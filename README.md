@@ -1,4 +1,4 @@
-##andriana-notes
+# Andriana Notes
 
 > Berisi catatan pembelajaran pribadi :)
 
