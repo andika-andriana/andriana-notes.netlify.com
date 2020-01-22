@@ -1,0 +1,585 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Membuat dan Menghapus Database</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f78b492-ae83-4b49-bcaa-9daa21b3ca91" class="page sans"><header><h1 class="page-title"><strong>Membuat dan Menghapus Database</strong></h1></header><div class="page-body"><p id="93fb6cfa-9c35-4aca-9adf-37a2b5eec184" class="">Pada sistem RDBMS (seperti MySQL dan MariaDB), database adalah kumpulan tabel yang saling terhubung. Sebuah aplikasi biasanya hanya butuh satu database. Namun satu database bisa berisi ratusan hingga ribuan tabel (tergantung kompleksitas dari aplikasi yang ingin dibuat). Di dalam database inilah tabel-tabel akan disimpan.</p><ul id="2e003883-f8f1-4a23-93c4-1489dddc86c3" class="bulleted-list"><li>Untuk membuat database, format penulisan querynya adalah sebagai berikut:<pre id="5c6f2cb1-8901-4b0a-89ae-4344fec89a41" class="code"><code>CREATE DATABASE [IF NOT EXISTS] nama_database;</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9de41a6a-1228-4e48-aa89-6ea633bc7a57"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Perintah yang ditandai dengan kurung siku, seperti “[IF NOT EXISTS]” adalah perintah optional (boleh tidak ditulis).</div></figure></li></ul><ul id="aa8ad24c-6025-4936-8022-1ec6ff49a137" class="bulleted-list"><li>Mari kita buat sebuah database “<strong>indonesia</strong>”:<pre id="312fb1d2-a395-4056-ae9a-41b7292b385c" class="code"><code>MariaDB [(none)]&gt; CREATE DATABASE indonesia;
+Query OK, 1 row affected (0.04 sec)</code></pre></li></ul><ul id="944f802e-096c-46ce-a56e-242f9b7d18d3" class="bulleted-list"><li>tambahan query [IF NOT EXISTS] berfungsi agar MySQL tidak menampilkan pesan error jika database sudah ada. Misalnya jika saya mencoba membuat ulang database “indonesia”, akan terjadi error:<pre id="4cbbc844-29fa-461e-900e-bb28f4152756" class="code"><code>MariaDB [(none)]&gt; CREATE DATABASE indonesia;
+ERROR 1007 (HY000): Can&#x27;t create database &#x27;indonesia&#x27;; database exists</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="537d6df5-0c27-4867-8885-df16a9768bd8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pesan error ini berguna untuk mengidentifikasi kesalahan. Apabila kita membuat kode query yang panjang dan dieksekusi secara keseluruhan (yang sering berasal dari PHP), pesan error ini bisa membuat seluruh query gagal berjalan.</div></figure></li></ul><ul id="d4b17ca1-0de0-4ad0-8346-3000c6523923" class="bulleted-list"><li>Perintah [IF NOT EXISTS] akan membuat database jika database itu belum ada sebelumnya. Jika sudah ada, query CREATE DATABASE tidak akan melakukan apa-apa (database yang lama juga tidak akan tertimpa).<pre id="397d8610-8c04-4a9c-876b-fe65a55d8643" class="code"><code>MariaDB [(none)]&gt; CREATE DATABASE IF NOT EXISTS indonesia;
+Query OK, 0 rows affected, 1 warning (0.00 sec)</code></pre></li></ul><ul id="08224543-96e0-4847-a76d-902b362e70ff" class="bulleted-list"><li>Untuk melihat apa saja database yang tersedia di MySQL server, bisa menggunakan perintah SHOW DATABASES. Berikut contohnya:<pre id="e7592348-a373-4542-9f8b-d07087ad3283" class="code"><code>MariaDB [(none)]&gt; SHOW DATABASES;
++---------------------+
+| Database                     | 
++---------------------+
+| indonesia           | 
+| information_schema        |
+| mysql                         |
+| performance_schema        | 
+| phpmyadmin                 |
+| test                         | 
++---------------------+
+6 rows in set (0.08 sec)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="31d5596e-37b3-40cb-9ece-a3d42ff2506b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Terlihat bahwa selain database indonesia, MariaDB dari XAMPP juga memiliki beberapa database bawaan (sedapat mungkin agar tidak menghapus atau mengubah database-database ini).</div></figure></li></ul><ul id="f3cff54d-a89b-431a-ac16-348b56f646cd" class="bulleted-list"><li>Untuk menghapus sebuah database, bisa menggunakan perintah berikut:<pre id="2ab26c80-9dbb-4239-9421-d8e95e40f3f2" class="code"><code>DROP DATABASE [IF EXISTS] database_name;</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c9792317-fc0a-4322-981c-baba76a02e21"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Yang perlu diperhatikan, query DROP DATABASE akan menghapus database, termasuk seluruh tabel dan isi dari tabel tersebut. Harap selalu berhati-hati dengan perintah seperti ini, karena di MySQL / MariaDB tidak ada tombol “undo”. Jika database telah dihapus, tidak bisa dikembalikan lagi.
+
+Sama seperti query pada pembuatan database, pilihan [IF EXISTS] digunakan untuk menghilangkan pesan error jika seandainya database tersebut memang tidak ada.</div></figure></li></ul><ul id="147553d5-167c-4d33-bcc1-eb772e339129" class="bulleted-list"><li>Untuk menghapus database “indonesia”, querynya adalah sebagai berikut:<pre id="e1f907a2-f68b-4a78-8e95-beaeadaaa001" class="code"><code>MariaDB [(none)]&gt; DROP DATABASE indonesia;
+Query OK, 0 rows affected (0.09 sec)</code></pre></li></ul><ul id="8dc9d4cf-e00b-436e-b48a-47604eac2fcb" class="bulleted-list"><li>Sekarang, database “indonesia” sudah berhasil dihapus. Mari coba sekali lagi:<pre id="7390a5a2-726b-40f0-a42e-77ff25b61bd2" class="code"><code>MariaDB [(none)]&gt; DROP DATABASE indonesia;
+ERROR 1008 (HY000): Can&#x27;t drop database &#x27;indonesia&#x27;; database doesn&#x27;t exist</code></pre></li></ul><ul id="d0bab61b-0c26-4a26-9b94-57a0fca5b969" class="bulleted-list"><li>Akan tampil pesan error karena database ‘indonesia’ memang sudah tidak ada. Solusinya, bisa menambahkan perintah IF EXISTS:<pre id="e59a539a-3450-4d14-8877-c64ea5bab1e0" class="code"><code>MariaDB [(none)]&gt; DROP DATABASE IF EXISTS indonesia;
+Query OK, 0 rows affected, 1 warning (0.00 sec)</code></pre></li></ul><ul id="e83d744b-b9f2-4545-b81f-1a7925ff00a7" class="bulleted-list"><li>Query terakhir yang berkaitan dengan database adalah untuk memilih default database. Format perintahnya adalah:<pre id="02682f63-8cd3-4914-bbea-481e045e39e8" class="code"><code>USE nama_database;</code></pre></li></ul><ul id="cf0f4e6f-af4e-4545-8a2c-b237d1b5b8bc" class="bulleted-list"><li>Jika ingin memilih database indonesia, maka querynya adalah:<pre id="b3785860-e57e-4025-9f0c-682e2b448964" class="code"><code>MariaDB [(none)]&gt; USE indonesia;
+Database changed MariaDB [indonesia]&gt;</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="93b97545-24da-428f-85db-2c0ecf41b8de"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Perhatikan ada perubahan cursor dari MariaDB [(none)]&gt; menjadi MariaDB [indonesia]&gt;. Artinya, setiap perintah query yang kita ketik, akan menggunakan database “indonesia” secara default.</div></figure></li></ul><ul id="4b9e6aee-22de-4bf7-af0e-243f32dd90d6" class="bulleted-list"><li>Praktek:<figure id="a49de6c6-f385-4a4f-bf52-f2cdd2114553" class="image"><a href="Membuat%20dan%20Menghapus%20Database/Untitled.png"><img style="width:478px" src="Membuat%20dan%20Menghapus%20Database/Untitled.png"/></a></figure></li></ul></div></article></body></html>

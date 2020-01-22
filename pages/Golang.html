@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Golang</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3ce6ba61-d41c-480e-909c-00f93b010cfa" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Golang/GolangLogo2.png"/></div><h1 class="page-title">Golang</h1></header><div class="page-body"><blockquote id="431cb4a3-4a41-4128-9dc2-470cb3ac4f49" class="">Materi Belajar Go Programming Language</blockquote><figure id="375638b8-08b4-4f55-97f3-1c9733e22739" class="link-to-page"><a href="Golang/Berkenalan%20Dengan%20Go%20Lang.html">Berkenalan Dengan Go Lang</a></figure><figure id="8c64a408-3829-4aee-bd31-4bc87b45248a" class="link-to-page"><a href="Golang/Instalasi%20Golang.html">Instalasi Golang</a></figure><figure id="1ce240c8-f3d1-4f63-858a-d15ef95d5473" class="link-to-page"><a href="Golang/GOPATH%20dan%20Workspace.html">GOPATH dan Workspace</a></figure><figure id="7fbca95f-6dc5-4cef-bad2-019569654754" class="link-to-page"><a href="Golang/Program%20Pertama%20Hello%20World.html">Program Pertama Hello World</a></figure><figure id="844b88fd-d1e0-4577-a5e8-df281d4bb449" class="link-to-page"><a href="Golang/Tugas%201.html">Tugas 1</a></figure><figure id="6a488e8a-c1db-4b97-acd9-7612c42484c9" class="link-to-page"><a href="Golang/Komentar.html">Komentar</a></figure><figure id="d645d199-f1db-459f-8df2-655eddbfb081" class="link-to-page"><a href="Golang/Variabel.html">Variabel</a></figure><figure id="e3c65bee-3dbe-4538-8a81-f67c38414f4f" class="link-to-page"><a href="Golang/Tipe%20Data.html">Tipe Data</a></figure><figure id="beef362f-ba5e-4214-802e-18d324aa125e" class="link-to-page"><a href="Golang/Konstanta.html">Konstanta</a></figure><figure id="62780f25-b48e-44af-af69-fe73ea59bea9" class="link-to-page"><a href="Golang/Operator.html">Operator</a></figure><figure id="51e214a7-ad6a-49e3-9900-9be6c00074e2" class="link-to-page"><a href="Golang/Seleksi%20Kondisi.html">Seleksi Kondisi</a></figure><figure id="ab8d64c2-e163-455d-bbfe-2536c7e2e0aa" class="link-to-page"><a href="Golang/Tugas%202.html">Tugas 2</a></figure><figure id="8f004b41-936e-4fdf-b951-af6ffc34e322" class="link-to-page"><a href="Golang/Perulangan.html">Perulangan</a></figure><figure id="0bd9033c-0dfa-43d3-99bf-0722bd5fe3a9" class="link-to-page"><a href="Golang/Array.html">Array</a></figure><figure id="0de99274-3f26-4365-a1c0-05bfdd94586d" class="link-to-page"><a href="Golang/Slice.html">Slice</a></figure><figure id="f08708ed-9a13-4c1c-a38e-57c1802ea02f" class="link-to-page"><a href="Golang/Tugas%203.html">Tugas 3</a></figure><figure id="c701d43a-b13c-4f7f-b91c-03db97adc9c6" class="link-to-page"><a href="Golang/Map.html">Map</a></figure><figure id="9ed4994d-2519-4dd2-a9bf-27c7f09a6c23" class="link-to-page"><a href="Golang/Fungsi.html">Fungsi</a></figure><figure id="918c5135-564a-4652-84c9-bcb0ab0f6213" class="link-to-page"><a href="Golang/Fungsi%20Multiple%20Return.html">Fungsi Multiple Return</a></figure><figure id="ea8182c5-aa99-4c01-8b2f-f1bc19a305b5" class="link-to-page"><a href="Golang/Fungsi%20Variadic.html">Fungsi Variadic</a></figure><figure id="4efd0f46-5a73-4fa5-8f48-aa7e5d68116b" class="link-to-page"><a href="Golang/Tugas%204.html">Tugas 4</a></figure><figure id="4c5dd781-72a7-4d55-ace4-5cf0a762eefb" class="link-to-page"><a href="Golang/Fungsi%20Closure.html">Fungsi Closure</a></figure><figure id="3d4ccbb9-9594-4d09-8cb4-b1b0b46ce7ae" class="link-to-page"><a href="Golang/Fungsi%20Sebagai%20parameter.html">Fungsi Sebagai parameter</a></figure><figure id="64ffe924-a2c0-469c-81f4-f067b438e017" class="link-to-page"><a href="Golang/Pointer.html">Pointer </a></figure><figure id="18208162-f314-4940-a6d7-acba8145571f" class="link-to-page"><a href="Golang/Struct.html">Struct</a></figure><figure id="15fc3778-e80e-43a1-87dc-7d91801a0139" class="link-to-page"><a href="Golang/Method.html">Method</a></figure><figure id="43e27dff-f34d-42a8-8624-5cd550e70823" class="link-to-page"><a href="Golang/Property%20Public%20Private.html">Property Public &amp; Private</a></figure><figure id="9015bf2a-bc1a-4260-88aa-3cc5893e9940" class="link-to-page"><a href="Golang/Tugas%205.html">Tugas 5</a></figure><figure id="a17abebf-ef8b-4cf7-a43a-106d775741bf" class="link-to-page"><a href="Golang/Tugas%206.html">Tugas 6</a></figure><figure id="1dac9727-3038-40a3-8159-4152c3643c44" class="link-to-page"><a href="Golang/Reflect.html">Reflect</a></figure><figure id="435324ec-8bc7-4db1-9700-8663a8c12b87" class="link-to-page"><a href="Golang/Goroutine.html">Goroutine</a></figure><figure id="477c3fdf-e48f-484f-8bc8-a83540dda55e" class="link-to-page"><a href="Golang/Tugas%207.html">Tugas 7</a></figure><figure id="cd43ce24-674a-441a-8ee0-af06b521b5b4" class="link-to-page"><a href="Golang/Channel.html">Channel</a></figure><figure id="39545a14-099e-432d-969e-0a84dac1e86a" class="link-to-page"><a href="Golang/Buffered%20Channel.html">Buffered Channel</a></figure><figure id="31fea8a7-a3a4-4204-a9ff-b82fa57f3dfa" class="link-to-page"><a href="Golang/Channel%20Select.html">Channel Select</a></figure><figure id="eeed27d2-e099-4d13-b186-ca6b1fe84e57" class="link-to-page"><a href="Golang/Channel%20Timeout.html">Channel Timeout</a></figure><figure id="b76a74c3-aef8-4ee5-8687-3148752a28c7" class="link-to-page"><a href="Golang/Tugas%208.html">Tugas 8</a></figure><figure id="051dd792-39fc-4146-a493-b5b6092df749" class="link-to-page"><a href="Golang/Defer%20Exit.html">Defer &amp; Exit</a></figure><figure id="9f64c459-55fd-49ef-b5ce-d7bd55654fb7" class="link-to-page"><a href="Golang/Error%20Panic%20Recover.html">Error , Panic &amp; Recover</a></figure><figure id="922dea88-5cb3-4af8-bfc3-108968106457" class="link-to-page"><a href="Golang/Tugas%209.html">Tugas 9</a></figure><figure id="63606590-f94a-4ff8-b991-ac97816f1898" class="link-to-page"><a href="Golang/Timer%20Ticker%20Scheduler.html">Timer, Ticker, &amp; Scheduler</a></figure><figure id="d6b2ce1e-b7f5-4a01-9442-048164fb090b" class="link-to-page"><a href="Golang/Tugas%2010.html">Tugas 10</a></figure><figure id="166da5ce-a0cb-4bfa-ac44-c11846ddecc0" class="link-to-page"><a href="Golang/Konversi%20Tipe%20Data.html">Konversi Tipe Data</a></figure><figure id="734a7042-fa8b-4b9c-a96f-a52cf08b3869" class="link-to-page"><a href="Golang/Fungsi%20String.html">Fungsi String</a></figure><figure id="1b4710e7-6324-485f-a8da-f02c744be7ff" class="link-to-page"><a href="Golang/Regex.html">Regex</a></figure><figure id="485c4156-eca4-468e-9dac-67a562e54c80" class="link-to-page"><a href="Golang/Tugas%2011.html">Tugas 11</a></figure><figure id="781840e1-f6e9-4f18-a9f9-54072bdb2b02" class="link-to-page"><a href="Golang/Tugas%2012.html">Tugas 12</a></figure><figure id="7e82e76a-7297-43fb-8b46-a97ddaba5ac3" class="link-to-page"><a href="Golang/Encode%20Decode%20Base64.html">Encode - Decode Base64</a></figure><figure id="10003a84-0dad-4539-8558-aa07ccb13bf3" class="link-to-page"><a href="Golang/Hash%20SHA%201.html">Hash SHA 1</a></figure><figure id="24559619-3ba6-461d-84dd-4ba2d8a6d73c" class="link-to-page"><a href="Golang/Tugas%2013.html">Tugas 13</a></figure><figure id="3924dd81-f7ae-4bbe-b34d-6936a3a04ce3" class="link-to-page"><a href="Golang/Exec.html">Exec</a></figure><figure id="dbcd1fd3-f3c3-4378-9c44-0575fe5f76e7" class="link-to-page"><a href="Golang/Tugas%2014.html">Tugas 14</a></figure><figure id="27e6f098-558f-4b04-8f58-729bfa9782b4" class="link-to-page"><a href="Golang/Web.html">Web</a></figure><figure id="3e0beba5-d017-414c-90e3-82ddff246c80" class="link-to-page"><a href="Golang/URL%20Parsing.html">URL Parsing</a></figure><figure id="094cfbab-5848-4ab3-990b-68bd3dedd011" class="link-to-page"><a href="Golang/Tugas%2015.html">Tugas 15</a></figure><figure id="91083840-8e80-4df1-99fe-3ce0657d2b5b" class="link-to-page"><a href="Golang/JSON.html">JSON</a></figure><figure id="3ddd75b2-8505-4100-8ffa-0862717275ca" class="link-to-page"><a href="Golang/SQL.html">SQL</a></figure><figure id="5298ec2b-eb83-4340-ba48-c1f36275ce33" class="link-to-page"><a href="Golang/Web%20JSON%20API%20data.html">Web JSON API (data)</a></figure><figure id="103bcd09-7c25-4e3c-8773-07904b8b9892" class="link-to-page"><a href="Golang/Web%20JSON%20API%20Databases.html">Web JSON API (Databases)</a></figure><figure id="1618e2df-1018-44a4-95eb-eede09a69e4a" class="link-to-page"><a href="Golang/Tugas%2016.html">Tugas 16</a></figure><figure id="cad9ec9b-3864-4dc3-89ef-0b2734b7c32a" class="link-to-page"><a href="Golang/HTTP%20Request.html">HTTP Request</a></figure><figure id="aa94a38e-e750-4304-b0df-1921a4ada01c" class="link-to-page"><a href="Golang/Tugas%2017.html">Tugas 17</a></figure><figure id="c6c9bc73-1916-4f10-a9a1-5f859aa0ecff" class="link-to-page"><a href="Golang/Tugas%20Akhir.html">Tugas Akhir</a></figure></div></article></body></html>

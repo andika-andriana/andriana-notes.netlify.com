@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Database</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ee83d4df-1231-4a97-a136-d16bb4cf6745" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Database/DatabaseLogo.png"/></div><h1 class="page-title">Database</h1></header><div class="page-body"><blockquote id="f4c7a16b-a882-4d43-a981-d87a0d635a40" class="">Materi Belajar Database SQL dan NO SQL</blockquote><figure id="76cedbd9-fa07-4b50-a790-c29087e5ffee" class="link-to-page"><a href="Database/Definisi%20Database.html">Definisi Database</a></figure><figure id="37fa627e-0cc9-4c3c-a3d5-73f924e011c3" class="link-to-page"><a href="Database/Pengertian%20Database%20Model.html">Pengertian Database Model</a></figure><figure id="37e5e81d-758c-4b12-a9cc-c3799edb164e" class="link-to-page"><a href="Database/Pengertian%20Relational%20Model.html">Pengertian Relational Model</a></figure><figure id="f9fcf19e-3827-4d6b-8ab5-e51c25dcde05" class="link-to-page"><a href="Database/RDBMS%20Relational%20Database%20Management%20Systems.html">RDBMS : Relational Database Management Systems</a></figure><figure id="c9c92103-ee5c-423b-a803-a246a4afe930" class="link-to-page"><a href="Database/MySQL%20sebagai%20RDBMS.html">MySQL sebagai RDBMS</a></figure><figure id="613cb5eb-8868-4fcb-ba1b-d1e0147f5478" class="link-to-page"><a href="Database/Tugas%201%20MySQL.html">Tugas 1 MySQL</a></figure><figure id="a01d436d-f053-4969-ae94-02be82e521f1" class="link-to-page"><a href="Database/Database%20Attribute%20dan%20Tuple.html">Database, Attribute dan Tuple</a></figure><figure id="d6491005-9985-4b98-9a43-740c11422c58" class="link-to-page"><a href="Database/Candidate%20Key%20Primary%20Key%20dan%20Foreign%20Key.html">Candidate Key, Primary Key dan Foreign Key</a></figure><figure id="e9e55ff1-9a53-4645-949b-69756baa447f" class="link-to-page"><a href="Database/Referential%20Integrity.html">Referential Integrity</a></figure><figure id="e77a42f8-b6f7-4ed1-9dfb-c1189d0d0dc9" class="link-to-page"><a href="Database/Structured%20Query%20Language%20SQL.html">Structured Query Language (SQL)</a></figure><figure id="0f6f4002-36b4-42ca-b5ac-feeb84357e5f" class="link-to-page"><a href="Database/Tugas%202%20MySQL.html">Tugas 2 MySQL</a></figure><figure id="dbf265ad-2e33-48fa-b436-9c8e1a3cfd50" class="link-to-page"><a href="Database/Instalasi%20XAMPP%20MYSQL%20dan%20MariaDB.html">Instalasi XAMPP, MYSQL dan MariaDB</a></figure><figure id="1b3efcb2-87ee-49b1-a576-b371c467e28b" class="link-to-page"><a href="Database/Menjalankan%20MYSQL%20Client.html">Menjalankan MYSQL Client</a></figure><figure id="12cd6e03-76b1-401f-b3a6-a6e019e1b73b" class="link-to-page"><a href="Database/Tugas%203%20MySQL.html">Tugas 3 MySQL</a></figure><figure id="9a780086-4b1c-42e3-a3d9-0b0d3ec0ba8c" class="link-to-page"><a href="Database/Aturan%20Penulisan%20Query%20MySQL.html">Aturan Penulisan Query MySQL</a></figure><figure id="1f78b492-ae83-4b49-bcaa-9daa21b3ca91" class="link-to-page"><a href="Database/Membuat%20dan%20Menghapus%20Database.html">Membuat dan Menghapus Database</a></figure><figure id="1106fa57-1e6c-44da-a80e-0f41e6139613" class="link-to-page"><a href="Database/Menambahkan%20Data%20ke%20Tabel.html">Menambahkan Data ke Tabel</a></figure><figure id="b4dbf7c8-d878-4d7e-8c1f-d24c7b7c8239" class="link-to-page"><a href="Database/Mengubah%20Data%20di%20Tabel.html">Mengubah Data di Tabel</a></figure><figure id="76138bd1-2c8d-4a2b-a387-adf1c611fbd5" class="link-to-page"><a href="Database/Menghapus%20Data%20Tabel.html">Menghapus Data Tabel</a></figure><figure id="590252ab-2023-41be-a0cc-f0e707c88f95" class="link-to-page"><a href="Database/Menampilkan%20Data%20Tabel.html">Menampilkan Data Tabel</a></figure><figure id="5ee6827c-7d13-4054-9f92-2a61f02ae362" class="link-to-page"><a href="Database/Tugas%204%20MySQL.html">Tugas 4 MySQL</a></figure><figure id="3ecf74a6-9bb5-486e-90b9-5d35d64926bd" class="link-to-page"><a href="Database/Character%20set%20dan%20Collation%20di%20dalam%20MySQL.html">Character set dan Collation di dalam MySQL</a></figure><figure id="4c6d6797-91d8-4070-9c36-8dc99855f2de" class="link-to-page"><a href="Database/Tipe%20Data%20MySQL.html">Tipe Data MySQL</a></figure><figure id="06849c7e-9d55-4322-b9f5-9671bb2f941c" class="link-to-page"><a href="Database/Tugas%205%20MySQL.html">Tugas 5 MySQL</a></figure><figure id="0dacc4a3-0f4e-4c63-bf7c-1ed04130a730" class="link-to-page"><a href="Database/Format%20Dasar%20CREATE%20TABLE.html">Format Dasar CREATE TABLE</a></figure><figure id="7f30ef3a-96e8-4d66-8eac-75f6cb47329b" class="link-to-page"><a href="Database/CREATE%20TABLE%20IF%20NOT%20EXIST.html">CREATE TABLE ... IF NOT EXIST</a></figure><figure id="5ae4634d-da73-44cc-9d4d-f3214e19285d" class="link-to-page"><a href="Database/CREATE%20TEMPORARY%20TABLE.html">CREATE TEMPORARY TABLE</a></figure><figure id="36113ba3-172d-45cb-ab38-bd161c62144d" class="link-to-page"><a href="Database/CREATE%20TABLE%20LIKE.html">CREATE TABLE ... LIKE</a></figure><figure id="ba7df0ad-f651-4355-bf40-4d6183bdae8d" class="link-to-page"><a href="Database/CREATE%20TABLE%20SELECT.html">CREATE TABLE ... SELECT</a></figure><figure id="540d7ee9-05e9-44fb-8d01-eeed89cd2af3" class="link-to-page"><a href="Database/CREATE%20TABLE%20CLONING.html">CREATE TABLE CLONING</a></figure><figure id="20ade17c-4c83-48b7-b819-b2dc84ba3f80" class="link-to-page"><a href="Database/Tabel%20Character%20Set%20dan%20Collation.html">Tabel Character Set dan Collation</a></figure><figure id="c47ab56c-038c-4bdf-ac64-e300568d99c4" class="link-to-page"><a href="Database/Tabel%20Option%20Auto%20Increment.html">Tabel Option Auto Increment</a></figure><figure id="f286ebf0-c0aa-4fd9-9a1b-bed5dd7690c1" class="link-to-page"><a href="Database/Table%20Option%20Comment.html">Table Option Comment</a></figure><figure id="5a37a1bd-4eed-4eb2-a4e7-14f230eeea04" class="link-to-page"><a href="Database/ALTER%20TABLE.html">ALTER TABLE</a></figure><figure id="e541de89-e78b-4bbb-9f85-e77bdbeec7ec" class="link-to-page"><a href="Database/ALTER%20TABLE%20RENAME.html">ALTER TABLE ... RENAME</a></figure><figure id="ea3cbd08-edba-4007-b6cf-d47ecf243d60" class="link-to-page"><a href="Database/ALTER%20TABLE%20MODIFY.html">ALTER TABLE ... MODIFY</a></figure><figure id="e0b0435b-eb4f-49cb-87fb-7217b381e21f" class="link-to-page"><a href="Database/ALTER%20TABLE%20CHANGE.html">ALTER TABLE ... CHANGE</a></figure><figure id="b4bc2ffd-6101-4cb5-b9d8-e29dc73109e5" class="link-to-page"><a href="Database/ALTER%20TABLE%20ADD%20COLUMN.html">ALTER TABLE ... ADD COLUMN</a></figure><figure id="f9d93162-a012-4b7d-aa0a-10075f1eb7f3" class="link-to-page"><a href="Database/ALTER%20TABLE%20DROP%20COLUMNS.html">ALTER TABLE … DROP COLUMNS</a></figure><figure id="04ad85ce-325e-44c3-a3e1-922512c8b061" class="link-to-page"><a href="Database/DROP%20TABLE.html">DROP TABLE</a></figure><figure id="2cd76b1a-37bf-42d8-aa88-555a2f11461f" class="link-to-page"><a href="Database/Tugas%206%20MySQL.html">Tugas 6 MySQL</a></figure><figure id="ad7bb227-e657-48d7-83d9-80a301ab5c9a" class="link-to-page"><a href="Database/INSERT%20VALUE.html">INSERT ... VALUE</a></figure><figure id="493281c1-523d-41a3-9d66-1cdc3231048a" class="link-to-page"><a href="Database/INSERT%20SET.html">INSERT ... SET</a></figure><figure id="7c04a8d6-e711-4217-b427-07eeb8c0f33c" class="link-to-page"><a href="Database/INSERT%20SELECT.html">INSERT ... SELECT</a></figure><figure id="717e1de2-f803-447b-be69-5e186a9faa7e" class="link-to-page"><a href="Database/ON%20DUPLICATE%20KEY%20UPDATE.html">ON DUPLICATE KEY UPDATE</a></figure><figure id="76937a74-442d-4b65-8147-434bc9b8dd7d" class="link-to-page"><a href="Database/Tugas%207%20MySQL.html">Tugas 7 MySQL</a></figure><figure id="fee2fe8e-af24-4930-b6c5-077e5c37fbf0" class="link-to-page"><a href="Database/Select%20select_expression.html">Select .. select_expression</a></figure><figure id="63054d02-eee0-40ed-b2b3-d2c218c2c7de" class="link-to-page"><a href="Database/Select%20FROM.html">Select .. FROM</a></figure><figure id="d1e3a596-875d-4080-9b28-00871ecd3f2c" class="link-to-page"><a href="Database/Select%20AS.html">Select .. AS</a></figure><figure id="1028563d-fa49-4c41-9a1c-ba8ad9d1d1f6" class="link-to-page"><a href="Database/Select%20ORDER%20BY.html">Select… ORDER BY</a></figure><figure id="2c353ecb-215c-4949-916b-2ab98fd2919a" class="link-to-page"><a href="Database/Select%20LIMIT.html">Select .. LIMIT</a></figure><figure id="5ce9ae3c-e5a4-464c-91a9-6a0cba9ecaf8" class="link-to-page"><a href="Database/Select%20WHERE.html">Select .. WHERE</a></figure><figure id="f7f39e43-a554-4327-9366-44caa68d0459" class="link-to-page"><a href="Database/Select%20WHERE%20table1%20table2.html">Select .. WHERE table1 = table2</a></figure><figure id="f6208e7b-de93-4eb1-91c6-28f758e3a57f" class="link-to-page"><a href="Database/Select%20WHERE%20IN.html">Select .. WHERE ... IN</a></figure><figure id="32790a1d-0352-4b70-8300-7a0c1c1cbbb5" class="link-to-page"><a href="Database/Select%20ANY%20SELECT%20SOME%20SELECT%20ALL.html">Select .. ANY, SELECT .. SOME, SELECT ... ALL</a></figure><figure id="b55ea96c-6159-4aa8-9eea-a67d9dca7538" class="link-to-page"><a href="Database/Select%20EXISTS.html">Select .. EXISTS</a></figure><figure id="db41e59e-5b31-4205-9984-c5228810d5fb" class="link-to-page"><a href="Database/Select%20WHERE%20BETWEEN.html">Select .. WHERE ... BETWEEN</a></figure><figure id="a1b2f724-1932-4b8e-9bcf-c3374ab6fcc3" class="link-to-page"><a href="Database/Select%20WHERE%20LIKE.html">Select .. WHERE ... LIKE</a></figure><figure id="f36e2f2e-ff2b-455b-a44e-299ac46d4352" class="link-to-page"><a href="Database/Select%20UNION.html">Select .. UNION</a></figure><figure id="b3357efc-c91d-48dd-95a9-6b6a1b562a2c" class="link-to-page"><a href="Database/Select%20DISTINCT.html">Select .. DISTINCT</a></figure><figure id="d6d4ff97-a6df-4b7b-8786-26d0fdbe995d" class="link-to-page"><a href="Database/Select%20JOIN.html">Select .. JOIN</a></figure><figure id="3b383fdd-6b4a-4b79-a291-bda2c14bccdc" class="link-to-page"><a href="Database/Tugas%208%20MySQL.html">Tugas 8 MySQL</a></figure><figure id="e95f6282-0398-4e2f-b928-f5d15ebd119f" class="link-to-page"><a href="Database/Update%20Data%20Tabel.html">Update Data Tabel</a></figure><figure id="d07a248c-8ffe-4768-bd5a-cc15b44857f3" class="link-to-page"><a href="Database/Replace%20Data%20Tabel.html">Replace Data Tabel</a></figure><figure id="cb60dad0-8bb5-449f-a503-6fdd51ef6a28" class="link-to-page"><a href="Database/Delete%20Data%20Tabel.html">Delete Data Tabel</a></figure><figure id="518108a2-cecc-44bd-81a7-dbabb36cebc3" class="link-to-page"><a href="Database/Truncate%20Data%20Tabel.html">Truncate Data Tabel</a></figure><figure id="d314b95c-7fc2-4cc2-a011-1ca9a886c910" class="link-to-page"><a href="Database/Tugas%209%20MySQL.html">Tugas 9 MySQL</a></figure><figure id="c718c099-3dc4-46fc-9aae-0014cdb23251" class="link-to-page"><a href="Database/Import%20Data%20dengan%20LOAD%20DATA%20INFILE.html">Import Data dengan LOAD DATA INFILE</a></figure><figure id="2d140a19-83dc-4599-a5b4-cdc87cd8ccb0" class="link-to-page"><a href="Database/LOAD%20DATA%20LOCAL%20INFILE.html">LOAD DATA LOCAL INFILE</a></figure><figure id="fd562c8b-ca56-4e9a-9be2-8ab5130779d8" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20FIELDS%20TERMINATED%20BY.html">LOAD DATA INFILE … FIELDS TERMINATED BY</a></figure><figure id="93d12864-fa0e-4aea-b354-cb5fe5f298ff" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20LINES%20TERMINATED%20BY.html">LOAD DATA INFILE … LINES TERMINATED BY</a></figure><figure id="7b3d199c-87d5-47c5-871d-b06e83e8b27c" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20FIELDS%20ENCLOSED%20BY.html">LOAD DATA INFILE … FIELDS ENCLOSED BY</a></figure><figure id="a73782b4-67f5-4ec9-b77f-24167512d406" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20IGNORE%20LINES.html">LOAD DATA INFILE … IGNORE LINES</a></figure><figure id="6d56b121-04e5-4dff-9d49-50c367385e7f" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20LINES%20STARTING%20BY.html">LOAD DATA INFILE … LINES STARTING BY</a></figure><figure id="81be1e97-f169-4e70-a404-6aaf8a8013b4" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20REPLACE%20IGNORE.html">LOAD DATA INFILE REPLACE IGNORE</a></figure><figure id="eb588da0-3627-4954-a61f-90107ee126d8" class="link-to-page"><a href="Database/LOAD%20DATA%20INFILE%20Col1%20Col2%20Col3.html">LOAD DATA INFILE Col1, Col2, Col3 ...</a></figure><figure id="f0d667d3-056c-484c-923f-63c69f43c974" class="link-to-page"><a href="Database/Import%20Data%20dari%20File%20CSV.html">Import Data dari File CSV</a></figure><figure id="b0afb66d-1ab3-491e-96a5-e352f83cd8fc" class="link-to-page"><a href="Database/Export%20Data%20dengan%20SELECT%20INTO%20OUTFILE.html">Export Data dengan SELECT INTO OUTFILE</a></figure><figure id="b56923c9-f97e-4589-8f05-775aceffc5da" class="link-to-page"><a href="Database/Export%20Data%20dengan%20Mysqldump.html">Export Data dengan Mysqldump</a></figure><figure id="35b9838a-f632-41a7-8a5b-95044471ad98" class="link-to-page"><a href="Database/Import%20Data%20dengan%20Mysqldump.html">Import Data dengan Mysqldump</a></figure><figure id="12a7dee2-8699-4108-ad08-444319a9b890" class="link-to-page"><a href="Database/Tugas%2010%20MySQL.html">Tugas 10 MySQL</a></figure><figure id="37de4a26-33c1-4f0f-b0aa-338bd9ab0a90" class="link-to-page"><a href="Database/Pembuatan%20User%20Hak%20Akses%20Privilege.html">Pembuatan User &amp; Hak Akses (Privilege)</a></figure><figure id="0eebe2ba-ce2d-4978-9b21-333354de21e1" class="link-to-page"><a href="Database/Cara%20Login%20ke%20MySQL%20Server.html">Cara Login ke MySQL Server</a></figure><figure id="1ad87980-85cc-447c-b0c3-3ace3c5e16e1" class="link-to-page"><a href="Database/Membuat%20User%20Privillege.html">Membuat User Privillege</a></figure><figure id="8ceeba08-465f-41cf-93b7-13891a6d25d6" class="link-to-page"><a href="Database/Membuat%20User%20dengan%20Batasan%20Host.html">Membuat User dengan Batasan Host</a></figure><figure id="d89c77bf-21b8-431a-9416-372ab7b80660" class="link-to-page"><a href="Database/Membuat%20User%20dengan%20Password.html">Membuat User dengan Password</a></figure><figure id="339f3405-4e26-4153-9acb-81b7468ea9f4" class="link-to-page"><a href="Database/Mengenal%20Hak%20Akses%20Privilege.html">Mengenal Hak Akses(Privilege)</a></figure><figure id="b78c53a9-8c1c-42e1-81e7-2c714824f54b" class="link-to-page"><a href="Database/Menghapus%20Hak%20Akses%20Privilege.html">Menghapus Hak Akses (Privilege)</a></figure><figure id="611d89ab-4ed0-4310-aab2-0f2057883830" class="link-to-page"><a href="Database/Hak%20Akses%20untuk%20Seluruh%20Tabel%20dan%20Database.html">Hak Akses untuk Seluruh Tabel dan Database</a></figure><figure id="c2e39503-4beb-436d-a558-b3b60064a9c3" class="link-to-page"><a href="Database/Hak%20Akses%20WITH%20GRANT%20OPTION.html">Hak Akses WITH GRANT OPTION</a></figure><figure id="62cecb18-c529-4369-b009-e8ecfb16e866" class="link-to-page"><a href="Database/Tugas%2011%20MySQL.html">Tugas 11 MySQL</a></figure><figure id="0e8c74e6-1c0a-405d-b991-0c8a3efe0f25" class="link-to-page"><a href="Database/MySQL%20View.html">MySQL View</a></figure><figure id="907d2a0f-6847-4ef5-8695-8847065c7a41" class="link-to-page"><a href="Database/Membuat%20dan%20Menghapus%20VIEW.html">Membuat dan Menghapus VIEW</a></figure><figure id="8e2061be-693e-4446-8ca4-d313e04a8a6d" class="link-to-page"><a href="Database/VIEW%20untuk%20JOIN%20dan%20Penambahan%20Data.html">VIEW untuk JOIN dan Penambahan Data</a></figure><figure id="2a5ddcd8-5b12-4d22-8b3c-60e05de2f582" class="link-to-page"><a href="Database/Update%20data%20dari%20VIEW.html">Update data dari VIEW</a></figure><figure id="e5b5a88f-7e61-49c7-ae36-5c90b897abfa" class="link-to-page"><a href="Database/Konsistensi%20Update%20VIEW%20dengan%20WITH%20CHECK%20OPTION.html">Konsistensi Update VIEW dengan WITH CHECK OPTION</a></figure><figure id="ba89f324-b096-4952-bb9b-3e6914c69d52" class="link-to-page"><a href="Database/Tugas%2012%20MySQL.html">Tugas 12 MySQL</a></figure><figure id="52669b82-52c1-4180-826f-02d3570ce6e2" class="link-to-page"><a href="Database/MySQL%20Stored%20Procedure%20dan%20Stored%20Function.html">MySQL Stored Procedure dan Stored Function</a></figure><figure id="59708b63-5ff3-4802-b7d3-c9d7c3162a2e" class="link-to-page"><a href="Database/Membuat%20Stored%20Procedure.html">Membuat Stored Procedure</a></figure><figure id="5d2def16-6800-4199-91f0-3e1753164860" class="link-to-page"><a href="Database/Menghapus%20Stored%20Procedure.html">Menghapus Stored Procedure</a></figure><figure id="1105b872-2d0d-44fb-8414-7ac705677143" class="link-to-page"><a href="Database/IF%20Statement.html">IF Statement</a></figure><figure id="9a88f424-10ca-4401-ba1d-4ba1edcb2978" class="link-to-page"><a href="Database/IF%20ELSE%20Statement.html">IF ELSE Statement</a></figure><figure id="e5e1f9c5-4bd6-44e3-9b44-7623793e51b8" class="link-to-page"><a href="Database/IF%20ELSEIF%20ELSE%20Statement.html">IF ELSEIF ELSE Statement</a></figure><figure id="7ccd9cfe-f1bc-4d99-8509-5dc1ac571e27" class="link-to-page"><a href="Database/Simple%20CASE%20Statement.html">Simple CASE Statement</a></figure><figure id="b8c31da5-1a37-4691-bbbd-4eb0f62b7019" class="link-to-page"><a href="Database/Complex%20CASE%20Statement.html">Complex CASE Statement</a></figure><figure id="af0b7ee7-e60a-47b3-891e-abb602525e29" class="link-to-page"><a href="Database/WHILE%20Loop%20Statement.html">WHILE Loop Statement</a></figure><figure id="7694bc0a-da58-4270-b0bf-23c208027e02" class="link-to-page"><a href="Database/Repeat%20Loop.html">Repeat Loop</a></figure><figure id="bc125123-795b-444f-b669-0e7c5d9248b7" class="link-to-page"><a href="Database/Stored%20Function.html">Stored Function</a></figure><figure id="65caceeb-f55b-4fee-8e79-633e51852907" class="link-to-page"><a href="Database/Tugas%2013%20MySQL.html">Tugas 13 MySQL</a></figure><figure id="a6bf193e-e6e3-4941-8105-2085588c647b" class="link-to-page"><a href="Database/Pengertian%20Trigger.html">Pengertian Trigger</a></figure><figure id="38ef413e-b9cc-49ff-acbb-3fc4c429aca0" class="link-to-page"><a href="Database/Format%20Dasar%20Penulisan%20Trigger.html">Format Dasar Penulisan Trigger</a></figure><figure id="ee94ebe5-cae4-424e-943b-2224da03e129" class="link-to-page"><a href="Database/Membuat%20Trigger.html">Membuat Trigger</a></figure><figure id="18b1e82b-75bf-4423-9dc5-c6146aa1f421" class="link-to-page"><a href="Database/Implisit%20Event%20Trigger.html">Implisit Event Trigger</a></figure><figure id="06746a12-cdd1-4383-b2cb-1fe316cc721e" class="link-to-page"><a href="Database/Menghapus%20Trigger.html">Menghapus Trigger</a></figure><figure id="2296bb50-153d-469a-af77-991ad69480a7" class="link-to-page"><a href="Database/Before%20atau%20After%20Trigger.html">Before atau After Trigger?</a></figure><figure id="4ba19fb3-fda0-4cd7-8e5d-ee9be8ca965c" class="link-to-page"><a href="Database/Tugas%2014%20MySQL.html">Tugas 14 MySQL</a></figure><figure id="f362d42e-843f-4c4d-a10e-e6612a49784e" class="link-to-page"><a href="Database/Pengertian%20PHPMyAdmin.html">Pengertian PHPMyAdmin</a></figure><figure id="cfdf3c48-70fb-4ede-b75d-fa38dde5b976" class="link-to-page"><a href="Database/Kelebihan%20dan%20Kekurangan%20PHPMyAdmin.html">Kelebihan dan Kekurangan PHPMyAdmin</a></figure><figure id="edf56482-83f8-4ab6-b105-36845c3912db" class="link-to-page"><a href="Database/Mengakses%20PHPMyAdmin.html">Mengakses PHPMyAdmin</a></figure><figure id="30afe770-a30f-4669-a412-1e709ad854ed" class="link-to-page"><a href="Database/Membuat%20Database%20dan%20Tabel%20di%20PHPMyAdmin.html">Membuat Database dan Tabel di PHPMyAdmin</a></figure><figure id="673891e9-47ca-45f4-a96a-4c6bf65d2d2c" class="link-to-page"><a href="Database/Mengisi%20Data%20Tabel%20di%20PHPMyAdmin.html">Mengisi Data Tabel di PHPMyAdmin</a></figure><figure id="d6609406-5be9-40e1-ab03-c398874c232a" class="link-to-page"><a href="Database/Menampilkan%20Isi%20Tabel%20di%20PHPMyAdmin.html">Menampilkan Isi Tabel di PHPMyAdmin</a></figure><figure id="c1f8c4de-4e8d-4e7d-965f-2f11cc134404" class="link-to-page"><a href="Database/Menjalankan%20Kode%20SQL%20di%20PHPMyAdmin.html">Menjalankan Kode SQL di PHPMyAdmin</a></figure><figure id="ca593df9-293e-4a48-8804-08d76723978b" class="link-to-page"><a href="Database/Tugas%2015%20MySQL.html">Tugas 15 MySQL</a></figure><figure id="cd70ad20-2911-4dcc-a50c-c58bd64e86d7" class="link-to-page"><a href="Database/Study%20Kasus%20MySQL.html">Study Kasus MySQL</a></figure><figure id="d7775437-57cc-4bce-95be-4f4257972a40" class="link-to-page"><a href="Database/Instalasi%20MongoDB.html">Instalasi MongoDB</a></figure><figure id="c54feec1-2904-442d-a616-fa16100d0adf" class="link-to-page"><a href="Database/Input%20Data%20MongoDB.html">Input Data MongoDB</a></figure><figure id="e4c0ac07-7f94-40e8-b396-f1a8a1e7b7f0" class="link-to-page"><a href="Database/Update%20Data%20MongoDB.html">Update Data MongoDB</a></figure><figure id="48c22d40-1ebb-4944-bd3e-8f61818cd85b" class="link-to-page"><a href="Database/Pencarian%20dan%20Menampilkan%20Data%20MongoDB.html">Pencarian dan Menampilkan Data MongoDB</a></figure><figure id="da7ab3a9-0aa6-4206-a92f-67786c971f61" class="link-to-page"><a href="Database/Delete%20Data%20MongoDB.html">Delete Data MongoDB</a></figure><figure id="c6708f09-74fc-4f4d-bf6b-57f06d997c51" class="link-to-page"><a href="Database/Tugas%2016%20MySQL.html">Tugas 16 MySQL</a></figure><figure id="f86badcf-8723-440c-95df-3e43e0c1502a" class="link-to-page"><a href="Database/STUDY%20KASUS%20MONGODB.html">STUDY KASUS MONGODB</a></figure></div></article></body></html>

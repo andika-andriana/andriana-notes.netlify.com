@@ -1,0 +1,663 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Slice</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0de99274-3f26-4365-a1c0-05bfdd94586d" class="page sans"><header><h1 class="page-title"><strong>Slice</strong></h1></header><div class="page-body"><p id="0f97c9c0-e21b-4dc8-9b66-58f09204ce03" class=""><strong>Slice</strong></p><p id="22e0559d-6e62-4306-9a39-a251aa6e40f1" class=""><strong>Slice</strong> adalah <em>reference</em> elemen array. Slice bisa dibuat, atau bisa juga dihasilkan dari manipulasi sebuah array ataupun slice lainnya. Karena merupakan data <em>reference</em>, menjadikan perubahan data di tiap elemen slice akan berdampak pada slice lain yang memiliki alamat memori yang sama.</p><p id="7e93ade8-5b7e-4a6e-80b3-692e624da53d" class=""><strong>Inisialisasi Slice</strong></p><p id="e4f337c2-510d-438e-b327-d4afa727169b" class="">Cara pembuatan slice mirip seperti pembuatan array, bedanya tidak perlu mendefinisikan jumlah elemen ketika awal deklarasi. Pengaksesan nilai elemen-nya juga sama. </p><p id="6d5c6d57-8cef-49d4-b3d6-705761c597c9" class="">Contoh pembuatan slice:</p><pre id="201be4e3-9a70-4cc3-b0b2-4826c030c2ab" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+fmt.Println(fruits[0]) // &quot;apple&quot;</code></pre><p id="4687f34a-9422-41cd-9252-45182c301f20" class="">Salah satu perbedaan slice dan array bisa diketahui pada saat deklarasi variabel-nya, jika jumlah elemen tidak dituliskan, maka variabel tersebut adalah slice:</p><pre id="618865fb-711e-46b7-9f30-18605681d34a" class="code"><code>var fruitsA = []string{&quot;apple&quot;, &quot;grape&quot;}      // slice
+var fruitsB = [2]string{&quot;banana&quot;, &quot;melon&quot;}    // array
+var fruitsC = [...]string{&quot;papaya&quot;, &quot;grape&quot;}  // array</code></pre><p id="749c3507-0752-4101-97d8-d91fa0420405" class=""><strong>Hubungan Slice Dengan Array &amp; Operasi Slice</strong></p><p id="b54da669-9216-4ae0-a7bb-7646b03b8f96" class="">Kalau perbedannya hanya di penentuan alokasi pada saat inisialisasi, kenapa tidak menggunakan satu istilah saja? atau adakah perbedaan lainnya?</p><p id="3ee0ea14-bd76-4aec-8ae8-0d2d45b4755d" class="">Sebenarnya slice dan array tidak bisa dibedakan karena merupakan sebuah kesatuan. Array adalah kumpulan nilai atau elemen, sedang slice adalah referensi tiap elemen tersebut.</p><p id="632c0e7a-6a9f-4c05-af69-5d78f98423e6" class="">Slice bisa dibentuk dari array yang sudah didefinisikan, caranya dengan memanfaatkan teknik <strong>2 index</strong> untuk mengambil elemen-nya. </p><p id="0e727479-f9fc-4e7c-9d52-aa64d31a6208" class="">Contoh bisa dilihat pada kode berikut.</p><pre id="f4c32d09-717f-4152-a3d7-b27fb5db2a41" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+var newFruits = fruits[0:2]
+
+fmt.Println(newFruits) // [&quot;apple&quot;, &quot;grape&quot;]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f1a3b253-db94-4569-b195-b448d63cbbb8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kode <code>fruits[0:2]</code> maksudnya adalah pengaksesan elemen dalam slice  <code>fruits</code>  yang  <strong>dimulai dari indeks ke-0, hingga elemen sebelum indeks ke-2</strong>. Elemen yang memenuhi kriteria tersebut akan didapat, untuk kemudian disimpan pada variabel lain sebagai slice baru. Pada contoh di atas, <code>newFruits</code> adalah slice baru yang tercetak dari slice <code>fruits</code>, dengan isi 2 elemen, yaitu <code>&quot;apple&quot;</code> dan <code>&quot;grape&quot;</code>.
+
+Ketika mengakses elemen array menggunakan satu buah indeks (seperti <code>data[2]</code>), nilai yang didapat merupakan hasil <strong>copy</strong> dari referensi aslinya. 
+Berbeda dengan pengaksesan elemen menggunakan 2 indeks (seperti <code>data[0:2]</code>), nilai yang didapat adalah <em>reference</em> elemen atau slice.
+
+Tidak apa jikalau pembaca masih bingung, di bawah akan dijelaskan lebih mendetail lagi tentang slice dan reference</div></figure><p id="fcc8817b-82a5-4669-9faa-ea285a765b20" class="">Tabel berikut adalah list operasi operasi menggunakan teknik 2 indeks yang bisa dilakukan.</p><pre id="57c49bf6-5f97-42a7-85a5-367b9fd51e9d" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}</code></pre><div id="fef77281-e0de-43cf-8f06-5b9ab84ff3e6" class="collection-content"><h4 class="collection-title">list operasi</h4><table class="collection-content"><thead><tr><th>Kode</th><th>Output</th><th>Penjelasan</th></tr></thead><tbody><tr id="39a0c0b1-c1b8-4ba3-a5d6-098f2d9ea599"><td class="cell-title"><a href="Slice/list%20operasi/fruits%200%202.html">fruits[0:2]</a></td><td class="cell-Kn\&#x27;">[apple, grape]</td><td class="cell-?5r&lt;">semua elemen mulai indeks ke-0, hingga sebelum indeks ke-2</td></tr><tr id="2f9241ee-e26f-4f94-9b07-ba6229396240"><td class="cell-title"><a href="Slice/list%20operasi/fruits%200%204.html">fruits[0:4]</a></td><td class="cell-Kn\&#x27;">[apple, grape, banana, melon]</td><td class="cell-?5r&lt;">semua elemen mulai indeks ke-0, hingga sebelum indeks ke-4</td></tr><tr id="ba5ba2b1-57ab-4e53-a486-182ef3594b61"><td class="cell-title"><a href="Slice/list%20operasi/fruits%200%200.html">fruits[0:0]</a></td><td class="cell-Kn\&#x27;">[]</td><td class="cell-?5r&lt;">menghasilkan slice kosong, tidak ada elemen sebelum indeks ke-0</td></tr><tr id="fb7152da-5993-4f8c-91b1-65836139d489"><td class="cell-title"><a href="Slice/list%20operasi/fruits%204%204.html">fruits[4:4]</a></td><td class="cell-Kn\&#x27;">[]</td><td class="cell-?5r&lt;">menghasilkan slice kosong, tidak ada elemen yang dimulai dari indeks 4</td></tr><tr id="cc46d725-3163-423d-8003-cf8ef656d812"><td class="cell-title"><a href="Slice/list%20operasi/fruits%204%200.html">fruits[4:0]</a></td><td class="cell-Kn\&#x27;">[]</td><td class="cell-?5r&lt;">error, pada penulisan fruits[a,b] nilai a harus lebih besar atau sama dengan b</td></tr><tr id="0ec156c2-0c0d-4990-ad24-1b9abf6c17a8"><td class="cell-title"><a href="Slice/list%20operasi/fruits.html">fruits[:]</a></td><td class="cell-Kn\&#x27;">[apple, grape, banana, melon]</td><td class="cell-?5r&lt;">semua elemen</td></tr><tr id="8dd7600f-2f28-4504-abca-b457f6f56d47"><td class="cell-title"><a href="Slice/list%20operasi/fruits%202.html">fruits[2:]</a></td><td class="cell-Kn\&#x27;">[banana, melon]</td><td class="cell-?5r&lt;">semua elemen mulai indeks ke-2</td></tr><tr id="626a3e13-bb5a-4294-b78e-07fd80cd1b8b"><td class="cell-title"><a href="Slice/list%20operasi/fruits%202%201.html">fruits[:2]</a></td><td class="cell-Kn\&#x27;">[apple, grape]</td><td class="cell-?5r&lt;">semua elemen hingga sebelum indeks ke-2</td></tr></tbody></table></div><p id="b5f2adeb-3e9b-403e-b19a-6ca4d3211198" class=""><strong>Slice Merupakan Tipe Data Reference</strong></p><p id="b201f1fe-e587-475e-a03a-67ea8b178dad" class="">Slice merupakan tipe data <em>reference</em> atau referensi. Artinya jika ada slice baru yang terbentuk dari slice lama, maka data elemen slice yang baru akan memiliki alamat memori yang sama dengan elemen slice lama. Setiap perubahan yang terjadi di elemen slice baru, akan berdampak juga pada elemen slice lama yang memiliki referensi yang sama.</p><p id="8bd2c80a-2928-4da1-8231-26dc4f62c55d" class="">Program berikut merupakan pembuktian tentang teori yang baru kita bahas. Kita akan mencoba mengubah data elemen slice baru, yang terbentuk dari slice lama.</p><pre id="bc02e2f5-33b6-451e-aa80-e650124f3090" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+var aFruits = fruits[0:3]
+var bFruits = fruits[1:4]
+
+var aaFruits = aFruits[1:2]
+var baFruits = bFruits[0:1]
+
+fmt.Println(fruits)   // [apple grape banana melon]
+fmt.Println(aFruits)  // [apple grape banana]
+fmt.Println(bFruits)  // [grape banana melon]
+fmt.Println(aaFruits) // [grape]
+fmt.Println(baFruits) // [grape]
+
+// Buah &quot;grape&quot; diubah menjadi &quot;pinnaple&quot;
+baFruits[0] = &quot;pinnaple&quot;
+
+fmt.Println(fruits)   // [apple pinnaple banana melon]
+fmt.Println(aFruits)  // [apple pinnaple banana]
+fmt.Println(bFruits)  // [pinnaple banana melon]
+fmt.Println(aaFruits) // [pinnaple]
+fmt.Println(baFruits) // [pinnaple]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3db8167e-00b8-4ac3-b666-d36be010abcc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Sekilas bisa kita lihat bahwa setelah slice yang isi datanya adalah <code>grape</code> di-ubah menjadi <code>pinnaple</code>, semua slice pada 4 variabel lainnya juga ikut berubah.
+
+Variabel <code>aFruits</code>, <code>bFruits</code> merupakan slice baru yang terbentuk dari variabel <code>fruits</code>. Dengan menggunakan dua slice baru tersebut, diciptakan lagi slice lainnya, yaitu <code>aaFruits</code>, dan <code>baFruits</code>. Kelima slice tersebut ditampilkan nilainya.
+
+Selanjutnya, nilai dari <code>baFruits[0]</code> diubah, dan 5 slice tadi ditampilkan lagi. Hasilnya akan ada banyak slice yang elemennya ikut berubah. Yaitu elemen-elemen yang referensi-nya sama dengan referensi elemen <code>baFruits[0]</code>.
+
+Bisa dilihat pada output di atas, elemen yang sebelumnya bernilai <code>&quot;grape&quot;</code> pada variabel <code>fruits</code>, <code>aFruits</code>, <code>bFruits</code>, <code>aaFruits</code>, dan <code>baFruits</code>; kesemuanya berubah menjadi <code>&quot;pinnaple&quot;</code>, karena memiliki referensi yang sama.
+
+Pembahasan mengenai dasar slice sepertinya sudah cukup, selanjutnya kita akan membahas tentang beberapa <em>built in function</em> bawaan Go, yang bisa dimanfaatkan untuk keperluan operasi slice.</div></figure><p id="00037b5e-1203-4b6e-865a-dc0345d939d7" class=""><strong>Fungsi </strong><code><strong>len()</strong></code></p><p id="4c19c5cf-d9c1-430c-888f-56a1eb174b84" class="">Fungsi <code>len()</code> digunakan untuk menghitung jumlah elemen slice yang ada. Sebagai contoh jika sebuah variabel adalah slice dengan data 4 buah, maka fungsi ini pada variabel tersebut akan mengembalikan angka <strong>4</strong>.</p><pre id="b850afdd-648a-4043-95bb-b622461a60dd" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+fmt.Println(len(fruits)) // 4</code></pre><p id="fd561420-8954-4ea2-a506-817c9a80a73e" class=""><strong>Fungsi </strong><code><strong>cap()</strong></code></p><p id="4956f5f5-b046-4bc4-b498-28f50680a0d4" class="">Fungsi <code>cap()</code> digunakan untuk menghitung lebar atau kapasitas maksimum slice. Nilai kembalian fungsi ini untuk slice yang baru dibuat pasti sama dengan <code>len</code>, tapi bisa berubah seiring operasi slice yang dilakukan. Agar lebih jelas, silakan disimak kode berikut.</p><pre id="5b9be864-e37c-402a-a96e-8ad79ab8ba85" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+fmt.Println(len(fruits))  // len: 4
+fmt.Println(cap(fruits))  // cap: 4
+
+var aFruits = fruits[0:3]
+fmt.Println(len(aFruits)) // len: 3
+fmt.Println(cap(aFruits)) // cap: 4
+
+var bFruits = fruits[1:4]
+fmt.Println(len(bFruits)) // len: 3
+fmt.Println(cap(bFruits)) // cap: 3</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="79147fa6-69d3-49aa-b38f-74d51a1bf349"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Variabel <code>fruits</code> disiapkan di awal dengan jumlah elemen 4, fungsi <code>len(fruits)</code> dan <code>cap(fruits)</code> pasti hasinya 4.
+
+Variabel <code>aFruits</code> dan <code>bFruits</code> merupakan slice baru berisikan 3 buah elemen milik slice <code>fruits</code>. Variabel <code>aFruits</code> mengambil elemen index 0, 1, 2; sedangkan <code>bFruits</code> 1, 2, 3.</div></figure><p id="326f53df-ea67-4b9d-a63c-e872ccc23930" class="">Fungsi <code>len()</code> menghasilkan angka 3, karena jumlah elemen kedua slice ini adalah 3. Tetapi  <code>cap(aFruits)</code> menghasilkan angka yang berbeda, yaitu 4 untuk <code>aFruits</code> dan 3 untuk <code>bFruits</code>.</p><p id="d45e0640-a27f-4c00-b353-23aab20bcd35" class="">jawabannya bisa dilihat pada tabel berikut:</p><div id="8f2ff687-0c36-4614-8cde-0826a54c21b0" class="collection-content"><h4 class="collection-title">tabel</h4><table class="collection-content"><thead><tr><th>Kode</th><th>Output</th><th>len()</th><th>cap()</th></tr></thead><tbody><tr id="61459678-c1f5-4df3-9972-ca1af61e5757"><td class="cell-title"><a href="Slice/tabel/fruits%200%204.html">fruits[0:4]</a></td><td class="cell-vr%^">[buah buah buah buah]</td><td class="cell-\C&gt;R">4</td><td class="cell-agF[">4</td></tr><tr id="66f92b31-cebc-474c-9ccd-9556b3b4fc3e"><td class="cell-title"><a href="Slice/tabel/aFruits%200%203.html">aFruits[0:3]</a></td><td class="cell-vr%^">[buah buah buah ----]</td><td class="cell-\C&gt;R">3</td><td class="cell-agF[">4</td></tr><tr id="ac0c0eea-8c3d-4d73-9756-10ffbcf8e4bd"><td class="cell-title"><a href="Slice/tabel/bFruits%201%203.html">bFruits[1:3]</a></td><td class="cell-vr%^">---- [buah buah buah]</td><td class="cell-\C&gt;R">3</td><td class="cell-agF[">3</td></tr></tbody></table></div><p id="647e59c8-d688-479e-90f4-3dbe2639f6ea" class="">Kita analogikan slicing 2 index menggunakan <strong>x</strong> dan <strong>y</strong>.</p><pre id="d40de5a7-aa3e-4241-9683-6ef01416e0fc" class="code"><code>fruits[x:y]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="dc4e5a8d-79bf-42bb-909a-23122e6de45e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Slicing</strong> yang dimulai dari indeks <strong>0</strong> hingga <strong>y</strong> akan mengembalikan elemen-elemen mulai indeks <strong>0</strong> hingga sebelum indeks <strong>y</strong>, dengan lebar kapasitas adalah sama dengan slice aslinya.
+
+Sedangkan slicing yang dimulai dari indeks <strong>x</strong>, yang dimana nilai <strong>x</strong> adalah lebih dari <strong>0</strong>, membuat elemen ke-<strong>x</strong> slice yang diambil menjadi elemen ke-0 slice baru. Hal inilah yang membuat kapasitas slice berubah.</div></figure><p id="5a591671-5d47-46a6-9a04-e2371dd5c4dd" class=""><strong>Fungsi </strong><code><strong>append()</strong></code></p><p id="2902913d-8bbd-4d82-aa14-cf027ff1ac62" class="">Fungsi <code>append()</code> digunakan untuk menambahkan elemen pada slice. Elemen baru tersebut diposisikan setelah indeks paling akhir. Nilai balik fungsi ini adalah slice yang sudah ditambahkan nilai barunya. </p><p id="d03e8535-f1cc-48c2-a6cd-d1a2cb40cef1" class="">Contoh penggunaannya bisa dilihat di kode berikut:</p><pre id="5f90c7e0-58e7-43db-9e49-ad81d3842bf3" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;}
+var cFruits = append(fruits, &quot;papaya&quot;)
+
+fmt.Println(fruits)  // [&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;]
+fmt.Println(cFruits) // [&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;papaya&quot;]</code></pre><p id="0e72097d-74b3-4ea0-865c-fb535de51d62" class="">Ada 3 hal yang perlu diketahui dalam penggunaan fungsi ini.</p><ul id="2fb7da81-855f-4c80-8c2e-a28f77f10755" class="bulleted-list"><li>Ketika jumlah elemen dan lebar kapasitas adalah sama (<code>len(fruits) == cap(fruits)</code>), maka elemen baru hasil <code>append()</code> merupakan referensi baru.</li></ul><ul id="b01e3735-fa2f-4f00-b805-475007bfeeab" class="bulleted-list"><li>Ketika jumlah elemen lebih kecil dibanding kapasitas (<code>len(fruits) &lt; cap(fruits)</code>), elemen baru tersebut ditempatkan kedalam cakupan kapasitas, menjadikan semua elemen slice lain yang referensi-nya sama akan berubah nilainya.</li></ul><p id="69a4f7d3-bdf2-44ef-b701-6ef44f2defce" class="">Agar lebih jelas silakan perhatikan contoh berikut.</p><pre id="b13efc7a-0333-484c-8bb2-7d448c516b05" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;}
+var bFruits = fruits[0:2]
+
+fmt.Println(cap(bFruits)) // 3
+fmt.Println(len(bFruits)) // 2
+
+fmt.Println(fruits)  // [&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;]
+fmt.Println(bFruits) // [&quot;apple&quot;, &quot;grape&quot;]
+
+var cFruits = append(bFruits, &quot;papaya&quot;)
+
+<mark class="highlight-yellow_background">fmt.Println(fruits)  // [&quot;apple&quot;, &quot;grape&quot;, &quot;papaya&quot;]</mark>
+fmt.Println(bFruits) // [&quot;apple&quot;, &quot;grape&quot;]
+fmt.Println(cFruits) // [&quot;apple&quot;, &quot;grape&quot;, &quot;papaya&quot;]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="623c9dd9-91db-45f8-894a-4c904b28bd52"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada contoh di atas bisa dilihat, elemen indeks ke-2 slice <code>fruits</code> nilainya berubah setelah ada penggunaan keyword <code>append()</code> pada <code>bFruits</code>. Slice <code>bFruits</code> kapasitasnya adalah <strong>3</strong> sedang jumlah datanya hanya <strong>2</strong>. Karena <code>len(bFruits) &lt; cap(bFruits)</code>, maka elemen baru yang dihasilkan, terdeteksi sebagai perubahan nilai pada referensi yang lama (referensi elemen indeks ke-2 slice <code>fruits</code>), membuat elemen yang referensinya sama, nilainya berubah.</div></figure><p id="f8f8190f-304c-4ecf-916d-b708c5224d93" class=""><strong>Fungsi </strong><code><strong>copy()</strong></code></p><p id="9b7b22ec-2456-4d17-8890-d83a97f2b7b9" class="">Fungsi <code>copy()</code> digunakan untuk men-copy elements slice pada <code>src</code> (parameter ke-2), ke <code>dst</code> (parameter pertama).</p><pre id="7b9b933b-17a2-454b-bc5f-2aa34738424c" class="code"><code>copy(dst, src)</code></pre><p id="5417687a-67aa-47b8-b5bd-30301e133486" class="">Jumlah element yang di-copy dari <code>src</code> adalah sejumlah lebar slice <code>dst</code> (atau <code>len(dst)</code>). </p><p id="784ef5a3-1d0d-40cf-8f73-ee12b2d587e6" class="">Jika jumlah slice pada <code>src</code> lebih kecil dari <code>dst</code>, maka akan ter-copy semua. Lebih jelasnya silakan perhatikan contoh berikut.</p><pre id="add431fd-4f4f-4d92-beca-f76a3a56fe2a" class="code"><code>dst := make([]string, 3)
+src := []string{&quot;watermelon&quot;, &quot;pinnaple&quot;, &quot;apple&quot;, &quot;orange&quot;}
+n := copy(dst, src)
+
+fmt.Println(dst) // watermelon pinnaple apple
+fmt.Println(src) // watermelon pinnaple apple orange
+fmt.Println(n)   // 3</code></pre><p id="dd4fc432-308c-4b5c-9e52-2e3c3f63893a" class="">Pada kode di atas variabel slice <code>dst</code> dipersiapkan dengan lebar adalah 3 elements. Slice <code>src</code> yang isinya 4 elements, di-copy ke <code>dst</code>. Menjadikan isi slice <code>dst</code> sekarang adalah 3 buah elements yang sama dengan 3 buah elements <code>src</code>, hasil dari operasi <code>copy()</code>.</p><p id="32162133-dfd0-47eb-9fb2-6c4bbdffe533" class="">Yang ter-copy hanya 3 buah (meski <code>src</code> memiliki 4 elements) hal ini karena <code>copy()</code> hanya meng-copy elements sebanyak <code>len(dst)</code>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26dd37eb-c06f-44f0-acc6-7c98df934efb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Fungsi copy() mengembalikan informasi angka, representasi dari jumlah element yang berhasil di-copy.</div></figure><p id="3d9f1c10-790d-456c-b5e0-b1b58b5b4b1a" class="">Pada contoh kedua berikut, <code>dst</code> merupakan slice yang sudah ada isinya, 3 buah elements. Variabel <code>src</code> yang juga merupakan slice dengan isi dua elements, di-copy ke <code>dst</code>. Karena operasi <code>copy()</code> akan meng-copy sejumlah <code>len(dst)</code>, maka semua elements <code>src</code> akan ter-copy <strong>karena jumlahnya dibawah atau sama dengan lebar</strong> <code>dst</code>.</p><pre id="dbfa0ca5-4b10-4e11-8c45-99ee9fe9abb6" class="code"><code>dst := []string{&quot;potato&quot;, &quot;potato&quot;, &quot;potato&quot;}
+src := []string{&quot;watermelon&quot;, &quot;pinnaple&quot;}
+n := copy(dst, src)
+
+fmt.Println(dst) // watermelon pinnaple potato
+fmt.Println(src) // watermelon pinnaple
+fmt.Println(n)   // 2</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a7118c77-5f08-45ce-8339-ad2148a398af"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Jika dilihat pada kode di atas, isi <code>dst</code> masih tetap 3 elements, tapi dua elements pertama adalah sama dengan <code>src</code>. Element terakhir <code>dst</code> isinya tidak berubah, tetap <code>potato</code>, hal ini karena proses copy hanya memutasi element ke-1 dan ke-2 milik <code>dst</code>, karena memang pada <code>src</code> hanya dua itu elements-nya.</div></figure><p id="a5c5c0ca-cbf5-4b6c-9aa1-9f1899f69152" class=""><strong>Pengaksesan Elemen Slice Dengan 3 Indeks</strong></p><p id="8f865aaf-daf2-4e36-8152-c407f8e0f2ab" class=""><strong>3 index</strong> adalah teknik slicing elemen yang sekaligus menentukan kapasitasnya. Cara menggunakannnya yaitu dengan menyisipkan angka kapasitas di belakang, seperti <code>fruits[0:1:1]</code>. Angka kapasitas yang diisikan tidak boleh melebihi kapasitas slice yang akan di slicing.</p><p id="af36d5be-2cd7-4ca6-9945-fed3d445d10e" class="">Berikut merupakan contoh penerapannya.</p><pre id="154be9e4-1c7d-427d-985f-c8e4540cf9d5" class="code"><code>var fruits = []string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;}
+var aFruits = fruits[0:2]
+var bFruits = fruits[0:2:2]
+
+fmt.Println(fruits)      // [&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;]
+fmt.Println(len(fruits)) // len: 3
+fmt.Println(cap(fruits)) // cap: 3
+
+fmt.Println(aFruits)      // [&quot;apple&quot;, &quot;grape&quot;]
+fmt.Println(len(aFruits)) // len: 2
+fmt.Println(cap(aFruits)) // cap: 3
+
+fmt.Println(bFruits)      // [&quot;apple&quot;, &quot;grape&quot;]
+fmt.Println(len(bFruits)) // len: 2
+fmt.Println(cap(bFruits)) // cap: 2</code></pre></div></article></body></html>

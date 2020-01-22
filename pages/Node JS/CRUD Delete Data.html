@@ -1,0 +1,757 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CRUD - Delete Data</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ff5e5d51-7299-4752-8337-20532a89206c" class="page sans"><header><h1 class="page-title">CRUD - Delete Data</h1></header><div class="page-body"><p id="e09443c6-1261-434a-ae52-440898bd9c2d" class="">Kali ini kita akan belajar membuat function untuk handle request delete API pada project nodeJs, </p><p id="cade6676-2d6d-4b7b-be17-974ef03916ab" class="">Berikut adalah contoh penerapannya:</p><ul id="dbb1df62-6ead-444d-b942-18c720387b85" class="bulleted-list"><li>Buat function pada controller.js<pre id="67d9fe69-ab34-4300-9030-781bdb48e695" class="code"><code>// fileName: contactController.js
+
+// import contact model
+Contact = require(&quot;./contactModel&quot;);
+
+// handle index actions
+exports.index = function(req, res) {
+  Contact.get(function(err, contacts) {
+    if (err) {
+      res.json({
+        status: &quot;error&quot;,
+        message: err
+      });
+    }
+    res.json({
+      status: &quot;status&quot;,
+      message: &quot;Contact retrivied successfully&quot;,
+      data: contacts
+    });
+  });
+};
+
+// handle create contact actions
+exports.new = function(req, res) {
+  var contact = new Contact();
+  contact.name = req.body.name ? req.body.name : contact.name;
+  contact.gender = req.body.gender;
+  contact.email = req.body.email;
+  contact.phone = req.body.phone;
+  // save the contact and check for error
+  contact.save(function(err) {
+    // if (err)
+    // res.json(err)
+    res.json({
+      message: &quot;New contact created&quot;,
+      data: contact
+    });
+  });
+};
+
+// handle view contact info
+exports.view = function(req, res) {
+  Contact.findById(req.params.contact_id, function(err, contact) {
+    if (err) res.send(err);
+    res.json({
+      message: &quot;Contact detail loading...&quot;,
+      data: contact
+    });
+  });
+};
+
+// handle update contact info
+exports.update = function(req, res) {
+  Contact.findById(req.params.contact_id, function(err, contact) {
+    if (err) res.send(err);
+    contact.name = req.body.name ? req.body.name : contact.name;
+    contact.gender = req.body.gender;
+    contact.email = req.body.email;
+    contact.phone = req.body.phone;
+    // save the contact and check for error
+    contact.save(function(err) {
+      if (err) res.json(err);
+      res.json({
+        message: &quot;Contact info updated&quot;,
+        data: contact
+      });
+    });
+  });
+};
+
+<mark class="highlight-yellow_background">// handle delete contact
+exports.delete = function(req, res) {
+  Contact.remove(
+    {
+      _id: req.params.contact_id
+    },
+    function(err, contact) {
+      if (err) res.send(err);
+      res.json({
+        status: &quot;success&quot;,
+        message: &quot;Contact deleted&quot;
+	      });
+    }
+  );
+};</mark></code></pre></li></ul><ul id="0ab68719-bbab-47e5-85f2-7e70db34e425" class="bulleted-list"><li>apiRouters.js<pre id="a2ec7ae6-21bc-491e-b9e9-1fdb5801f032" class="code"><code>// initialize express router
+let router = require(&quot;express&quot;).Router();
+
+// set default API responses
+router.get(&quot;/&quot;, function(req, res) {
+  res.json({
+    status: &quot;API its Working&quot;,
+    message: &quot;Welcome to RESThub crafted!&quot;
+  });
+});
+
+<mark class="highlight-yellow_background">// import ContactController
+var contactController = require(&quot;./contactController&quot;);</mark>
+
+<mark class="highlight-yellow_background">// Contact Router</mark>
+router
+  .route(&quot;/contacts&quot;)
+  .get(contactController.index)
+  .post(contactController.new);
+<mark class="highlight-yellow_background">router
+  .route(&quot;/contacts/:contact_id&quot;)</mark>
+  .get(contactController.view)
+  .patch(contactController.update)
+  .put(contactController.update)
+<mark class="highlight-yellow_background">  .delete(contactController.delete);</mark>
+
+// export API
+module.exports = router;</code></pre></li></ul><ul id="3c15fdd2-accd-4ec4-a6ea-f5ecb32fb9ce" class="bulleted-list"><li>contactModel.js<pre id="a2367499-8575-4c60-8676-ead536097a40" class="code"><code>// fileName: contactModel.js
+
+// import mongoose
+var mongoose = require(&quot;mongoose&quot;);
+
+// setup schema
+var contactScema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  gender: String,
+  phone: String,
+  create_date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// exports contact model
+var Contact = (module.exports = mongoose.model(&quot;contact&quot;, contactScema));
+module.exports.get = function(callback, limit) {
+  Contact.find(callback).limit(limit);
+};</code></pre></li></ul><ul id="f550a359-c659-4d3a-982e-e2bc09eaa05c" class="bulleted-list"><li>index.js<pre id="5ae294f7-c3b0-43ae-aece-af7e04acec73" class="code"><code>// filename: index.js
+
+// import express
+let express = require(&quot;express&quot;);
+
+// import API Router
+let apiRoutes = require(&quot;./apiRoutes&quot;);
+
+// import mongoose
+let mongoose = require(&quot;mongoose&quot;);
+
+// import body-parser
+let bodyParser = require(&quot;body-parser&quot;);
+
+// initialize app
+let app = express();
+
+// setup server
+var port = process.env.PORT || 8080;
+
+// configuration body-parser
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+app.use(bodyParser.json());
+
+// connect mongoose and set connection variable
+mongoose.connect(&quot;mongodb://localhost/resthub&quot;);
+var db = mongoose.connection;
+
+// send message for default URL
+app.get(&quot;/&quot;, (req, res) =&gt;
+  res.json({
+    message: &quot;Hello, Its Working With Modules&quot;,
+    modules: &quot;express, nodemon, mongoose, body-parser&quot;
+  })
+);
+
+// app apiRoutes
+app.use(&quot;/api&quot;, apiRoutes);
+
+// launch app to listen specified PORT
+app.listen(port, function() {
+  console.log(&quot;Running resthub on port: &quot; + port);
+});</code></pre></li></ul><p id="b6b2fbc5-f470-4c5f-8b7f-4ff4f42e4c83" class="">Kemudian jalankan server dengan nodemon pada terminal/cmd pada directory project:</p><pre id="8adcd721-6241-4567-a9a0-dac2cd51109a" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\nodeJS\resthub&gt; nodemon index  [nodemon] 2.0.2
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching dir(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node index index.js`
+(node:9196) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+(node:9196) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+Running resthub on port: 8080</code></pre><p id="7925e63e-574e-422f-ae41-ec54e65139db" class="">Kemudian GET API pada postman untuk mendapatkan id dari masing masing data:</p><figure id="15210cf4-63c9-456c-8b98-8c1bf1be3ed9" class="image"><a href="CRUD%20Update%20Data/Untitled.png"><img style="width:1365px" src="CRUD%20Update%20Data/Untitled.png"/></a></figure><p id="17c934cd-73f7-48a2-8de0-d4ee571b443d" class="">Kemudian copy id dari data yang akan kita ubah dan pastekan dikolom address postman contoh: <a href="http://localhost:8080/api/contacts/5e039eb70b74a945605aed69">http://localhost:8080/api/contacts/5e039eb70b74a945605aed69</a></p><figure id="d79b6768-c8c0-408f-a045-95a7fccd20c8" class="image"><a href="CRUD%20Update%20Data/Untitled%201.png"><img style="width:1364px" src="CRUD%20Update%20Data/Untitled%201.png"/></a></figure><p id="67e11933-fefe-46d3-8044-a06a84d04f0a" class="">Kemudian rubah mode request postman menjadi <code>DELETE</code> :</p><figure id="e4a3ce2c-0b67-42ac-94cd-1a5f1d66d618" class="image"><a href="CRUD%20Update%20Data/Untitled%202.png"><img style="width:1363px" src="CRUD%20Update%20Data/Untitled%202.png"/></a></figure><p id="93dbd010-53ff-4c65-92ba-55c8fbf12ba4" class="">Jika berhasil, akan tampil pesan respon pada postman sebagai berikut:</p><figure id="02444ceb-5d8f-4b1f-ac63-42f45be148db" class="image"><a href="CRUD%20Delete%20Data/Untitled.png"><img style="width:1364px" src="CRUD%20Delete%20Data/Untitled.png"/></a></figure><p id="e9b1d6b4-354d-4766-9b6a-e0d2c5c3d252" class="">Kemudian periksa kembali data contact menggunakan request get pada postman:</p><figure id="df749699-f372-41dd-818a-fc195e9289b7" class="image"><a href="CRUD%20Delete%20Data/Untitled%201.png"><img style="width:1365px" src="CRUD%20Delete%20Data/Untitled%201.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="96f2a033-b184-47de-9db6-693f2f84f9a1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Terlihat data dengan nama Asef Kasef sudah terhapus.</div></figure><p id="ce51b59d-42c9-473e-b273-8c7280b6a527" class="">
+</p></div></article></body></html>

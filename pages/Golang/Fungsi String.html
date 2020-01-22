@@ -1,0 +1,608 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Fungsi String</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="734a7042-fa8b-4b9c-a96f-a52cf08b3869" class="page sans"><header><h1 class="page-title"><strong>Fungsi String</strong></h1></header><div class="page-body"><ol id="08ffef37-184e-41e8-99ce-6eed57024c47" class="numbered-list" start="1"><li><strong>Fungsi String</strong><p id="101fd351-2d7d-4cdf-b378-64fbf0b3216a" class="">Go menyediakan package <code>strings</code>, isinya banyak fungsi untuk keperluan pengolahan data string. Bab ini berisi pembahasan mengenai beberapa fungsi yang ada di dalam package tersebut.</p></li></ol><ol id="713dd36b-0286-48a2-b6fa-21f5512acf5f" class="numbered-list" start="2"><li><strong>Fungsi </strong><code><strong>strings.Contains()</strong></code><p id="34d83a9f-57a3-46bc-9e64-3c3b65b503d3" class="">Dipakai untuk deteksi apakah string (parameter kedua) merupakan bagian dari string lain (parameter pertama). Nilai kembaliannya berupa <code>bool</code>.</p><p id="0363725c-2c5a-4294-acb6-9cdf8484d515" class="">Contoh:</p><pre id="f240b5d3-57e4-4b5e-beef-b2feea780cae" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;strings&quot;
+
+func main() {
+    var isExists = strings.Contains(&quot;john wick&quot;, &quot;wick&quot;)
+    fmt.Println(isExists)
+}</code></pre><p id="6be2f22d-8ece-4453-8b08-29cfee0b65e3" class="">Output:</p><pre id="bf2ba6c4-b627-404d-a57b-6159199d81da" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\strings.go
+true</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8d412b6b-691a-4939-b10a-3640ded742f7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Variabel <code>isExists</code> akan bernilai <code>true</code>, karena string <code>&quot;wick&quot;</code> merupakan bagian dari <code>&quot;john wick&quot;</code>.</div></figure></li></ol><ol id="492578a7-26ff-419f-8519-b443bb30848f" class="numbered-list" start="3"><li><strong>Fungsi </strong><code><strong>strings.HasPrefix()</strong></code><p id="af23c493-ccea-43b4-91c0-871a1805d594" class="">Digunakan untuk deteksi apakah sebuah string (parameter pertama) diawali string tertentu (parameter kedua).</p><p id="a1344236-9903-41a1-990c-b16b21c96358" class="">Contoh:</p><pre id="5d0c11ab-3f6a-4d18-9186-cddff8a6491b" class="code"><code>var isPrefix1 = strings.HasPrefix(&quot;john wick&quot;, &quot;jo&quot;)
+fmt.Println(isPrefix1) // true
+
+var isPrefix2 = strings.HasPrefix(&quot;john wick&quot;, &quot;wi&quot;)
+fmt.Println(isPrefix2) // false</code></pre></li></ol><ol id="485c2ecd-78f3-490a-92a9-725fc3b37904" class="numbered-list" start="4"><li><strong>Fungsi </strong><code><strong>strings.HasSuffix()</strong></code><p id="805d0def-215d-46d1-a682-9c62b04e164a" class="">Digunakan untuk deteksi apakah sebuah string (parameter pertama) diakhiri string tertentu (parameter kedua).</p><pre id="53ba387a-a32a-445b-92b6-0d4937e1b5e2" class="code"><code>var isSuffix1 = strings.HasSuffix(&quot;john wick&quot;, &quot;ic&quot;)
+fmt.Println(isSuffix1) // false
+
+var isSuffix2 = strings.HasSuffix(&quot;john wick&quot;, &quot;ck&quot;)
+fmt.Println(isSuffix2) // true</code></pre></li></ol><ol id="76d3f622-a787-4622-a4cd-425a6df5030b" class="numbered-list" start="5"><li><strong>Fungsi </strong><code><strong>strings.Count()</strong></code><p id="dd257bd4-f7c4-47fd-957f-194a31b1a4b5" class="">Memiliki kegunaan untuk menghitung jumlah karakter tertentu (parameter kedua) dari sebuah string (parameter pertama). Nilai kembalian fungsi ini adalah jumlah karakternya.</p><pre id="db1c69d3-c381-4b63-94dc-02c4de9faf0f" class="code"><code>var howMany = strings.Count(&quot;ethan hunt&quot;, &quot;t&quot;)
+fmt.Println(howMany) // 2</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ff607011-0f04-471c-9567-658be4f41ece"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Nilai yang dikembalikan <code>2</code>, karena pada string <code>&quot;ethan hunt&quot;</code> terdapat dua buah karakter <code>&quot;t&quot;</code>.</div></figure></li></ol><ol id="11717d68-891a-4249-8fbc-51f1c8198689" class="numbered-list" start="6"><li><strong>Fungsi </strong><code><strong>strings.Index()</strong></code><p id="cdbc1edd-19dc-46e6-84e0-7adf66bd88ef" class="">Digunakan untuk mencari posisi indeks sebuah string (parameter kedua) dalam string (parameter pertama).</p><pre id="0eea6b4a-9346-42ff-9971-94a9b85c6e9c" class="code"><code>var index1 = strings.Index(&quot;ethan hunt&quot;, &quot;ha&quot;)
+fmt.Println(index1) // 2</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="936cf2cf-0924-4c4e-a6dd-b2a742b52a48"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">String <code>&quot;ha&quot;</code> berada pada posisi ke <code>2</code> dalam string <code>&quot;ethan hunt&quot;</code> 
+(indeks dimulai dari 0).</div></figure><p id="6727c1e1-1f76-49dc-95cd-66d26ac5bede" class=""> Jika diketemukan dua substring, maka yang diambil adalah yang pertama, contoh:</p><pre id="823f87f1-afc4-4818-9ae4-6a425349811d" class="code"><code>var index2 = strings.Index(&quot;ethan hunt&quot;, &quot;n&quot;)
+fmt.Println(index2) // 4</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cfadb2a9-f316-45f4-b707-f4fb1b2c5f88"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">String <code>&quot;n&quot;</code> berada pada indeks <code>4</code> dan <code>8</code>. Yang dikembalikan adalah yang paling kiri (paling kecil), yaitu <code>4</code>.</div></figure></li></ol><ol id="aa6347af-bee4-4f76-83ef-923ae82570bd" class="numbered-list" start="7"><li><strong>Fungsi </strong><code><strong>strings.Replace()</strong></code><p id="91295d3a-c6eb-48b1-bb66-0996defdf95a" class="">Fungsi ini digunakan untuk replace atau mengganti bagian dari string dengan string tertentu. Jumlah substring yang di-replace bisa ditentukan, apakah hanya 1 string pertama, 2 string, atau kesemuanya.</p><pre id="a11360d1-35ae-49bf-81ee-7ba44201725b" class="code"><code>var text = &quot;banana&quot;
+var find = &quot;a&quot;
+var replaceWith = &quot;o&quot;
+
+var newText1 = strings.Replace(text, find, replaceWith, 1)
+fmt.Println(newText1) // &quot;bonana&quot;
+
+var newText2 = strings.Replace(text, find, replaceWith, 2)
+fmt.Println(newText2) // &quot;bonona&quot;
+
+var newText3 = strings.Replace(text, find, replaceWith, -1)
+fmt.Println(newText3) // &quot;bonono&quot;</code></pre><p id="b18bbdcc-940e-4749-8556-22d96fa57938" class="">Penjelasan:</p><ol id="be44d749-5d4f-406e-8a61-3685c4753b33" class="numbered-list" start="1"><li>Pada contoh di atas, substring <code>&quot;a&quot;</code> pada string <code>&quot;banana&quot;</code> akan di-replace dengan string <code>&quot;o&quot;</code>.</li></ol><ol id="fc065853-ba5e-491f-bfd3-931fbef2a5ee" class="numbered-list" start="2"><li>Pada <code>newText1</code>, hanya 1 huruf <code>o</code> saja yang tereplace karena maksimal substring yang ingin di-replace ditentukan 1.</li></ol><ol id="cd9e7e85-789d-43b1-95bc-7d491b650b21" class="numbered-list" start="3"><li>Angka <code>-1</code> akan menjadikan proses replace berlaku pada semua substring. Contoh bisa dilihat pada <code>newText3</code>.</li></ol><ol id="4f7dc8be-8250-405e-bb2e-b22d4ace0fa1" class="numbered-list" start="4"><li><strong>Fungsi </strong><code><strong>strings.Repeat()</strong></code></li></ol><p id="31fd60a1-da67-4472-8965-65eb04452e37" class="">Digunakan untuk mengulang string (parameter pertama) sebanyak data yang ditentukan (parameter kedua).</p><pre id="3945a72e-718d-4452-b588-6502204b7abf" class="code"><code>var str = strings.Repeat(&quot;na&quot;, 4)
+fmt.Println(str) // &quot;nananana&quot;</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6d6b0c26-4f94-48da-af3f-f90e4c470b4a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada contoh di atas, string <code>&quot;na&quot;</code> diulang sebanyak 4 kali. Hasilnya adalah: <code>&quot;nananana&quot;</code></div></figure></li></ol><ol id="952df835-db6b-4d83-8a4e-e4015f4ea31d" class="numbered-list" start="8"><li><strong>Fungsi </strong><code><strong>strings.Split()</strong></code><p id="48272586-276e-4b31-9181-120283dcf034" class="">Digunakan untuk memisah string (parameter pertama) dengan tanda pemisah bisa ditentukan sendiri (parameter kedua). Hasilnya berupa array string.</p><pre id="19430a00-35ab-4afc-bc46-37d847cbb041" class="code"><code>var string1 = strings.Split(&quot;the dark knight&quot;, &quot; &quot;)
+fmt.Println(string1) // [&quot;the&quot;, &quot;dark&quot;, &quot;knight&quot;]
+
+var string2 = strings.Split(&quot;batman&quot;, &quot;&quot;)
+fmt.Println(string2) // [&quot;b&quot;, &quot;a&quot;, &quot;t&quot;, &quot;m&quot;, &quot;a&quot;, &quot;n&quot;]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="72f174c6-d8c8-4c55-afb0-6c26424eae66"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">String <code>&quot;the dark knight&quot;</code> dipisah oleh karakter spasi <code>&quot; &quot;</code>, hasilnya kemudian ditampung oleh <code>string1</code>.
+
+Untuk memisah string menjadi array tiap 1 string, gunakan pemisah string kosong <code>&quot;&quot;</code>. Bisa dilihat contohnya pada variabel <code>string2</code>.</div></figure></li></ol><ol id="531b59ca-0836-47ed-83f4-9190ad4bf9cc" class="numbered-list" start="9"><li><strong>Fungsi </strong><code><strong>strings.Join()</strong></code><p id="7ba8ff57-e0a6-44f4-bc8b-944ce95abd92" class="">Memiliki kegunaan berkebalikan dengan <code>strings.Split()</code>. Digunakan untuk menggabungkan array string (parameter pertama) menjadi sebuah string dengan pemisah tertentu (parameter kedua.</p><pre id="738178d0-c912-4a50-a7e6-1a0347b88212" class="code"><code>var data = []string{&quot;banana&quot;, &quot;papaya&quot;, &quot;tomato&quot;}
+var str = strings.Join(data, &quot;-&quot;)
+fmt.Println(str) // &quot;banana-papaya-tomato&quot;</code></pre><p id="d887494a-5984-4c93-8a9f-07c19ecd6b7f" class="">Array <code>data</code> digabungkan menjadi satu dengan pemisah tanda <em>dash</em> (<code>-</code>).</p></li></ol><ol id="4f67b61e-6833-4d8d-8f1a-de7dc5ce7923" class="numbered-list" start="10"><li><strong>Fungsi </strong><code><strong>strings.ToLower()</strong></code><p id="df3aeb63-0371-4f09-becc-6714020d1044" class="">Mengubah huruf-huruf string menjadi huruf kecil.</p><pre id="da9c1557-3c6b-4dae-9ff7-bfc6e9e7d2b1" class="code"><code>var str = strings.ToLower(&quot;aLAy&quot;)
+fmt.Println(str) // &quot;alay&quot;</code></pre></li></ol><ol id="d3d75acd-8e1c-43b2-a10e-066139de3e6c" class="numbered-list" start="11"><li><strong>Fungsi </strong><code><strong>strings.ToUpper()</strong></code><p id="6ac36685-5d26-4e41-9237-4a18ab026bea" class="">Mengubah huruf-huruf string menjadi huruf besar.</p><pre id="c6eb1265-3031-40ac-a95f-5e9617c57699" class="code"><code>var str = strings.ToUpper(&quot;eat!&quot;)
+fmt.Println(str) // &quot;EAT!&quot;</code></pre></li></ol></div></article></body></html>

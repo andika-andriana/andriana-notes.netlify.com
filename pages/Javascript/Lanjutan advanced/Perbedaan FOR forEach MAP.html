@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Perbedaan || FOR - forEach - MAP</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="986550e3-0106-4316-b55a-ebe27f468f48" class="page sans"><header><h1 class="page-title">Perbedaan || FOR - forEach - MAP</h1></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9887ccbe-20e8-4b79-8db2-bd1aaa390855"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Method for → dapat <mark class="highlight-red_background">melakukan perulangan berdasarkan jumlah yang ditentukan</mark>, sedangkan forEach dan Map tidak bisa;
+Method for &amp; forEach → <mark class="highlight-red_background">tidak bisa Menghasilkan array baru</mark>;
+Method MAP → <mark class="highlight-red_background">dapat menghasilkan array baru;</mark></div></figure><hr id="4a9c28b3-5329-41d2-807c-e732190728c6"/><ul id="8c6d29ef-d924-401b-83eb-7d2db7fded06" class="toggle"><li><details open=""><summary>Berikut penjelasan tentang method <mark class="highlight-red_background">for</mark>:</summary><ul id="f983c3ac-04be-4489-9046-f24659c32931" class="bulleted-list"><li>Dapat digunakan untuk melakukan perulangan berdasarkan panjang dari sebuah array.</li></ul><pre id="95b4cffc-66fe-4a21-bc94-60d0a40416c2" class="code"><code>function perulanganFor() {
+
+  var dataNama = [&#x27;Andi&#x27;, &#x27;Bobi&#x27;, &#x27;Doni&#x27;];
+
+  for (var i = 0; i &lt; dataKota.length; i++) {
+    console.log(dataNama[i])
+    console.log(i)
+    console.log(dataNama)
+  }
+}
+
+perulanganFor();</code></pre><ul id="78359b3e-bc60-47d5-897b-9b8dc8c0836b" class="bulleted-list"><li>Output:</li></ul><pre id="11ab70f5-011a-4e97-97ea-dafda8040b7d" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\javascript&gt; node .\forForEachMAP.js
+Andi
+0
+[ &#x27;Andi&#x27;, &#x27;Bobi&#x27;, &#x27;Doni&#x27; ]
+Bobi
+1
+[ &#x27;Andi&#x27;, &#x27;Bobi&#x27;, &#x27;Doni&#x27; ]
+Doni
+2
+[ &#x27;Andi&#x27;, &#x27;Bobi&#x27;, &#x27;Doni&#x27; ]</code></pre><ul id="0ffad3b6-ab1f-4b80-8660-63b0efedd1b8" class="bulleted-list"><li>Dapat digunakan untuk melakukan perulangan berdasarkan jumlah yang sudah ditentukan.</li></ul><pre id="6fe99508-7b88-48c7-84dc-87619f5901bf" class="code"><code>function perulanganFor() {
+  for (var i = 0; i &lt; 10; i++) {
+    console.log(&#x27;ulang &#x27;, i);
+  }
+}
+
+perulanganFor();</code></pre><ul id="d949048c-e471-4e6d-b6ab-09f143379aa1" class="bulleted-list"><li>Output:</li></ul><pre id="adca1c82-ced2-4c07-9703-72e34eeceeda" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\javascript&gt; node .\forForEachMAP.js
+ulang  0
+ulang  1
+ulang  2
+ulang  3
+ulang  4
+ulang  5
+ulang  6
+ulang  7
+ulang  8
+ulang  9</code></pre><ul id="7d85c3b7-a1bf-42e0-8a9f-e6612bce08c1" class="bulleted-list"><li>for tidak dapat menghasilkan array baru dengan cara seperti ini:</li></ul><pre id="7766b11c-c056-4f70-bb7e-07bf9fdf70bc" class="code"><code>function perulanganFor() {
+  var dataNama= [&#x27;Andi&#x27;, &#x27;Doni&#x27;, &#x27;Bobi&#x27;];
+  var dataBaru =
+    for (var i = 0; i &lt; dataNama.length; i++) {
+      return dataNama[i]
+    }
+  console.log(dataBaru);
+}
+
+perulanganFor();</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d3ec7480-b6e8-4de1-a046-9a6347c18bab"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Hasilnya akan error; 
+Sehingga yang bisa dilakukan adalah memasukkan data baru tersebut menggunakan tambahan perintah <mark class="highlight-red_background">push</mark> ke dalam variable bertipe array yang sudah dideklarasikan dulu di atasnya;</div></figure><ul id="fb090e42-d18f-4e18-bc29-3b0032d1a46a" class="bulleted-list"><li>Berikut cara for menghasilkan data baru dengan push:</li></ul><pre id="4c1233e2-30cd-46eb-aa11-81714342e1f5" class="code"><code>function perulanganFor() {
+  var dataNama = [&#x27;Andi&#x27;, &#x27;Mona&#x27;, &#x27;Doni&#x27;, &#x27;Sinta&#x27;];
+  var dataBaru = [];
+  for (var i = 0; i &lt; dataNama.length; i++) {
+    dataBaru.push(&#x27;Kota: &#x27; + dataNama[i]);
+  }
+  console.log(dataBaru);
+}
+
+perulanganFor();</code></pre><ul id="07cb7639-863e-428d-b240-1ab02ac2eaa8" class="bulleted-list"><li>Output:</li></ul><pre id="6f4092a6-e649-4894-ace6-1dc169e704a3" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\javascript&gt; node .\forForEachMAP.js
+[ &#x27;Kota: Andi&#x27;, &#x27;Kota: Mona&#x27;, &#x27;Kota: Doni&#x27;, &#x27;Kota: Sinta&#x27; ]</code></pre></details></li></ul><hr id="160dc54c-a94a-4727-ad88-1f7c44ce084e"/><ul id="4b0e92ed-8fb7-49de-80f5-eb4e0de625f6" class="toggle"><li><details open=""><summary>Berikut penjelasan tentang method <mark class="highlight-red_background">forEach</mark>:</summary><ul id="ac4b62a0-022b-4da8-b31e-1dbfdaa877c3" class="bulleted-list"><li>Dapat kita gunakan untuk melakukan perulangan berdasarkan panjang dari sebuah array</li></ul><pre id="fa0f4ec6-7a77-48f9-b34c-42ff0d8ead58" class="code"><code>function perulanganForEach() {
+  var dataNama = [&#x27;Andi&#x27;, &#x27;Bona&#x27;, &#x27;Bobi&#x27;, &#x27;Dodi&#x27;];
+  dataNama.forEach((item, index, array) =&gt; {
+    console.log(item);
+    console.log(index);
+    console.log(array);
+  });
+}
+
+perulanganForEach();</code></pre><ul id="d364f789-3e55-4e58-a392-cc60378fa07a" class="bulleted-list"><li>Output:</li></ul><pre id="9c1de5c9-7a3d-4fef-bdb2-c86d378c1c31" class="code"><code>&quot;Andi&quot;
+0
+[&quot;Andi&quot;, &quot;Bona&quot;, &quot;Bobi&quot;, &quot;Dodi&quot;]
+&quot;Bona&quot;
+1
+[&quot;Andi&quot;, &quot;Bona&quot;, &quot;Bobi&quot;, &quot;Dodi&quot;]
+&quot;Bobi&quot;
+2
+[&quot;Andi&quot;, &quot;Bona&quot;, &quot;Bobi&quot;, &quot;Dodi&quot;]
+&quot;Dodi&quot;
+3
+[&quot;Andi&quot;, &quot;Bona&quot;, &quot;Bobi&quot;, &quot;Dodi&quot;]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9f491e2d-f159-443f-b197-49d5f6f24629"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">forEach  → tidak dapat melakukan perulangan berdasarkan jumlah yang sudah ditentukan, seperti yang bisa dilakukan pada perintah for;
+forEach  → tidak dapat menghasilkan array baru; 
+Sehingga yang bisa dilakukan adalah memasukkan data baru tersebut menggunakan tambahan perintah push ke dalam variable bertipe array yang sudah dideklarasikan dulu di atasnya.</div></figure><ul id="e5e8eddb-e9a7-47ab-bc6f-3a07ecb6a169" class="bulleted-list"><li>Berikut cara forEach menghasilkan data baru dengan push:</li></ul><pre id="c32abba7-b93b-4776-b24e-9d5331da2d11" class="code"><code>function perulanganForEach() {
+  var dataNama = [&#x27;Andi&#x27;, &#x27;Doni&#x27;, &#x27;Bobi&#x27;, &#x27;Jojo&#x27;];
+  var dataBaru = [];
+  dataNama.forEach((item, index, array) =&gt; {
+    return dataBaru.push(&#x27;Kota : &#x27; + item);
+  });
+  console.log(dataBaru);
+}
+
+perulanganForEach();</code></pre><ul id="7d87a945-65e7-404c-acb8-117845fe0d0e" class="bulleted-list"><li>Output:</li></ul><pre id="d9a82fba-b588-45ae-bcd0-026436a0f6fd" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\javascript&gt; node .\forForEachMAP.js
+[ &#x27;Kota : Andi&#x27;, &#x27;Kota : Doni&#x27;, &#x27;Kota : Bobi&#x27;, &#x27;Kota : Jojo&#x27; ]</code></pre></details></li></ul><hr id="b55ab501-6266-442c-bb1e-25157a8f59c9"/><ul id="e8535c9d-a397-4466-bb0b-fdf87438efd7" class="toggle"><li><details open=""><summary>Berikut penjelasan tentang method <mark class="highlight-red_background">MAP</mark>:</summary><ul id="24a4b16d-7ba6-4630-b5be-a834bf986afe" class="bulleted-list"><li>Dapat digunakan untuk melakukan perulangan berdasarkan panjang dari sebuah array.</li></ul><pre id="8479b0b0-59dc-4483-878e-86f2147e9ad2" class="code"><code>function perulanganMAP() {
+  var dataNama = [&#x27;Andi&#x27;, &#x27;Doni&#x27;, &#x27;Bobi&#x27;, &#x27;Jojo&#x27;];
+  dataNama.map((item, index, array) =&gt; {
+    console.log(item);
+    console.log(index);
+    console.log(array);
+  });
+}
+
+perulanganMAP();</code></pre><ul id="acc67afa-24d8-41c0-9ba8-22bf24f7c4d1" class="bulleted-list"><li>Output:</li></ul><pre id="6ddda2a7-6eb3-441e-bf10-2e4772c32f41" class="code"><code>&quot;Andi&quot;
+0
+[&quot;Andi&quot;, &quot;Doni&quot;, &quot;Bobi&quot;, &quot;Jojo&quot;]
+&quot;Doni&quot;
+1
+[&quot;Andi&quot;, &quot;Doni&quot;, &quot;Bobi&quot;, &quot;Jojo&quot;]
+&quot;Bobi&quot;
+2
+[&quot;Andi&quot;, &quot;Doni&quot;, &quot;Bobi&quot;, &quot;Jojo&quot;]
+&quot;Jojo&quot;
+3
+[&quot;Andi&quot;, &quot;Doni&quot;, &quot;Bobi&quot;, &quot;Jojo&quot;]</code></pre><ul id="b4fe655c-a7b0-4a5e-8173-a04b26347704" class="bulleted-list"><li>Dapat menghasilkan array baru dengan cara seperti ini, sehingga tidak perlu lagi menggunakan tambahan perintah push.</li></ul><pre id="77d252ef-324a-4bf2-94aa-1d44c4baee8e" class="code"><code>function perulanganMAP() {
+  var dataNama = [&#x27;Andi&#x27;, &#x27;Doni&#x27;, &#x27;Bobi&#x27;, &#x27;Jojo&#x27;];
+  var dataBaru = dataNama.map((item, index, array) =&gt; {
+    return &#x27;Kota : &#x27; + item;
+  });
+  console.log(dataBaru);
+}
+
+perulanganMAP();</code></pre><ul id="e528844e-f1f1-45ef-8bb8-1b02df198b37" class="bulleted-list"><li>Output:</li></ul><pre id="c04a1858-77ae-4c3e-9836-5706cd280202" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\javascript&gt; node .\forForEachMAP.js
+[ &#x27;Kota : Andi&#x27;, &#x27;Kota : Doni&#x27;, &#x27;Kota : Bobi&#x27;, &#x27;Kota : Jojo&#x27; ]</code></pre><p id="3c75705c-46c7-4c2a-be04-2c13ec4065cd" class="">
+</p></details></li></ul><hr id="07ed35c9-88b2-4e1d-a3c2-d427b6b2579b"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="efff1207-ce34-44a5-a4f6-91843c8aa93a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Notes:
+- Jika kita ingin melakukan perulangan berdasarkan jumlah data yang sudah ditentukan, maka gunakanlah perintah <mark class="highlight-red_background">for</mark>;
+- Jika kita ingin melakukan perulangan berdasarkan panjang array dan tidak ingin mencetak array baru lagi, maka gunakanlah <mark class="highlight-red_background">forEach</mark>;
+- Jika kita ingin melakukan perulangan dan ingin menghasilkan array baru, maka gunakanlah <mark class="highlight-red_background">MAP.</mark></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="adc6409f-6453-4714-9e24-37f5ade41f04"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Perbedaan Lain:
+<mark class="highlight-red_background">forEach( )</mark> → mungkin sangat cocok ketika anda tidak ingin mengubah nilai datanya itu sendiri misalkan memasukan data ke database.
+<mark class="highlight-red_background">map( ) </mark>→ dapat digunakan untuk perubahan data dalam bentuk array.</div></figure><p id="4c053068-98e3-4cfa-8b2b-55d0b8b28f1c" class="">
+</p></div></article></body></html>

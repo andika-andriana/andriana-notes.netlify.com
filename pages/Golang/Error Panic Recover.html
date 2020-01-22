@@ -1,0 +1,764 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Error , Panic &amp; Recover</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9f64c459-55fd-49ef-b5ce-d7bd55654fb7" class="page sans"><header><h1 class="page-title">Error , Panic &amp; Recover</h1></header><div class="page-body"><ol id="8a9b9740-b276-469d-8e4a-a604074d6293" class="numbered-list" start="1"><li><strong>Error, Panic, dan Recover</strong><p id="9d6afca2-0a97-4a85-832b-6d5255335cd3" class="">Error merupakan topik yang sangat penting dalam pemrograman Go. Di bagian ini kita akan belajar mengenai pemanfaatan error dan cara membuat custom error sendiri. </p><p id="d0a06f9a-5ac6-4202-9db5-20c41266439c" class="">Selain itu, kita juga akan belajar tentang penggunaan <strong>panic</strong> untuk memunculkan panic error, dan <strong>recover</strong> untuk mengatasinya.</p></li></ol><ol id="4cdd553d-4f04-4476-94c9-b0557f860531" class="numbered-list" start="2"><li><strong>Pemanfaatan Error</strong><p id="5d736bef-4cd7-443a-91b4-1198e9cf188d" class=""><code>error</code> merupakan sebuah tipe. Error memiliki memiliki 1 buah property berupa method <code>Error()</code>, method ini mengembalikan detail pesan error dalam string. Error termasuk tipe yang isinya bisa <code>nil</code>.</p><p id="ada3ced2-d62b-496d-a8c7-5cffa5a906c7" class="">Di Go, banyak sekali fungsi yang mengembalikan nilai balik lebih dari satu. Biasanya, salah satu kembalian adalah bertipe <code>error</code>. Contohnya seperti pada fungsi <code>strconv.Atoi()</code>. Fungsi tersebut digunakan untuk konversi data string menjadi numerik. Fungsi ini mengembalikan 2 nilai balik. Nilai balik pertama adalah hasil konversi, dan nilai balik kedua adalah <code>error</code>. Ketika konversi berjalan mulus, nilai balik kedua akan bernilai <code>nil</code>. Sedangkan ketika konversi gagal, penyebabnya bisa langsung diketahui dari error yang dikembalikan.</p><p id="d7de7839-0204-4f4b-9bbc-8b5d9fb1625e" class="">Dibawah ini merupakan contoh program sederhana untuk deteksi inputan dari user, apakah numerik atau bukan. </p><p id="e9359194-818b-45ca-9012-3131069bbbf7" class="">Dari sini kita akan belajar mengenai pemanfaatan error:</p><pre id="dc751341-c8f9-4375-9bfd-3f68a3363cbf" class="code"><code>package main
+
+import (
+    &quot;fmt&quot;
+    &quot;strconv&quot;
+)
+
+func main() {
+    var input string
+    fmt.Print(&quot;Type some number: &quot;)
+    fmt.Scanln(&amp;input)
+
+    var number int
+    var err error
+    number, err = strconv.Atoi(input)
+
+    if err == nil {
+        fmt.Println(number, &quot;is number&quot;)
+    } else {
+        fmt.Println(input, &quot;is not number&quot;)
+        fmt.Println(err.Error())
+    }
+}</code></pre><p id="f076fd2a-cd14-4e3d-bf94-48f59122e7d5" class="">Jalankan program, maka muncul tulisan <code>&quot;Type some number: &quot;</code>. Ketik angka bebas, jika sudah maka enter.</p><pre id="17b0c611-25f5-4954-b3b7-4e719f24e2bb" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\error.go
+Type some number: 1
+1 is number
+PS C:\Go\src\belajar-golang&gt; go run .\error.go
+Type some number: 1a
+1a is not number
+strconv.Atoi: parsing &quot;1a&quot;: invalid syntax</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e8f984e-efd4-413b-a652-5e7e848f2377"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Statement <code>fmt.Scanln(&amp;input)</code> dipergunakan untuk men-capture inputan yang diketik oleh user sebelum dia menekan enter, lalu menyimpannya sebagai string ke variabel <code>input</code>.
+
+Selanjutnya variabel tersebut dikonversi ke tipe numerik menggunakan <code>strconv.Atoi()</code>. Fungsi tersebut mengembalikan 2 data, ditampung oleh <code>number</code> dan <code>err</code>.
+
+Data pertama (<code>number</code>) berisi hasil konversi. Dan data kedua <code>err</code>, berisi informasi errornya (jika memang terjadi error ketika proses konversi).
+
+Setelah itu dilakukan pengecekkan, ketika tidak ada error, <code>number</code> ditampilkan. Dan jika ada error, <code>input</code> ditampilkan beserta pesan errornya.
+
+Pesan error bisa didapat dari method <code>Error()</code> milik tipe <code>error</code>.</div></figure></li></ol><ol id="a2209d8b-dc1a-4d0e-8a9e-3a9a72e8f3a3" class="numbered-list" start="3"><li><strong>Membuat Custom Error</strong><p id="80ad5692-49ed-45c5-82ae-19401ff15804" class="">Selain memanfaatkan error hasil kembalian suatu fungsi internal yang tersedia, kita juga bisa membuat objek error sendiri dengan menggunakan fungsi <code>errors.New()</code> (harus import package <code>errors</code> terlebih dahulu).</p><p id="a4bb7c07-4fd3-4d5d-8390-11c0ace9fb0f" class="">Pada contoh berikut ditunjukan bagaimana cara membuat custom error. Pertama siapkan fungsi dengan nama <code>validate()</code>, yang nantinya digunakan untuk pengecekan input, apakah inputan kosong atau tidak. Ketika kosong, maka error baru akan dibuat.</p><pre id="6baa59b7-748b-4ce6-add7-982607e3ca59" class="code"><code>package main
+
+import (
+    &quot;errors&quot;
+    &quot;fmt&quot;
+    &quot;strings&quot;
+)
+
+func validate(input string) (bool, error) {
+    if strings.TrimSpace(input) == &quot;&quot; {
+        return false, errors.New(&quot;cannot be empty&quot;)
+    }
+    return true, nil
+}</code></pre><p id="16df1dee-5ec3-4b01-a6d9-55ae45597ff6" class="">Selanjutnya di fungsi main, buat proses sederhana untuk capture inputan user. Manfaatkan fungsi <code>validate()</code> untuk mengecek inputannya.</p><pre id="6ef4c5e7-eacb-4df2-bae5-97908d3c353d" class="code"><code>package main
+
+import (
+	&quot;errors&quot;
+	&quot;fmt&quot;
+	&quot;strings&quot;
+)
+
+func main() {
+	var name string
+	fmt.Print(&quot;Type your name: &quot;)
+	fmt.Scanln(&amp;name)
+
+	if valid, err := validate(name); valid {
+		fmt.Println(&quot;halo&quot;, name)
+	} else {
+		fmt.Println(err.Error())
+	}
+}
+
+func validate(input string) (bool, error) {
+	if strings.TrimSpace(input) == &quot;&quot; {
+		return false, errors.New(&quot;cannot be empty&quot;)
+	}
+	return true, nil
+}</code></pre><p id="02ef033f-a217-479a-98ca-dd6cab39f2b3" class="">Fungsi <code>validate()</code> mengembalikan 2 data. Data pertama adalah nilai <code>bool</code> yang menandakan inputan apakah valid atau tidak. Data ke-2 adalah pesan error-nya (jika inputan tidak valid).</p><p id="f21df57c-989d-4686-85f0-43b889c94f8d" class="">Fungsi <code>strings.TrimSpace()</code> digunakan untuk menghilangkan karakter spasi sebelum dan sesudah string. Ini dibutuhkan karena user bisa saja menginputkan spasi lalu enter.</p><p id="b6331ecb-505f-4aa2-a4b1-0520fa74dc2b" class="">Ketika inputan tidak valid, maka error baru dibuat dengan memanfaatkan fungsi <code>errors.New()</code>. Selain itu objek error juga bisa dibuat lewat fungsi <code>fmt.Errorf()</code>.</p><pre id="107e7c3f-16bc-4a6d-9b5a-4e702d15707d" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\error.go
+Type your name: Andika
+halo Andika
+PS C:\Go\src\belajar-golang&gt; go run .\error.go
+Type your name:
+cannot be empty</code></pre></li></ol><ol id="a29dd672-207e-4f6d-88e9-1a710f324af0" class="numbered-list" start="4"><li><strong>Penggunaan </strong><code><strong>panic</strong></code><p id="e7e935a1-60d2-46d5-ae7f-1a4df2ebc211" class="">Panic digunakan untuk menampilkan <em>stack trace</em> error sekaligus menghentikan flow goroutine (karena <code>main()</code> juga merupakan goroutine, maka behaviour yang sama juga berlaku). Setelah ada panic, proses akan terhenti, apapun setelah tidak di-eksekusi kecuali proses yang sudah di-defer sebelumnya (akan muncul sebelum panic error).</p><p id="aec7a4e6-f772-4568-bde7-51568d91c60f" class="">Panic menampilkan pesan error di console, sama seperti <code>fmt.Println()</code>. Informasi error yang ditampilkan adalah stack trace error, jadi sangat mendetail dan heboh.</p><p id="dfd1ecd8-6a47-4a53-9a56-2cb1b6004a9d" class="">Kembali ke koding, pada program yang telah kita buat tadi, ubah <code>fmt.Println()</code> yang berada di dalam blok kondisi <code>else</code> pada fungsi main menjadi <code>panic()</code>, lalu tambahkan <code>fmt.Println()</code> setelahnya.</p><pre id="0bdf3eca-b68a-48bb-970d-6840fbf2a0cb" class="code"><code>package main
+
+import (
+	&quot;errors&quot;
+	&quot;fmt&quot;
+	&quot;strings&quot;
+)
+
+func main() {
+	var name string
+	fmt.Print(&quot;Type your name: &quot;)
+	fmt.Scanln(&amp;name)
+
+	if valid, err := validate(name); valid {
+		fmt.Println(&quot;halo&quot;, name)
+	} else {
+		panic(err.Error())
+		fmt.Println(&quot;end&quot;)
+	}
+}
+
+func validate(input string) (bool, error) {
+	if strings.TrimSpace(input) == &quot;&quot; {
+		return false, errors.New(&quot;cannot be empty&quot;)
+	}
+	return true, nil
+}</code></pre><p id="811c7816-db3c-4feb-9bb7-83c4e336296d" class="">Jalankan program lalu langsung tekan enter, maka panic error muncul dan baris kode setelahnya tidak dijalankan.</p><pre id="e09848f6-2a94-4b67-b4a4-c746beffe660" class="code"><code>PS C:\Go\src\belajar-golang&gt;
+
+Type your name: Anonim
+halo Anonim
+
+PS C:\Go\src\belajar-golang&gt; go run .\error.go
+
+Type your name:
+panic: cannot be empty
+
+goroutine 1 [running]:
+main.main()
+        C:/Go/src/belajar-golang/error.go:17 +0x205
+exit status 2</code></pre></li></ol><ol id="b68df916-ed02-4177-a53b-4b23306602bd" class="numbered-list" start="5"><li><strong>Penggunaan </strong><code><strong>recover</strong></code><p id="694af7d6-1810-4a08-a3f9-03d504e29f88" class="">Recover berguna untuk meng-handle panic error. Pada saat panic error muncul, recover men-take-over goroutine yang sedang panic (pesan panic tidak akan muncul).</p><p id="da567e08-f586-4d08-a903-04836f34794a" class="">Ok, mari kita modif sedikit fungsi di-atas untuk mempraktekkan bagaimana cara penggunaan recover. Tambahkan fungsi <code>catch()</code>, dalam fungsi ini terdapat statement <code>recover()</code> yang dia akan mengembalikan pesan panic error yang seharusnya muncul.</p><p id="65ee15ce-2857-4985-8b57-84f6cf8ef3cb" class="">Untuk menggunakan recover, fungsi/closure/IIFE dimana <code>recover()</code> berada harus dieksekusi dengan cara di-defer.</p><pre id="17b38223-061a-4921-abbc-defb5c2dd1ce" class="code"><code>package main
+
+import (
+	&quot;errors&quot;
+	&quot;fmt&quot;
+	&quot;strings&quot;
+)
+
+func main() {
+	defer catch()
+
+	var name string
+	fmt.Print(&quot;Type your name: &quot;)
+	fmt.Scanln(&amp;name)
+
+	if valid, err := validate(name); valid {
+		fmt.Println(&quot;halo&quot;, name)
+	} else {
+		panic(err.Error())
+		fmt.Println(&quot;end&quot;)
+	}
+}
+
+func catch() {
+	if r := recover(); r != nil {
+		fmt.Println(&quot;Error occured&quot;, r)
+	} else {
+		fmt.Println(&quot;Application running perfectly&quot;)
+	}
+}
+
+func validate(input string) (bool, error) {
+	if strings.TrimSpace(input) == &quot;&quot; {
+		return false, errors.New(&quot;cannot be empty&quot;)
+	}
+	return true, nil
+}</code></pre><p id="2fe5774d-9a4d-4b19-a03f-4da28faa83d7" class="">Output:</p><pre id="bfeda4c8-67a5-4d51-ae8a-0b6810573716" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\error.go
+
+Type your name: Anonim
+halo Anonim
+Application running perfectly
+
+PS C:\Go\src\belajar-golang&gt; go run .\error.go
+
+Type your name:
+Error occured cannot be empty</code></pre></li></ol><ol id="e555dfb9-f6d2-4905-b734-0511bcfb4c3b" class="numbered-list" start="6"><li><strong>Pemanfaatan </strong><code><strong>recover</strong></code><strong> pada IIFE</strong><p id="33871f26-ef6f-46d3-b1fa-fce81cda32ea" class="">Contoh penerapan recover pada IIFE:</p><pre id="74393ed6-d65c-48d2-a53b-9f2e4e3f9f5b" class="code"><code>func main() {
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Println(&quot;Panic occured&quot;, r)
+        } else {
+            fmt.Println(&quot;Application running perfectly&quot;)
+        }
+    }()
+
+    panic(&quot;some error happen&quot;)
+}</code></pre><p id="57f9d019-bd16-4ad0-8c28-12e22a6cf6a8" class="">Dalam real-world development, ada kalanya recover dibutuhkan tidak dalam blok fungsi terluar, tetapi dalam blok fungsi yg lebih spesifik.</p><p id="739b9b5e-23d9-4eb9-aa9e-ae09973b354f" class="">Umumnya, jika terjadi panic error, maka proses proses dalam scope blok fungsi akan terhenti, mengakibatkan perulangan juga akan terhenti secara paksa. Pada contoh berikut kita coba terapkan cara handle panic error tanpa menghentikan perulangan itu sendiri.</p><p id="e8dc01b9-df8f-4cd2-b242-c46e4ec52cc6" class="">Silakan perhatikan contoh kode recover perulangan berikut:</p><pre id="8f3785ca-f7ba-4ff4-a344-1ee4cb2acacf" class="code"><code>func main() {
+    data := []string{&quot;superman&quot;, &quot;aquaman&quot;, &quot;wonder woman&quot;}
+
+    for _, each := range data {
+
+        func() {
+
+            // recover untuk IIFE dalam perulangan
+            defer func() {
+                if r := recover(); r != nil {
+                    fmt.Println(&quot;Panic occured on looping&quot;, each, &quot;| message:&quot;, r)
+                } else {
+                    fmt.Println(&quot;Application running perfectly&quot;)
+                }
+            }()
+
+            panic(&quot;some error happen&quot;)
+        }()
+
+    }
+}</code></pre><p id="dbf41098-55a5-4d16-931b-671014060f46" class="">Output:</p><pre id="5c972163-69c1-4a14-9bad-6fd7f55c2095" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\recover-IIFE.go
+Panic occured on looping superman | message: some error happen
+Panic occured on looping aquaman | message: some error happen
+Panic occured on looping wonder woman | message: some error happen</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9e010c8f-bd50-4c80-be02-6e913359948a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada kode di atas, bisa dilihat di dalam perulangan terdapat sebuah IIFE untuk recover panic dan juga ada kode untuk men-trigger panic error secara paksa. 
+
+Ketika panic error terjadi, maka idealnya perulangan terhenti, tetapi pada contoh di atas tidak, dikarenakan operasi dalam perulangan sudah di bungkus dalam IIFE dan seperti yang kita tau sifat panic error adalah menghentikan proses secara paksa dalam scope blok fungsi.</div></figure><p id="a6948252-0bb4-48fe-b9f0-630eda414f53" class="">
+</p></li></ol></div></article></body></html>

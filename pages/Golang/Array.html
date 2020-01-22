@@ -1,0 +1,707 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Array</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0bd9033c-0dfa-43d3-99bf-0722bd5fe3a9" class="page sans"><header><h1 class="page-title"><strong>Array</strong></h1></header><div class="page-body"><p id="d175399f-748a-4c1d-9337-7e17e73b9cb0" class=""><strong>Array</strong><div class="indented"><p id="ad74c9f4-fab2-4a31-9db7-05c0fae2ec14" class="">Array adalah kumpulan data bertipe sama, yang disimpan dalam sebuah variabel. Array memiliki kapasitas yang nilainya ditentukan pada saat pembuatan, menjadikan elemen/data yang disimpan di array tersebut jumlahnya tidak boleh melebihi yang sudah dialokasikan. </p><p id="154edfbd-adf3-4323-a381-990414a4294c" class="">Default nilai tiap elemen array pada awalnya tergantung dari tipe datanya. Jika <code>int</code> maka tiap element zero value-nya adalah <code>0</code>, jika <code>bool</code> maka <code>false</code>, dan seterusnya. </p><p id="ea75a05e-8680-4693-b9b6-68942ba12403" class="">Setiap elemen array memiliki indeks berupa angka yang merepresentasikan posisi urutan elemen tersebut. Indeks array dimulai dari 0.</p><p id="e4abd189-c3f9-4af6-ac8e-821b82e783d5" class="">Contoh penerapan array:</p><pre id="c0658ccb-dbed-4a34-943c-e4e1e93cd614" class="code"><code>var names [4]string
+names[0] = &quot;trafalgar&quot;
+names[1] = &quot;d&quot;
+names[2] = &quot;water&quot;
+names[3] = &quot;law&quot;
+
+fmt.Println(names[0], names[1], names[2], names[3])</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e4f8b55f-cb30-4162-bff8-be5b647c74c4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Variabel <code>names</code> dideklarasikan sebagai <code>array string</code> dengan alokasi elemen <code>4</code> slot. Cara mengisi slot elemen array bisa dilihat di kode di atas, yaitu dengan langsung mengakses elemen menggunakan indeks, lalu mengisinya.</div></figure><p id="56fead65-912a-433f-be1a-982aeb9af09d" class="">Hasil:</p><pre id="ef4f0b4d-c0d8-4716-97ed-f64c4a87a514" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+trafalgar d water law</code></pre></div></p><p id="fd2c4c87-7c39-4776-b312-404d48a59c33" class=""><strong>Pengisian Elemen Array yang Melebihi Alokasi Awal</strong><div class="indented"><p id="3d336c63-08fe-404a-931f-9c56029820fa" class="">Pengisian elemen array pada indeks yang tidak sesuai dengan alokasi menghasilkan error. Jika array memiliki 4 slot, maka pengisian nilai slot 5 seterusnya adalah tidak valid.</p><p id="ca3c86b6-54fb-4c84-8b77-4119908dc461" class="">Contoh:</p><pre id="6dbdb09c-6c29-4e4a-b0b4-70a46dc18478" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var names [4]string
+	names[0] = &quot;trafalgar&quot;
+	names[1] = &quot;d&quot;
+	names[2] = &quot;water&quot;
+	names[3] = &quot;law&quot;
+	names[4] = &quot;ez&quot; // baris kode ini menghasilkan error
+	fmt.Println(names[0], names[1], names[2], names[3], names[4])
+}</code></pre><p id="ce6b70e7-108d-47f2-ba1f-6bff51ceea45" class="">Hasil:</p><pre id="6c44df9f-c6c7-4c03-a195-c0d5ee75da4a" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go                                                                 # command-line-arguments
+.\array.go:11:7: invalid array index 4 (out of bounds for 4-element array)
+.\array.go:12:59: invalid array index 4 (out of bounds for 4-element array)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d1a9d13e-95dd-4541-8312-a8e9534b7251"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Solusi dari masalah di atas adalah dengan menggunakan keyword <code>append</code>, yang di materi selanjutnya akan kita bahas.</div></figure></div></p><p id="ba96ec52-7ded-45ba-9598-fd679b8a490c" class=""><strong>Inisialisasi Nilai Awal Array</strong><div class="indented"><p id="9ac27d65-2517-4c59-921c-560557a350c2" class="">Pengisian elemen array bisa dilakukan pada saat deklarasi variabel. Caranya dengan menuliskan data elemen dalam kurung kurawal setelah tipe data, dengan pembatas antar elemen adalah tanda koma (<code>,</code>).</p><pre id="2027f06b-2624-4a06-877b-7ac178c3178b" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+	fmt.Println(&quot;Jumlah element \t\t&quot;, len(fruits))
+	fmt.Println(&quot;Isi semua element \t&quot;, fruits)
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bf6c6829-1a35-421c-8af6-0b7dd287ca2e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Penggunaan fungsi <code>fmt.Println()</code> pada data array tanpa mengakses indeks tertentu, akan menghasilkan output dalam bentuk string dari semua array yang ada. 
+Teknik ini biasa digunakan untuk <strong>debugging</strong> data array.</div></figure><p id="0eeadfc3-aa2a-447c-8c6b-dd8fda8e7283" class="">Hasil:</p><pre id="e36100dd-fe24-4357-bd41-366ffb4b403f" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+Jumlah element           4
+Isi semua element        [apple grape banana melon]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f3274a00-cc53-45c9-81f2-e1f1130f1072"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Fungsi <code>len()</code> dipakai untuk menghitung jumlah elemen sebuah array.</div></figure></div></p><p id="16995254-fd82-4aba-b5cb-37dbf9d507eb" class=""><strong>Inisialisasi Nilai Array Dengan Gaya Vertikal</strong><div class="indented"><p id="bb838c19-4b3e-46de-8427-ef21e37f9953" class="">Elemen array bisa dituliskan dalam bentuk horizontal (seperti yang sudah dicontohkan di atas) ataupun dalam bentuk vertikal.</p><pre id="a03d7d32-6831-4051-9719-e5afe2e2ed48" class="code"><code>var fruits [4]string
+
+// cara horizontal
+fruits  = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+// cara vertikal
+fruits  = [4]string{
+    &quot;apple&quot;,
+    &quot;grape&quot;,
+    &quot;banana&quot;,
+    &quot;melon&quot;,
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9015e9f3-2c56-4a27-952d-fe46f2da6140"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Khusus untuk deklarasi array dengan cara vertikal, tanda koma wajib dituliskan setelah elemen, termasuk elemen terakhir. Jika tidak, maka akan muncul error.</div></figure></div></p><p id="b7df5de7-a8ea-44fb-80c8-e8f16a28c47a" class=""><strong>Inisialisasi Nilai Awal Array Tanpa Jumlah Elemen</strong><div class="indented"><p id="90c3f875-c633-45f1-9b09-5c767782197e" class="">Deklarasi array yang nilainya diset di awal, boleh tidak dituliskan jumlah lebar array-nya, cukup ganti dengan tanda 3 titik (<code>...</code>). Jumlah elemen akan dikalkulasi secara otomatis menyesuaikan data elemen yang diisikan.</p><p id="6a847cc6-6842-4f11-a6dd-440493c3300a" class="">Contoh:</p><pre id="2a74eede-713c-44b8-a749-b56fc56752f1" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var numbers = [...]int{2, 3, 2, 4, 3}
+
+	fmt.Println(&quot;data array \t:&quot;, numbers)
+	fmt.Println(&quot;jumlah elemen \t:&quot;, len(numbers))
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b1724108-b35a-4b85-b762-22aa79709b07"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Variabel <code>numbers</code> akan secara otomatis memiliki jumlah elemen <code>5</code>, karena pada saat deklarasi disiapkan 5 buah elemen.</div></figure><p id="89122a49-3629-47b6-9837-20e5002d2965" class="">Hasil:</p><pre id="8c60236e-4ef3-401d-ab33-a8a65bec37ca" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+data array      : [2 3 2 4 3]
+jumlah elemen   : 5</code></pre></div></p><p id="a6601dc4-7ee8-4e5b-a086-106e51b798b1" class=""><strong>Array Multidimensi</strong><div class="indented"><p id="88cd9546-cbc0-429d-a734-36a964bc2972" class="">Array multidimensi adalah array yang tiap elemennya juga berupa array (dan bisa seterusnya, tergantung kedalaman dimensinya).</p><p id="8ee70645-158a-4579-8863-5072a0959a1a" class="">Cara deklarasi array multidimensi secara umum sama dengan cara deklarasi array biasa, dengan cara menuliskan data array dimensi selanjutnya sebagai elemen array dimensi sebelumnya.</p><p id="86f733a0-c989-45bd-b90a-a926d2a8c330" class="">Khusus untuk array yang merupakan sub dimensi atau elemen, boleh tidak dituliskan jumlah datanya. Contohnya bisa dilihat pada deklarasi variabel <code>numbers2</code> di kode berikut:</p><pre id="dd5b187f-8882-452b-9db0-98c8401a330e" class="code"><code>var numbers1 = [2][3]int{[3]int{3, 2, 3}, [3]int{3, 4, 5}}
+var numbers2 = [2][3]int{{3, 2, 3}, {3, 4, 5}}
+
+fmt.Println(&quot;numbers1&quot;, numbers1)
+fmt.Println(&quot;numbers2&quot;, numbers2)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="71fe6581-b0db-412d-959b-2f722c2c6206"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kedua array di atas memiliki elemen yang sama.
+Hasil:</div></figure><p id="3af71e0c-d70a-498e-b97c-732aaf6da340" class="">Hasil:</p><pre id="689806da-ca12-49bd-b90d-4c04299e235b" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+numbers1 [[3 2 3] [3 4 5]]
+numbers2 [[3 2 3] [3 4 5]]</code></pre></div></p><p id="8d320654-b512-48de-bb98-8d204d9b6fd0" class=""><strong>Perulangan Elemen Array Menggunakan Keyword </strong><code><strong>for</strong></code><div class="indented"><p id="e59b755c-1645-49b2-9f4a-d91d81a8e45a" class="">Keyword <code>for</code> dan array memiliki hubungan yang sangat erat. Dengan memanfaatkan perulangan menggunakan keyword ini, elemen-elemen dalam array bisa didapat.</p><p id="d10c9038-a6a8-4559-961e-b4099a52050a" class="">Ada beberapa cara yang bisa digunakan untuk me-looping data array, yg pertama adalah dengan memanfaatkan variabel iterasi perulangan untuk mengakses elemen berdasarkan indeks-nya. </p><p id="4b45bbfd-80f0-40b6-97cc-401f29bb444f" class="">Contoh:</p><pre id="2060d675-4cc1-4295-aa12-fa7adc34693e" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+	for i := 0; i &lt; len(fruits); i++ {
+		fmt.Printf(&quot;elemen %d : %s\n&quot;, i, fruits[i])
+	}
+}</code></pre><p id="dcc5123e-a76a-4bad-b194-1b433c15368c" class="">Perulangan di atas dijalankan sebanyak jumlah elemen array <code>fruits</code> (bisa diketahui dari kondisi <code>i &lt; len(fruits</code>). Di tiap perulangan, elemen array diakses lewat variabel iterasi <code>i</code>.</p><p id="bd866e6f-713b-43af-a6a6-146c85687894" class="">Hasil:</p><pre id="dabb4356-758e-4f39-8406-70635d8a3c58" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+elemen 0 : apple
+elemen 1 : grape
+elemen 2 : banana
+elemen 3 : melon</code></pre></div></p><p id="b3587014-691b-4055-9f1d-0c6e46b2fcc7" class=""><strong>Perulangan Elemen Array Menggunakan Keyword </strong><code><strong>for</strong></code><strong> - </strong><code><strong>range</strong></code><div class="indented"><p id="d9f70f85-20a7-4632-9ac5-fa7f0ce57eb1" class="">Ada cara yang lebih sederhana me-looping data array, dengan menggunakan keyword <code>for</code> - <code>range</code>. </p><p id="b6b575dd-edce-4258-93b7-328219c3b588" class="">Contoh pengaplikasiannya bisa dilihat di kode berikut:</p><pre id="d0b2a96b-2db0-4b5c-b641-6b6397401cdf" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+	for i, fruit := range fruits {
+		fmt.Printf(&quot;elemen %d : %s\n&quot;, i, fruit)
+	}
+}</code></pre><p id="c59d2d94-d85c-4fb9-808c-3abdfcadb389" class="">Array <code>fruits</code> diambil elemen-nya secara berurutan. Nilai tiap elemen ditampung variabel oleh <code>fruit</code> (tanpa huruf s), sedangkan indeks nya ditampung variabel <code>i</code>.</p><p id="c49109c7-e9e0-48c7-a75c-bc3b89e7cf3a" class="">Hasil:</p><pre id="e1f0f9fa-78d2-42d9-bb79-15d150124b1e" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+elemen 0 : apple
+elemen 1 : grape
+elemen 2 : banana
+elemen 3 : melon</code></pre></div></p><p id="6afdc9d0-c56a-499a-8d8f-17a7317198c7" class=""><strong>Penggunaan Variabel Underscore </strong><code><strong>_</strong></code><strong> Dalam </strong><code><strong>for</strong></code><strong> - </strong><code><strong>range</strong></code><div class="indented"><p id="8aeef853-7411-457c-b2df-46a0277ef085" class="">Kadang kala ketika <em>looping</em> menggunakan <code>for</code> - <code>range</code>, ada kemungkinan dimana data yang dibutuhkan adalah elemen-nya saja, indeks-nya tidak. Sedangkan kode di atas, <code>range</code> mengembalikan 2 data, yaitu indeks dan elemen.</p><p id="8583a527-72c2-4ed7-af62-d16d0f9c69dd" class="">Seperti yang sudah diketahui, bahwa di Go tidak memperbolehkan adanya variabel yang menaggur atau tidak dipakai. Jika dipaksakan, error akan muncul, contohnya seperti kode berikut.</p><pre id="1e78a262-667f-4369-b5b1-bef1f33d3209" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+	for i, fruit := range fruits {
+		fmt.Printf(&quot;nama buah : %s\n&quot;, fruit)
+	}
+}</code></pre><p id="ef1b07b6-1273-4342-bebe-cfda5cadbe11" class="">Hasil dari kode program di atas:</p><pre id="6eae6987-5391-48da-bbce-c3055b214bbf" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+# command-line-arguments
+.\array.go:8:6: i declared and not used</code></pre><p id="19f53ba6-9588-4879-9b66-521b0de6a9a5" class="">Disinilah salah satu kegunaan variabel pengangguran, atau underscore (<code>_</code>). 
+Tampung saja nilai yang tidak ingin digunakan ke underscore.</p><pre id="34b91e34-7965-4ad3-8627-971392016633" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+	for _, fruit := range fruits {
+		fmt.Printf(&quot;nama buah : %s\n&quot;, fruit)
+	}
+}</code></pre><p id="d779c2db-3ac1-40e2-8965-328f0f0fdbd4" class="">Pada kode di atas, yang sebelumnya adalah variabel <code>i</code> diganti dengan <code>_</code>, karena kebetulan variabel <code>i</code> tidak digunakan.</p><pre id="c73fdc05-b9e5-4c54-8079-42c48cb18d7d" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+nama buah : apple
+nama buah : grape
+nama buah : banana
+nama buah : melon</code></pre><p id="bf9e3e37-6200-433f-9777-2f18e5708057" class="">Jika yang dibutuhkan hanya indeks elemen-nya saja, bisa gunakan 1 buah variabel setelah keyword <code>for</code>.</p><pre id="f80a33e2-d0f7-4239-95a0-943ac819c643" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = [4]string{&quot;apple&quot;, &quot;grape&quot;, &quot;banana&quot;, &quot;melon&quot;}
+
+	for i, _ := range fruits {
+		fmt.Printf(&quot;nama buah : %d \n&quot;, i)
+	}
+}</code></pre><p id="9e5e5905-2e78-4959-8f80-a985358ae56d" class="">Hasil:</p><pre id="b16026dc-376d-4c55-8ab0-fc0866d39150" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+nama buah : 0
+nama buah : 1
+nama buah : 2
+nama buah : 3</code></pre></div></p><p id="40449ad1-2265-4737-a031-d041a0c11207" class=""><strong>Alokasi Elemen Array Menggunakan Keyword </strong><code><strong>make</strong></code><div class="indented"><p id="da24ba89-943f-4b57-8401-42c494e5a90b" class="">Deklarasi sekaligus alokasi data array juga bisa dilakukan lewat keyword <code>make</code>.</p><p id="7305f821-5dc2-45a5-ab85-c1660b3ec646" class="">Contoh:</p><pre id="862f89e2-c4ec-4523-8d32-f9483fe115b6" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var fruits = make([]string, 2)
+	fruits[0] = &quot;apple&quot;
+	fruits[1] = &quot;manggo&quot;
+
+	fmt.Println(fruits)
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9ac50b51-8bc0-494f-af18-e35e256021db"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Parameter pertama keyword <code>make</code> diisi dengan tipe data elemen array yang diinginkan, parameter kedua adalah jumlah elemennya. Pada kode di atas, variabel <code>fruits</code> tercetak sebagai array string dengan alokasi 2 slot.</div></figure><p id="5b46f8b2-42f1-44fa-81d7-afbaaf52f6de" class="">Hasil:</p><pre id="c7e46554-1128-4659-89a7-76bd793a85d8" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\array.go
+[apple manggo]</code></pre></div></p></div></article></body></html>

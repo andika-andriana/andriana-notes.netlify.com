@@ -1,0 +1,808 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas 11 PHP</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4ad41624-a871-45df-9dd1-0d1cf8a980f1" class="page sans"><header><h1 class="page-title"><strong>Tugas 11 PHP</strong></h1></header><div class="page-body"><ol id="0214b898-c890-495b-8f50-add8caa80146" class="numbered-list" start="1"><li>Buatlah database dengan nama “tugas12” .<figure id="334d7685-fe56-4e5e-838a-927af0de4bc6" class="image"><a href="Tugas%2011%20PHP/Untitled.png"><img style="width:823px" src="Tugas%2011%20PHP/Untitled.png"/></a></figure></li></ol><ol id="7459aedf-f440-475d-b3b8-5576628e6c41" class="numbered-list" start="2"><li>Silahkan lakukan instalasi project laravel dengan nama “Tugas12” dan buatlah tabel dengan struktur seperti gambar dibawah ini :<figure id="3520e5e6-9840-449f-a7dc-3e432a383994" class="image"><a href="https://lh6.googleusercontent.com/p6_dAbNJjDZm5j9Ea1BLj2hnKEt1vpexcwUbDwlsOhlv8-KL6iSr0QN0QsVV9dUjSbz18Fx7iITy6OTAHbW0qg9ImtrYcq-nukJm04JHK0r9kIdWDCXk2n7chgw5uZHKi-1EywSB"><img src="https://lh6.googleusercontent.com/p6_dAbNJjDZm5j9Ea1BLj2hnKEt1vpexcwUbDwlsOhlv8-KL6iSr0QN0QsVV9dUjSbz18Fx7iITy6OTAHbW0qg9ImtrYcq-nukJm04JHK0r9kIdWDCXk2n7chgw5uZHKi-1EywSB"/></a></figure></li></ol><ol id="b363804e-0a39-48be-8279-00f11bd4be9d" class="numbered-list" start="3"><li>Buatlah API simpan data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><ol id="2dd95ff6-aa59-4b51-aa99-7bf649a60516" class="numbered-list" start="4"><li>Buatlah API hapus data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><ol id="99aad4dc-c60d-4b56-941a-94ebe021c1b8" class="numbered-list" start="5"><li>Buatlah API ubah data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><ol id="ee98768b-c5b7-4555-a7af-c5862c221512" class="numbered-list" start="6"><li>Buatlah API baca data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><hr id="9bd4ec5d-0d96-440a-ab20-003778d4c926"/><ul id="e7d6f0fe-dbfc-4048-bb01-2f431b727c6f" class="bulleted-list"><li>.env<pre id="7ce83218-ed71-4a65-b2c9-5e71d98d63e4" class="code"><code>APP_ENV=local
+APP_DEBUG=true
+APP_KEY=base64:k3m1jgaX+5BtSH/TvxiWa8QMVX0fyiKvxVfPaYI6MDw=
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tugas12
+DB_USERNAME=root
+DB_PASSWORD=
+
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null</code></pre></li></ul><ul id="57b1c667-e82b-4e3a-b640-9d2f8b487b6d" class="bulleted-list"><li>database\migrations\2019_12_31_000724_tbl_karyawan.php<pre id="84753af6-a292-45d9-9e17-0e9074a939e4" class="code"><code>&lt;?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class TblKaryawan extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+      Schema::create(&#x27;tbl_karyawan&#x27;, function(Blueprint $table){
+        $table-&gt;increments(&#x27;id&#x27;);
+        $table-&gt;string(&#x27;nama&#x27;);
+        $table-&gt;string(&#x27;jabatan&#x27;);
+        $table-&gt;integer(&#x27;umur&#x27;);
+        $table-&gt;string(&#x27;alamat&#x27;);
+        $table-&gt;string(&#x27;foto&#x27;);
+      });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}</code></pre></li></ul><ul id="193122cb-7241-4180-91a8-cd7e277508b3" class="bulleted-list"><li>app\tbl_karyawan.php<pre id="72a287a2-c080-4e12-a11e-9e549f0c4a3d" class="code"><code>&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tbl_karyawan extends Model
+{
+  public $timestamps = false;
+  protected $table = &quot;tbl_karyawan&quot;;
+  protected $fillable = [&#x27;nama&#x27;,&#x27;jabatan&#x27;,&#x27;umur&#x27;,&#x27;alamat&#x27;,&#x27;foto&#x27;];
+}</code></pre></li></ul><ul id="6c81ffe5-e539-4f40-80cd-4527218eff0b" class="bulleted-list"><li>app\Http\Kernel.php<pre id="aceb5587-f271-4add-a142-9d27381b0fc6" class="code"><code>&lt;?php
+
+namespace App\Http;
+
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+
+class Kernel extends HttpKernel
+{
+    /**
+     * The application&#x27;s global HTTP middleware stack.
+     *
+     * These middleware are run during every request to your application.
+     *
+     * @var array
+     */
+    protected $middleware = [
+        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+    ];
+
+    /**
+     * The application&#x27;s route middleware groups.
+     *
+     * @var array
+     */
+    protected $middlewareGroups = [
+        &#x27;web&#x27; =&gt; [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            // \App\Http\Middleware\VerifyCsrfToken::class,
+        ],
+
+        &#x27;api&#x27; =&gt; [
+            &#x27;throttle:60,1&#x27;,
+        ],
+    ];
+
+    /**
+     * The application&#x27;s route middleware.
+     *
+     * These middleware may be assigned to groups or used individually.
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [
+        &#x27;auth&#x27; =&gt; \App\Http\Middleware\Authenticate::class,
+        &#x27;auth.basic&#x27; =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        &#x27;can&#x27; =&gt; \Illuminate\Foundation\Http\Middleware\Authorize::class,
+        &#x27;guest&#x27; =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
+        &#x27;throttle&#x27; =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,
+    ];
+}</code></pre></li></ul><ul id="df936b35-093c-4a1e-a5ba-cc4827cd4475" class="bulleted-list"><li>app\Http\routes.php<pre id="f774f84f-9180-469b-9eb6-e2d349d90f47" class="code"><code>&lt;?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It&#x27;s a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+Route::get(&#x27;/&#x27;, function () {
+    return view(&#x27;welcome&#x27;);
+});
+Route::post(&#x27;/simpan&#x27;,&#x27;Karyawan@simpan&#x27;);
+Route::get(&#x27;/hapus/{id}&#x27;,&#x27;Karyawan@hapus&#x27;);
+Route::post(&#x27;/ubah&#x27;,&#x27;Karyawan@ubah&#x27;);
+Route::get(&#x27;/baca&#x27;,&#x27;Karyawan@baca&#x27;);</code></pre></li></ul><ul id="77912a3d-1761-48dd-8f69-1f5aafa47cf0" class="bulleted-list"><li>app\Http\Controllers\Karyawan.php<pre id="e73e1302-a777-4043-ab45-6718a176074c" class="code"><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
+use App\tbl_karyawan;
+
+class Karyawan extends Controller
+{
+  public function baca(){
+    $data = DB::table(&#x27;tbl_karyawan&#x27;)-&gt;get();
+    if(count($data) &gt; 0){
+      $res[&#x27;status&#x27;] = &quot;Berhasil&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data dapat ditampilkan&quot;;
+      $res[&#x27;value&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;status&#x27;] = &quot;Gagal&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data tidak dapat ditampilkan atau kosong&quot;;
+      return response($res);
+    }
+  }
+
+  public function simpan(Request $request){
+    $this-&gt;validate($request, [
+      &#x27;file&#x27; =&gt; &#x27;required|max:2048&#x27;
+    ]);
+    $file = $request-&gt;file(&#x27;file&#x27;);
+    $nama_file = time().&quot;_&quot;.$file-&gt;getClientOriginalName();
+    $tujuan_upload = &#x27;data_file&#x27;;
+    if($file-&gt;move($tujuan_upload,$nama_file)){
+      $data = tbl_karyawan::create([
+        &#x27;nama&#x27; =&gt; $request-&gt;nama,
+        &#x27;jabatan&#x27; =&gt; $request-&gt;jabatan,
+        &#x27;umur&#x27; =&gt; $request-&gt;umur,
+        &#x27;alamat&#x27; =&gt; $request-&gt;alamat,
+        &#x27;foto&#x27; =&gt; $nama_file
+      ]);
+      $res[&#x27;status&#x27;] = &quot;Berhasil&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data dapat ditambahkan&quot;;
+      $res[&#x27;values&#x27;] = $data;
+      return response($res);
+    }
+  }
+
+  public function ubah(Request $request){
+    if(!empty($request-&gt;file)){
+      $this-&gt;validate($request, [
+        &#x27;file&#x27; =&gt; &#x27;required|max:2048&#x27;
+      ]);
+      $file = $request-&gt;file(&#x27;file&#x27;);
+      $nama_file = time().&quot;_&quot;.$file-&gt;getClientOriginalName();
+      $tujuan_upload = &#x27;data_file&#x27;;
+      $file-&gt;move($tujuan_upload,$nama_file);
+      $data = DB::table(&#x27;tbl_karyawan&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;get();
+      foreach($data as $keterangan){
+        @unlink(public_path(&#x27;data_file/&#x27;.$keterangan-&gt;gambar));
+        $ket = DB::table(&#x27;tbl_karyawan&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+          &#x27;nama&#x27; =&gt; $request-&gt;nama,
+          &#x27;jabatan&#x27; =&gt; $request-&gt;jabatan,
+          &#x27;umur&#x27; =&gt; $request-&gt;umur,
+          &#x27;alamat&#x27; =&gt; $request-&gt;alamat,
+          &#x27;foto&#x27; =&gt; $nama_file
+        ]);
+        $res[&#x27;status&#x27;] = &quot;Berhasil&quot;;
+        $res[&#x27;message&#x27;] = &quot;Gambar dan Data Telah Terupdate&quot;;
+        $res[&#x27;values&#x27;] = $ket;
+        return response($res);
+      }
+    }else{
+      $data = DB::table(&#x27;tbl_karyawan&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;get();
+      foreach($data as $keterangan){
+        $ket = DB::table(&#x27;tbl_karyawan&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+          &#x27;nama&#x27; =&gt; $request-&gt;nama,
+          &#x27;jabatan&#x27; =&gt; $request-&gt;jabatan,
+          &#x27;umur&#x27; =&gt; $request-&gt;umur,
+          &#x27;alamat&#x27; =&gt; $request-&gt;alamat,
+        ]);
+        $res[&#x27;status&#x27;] = &quot;Berhasil&quot;;
+        $res[&#x27;message&#x27;] = &quot;Data Telah Terupdate&quot;;
+        $res[&#x27;values&#x27;] = $ket;
+        return response($res);
+      }
+    }
+  }
+
+  public function hapus($id){
+    $data = DB::table(&#x27;tbl_karyawan&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;get();
+    foreach($data as $keterangan){
+      if(file_exists(public_path(&#x27;data_file/&#x27;.$keterangan-&gt;foto))){
+        @unlink(public_path(&#x27;data_file/&#x27;.$keterangan-&gt;foto));
+        DB::table(&#x27;tbl_karyawan&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;delete();
+        $res[&#x27;status&#x27;] = &quot;Berhasil&quot;;
+        $res[&#x27;message&#x27;] = &quot;Data telah terhapus&quot;;
+        return response($res);
+      }else{
+        $res[&#x27;message&#x27;] = &quot;Data Kosong&quot;;
+        return response($res);
+      }
+    }
+  }
+}</code></pre></li></ul></div></article></body></html>

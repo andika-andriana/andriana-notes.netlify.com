@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Creating New Project React Native</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f6d2312-cd37-42eb-830a-17820f3082e5" class="page sans"><header><h1 class="page-title">Creating New Project React Native</h1></header><div class="page-body"><p id="1dff0d08-4561-40c8-a7fa-579347e274b5" class="">Berikut adalah contoh membuat project dengan react native:</p><ol id="7740144f-de86-4553-936f-0a2b4c59aa44" class="numbered-list" start="1"><li>Buka terminal/cmd kemudian buat folder untuk meletakan project kita:<pre id="2ef418a6-43ab-41f1-a7f4-d88e6da0deb7" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative&gt;</code></pre></li></ol><ol id="64eee407-e8f6-4144-90d3-a79929d93dc2" class="numbered-list" start="2"><li>Kemudian ketikan <code>react-native init &lt;nama_project&gt;</code> untuk menginstall framework:<pre id="2ef610fe-2e7a-4d25-ab7f-7182fae749b1" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative&gt; react-native init hello_react                                                                         
+This will walk you through creating a new React Native project in C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react
+&#x27;yarn&#x27; is not recognized as an internal or external command,
+operable program or batch file.
+Installing react-native...
+Consider installing yarn to make this faster: https://yarnpkg.com
+npm WARN deprecated core-js@2.6.11: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+npm WARN deprecated core-js@1.2.7: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+
+&gt; core-js@2.6.11 postinstall C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react\node_modules\core-js
+&gt; node -e &quot;try{require(&#x27;./postinstall&#x27;)}catch(e){}&quot;
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon:
+&gt; https://opencollective.com/core-js
+&gt; https://www.patreon.com/zloirock
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN react-native@0.61.5 requires a peer of react@16.9.0 but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;} (current: {&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;})
+
++ react-native@0.61.5
+added 645 packages from 413 contributors and audited 66229 packages in 205.914s
+
+4 packages are looking for funding
+  run `npm fund` for details
+
+found 4 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+info Setting up new React Native app in C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react
+info Adding required dependencies
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;} (current: {&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;})
+
++ react@16.9.0
+added 1 package and audited 67227 packages in 16.965s
+
+4 packages are looking for funding
+  run `npm fund` for details
+
+found 4 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+info Adding required dev dependencies
+npm WARN deprecated left-pad@1.3.0: use String.prototype.padStart()
+npm WARN eslint-plugin-react-native@3.6.0 requires a peer of eslint@^3.17.0 || ^4 || ^5 but none is installed. You must install peer dependencies yourself.
+npm WARN eslint-plugin-react@7.12.4 requires a peer of eslint@^3.0.0 || ^4.0.0 || ^5.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @typescript-eslint/parser@1.13.0 requires a peer of eslint@^5.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @typescript-eslint/eslint-plugin@1.13.0 requires a peer of eslint@^5.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN tsutils@3.17.1 requires a peer of typescript@&gt;=2.8.0 || &gt;= 3.2.0-dev || &gt;= 3.3.0-dev || &gt;= 3.4.0-dev || &gt;= 3.5.0-dev || &gt;= 3.6.0-dev || &gt;= 3.6.0-beta || &gt;= 3.7.0-dev || &gt;= 3.7.0-beta but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.11 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.11: wanted {&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;} (current: {&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;})
+
++ @react-native-community/eslint-config@0.0.5
++ @babel/runtime@7.7.7
++ @babel/core@7.7.7
++ metro-react-native-babel-preset@0.56.3
++ jest@24.9.0
++ babel-jest@24.9.0
++ eslint@6.8.0
++ react-test-renderer@16.9.0
+added 292 packages from 274 contributors, updated 3 packages and audited 952647 packages in 91.269s
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+found 4 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+  Run instructions for iOS:
+    • cd C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react &amp;&amp; npx react-native run-ios
+    - or -
+    • Open hello_react\ios\hello_react.xcodeproj in Xcode or run &quot;xed -b ios&quot;
+    • Hit the Run button
+
+  Run instructions for Android:
+    • Have an Android emulator running (quickest way to get started), or a device connected.
+    • cd C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react &amp;&amp; npx react-native run-android</code></pre></li></ol><ol id="6222e7d9-ef62-49ac-8c3c-47463ba4d354" class="numbered-list" start="3"><li>Setelah proses selesai kemudian buka folder project pada text editor atom:<figure id="3e35e2c8-edba-430f-ab0f-7a0cee9d0aed" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled.png"><img style="width:1365px" src="Creating%20New%20Project%20React%20Native/Untitled.png"/></a></figure></li></ol><ol id="e1963720-b849-41d7-9c98-847f65e038e1" class="numbered-list" start="4"><li>Kemudian buka android studio, gunakan virtual davice:<figure id="3c9d480f-91d2-4273-b81a-d9699864ed83" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%201.png"><img style="width:800px" src="Creating%20New%20Project%20React%20Native/Untitled%201.png"/></a></figure></li></ol><ol id="89e7ba39-0ce5-4785-bce2-b65e0a02fa48" class="numbered-list" start="5"><li>Pilih Create Virtual Device:<figure id="b2bb93d5-31d4-400a-9011-2ad4e74fd306" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%202.png"><img style="width:664px" src="Creating%20New%20Project%20React%20Native/Untitled%202.png"/></a></figure></li></ol><ol id="2118472c-394e-4f14-9c10-f5e180a70f5d" class="numbered-list" start="6"><li>Pilih virtual device sesuai kebutuhan contoh nexus:<figure id="8d0a3935-c73d-4c77-8c66-fe39d51c11fd" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%203.png"><img style="width:1001px" src="Creating%20New%20Project%20React%20Native/Untitled%203.png"/></a></figure></li></ol><ol id="53dd9a02-f389-40a8-9dab-7b94e13629ea" class="numbered-list" start="7"><li>Sesuaikan OSnya juga Kemudian klik download:<figure id="919ade9d-271d-4de8-a038-8345231f0a14" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%204.png"><img style="width:997px" src="Creating%20New%20Project%20React%20Native/Untitled%204.png"/></a></figure></li></ol><ol id="451f1cd5-766f-4ffa-bc9f-6390bc638112" class="numbered-list" start="8"><li>Pilih Accept  dan Next:<figure id="a32d3aa4-cce7-4d38-a0f2-adcdd3035156" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%205.png"><img style="width:799px" src="Creating%20New%20Project%20React%20Native/Untitled%205.png"/></a></figure></li></ol><ol id="83b06c2d-fa13-4251-acb9-1b4c61c8c4b1" class="numbered-list" start="9"><li>Tunggu proses Download selesai:<figure id="49c26dd4-c419-4128-bde7-e6829f5c02da" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%206.png"><img style="width:801px" src="Creating%20New%20Project%20React%20Native/Untitled%206.png"/></a></figure></li></ol><ol id="5c49a509-6f3b-4b3a-aca4-c9700dcb46b7" class="numbered-list" start="10"><li>Jika proses sudah selesai maka pilih os yang sudah kita download tadi:<figure id="6adcbf30-38c4-4993-bbec-3256de4f4c7e" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%207.png"><img style="width:998px" src="Creating%20New%20Project%20React%20Native/Untitled%207.png"/></a></figure></li></ol><ol id="932b3a8e-7597-464d-875a-2c0e830bc46c" class="numbered-list" start="11"><li>Silahkan rubahnama ADV jika diperlukan, setelah selesai klik finish:<figure id="b5b4de61-3b1e-495c-922c-6d5b771cc359" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%208.png"><img style="width:998px" src="Creating%20New%20Project%20React%20Native/Untitled%208.png"/></a></figure></li></ol><ol id="ed2d8500-5e21-4225-ac86-dbc2c4896ceb" class="numbered-list" start="12"><li>Kemudian klik tombol play untuk memulai virtual device:<figure id="ae5539a9-6132-4e39-b28c-df4fab8ce2ce" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%209.png"><img style="width:666px" src="Creating%20New%20Project%20React%20Native/Untitled%209.png"/></a></figure></li></ol><ol id="5447c747-fcdf-4079-a4a6-d9311d74d2d2" class="numbered-list" start="13"><li>Maka akan muncul virtual device:<figure id="fdb66da9-ec69-4d0d-963d-1297fc5709ba" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%2010.png"><img style="width:1362px" src="Creating%20New%20Project%20React%20Native/Untitled%2010.png"/></a></figure></li></ol><ol id="49928bfc-d2ef-450d-91db-70ea6544cff0" class="numbered-list" start="14"><li>Jalankan project react native kedalam adv dengan mengetikan kode pada terminal atau cmd:<pre id="70f88970-dc9b-4173-91b6-45202c8b4e24" class="code"><code>PS C:\Users\AndikaAndriana&gt; cd C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react
+PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react&gt; react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+Loading dependency graph, done.
+info Writing bundle output to:, android/app/src/main/assets/index.android.bundle
+info Done writing bundle output
+info Copying 2 asset files
+info Done copying assets
+PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react&gt; react-native run-android
+info Running jetifier to migrate libraries to AndroidX. You can disable it using &quot;--no-jetifier&quot; flag.
+Jetifier found 864 file(s) to forward-jetify. Using 4 workers...
+info Starting JS server...
+info Installing the app...
+
+&gt; Task :app:installDebug
+12:50:29 V/ddms: execute: running am get-config
+12:50:29 V/ddms: execute &#x27;am get-config&#x27; on &#x27;emulator-5554&#x27; : EOF hit. Read: -1
+12:50:29 V/ddms: execute: returning
+Installing APK &#x27;app-debug.apk&#x27; on &#x27;Dummy_Phone_API_27(AVD) - 8.1.0&#x27; for app:debug
+12:50:29 D/app-debug.apk: Uploading app-debug.apk onto device &#x27;emulator-5554&#x27;
+12:50:29 D/Device: Uploading file onto device &#x27;emulator-5554&#x27;
+12:50:29 D/ddms: Reading file permision of C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\hello_react\android\app\build\outputs\apk\debug\app-debug.apk as: rwx------
+12:50:30 V/ddms: execute: running pm install -r -t &quot;/data/local/tmp/app-debug.apk&quot;
+12:50:37 V/ddms: execute &#x27;pm install -r -t &quot;/data/local/tmp/app-debug.apk&quot;&#x27; on &#x27;emulator-5554&#x27; : EOF hit. Read: -1
+12:50:37 V/ddms: execute: returning
+12:50:37 V/ddms: execute: running rm &quot;/data/local/tmp/app-debug.apk&quot;
+12:50:37 V/ddms: execute &#x27;rm &quot;/data/local/tmp/app-debug.apk&quot;&#x27; on &#x27;emulator-5554&#x27; : EOF hit. Read: -1
+12:50:37 V/ddms: execute: returning
+Installed on 1 device.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 6.0.
+Use &#x27;--warning-mode all&#x27; to show the individual deprecation warnings.
+See https://docs.gradle.org/5.5/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 45s
+27 actionable tasks: 10 executed, 17 up-to-date
+info Connecting to the development server...
+info Starting the app on &quot;emulator-5554&quot;...
+Starting: Intent { cmp=com.hello_react/.MainActivity }</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="08e4772b-3d9b-46b9-aebd-95d5bfe51ccc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Jika gagal dalam proses menjalankan project react kedalam avd maka lakukan step:
+
+1 → <code>create directory  android/app/src/main/assets</code>
+2 → <code>edit file the project  node_modules\metro-config\src\defaults\blacklist.js</code>
+
+Replace : 
+
+var sharedBlacklist = [
+  /node_modules[/\\]react[/\\]dist[/\\].*/,
+  /website\/node_modules\/.*/,
+  /heapCapture\/bundle\.js/,
+  /.*\/__tests__\/.*/
+];
+
+
+with : 
+
+
+var sharedBlacklist = [
+  /node_modules[\/\\]react[\/\\]dist[\/\\].*/,
+  /website\/node_modules\/.*/,
+  /heapCapture\/bundle\.js/,
+  /.*\/__tests__\/.*/
+];
+
+3 → Finaly <code>run following command from project root directory</code>
+
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+4 → Kemudian jalankan <code>react-native run-android</code> kembali.
+</div></figure></li></ol><ol id="76a4fc06-8c71-4e50-bdb5-187cec6c0fa2" class="numbered-list" start="15"><li>Jika berhasil maka akan tampil seperti ini pada Avd:<figure id="86d69072-279c-4f3d-b46e-5776a09ea3b2" class="image"><a href="Creating%20New%20Project%20React%20Native/Untitled%2011.png"><img style="width:1365px" src="Creating%20New%20Project%20React%20Native/Untitled%2011.png"/></a></figure><p id="4354980b-66bd-471b-b8f1-3301d8a04cac" class="">
+</p></li></ol></div></article></body></html>

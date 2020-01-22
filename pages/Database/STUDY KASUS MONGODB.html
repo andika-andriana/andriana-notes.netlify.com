@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>STUDY KASUS MONGODB</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f86badcf-8723-440c-95df-3e43e0c1502a" class="page sans"><header><h1 class="page-title">STUDY KASUS MONGODB</h1></header><div class="page-body"><p id="76b54eb0-acea-4526-8d0c-4a4b1fc23b3d" class=""><strong>Study Kasus MongoDB</strong></p><ol id="c13b6f1a-ed12-4998-aeb5-fb362b4f1e8f" class="numbered-list" start="1"><li>Buat database universitas:<pre id="8ea7370a-e342-4242-bfba-c04d4dbe1262" class="code"><code>&gt; use universitas;
+switched to db universitas</code></pre></li></ol><ol id="f2fabced-9bb8-48d6-86c2-9244b2c1b20f" class="numbered-list" start="2"><li>Membuat field key unik untuk email dengan perintah:<pre id="a0ecca6a-8925-4551-89da-2cf28ce94eb7" class="code"><code>db.mahasiswa.createIndex({&quot;email&quot;:1},{unique:true})</code></pre><hr id="d5c0dcf3-aef5-40ed-9311-54dbcea515ef"/><pre id="4e5eaab4-3193-48de-9c55-ff62721fa73e" class="code"><code>&gt; db.mahasiswa.createIndex({&quot;email&quot;:1},{unique:true})
+{
+        &quot;createdCollectionAutomatically&quot; : true,
+        &quot;numIndexesBefore&quot; : 1,
+        &quot;numIndexesAfter&quot; : 2,
+        &quot;ok&quot; : 1
+}</code></pre></li></ol><ol id="f2ba533f-31b1-49dd-9016-777468500a26" class="numbered-list" start="3"><li>Input 10 data pada collection mahasiswa:<div id="0a29ee85-cc23-481c-9f3b-1ae33fbcff5f" class="collection-content"><h4 class="collection-title">Tabel Mahasiswa</h4><table class="collection-content"><thead><tr><th>Nama</th><th>NIM</th><th>Email</th><th>Phone</th></tr></thead><tbody><tr id="8f558a6e-e3ac-4da4-bbe0-07be56c914b5"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Joko%20Purwono.html">Joko Purwono</a></td><td class="cell-|3Sl">111</td><td class="cell-h}&gt;O"><a href="jokopurwono@yahoo.com" class="url-value">jokopurwono@yahoo.com</a></td><td class="cell-^ZYG">89812345678</td></tr><tr id="6ac5569c-08a5-412b-9380-ae5c7022ccea"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Widya%20Kosasih.html">Widya Kosasih</a></td><td class="cell-|3Sl">112</td><td class="cell-h}&gt;O"><a href="widyakosasih@gmail.com" class="url-value">widyakosasih@gmail.com</a></td><td class="cell-^ZYG">85769553853</td></tr><tr id="b2ba6699-18d8-4e1a-8fea-efff5b2b4085"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Hanung%20Bramantyo.html">Hanung Bramantyo</a></td><td class="cell-|3Sl">113</td><td class="cell-h}&gt;O"><a href="hanungbra@yahoo.com" class="url-value">hanungbra@yahoo.com</a></td><td class="cell-^ZYG">82183729013</td></tr><tr id="7874d810-91f5-4938-8c19-ba18bdfd7b5c"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Robby%20Purba.html">Robby Purba</a></td><td class="cell-|3Sl">114</td><td class="cell-h}&gt;O"><a href="robbypurba@gmail.com" class="url-value">robbypurba@gmail.com</a></td><td class="cell-^ZYG">87709241345</td></tr><tr id="586819ab-6010-4e02-bf12-13f1667ad18f"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Nining%20Herawati.html">Nining Herawati</a></td><td class="cell-|3Sl">115</td><td class="cell-h}&gt;O"><a href="herawatinining123@gmail.com" class="url-value">herawatinining123@gmail.com</a></td><td class="cell-^ZYG">85638391042</td></tr><tr id="58ae3f42-a3d3-44e7-af80-addae85d4d9d"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/M%20Nurreza%20Hidayat.html">M. Nurreza Hidayat</a></td><td class="cell-|3Sl">116</td><td class="cell-h}&gt;O"><a href="rezahidayat@gmail.com" class="url-value">rezahidayat@gmail.com</a></td><td class="cell-^ZYG">82293750135</td></tr><tr id="3c38c3d7-f4d6-4729-accd-28ae698d5f4f"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Rahmad%20Ibrahim.html">Rahmad Ibrahim</a></td><td class="cell-|3Sl">117</td><td class="cell-h}&gt;O"><a href="ibrahimrahmaddd@yahoo.com" class="url-value">ibrahimrahmaddd@yahoo.com</a></td><td class="cell-^ZYG">81339519352</td></tr><tr id="4e91de42-53cc-4d75-af0c-0ec5b0a57708"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Meilani%20Fifi.html">Meilani Fifi</a></td><td class="cell-|3Sl">118</td><td class="cell-h}&gt;O"><a href="fifimeilani93@gmail.com" class="url-value">fifimeilani93@gmail.com</a></td><td class="cell-^ZYG">89810917249</td></tr><tr id="db625c48-7af9-4771-8547-a3b39a662615"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Alica%20Nur%20Jannah.html">Alica Nur Jannah</a></td><td class="cell-|3Sl">119</td><td class="cell-h}&gt;O"><a href="alicajannah@gmail.com" class="url-value">alicajannah@gmail.com</a></td><td class="cell-^ZYG">87712497535</td></tr><tr id="c5b97232-321f-4689-bf83-eb3e2c6e5a33"><td class="cell-title"><a href="STUDY%20KASUS%20MONGODB/Tabel%20Mahasiswa/Benny%20Sucipto.html">Benny Sucipto</a></td><td class="cell-|3Sl">120</td><td class="cell-h}&gt;O"><a href="bennysu@yahoo.com" class="url-value">bennysu@yahoo.com</a></td><td class="cell-^ZYG">82212497953</td></tr></tbody></table></div><ul id="a027134b-dc60-4e2c-9b27-478709b95e68" class="bulleted-list"><li>Contohnya:<pre id="87aa941a-c43b-409a-8ec3-7e5e1cb215e9" class="code"><code>db.mahasiswa.insert({nim:&quot;111&quot;,nama:&quot;Joko Purwono&quot;,email:&quot;jokopurwono@yahoo.com&quot;,phone:&quot;089812345678&quot;})</code></pre></li></ul><ul id="366b8b96-be36-425d-bccd-328447d34a09" class="bulleted-list"><li>Cek data yang sudah diinputkan apakah sudah masuk atau belum dengan mengetikan:<pre id="d59195c3-eca4-482d-8b8c-242fd084b437" class="code"><code>db.mahasiswa.find().pretty()</code></pre></li></ul><pre id="98718fb4-55ec-4c94-8c9f-887e61aba05e" class="code"><code>&gt; db.mahasiswa.insert([
+... {nim:&quot;111&quot;,nama:&quot;Joko Purwono&quot;,email:&quot;jokopurwono@yahoo.com&quot;,phone:&quot;089812345678&quot;},
+... {nim:&quot;112&quot;,nama:&quot;Widya Kosasih&quot;,email:&quot;widyakosasih@gmail.com&quot;,phone:&quot;085769553853&quot;},
+... {nim:&quot;113&quot;,nama:&quot;Hanung Bramantyo&quot;,email:&quot;hanungbra@yahoo.com&quot;,phone:&quot;082183729013&quot;},
+... {nim:&quot;114&quot;,nama:&quot;Robby Purba&quot;,email:&quot;robbypurba@gmail.com&quot;,phone:&quot;087709241345&quot;},
+... {nim:&quot;115&quot;,nama:&quot;Nining Herawati&quot;,email:&quot;herawatinining123@gmail.com&quot;,phone:&quot;085638391042&quot;},
+... {nim:&quot;116&quot;,nama:&quot;M. Nurreza Hidayat&quot;,email:&quot;rezahidayat@gmail.com&quot;,phone:&quot;082293750135&quot;},
+... {nim:&quot;117&quot;,nama:&quot;Rahmad Ibrahim&quot;,email:&quot;ibrahimrahmaddd@yahoo.com&quot;,phone:&quot;081339519352&quot;},
+... {nim:&quot;118&quot;,nama:&quot;Meilani Fifi&quot;,email:&quot;fifimeilani93@gmail.com&quot;,phone:&quot;089810917249&quot;},
+... {nim:&quot;119&quot;,nama:&quot;Alica Nur Jannah&quot;,email:&quot;alicajannah@gmail.com&quot;,phone:&quot;087712497535&quot;},
+... {nim:&quot;120&quot;,nama:&quot;Benny Sucipto&quot;,email:&quot;bennysu@yahoo.com&quot;,phone:&quot;082212497953&quot;}
+... ]);
+BulkWriteResult({
+        &quot;writeErrors&quot; : [ ],
+        &quot;writeConcernErrors&quot; : [ ],
+        &quot;nInserted&quot; : 10,
+        &quot;nUpserted&quot; : 0,
+        &quot;nMatched&quot; : 0,
+        &quot;nModified&quot; : 0,
+        &quot;nRemoved&quot; : 0,
+        &quot;upserted&quot; : [ ]
+})
+
+&gt; db.mahasiswa.find().pretty()
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412e&quot;),
+        &quot;nim&quot; : &quot;111&quot;,
+        &quot;nama&quot; : &quot;Joko Purwono&quot;,
+        &quot;email&quot; : &quot;jokopurwono@yahoo.com&quot;,
+        &quot;phone&quot; : &quot;089812345678&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412f&quot;),
+        &quot;nim&quot; : &quot;112&quot;,
+        &quot;nama&quot; : &quot;Widya Kosasih&quot;,
+        &quot;email&quot; : &quot;widyakosasih@gmail.com&quot;,
+        &quot;phone&quot; : &quot;085769553853&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624130&quot;),
+        &quot;nim&quot; : &quot;113&quot;,
+        &quot;nama&quot; : &quot;Hanung Bramantyo&quot;,
+        &quot;email&quot; : &quot;hanungbra@yahoo.com&quot;,
+        &quot;phone&quot; : &quot;082183729013&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624131&quot;),
+        &quot;nim&quot; : &quot;114&quot;,
+        &quot;nama&quot; : &quot;Robby Purba&quot;,
+        &quot;email&quot; : &quot;robbypurba@gmail.com&quot;,
+        &quot;phone&quot; : &quot;087709241345&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624132&quot;),
+        &quot;nim&quot; : &quot;115&quot;,
+        &quot;nama&quot; : &quot;Nining Herawati&quot;,
+        &quot;email&quot; : &quot;herawatinining123@gmail.com&quot;,
+        &quot;phone&quot; : &quot;085638391042&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624133&quot;),
+        &quot;nim&quot; : &quot;116&quot;,
+        &quot;nama&quot; : &quot;M. Nurreza Hidayat&quot;,
+        &quot;email&quot; : &quot;rezahidayat@gmail.com&quot;,
+        &quot;phone&quot; : &quot;082293750135&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624134&quot;),
+        &quot;nim&quot; : &quot;117&quot;,
+        &quot;nama&quot; : &quot;Rahmad Ibrahim&quot;,
+        &quot;email&quot; : &quot;ibrahimrahmaddd@yahoo.com&quot;,
+        &quot;phone&quot; : &quot;081339519352&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624135&quot;),
+        &quot;nim&quot; : &quot;118&quot;,
+        &quot;nama&quot; : &quot;Meilani Fifi&quot;,
+        &quot;email&quot; : &quot;fifimeilani93@gmail.com&quot;,
+        &quot;phone&quot; : &quot;089810917249&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624136&quot;),
+        &quot;nim&quot; : &quot;119&quot;,
+        &quot;nama&quot; : &quot;Alica Nur Jannah&quot;,
+        &quot;email&quot; : &quot;alicajannah@gmail.com&quot;,
+        &quot;phone&quot; : &quot;087712497535&quot;
+}
+{
+        &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624137&quot;),
+        &quot;nim&quot; : &quot;120&quot;,
+        &quot;nama&quot; : &quot;Benny Sucipto&quot;,
+        &quot;email&quot; : &quot;bennysu@yahoo.com&quot;,
+        &quot;phone&quot; : &quot;082212497953&quot;
+}</code></pre></li></ol><ol id="5875ca29-c776-41cd-adcd-311de9585f7c" class="numbered-list" start="4"><li>Tampilkan data dari tabel mahasiswa berdasarkan nama mahasiswa secara alphabet.<pre id="ecbf3fce-c772-44cc-aaaf-95d80b857ee0" class="code"><code>&gt; db.mahasiswa.find().sort({ &quot;nama&quot;: 1})
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624136&quot;), &quot;nim&quot; : &quot;119&quot;, &quot;nama&quot; : &quot;Alica Nur Jannah&quot;, &quot;email&quot; : &quot;alicajannah@gmail.com&quot;, &quot;phone&quot; : &quot;087712497535&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624137&quot;), &quot;nim&quot; : &quot;120&quot;, &quot;nama&quot; : &quot;Benny Sucipto&quot;, &quot;email&quot; : &quot;bennysu@yahoo.com&quot;, &quot;phone&quot; : &quot;082212497953&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624130&quot;), &quot;nim&quot; : &quot;113&quot;, &quot;nama&quot; : &quot;Hanung Bramantyo&quot;, &quot;email&quot; : &quot;hanungbra@yahoo.com&quot;, &quot;phone&quot; : &quot;082183729013&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412e&quot;), &quot;nim&quot; : &quot;111&quot;, &quot;nama&quot; : &quot;Joko Purwono&quot;, &quot;email&quot; : &quot;jokopurwono@yahoo.com&quot;, &quot;phone&quot; : &quot;089812345678&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624133&quot;), &quot;nim&quot; : &quot;116&quot;, &quot;nama&quot; : &quot;M. Nurreza Hidayat&quot;, &quot;email&quot; : &quot;rezahidayat@gmail.com&quot;, &quot;phone&quot; : &quot;082293750135&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624135&quot;), &quot;nim&quot; : &quot;118&quot;, &quot;nama&quot; : &quot;Meilani Fifi&quot;, &quot;email&quot; : &quot;fifimeilani93@gmail.com&quot;, &quot;phone&quot; : &quot;089810917249&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624132&quot;), &quot;nim&quot; : &quot;115&quot;, &quot;nama&quot; : &quot;Nining Herawati&quot;, &quot;email&quot; : &quot;herawatinining123@gmail.com&quot;, &quot;phone&quot; : &quot;085638391042&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624134&quot;), &quot;nim&quot; : &quot;117&quot;, &quot;nama&quot; : &quot;Rahmad Ibrahim&quot;, &quot;email&quot; : &quot;ibrahimrahmaddd@yahoo.com&quot;, &quot;phone&quot; : &quot;081339519352&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624131&quot;), &quot;nim&quot; : &quot;114&quot;, &quot;nama&quot; : &quot;Robby Purba&quot;, &quot;email&quot; : &quot;robbypurba@gmail.com&quot;, &quot;phone&quot; : &quot;087709241345&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412f&quot;), &quot;nim&quot; : &quot;112&quot;, &quot;nama&quot; : &quot;Widya Kosasih&quot;, &quot;email&quot; : &quot;widyakosasih@gmail.com&quot;, &quot;phone&quot; : &quot;085769553853&quot; }</code></pre></li></ol><ol id="449d0cdf-045a-4839-b95a-31f7e540afdf" class="numbered-list" start="5"><li>Ubah nama Joko Purwono menjadi Joko Dwi Purwono<pre id="4c1251f0-e8a8-4192-a151-d2d9d19f8645" class="code"><code>&gt; db.mahasiswa.update(
+... {nama:&quot;Joko Purwono&quot;},
+... {$set:{nama:&quot;Joko Dwi Purwono&quot;}},
+... false,true
+... );
+WriteResult({ &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 })
+
+&gt; db.mahasiswa.find().sort({ &quot;nama&quot;: 1})
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624136&quot;), &quot;nim&quot; : &quot;119&quot;, &quot;nama&quot; : &quot;Alica Nur Jannah&quot;, &quot;email&quot; : &quot;alicajannah@gmail.com&quot;, &quot;phone&quot; : &quot;087712497535&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624137&quot;), &quot;nim&quot; : &quot;120&quot;, &quot;nama&quot; : &quot;Benny Sucipto&quot;, &quot;email&quot; : &quot;bennysu@yahoo.com&quot;, &quot;phone&quot; : &quot;082212497953&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624130&quot;), &quot;nim&quot; : &quot;113&quot;, &quot;nama&quot; : &quot;Hanung Bramantyo&quot;, &quot;email&quot; : &quot;hanungbra@yahoo.com&quot;, &quot;phone&quot; : &quot;082183729013&quot; }
+<mark class="highlight-yellow_background">{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412e&quot;), &quot;nim&quot; : &quot;111&quot;, &quot;nama&quot; : &quot;Joko Dwi Purwono&quot;, &quot;email&quot; : &quot;jokopurwono@yahoo.com&quot;, &quot;phone&quot; : &quot;089812345678&quot; }</mark>
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624133&quot;), &quot;nim&quot; : &quot;116&quot;, &quot;nama&quot; : &quot;M. Nurreza Hidayat&quot;, &quot;email&quot; : &quot;rezahidayat@gmail.com&quot;, &quot;phone&quot; : &quot;082293750135&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624135&quot;), &quot;nim&quot; : &quot;118&quot;, &quot;nama&quot; : &quot;Meilani Fifi&quot;, &quot;email&quot; : &quot;fifimeilani93@gmail.com&quot;, &quot;phone&quot; : &quot;089810917249&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624132&quot;), &quot;nim&quot; : &quot;115&quot;, &quot;nama&quot; : &quot;Nining Herawati&quot;, &quot;email&quot; : &quot;herawatinining123@gmail.com&quot;, &quot;phone&quot; : &quot;085638391042&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624134&quot;), &quot;nim&quot; : &quot;117&quot;, &quot;nama&quot; : &quot;Rahmad Ibrahim&quot;, &quot;email&quot; : &quot;ibrahimrahmaddd@yahoo.com&quot;, &quot;phone&quot; : &quot;081339519352&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624131&quot;), &quot;nim&quot; : &quot;114&quot;, &quot;nama&quot; : &quot;Robby Purba&quot;, &quot;email&quot; : &quot;robbypurba@gmail.com&quot;, &quot;phone&quot; : &quot;087709241345&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412f&quot;), &quot;nim&quot; : &quot;112&quot;, &quot;nama&quot; : &quot;Widya Kosasih&quot;, &quot;email&quot; : &quot;widyakosasih@gmail.com&quot;, &quot;phone&quot; : &quot;085769553853&quot; }</code></pre></li></ol><ol id="74cc3850-12d1-45c0-b67a-c390f88dc262" class="numbered-list" start="6"><li>Ubah email atas nama Benny Sucipto menjadi <a href="mailto:bennyofficial@gmail.com">bennyofficial@gmail.com</a>:<pre id="3d2f32aa-412e-45d6-be4c-689d29378375" class="code"><code>&gt; db.mahasiswa.find().sort({ &quot;nama&quot;: 1})
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624136&quot;), &quot;nim&quot; : &quot;119&quot;, &quot;nama&quot; : &quot;Alica Nur Jannah&quot;, &quot;email&quot; : &quot;alicajannah@gmail.com&quot;, &quot;phone&quot; : &quot;087712497535&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624137&quot;), &quot;nim&quot; : &quot;120&quot;, &quot;nama&quot; : &quot;Benny Sucipto&quot;, &quot;email&quot; : &quot;bennysu@yahoo.com&quot;, &quot;phone&quot; : &quot;082212497953&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624130&quot;), &quot;nim&quot; : &quot;113&quot;, &quot;nama&quot; : &quot;Hanung Bramantyo&quot;, &quot;email&quot; : &quot;hanungbra@yahoo.com&quot;, &quot;phone&quot; : &quot;082183729013&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412e&quot;), &quot;nim&quot; : &quot;111&quot;, &quot;nama&quot; : &quot;Joko Dwi Purwono&quot;, &quot;email&quot; : &quot;jokopurwono@yahoo.com&quot;, &quot;phone&quot; : &quot;089812345678&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624133&quot;), &quot;nim&quot; : &quot;116&quot;, &quot;nama&quot; : &quot;M. Nurreza Hidayat&quot;, &quot;email&quot; : &quot;rezahidayat@gmail.com&quot;, &quot;phone&quot; : &quot;082293750135&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624135&quot;), &quot;nim&quot; : &quot;118&quot;, &quot;nama&quot; : &quot;Meilani Fifi&quot;, &quot;email&quot; : &quot;fifimeilani93@gmail.com&quot;, &quot;phone&quot; : &quot;089810917249&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624132&quot;), &quot;nim&quot; : &quot;115&quot;, &quot;nama&quot; : &quot;Nining Herawati&quot;, &quot;email&quot; : &quot;herawatinining123@gmail.com&quot;, &quot;phone&quot; : &quot;085638391042&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624134&quot;), &quot;nim&quot; : &quot;117&quot;, &quot;nama&quot; : &quot;Rahmad Ibrahim&quot;, &quot;email&quot; : &quot;ibrahimrahmaddd@yahoo.com&quot;, &quot;phone&quot; : &quot;081339519352&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624131&quot;), &quot;nim&quot; : &quot;114&quot;, &quot;nama&quot; : &quot;Robby Purba&quot;, &quot;email&quot; : &quot;robbypurba@gmail.com&quot;, &quot;phone&quot; : &quot;087709241345&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412f&quot;), &quot;nim&quot; : &quot;112&quot;, &quot;nama&quot; : &quot;Widya Kosasih&quot;, &quot;email&quot; : &quot;widyakosasih@gmail.com&quot;, &quot;phone&quot; : &quot;085769553853&quot; }
+
+&gt; db.mahasiswa.update( {email:&quot;bennysu@yahoo.com&quot;}, {$set:{email:&quot;bennyofficial@gmail.com&quot;}}, false,true );
+WriteResult({ &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 })
+
+&gt; db.mahasiswa.find().sort({ &quot;nama&quot;: 1})
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624136&quot;), &quot;nim&quot; : &quot;119&quot;, &quot;nama&quot; : &quot;Alica Nur Jannah&quot;, &quot;email&quot; : &quot;alicajannah@gmail.com&quot;, &quot;phone&quot; : &quot;087712497535&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624137&quot;), &quot;nim&quot; : &quot;120&quot;, &quot;nama&quot; : &quot;Benny Sucipto&quot;, &quot;email&quot; : &quot;bennyofficial@gmail.com&quot;, &quot;phone&quot; : &quot;082212497953&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624130&quot;), &quot;nim&quot; : &quot;113&quot;, &quot;nama&quot; : &quot;Hanung Bramantyo&quot;, &quot;email&quot; : &quot;hanungbra@yahoo.com&quot;, &quot;phone&quot; : &quot;082183729013&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412e&quot;), &quot;nim&quot; : &quot;111&quot;, &quot;nama&quot; : &quot;Joko Dwi Purwono&quot;, &quot;email&quot; : &quot;jokopurwono@yahoo.com&quot;, &quot;phone&quot; : &quot;089812345678&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624133&quot;), &quot;nim&quot; : &quot;116&quot;, &quot;nama&quot; : &quot;M. Nurreza Hidayat&quot;, &quot;email&quot; : &quot;rezahidayat@gmail.com&quot;, &quot;phone&quot; : &quot;082293750135&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624135&quot;), &quot;nim&quot; : &quot;118&quot;, &quot;nama&quot; : &quot;Meilani Fifi&quot;, &quot;email&quot; : &quot;fifimeilani93@gmail.com&quot;, &quot;phone&quot; : &quot;089810917249&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624132&quot;), &quot;nim&quot; : &quot;115&quot;, &quot;nama&quot; : &quot;Nining Herawati&quot;, &quot;email&quot; : &quot;herawatinining123@gmail.com&quot;, &quot;phone&quot; : &quot;085638391042&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624134&quot;), &quot;nim&quot; : &quot;117&quot;, &quot;nama&quot; : &quot;Rahmad Ibrahim&quot;, &quot;email&quot; : &quot;ibrahimrahmaddd@yahoo.com&quot;, &quot;phone&quot; : &quot;081339519352&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d624131&quot;), &quot;nim&quot; : &quot;114&quot;, &quot;nama&quot; : &quot;Robby Purba&quot;, &quot;email&quot; : &quot;robbypurba@gmail.com&quot;, &quot;phone&quot; : &quot;087709241345&quot; }
+{ &quot;_id&quot; : ObjectId(&quot;5e0222f1b5e775263d62412f&quot;), &quot;nim&quot; : &quot;112&quot;, &quot;nama&quot; : &quot;Widya Kosasih&quot;, &quot;email&quot; : &quot;widyakosasih@gmail.com&quot;, &quot;phone&quot; : &quot;085769553853&quot; }</code></pre></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a652a9bd-3ee6-4dbc-a5b5-7e2012dd3994"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Ketentuan:
+</strong>Silahkan teman-teman kerjakan soal-soal tersebut step by step secara berurutan kemudian <strong>capture </strong>kode program dan kerjakan tugas ini di aplikasi Microsoft Word atau sejenisnya.</div></figure></div></article></body></html>

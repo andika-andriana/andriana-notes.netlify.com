@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lanjutan (advanced)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="56118ebe-1f73-4d69-a89e-9b467323f3fb" class="page sans"><header><h1 class="page-title">Lanjutan (advanced)</h1></header><div class="page-body"><figure id="8e8b2b85-5504-4951-bd10-9bde6295d99b" class="link-to-page"><a href="Lanjutan%20advanced/Memanipulasi%20Array%20Dengan%20Shift.html">Memanipulasi Array Dengan Shift</a></figure><figure id="92bcd93d-dfac-49f5-b272-5740f472404f" class="link-to-page"><a href="Lanjutan%20advanced/Memanipulasi%20Array%20Dengan%20Pop.html">Memanipulasi Array Dengan Pop</a></figure><figure id="c783e475-f865-4760-a703-647b6c824af2" class="link-to-page"><a href="Lanjutan%20advanced/Memanipulasi%20Array%20Dengan%20Push.html">Memanipulasi Array Dengan Push</a></figure><figure id="332f8797-8eda-4495-bc0c-a8d7221b613a" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2012%20JS.html">Tugas 12 JS</a></figure><figure id="4c3fd5db-678d-4e2c-b793-ccedae9f7cee" class="link-to-page"><a href="Lanjutan%20advanced/Memanipulasi%20Array%20Dengan%20Splice%201.html">Memanipulasi Array Dengan Splice 1</a></figure><figure id="469e4665-cbdb-417c-a7f0-ac31289b22a6" class="link-to-page"><a href="Lanjutan%20advanced/Memanipulasi%20Array%20Dengan%20Splice%202.html">Memanipulasi Array Dengan Splice 2</a></figure><figure id="8f323929-ae43-48a7-84c2-131058c87c34" class="link-to-page"><a href="Lanjutan%20advanced/Memanipulasi%20Array%20Dengan%20UnShift.html">Memanipulasi Array Dengan UnShift</a></figure><figure id="c3971894-e82c-474d-8f0f-21bf261f35a1" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2013%20JS.html">Tugas 13 JS</a></figure><figure id="2fb2ec3a-98c2-4767-933a-35e51bf3eff9" class="link-to-page"><a href="Lanjutan%20advanced/Math%20Object%20Property.html">Math Object Property</a></figure><figure id="2232582c-040e-480e-a76a-16db3fcd9f43" class="link-to-page"><a href="Lanjutan%20advanced/Math%20Object%20Method.html">Math Object Method</a></figure><figure id="39177e4f-7cf7-4e42-b869-5645f4f2d82e" class="link-to-page"><a href="Lanjutan%20advanced/Math%20Ceil%20Math%20Floor%20Math%20Round.html">Math Ceil, Math Floor &amp; Math Round</a></figure><figure id="e3502fe8-4733-4dd6-aff6-ce75d253952d" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2014%20JS.html">Tugas 14 JS</a></figure><figure id="7ad75917-bd8d-43d3-a89f-b3bc365933bc" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Matematika%20abs%20Absolut.html">Fungsi Matematika abs (Absolut)</a></figure><figure id="07040d93-20bc-48d9-a8b3-0656107cfbe8" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Matematika%20pow.html">Fungsi Matematika pow</a></figure><figure id="bb068717-c987-42c1-8521-39449865e554" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Matematika%20SQRT.html">Fungsi Matematika SQRT</a></figure><figure id="afa24a07-110a-4f43-b46d-02b638f0c425" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Matematika%20LOG%20Logaritma.html">Fungsi Matematika LOG (Logaritma)</a></figure><figure id="b5eac39f-51c0-4063-a903-0d80a6f2aee9" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Matematika%20Min%20dan%20Max.html">Fungsi Matematika Min dan Max</a></figure><figure id="b98108d1-00f9-474a-9793-be31d1fb13a3" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2015%20JS.html">Tugas 15 JS</a></figure><figure id="a67e047b-a1fa-421c-9dd4-78d0e4b48ea0" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2016%20JS.html">Tugas 16 JS</a></figure><figure id="697b9bc0-d597-41ba-94d8-1cef6fc98c41" class="link-to-page"><a href="Lanjutan%20advanced/Propery%20dan%20Method%20fungsi%20dari%20Objek%20String.html">Propery dan Method (fungsi) dari Objek String</a></figure><figure id="d27b00b3-3f7b-4dec-90ab-47b42d9b8594" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Char%20Code%20At.html">Fungsi String Char Code At</a></figure><figure id="65b07c88-867d-4daf-b725-6868d04206f7" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Code%20Point.html">Fungsi String Code Point</a></figure><figure id="a29599b7-bf7d-4111-b2a5-319b3d360ff5" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Lower%20Case%20dan%20Upper%20Case.html">Fungsi String Lower Case dan Upper Case</a></figure><figure id="a5515025-a4c6-4c22-adb1-dafe63f444dc" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Char%20At.html">Fungsi String Char At</a></figure><figure id="e9adbfb3-0062-436d-ba43-7936e8fc37f0" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Substr.html">Fungsi String Substr</a></figure><figure id="0f9dd544-7d6c-4280-9b5e-d75528b7fefb" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2017%20JS.html">Tugas 17 JS</a></figure><figure id="b39f0441-5998-4d67-b6bd-7035b09f0d85" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Slice.html">Fungsi String Slice</a></figure><figure id="e8c475e1-4574-4450-98f4-1ab9c2480f1f" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Split.html">Fungsi String Split</a></figure><figure id="0d852b8e-f309-4ae8-9443-3dc49e9c80cd" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Trim.html">Fungsi String Trim</a></figure><figure id="b9490674-6256-4dac-a1c9-6797d163c16d" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Concat.html">Fungsi String Concat</a></figure><figure id="0eda1d31-2d44-44f2-8def-72898ed3d37e" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2018%20JS.html">Tugas 18 JS</a></figure><figure id="58765dce-9778-4010-8ae5-04554f04e1a4" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Includes.html">Fungsi String Includes</a></figure><figure id="981e6b34-e611-4639-bf8d-1431e1593402" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Start%20With%20dan%20End%20With.html">Fungsi String Start With dan End With</a></figure><figure id="c8e2a573-de11-4c90-8c6b-c75710edd977" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Repeat.html">Fungsi String Repeat</a></figure><figure id="d805d342-b626-4175-b5f3-c2dffcb707af" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2019%20JS.html">Tugas 19 JS</a></figure><figure id="4983736c-ced2-4ecc-87ae-4ce000e9120f" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Konversi%20Ke%20String.html">Fungsi Konversi Ke String</a></figure><figure id="7244785d-fdf1-4bec-a7f5-9f6351ada7ca" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20IndexOf.html">Fungsi String IndexOf</a></figure><figure id="76a97004-842b-4416-9f90-66c64f00df6c" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20IndexOf%201.html">Fungsi String IndexOf</a></figure><figure id="6817ce2f-cbb7-4d2e-8791-aa87d79a45ff" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Last%20Index%20Of.html">Fungsi String Last Index Of</a></figure><figure id="c52545ff-74e0-4a0a-9b38-2dc9a3d5e225" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Search.html">Fungsi String Search</a></figure><figure id="a5352882-24ac-416d-be67-96c2b7e77c55" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Match.html">Fungsi String Match</a></figure><figure id="c95d8df4-7c23-4a02-a197-930638242f28" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2020%20JS.html">Tugas 20 JS</a></figure><figure id="fa508168-534d-4e4b-834e-a1cd552090f4" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20String%20Replace.html">Fungsi String Replace</a></figure><figure id="77f27f26-8e0d-4ab3-9e71-f7d43cbf915a" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Reverse.html">Fungsi Array Reverse</a></figure><figure id="ec300c82-4dbe-4357-b86b-70a86349e90b" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Concat.html">Fungsi Array Concat</a></figure><figure id="fae632c5-de0e-45cc-9d66-ab8068313ae2" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Slice.html">Fungsi Array Slice</a></figure><figure id="19714f79-9e87-45dc-a712-a52e3f970b4f" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2021%20JS.html">Tugas 21 JS</a></figure><figure id="b59c3500-8343-4959-81d6-65800c285cb8" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Join.html">Fungsi Array Join</a></figure><figure id="5639c04c-cffb-4c74-bc07-d1925b0ee5e9" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Split.html">Fungsi Array Split</a></figure><figure id="92589077-5cc5-4e64-a033-9f563b73936f" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20IndexOf.html">Fungsi Array IndexOf</a></figure><figure id="fc6c326c-c346-4acf-ab7b-d47b1ac8bee3" class="link-to-page"><a href="Lanjutan%20advanced/Perulangan%20Array%20dengan%20ForEach.html">Perulangan Array dengan ForEach</a></figure><figure id="ff1df1a4-e9ed-4f8d-9585-1d7a88df38c4" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Perulangan%20Map.html">Fungsi Perulangan Map</a></figure><figure id="7888cb43-9668-40b3-a874-d8ab5dec1d9e" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2022%20JS.html">Tugas 22 JS</a></figure><figure id="fe209899-cd81-43aa-a022-56f97b480b95" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Filter.html">Fungsi Array Filter</a></figure><figure id="ed68fb06-2e49-4429-9dd9-9cbb56fda95e" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Every.html">Fungsi Array Every</a></figure><figure id="a634644b-121c-43cf-b193-7b1b9eb2f964" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Some.html">Fungsi Array Some</a></figure><figure id="55e3f339-f00c-4b84-8fb5-6333fde290ba" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2023%20JS.html">Tugas 23 JS</a></figure><figure id="cea7c652-456a-4a3f-a473-dfaac9c141d6" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Find%20dan%20Find%20Index.html">Fungsi Array Find dan Find Index</a></figure><figure id="3cb1acfa-49d9-4d3c-bcac-9f93ff05d247" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Reduce%20dan%20Reduce%20Right.html">Fungsi Array Reduce dan Reduce Right</a></figure><figure id="d30dfa55-1131-4e7a-bca3-47fb8cb86328" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Sort.html">Fungsi Array Sort</a></figure><figure id="7033ca3c-8e87-447a-ac93-ee2168aca4db" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2024%20JS.html">Tugas 24 JS</a></figure><figure id="b65280fd-673e-4d2c-9a87-f509ce1f1cf7" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2025%20JS.html">Tugas 25 JS</a></figure><figure id="a493c451-32d7-447c-b8f2-32df4296eec0" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20Eval.html">Fungsi Array Eval</a></figure><figure id="e8f71616-6bfb-40e3-949e-ac511069639b" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20isFinite.html">Fungsi Array isFinite</a></figure><figure id="9d45bf11-c03a-400f-877c-8728051eeb35" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Array%20isNan.html">Fungsi Array isNan</a></figure><figure id="7eef7e47-c67b-4d59-a92c-f7bf4da02f82" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2026%20JS.html">Tugas 26 JS</a></figure><figure id="d1b52140-ca67-43fa-9284-845c355b16c4" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Konversi%20Menjadi%20Number.html">Fungsi Konversi Menjadi Number</a></figure><figure id="f06d0ad3-ef8a-4af3-9c66-f7ce53941e65" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Konversi%20Menjadi%20String.html">Fungsi Konversi Menjadi String</a></figure><figure id="b66d134f-d7ff-4d34-8654-2b8e3ee4653c" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Encode%20URI.html">Fungsi Encode URI</a></figure><figure id="12cdb364-f5df-40f1-a038-cc0ab8e9dba1" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20Decode%20URI.html">Fungsi Decode URI</a></figure><figure id="6100a667-202c-40de-9722-0546e44f2585" class="link-to-page"><a href="Lanjutan%20advanced/Pengenalan%20Regular%20Expression.html">Pengenalan Regular Expression</a></figure><figure id="c19a4c72-6661-4055-9ea0-bb6f11fc8cf9" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2028%20JS.html">Tugas 28 JS</a></figure><figure id="e1cfd36b-89c8-4100-b311-432cb89be3bb" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20RegExp%20Test.html">Fungsi RegExp Test</a></figure><figure id="0b81e810-fe03-4535-a8b0-f49f09a25c1a" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20RegExp%20Exec%20exactly.html">Fungsi RegExp Exec (exactly);</a></figure><figure id="bb77371b-c84b-449e-9004-89c7a5a8792d" class="link-to-page"><a href="Lanjutan%20advanced/Fungsi%20RegExp%20Replace.html">Fungsi RegExp Replace</a></figure><figure id="2cdf76f0-0e56-4583-b9f2-621a980e783f" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2029%20JS.html">Tugas 29 JS</a></figure><figure id="1b8a4899-2ab7-4ee0-8172-f4025d8dfefb" class="link-to-page"><a href="Lanjutan%20advanced/Flags%20Regular%20Expression.html">Flags - Regular Expression</a></figure><figure id="3237a116-9fa5-450c-9243-8b427c45c629" class="link-to-page"><a href="Lanjutan%20advanced/Token%20Regular%20Expression.html">Token - Regular Expression</a></figure><figure id="43e7d8da-389c-4724-b605-15263d9f4caf" class="link-to-page"><a href="Lanjutan%20advanced/Karakter%20Spesifik%20RegExp%20Regular%20Expression.html">Karakter Spesifik - RegExp (Regular Expression)</a></figure><figure id="0914294b-12ae-4068-a1f2-aba804a1a517" class="link-to-page"><a href="Lanjutan%20advanced/Flag%20g%20global%20RegExp.html">Flag &quot;g&quot; (global) - RegExp</a></figure><figure id="ef653d56-de35-406d-8451-fe1f7bc96478" class="link-to-page"><a href="Lanjutan%20advanced/Huruf%20Angka%20dan%20Spasi%20RegExp%20Regular%20Expression.html">Huruf - Angka dan Spasi : RegExp (Regular Expression)</a></figure><figure id="2e7bdbb4-0296-4f47-ba8a-670a7e36a01a" class="link-to-page"><a href="Lanjutan%20advanced/NOT%20Huruf%20Angka%20dan%20Spasi%20RegExp%20Regular%20Expressio.html">NOT (Huruf - Angka dan Spasi) : RegExp (Regular Expression)</a></figure><figure id="51b48527-9770-4f30-ac95-3884a1b846b0" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%2030%20JS.html">Tugas 30 JS</a></figure><figure id="694951f9-672c-462d-a6dd-9b8ef82b3a5f" class="link-to-page"><a href="Lanjutan%20advanced/Operator%20Modulus.html">Operator Modulus</a></figure><figure id="ed23a30c-748e-46ae-8131-0c5987304f12" class="link-to-page"><a href="Lanjutan%20advanced/Bilangan%20Genap%20dengan%20Modulus.html">Bilangan Genap dengan Modulus</a></figure><figure id="ed8337f7-3c59-48ad-a891-7aeb3408142d" class="link-to-page"><a href="Lanjutan%20advanced/Bilangan%20Ganjil%20dengan%20Modulus.html">Bilangan Ganjil dengan Modulus</a></figure><figure id="45201d9b-e1a3-46c7-948d-379ae202ae22" class="link-to-page"><a href="Lanjutan%20advanced/Bilangan%20Kelipatan%20dengan%20Modulus.html">Bilangan Kelipatan dengan Modulus</a></figure><figure id="8789b0b3-868c-4f41-a137-8b6c8f442403" class="link-to-page"><a href="Lanjutan%20advanced/Persamaan%20FOR%20forEach%20MAP.html">Persamaan || FOR - forEach - MAP</a></figure><figure id="986550e3-0106-4316-b55a-ebe27f468f48" class="link-to-page"><a href="Lanjutan%20advanced/Perbedaan%20FOR%20forEach%20MAP.html">Perbedaan || FOR - forEach - MAP</a></figure><figure id="b029fdcf-1fb6-4185-90c8-9a8186f83d16" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%20Filter%20dan%20Parameters.html">Tugas Filter dan Parameters</a></figure><figure id="2cca7270-2ef7-4fe7-a39f-60d59e399ceb" class="link-to-page"><a href="Lanjutan%20advanced/Studi%20Kasus%20Balik%20Kata.html">Studi Kasus : Balik Kata</a></figure><figure id="806dac30-be9c-44b7-afaa-ebe860f678cc" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%20Balik%20Kata.html">Tugas : Balik Kata</a></figure><figure id="d613d993-20bd-403a-a51b-2effaf9e7891" class="link-to-page"><a href="Lanjutan%20advanced/Study%20Kasus%20Manipulasi%20Deret%20Angka.html">Study Kasus : Manipulasi Deret Angka</a></figure><figure id="ec89b812-ae32-48fc-ba2d-93cc7a2609bf" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%20Manipulasi%20Deret%20Angka.html">Tugas : Manipulasi Deret Angka</a></figure><figure id="393a8d00-5cbd-4567-b1e9-601f94d3aa96" class="link-to-page"><a href="Lanjutan%20advanced/Studi%20Kasus%20Nested%20Array%20dan%20Looping.html">Studi Kasus : Nested Array dan Looping</a></figure><figure id="d1188355-946a-4539-9b16-d3e59012f099" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%20Nested%20Array%20dan%20Looping.html">Tugas : Nested Array dan Looping</a></figure><figure id="7bd2fa4c-0b61-45f2-a3f5-32a847e925b7" class="link-to-page"><a href="Lanjutan%20advanced/Tugas%20RegExp%20Regular%20Expression%20Bagian%201.html">Tugas : RegExp (Regular Expression) Bagian 1</a></figure></div></article></body></html>

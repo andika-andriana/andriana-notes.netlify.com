@@ -1,0 +1,710 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas Akhir Javascript</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="070561ab-f7f8-4935-8cd2-8ac7e020f0ee" class="page sans"><header><h1 class="page-title"><strong>Tugas Akhir Javascript</strong></h1></header><div class="page-body"><ol id="60a29237-9a6c-483c-b18f-75089d6664a4" class="numbered-list" start="1"><li>Pastikan Teman Teman Buatlah sebuah file pada folder project teman teman</li></ol><ol id="c6bbd316-cd72-4612-86b1-0724eb2bf375" class="numbered-list" start="2"><li>Berikan nama filenya dengan style.css lalu masukan kode dibawah ini:<pre id="4cb83f1a-bbb3-4546-be24-c8ab1e7249b3" class="code"><code>body{
+        font-family: sans-serif;
+        background: #C0C0C0;
+}
+
+h1{
+        text-align: center;
+        font-weight: 300;
+}
+
+.tulisan_login{
+        text-align: center;
+        text-transform: uppercase;
+}
+
+.kotak_login{
+        width: 350px;
+        background: white;
+
+        margin: 80px auto;
+        padding: 30px 20px;
+}
+
+label{
+        font-size: 11pt;
+}
+
+.form_login{
+        box-sizing : border-box;
+        width: 100%;
+        padding: 10px;
+        font-size: 11pt;
+        margin-bottom: 20px;
+}
+
+.tombol_login{
+        background: #FF7F00;
+        color: white;
+        font-size: 11pt;
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+}
+.tombol_lanjut{
+        background: red;
+        color: white;
+        font-size: 11pt;
+        width: 100%;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+}
+.link{
+        color: #232323;
+        text-decoration: none;
+        font-size: 10pt;
+}</code></pre></li></ol><ol id="980e5a95-0eec-484b-b76e-45ad655e7a2b" class="numbered-list" start="3"><li>Setelah itu teman teman buatlah 1 buah file dengan nama index.html copy kan kode dibawah ini:<pre id="dcab2902-4a79-47a3-9677-73fe1daa3925" class="code"><code>&lt;html&gt;
+
+&lt;head&gt;
+  &lt;title&gt;TUGAS AKHIR&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;h1&gt;Membuat Desain Form Register Dengan Javascript &lt;br /&gt; NIOMIC&lt;/h1&gt;
+  &lt;div class=&quot;kotak_login&quot;&gt;
+    &lt;button id=&quot;X&quot; onclick=&quot;buat_login()&quot; class=&quot;tombol_lanjut&quot;&gt;Klik Disini Untuk Mendaftar&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;form.js&quot;&gt; &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre></li></ol><ol id="9ac3eb90-c80d-4332-a66c-17440dbc8b99" class="numbered-list" start="4"><li>Setelah itu teman teman buatlah 1 buah file javascript dengan nama form.js lalu buat sebuah function bernama buat_login() yang mampu membuat form untuk register otomatis pada saat kita mengklik tombol pada tampilan awal ini :<figure id="8495b35c-20a8-4c32-8a17-0621beb85cbb" class="image"><a href="https://lh3.googleusercontent.com/FVxqSjaD8O0zlJm2XcBm0e5omW_qLSHvSbCdQoS4ZgoTB_l7xyZDPx0S0ubnNX-yepzA267E1aEUi3WS7ytN7v-h3k7Dv9rtU9gP__roq2WM1FPLoRPK6B8jo-E4nO_gDbD5bQGQ"><img src="https://lh3.googleusercontent.com/FVxqSjaD8O0zlJm2XcBm0e5omW_qLSHvSbCdQoS4ZgoTB_l7xyZDPx0S0ubnNX-yepzA267E1aEUi3WS7ytN7v-h3k7Dv9rtU9gP__roq2WM1FPLoRPK6B8jo-E4nO_gDbD5bQGQ"/></a></figure></li></ol><ol id="558f81ee-78c0-46f7-b0e2-1fe8a3e456ec" class="numbered-list" start="5"><li>Pada saat diklik form register akan muncul tanpa loading<figure id="ac555e4f-e4c6-48be-ada2-a9eb9975c309" class="image"><a href="https://lh5.googleusercontent.com/tK1vBYfKaQ77rB2ibxXYj49A5K6X2qYpsS6BOlsmVP2cgAKaVioB_M0u9MEaPxCTLB8mUXLVBcrSRw0_HRQWaiMsAzM3H1fpUyYyWSgbuk8U6kxVtLj2c0ktsBBAUbw-DNSdy-LL"><img src="https://lh5.googleusercontent.com/tK1vBYfKaQ77rB2ibxXYj49A5K6X2qYpsS6BOlsmVP2cgAKaVioB_M0u9MEaPxCTLB8mUXLVBcrSRw0_HRQWaiMsAzM3H1fpUyYyWSgbuk8U6kxVtLj2c0ktsBBAUbw-DNSdy-LL"/></a></figure></li></ol><hr id="7ae032cf-48d6-4b9f-aedc-c1852a97aadc"/><ul id="564c954f-28d7-41a2-9842-7c701ce38fd7" class="bulleted-list"><li>Jawaban:<ul id="bd79e255-acd7-40fd-bd38-d792674f6466" class="bulleted-list"><li>index.html<pre id="b030b88d-011b-4721-9ecc-4edcad657068" class="code"><code>&lt;html&gt;
+
+&lt;head&gt;
+  &lt;title&gt;TUGAS AKHIR&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;style.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;h1&gt;Membuat Desain Form Register Dengan Javascript &lt;br /&gt; NIOMIC&lt;/h1&gt;
+  &lt;div class=&quot;kotak_login&quot;&gt;
+    &lt;button id=&quot;X&quot; onclick=&quot;buat_login()&quot; class=&quot;tombol_lanjut&quot;&gt;Klik Disini Untuk Mendaftar&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;form.js&quot;&gt; &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre></li></ul><ul id="2fca0eb6-2237-4328-a479-3e587ac24033" class="bulleted-list"><li>form.js<pre id="03e5a023-34f9-4c3d-aad4-70e45c76a946" class="code"><code>function buat_login() {
+  var hapus = document.getElementById(&quot;X&quot;); //melakukan seleksi pada element dengan id=&quot;X&quot;
+  hapus.parentElement.removeChild(hapus); //melakukan pengahapusan
+
+  var p = document.createElement(&quot;p&quot;); //membuat element p
+  p.className = &quot;tulisan_login&quot;; //input className agar dapat di seleksi oleh CSS
+  p.innerHTML = &quot;Silahkan Login&quot;; //rubah value P
+
+  var div1 = document.getElementsByTagName(&quot;div&quot;)[0]; //seleksi div
+  div1.appendChild(p); //masukan element p kedalam div
+
+  var formulir = document.createElement(&quot;form&quot;); //buat element form
+  div1.appendChild(formulir); //masukan element form kedalam element div
+
+  var label1 = document.createElement(&quot;label&quot;); //buat label
+  label1.innerHTML = &quot;Nama User&quot;; //ubah nilai dengan &quot;Username&quot;
+  formulir.appendChild(label1); //masukan label kedalam formulir
+  var namaUser = document.createElement(&quot;input&quot;); //buat element input
+  namaUser.type = &quot;text&quot; //isikan nilai attribute type
+  namaUser.placeholder = &quot;Nama User..&quot;
+  namaUser.className = &quot;form_login&quot;; //isikan nilai attribute class agar dapat diseleksi CSS
+  formulir.appendChild(namaUser); //masukan element input kedalam element form
+
+  var label2 = document.createElement(&quot;label&quot;); //buat label
+  label2.innerHTML = &quot;Nomor Handphone&quot;; //ubah nilai dengan &quot;Username&quot;
+  formulir.appendChild(label2); //masukan label kedalam formulir
+  var noHp = document.createElement(&quot;input&quot;); //buat element input
+  noHp.type = &quot;text&quot; //isikan nilai attribute type
+  noHp.placeholder = &quot;Nomor Handphone.&quot;
+  noHp.className = &quot;form_login&quot;; //isikan nilai attribute class agar dapat diseleksi CSS
+  formulir.appendChild(noHp); //masukan element input kedalam element form
+
+  var label3 = document.createElement(&quot;label&quot;); //buat label
+  label3.innerHTML = &quot;Username&quot;; //ubah nilai dengan &quot;Username&quot;
+  formulir.appendChild(label3); //masukan label kedalam formulir
+  var inputUsername = document.createElement(&quot;input&quot;); //buat element input
+  inputUsername.type = &quot;text&quot; //isikan nilai attribute type
+  inputUsername.placeholder = &quot;Username dan email ..&quot;
+  inputUsername.className = &quot;form_login&quot;; //isikan nilai attribute class agar dapat diseleksi CSS
+  formulir.appendChild(inputUsername); //masukan element input kedalam element form
+
+  var label4 = document.createElement(&quot;label&quot;); //buat label
+  label4.innerHTML = &quot;Password&quot;; //ubah nilai dengan &quot;Username&quot;
+  formulir.appendChild(label4); //masukan label kedalam formulir
+  var inputUsername = document.createElement(&quot;input&quot;); //buat element input
+  inputUsername.type = &quot;password&quot; //isikan nilai attribute type
+  inputUsername.placeholder = &quot;Password ..&quot;
+  inputUsername.className = &quot;form_login&quot;; //isikan nilai attribute class agar dapat diseleksi CSS
+  formulir.appendChild(inputUsername); //masukan element input kedalam element form
+
+  var tombol = document.createElement(&quot;input&quot;); //buat elemet input
+  tombol.type = &quot;submit&quot;; //isikan nilai attribute type dengan submit
+  tombol.className = &quot;tombol_login&quot;; //isikan nilai attribute class agar dapat diseleksi CSS
+  tombol.value = &quot;DAFTAR SEKARANG&quot;;
+  formulir.appendChild(tombol); //masukan element input kedalam element form
+
+}</code></pre></li></ul></li></ul></div></article></body></html>

@@ -1,0 +1,786 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas Ahir PHP</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e873f425-3ab5-467d-b13b-3e5c70a6206c" class="page sans"><header><h1 class="page-title"><strong>Tugas Ahir PHP</strong></h1></header><div class="page-body"><ol id="3311f0e7-3e72-497c-978c-cb6a71d2fd44" class="numbered-list" start="1"><li>Buatlah database dengan nama <code>tugas_ahir</code> .</li></ol><ol id="16c5c24c-6582-49c7-9963-5c95a9740968" class="numbered-list" start="2"><li>Buatlah tabel dengan fungsi Migration pada Laravel berinama <code>tbl_biodata</code> dan buatlah field : id,nama, no_hp , alamat,hobi, foto :<figure id="899537fd-e7ca-4526-8f25-a0c6a90054e5" class="image"><a href="https://lh5.googleusercontent.com/hXErXzL4eNh4_wNap2if6BJhJJOR-z2AGeIIezD03eTjOYFDNiJl4Ze8yKtv2Zh_tZElm5893PEfpWB6nYjBVHtW3kUxnWn4RAo1end5Jv_-KjNclxqB0U2ML7L59t_8u9hREBco"><img src="https://lh5.googleusercontent.com/hXErXzL4eNh4_wNap2if6BJhJJOR-z2AGeIIezD03eTjOYFDNiJl4Ze8yKtv2Zh_tZElm5893PEfpWB6nYjBVHtW3kUxnWn4RAo1end5Jv_-KjNclxqB0U2ML7L59t_8u9hREBco"/></a></figure></li></ol><ol id="5d812230-7ac7-45be-b1ff-6c345f4718ed" class="numbered-list" start="3"><li>Buatlah API <code>simpan</code> data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><ol id="0aeba582-8d84-45b0-a171-57de12039a81" class="numbered-list" start="4"><li>Buatlah API <code>hapus</code> data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><ol id="9169aada-69a4-443b-ab3c-dfc9a6d396e9" class="numbered-list" start="5"><li>Buatlah API <code>ubah</code> data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><ol id="376a88b4-90e1-428b-8889-d97d0f6fbaa9" class="numbered-list" start="6"><li>Buatlah API <code>baca</code> data dari database yang telah dibuat dan wajib menggunakan framework laravel.</li></ol><hr id="12470f0b-70fc-479e-a24b-3acc9c25848b"/><ul id="3221ffb0-1945-4e1e-9db9-f090d30b3833" class="bulleted-list"><li>.env<pre id="d3a1cd1c-2ef5-4410-a5d0-309996fa4dd0" class="code"><code>APP_ENV=local
+APP_DEBUG=true
+APP_KEY=base64:k3m1jgaX+5BtSH/TvxiWa8QMVX0fyiKvxVfPaYI6MDw=
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tugas_akhir
+DB_USERNAME=root
+DB_PASSWORD=
+
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null</code></pre></li></ul><ul id="85d3ba0e-c5e3-42a9-8a00-52dc5e789dd9" class="bulleted-list"><li>create migration tbl_biodata:<pre id="24e42f1e-b991-4733-8155-2534faee55fa" class="code"><code>PS C:\xampp\htdocs\tugas_akhir_php&gt; php artisan make:migration tbl_biodata
+Created Migration: 2020_01_02_095618_tbl_biodata</code></pre></li></ul><ul id="0d083782-ce12-470e-902b-3b05f96b57c1" class="bulleted-list"><li>database\migrations\2020_01_02_095618_tbl_biodata.php:<pre id="e8a76cdc-7e04-4bc2-a78a-56ca18611907" class="code"><code>&lt;?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class TblBiodata extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+      Schema::create(&#x27;tbl_biodata&#x27;, function(Blueprint $table){
+        $table-&gt;increments(&#x27;id&#x27;);
+        $table-&gt;string(&#x27;nama&#x27;);
+        $table-&gt;integer(&#x27;no_hp&#x27;);
+        $table-&gt;string(&#x27;alamat&#x27;);
+        $table-&gt;string(&#x27;hobi&#x27;);
+        $table-&gt;string(&#x27;foto&#x27;);
+      });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}</code></pre></li></ul><ul id="4848876f-f33d-443d-b0c0-3544da041205" class="bulleted-list"><li>Migrate → 2020_01_02_095618_tbl_biodata:<pre id="54af716c-7f84-43af-9846-600abeba8d0f" class="code"><code>PS C:\xampp\htdocs\tugas_akhir_php&gt; php artisan migrate
+Migration table created successfully.
+Migrated: 2014_10_12_000000_create_users_table
+Migrated: 2014_10_12_100000_create_password_resets_table
+Migrated: 2020_01_02_095618_tbl_biodata</code></pre></li></ul><ul id="e58dd622-911c-4273-87db-a76144822c2a" class="bulleted-list"><li>Delete table yang tidak dibutuhkan:<pre id="c47212fb-a3b6-476e-a691-91179672194c" class="code"><code>Drop: 2014_10_12_000000_create_users_table
+Drop: 2014_10_12_100000_create_password_resets_table
+Drop: 2014_10_12_000000_create_migration</code></pre></li></ul><ul id="29392543-536d-4944-80d2-045174fe55b0" class="bulleted-list"><li>Buat Controller Biodata:<pre id="3bf1f56d-001a-4cc2-90b5-31e8541283b0" class="code"><code>PS C:\xampp\htdocs\tugas_akhir_php&gt; php artisan make:controller Biodata
+Controller created successfully.</code></pre></li></ul><ul id="1d78fa4f-ef57-426a-b0d2-0c1160defc04" class="bulleted-list"><li>Buat Model tbl_biodata:<pre id="602b2bb1-8a4f-4b9c-9d31-a6426788c0d7" class="code"><code>PS C:\xampp\htdocs\tugas_akhir_php&gt; php artisan make:model tbl_biodata
+Model created successfully.</code></pre></li></ul><ul id="c08593c9-2ec5-4e8d-be10-366877a2512b" class="bulleted-list"><li>Struktur Model tbl_biodata:<pre id="96ddf69a-6ffe-48e5-92e0-b1ed03d56968" class="code"><code>&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tbl_biodata extends Model
+{
+  public $timestamps = false;
+  protected $table = &quot;tbl_biodata&quot;;
+  protected $fillable = [&#x27;nama&#x27;,&#x27;no_hp&#x27;,&#x27;alamat&#x27;,&#x27;hobi&#x27;,&#x27;foto&#x27;];
+}</code></pre></li></ul><ul id="548b9665-ec50-40ec-89c2-88d630d128e8" class="bulleted-list"><li>Buat function pada controller Biodata:<pre id="d97835c0-f242-4c00-ba65-f689698d6946" class="code"><code>&lt;?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\tbl_biodata;
+use Illuminate\Support\Facades\DB;
+
+class Biodata extends Controller
+{
+  public function baca(){
+    $data = DB::table(&#x27;tbl_biodata&#x27;)-&gt;get();
+    if(count($data) &gt; 0){
+      $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data Berhasil Dibaca&quot;;
+      $res[&#x27;value&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data Kosong&quot;;
+      return response($res);
+    }
+  }
+
+  public function simpan(Request $request){
+    $this-&gt;validate($request, [
+      &#x27;file&#x27; =&gt; &#x27;required|max:2048&#x27;
+    ]);
+    // menyimpan data file yang diupload ke variable $file
+    $file = $request-&gt;file(&#x27;file&#x27;);
+    $nama_file = time().&quot;_&quot;.$file-&gt;getClientOriginalName();
+    // isi dengan nama folder tempat kemana file diupload
+    $tujuan_upload = &#x27;data_file&#x27;;
+    if($file-&gt;move($tujuan_upload,$nama_file)){
+      $data = tbl_biodata::create([
+        &#x27;nama&#x27; =&gt; $request-&gt;nama,
+        &#x27;no_hp&#x27; =&gt; $request-&gt;no_hp,
+        &#x27;alamat&#x27; =&gt; $request-&gt;alamat,
+        &#x27;hobi&#x27; =&gt; $request-&gt;hobi,
+        &#x27;foto&#x27; =&gt; $nama_file
+      ]);
+      $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data Berhasil Disimpan&quot;;
+      $res[&#x27;values&#x27;] = $data;
+      return response($res);
+    }
+  }
+
+  public function ubah(Request $request){
+    if(!empty($request-&gt;file)){
+    $this-&gt;validate($request, [
+      &#x27;file&#x27; =&gt; &#x27;required|max:2048&#x27;
+    ]);
+      // menyimpan data file yang diupload ke variable $file
+      $file = $request-&gt;file(&#x27;file&#x27;);
+      $nama_file = time().&quot;_&quot;.$file-&gt;getClientOriginalName();
+      // isi dengan nama folder tempat kemana file diupload
+      $tujuan_upload = &#x27;data_file&#x27;;
+      $file-&gt;move($tujuan_upload,$nama_file);
+      // mengambil data spesifik by id
+      $data = DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;get();
+      foreach($data as $biodata){
+        @unlink(public_path(&#x27;data_file/&#x27;.$biodata-&gt;foto));
+        $ket = DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+          &#x27;nama&#x27; =&gt; $request-&gt;nama,
+          &#x27;no_hp&#x27; =&gt; $request-&gt;no_hp,
+          &#x27;alamat&#x27; =&gt; $request-&gt;alamat,
+          &#x27;hobi&#x27; =&gt; $request-&gt;hobi,
+          &#x27;foto&#x27; =&gt; $nama_file
+        ]);
+        $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+        $res[&#x27;message&#x27;] = &quot;Data Berhasil Diperbaharui&quot;;
+        $res[&#x27;values&#x27;] = $ket;
+        return response($res);
+      }
+    }else{
+      $data = DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;get();
+      foreach($data as $biodata){
+        $ket = DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+          &#x27;nama&#x27; =&gt; $request-&gt;nama,
+          &#x27;no_hp&#x27; =&gt; $request-&gt;no_hp,
+          &#x27;alamat&#x27; =&gt; $request-&gt;alamat,
+          &#x27;hobi&#x27; =&gt; $request-&gt;hobi
+        ]);
+        $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+        $res[&#x27;message&#x27;] = &quot;Data Berhasil Diperbaharui (Data Saja)&quot;;
+        $res[&#x27;values&#x27;] = $ket;
+        return response($res);
+      }
+    }
+  }
+  public function hapus($id){
+    $data = DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;get();
+    foreach($data as $biodata){
+      $image_path = &#x27;http://localhost/APIREST/public&#x27; .$biodata-&gt;foto;
+      if(file_exists(public_path(&#x27;data_file/&#x27;.$biodata-&gt;foto))){
+        @unlink(public_path(&#x27;data_file/&#x27;.$biodata-&gt;foto));
+        DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;delete();
+        $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+        $res[&#x27;message&#x27;] = &quot;Data Berhasil Dihapus&quot;;
+        return response($res);
+      }else{
+        $res[&#x27;status&#x27;] = &quot;Gagal&quot;;
+        $res[&#x27;message&#x27;] = &quot;Data Tidak Ditemukan&quot;;
+        return response($res);
+      }
+    }
+  }
+
+  public function bacaDetail($id){
+    $data = DB::table(&#x27;tbl_biodata&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;get();
+    if(count($data) &gt; 0){
+      $res[&#x27;status&#x27;] = &quot;Sukses&quot;;
+      $res[&#x27;message&#x27;] = &quot;Detail Berhasil Ditampilkan&quot;;
+      $res[&#x27;value&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;status&#x27;] = &quot;Gagal&quot;;
+      $res[&#x27;message&#x27;] = &quot;Data Tidak Ditemukan&quot;;
+      return response($res);
+    }
+  }
+}</code></pre></li></ul><ul id="628718c6-bcfe-4933-ab4a-8c7cfe2a995c" class="bulleted-list"><li>app\Http\routes.php:<pre id="3fbab7b3-379e-4343-816c-3f64d4375dd8" class="code"><code>&lt;?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It&#x27;s a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+Route::get(&#x27;/&#x27;, function () {
+    return view(&#x27;welcome&#x27;);
+});
+Route::get(&#x27;/baca&#x27;,&#x27;Biodata@baca&#x27;);
+Route::post(&#x27;/simpan&#x27;,&#x27;Biodata@simpan&#x27;);
+Route::post(&#x27;/ubah&#x27;,&#x27;Biodata@ubah&#x27;);
+Route::get(&#x27;/hapus/{id}&#x27;,&#x27;Biodata@hapus&#x27;);
+Route::get(&#x27;/bacaDetail/{id}&#x27;,&#x27;Biodata@bacaDetail&#x27;);</code></pre></li></ul><ul id="e194dbe5-c402-4007-99e6-4a60fa2516e7" class="bulleted-list"><li>Sebelum server kita jalankan, kita akan mendisable VerifyCsrfToken pada kernel:<figure id="47775c99-e5aa-49d6-9351-e86c3a0a6a53" class="image"><a href="Membuat%20API%20POST%20Data%20Laravel/Untitled%201.png"><img style="width:872px" src="Membuat%20API%20POST%20Data%20Laravel/Untitled%201.png"/></a></figure></li></ul><ul id="4c0fac1a-d671-41d2-ad0f-d905a856d2d5" class="bulleted-list"><li>Kemudian jalankan php artisan serve untuk mencoba APIs Data yang kita buat:<pre id="c8a89915-54ec-4c50-ac07-70334c078001" class="code"><code>PS C:\xampp\htdocs\hello-laravel&gt; php artisan serve
+Laravel development server started on http://localhost:8000/</code></pre></li></ul><ul id="7f9b9999-ab53-4b54-9126-8f85b1c9e0f6" class="bulleted-list"><li>Postman Screenshoot:<figure id="e803b45e-da31-4bc9-b2a5-f376ea24a6c1" class="image"><a href="Tugas%20Ahir%20PHP/Screenshot_API_baca.png"><img style="width:1058px" src="Tugas%20Ahir%20PHP/Screenshot_API_baca.png"/></a></figure><figure id="5fd4e158-12ed-4f4c-98d4-8aad27a49c22" class="image"><a href="Tugas%20Ahir%20PHP/Screenshot_API_bacaDetail.png"><img style="width:1058px" src="Tugas%20Ahir%20PHP/Screenshot_API_bacaDetail.png"/></a></figure><figure id="ab421bb6-0c37-406b-844b-206aedec903e" class="image"><a href="Tugas%20Ahir%20PHP/Screenshot_API_hapus.png"><img style="width:1062px" src="Tugas%20Ahir%20PHP/Screenshot_API_hapus.png"/></a></figure><figure id="72c49026-8da2-4ee3-9577-e89c47cadb75" class="image"><a href="Tugas%20Ahir%20PHP/Screenshot_API_simpan.png"><img style="width:1060px" src="Tugas%20Ahir%20PHP/Screenshot_API_simpan.png"/></a></figure><figure id="20553876-f270-4c04-8f03-aa5894c86b83" class="image"><a href="Tugas%20Ahir%20PHP/Screenshot_API_ubah.png"><img style="width:1061px" src="Tugas%20Ahir%20PHP/Screenshot_API_ubah.png"/></a></figure></li></ul></div></article></body></html>

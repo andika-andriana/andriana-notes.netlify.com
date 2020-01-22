@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Instalasi XAMPP, MYSQL dan MariaDB</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dbf265ad-2e33-48fa-b436-9c8e1a3cfd50" class="page sans"><header><h1 class="page-title"><strong>Instalasi XAMPP, MYSQL dan MariaDB</strong></h1></header><div class="page-body"><p id="81238cd5-0b91-4d9e-a3ed-d7a95e6ba89f" class="">Dalam bab ini kita akan masuk ke proses instalasi XAMPP, MySQL dan MariaDB. Kenapa ada 3 aplikasi? Aplikasi XAMPP adalah pilihan yang paling praktis, karena didalamnya sudah terdapat web server Apache, database server MySQL dan bahasa pemrograman PHP.</p><p id="70725626-cdae-43ac-8be4-a4bb935dbb1a" class=""><strong>Install XAMPP</strong></p><ol id="bb6c8493-7e13-4e8a-88ef-9f8cb85ae7de" class="numbered-list" start="1"><li>Silahkan download XAMPP dari website resminya di <a href="https://www.google.com/url?q=https://www.apachefriends.org/download.html&amp;sa=D&amp;ust=1576730566891000">apachefriends.org</a>.</li></ol><ol id="1dfecd7a-8f44-46df-9597-52b679df35e1" class="numbered-list" start="2"><li>Setelah file aplikasi XAMPP tersedia, kita sudah bisa mulai proses instalasi. Silahkan double klik file tersebut hingga akan muncul jendela seperti berikut:<figure id="036df89d-6848-49dc-b9f8-7669b7e89b04" class="image"><a href="https://lh4.googleusercontent.com/2AI6pFN2XXBT8gUidFgQBtgm_krzHQDXyuQlrXCnB-lxXZEudWnnnw4xf4_4xfKe9z-5c6BEH-lB80xNNhk7mL3DqcvLFm4Zl6HmH6rcpG3hTyYRRVMZsSxLbSgK0zr2KyLOExii"><img src="https://lh4.googleusercontent.com/2AI6pFN2XXBT8gUidFgQBtgm_krzHQDXyuQlrXCnB-lxXZEudWnnnw4xf4_4xfKe9z-5c6BEH-lB80xNNhk7mL3DqcvLFm4Zl6HmH6rcpG3hTyYRRVMZsSxLbSgK0zr2KyLOExii"/></a></figure><p id="92a519b5-7a1b-481f-8d0b-bdd3542f048d" class="">Gambar: Saran untuk mematikan anti virus</p></li></ol><ol id="22b6c311-8400-41a5-b758-09198e8b6b20" class="numbered-list" start="3"><li>Jendela peringatan berikutnya adalah tentang UAC (User Account Control). Klik tombol OK untuk melanjutkan.<figure id="e4934575-6a4d-45b8-a6a5-2e7002fa984d" class="image"><a href="https://lh3.googleusercontent.com/G6xXKhhF5SvoN4vusLUcCInBGZAfnOW1m01S9ZdBFffK5TOyI1fxh6VcEQQq18XGkRvVBSY0_E6l86zbYSA4FJhF5RR2afeR-aM1zmsuP7KEQGA2Cys2dGAB3K8qksH1Ew1OFCXJ"><img src="https://lh3.googleusercontent.com/G6xXKhhF5SvoN4vusLUcCInBGZAfnOW1m01S9ZdBFffK5TOyI1fxh6VcEQQq18XGkRvVBSY0_E6l86zbYSA4FJhF5RR2afeR-aM1zmsuP7KEQGA2Cys2dGAB3K8qksH1Ew1OFCXJ"/></a></figure><p id="4dcdbbb9-7fd8-4a48-bed6-69432615dac3" class="">Gambar: Peringatan UAC jika XAMPP di-instal di C:\Program Files</p></li></ol><ol id="15c6bede-aa33-4c33-8093-83bd69d91b9a" class="numbered-list" start="4"><li>Jendela awal instalasi akan muncul, klik saja tombol Next.<figure id="a5e968ff-2a35-4f51-9ded-3c4df09e186a" class="image"><a href="https://lh4.googleusercontent.com/9LNG3Bz5IkD6xIdfU7JlTewP_4B8FC0UJRnNPxV7D4DA1FXK-bUo-61VH2rMzQ_myOEWFChHl9TgVGpwQOeR5uw6J100p5GruHbKLy2JE1XRRymuOXjyMlG0dltsTDHOjqFgtX9m"><img src="https://lh4.googleusercontent.com/9LNG3Bz5IkD6xIdfU7JlTewP_4B8FC0UJRnNPxV7D4DA1FXK-bUo-61VH2rMzQ_myOEWFChHl9TgVGpwQOeR5uw6J100p5GruHbKLy2JE1XRRymuOXjyMlG0dltsTDHOjqFgtX9m"/></a></figure><p id="b13c435f-ca28-4bed-82c9-fadec7edb52e" class="">Gambar: Jendela awal instalasi XAMPP</p></li></ol><ol id="984c08f4-e453-421d-bf76-23d8197536cb" class="numbered-list" start="5"><li>Jendela berikutnya adalah “Select Component”. Pada bagian ini kita bisa memilih aplikasi apa saja yang akan diinstall. Dalam tahap ini saya membiarkan semua pilihan. Klik tombol Next untuk melanjutkan.<figure id="c6ca9e90-5d9e-4b16-84ba-dccbb88dfa24" class="image"><a href="https://lh6.googleusercontent.com/8WhfMM6tSfhH7kaP-8ipSCkbRDyKmGuPoSGU1a12RkRMJzS12LYf_foSiVhAdtVehKtHb5KCxfbzBVYTexQIKJQO1WfMfxwGIqeXuieghI5u3o3nzmMZttRtGUanW_WfujvLpzeV"><img src="https://lh6.googleusercontent.com/8WhfMM6tSfhH7kaP-8ipSCkbRDyKmGuPoSGU1a12RkRMJzS12LYf_foSiVhAdtVehKtHb5KCxfbzBVYTexQIKJQO1WfMfxwGIqeXuieghI5u3o3nzmMZttRtGUanW_WfujvLpzeV"/></a></figure><p id="688f240f-1495-4b11-aeac-da218b8a5911" class="">Gambar: Jendela Select Component</p></li></ol><ol id="63a1798c-64b8-41eb-83cf-c5e708f812e8" class="numbered-list" start="6"><li>Pada jendela “Installation Folder” kita bisa menentukan folder tempat file XAMPP akan diinstall. Secara default, lokasinya di C:\xampp, anda bebas jika ingin mengubahnya.<figure id="49b4a967-6ae4-4150-9c6d-72b78c24b4aa" class="image"><a href="https://lh5.googleusercontent.com/mGjDMDD88zY7carWh58mujidPYtG6A_bXCQwOGgZyu7HLOaYJtGjtZq4D0T1Mws5xAP8fYKV5eVHWWpz3CCKgXb7KN97O70eUI1s2FYDX9aEK_dnjrZ_u4NEJfMsHU_2VfCdgH4-"><img src="https://lh5.googleusercontent.com/mGjDMDD88zY7carWh58mujidPYtG6A_bXCQwOGgZyu7HLOaYJtGjtZq4D0T1Mws5xAP8fYKV5eVHWWpz3CCKgXb7KN97O70eUI1s2FYDX9aEK_dnjrZ_u4NEJfMsHU_2VfCdgH4-"/></a></figure><p id="e548d97d-88dc-4f64-9b41-92f1681317b5" class="">Gambar: Jendela Installation Folder</p></li></ol><ol id="5a09f171-3b14-486a-b706-e1717ce6c5b5" class="numbered-list" start="7"><li>Tampilan berikutnya adalah jendela “Bitnami for XAMPP”. Bitnami adalah aplikasi AMP stack yang juga menjadi sponsor XAMPP. Saat ini kita tidak memerlukannya. Hapus pilihan “learn more about Bitnami for XAMPP”, kemudian klik tombol Next.<figure id="f49e9565-7136-405a-affb-b1f986e99996" class="image"><a href="https://lh3.googleusercontent.com/MRFjTCJJ4g-q2i4_D_C_85pTAdVA3eb5KPhX0R2_T-8B74wTxohB0NtpkVPUjZ3P43Lm3dTGAMysqGF2ABLTwU7CilrQ44tAkXbY4_QMbFX73cKwjGHf_C8EeGVzk6zXLQyItJy_"><img src="https://lh3.googleusercontent.com/MRFjTCJJ4g-q2i4_D_C_85pTAdVA3eb5KPhX0R2_T-8B74wTxohB0NtpkVPUjZ3P43Lm3dTGAMysqGF2ABLTwU7CilrQ44tAkXbY4_QMbFX73cKwjGHf_C8EeGVzk6zXLQyItJy_"/></a></figure><p id="eed790e1-5dcb-45ae-a4ce-08bc0cce4427" class="">Gambar: Jendela Bitnami for XAMPP</p></li></ol><ol id="1762d8ab-0d40-4310-9e47-611954e27a6e" class="numbered-list" start="8"><li>Jendela “Ready to Install” berisi konfirmasi untuk mulai menginstall XAMPP. Langsung saja klik tombol Next dan XAMPP akan memulai proses instalasi.<figure id="d2f19d2b-6ddf-4dd8-ba35-f808acaa835a" class="image"><a href="https://lh4.googleusercontent.com/wO8dY-8JTKGmSl6NEOy1eUH6UBnHOOeChnd5l_pFhY1y1P6eZZXpzcXWNMM4XdhinfA9ioHnITyXJSpVrdVt299EdguTTSbFgl-8T0Q-qAUHBKEDmRhRrvyiyPeSF5ZFyJRuq878"><img src="https://lh4.googleusercontent.com/wO8dY-8JTKGmSl6NEOy1eUH6UBnHOOeChnd5l_pFhY1y1P6eZZXpzcXWNMM4XdhinfA9ioHnITyXJSpVrdVt299EdguTTSbFgl-8T0Q-qAUHBKEDmRhRrvyiyPeSF5ZFyJRuq878"/></a></figure><p id="3e90e8cc-59ef-4205-844d-bdf05cf937c5" class="">Gambar: Jendela Ready to Install</p></li></ol><ol id="ccaeaf01-fb63-4319-895e-62bf1f406cda" class="numbered-list" start="9"><li>Jika jendela “Completing the XAMPP Setup Wizard” telah tampil, berarti proses instalasi XAMPP sudah selesai. Pada bagian ini kita akan langsung mencoba aplikasi XAMPP, sehingga biarkan pilihan check list “Do you want to start the Control Panel now?”, kemudian klik tombol Finish.<figure id="2f78343a-e41b-4853-a90f-0835b271f6ca" class="image"><a href="https://lh5.googleusercontent.com/XTVA6ZfOjdoP7FEr-uVwOQ2VMciqGZR2kOEh-hUhGWzBOUpKsK3zVokaAb-8Y0q8acGrkKc9x_2FooHjijUeszFuD_VHVNBgvMIdvyMUuCoXv5RESGVftlBAYVWs8i5GH2utKmRg"><img src="https://lh5.googleusercontent.com/XTVA6ZfOjdoP7FEr-uVwOQ2VMciqGZR2kOEh-hUhGWzBOUpKsK3zVokaAb-8Y0q8acGrkKc9x_2FooHjijUeszFuD_VHVNBgvMIdvyMUuCoXv5RESGVftlBAYVWs8i5GH2utKmRg"/></a></figure><p id="b567f293-837b-4935-9dc2-2e16374deaa5" class="">Gambar: XAMPP sedang dalam proses instalasi</p><figure id="9e704f15-1932-4df7-a10d-186c92d6428c" class="image"><a href="https://lh5.googleusercontent.com/3lvXH5tr9aBbXTi6IOqVCglb47aHOj5GBDGJl2lULgrcOibqHwjFtA3ic5bSBOsSd2xMce8z8UHvX9X59QFvuJ7kcaQ-k9iSCG_6pi3GQSvMuLbbXvTC03y69eJMathWL0u1ipUG"><img src="https://lh5.googleusercontent.com/3lvXH5tr9aBbXTi6IOqVCglb47aHOj5GBDGJl2lULgrcOibqHwjFtA3ic5bSBOsSd2xMce8z8UHvX9X59QFvuJ7kcaQ-k9iSCG_6pi3GQSvMuLbbXvTC03y69eJMathWL0u1ipUG"/></a></figure><p id="27d2dc12-090c-414f-8c8d-06eeaf91ad36" class="">Gambar: XAMPP telah selesai diinstall</p></li></ol><ol id="b450acd3-7025-4ef5-8d08-3fd8a08b608b" class="numbered-list" start="10"><li>XAMPP Control Panel adalah jendela yang digunakan untuk mengontrol apa saja modul XAMPP yang akan atau sedang berjalan. Jika jendela ini tidak tampil, anda bisa mengaksesnya dari menu <strong>START-&gt;All Programs-&gt;XAMPP-&gt;XAMPP Control Panel</strong>.</li></ol><ol id="1394920a-1aa3-4aec-bcb0-d92855367cd7" class="numbered-list" start="11"><li>Untuk menguji instalasi XAMPP, silahkan klik tombol START pada modul Apache dan MySQL. Jika tidak ada masalah, akan tampil warna hijau pada kolom module, seperti gambar berikut:<figure id="a5623efc-fc2e-4fd3-8c4a-457b8613133e" class="image"><a href="https://lh5.googleusercontent.com/tV4dLQZ7Bm7XBUDBKpZCbO7Y4SgCwQT_Pt0mSWfFttmahKX5Ct7zuK9pqlzxsM5BRbt4J2p7-Kd2g8qSnBys4Hi4GC6ZU1F5HYj-Rl74P5010P4py-tz5vtnd9bzIDiJQ33wsFGo"><img src="https://lh5.googleusercontent.com/tV4dLQZ7Bm7XBUDBKpZCbO7Y4SgCwQT_Pt0mSWfFttmahKX5Ct7zuK9pqlzxsM5BRbt4J2p7-Kd2g8qSnBys4Hi4GC6ZU1F5HYj-Rl74P5010P4py-tz5vtnd9bzIDiJQ33wsFGo"/></a></figure><p id="eac54edd-ce3b-4d4d-8f13-2d78a23ff356" class="">Gambar: Cara menjalankan Apache web server dan MySQL Server</p></li></ol><ol id="3409eb77-5d06-46e2-8a70-3f94d55c473c" class="numbered-list" start="12"><li>Tombol <strong>START </strong>akan berubah menjadi tombol <strong>STOP</strong>. Tombol stop digunakan untuk mematikan Apache web server dan MySQL database server.</li></ol><ol id="40f88d85-822c-482c-ad50-ab69cf2cb694" class="numbered-list" start="13"><li>Untuk mengujinya, silahkan buka web browser dan ketik alamat <strong>http://localhost</strong> di address bar, kemudian tekan enter. Jika yang tampil adalah jendela pembuka XAMPP, maka semuanya telah terinstall dengan baik.<figure id="bc747152-363d-426a-9f7d-b058ea65035e" class="image"><a href="https://lh6.googleusercontent.com/OC3fHG6i-qPy40vv41Tgdtec96XSdhRDcDHlj_QbyTatFP-93aHkB3a-q_O2XIZb5jZbr1nHeN_tzuyeH0YdivXhgWEy1DWdUBNE8E960b-brOUhHWT7-JOBcE4BY_-0sZJGybGz"><img src="https://lh6.googleusercontent.com/OC3fHG6i-qPy40vv41Tgdtec96XSdhRDcDHlj_QbyTatFP-93aHkB3a-q_O2XIZb5jZbr1nHeN_tzuyeH0YdivXhgWEy1DWdUBNE8E960b-brOUhHWT7-JOBcE4BY_-0sZJGybGz"/></a></figure><p id="d89835e5-50f0-4683-b49d-0f97aa01f5f3" class="">Gambar: Halaman awal localhost XAMPP</p></li></ol><ol id="6b7926db-bd40-466d-92ca-80be60ede9b7" class="numbered-list" start="14"><li>Untuk menguji apakah database MySQL (atau tepatnya MariaDB) sudah terkoneksi dan bisa di- Instalasi XAMPP, MySQL dan MariaDB akses, klik menu phpMyAdmin di sudut kanan atas, atau ketik alamat http://localhost/phpmyadmin.</li></ol><ol id="68fb2028-7d2d-448f-96c3-ddb4ffd7058a" class="numbered-list" start="15"><li>Jika tampil jendela berikut, berarti database MariaDB sudah terhubung dengan Apache Web Server serta dengan PHP:<figure id="76190451-6b8b-4ab6-92f9-6b77b9b2da3e" class="image"><a href="https://lh5.googleusercontent.com/m3NS4MXdtjvZegxlNr8pJYl1sbKg4wi68LaHhhJ9IpyvGVJvweNvSHsZTX-leEfI2Cz0Xi9iEH4YNFD6EnnCAs3nW2hz4Y_vQZ0pcEeYPqVmaEhVrRNDGk9gL5AkAKOCnOydawsf"><img src="https://lh5.googleusercontent.com/m3NS4MXdtjvZegxlNr8pJYl1sbKg4wi68LaHhhJ9IpyvGVJvweNvSHsZTX-leEfI2Cz0Xi9iEH4YNFD6EnnCAs3nW2hz4Y_vQZ0pcEeYPqVmaEhVrRNDGk9gL5AkAKOCnOydawsf"/></a></figure><p id="00bc069c-b143-40f8-baac-678e272ac08c" class="">Gambar: Halaman phpMyAdmin XAMPP</p><p id="6e5c751f-4a57-4653-9bd9-524f7151dac7" class="">Proses instalasi XAMPP sudah selesai.</p></li></ol></div></article></body></html>

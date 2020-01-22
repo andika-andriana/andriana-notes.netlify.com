@@ -1,0 +1,721 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Seleksi Kondisi</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="51e214a7-ad6a-49e3-9900-9be6c00074e2" class="page sans"><header><h1 class="page-title">Seleksi Kondisi</h1></header><div class="page-body"><p id="af940033-56e4-42c8-a2b0-112e628b7cd5" class=""><strong>Seleksi Kondisi</strong><div class="indented"><p id="ed6bfd40-c453-47a6-83bc-946f260b2bef" class="">Seleksi kondisi digunakan untuk mengontrol alur program. Analoginya mirip seperti fungsi rambu lalu lintas di jalan raya. Kapan kendaraan diperbolehkan melaju dan kapan harus berhenti diatur oleh rambu tersebut. Seleksi kondisi pada program juga kurang lebih sama, kapan sebuah blok kode akan dieksekusi. Yang dijadikan acuan oleh seleksi kondisi adalah nilai bertipe <code>bool</code>, bisa berasal dari variabel, ataupun hasil operasi perbandingan. Nilai tersebut menentukan blok kode mana yang akan dieksekusi.</p><p id="a42486b5-5be5-44f9-92c0-47d519e80a6d" class="">Go memiliki 2 macam keyword untuk seleksi kondisi, yaitu <code><strong>if else</strong></code> dan <code><strong>switch</strong></code>.</p><p id="747a29d9-7013-4c09-998b-4ff98310881d" class="">Kali ini kita akan mempelajarinya satu-persatu.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="555163b4-08e3-4163-8a62-56cca51a424e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Go tidak mendukung seleksi kondisi menggunakan ternary. Statement seperti: 
+<code>var data = (isExist ? &quot;ada&quot; : &quot;tidak ada&quot;)</code> adalah invalid dan menghasilkan error.</div></figure></div></p><p id="ddeda764-fbf3-4d4d-8c05-459cb84ae501" class=""><strong>Seleksi Kondisi Menggunakan Keyword </strong><code><strong>if</strong></code><strong>, </strong><code><strong>else if</strong></code><strong>, &amp; </strong><code><strong>else</strong></code><div class="indented"><p id="19a2e5cb-56b2-4429-881b-c926d64911d3" class="">Cara penerapan if-else di Go sama seperti pada bahasa pemrograman lain. Yang membedakan hanya tanda kurungnya <em>(parentheses)</em>, di Go tidak perlu ditulis. Kode berikut merupakan contoh penerapan seleksi kondisi if else, dengan jumlah kondisi 4 buah.</p><pre id="f5b33283-5b19-47cf-aa17-0e6a3320b7c7" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 2
+
+	if point == 10 {
+		fmt.Println(&quot;lulus dengan nilai sempurna&quot;)
+	} else if point &gt; 5 {
+		fmt.Println(&quot;lulus&quot;)
+	} else if point == 4 {
+		fmt.Println(&quot;hampir lulus&quot;)
+	} else {
+		fmt.Printf(&quot;tidak lulus. nilai anda %d&quot;, point)
+	}
+}</code></pre><p id="eddfe6c6-7950-4021-97dc-c7daf2b324fd" class="">Dari ke-empat kondisi di atas, yang terpenuhi adalah <code>if point &gt; 5</code>, karena nilai variabel <code>point</code> memang lebih besar dari <code>5</code>. Maka blok kode tepat dibawah kondisi tersebut akan dieksekusi (blok kode ditandai kurung kurawal buka dan tutup), hasilnya text <code>&quot;lulus&quot;</code> muncul sebagai output.</p><pre id="d7ab1dd3-8589-4863-85ca-6eb4c63d548a" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+tidak lulus. nilai anda 2</code></pre><p id="43adead1-b051-44c8-83ed-8531c99ad851" class="">Skema if else Go sama seperti pada pemrograman umumnya. Yaitu di awal seleksi kondisi menggunakan <code>if</code>, dan ketika kondisinya tidak terpenuhi akan menuju ke <code>else</code> (jika ada). Ketika ada banyak kondisi, gunakan <code>else if</code>.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6cf27815-0d37-4fa8-8cc1-2d877483114c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Di bahasa pemrograman lain, ketika ada seleksi kondisi yang isi blok-nya hanya 1 baris saja, kurung kurawal boleh tidak dituliskan. Berbeda dengan aturan di Go, kurung kurawal harus tetap dituliskan meski isinya hanya 1 blok satement.</div></figure></div></p><p id="9d8dadde-d57d-4519-8be0-3492185c91cf" class=""><strong>Variabel Temporary Pada </strong><code><strong>if</strong></code><strong> - </strong><code><strong>else</strong></code><div class="indented"><p id="9fe5eed3-b994-41fa-a26c-2e7608e0025f" class="">Variabel temporary adalah variabel yang hanya bisa digunakan pada blok seleksi kondisi dimana ia ditempatkan saja. Penggunaan variabel ini membawa beberapa manfaat, antara lain:</p><ul id="fd82ce81-4cb5-42cb-bbbb-66d6e309705d" class="bulleted-list"><li>Scope atau cakupan variabel jelas, hanya bisa digunakan pada blok seleksi kondisi itu saja</li></ul><ul id="e4d8651c-a28e-48b7-b06b-7bd7cc694251" class="bulleted-list"><li>Kode menjadi lebih rapi</li></ul><ul id="c9773958-8ad1-4a57-b646-a4ba2ae5a94e" class="bulleted-list"><li>Ketika nilai variabel tersebut didapat dari sebuah komputasi, perhitungan tidak perlu dilakukan di dalam blok masing-masing kondisi.</li></ul><pre id="4771ee21-2d8a-4cef-923a-11d81be56225" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 8840.0
+
+	if percent := point / 100; percent &gt;= 100 {
+		fmt.Printf(&quot;%.1f%s perfect!\n&quot;, percent, &quot;%&quot;)
+	} else if percent &gt;= 70 {
+		fmt.Printf(&quot;%.1f%s good\n&quot;, percent, &quot;%&quot;)
+	} else {
+		fmt.Printf(&quot;%.1f%s not bad\n&quot;, percent, &quot;%&quot;)
+	}
+}</code></pre><p id="07b53a68-a217-478f-a311-f4fc0922c4f2" class="">Variabel <code>percent</code> nilainya didapat dari hasil perhitungan, dan hanya bisa digunakan di deretan blok seleksi kondisi itu saja.</p><p id="c3d37b06-f7d2-4a71-9b0d-5d604096cb44" class="">Hasil dari kode diatas:</p><pre id="574a5a78-5b6f-4c93-83ee-d88dad6bde9f" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+88.4% good</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5ba76a8d-8da9-4277-a143-71d1dca847ea"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Deklarasi variabel temporary hanya bisa dilakukan lewat metode type inference yang menggunakan tanda :=. Penggunaan keyword var disitu tidak diperbolehkan karena akan menyebabkan error.</div></figure></div></p><p id="2bbf3453-e1ed-4073-9aa1-c5632e5869d9" class=""><strong>Seleksi Kondisi Menggunakan Keyword </strong><code><strong>switch</strong></code><strong> - </strong><code><strong>case</strong></code><div class="indented"><p id="ab6cfaa0-81a0-492f-8cb3-42cafad1cd9e" class="">Switch merupakan seleksi kondisi yang sifatnya fokus pada satu variabel, lalu kemudian di-cek nilainya. Contoh sederhananya seperti penentuan apakah nilai variabel <code>x</code> adalah: <code>1</code>, <code>2</code>, <code>3</code>, atau lainnya.</p><pre id="e8df3413-7c8f-483c-bfeb-ea31e179a0a8" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 6
+
+	switch point {
+	case 8:
+		fmt.Println(&quot;perfect&quot;)
+	case 7:
+		fmt.Println(&quot;awesome&quot;)
+	default:
+		fmt.Println(&quot;not bad&quot;)
+	}
+}</code></pre><p id="a96f9311-ce20-431a-9d8c-375f102582e2" class="">Hasil:</p><pre id="bb620f95-af5b-470a-bfb6-a7f58578941a" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+not bad</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6c51b88e-46e6-44ab-9aa3-1fd712dc4e70"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada kode di atas, tidak ada kondisi atau <code>case</code> yang terpenuhi karena nilai variabel <code>point</code> tetap <code>6</code>. Ketika hal seperti ini terjadi, blok kondisi <code>default</code> dipanggil. Bisa dibilang bahwa <code>default</code> merupakan <code>else</code> dalam sebuah switch.
+
+Perlu diketahui, switch pada pemrograman Go memiliki perbedaan dibanding bahasa lain. Di Go, ketika sebuah case terpenuhi, tidak akan dilanjutkan ke pengecekkan case selanjutnya, meskipun tidak ada keyword <code>break</code> di situ. Konsep ini berkebalikan dengan switch pada umumnya, yang ketika sebuah case terpenuhi, maka akan tetap dilanjut mengecek case selanjutnya kecuali ada keyword <code>break</code>.</div></figure></div></p><p id="f2b50461-5649-4ba3-b891-40cd9cc64a97" class=""><strong>Pemanfaatan </strong><code><strong>case</strong></code><strong> Untuk Banyak Kondisi</strong><div class="indented"><p id="869ddcf3-48ae-4827-9430-418da118325e" class="">Sebuah <code>case</code> dapat menampung banyak kondisi. Cara penerapannya yaitu dengan menuliskan nilai pembanding-pembanding variabel yang di-switch setelah keyword <code>case</code> dipisah tanda koma (<code>,</code>).</p><p id="b19768ea-4d75-4408-905b-310b81508185" class="">Contoh:</p><pre id="579965a6-7ed8-4f86-9c8d-22a2cffe5cf0" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 6
+
+	switch point {
+	case 8:
+		fmt.Println(&quot;perfect&quot;)
+	case 7, 6, 5, 4:
+		fmt.Println(&quot;awesome&quot;)
+	default:
+		fmt.Println(&quot;not bad&quot;)
+	}
+}</code></pre><p id="8298baba-f013-43dd-805d-8d75501260a3" class="">Hasil:</p><pre id="7092d99e-c379-4cc9-966d-e4f0fcae2665" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+awesome</code></pre><p id="7062d51e-0f25-4f72-9e6a-7c635e519794" class="">Kondisi <code>case 7, 6, 5, 4:</code> akan terpenuhi ketika nilai variabel <code>point</code> adalah 7 atau 6 atau 5 atau 4.</p></div></p><p id="2930cdf7-cec5-401b-bfec-79d4e31c85b2" class=""><strong>Kurung Kurawal Pada Keyword </strong><code><strong>case</strong></code><strong> &amp; </strong><code><strong>default</strong></code><div class="indented"><p id="e7d8ca16-961d-4f0d-aeb0-50ee7fea9069" class="">Tanda kurung kurawal (<code>{ }</code>) bisa diterapkan pada keyword <code>case</code> dan <code>default</code>. Tanda ini opsional, boleh dipakai boleh tidak. Bagus jika dipakai pada blok kondisi yang didalamnya ada banyak statement, kode akan terlihat lebih rapi dan mudah di-maintain.</p><p id="52d1e185-0e65-4c04-b39c-e19b1a00cf95" class="">Perhatikan kode berikut, bisa dilihat pada keyword <code>default</code> terdapat kurung kurawal yang mengapit 2 statement didalamnya.</p><pre id="08b49399-c361-4729-adae-f28a640bbf1c" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 1
+
+	switch point {
+	case 8:
+		fmt.Println(&quot;perfect&quot;)
+	case 7, 6, 5, 4:
+		fmt.Println(&quot;awesome&quot;)
+	default:
+		{
+			fmt.Println(&quot;not bad&quot;)
+			fmt.Println(&quot;you can be better!&quot;)
+		}
+	}
+}</code></pre><p id="d99967f3-264a-46f7-8bd4-9c482e8995af" class="">Hasil:</p><pre id="a3d6bdc6-7b98-436a-8463-99ca01b2b41d" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+not bad
+you can be better!</code></pre></div></p><p id="06a66d37-3bc7-4b6e-b63b-3803789ac028" class=""><strong>Switch Dengan Gaya </strong><code><strong>if</strong></code><strong> - </strong><code><strong>else</strong></code><div class="indented"><p id="334ff821-7b7d-4ec3-ba97-ff46e7c25fa6" class="">Uniknya di Go, switch bisa digunakan dengan gaya ala if-else. Nilai yang akan dibandingkan tidak dituliskan setelah keyword <code>switch</code>, melainkan akan ditulis langsung dalam bentuk perbandingan dalam keyword <code>case</code>.</p><p id="9d290165-438d-48c3-a3ad-bb0a7f274554" class="">Pada kode di bawah ini, kode program switch di atas diubah ke dalam gaya <code>if-else</code>. Variabel <code>point</code> dihilangkan dari keyword <code>switch</code>, lalu kondisi-kondisinya dituliskan di tiap <code>case</code>.</p><pre id="74db34e5-d532-46ef-b83b-aa5f580d9990" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 6
+
+	switch {
+	case point == 8:
+		fmt.Println(&quot;perfect&quot;)
+	case (point &lt; 8) &amp;&amp; (point &gt; 3):
+		fmt.Println(&quot;awesome&quot;)
+	default:
+		{
+			fmt.Println(&quot;not bad&quot;)
+			fmt.Println(&quot;you need to learn more&quot;)
+		}
+	}
+}</code></pre><p id="13249bf0-bd03-4c38-b754-227d0b2547e4" class="">Hasil:</p><pre id="bef427ab-fc87-4109-b1fb-0f5b03497957" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+awesome</code></pre></div></p><p id="ecad1efc-f8c5-4302-a467-da9d2fab6653" class=""><strong>Penggunaan Keyword </strong><code><strong>fallthrough</strong></code><strong> Dalam </strong><code><strong>switch</strong></code><div class="indented"><p id="2b68b172-444d-4352-8e74-ad949d5edb02" class="">Seperti yang sudah dijelaskan sebelumnya, bahwa switch pada Go memiliki perbedaan dengan bahasa lain. Ketika sebuah <code>case</code> terpenuhi, pengecekkan kondisi tidak akan diteruskan ke case-case setelahnya.</p><p id="99172ff0-accb-4048-9e9b-2107f69e9bc6" class="">Keyword <code>fallthrough</code> digunakan untuk memaksa proses pengecekkan diteruskan ke <code>case</code> selanjutnya dengan <strong>tanpa menghiraukan nilai kondisinya</strong>, jadi case di pengecekan selanjutnya tersebut selalu dianggap benar (meskipun aslinya adalah salah).</p><pre id="1df87314-ff06-41e9-b94d-60d08e486e29" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 6
+
+	switch {
+	case point == 8:
+		fmt.Println(&quot;perfect&quot;)
+	case (point &lt; 8) &amp;&amp; (point &gt; 3):
+		fmt.Println(&quot;awesome&quot;)
+		fallthrough
+	case point &lt; 5:
+		fmt.Println(&quot;you need to learn more&quot;)
+	default:
+		{
+			fmt.Println(&quot;not bad&quot;)
+			fmt.Println(&quot;you need to learn more&quot;)
+		}
+	}
+}</code></pre><p id="07a92ca0-5733-4684-8490-3e02656800b0" class="">Setelah pengecekkan <code>case (point &lt; 8) &amp;&amp; (point &gt; 3)</code> selesai, akan dilanjut ke pengecekkan <code>case point &lt; 5</code>, karena ada <code>fallthrough</code> di situ.</p><p id="131f6397-f509-43c8-9db4-cdeff93811ea" class="">Hasil:</p><pre id="2ca392eb-67fc-4a6a-be85-235b8bf8e47c" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+awesome
+you need to learn more</code></pre></div></p><p id="dea0f2a1-d7b6-4e2b-945e-95570ddc2014" class=""><strong>Seleksi Kondisi Bersarang</strong><div class="indented"><p id="bfdb87b7-bc76-456e-b604-09a11a269564" class="">Seleksi kondisi bersarang adalah seleksi kondisi, yang berada dalam seleksi kondisi, yang mungkin juga berada dalam seleksi kondisi, dan seterusnya. Seleksi kondisi bersarang bisa dilakukan pada <code>if</code> - <code>else</code>, <code>switch</code>, ataupun kombinasi keduanya.</p><p id="2d1d4d77-131f-4063-851c-143607f0bd19" class="">Contoh:</p><pre id="3b4c06ce-5ad9-4776-8c2d-e6df01c696a8" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var point = 10
+
+	if point &gt; 7 {
+		switch point {
+		case 10:
+			fmt.Println(&quot;perfect!&quot;)
+		default:
+			fmt.Println(&quot;nice!&quot;)
+		}
+	} else {
+		if point == 5 {
+			fmt.Println(&quot;not bad&quot;)
+		} else if point == 3 {
+			fmt.Println(&quot;keep trying&quot;)
+		} else {
+			fmt.Println(&quot;you can do it&quot;)
+			if point == 0 {
+				fmt.Println(&quot;try harder!&quot;)
+			}
+		}
+	}
+}</code></pre><p id="036ea336-71c2-48a8-a084-6b56ce287904" class="">Hasil:</p><pre id="d96af00e-fe53-4bd3-a8b8-a6a113482865" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\condition.go
+perfect!</code></pre></div></p></div></article></body></html>

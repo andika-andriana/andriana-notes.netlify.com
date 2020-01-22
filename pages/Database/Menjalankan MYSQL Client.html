@@ -1,0 +1,575 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Menjalankan MYSQL Client</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1b3efcb2-87ee-49b1-a576-b371c467e28b" class="page sans"><header><h1 class="page-title">Menjalankan MYSQL Client</h1></header><div class="page-body"><ul id="525695eb-14f8-4aa4-85ab-e21fd4f93397" class="bulleted-list"><li><strong>Arsitektur Client-Server MySQL</strong><p id="3ebea668-c897-480f-b564-c798f7f4f409" class="">Dalam operasionalnya, MySQL menggunakan konsep arsitektur client-server. Arsitektur ini mirip seperti yang ada pada web browser dan web server. Salah satu komputer bertindak sebagai server. Di dalam server inilah seluruh database MySQL disimpan. Kemudian komputer lain berperan sebagai client.</p><p id="a7df3abb-68d0-4f11-867b-9509985f54b8" class="">Client berinteraksi dengan server agar bisa mengakses database. Jumlah client yang mengakses server bisa 1 komputer, 100, atau bahkan 1000 komputer pada saat yang bersamaan.</p><figure id="6c67460d-95c4-4b1f-86e4-0b6e26282a04" class="image"><a href="https://lh4.googleusercontent.com/RpF_kPQir3kIjpUJkjhtnBZ8paET4a7_3qsgHyPpWwNFnYUzomwg18OrIZBiI9IO6rhRT78rQZJd4szkY7k3Wtv5Jpbsde7pastyuwmM2LHqbevvf18bNvIINHsAzpwh_vfu88a0"><img src="https://lh4.googleusercontent.com/RpF_kPQir3kIjpUJkjhtnBZ8paET4a7_3qsgHyPpWwNFnYUzomwg18OrIZBiI9IO6rhRT78rQZJd4szkY7k3Wtv5Jpbsde7pastyuwmM2LHqbevvf18bNvIINHsAzpwh_vfu88a0"/></a></figure><p id="87cbe642-88a3-4cd8-bf3d-bb81371ae234" class="">Gambar: Ilustrasi konsep Client-Server MySQL</p></li></ul><ul id="8f50d0a6-3442-447e-90a2-aa42011211af" class="bulleted-list"><li><strong>Menjalankan MySQL Server (mysqld.exe)</strong><p id="7e89ac03-92b0-48f2-a4ba-f032e27f533a" class="">Untuk menjalankan MySQL server, kita harus mengakses file <strong>mysqld.exe</strong> yang berada di folder <strong>bin</strong>. Akhiran “d” dari <strong>mysqld.exe</strong> berarti “daemon”, suatu istilah dalam sistem UNIX untuk aplikasi yang terus berjalan di background.</p><p id="5475ba8e-b60f-46a0-ac78-ba4cb5630e4c" class="">Terdapat beberapa cara menjalankan mysqld.exe. Jika anda menggunakan XAMPP, tinggal klik tombol <strong>Start </strong>pada baris <strong>MySQL </strong>dari XAMPP Control Panel.</p><figure id="8fef48f4-a67b-4780-9d70-31344b9a2b73" class="image"><a href="https://lh4.googleusercontent.com/ycL59HBMGU9LxxUaILXbjUKupk43Q7ouy7vc7isT9R9PHzRW6ni2suw8nnU5lEDM4TOqcnJkJqWLKXTYq6pQ_FP51A_AQXdETDLHl-TE0E2ki2ngkHNsKz9G42hsVoMOR8-aU1sR"><img src="https://lh4.googleusercontent.com/ycL59HBMGU9LxxUaILXbjUKupk43Q7ouy7vc7isT9R9PHzRW6ni2suw8nnU5lEDM4TOqcnJkJqWLKXTYq6pQ_FP51A_AQXdETDLHl-TE0E2ki2ngkHNsKz9G42hsVoMOR8-aU1sR"/></a></figure><p id="e439bb33-b501-4eef-966b-e04ee7005853" class="">Gambar: Menjalankan MySQL Server dari XAMPP Control Panel</p></li></ul><ul id="b1ce7ef6-5021-4a88-8a6e-0a8db3137df5" class="bulleted-list"><li><strong>Menjalankan MYSQL Client</strong><p id="06c4eba0-8de6-49ae-b33b-c2a5e6f8cdd3" class="">MySQL client digunakan untuk berkomunikasi dengan MySQL server. MySQL client hadir dengan berbagai bentuk. Ada yang diakses dari cmd, berbasis web, maupun yang berbasis aplikasi desktop.</p><p id="a08ee35e-6028-4054-a54d-ac10ee003c7d" class="">XAMPP menyediakan halaman phpMyAdmin sebagai MySQL client. phpMyAdmin adalah bentuk MySQL client yang berbasis web. Jika anda menginstall MySQL secara terpisah, ada pilihan untuk menginstall aplikasi MySQLWorkbench, ini adalah MySQL client yang berbentuk aplikasi desktop.</p><p id="4ef1b23b-5a2f-4db6-9682-61eafa8c27fe" class="">MySQL client yang paling sederhana (dan yang akan saya pakai sepanjang buku ini) adalah berbasis cmd (command prompt). Dimana kita mengetik perintah-perintah SQL secara manual untuk berkomunikasi dengan MySQL server.</p><p id="3a379568-fa5f-4262-a9f8-3f9c0d23f1b1" class="">Jika sebelumnya anda sudah pernah menggunakan phpMyAdmin, tentu merasa sangat mudah dalam mengelola database MySQL menggunakan aplikasi tersebut. Kita tinggal klik, pilih menu yang ada, dan dalam beberapa menit database sudah selesai dibuat tanpa perlu menulis perintah SQL apapun.</p><p id="1393ca1b-6d55-4a02-92a7-91c496c9cd60" class="">Sebelum mulai, <strong>pastikan MySQL server sudah berjalan</strong>, boleh dari XAMPP Control Panel atau secara manual dari cmd. Kemudian, buka kembali cmd dan ketik perintah berikut:</p><pre id="0b684bfb-8396-4056-b12c-9b1f3eeea807" class="code"><code>c:\xampp\mysql\bin\mysql -u root</code></pre><p id="7bb9a2ce-19a7-4d03-b8c2-b64512e52eb7" class="">Jika penulisannya benar, akan tampil teks “welcome” dari MariaDB:</p><pre id="8bd3c41a-58bb-4777-a47c-aa1fde9f47f2" class="code"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.16 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</code></pre><figure id="e5c869db-d4d7-4add-9183-bde2f6b5b7f6" class="image"><a href="https://lh4.googleusercontent.com/RZLa85dX4TfbTjZFPqBfjBP654a9rQIowI46YkzgxXmnjUud3G0NSpvLQ5A0NSPqhPR3Zhd5VCUEyKzqOiLE1wGQMgz0tOBq0RU9acLc08jq5Y5En0XB6DbPYpN9V1ZggUqWV2_q"><img src="https://lh4.googleusercontent.com/RZLa85dX4TfbTjZFPqBfjBP654a9rQIowI46YkzgxXmnjUud3G0NSpvLQ5A0NSPqhPR3Zhd5VCUEyKzqOiLE1wGQMgz0tOBq0RU9acLc08jq5Y5En0XB6DbPYpN9V1ZggUqWV2_q"/></a></figure><p id="46949665-6ffc-42f9-a946-87051d6dd268" class="">Gambar: Login sebagai user root</p><p id="8e87302a-cdc9-4cc3-8bc5-91751b3e312a" class="">Perintah c:\xampp\mysql\bin\mysql -uroot artinya, saya mencari file mysql.exe yang berada di folder c:\xampp\mysql\bin\, kemudian masuk sebagai user root. Untuk keluar dari MySQL client, ketik perintah: exit.</p><figure id="fd351b3f-3904-48ec-a4a7-cdec9461d718" class="image"><a href="https://lh3.googleusercontent.com/MgLXMpemEyvXXMaGhvPE6OyqEU5g5vdGi5DUNREtNOvtDRkSkExg03wlOqtvdg2fn1332BZsenYWVBbvRR-cN7_DcqU5tt5lZPWRt1FHd2Yo2AGy7XhkCnXnzRLSSMgujD0VpcTp"><img src="https://lh3.googleusercontent.com/MgLXMpemEyvXXMaGhvPE6OyqEU5g5vdGi5DUNREtNOvtDRkSkExg03wlOqtvdg2fn1332BZsenYWVBbvRR-cN7_DcqU5tt5lZPWRt1FHd2Yo2AGy7XhkCnXnzRLSSMgujD0VpcTp"/></a></figure><p id="322b906f-0d66-493f-81e2-e4be94209fc9" class="">Gambar: Logout dari MySQL client</p><p id="e3085e94-91dd-4e07-9434-f000cf4e075f" class="">Perintah mysql -uroot hanya bisa dipakai untuk mengakses MariaDB bawaan XAMPP yang tidak memiliki password. Kalau dipakai untuk MySQL / MariaDB yang diinstall secara terpisah, akan keluar pesan error. Kenapa? Karena user root untuk MySQL / MariaDB tersebut menggunakan password.</p></li></ul><ul id="fb172627-d8b6-4ce4-afe5-524aa39b8526" class="bulleted-list"><li>Cara mengatasi error saat menjalankan user root pada powershell<figure id="09716cfb-3f5e-4941-a3b3-69b390ead32b" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled.png"><img style="width:859px" src="Menjalankan%20MYSQL%20Client/Untitled.png"/></a></figure><ol id="51971cf0-7f95-4165-8c4b-b15743c69e3b" class="numbered-list" start="1"><li>Control Panel &gt; System and Security<figure id="18887d9a-f51b-439e-91f5-8cc84ebf9ef4" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%201.png"><img style="width:480px" src="Menjalankan%20MYSQL%20Client/Untitled%201.png"/></a></figure></li></ol><ol id="40e55e92-2247-401c-848a-bc50eb5df85f" class="numbered-list" start="2"><li>System dan Security &gt; System<figure id="10b837b6-07cb-463d-8fad-7e693df01c78" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%202.png"><img style="width:480px" src="Menjalankan%20MYSQL%20Client/Untitled%202.png"/></a></figure></li></ol><ol id="613734bd-df00-40c0-8ddf-ffb322693650" class="numbered-list" start="3"><li>System &gt; Advance system setting<figure id="21744c71-7c61-410f-8f84-67fd3123e5a2" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%203.png"><img style="width:480px" src="Menjalankan%20MYSQL%20Client/Untitled%203.png"/></a></figure></li></ol><ol id="5313aef0-88f2-4def-ac18-095046e84010" class="numbered-list" start="4"><li>System Properties &gt; Advance &gt; Environment Variabel<figure id="7e4a4a13-a4c0-4ce8-82d1-bb29fa23a6b5" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%204.png"><img style="width:412px" src="Menjalankan%20MYSQL%20Client/Untitled%204.png"/></a></figure></li></ol><ol id="fa93d7c5-9b59-46f5-b74d-1246eac43c76" class="numbered-list" start="5"><li>System variables &gt; Path &gt; Edit<figure id="e9316800-2386-4c6e-a33c-4704ca908da2" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%205.png"><img style="width:618px" src="Menjalankan%20MYSQL%20Client/Untitled%205.png"/></a></figure></li></ol><ol id="0e5f9284-fa17-4f91-810c-ce377c36d7b7" class="numbered-list" start="6"><li>Edit Environment Variable &gt; New<figure id="c3397275-cb03-446b-a3f3-8de9c541f413" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%206.png"><img style="width:527px" src="Menjalankan%20MYSQL%20Client/Untitled%206.png"/></a></figure></li></ol><ol id="ef11e9c1-28f9-4625-b058-e48c96282998" class="numbered-list" start="7"><li>Add dir C:\xampp\mysql\bin<figure id="679fa7ab-4341-47f3-a0c5-f7010c9705a7" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%207.png"><img style="width:527px" src="Menjalankan%20MYSQL%20Client/Untitled%207.png"/></a></figure></li></ol><ol id="208b5251-b617-4002-8284-d75ee51cff00" class="numbered-list" start="8"><li>Simpan semua perubahan yang sudah di lakukan kemudian restart ulang powershell / command prompt:<figure id="15c9e280-a404-44f0-b1b5-63bc99227728" class="image"><a href="Menjalankan%20MYSQL%20Client/Untitled%208.png"><img style="width:859px" src="Menjalankan%20MYSQL%20Client/Untitled%208.png"/></a></figure></li></ol></li></ul></div></article></body></html>

@@ -1,0 +1,615 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Fungsi Sebagai parameter</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3d4ccbb9-9594-4d09-8cb4-b1b0b46ce7ae" class="page sans"><header><h1 class="page-title"><strong>Fungsi Sebagai parameter</strong></h1></header><div class="page-body"><ol id="291773e8-a4b5-4296-abca-067af1f0555c" class="numbered-list" start="1"><li><strong>Fungsi Sebagai parameter</strong><p id="4f4ef55e-8d30-4c3c-816b-cc21d74c4e23" class="">Di Go, fungsi bisa dijadikan sebagai tipe data variabel. Dari situ sangat memungkinkan untuk menjadikannya sebagai parameter juga.</p></li></ol><ol id="0a17a7a5-05cf-497d-b273-34e549330829" class="numbered-list" start="2"><li><strong>Penerapan Fungsi Sebagai Parameter</strong><p id="0c9c7d64-b3b0-45b8-befe-df10d7fb27eb" class="">Cara membuat parameter fungsi adalah dengan langsung menuliskan skema fungsi nya sebagai tipe data. </p><p id="a9d81006-6c3b-487a-a459-64fe910c092c" class="">Contohnya bisa dilihat pada kode berikut.</p><pre id="d21c808d-cd97-4a55-9de9-f2b0e9c656ab" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;strings&quot;
+
+func filter(data []string, callback func(string) bool) []string {
+    var result []string
+    for _, each := range data {
+        if filtered := callback(each); filtered {
+            result = append(result, each)
+        }
+    }
+    return result
+}</code></pre><p id="b6bfcfc6-10f7-4f57-9207-d78be6d1d2d7" class="">Parameter <code>callback</code> merupakan sebuah closure yang dideklarasikan bertipe <code>func(string) bool</code>. Closure tersebut dipanggil di tiap perulangan dalam fungsi <code>filter()</code>.</p><p id="b1e20453-b762-4515-aa5c-0dff1f77e137" class="">Fungsi <code>filter()</code> sendiri kita buat untuk filtering data array (yang datanya didapat dari parameter pertama), dengan kondisi filter bisa ditentukan sendiri. </p><p id="b530cd1a-aaae-4de3-9bac-e74f1678aae6" class="">Di bawah ini adalah contoh pemanfaatan fungsi tersebut.</p><pre id="ec3f6946-b8d9-4eb0-a4ed-93b052fb739c" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;strings&quot;
+
+func main() {
+	var data = []string{&quot;wick&quot;, &quot;jason&quot;, &quot;ethan&quot;}
+	var dataContainsO = filter(data, func(each string) bool {
+		return strings.Contains(each, &quot;o&quot;)
+	})
+	var dataLenght5 = filter(data, func(each string) bool {
+		return len(each) == 5
+	})
+
+	fmt.Println(&quot;data asli \t\t:&quot;, data)
+
+	fmt.Println(&quot;filter ada huruf \&quot;o\&quot;\t:&quot;, dataContainsO)
+
+	fmt.Println(&quot;filter jumlah huruf \&quot;5\&quot;\t:&quot;, dataLenght5)
+}
+
+func filter(data []string, callback func(string) bool) []string {
+	var result []string
+	for _, each := range data {
+		if filtered := callback(each); filtered {
+			result = append(result, each)
+		}
+	}
+	return result
+}</code></pre><p id="c4d3bc04-de7c-4b9a-9f2e-76d9d831cb7e" class="">Ada cukup banyak hal yang terjadi didalam tiap pemanggilan fungsi <code>filter()</code> di atas. </p><p id="b05a27a7-26ec-4d53-8dff-8e0926f31447" class="">Berikut merupakan penjelasannya.</p><ol id="d46497cd-18a8-4a98-9301-3777df4481ca" class="numbered-list" start="1"><li>Data array (yang didapat dari parameter pertama) akan di-looping.</li></ol><ol id="9e77d8c4-ab05-4425-9aa4-9b4eda9600a6" class="numbered-list" start="2"><li>Di tiap perulangannya, closure <code>callback</code> dipanggil, dengan disisipkan data tiap elemen perulangan sebagai parameter.</li></ol><ol id="8d4ab9d6-cfba-4bf1-a15c-b41eab6c68fd" class="numbered-list" start="3"><li>Closure <code>callback</code> berisikan kondisi filtering, dengan hasil bertipe <code>bool</code> yang kemudian dijadikan nilai balik dikembalikan.</li></ol><ol id="173efd1e-1219-4680-a117-92b5da965362" class="numbered-list" start="4"><li>Di dalam fungsi <code>filter()</code> sendiri, ada proses seleksi kondisi (yang nilainya didapat dari hasil eksekusi closure <code>callback</code>). Ketika kondisinya bernilai <code>true</code>, maka data elemen yang sedang diulang dinyatakan lolos proses filtering.</li></ol><ol id="b3fa2468-0cbe-4bc7-b2fb-6ddfd7a64ba9" class="numbered-list" start="5"><li>Data yang lolos ditampung variabel <code>result</code>. Variabel tersebut dijadikan sebagai nilai balik fungsi <code>filter()</code>.</li></ol><p id="937394c4-2312-4134-b474-8429c888f14e" class="">Output:</p><pre id="c90e105a-aceb-4144-a3f3-46051846a6eb" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\fungsi-parameter.go
+data asli               : [wick jason ethan]
+filter ada huruf &quot;o&quot;    : [jason]
+filter jumlah huruf &quot;5&quot; : [jason ethan]</code></pre><p id="2985a0fa-0e44-418f-ad41-53a3c5919028" class="">Pada <code>dataContainsO</code>, parameter kedua fungsi <code>filter()</code> berisikan statement untuk deteksi apakah terdapat substring <code>&quot;o&quot;</code> di dalam nilai variabel <code>each</code> (yang merupakan data tiap elemen), jika iya, maka kondisi filter bernilai <code>true</code>, dan sebaliknya.</p><p id="dc24786b-c847-47ef-8ece-82cedcf57299" class="">pada contoh ke-2 (<code>dataLength5</code>), closure <code>callback</code> berisikan statement untuk deteksi jumlah karakter tiap elemen. Jika ada elemen yang jumlah karakternya adalah 5, berarti elemen tersebut lolos filter.</p><p id="9708a07a-eae3-4192-80b0-ae141bfd7965" class="">Memang butuh usaha ekstra untuk memahami pemanfaatan closure sebagai parameter fungsi. Tapi setelah paham, penerapan teknik ini pada kondisi yang tepat akan sangat membantu proses pembuatan aplikasi.</p></li></ol><ol id="1b049d20-d2e9-45ff-8dee-32f6589dcf72" class="numbered-list" start="3"><li><strong>Alias Skema Closure</strong><p id="07a4ad9b-33e0-40e2-b4df-648b84b59a14" class="">Kita sudah mempelajari bahwa closure bisa dimanfaatkan sebagai tipe parameter, contohnya seperti pada fungsi <code>filter()</code>. Pada fungsi tersebut kebetulan skema tipe parameter closure-nya tidak terlalu panjang, hanya ada satu buah parameter dan satu buah nilai balik.</p><p id="a0ae208f-a041-48fb-8d8d-d0791ece0a8a" class="">Pada fungsi yang skema-nya cukup panjang, akan lebih baik jika menggunakan alias, apalagi ketika ada parameter fungsi lain yang juga menggunakan skema yang sama. Membuat alias fungsi berarti menjadikan skema fungsi tersebut menjadi tipe data baru. Caranya dengan menggunakan keyword <code>type</code>. Contoh:</p><pre id="8393e154-9ed8-49f7-8381-2c6db5e0f320" class="code"><code>type FilterCallback func(string) bool
+
+func filter(data []string, callback FilterCallback) []string {
+    // ...
+}</code></pre><p id="c0788e65-096a-43cb-8928-99fb7c7ad6c2" class="">Skema <code>func(string) bool</code> diubah menjadi tipe dengan nama <code>FilterCallback</code>. Tipe tersebut kemudian digunakan sebagai tipe data parameter <code>callback</code>.</p><p id="773b1646-79df-4140-8152-fb090ead2f38" class="">Di bawah ini merupakan penjelasan tambahan mengenai fungsi <code>strings.Contains()</code>.</p></li></ol><ol id="e89dfe0f-b2a4-4b23-a526-d1983385cea6" class="numbered-list" start="4"><li><strong>Penggunaan Fungsi </strong><code><strong>string.Contains()</strong></code><p id="51b5033e-1c3b-4262-b28c-8bd1bc05f3d3" class="">Inti dari fungsi ini adalah untuk deteksi apakah sebuah substring adalah bagian dari string, jika iya maka akan bernilai <code>true</code>, dan sebaliknya. Contoh penggunaannya:</p><pre id="5f1691cc-a7eb-4d28-b6b0-6e7072f9cc25" class="code"><code>var result = strings.Contains(&quot;Golang&quot;, &quot;ang&quot;)
+// true</code></pre><p id="910dc7fd-fef7-4fa7-a0a5-e7375ed30456" class="">Variabel <code>result</code> bernilai <code>true</code> karena string <code>&quot;ang&quot;</code> merupakan bagian dari string <code>&quot;Golang&quot;</code>.</p></li></ol></div></article></body></html>

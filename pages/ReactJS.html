@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ReactJS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="44014cae-a441-4ce5-bf65-2c340b296b43" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="ReactJS/Reactjs_logo.png"/></div><h1 class="page-title">ReactJS</h1></header><div class="page-body"><blockquote id="c78f31fc-3041-4458-886d-24ab0e56a7bc" class="">Materi Belajar React - JavaScript library for building user interfaces</blockquote><figure id="b88e3e64-0789-4c36-bea1-d122e9a4e988" class="link-to-page"><a href="ReactJS/Apa%20itu%20React%20JS.html">Apa itu React JS ?</a></figure><figure id="f681fc1a-df41-4ea3-834a-7a769dd8738e" class="link-to-page"><a href="ReactJS/Persiapan%20Project%20React%20JS.html">Persiapan Project React JS</a></figure><figure id="dcb6a39c-f594-4351-8439-3ecbfb8d9562" class="link-to-page"><a href="ReactJS/Install%20Create%20React%20App.html">Install Create React App</a></figure><figure id="aee56ea2-d15e-47aa-8a02-6abb5918bb97" class="link-to-page"><a href="ReactJS/Membuat%20dan%20Menjalankan%20Project%20React%20JS.html">Membuat dan Menjalankan Project React JS</a></figure><figure id="16de0c17-6830-4cba-adc0-e607f0edc354" class="link-to-page"><a href="ReactJS/Install%20React%20Developer%20Tools.html">Install React Developer Tools</a></figure><figure id="8f17b044-907b-4c8e-a33d-9ddc16abc9e6" class="link-to-page"><a href="ReactJS/Hello%20React.html">Hello React</a></figure><figure id="a4f77386-5cd7-494e-ab88-f0147bf2969e" class="link-to-page"><a href="ReactJS/Rendering%20Elements.html">Rendering Elements</a></figure><figure id="d33f7e96-d400-442e-8462-4f8f5b701224" class="link-to-page"><a href="ReactJS/Class%20Component%20Dalam%201%20File.html">Class Component Dalam 1 File</a></figure><figure id="3a86fbe2-ed48-426d-b05c-183e4905e192" class="link-to-page"><a href="ReactJS/Class%20Component%20Dengan%20File%20Terpisah.html">Class Component Dengan File Terpisah</a></figure><figure id="ab772633-1f82-44eb-a766-4098d9c1b343" class="link-to-page"><a href="ReactJS/Import%20React%20Component.html">Import React Component</a></figure><figure id="444adc6c-1872-45a1-ba1e-68b4a647afb0" class="link-to-page"><a href="ReactJS/Function%20Component%20Dalam%201%20File.html">Function Component Dalam 1 File</a></figure><figure id="3ec44f6e-6e79-4309-9c86-6ac9606d2613" class="link-to-page"><a href="ReactJS/Function%20Component%20Dengan%20File%20Terpisah.html">Function Component Dengan File Terpisah</a></figure><figure id="22375aa0-1779-4c94-af2b-0d9e367e6c5b" class="link-to-page"><a href="ReactJS/Tugas%201%20React%20JS.html">Tugas 1 React JS</a></figure><figure id="9c00456c-eeb7-481e-aa0a-097d5fb76323" class="link-to-page"><a href="ReactJS/Penulisan%20Function%20Component.html">Penulisan Function Component</a></figure><figure id="7dfd54ab-e88d-4b42-a002-3e02ef49bb73" class="link-to-page"><a href="ReactJS/Export%20dan%20Import%20Component.html">Export dan Import Component</a></figure><figure id="73d661e5-e428-40d9-90b7-07ee14887aef" class="link-to-page"><a href="ReactJS/Multiple%20Components.html">Multiple Components</a></figure><figure id="a92892e1-cb4a-432d-8dd9-bd046fb0cec4" class="link-to-page"><a href="ReactJS/Props%20pada%20Function%20Component.html">Props pada Function Component</a></figure><figure id="8dfc8086-d440-42fb-80ac-d707e0a74a65" class="link-to-page"><a href="ReactJS/Props%20pada%20Class%20Component.html">Props pada Class Component</a></figure><figure id="3b6755de-d10a-4be1-92ae-1d3a853ef00e" class="link-to-page"><a href="ReactJS/Penulisan%20State.html">Penulisan State</a></figure><figure id="b60d3530-2fa9-4aed-8730-30d933dce98d" class="link-to-page"><a href="ReactJS/State%20dan%20Props.html">State dan Props</a></figure><figure id="06608840-2573-47ca-87b4-8416861be6a0" class="link-to-page"><a href="ReactJS/Tugas%202%20React%20JS.html">Tugas 2 React JS</a></figure><figure id="2aceb493-0fd4-410a-83f6-22a634bcd3e4" class="link-to-page"><a href="ReactJS/Handling%20Events%20pada%20Function%20Component.html">Handling Events pada Function Component</a></figure><figure id="fa1db259-c619-49ca-a0b1-42ff4e4d3353" class="link-to-page"><a href="ReactJS/Handling%20Events%20pada%20Class%20Component.html">Handling Events pada Class Component</a></figure><figure id="767d0bb4-7365-4441-9b08-58b851820ba5" class="link-to-page"><a href="ReactJS/Handling%20Events%20dan%20Parameters.html">Handling Events dan Parameters</a></figure><figure id="ba53b1b3-2ee4-40b1-a88e-8a00e180cb10" class="link-to-page"><a href="ReactJS/preventDefault.html">preventDefault</a></figure><figure id="84349ee5-c511-4168-a99b-2846cd62b6c5" class="link-to-page"><a href="ReactJS/setState.html">setState</a></figure><figure id="559f965b-73d5-4518-9061-57fc4753539f" class="link-to-page"><a href="ReactJS/Penulisan%20setState.html">Penulisan setState</a></figure><figure id="e3ff7066-6efb-4553-a282-f73b22ee25e0" class="link-to-page"><a href="ReactJS/Multiple%20State.html">Multiple State</a></figure><figure id="5db8cd51-a618-4131-aeaa-a80156e2b8c9" class="link-to-page"><a href="ReactJS/Handling%20Events%20onChange%20pada%20Input%20Element.html">Handling Events onChange pada Input Element</a></figure><figure id="09528bbe-4812-4d97-9cda-35352fcedb4a" class="link-to-page"><a href="ReactJS/Event%20Target%20Value.html">Event Target Value</a></figure><figure id="0ba67622-e20f-4bbc-b630-be7cf7426b34" class="link-to-page"><a href="ReactJS/Set%20Default%20Input%20Value.html">Set Default Input Value</a></figure><figure id="9ebad671-71a7-4e16-8acb-98f0fb5c3ce3" class="link-to-page"><a href="ReactJS/Tugas%203%20React%20JS.html">Tugas 3 React JS</a></figure><figure id="9ef6434b-183d-435d-8174-55bea0d1d056" class="link-to-page"><a href="ReactJS/Menghubungkan%20state%20dan%20input%20value.html">Menghubungkan state dan input value</a></figure><figure id="61bc88fe-c56e-459b-bd34-d00c9ab1beaf" class="link-to-page"><a href="ReactJS/Comment.html">Comment</a></figure><figure id="614f74e5-74d8-4494-af9d-73de34feee20" class="link-to-page"><a href="ReactJS/Dynamic%20Method.html">Dynamic Method</a></figure><figure id="eb407473-dffc-4299-811d-d9221b2fb3a1" class="link-to-page"><a href="ReactJS/componentDidMount.html">componentDidMount</a></figure><figure id="50af358b-d08d-42ce-bd80-133ad67942a2" class="link-to-page"><a href="ReactJS/Conditional%20Rendering%201.html">Conditional Rendering 1</a></figure><figure id="6db28382-35e2-45ef-9f1b-6e51ce4fc62a" class="link-to-page"><a href="ReactJS/Conditional%20Rendering%202.html">Conditional Rendering 2</a></figure><figure id="39e5251c-4b9d-4eb0-880d-10c766fe578f" class="link-to-page"><a href="ReactJS/Conditional%20Rendering%203.html">Conditional Rendering 3</a></figure><figure id="08cd3d77-ae19-46b1-a16b-b72257626013" class="link-to-page"><a href="ReactJS/Tugas%204%20React%20JS.html">Tugas 4 React JS</a></figure><figure id="4bba7238-c141-4805-93f6-7364e49fb0f5" class="link-to-page"><a href="ReactJS/Lists%20dan%20Keys%20dari%20State.html">Lists dan Keys dari State</a></figure><figure id="2f7b0cc2-8748-4e10-9396-a29df01fbee8" class="link-to-page"><a href="ReactJS/Lists%20dan%20Keys%20dari%20Props.html">Lists dan Keys dari Props</a></figure><figure id="efe2823a-b4d9-4016-b7fc-cd8bedd37b5f" class="link-to-page"><a href="ReactJS/Lists%20dan%20Keys%20dari%20Internal%20File.html">Lists dan Keys dari Internal File</a></figure><figure id="c74a439e-f66f-4abc-91d0-edfac97df778" class="link-to-page"><a href="ReactJS/Lists%20dan%20Keys%20dari%20Eksternal%20File.html">Lists dan Keys dari Eksternal File</a></figure><figure id="6af700fa-cefb-4e50-9570-351197774afb" class="link-to-page"><a href="ReactJS/Form.html">Form</a></figure><figure id="7194d68a-ae14-4b26-97fd-626f55c85a24" class="link-to-page"><a href="ReactJS/Refs.html">Refs</a></figure><figure id="a3e26e05-a54a-40c1-a7bf-6a65d4f7d2fd" class="link-to-page"><a href="ReactJS/Refs%20Lanjutan.html">Refs Lanjutan</a></figure><figure id="975fecdc-42ea-4c2d-a63d-61030e37ed5d" class="link-to-page"><a href="ReactJS/Tugas%205%20React%20JS.html">Tugas 5 React JS</a></figure><figure id="747c2b66-8eb5-433c-980b-8470f780f33a" class="link-to-page"><a href="ReactJS/React%20CSS%20Inline.html">React CSS Inline</a></figure><figure id="af368f37-97af-44f4-9032-fb435d810026" class="link-to-page"><a href="ReactJS/React%20CSS%20Internal.html">React CSS Internal</a></figure><figure id="5b17379e-df26-415a-a260-705936352790" class="link-to-page"><a href="ReactJS/React%20CSS%20External.html">React CSS External</a></figure><figure id="8ff90de5-faa4-49f8-84a7-c21b5c3f5eb9" class="link-to-page"><a href="ReactJS/React%20CSS%20className.html">React CSS className</a></figure><figure id="c36b0276-bb92-4270-9984-2611693b7e74" class="link-to-page"><a href="ReactJS/Install%20Routing.html">Install Routing</a></figure><figure id="e447712f-bdf9-4d13-a0c4-2445bd67aaea" class="link-to-page"><a href="ReactJS/Penerapan%20Routing.html">Penerapan Routing</a></figure><figure id="93467597-dc89-43b5-a49b-82b497784500" class="link-to-page"><a href="ReactJS/Navigasi%20Routing.html">Navigasi Routing</a></figure><figure id="1cf2f7ac-b8e6-4318-a1e8-b70611c10f7a" class="link-to-page"><a href="ReactJS/Tugas%206%20React%20JS.html">Tugas 6 React JS</a></figure><figure id="5f326ba8-e858-4aec-af35-7bc8b4e5467e" class="link-to-page"><a href="ReactJS/React%20With%20Bootstrap.html">React With Bootstrap</a></figure><figure id="52653c56-7f8f-4ea0-8cba-38ccfef43f89" class="link-to-page"><a href="ReactJS/Bootstrap%20Layout%20Media.html">Bootstrap - Layout &amp; Media</a></figure><figure id="96ecbf49-f0cb-4d04-b9e9-b67329684617" class="link-to-page"><a href="ReactJS/Bootstrap%20Alert.html">Bootstrap - Alert</a></figure><figure id="ae85543c-e211-4c1a-a5b0-aa0b29315659" class="link-to-page"><a href="ReactJS/Bootstrap%20Badge.html">Bootstrap - Badge</a></figure><figure id="bfd99063-a613-410c-a86c-d9b5fcfe24b0" class="link-to-page"><a href="ReactJS/Bootstrap%20Breadcrumbs.html">Bootstrap - Breadcrumbs</a></figure><figure id="db895261-5fb1-4858-94e0-e25c43fc1006" class="link-to-page"><a href="ReactJS/Bootstrap%20Buttons.html">Bootstrap - Buttons</a></figure><figure id="0aaecc8c-0f35-4473-8822-99305be45416" class="link-to-page"><a href="ReactJS/Bootstrap%20Buttons%20Group.html">Bootstrap - Buttons Group</a></figure><figure id="5da64fae-e67a-4305-8eae-b65a87668e9f" class="link-to-page"><a href="ReactJS/Bootstrap%20Cards.html">Bootstrap - Cards</a></figure><figure id="3d2399b7-301e-4b48-8d3b-6addcc1aebe0" class="link-to-page"><a href="ReactJS/Tugas%207%20React%20JS.html">Tugas 7 React JS</a></figure><figure id="c1c48717-a104-4451-b835-e85e391b6922" class="link-to-page"><a href="ReactJS/Bootstrap%20Carousels.html">Bootstrap - Carousels</a></figure><figure id="ee623b71-be91-4e2c-a854-a1eafd7bef2e" class="link-to-page"><a href="ReactJS/Bootstrap%20Dropdowns.html">Bootstrap - Dropdowns</a></figure><figure id="535b968c-9b00-4d95-8284-91557738ccbf" class="link-to-page"><a href="ReactJS/Bootstrap%20Forms.html">Bootstrap - Forms</a></figure><figure id="592ec64a-d9a3-419e-963a-e213c0f0d51f" class="link-to-page"><a href="ReactJS/Bootstrap%20InputGroup.html">Bootstrap - InputGroup</a></figure><figure id="e206b9da-29bb-49a7-9811-54a2846c20f1" class="link-to-page"><a href="ReactJS/Bootstrap%20Images.html">Bootstrap - Images</a></figure><figure id="c05e833a-5d9b-4625-8275-fb6329bea586" class="link-to-page"><a href="ReactJS/Bootstrap%20Figure.html">Bootstrap - Figure</a></figure><figure id="86c6fa44-57fc-418b-84de-9401542f5172" class="link-to-page"><a href="ReactJS/Bootstrap%20Jumbotron.html">Bootstrap - Jumbotron</a></figure><figure id="14346640-dced-4c61-9bf0-2562204d0108" class="link-to-page"><a href="ReactJS/Bootstrap%20List%20groups.html">Bootstrap - List groups</a></figure><figure id="9b71f798-db82-4c2a-a4fb-2ca2b62c5679" class="link-to-page"><a href="ReactJS/Bootstrap%20Modals.html">Bootstrap - Modals</a></figure><figure id="578c356d-d9d7-4e62-8671-ad7386430530" class="link-to-page"><a href="ReactJS/Tugas%208%20React%20JS.html">Tugas 8 React JS</a></figure><figure id="8da9f925-1d4a-4084-bbdc-0cb90aba8f17" class="link-to-page"><a href="ReactJS/Bootstrap%20Nav.html">Bootstrap - Nav</a></figure><figure id="d5f679e9-9db1-4f08-8d31-4178f3eb34a3" class="link-to-page"><a href="ReactJS/Bootstrap%20Navbars.html">Bootstrap - Navbars</a></figure><figure id="343cda4d-129b-495d-b1ba-a2805135bb6e" class="link-to-page"><a href="ReactJS/Bootstrap%20Overlays%20Popovers%20Tooltips.html">Bootstrap - Overlays / Popovers / Tooltips</a></figure><figure id="4f9da330-564d-421d-bdee-b698bbd9eee8" class="link-to-page"><a href="ReactJS/Bootstrap%20Pagination.html">Bootstrap - Pagination</a></figure><figure id="500726cf-cc24-4b88-bd78-93ae96a9cae7" class="link-to-page"><a href="ReactJS/Bootstrap%20Progress%20bars.html">Bootstrap - Progress bars</a></figure><figure id="30922bf1-a948-4d99-87c3-36d31812a613" class="link-to-page"><a href="ReactJS/Bootstrap%20Tables.html">Bootstrap - Tables</a></figure><figure id="a25360db-604e-4881-8a5a-4d4875aa795d" class="link-to-page"><a href="ReactJS/Bootstrap%20Tab.html">Bootstrap - Tab</a></figure><figure id="9a6e1dbb-c4fc-4fe4-9457-e3b4984970c7" class="link-to-page"><a href="ReactJS/Bootstrap%20Collapse.html">Bootstrap - Collapse</a></figure><figure id="e8f1fd24-e412-492b-8d32-1dcf6017fbc1" class="link-to-page"><a href="ReactJS/Tugas%209%20React%20JS.html">Tugas 9 React JS</a></figure><figure id="93f77d45-5aaa-4a61-adc7-afef5662563c" class="link-to-page"><a href="ReactJS/React%20With%20Semantic%20UI.html">React With Semantic UI</a></figure><figure id="3231395d-4053-42de-8aed-bdf6c347b3d6" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Layout.html">Semantic UI - Layout</a></figure><figure id="c59d5592-460b-444d-b8fc-db30e748182b" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Button.html">Semantic UI - Button</a></figure><figure id="99afbfbb-a96b-4ecf-b545-547bdd18f78c" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Container.html">Semantic UI - Container</a></figure><figure id="6ccb9f97-f72e-4cdb-9905-f5ee63fdcfcf" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Divider.html">Semantic UI - Divider</a></figure><figure id="00c67513-580c-4cfc-b0c4-f18f8beeaeb9" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Flag.html">Semantic UI - Flag</a></figure><figure id="3ac26e1e-4862-4a3d-85e7-f33168ec10f3" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Header.html">Semantic UI - Header</a></figure><figure id="d62bfd90-1978-4771-bae4-b63965d81039" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Icon.html">Semantic UI - Icon</a></figure><figure id="799fb922-73aa-45bf-9c1e-b9e8aea0f10b" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Image.html">Semantic UI - Image</a></figure><figure id="2039e121-5cd6-4d4c-97d0-8a727b359ae4" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Input.html">Semantic UI - Input</a></figure><figure id="396675a4-ee8c-4b74-9f86-0179fa45fffe" class="link-to-page"><a href="ReactJS/Semantic%20UI%20Label.html">Semantic UI - Label</a></figure><figure id="e3c51378-0c07-4868-9b31-91ab264b5fd5" class="link-to-page"><a href="ReactJS/Tugas%2010%20React%20JS.html">Tugas 10 React JS</a></figure><figure id="5fe47f5b-65e4-4f86-94a8-4cb88d0459f3" class="link-to-page"><a href="ReactJS/Tugas%2011%20Semantic%20UI.html">Tugas 11 Semantic UI</a></figure><figure id="d47e9dff-37f0-4abf-971d-32154b39efd2" class="link-to-page"><a href="ReactJS/Tugas%2012%20Semantic%20UI.html">Tugas 12 Semantic UI</a></figure><figure id="10b3a393-2e94-44dc-96e8-006e8b9c50de" class="link-to-page"><a href="ReactJS/Tugas%2013%20Semantic%20UI.html">Tugas 13 Semantic UI</a></figure><figure id="c7d0e8b9-b625-44e1-a22d-50a577459890" class="link-to-page"><a href="ReactJS/Tugas%2014%20Semantic%20UI.html">Tugas 14 Semantic UI</a></figure><figure id="0d5601a5-fff3-4207-880f-690b0a56d886" class="link-to-page"><a href="ReactJS/Tugas%2015%20Semantic%20UI.html">Tugas 15 Semantic UI</a></figure><figure id="f64eedc0-bf2e-4ea9-90f0-d51ffe907b64" class="link-to-page"><a href="ReactJS/React%20With%20Materialize%20CSS.html">React With Materialize CSS</a></figure><figure id="b6f25c85-d9c3-4583-9074-7417063d0d6e" class="link-to-page"><a href="ReactJS/Materialize%20Card.html">Materialize - Card</a></figure><figure id="f4ae0bcd-11a2-43a3-842f-35be645f105c" class="link-to-page"><a href="ReactJS/Materialize%20Input%20Icon.html">Materialize - Input &amp; Icon</a></figure><figure id="61b40650-021a-4bab-8d10-d446026cb7a3" class="link-to-page"><a href="ReactJS/Materialize%20Carousel.html">Materialize - Carousel</a></figure><figure id="7df6c963-4b62-4613-b693-2688a1495f7c" class="link-to-page"><a href="ReactJS/Tugas%2016%20Materialize.html">Tugas 16 Materialize</a></figure><figure id="b59d82fe-81c0-4177-b448-194eabbf306b" class="link-to-page"><a href="ReactJS/Tugas%2017%20Materialize.html">Tugas 17 Materialize</a></figure><figure id="ba90ee42-2828-4f68-82fe-56c41a5b4831" class="link-to-page"><a href="ReactJS/Tugas%2018%20Materialize.html">Tugas 18 Materialize</a></figure><figure id="378590d8-ee14-411f-8e1f-208358a6a3cd" class="link-to-page"><a href="ReactJS/Application%20Programming%20Interface%20API%20With%20React.html">Application Programming Interface (API) With React</a></figure><figure id="505219e9-6ab4-49e8-b877-7db9c1feb734" class="link-to-page"><a href="ReactJS/Interaksi%20Dengan%20API%20GET.html">Interaksi Dengan API (GET)</a></figure><figure id="1e644c6d-a9fe-4b81-a274-f57feba33e03" class="link-to-page"><a href="ReactJS/Interaksi%20Dengan%20API%20DELETE.html">Interaksi Dengan API (DELETE)</a></figure><figure id="2dc81ee4-cf3b-409c-bb7e-4f69c52a9b3d" class="link-to-page"><a href="ReactJS/Interaksi%20Dengan%20API%20POST.html">Interaksi Dengan API (POST)</a></figure><figure id="7a49878f-e8ba-4d81-9269-e158241dea0a" class="link-to-page"><a href="ReactJS/Interaksi%20Dengan%20API%20PUT.html">Interaksi Dengan API (PUT)</a></figure><figure id="9939b541-d3bb-4d02-aadd-e4f7e8adb0dd" class="link-to-page"><a href="ReactJS/Tugas%2019%20React%20JS.html">Tugas 19 React JS</a></figure></div></article></body></html>

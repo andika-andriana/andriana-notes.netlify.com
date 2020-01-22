@@ -1,0 +1,750 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TUGAS AKHIR</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="27b31842-1926-4c5a-9a33-2e88fe891519" class="page sans"><header><h1 class="page-title">TUGAS AKHIR</h1></header><div class="page-body"><p id="e4431022-67f0-42c9-a846-aa9d121342bf" class=""><strong>Tugas Akhir Node JS</strong></p><ol id="568c6869-34c1-4a29-b579-592f05a18c9f" class="numbered-list" start="1"><li>Teman teman disini harus bisa membuat sebuah api data mahasiswa dengan fitur CRUD <code>(Create Read Update Delete)</code></li></ol><ol id="bf511bd2-53e5-4645-ab79-2220d0149076" class="numbered-list" start="2"><li>Baik Pertama teman teman buatlah struktur project seperti ini :<figure id="d126ebb2-7177-4fc4-85ab-bc0e3670cd3f" class="image"><a href="https://lh3.googleusercontent.com/6hOeiBh3nJTTnVdoweI61xfxXNN0h8-MJjFaU73c154NgMyEeHNqZ8O92bcxdvjegfioeCJkca4TFLG4Srlvmsmtuqa3LSaq8WKdUidsBWZPu6CsY2AvWVb4c1wHM-N7CzbApHzz"><img src="https://lh3.googleusercontent.com/6hOeiBh3nJTTnVdoweI61xfxXNN0h8-MJjFaU73c154NgMyEeHNqZ8O92bcxdvjegfioeCJkca4TFLG4Srlvmsmtuqa3LSaq8WKdUidsBWZPu6CsY2AvWVb4c1wHM-N7CzbApHzz"/></a></figure></li></ol><ol id="fa5ba815-0692-4594-a4de-7e94a404be8f" class="numbered-list" start="3"><li>Baik Disini teman teman tampilkan hasil tiap eksekusi dimulai dari pengaksesan api pertama pada saat data kosong seperti ini :<figure id="823e907d-4848-40c5-bfd1-606da37b14d4" class="image"><a href="https://lh4.googleusercontent.com/FCOt85ARAayWoSY4ExlhOzRz8GJejAWMUfOpjXFCEYx0CkcZE9OraGzFAaXROULYJqtvK56H4VxT7DfvNo9Eq3BFgHVq-jcRjEOk_bklAXRwBu2mS-97y6RL0TWOo4shxCFCPSOo"><img src="https://lh4.googleusercontent.com/FCOt85ARAayWoSY4ExlhOzRz8GJejAWMUfOpjXFCEYx0CkcZE9OraGzFAaXROULYJqtvK56H4VxT7DfvNo9Eq3BFgHVq-jcRjEOk_bklAXRwBu2mS-97y6RL0TWOo4shxCFCPSOo"/></a></figure></li></ol><ol id="e8936474-7f6f-4af8-b43e-dff049f3a247" class="numbered-list" start="4"><li>Setelah itu teman teman disini harus bisa melakukan create data , cobalah teman teman menambahkan 2 buah data seperti dibawah ini<figure id="da4a5a99-dce2-40e0-91b0-687d68c2fd64" class="image"><a href="https://lh6.googleusercontent.com/HI9QN-8ZrrxDOwGkoDzBk6MuLSHptyhGPAX4_3Sd279AVq6G98z3j84wF_Ye97TbvDxo15IzHZVCAIiRtph11Li4O8YFYYSOOBeO133f4QTr1M8EM24epDVSeblUEtuMm9tsOMP0"><img src="https://lh6.googleusercontent.com/HI9QN-8ZrrxDOwGkoDzBk6MuLSHptyhGPAX4_3Sd279AVq6G98z3j84wF_Ye97TbvDxo15IzHZVCAIiRtph11Li4O8YFYYSOOBeO133f4QTr1M8EM24epDVSeblUEtuMm9tsOMP0"/></a></figure><figure id="8b2b6df0-2452-45e3-8c02-85a2f772432f" class="image"><a href="https://lh6.googleusercontent.com/qz1ZQBkdbwdmbUtedrpe5yca_jvOBmqgmsLL-4sFNR5YbE0FYVbXEOPt9xNzc_e2gKgroP-Vt3sw0N5ayN9P2NZbpiaJOrJuZVa-_z9zhdANRQb8gxcBSRF0jPnWscSn77mYd0Fx"><img src="https://lh6.googleusercontent.com/qz1ZQBkdbwdmbUtedrpe5yca_jvOBmqgmsLL-4sFNR5YbE0FYVbXEOPt9xNzc_e2gKgroP-Vt3sw0N5ayN9P2NZbpiaJOrJuZVa-_z9zhdANRQb8gxcBSRF0jPnWscSn77mYd0Fx"/></a></figure><ul id="4dffc10c-a106-4de1-9d6e-c5976e6969bd" class="bulleted-list"><li>Maka akan ada 2 buah data seperti ini :</li></ul><figure id="c27d6185-4f1b-4a51-b32b-e9b5acf822a5" class="image"><a href="https://lh6.googleusercontent.com/GLDp-6IVA1lOVfUu15ff7NN0t12eZRQ7Y0UTnONHOWKTVAmU_PsuBE-vbkzOVN-PPIBSZIlEk9X-jqOBe4gHzIEDuOEl5O-UgCHd1GKr-WT0CV5WcG-Wo6boLR_HgbAAJgpMvcml"><img src="https://lh6.googleusercontent.com/GLDp-6IVA1lOVfUu15ff7NN0t12eZRQ7Y0UTnONHOWKTVAmU_PsuBE-vbkzOVN-PPIBSZIlEk9X-jqOBe4gHzIEDuOEl5O-UgCHd1GKr-WT0CV5WcG-Wo6boLR_HgbAAJgpMvcml"/></a></figure></li></ol><ol id="6e276a73-e8d7-4f57-9628-580703654e97" class="numbered-list" start="5"><li>Jika teman teman sudah berhasil melakukan create data ,selanjutnya teman teman pastikan bisa mencari data berdasarkan id seperti dibawah ini dia hanya menampilkan data dengan nim tertentu saja saja:<figure id="fbe0a573-4620-4570-aaae-a1acf8029bc0" class="image"><a href="https://lh6.googleusercontent.com/Veb2QmPdklWkWUeqxLWvTvgffcc_oDGUwJQoBWy33Y7IoCmV-AaA82eGhaBtP2_tSaaxnIqZKXH__gw_0EPA-DNKHiJ5nzGjw-YyCSBVoylSEJclcwo5ungkMZf8y1ybFOuzLc5n"><img src="https://lh6.googleusercontent.com/Veb2QmPdklWkWUeqxLWvTvgffcc_oDGUwJQoBWy33Y7IoCmV-AaA82eGhaBtP2_tSaaxnIqZKXH__gw_0EPA-DNKHiJ5nzGjw-YyCSBVoylSEJclcwo5ungkMZf8y1ybFOuzLc5n"/></a></figure></li></ol><ol id="24e26212-a0d6-4793-90d6-f7dc3ed5b872" class="numbered-list" start="6"><li>Jika teman teman sudah berhasil melakukan pencarian data, selanjutnya teman teman pastikan bisa merubah data seperti dibawah ini , saya merubah data nama redo alfredo menjadi alen gery salut :<figure id="7e54b27c-6be1-4551-831c-cc2d7cef90b4" class="image"><a href="https://lh4.googleusercontent.com/jX_YIE0Y2tPH2SZv4ew1gJnRlD-jPamTHFmGbYIlShBXs2DGV77NX7x2V5MZA4MKLuO9BL_vV0A6unOmCi2VhZVCcsg_CC-FXsH82PS7ohlPkILGlB1il-VakhHrfvZxljpgv93u"><img src="https://lh4.googleusercontent.com/jX_YIE0Y2tPH2SZv4ew1gJnRlD-jPamTHFmGbYIlShBXs2DGV77NX7x2V5MZA4MKLuO9BL_vV0A6unOmCi2VhZVCcsg_CC-FXsH82PS7ohlPkILGlB1il-VakhHrfvZxljpgv93u"/></a></figure></li></ol><ol id="2ffe818c-ddbb-4bed-ab47-473da2cdb57c" class="numbered-list" start="7"><li>Nah Jika teman teman wsudah berhasil melakukan perubahan data pada id tertentu maka selanjutnya teman teman harus bisa melakukan penghapusan data, contoh seperti dibawah ini menghapus data fony :<figure id="17aad300-054d-42f1-b3c1-9f4449a34ce3" class="image"><a href="https://lh4.googleusercontent.com/elnWJVhnfeolQ40zvS0UUdhJC-dPc90hKBcjFvTHt6WnEGyDmbmMvFTZhXicUJWTTZ_KvmUTZyoGDpJ5EwZMPUJFCOLBEj5jLFZKEMy4DsFuH65ASg5aJ0tRWiuLlzSbYy3C0HR0"><img src="https://lh4.googleusercontent.com/elnWJVhnfeolQ40zvS0UUdhJC-dPc90hKBcjFvTHt6WnEGyDmbmMvFTZhXicUJWTTZ_KvmUTZyoGDpJ5EwZMPUJFCOLBEj5jLFZKEMy4DsFuH65ASg5aJ0tRWiuLlzSbYy3C0HR0"/></a></figure></li></ol><ol id="e40ae804-6190-4532-961b-fe50cf41bca7" class="numbered-list" start="8"><li>Jika teman teman sudah berhasil melakukan semua aktivitas diatas maka teman teman sudah dipastikan bisa membuat api dan tampilan akhir setelah efek penghapusan data sebagai berikut:<figure id="aa80e7a7-f009-40ce-b324-09ae10a0e10e" class="image"><a href="https://lh4.googleusercontent.com/0fOr0GHBOcWX_znndg3lC6CkR6MotXWOPVqYuP0tDaE6ZsT2kzS2KlIfyDOCUUM9Deqtxe40PFWYAaeIl2ZTqTFVRxsqf_DtEVVSQrvsS1LzhrtIpK5sueAia8lcpvCRNIhO6xBe"><img src="https://lh4.googleusercontent.com/0fOr0GHBOcWX_znndg3lC6CkR6MotXWOPVqYuP0tDaE6ZsT2kzS2KlIfyDOCUUM9Deqtxe40PFWYAaeIl2ZTqTFVRxsqf_DtEVVSQrvsS1LzhrtIpK5sueAia8lcpvCRNIhO6xBe"/></a></figure></li></ol><ol id="2150ca47-56b3-4342-a1c2-1707c6c0bfe6" class="numbered-list" start="9"><li>Nah baik teman teman silahkan kerjakan tugas ini dengan benar yaa… semangatt :)</li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4f4e75a9-b364-4f76-bdd5-593a4fec3d76"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Happy Codding :D</div></figure><hr id="24c6dee3-ae52-494c-a1d3-508624d4d5a7"/><ul id="b94466f8-78b9-411f-9a1e-0617ed19550e" class="bulleted-list"><li>index.js<pre id="325cadae-2310-490d-9503-cd6c1297ecd0" class="code"><code>// fileName: index.js
+
+// import Express, mongoose, body-parser
+let express = require(&quot;express&quot;);
+let mongoose = require(&quot;mongoose&quot;);
+let bodyParser = require(&quot;body-parser&quot;);
+
+// import API Router
+let apiRoutes = require(&quot;./api-routes&quot;);
+
+// initialize app
+let app = express();
+
+// setup server
+var port = process.env.PORT || 8080;
+
+// config body-parser
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+app.use(bodyParser.json());
+
+// connect mongodb use mongoose and set connection variable
+mongoose.connect(&quot;mongodb://localhost/resthub&quot;);
+var db = mongoose.connection;
+
+// send messagge for default URL
+app.get(&quot;/&quot;, (req, res) =&gt;
+  res.json({
+    status: &quot;success&quot;,
+    message: &quot;Running Server resthub w/ modules&quot;,
+    modules: &quot;{express, nodemon, mongoose, body-parser}&quot;
+  })
+);
+
+// use app apiRoutes
+app.use(&quot;/api&quot;, apiRoutes);
+
+// launch app to listen specified PORT
+app.listen(port, function() {
+  console.log(&quot;Runing Server resthub on PORT: &quot; + port);
+});</code></pre></li></ul><ul id="e5d2f859-b818-4bb5-a951-f8a85e23356c" class="bulleted-list"><li>api-routes.js<pre id="d378b770-80e7-43d0-8062-55498c8a5a6f" class="code"><code>// fileName: api-routes.js
+
+// initialize Express router
+let router = require(&quot;express&quot;).Router();
+
+// set default API responses
+router.get(&quot;/&quot;, function(req, res) {
+  res.json({
+    status: &quot;API its Working&quot;,
+    message: &quot;Welcome to resthub crafted!&quot;
+  });
+});
+
+// Import mahasiswa controller
+var mahasiswaController = require(&quot;./mahasiswaController&quot;);
+
+// mahasiswa routes
+router
+  .route(&quot;/mahasiswa&quot;)
+  .get(mahasiswaController.index)
+  .post(mahasiswaController.new);
+router
+  .route(&quot;/mahasiswa/:mahasiswa_id&quot;)
+  .get(mahasiswaController.view)
+  .get(mahasiswaController.view)
+  .patch(mahasiswaController.update)
+  .put(mahasiswaController.update)
+  .delete(mahasiswaController.delete);
+// exports API module
+module.exports = router;</code></pre></li></ul><ul id="9662a7aa-4221-444f-acfd-a4fcabcb2ca8" class="bulleted-list"><li>mahasiswaController.js<pre id="fbb7578b-314a-4b46-a1bc-1dfa3022c758" class="code"><code>// fileName: mahasiswaController.js
+
+// Import mahasiswa model
+Mahasiswa = require(&quot;./mahasiswaModel&quot;);
+
+// Handle index actions
+exports.index = function(req, res) {
+  Mahasiswa.get(function(err, mahasiswa) {
+    if (err) {
+      res.json({
+        status: &quot;error&quot;,
+        message: err
+      });
+    }
+    res.json({
+      status: &quot;success&quot;,
+      message: &quot;Data Mahasiswa Berhasil Di Dapatkan&quot;,
+      data: mahasiswa
+    });
+  });
+};
+
+// Handle create mahasiswa actions
+exports.new = function(req, res) {
+  var mahasiswa = new Mahasiswa();
+  mahasiswa.nim = req.body.nim ? req.body.nim : mahasiswa.nim;
+  mahasiswa.nama = req.body.nama;
+  mahasiswa.jurusan = req.body.jurusan;
+  mahasiswa.semester = req.body.semester;
+  // save the mahasiswa and check for errors
+  mahasiswa.save(function(err) {
+    if (err) res.json(err);
+    res.json({
+      message: &quot;Mahasiswa Baru Terdaftar!&quot;,
+      data: mahasiswa
+    });
+  });
+};
+
+// Handle view mahasiswa info
+exports.view = function(req, res) {
+  Mahasiswa.findById(req.params.mahasiswa_id, function(err, mahasiswa) {
+    if (err) res.send(err);
+    res.json({
+      message: &quot;Mahasiswa Details Loading..&quot;,
+      data: mahasiswa
+    });
+  });
+};
+
+// Handle update mahasiswa info
+exports.update = function(req, res) {
+  Mahasiswa.findById(req.params.mahasiswa_id, function(err, mahasiswa) {
+    if (err) res.send(err);
+    mahasiswa.nim = req.body.nim ? req.body.nim : mahasiswa.nim;
+    mahasiswa.nama = req.body.nama;
+    mahasiswa.jurusan = req.body.jurusan;
+    mahasiswa.semester = req.body.semester;
+    // save the mahasiswa and check for errors
+    mahasiswa.save(function(err) {
+      if (err) res.json(err);
+      res.json({
+        message: &quot;Mahasiswa Info Updated&quot;,
+        data: mahasiswa
+      });
+    });
+  });
+};
+
+// handle delete mahasiswa
+exports.delete = function(req, res) {
+  Mahasiswa.remove(
+    {
+      _id: req.params.mahasiswa_id
+    },
+    function(err) {
+      if (err) res.send(err);
+      res.json({
+        status: &quot;success&quot;,
+        message: &quot;Mahasiswa deleted&quot;
+      });
+    }
+  );
+};</code></pre></li></ul><ul id="796fcc63-3802-46f4-bccb-df2dab8703fa" class="bulleted-list"><li>mahasisModel.js<pre id="8d73f43d-b1e3-4c89-9a99-361e3d254a1d" class="code"><code>// fileName: mahasisModel.js
+
+// import mongoose
+var mongoose = require(&quot;mongoose&quot;);
+
+// setup schema
+var mahasiswaSchema = mongoose.Schema({
+  nim: {
+    type: String,
+    required: true
+  },
+  nama: {
+    type: String
+  },
+  jurusan: {
+    type: String
+  },
+  semester: {
+    type: String
+  },
+  create_date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// export mahasiswa model
+var Mahasiswa = (module.exports = mongoose.model(&quot;mahasiswa&quot;, mahasiswaSchema));
+module.exports.get = function(callback, limit) {
+  Mahasiswa.find(callback).limit(limit);
+};</code></pre></li></ul><ul id="e7050987-8da0-4793-917b-529e2c20caf9" class="bulleted-list"><li>3_SS_Req_GET_API_Browser<figure id="6370d479-0b63-4cda-b31f-b9a63e577515" class="image"><a href="TUGAS%20AKHIR/3_SS_Req_GET_API_Browser.png"><img style="width:1023px" src="TUGAS%20AKHIR/3_SS_Req_GET_API_Browser.png"/></a></figure></li></ul><ul id="d511a64a-ce6b-4120-bad3-307ee2184de8" class="bulleted-list"><li>4-SS_Req_GET_All_Postman<figure id="5b42829c-5b86-408f-9e6b-988ba0d66ba0" class="image"><a href="TUGAS%20AKHIR/4-SS_Req_GET_All_Postman.png"><img style="width:1069px" src="TUGAS%20AKHIR/4-SS_Req_GET_All_Postman.png"/></a></figure></li></ul><ul id="ad844c01-518b-425b-9c9c-ccc73f533c99" class="bulleted-list"><li>4-SS_Req_POST_Data1_Postman<figure id="6d0197f9-4b02-4d1d-9ced-0d860e1f4a8d" class="image"><a href="TUGAS%20AKHIR/4-SS_Req_POST_Data1_Postman.png"><img style="width:1063px" src="TUGAS%20AKHIR/4-SS_Req_POST_Data1_Postman.png"/></a></figure></li></ul><ul id="2a050b6b-5242-4ed3-99b3-b3536a3bd332" class="bulleted-list"><li>4-SS_Req_POST_Data2_Postman<figure id="1e15e9c5-13ae-4a48-8270-50889bf54d72" class="image"><a href="TUGAS%20AKHIR/4-SS_Req_POST_Data2_Postman.png"><img style="width:1063px" src="TUGAS%20AKHIR/4-SS_Req_POST_Data2_Postman.png"/></a></figure></li></ul><ul id="26edd219-cb07-4ccc-af73-2604f19fd1ff" class="bulleted-list"><li>5-SS_Req_GET_ID_Postman<figure id="a5081ac1-4831-4370-9ef0-8eac932f876a" class="image"><a href="TUGAS%20AKHIR/5-SS_Req_GET_ID_Postman.png"><img style="width:1065px" src="TUGAS%20AKHIR/5-SS_Req_GET_ID_Postman.png"/></a></figure></li></ul><ul id="225b6f7a-b1f6-465f-93cf-8b5a8cd393cb" class="bulleted-list"><li>6-SS_Req_PUT_API_Postman<figure id="ff7d33d9-2488-4bfe-9cbb-b8a3049b2ada" class="image"><a href="TUGAS%20AKHIR/6-SS_Req_PUT_API_Postman.png"><img style="width:1062px" src="TUGAS%20AKHIR/6-SS_Req_PUT_API_Postman.png"/></a></figure></li></ul><ul id="9875e75c-9582-471e-b6a0-ad121162d36a" class="bulleted-list"><li>7-SS_Req_DELETE_API_Postman<figure id="4bb7c97e-e8cc-4cb9-9316-e7af5dc10927" class="image"><a href="TUGAS%20AKHIR/7-SS_Req_DELETE_API_Postman.png"><img style="width:1065px" src="TUGAS%20AKHIR/7-SS_Req_DELETE_API_Postman.png"/></a></figure></li></ul><ul id="04a306f9-1a8e-487a-a152-15a2a9dc45f4" class="bulleted-list"><li>8-SS_Req_GET_API_Postman<figure id="bf947e4e-d3d1-4b28-9181-058b9e47757f"><div class="source"><a></a></div></figure></li></ul></div></article></body></html>

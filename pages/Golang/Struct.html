@@ -1,0 +1,825 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Struct</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="18208162-f314-4940-a6d7-acba8145571f" class="page sans"><header><h1 class="page-title">Struct</h1></header><div class="page-body"><ol id="61f8be89-8220-4347-95cb-a9e7e281abe1" class="numbered-list" start="1"><li><strong>Struct</strong><p id="4d1d9471-ada1-45dc-bffb-535668b10834" class="">Go tidak memiliki class yang ada di bahasa-bahasa strict OOP lain. Tapi Go memiliki tipe data struktur yang disebut dengan Struct.</p><p id="15624c23-1764-4699-a73d-dc733774860e" class="">Struct adalah kumpulan definisi variabel (atau property) dan atau fungsi (atau method), yang dibungkus sebagai tipe data baru dengan nama tertentu. Property dalam struct, tipe datanya bisa bervariasi. Mirip seperti <code>map</code>, hanya saja key-nya sudah didefinisikan di awal, dan tipe data tiap itemnya bisa berbeda.</p><p id="dd1bea49-6428-49be-8101-e630889427ab" class="">Dari sebuah struct, kita bisa buat variabel baru, yang memiliki atribut sesuai skema struct tersebut. Kita sepakati dalam buku ini, variabel tersebut dipanggil dengan istilah <strong>object</strong> atau <strong>object struct</strong>.</p><blockquote id="87a4c9e1-4b58-4806-9284-cf511d50dfaf" class="">Konsep struct di golang mirip dengan konsep class pada OOP, meski sebenarnya berbeda. Disini penulis menggunakan konsep OOP sebagai analogi, dengan tujuan untuk mempermudah dalam mencerna isi bab ini.</blockquote><p id="7ff8ed37-639c-4bef-a4ef-0689ed35221f" class="">Dengan memanfaatkan struct, grouping data akan lebih mudah, selain itu dan rapi dan gampang untuk di-maintain.</p></li></ol><ol id="d1ce6f88-801f-4ede-97b4-58dc6df63711" class="numbered-list" start="2"><li><strong>Deklarasi Struct</strong><p id="4f61b102-cfc8-49a8-a544-1b5b9d6d975c" class="">Keyword <code>type</code> digunakan untuk deklarasi struct. Di bawah ini merupakan contoh cara penggunaannya.</p><pre id="9e3d0bfe-c735-4b51-a963-9fa1718335dc" class="code"><code>type student struct {
+    name string
+    grade int
+}</code></pre><p id="d2a646f4-5904-436f-883c-24f5ce1a3376" class="">Struct <code>student</code> dideklarasikan memiliki 2 property, yaitu <code>name</code> dan <code>grade</code>. Objek yang dibuat dengan struct ini nantinya memiliki skema atau struktur yang sama.</p></li></ol><ol id="51583964-59c4-4dae-b87f-317fee1a903a" class="numbered-list" start="3"><li><strong>Penerapan Struct</strong><p id="0c43d555-3f2d-43bf-ab22-49be9d31fadf" class="">Struct <code>student</code> yang sudah disiapkan di atas akan kita manfaatkan untuk membuat variabel objek. Property variabel tersebut di-isi kemudian ditampilkan.</p><pre id="c744ef82-1f36-429b-9f23-f7a21b328f53" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+
+	var s1 student
+	s1.name = &quot;john wick&quot;
+	s1.grade = 2
+
+	fmt.Println(&quot;name  :&quot;, s1.name)
+	fmt.Println(&quot;grade :&quot;, s1.grade)
+}
+
+type student struct {
+	name  string
+	grade int
+}</code></pre><p id="50e91f78-9491-486d-8d63-3872b159571d" class="">Cara membuat variabel objek sama seperti pembuatan variabel biasa. Tinggal tulis saja nama variabel diikuti nama struct, contoh: <code>var s1 student</code>.</p><p id="d33df999-fce4-462e-a41d-4df7c88ef326" class="">Semua property variabel objek pada awalnya memiliki zero value sesuai tipe datanya.</p><p id="73a71d84-3b67-493a-950a-6ed2cfdba38d" class="">Property variabel objek bisa diakses nilainya menggunakan notasi titik, contohnya <code>s1.name</code>. Nilai property-nya juga bisa diubah, contohnya <code>s1.grade = 2</code>.</p><p id="bfa44c04-8b6e-4dfa-853b-3be827648276" class="">Hasil:</p><pre id="d30a83e5-4754-4348-9e2d-660bef890dd3" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\struct.go
+name  : john wick
+grade : 2</code></pre></li></ol><ol id="841f627e-aad2-499c-8b52-00358421f4d5" class="numbered-list" start="4"><li><strong>Inisialisasi Object Struct</strong><p id="d86d1cad-ad9e-45d0-a535-8a45ec8f0173" class="">Cara inisialisasi variabel objek adalah dengan menambahkan kurung kurawal setelah nama struct. Nilai masing-masing property bisa diisi pada saat inisialisasi.</p><p id="0bff5008-f64b-414c-8dcd-a0b3f0204bc8" class="">Pada contoh berikut, terdapat 3 buah variabel objek yang dideklarasikan dengan cara berbeda.</p><pre id="7b32b447-2b53-4ed0-96ee-618cf4d11daa" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var s1 = student{}
+	s1.name = &quot;wick&quot;
+	s1.grade = 2
+
+	var s2 = student{&quot;ethan&quot;, 2}
+
+	var s3 = student{name: &quot;jason&quot;}
+
+	fmt.Println(&quot;student 1 :&quot;, s1.name)
+	fmt.Println(&quot;student 2 :&quot;, s2.name)
+	fmt.Println(&quot;student 3 :&quot;, s3.name)
+}
+
+type student struct {
+	name  string
+	grade int
+}</code></pre><p id="a34680fb-4fbc-43dd-9f8f-ac064628991f" class="">Hasil:</p><pre id="fb1ec0fb-0120-46ad-8f11-297a2c2a6265" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\struct.go
+student 1 : wick
+student 2 : ethan
+student 3 : jason</code></pre><p id="ffe6f804-e4be-4390-b890-da626edf8ba2" class="">Pada kode di atas, variabel <code>s1</code> menampung objek cetakan <code>student</code>. Vartiabel tersebut kemudian di-set nilai property-nya.</p><p id="f04e1734-3183-42cf-a1e1-f57f05205111" class="">Variabel objek <code>s2</code> dideklarasikan dengan metode yang sama dengan <code>s1</code>, pembedanya di <code>s2</code> nilai propertinya di isi langsung ketika deklarasi. Nilai pertama akan menjadi nilai property pertama (yaitu <code>name</code>), dan selanjutnya berurutan.</p><p id="74252582-c83f-4e94-9e97-7f4a44b697b2" class="">Pada deklarasi <code>s3</code>, dilakukan juga pengisian property ketika pencetakan objek. Hanya saja, yang diisi hanya <code>name</code> saja. Cara ini cukup efektif jika digunakan untuk membuat objek baru yang nilai property-nya tidak semua harus disiapkan di awal. Keistimewaan lain menggunakan cara ini adalah penentuan nilai property bisa dilakukan dengan tidak berurutan. </p><p id="95603b5e-a24d-47d8-86b6-9e871789b66e" class="">Contohnya:</p><pre id="a6df2cee-d470-472e-abba-9c65437d2ba4" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var s1 = student{}
+	s1.name = &quot;wick&quot;
+	s1.grade = 2
+
+	var s2 = student{&quot;ethan&quot;, 2}
+
+	var s3 = student{name: &quot;jason&quot;}
+	var s4 = student{name: &quot;wayne&quot;, grade: 2}
+	var s5 = student{grade: 2, name: &quot;bruce&quot;}
+
+	fmt.Println(&quot;student 1 :&quot;, s1.name)
+	fmt.Println(&quot;student 2 :&quot;, s2.name)
+	fmt.Println(&quot;student 3 :&quot;, s3.name)
+	fmt.Println(&quot;student 4 :&quot;, s4.name)
+	fmt.Println(&quot;student 5 :&quot;, s5.name)
+}
+
+type student struct {
+	name  string
+	grade int
+}</code></pre><p id="977aab5d-3cf2-4dde-92a6-445d357397fb" class="">Hasilnya:</p><pre id="ba500c1f-bda8-4fe8-961e-4cb35dad1480" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\struct.go
+student 1 : wick
+student 2 : ethan
+student 3 : jason
+student 4 : wayne
+student 5 : bruce</code></pre></li></ol><ol id="238285b7-d382-4742-966f-590cf9f2d5f2" class="numbered-list" start="5"><li><strong>Variabel Objek Pointer</strong><p id="116217f2-e62b-4768-a759-1d7391f21537" class="">Objek yang dibuat dari tipe struct bisa diambil nilai pointer-nya, dan bisa disimpan pada variabel objek yang bertipe struct pointer. </p><p id="1a6a411d-c62c-4d5a-820f-8dd915c90a96" class="">Contoh penerapannya:</p><pre id="e016c7d1-1ad0-4b86-a1d4-13106f0f8d3f" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var s1 = student{name: &quot;wick&quot;, grade: 2}
+	var s2 *student = &amp;s1
+	fmt.Println(&quot;student 1, name :&quot;, s1.name)
+	fmt.Println(&quot;student 2, name :&quot;, s2.name)
+	s2.name = &quot;ethan&quot;
+	fmt.Println(&quot;student 1, name :&quot;, s1.name)
+	fmt.Println(&quot;student 2, name :&quot;, s2.name)
+}
+
+type student struct {
+	name  string
+	grade int
+}</code></pre><p id="86972f9a-46b6-4d32-9108-7f171d09d94b" class=""><code>s2</code> adalah variabel pointer hasil cetakan struct <code>student</code>. <code>s2</code> menampung nilai referensi <code>s1</code>, menjadikan setiap perubahan pada property variabel tersebut, akan juga berpengaruh pada variabel objek <code>s1</code>.</p><p id="d69a3e79-a851-40d5-ba94-20d9311de563" class="">Meskipun <code>s2</code> bukan variabel asli, property nya tetap bisa diakses seperti biasa. Inilah keistimewaan property dalam objek pointer, tanpa perlu di-dereferensi nilai asli property tetap bisa diakses. Pengisian nilai pada property tersebut juga bisa langsung menggunakan nilai asli, contohnya seperti <code>s2.name = &quot;ethan&quot;</code>.</p><p id="80f8c733-d82d-4542-bb22-a56f98ecfa6c" class="">Output kode:</p><pre id="38227e35-5255-4515-8454-614678a676d5" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\struct.go
+student 1, name : wick
+student 2, name : wick
+student 1, name : ethan
+student 2, name : ethan</code></pre></li></ol><ol id="d121deab-ff46-4db6-a1b7-b78c1b899c48" class="numbered-list" start="6"><li><strong>Embedded Struct</strong><p id="93ce1065-70c0-4e32-869c-7d131a2cbed5" class=""><strong>Embedded</strong> struct adalah mekanisme untuk menempelkan sebuah struct sebagai properti struct lain. Agar lebih mudah dipahami, mari kita bahas kode berikut.</p><pre id="517c044c-0a59-41d3-8009-b3fa07c17662" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+type person struct {
+    name string
+    age  int
+}
+
+type student struct {
+    grade int
+    person
+}
+
+func main() {
+    var s1 = student{}
+    s1.name = &quot;wick&quot;
+    s1.age = 21
+    s1.grade = 2
+
+    fmt.Println(&quot;name  :&quot;, s1.name)
+    fmt.Println(&quot;age   :&quot;, s1.age)
+    fmt.Println(&quot;age   :&quot;, s1.person.age)
+    fmt.Println(&quot;grade :&quot;, s1.grade)
+}</code></pre><p id="d3bd9f2d-991d-446b-90b2-fd3c17fa9105" class="">Pada kode di atas, disiapkan struct <code>person</code> dengan properti yang tersedia adalah <code>name</code> dan <code>age</code>. Disiapkan juga struct <code>student</code> dengan property <code>grade</code>. Struct <code>person</code> di-embed kedalam struct <code>student</code>. Caranya cukup mudah, yaitu dengan menuliskan nama struct yang ingin di-embed ke dalam body <code>struct</code> target.</p><p id="a095975d-e000-4095-b3a0-177aa84a8a57" class="">Embedded struct adalah <strong>mutable</strong>, nilai property-nya nya bisa diubah.</p><p id="d2fa701a-17b4-431c-8d05-76ff9593f3d0" class="">Khusus untuk properti yang bukan properti asli (properti turunan dari struct lain), bisa diakses dengan cara mengakses struct <em>parent</em>-nya terlebih dahulu, contohnya <code>s1.person.age</code>. Nilai yang dikembalikan memiliki referensi yang sama dengan <code>s1.age</code>.</p><p id="c6e25b5f-9f3d-4908-be40-b17757cfef30" class="">Output:</p><pre id="91934ca1-2bc0-4928-8fa0-9470f3942ff5" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\struct.go
+name  : wick
+age   : 21
+age   : 21
+grade : 2</code></pre></li></ol><ol id="5aa1cbc6-16a1-4b42-abf6-ed4fa8ee541a" class="numbered-list" start="7"><li><strong>Embedded Struct Dengan Nama Property Yang Sama</strong><p id="b4445f13-d71a-4856-9081-114ef012c2cf" class="">Jika salah satu nama properti sebuah struct memiliki kesamaan dengan properti milik struct lain yang di-embed, maka pengaksesan property-nya harus dilakukan secara explisit atau jelas. Contoh bisa dilihat di kode berikut.</p><pre id="5b247846-17b5-4c99-9398-bcdc5a3138da" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+type person struct {
+    name string
+    age  int
+}
+
+type student struct {
+    person
+    age   int
+    grade int
+}
+
+func main() {
+    var s1 = student{}
+    s1.name = &quot;wick&quot;
+    s1.age = 21        // age of student
+    s1.person.age = 22 // age of person
+
+    fmt.Println(s1.name)
+    fmt.Println(s1.age)
+    fmt.Println(s1.person.age)
+}</code></pre><p id="e4c1f176-0039-468c-bb98-4bf4e57e1292" class="">Struct <code>person</code> di-embed ke dalam struct <code>student</code>, dan kedua struct tersebut kebetulan salah satu nama property-nya ada yg sama, yaitu <code>age</code>. Cara mengakses property <code>age</code> milik struct <code>person</code> lewat objek struct <code>student</code>, adalah dengan menuliskan nama struct yg di-embed kemudian nama property-nya, contohnya: <code>s1.person.age = 22</code>.</p></li></ol><ol id="79102924-a90b-4d9c-ba78-1a29f7179f22" class="numbered-list" start="8"><li><strong>Pengisian Nilai Sub-Struct</strong><p id="1036c47f-7506-4d79-a7ef-d6c881e4d60e" class="">Pengisian nilai property sub-struct bisa dilakukan dengan langsung memasukkan variabel objek yang tercetak dari struct yang sama.</p><pre id="ad378344-3801-4448-8b33-22d1c64cd022" class="code"><code>var p1 = person{name: &quot;wick&quot;, age: 21}
+var s1 = student{person: p1, grade: 2}
+
+fmt.Println(&quot;name  :&quot;, s1.name)
+fmt.Println(&quot;age   :&quot;, s1.age)
+fmt.Println(&quot;grade :&quot;, s1.grade)</code></pre><p id="5cb2c597-65a0-4947-a0de-bbbd684b31f9" class="">Pada deklarasi <code>s1</code>, property <code>person</code> diisi variabel objek <code>p1</code>.</p></li></ol><ol id="dc7dd7d0-ac7e-4b42-ac24-a3c28c74134c" class="numbered-list" start="9"><li><strong>Anonymous Struct</strong><p id="a47c3cd9-9d24-47b4-8d59-10504e685147" class="">Anonymous struct adalah struct yang tidak dideklarasikan di awal sebagai tipe data baru, melainkan langsung ketika pembuatan objek. Teknik ini cukup efisien untuk pembuatan variabel objek yang struct-nya hanya dipakai sekali.</p><pre id="2cf68378-c415-42e0-90ac-32f623309077" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+type person struct {
+    name string
+    age  int
+}
+
+func main() {
+    var s1 = struct {
+        person
+        grade int
+    }{}
+    s1.person = person{&quot;wick&quot;, 21}
+    s1.grade = 2
+
+    fmt.Println(&quot;name  :&quot;, s1.person.name)
+    fmt.Println(&quot;age   :&quot;, s1.person.age)
+    fmt.Println(&quot;grade :&quot;, s1.grade)
+}</code></pre><p id="3098f03b-b501-4e81-88dc-bea342739d8c" class="">Pada kode di atas, variabel <code>s1</code> langsung diisi objek anonymous struct yang memiliki property <code>grade</code>, dan property <code>person</code> yang merupakan embedded struct.</p><p id="0d48fc03-4a5a-433c-876e-5c5bfcfeb14b" class="">Salah satu aturan yang perlu diingat dalam pembuatan anonymous struct adalah, deklarasi harus diikuti dengan inisialisasi. Bisa dilihat pada <code>s1</code> setelah deklarasi struktur struct, terdapat kurung kurawal untuk inisialisasi objek. Meskipun nilai tidak diisikan di awal, kurung kurawal tetap harus ditulis.</p><pre id="05907c21-4bb1-4796-9839-d1f8ed2a2c3b" class="code"><code>// anonymous struct tanpa pengisian property
+var s1 = struct {
+    person
+    grade int
+}{}
+
+// anonymous struct dengan pengisian property
+var s2 = struct {
+    person
+    grade int
+}{
+    person: person{&quot;wick&quot;, 21},
+    grade:  2,
+}</code></pre></li></ol><ol id="55c4d734-2915-4d96-8406-66bba3992acb" class="numbered-list" start="10"><li><strong>Kombinasi Slice &amp; Struct</strong><p id="09e64b45-30e3-4ff3-9903-e3d13cd70d3e" class="">Slice dan <code>struct</code> bisa dikombinasikan seperti pada slice dan <code>map</code>, caranya penggunaannya-pun mirip, cukup tambahkan tanda <code>[]</code> sebelum tipe data pada saat deklarasi.</p><pre id="1c26e2ef-77a5-41c3-81a8-7baf729817f8" class="code"><code>type person struct {
+    name string
+    age  int
+}
+
+var allStudents = []person{
+    {name: &quot;Wick&quot;, age: 23},
+    {name: &quot;Ethan&quot;, age: 23},
+    {name: &quot;Bourne&quot;, age: 22},
+}
+
+for _, student := range allStudents {
+    fmt.Println(student.name, &quot;age is&quot;, student.age)
+}</code></pre></li></ol><ol id="a3d0f0ba-d785-4f5d-aee5-3b9563f6d7a0" class="numbered-list" start="11"><li><strong>Inisialisasi Slice Anonymous Struct</strong><p id="8483346c-e37d-418f-aa6e-a0666308faab" class="">Anonymous struct bisa dijadikan sebagai tipe sebuah slice. Dan nilai awalnya juga bisa diinisialisasi langsung pada saat deklarasi. Berikut adalah contohnya:</p><pre id="a7aea618-5f82-425d-bce4-9dd4bd37251a" class="code"><code>var allStudents = []struct {
+    person
+    grade int
+}{
+    {person: person{&quot;wick&quot;, 21}, grade: 2},
+    {person: person{&quot;ethan&quot;, 22}, grade: 3},
+    {person: person{&quot;bond&quot;, 21}, grade: 3},
+}
+
+for _, student := range allStudents {
+    fmt.Println(student)
+}</code></pre></li></ol><ol id="841105fe-0af0-46cb-8d45-c00eaa1b638c" class="numbered-list" start="12"><li><strong>Deklarasi Anonymous Struct Menggunakan Keyword var</strong><p id="acfe74d7-ceaa-47e5-aa6c-533c0caea3ba" class="">Cara lain untuk deklarasi anonymous struct adalah dengan menggunakan keyword <code>var</code>.</p><pre id="d4b3dec0-da75-4cb4-b41d-73d323ec66bb" class="code"><code>var student struct {
+    person
+    grade int
+}
+
+student.person = person{&quot;wick&quot;, 21}
+student.grade = 2</code></pre><p id="8a54f584-3073-4481-8ac6-45fab1ef3508" class="">Statement <code>type student struct</code> adalah contoh cara deklarasi struct. Maknanya akan berbeda ketika keyword <code>type</code> diganti <code>var</code>, seperti pada contoh di atas <code>var student struct</code>, yang artinya dicetak sebuah objek dari anonymous struct kemudian disimpan pada variabel bernama <code>student</code>.</p><p id="f90f3ae4-1917-4f47-bdca-4d5d4a27b896" class="">Deklarasi anonymous struct menggunakan metode ini juga bisa dilakukan beserta inisialisasi-nya.</p><pre id="6a70986d-6601-4ea4-958d-e7b6065b84c4" class="code"><code>// hanya deklarasi
+var student struct {
+    grade int
+}
+
+// deklarasi sekaligus inisialisasi
+var student = struct {
+    grade int
+} {
+    12,
+}</code></pre></li></ol><ol id="01a5c2a0-b069-45ef-8b09-f88d7213e4b5" class="numbered-list" start="13"><li><strong>Nested struct</strong><p id="14c38c08-0b92-4d51-b84f-b17417fbe952" class="">Nested struct adalah anonymous struct yang di-embed ke sebuah struct. Deklarasinya langsung didalam struct peng-embed. Contoh:</p><pre id="f171273c-6a47-4d79-8260-726a2dbeac53" class="code"><code>type student struct {
+    person struct {
+        name string
+        age  int
+    }
+    grade   int
+    hobbies []string
+}</code></pre><p id="62725d8e-5d58-4b1f-b835-106106c0e7ac" class="">Teknik ini biasa digunakan ketika decoding data <strong>json</strong> yang struktur datanya cukup kompleks dengan proses decode hanya sekali.</p></li></ol><ol id="b2164d88-3560-44fe-ad39-a28591089366" class="numbered-list" start="14"><li><strong>Deklarasi Dan Inisialisasi Struct Secara Horizontal</strong><p id="d4862a44-ee07-4055-9fb1-d3163b3a17db" class="">Deklarasi struct bisa dituliskan secara horizontal, caranya bisa dilihat pada kode berikut:</p><pre id="0ecf9f1d-a144-4810-aa14-a8ead7aef87e" class="code"><code>type person struct { name string; age int; hobbies []string }</code></pre><p id="519a14b4-0dd4-4b6d-b682-a5e9a59a0769" class="">Tanda semi-colon (<code>;</code>) digunakan sebagai pembatas deklarasi poperty yang dituliskan secara horizontal. Inisialisasi nilai juga bisa dituliskan dengan metode ini. Contohnya:</p><pre id="b156edd1-603a-48ea-a297-b09c921b187d" class="code"><code>var p1 = struct { name string; age int } { age: 22, name: &quot;wick&quot; }
+var p2 = struct { name string; age int } { &quot;ethan&quot;, 23 }</code></pre><p id="4e13c021-f42e-4d04-af57-73cd399ca5b0" class="">Bagi pengguna editor Sublime yang terinstal plugin GoSublime didalamnya, cara ini tidak akan bisa dilakukan, karena setiap kali file di-save, kode program dirapikan. Jadi untuk mengetesnya bisa dengan menggunakan editor lain.</p></li></ol><ol id="b06f90a5-3e45-4620-860b-d31ab238f498" class="numbered-list" start="15"><li><strong>Tag property dalam struct</strong><p id="303c39b1-4f6d-4bf9-8637-a78743cf477c" class="">Tag merupakan informasi opsional yang bisa ditambahkan pada masing-masing property struct.</p><pre id="75b4f686-c030-4e4a-af43-d1f4f8349d63" class="code"><code>type person struct {
+    name string `tag1`
+    age  int    `tag2`
+}</code></pre><p id="3f9b64c0-5ad4-40c4-b711-caf46561f9b1" class="">Tag biasa dimanfaatkan untuk keperluan encode/decode data json. Informasi tag juga bisa diakses lewat reflect. Nantinya akan ada pembahasan yang lebih detail mengenai pemanfaatan tag dalam struct, terutama ketika sudah masuk bab JSON.</p></li></ol><ol id="380e10a9-abf7-45ab-85e4-50ea2f62fb7e" class="numbered-list" start="16"><li><strong>Type Alias</strong><p id="9bcc6ddc-a708-4ff3-8aa0-133b268172d8" class="">Sebuah tipe data, seperti struct, bisa dibuatkan alias baru, caranya dengan <code>type NamaAlias = TargetStruct</code>. </p><p id="ea21d7e3-81dc-427d-8581-d7a09e9d259e" class="">Contoh:</p><pre id="c39fc057-0315-43b9-bd88-adaf6d224ee3" class="code"><code>type Person struct {
+    name string
+    age  int
+}
+type People = Person
+
+var p1 = Person{&quot;wick&quot;, 21}
+fmt.Println(p1)
+
+var p2 = People{&quot;wick&quot;, 21}
+fmt.Println(p2)</code></pre><p id="ba1d75b3-238f-4811-8c29-fb4667b32a1c" class="">Pada kode di atas, sebuah alias bernama <code>People</code> dibuat untuk struct <code>Person</code>.</p><p id="00e5b020-ec52-44ac-9c76-a19a8fa19c7a" class="">Casting dari objek (yang dicetak lewat struct tertentu) ke tipe yang merupakan alias dari struct pencetak, hasilnya selalu valid. Berlaku juga sebaliknya.</p><pre id="2e473fd1-9397-4365-a768-86045c93443a" class="code"><code>people := People{&quot;wick&quot;, 21}
+fmt.Println(Person(people))
+
+person := Person{&quot;wick&quot;, 21}
+fmt.Println(People(person))</code></pre><p id="bd5a398f-a435-4d5d-895d-c8c24727e638" class="">Pembuatan struct baru juga bisa dilakukan lewat teknik type alias. Silakan perhatikan kode berikut.</p><pre id="8323b291-0411-471a-8475-8ecdfadf8173" class="code"><code>type People1 struct {
+    name string
+    age  int
+}
+type People2 = struct {
+    name string
+    age  int
+}</code></pre><p id="bc56f416-9a0f-4a93-8af2-8434625251b2" class="">Struct <code>People1</code> dideklarasikan. Struct alias <code>People2</code> juga dideklarasikan, struct ini merupakan alias dari anonymous struct. Penggunaan teknik type alias untuk anonymous struct menghasilkan output yang ekuivalen dengan pendeklarasian struct.</p><p id="dc17dc42-ec4f-4575-a526-c11a6b0667f4" class="">Perlu diketahui juga, dan di atas sudah sempat disinggung, bahwa teknik type alias ini tidak didesain hanya untuk pembuatan alias pada tipe struct saja, semua jenis tipe data bisa dibuatkan alias. Di contoh berikut, dipersiapkan tipe <code>Number</code> yang merupakan alias dari tipe data <code>int</code>.</p><pre id="07134e05-743c-466c-b394-6285cb1eecf5" class="code"><code>type Number = int
+var num Number = 12</code></pre></li></ol></div></article></body></html>

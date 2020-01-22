@@ -1,0 +1,639 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Web</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="27e6f098-558f-4b04-8f58-729bfa9782b4" class="page sans"><header><h1 class="page-title"><strong>Web</strong></h1></header><div class="page-body"><ol id="41370cce-e98a-4ea2-8b6e-12fe1fcedfe6" class="numbered-list" start="1"><li><strong>Web</strong><p id="23c471e6-8a91-40e2-ab96-c5cd2d6e5904" class="">Go menyediakan package <code>net/http</code>, berisi berbagai macam fitur untuk keperluan pembuatan aplikasi berbasi web. Termasuk didalamnya web server, routing, templating, dan lainnya.</p><p id="bfab5249-dc92-42ee-b0ba-91befec42c52" class="">Go memiliki web server sendiri, dan web server tersebut berada di dalam Go, tidak seperti bahasa lain yang server nya terpisah dan perlu di-instal sendiri (seperti PHP yang memerlukan Apache, .NET yang memerlukan IIS).</p><p id="165bbced-d54d-4275-b552-4640f8dde9f2" class="">kita akan belajar cara pembuatan aplikasi web sederhanda dan pemanfaatan template untuk mendesain view.</p></li></ol><ol id="6ef7dfa3-3e58-4b59-a2eb-35be5af64bf4" class="numbered-list" start="2"><li><strong>Membuat Aplikasi Web Sederhanda</strong><p id="fefab1f3-a26b-45e0-a65e-16de0500ec33" class="">Package <code>net/http</code> memiliki banyak sekali fungsi yang bisa dimanfaatkan. Di bagian ini kita akan mempelajari beberapa fungsi penting seperti <em>routing</em> dan <em>start server</em>.</p><p id="63a1a26d-f126-455d-86cf-d09ea79826d9" class="">Program dibawah ini merupakan contoh sederhana untuk memunculkan text di web ketika url tertentu diakses.</p><pre id="933f03ff-ea8a-405a-b258-ef9637bcf32b" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;net/http&quot;
+
+func index(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintln(w, &quot;apa kabar!&quot;)
+}
+
+func main() {
+    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, &quot;halo!&quot;)
+    })
+
+    http.HandleFunc(&quot;/index&quot;, index)
+
+    fmt.Println(&quot;starting web server at http://localhost:8080/&quot;)
+    http.ListenAndServe(&quot;:8080&quot;, nil)
+}</code></pre><p id="90f69091-9c5d-48db-a416-a1ffdba36429" class="">Jalankan program tersebut.</p><pre id="1db3a859-6b53-4140-bb23-f704e5b47108" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\web.go
+starting web server at http://localhost:8080/</code></pre><p id="055f758c-0b3e-4547-8812-c52625d17ebe" class="">Jika muncul dialog <strong>Do you want the application to accept incoming network connections? </strong>atau sejenis, pilih allow. Setelah itu, buka url <a href="http://localhost:8080/">http://localhost:8080/</a>:</p><figure id="2a781e45-d376-4f33-a5aa-ccc59175e940" class="image"><a href="Web/Untitled.png"><img style="width:375px" src="Web/Untitled.png"/></a></figure><p id="a37ab7f1-9d00-415f-b356-3590e1f37970" class=""><a href="http://localhost/index/">http://localhost/index</a> lewat browser:</p><figure id="f14f7851-6b08-4852-84b8-b92fd556cd11" class="image"><a href="Web/Untitled%201.png"><img style="width:406px" src="Web/Untitled%201.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a16c8164-7d75-461a-a150-e628197af88c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Fungsi <code>http.HandleFunc()</code> digunakan untuk routing aplikasi web. Maksud dari routing adalah penentuan aksi ketika url tertentu diakses oleh user.
+
+Pada kode di atas 2 rute didaftarkan, yaitu <code>/</code> dan <code>/index</code>. Aksi dari rute <code>/</code> adalah menampilkan text <code>&quot;halo&quot;</code> di halaman website. Sedangkan <code>/index</code> menampilkan text <code>&quot;apa kabar!&quot;</code>.
+
+Fungsi <code>http.HandleFunc()</code> memiliki 2 buah parameter yang harus diisi. Parameter pertama adalah rute yang diinginkan. Parameter kedua adalah <em>callback</em> atau aksi ketika rute tersebut diakses. Callback tersebut bertipe 
+fungsi <code>func(w http.ResponseWriter, r *http.Request)</code>.
+
+Pada pendaftaran rute <code>/index</code>, callback-nya adalah fungsi <code>index()</code>, hal seperti ini diperbolehkan asalkan tipe dari fungsi tersebut sesuai.
+
+Fungsi <code>http.listenAndServe()</code> digunakan untuk menghidupkan server sekaligus menjalankan aplikasi menggunakan server tersebut. 
+Di Go, 1 web aplikasi adalah 1 buah server berbeda.
+
+Pada contoh di atas, server dijalankan pada port <code>8080</code>.
+
+Perlu diingat, setiap ada perubahan pada file <code>.go</code>, <code>go run</code> harus dipanggil lagi.
+
+Untuk menghentikan web server, tekan <strong>CTRL+C</strong> pada terminal atau CMD, dimana pengeksekusian aplikasi berlangsung.</div></figure></li></ol><ol id="8b3fcb0f-36f5-4306-a5f1-5e8e71685836" class="numbered-list" start="3"><li><strong>Penggunaan Template Web</strong><p id="b7e77ec4-f099-4de8-8b83-a0d3edfc1a2c" class="">Template engine memberikan kemudahan dalam mendesain tampilan view aplikasi website. Dan kabar baiknya Go menyediakan engine template sendiri, dengan banyak fitur yang tersedia didalamnya.</p><p id="7d0a1cf0-447d-49b0-833f-56f593ae2dbd" class="">Di sini kita akan belajar contoh sederhana penggunaan template untuk menampilkan data. Pertama siapkan dahulu template nya. Buat file <code>template.html</code> lalu isi dengan kode berikut.</p><pre id="47afb957-abdf-4846-a1ab-5155f3e25c43" class="code"><code>&lt;html&gt;
+
+&lt;head&gt;
+  &lt;title&gt;Go learn net/http&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;p&gt;Hello {{.Name}} !&lt;/p&gt;
+  &lt;p&gt;{{.Message}}&lt;/p&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre><p id="bea2e025-3b66-48f4-823c-6daf424966d8" class="">Kode <code>{{.Name}}</code> artinya memunculkan isi data property <code>Name</code> yang dikirim dari router. Kode tersebut nantinya di-replace dengan isi variabel <code>Name</code>.</p><p id="9b1caac9-09b9-4c9d-a789-9a55bcb89560" class="">Selanjutnya ubah isi file <code>.go</code> dengan kode berikut.</p><pre id="024e5192-7d1a-49ba-b393-425ecd6536cf" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;html/template&quot;
+import &quot;net/http&quot;
+
+func main() {
+	http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
+		var data = map[string]string{
+			&quot;Name&quot;:    &quot;Andika Andriana&quot;,
+			&quot;Message&quot;: &quot;have a nice day&quot;,
+		}
+
+		var t, err = template.ParseFiles(&quot;template.html&quot;)
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+
+		t.Execute(w, data)
+	})
+
+	fmt.Println(&quot;starting web server at http://localhost:8080/&quot;)
+	http.ListenAndServe(&quot;:8080&quot;, nil)
+}</code></pre><p id="83e3824e-fadc-4fed-83ab-536c7ff8ec62" class="">Jalankan, lalu buka <a href="http://localhost:8080/">http://localhost:8080/</a>, maka data <code>Nama</code> dan <code>Message</code> akan muncul di view.<div class="indented"><figure id="17003533-3818-4431-9b95-3b1db57f32e0" class="image"><a href="Web/Untitled%202.png"><img style="width:332px" src="Web/Untitled%202.png"/></a></figure></div></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0271254e-8941-452a-8068-cd56b1aa2789"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Fungsi <code>template.ParseFiles()</code> digunakan untuk parsing template, mengembalikan 2 data yaitu instance template-nya dan error (jika ada). Pemanggilan method <code>Execute()</code> akan membuat hasil parsing template ditampilkan ke layar web browser.
+
+Pada kode di atas, variabel <code>data</code> disisipkan sebagai parameter ke-2 method <code>Execute()</code>. Isi dari variabel tersebut bisa diakses di-view dengan menggunakan notasi <code>{{.NAMA_PROPERTY}}</code> (nama variabel sendiri tidak perlu dituliskan, langsung nama property didalamnya).
+
+Pada contoh di atas, statement di view <code>{{.Name}}</code> akan menampilkan isi dari <code>data.Name</code>.</div></figure></li></ol></div></article></body></html>

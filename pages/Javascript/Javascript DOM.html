@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Javascript (DOM)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="57ca55e1-723d-44e2-ac61-adc7aeb10a1c" class="page sans"><header><h1 class="page-title">Javascript (DOM)</h1></header><div class="page-body"><figure id="0a972135-32e7-43b9-9a22-e6f08fc88ef4" class="link-to-page"><a href="Javascript%20DOM/DOM%20Document%20Object%20Model.html">DOM (Document Object Model)</a></figure><figure id="4c3c8e15-c373-4063-8bec-fd93da0121c5" class="link-to-page"><a href="Javascript%20DOM/Menulis%20Javascript%20di%20Browser%20Internal%20External.html">Menulis Javascript di Browser (Internal &amp; External)</a></figure><figure id="4aacca33-62bc-4e3e-b77c-171d01d0deac" class="link-to-page"><a href="Javascript%20DOM/Menuliskan%20Function%20Javascript%20Di%20Browser.html">Menuliskan Function Javascript Di Browser</a></figure><figure id="d86ba465-55dd-4de3-b603-81a1aaa9cfdf" class="link-to-page"><a href="Javascript%20DOM/Tugas%2031%20JS.html">Tugas 31 JS</a></figure><figure id="eb1a1f8b-186b-40a7-88f9-af5aab12126a" class="link-to-page"><a href="Javascript%20DOM/Javascript%20Event.html">Javascript Event</a></figure><figure id="76d01535-7f99-424e-ab4c-da57dc3264fc" class="link-to-page"><a href="Javascript%20DOM/Log%20di%20Javascript%20Event.html">Log di Javascript Event</a></figure><figure id="595ab907-3aa1-4bbc-a555-ebc9a1e95c79" class="link-to-page"><a href="Javascript%20DOM/Menyeleksi%20Element%20DOM%20dengan%20getElementById.html">Menyeleksi Element DOM dengan getElementById()</a></figure><figure id="88da2c07-063e-4d14-975f-f9e553a476c8" class="link-to-page"><a href="Javascript%20DOM/Tugas%2032%20JS.html">Tugas 32 JS</a></figure><figure id="dae74bbc-0480-49fd-a21f-6d5c732763d8" class="link-to-page"><a href="Javascript%20DOM/Menyeleksi%20Element%20DOM%20dengan%20getElementsByClassNa.html">Menyeleksi Element DOM dengan getElementsByClassName()</a></figure><figure id="045c83a0-c94c-4058-85c3-361b1eff6540" class="link-to-page"><a href="Javascript%20DOM/Tugas%2033%20JS.html">Tugas 33 JS</a></figure><figure id="46f1784e-8fb2-4f22-89d7-8606c1c9acc5" class="link-to-page"><a href="Javascript%20DOM/Menyeleksi%20Element%20DOM%20dengan%20getElementsByTagName.html">Menyeleksi Element DOM dengan getElementsByTagName()</a></figure><figure id="48b43c56-5154-46aa-8a3a-ee0a9c0e9d97" class="link-to-page"><a href="Javascript%20DOM/Tugas%2034%20JS.html">Tugas 34 JS</a></figure><figure id="6de2bc00-f793-423a-ad42-44a7740c638e" class="link-to-page"><a href="Javascript%20DOM/Menyeleksi%20Element%20DOM%20Berdasarkan%20Selector.html">Menyeleksi Element DOM Berdasarkan Selector</a></figure><figure id="f43b0991-bf88-4fdf-8367-fb5a95792c6c" class="link-to-page"><a href="Javascript%20DOM/Tugas%2035%20JS.html">Tugas 35 JS</a></figure><figure id="a3563cd1-8438-4183-af5e-fc0e38b9837a" class="link-to-page"><a href="Javascript%20DOM/Tugas%2036%20JS.html">Tugas 36 JS</a></figure><figure id="9b3a9574-bb34-438d-9ce8-8b0667db292f" class="link-to-page"><a href="Javascript%20DOM/Atribute%20item.html">Atribute item( )</a></figure><figure id="a7430172-ef9a-4b5b-b8fb-848647a9635d" class="link-to-page"><a href="Javascript%20DOM/Attribute%20getNamedItem.html">Attribute getNamedItem( )</a></figure><figure id="644182ac-0de7-4147-874a-242bad7908dc" class="link-to-page"><a href="Javascript%20DOM/Attribute%20length.html">Attribute length( )</a></figure><figure id="57c58acd-4196-4f99-bc07-28e75908c8c5" class="link-to-page"><a href="Javascript%20DOM/Attribute%20name.html">Attribute name( )</a></figure><figure id="745950a4-44e9-4520-8656-1238fc75173f" class="link-to-page"><a href="Javascript%20DOM/Tugas%2037%20JS.html">Tugas 37 JS</a></figure><figure id="da38c5ac-7ca4-4f47-869a-2398ecf36622" class="link-to-page"><a href="Javascript%20DOM/Attribute%20removeNamedItem.html">Attribute removeNamedItem( )</a></figure><figure id="2094c8f6-0c1c-401d-a8fa-71c172c03e3f" class="link-to-page"><a href="Javascript%20DOM/Attribute%20setNamedItem.html">Attribute setNamedItem( )</a></figure><figure id="47d905a3-3f53-4ea8-802e-756e2238a580" class="link-to-page"><a href="Javascript%20DOM/Attribute%20value.html">Attribute value( )</a></figure><figure id="efc3de2e-fde1-4d05-96a8-c690d9330654" class="link-to-page"><a href="Javascript%20DOM/Tugas%2038%20JS.html">Tugas 38 JS</a></figure><figure id="f16f41c5-ed3c-4ad1-a9d5-8c63ae6276dc" class="link-to-page"><a href="Javascript%20DOM/Active%20Element%20Property.html">Active Element Property</a></figure><figure id="a74950cd-a20e-49d6-a36c-d5029ee66b74" class="link-to-page"><a href="Javascript%20DOM/Fungsi%20addEventListener%20Property.html">Fungsi addEventListener( ) Property</a></figure><figure id="6212b723-a675-48d5-8c9e-fa1a67f71e2d" class="link-to-page"><a href="Javascript%20DOM/Document%20Open%20Write%20Close%20Property.html">Document Open,Write Close Property</a></figure><figure id="6abcd10c-98f9-49d4-a649-f5b443a1a219" class="link-to-page"><a href="Javascript%20DOM/Anchor%20Property.html">Anchor Property</a></figure><figure id="77cd785c-4496-40b7-8f24-b7f1ffa0a001" class="link-to-page"><a href="Javascript%20DOM/Tugas%2039%20JS.html">Tugas 39 JS</a></figure><figure id="1a2b724d-df8e-48b6-9be7-79100cc5e4be" class="link-to-page"><a href="Javascript%20DOM/Base%20Uri%20Property.html">Base Uri Property</a></figure><figure id="c810a6b2-2e9d-4d1b-8a70-8e9a2b2d004d" class="link-to-page"><a href="Javascript%20DOM/Body%20Property.html">Body Property</a></figure><figure id="d7a062e2-f0db-4d45-a366-5bd2861cd2e9" class="link-to-page"><a href="Javascript%20DOM/Document%20Cookie.html">Document Cookie</a></figure><figure id="d1fa36ac-66c6-4295-8270-c76e43c33d09" class="link-to-page"><a href="Javascript%20DOM/Document%20URI.html">Document URI</a></figure><figure id="d6d78ada-ee29-4f0b-8bc6-9f25e1a5285d" class="link-to-page"><a href="Javascript%20DOM/Create%20Element.html">Create Element()</a></figure><figure id="26d5184b-5986-4226-adb9-5e93ac15b78e" class="link-to-page"><a href="Javascript%20DOM/Tugas%2040%20JS.html">Tugas 40 JS</a></figure><figure id="681b5b45-8ee0-4fca-85e0-c29e264f62dc" class="link-to-page"><a href="Javascript%20DOM/Load%20Event.html">Load Event</a></figure><figure id="a01f9559-feb3-46c4-ac3f-d683acca9c1b" class="link-to-page"><a href="Javascript%20DOM/Click%20Event.html">Click Event</a></figure><figure id="6319a3c3-d2f7-4352-9ad3-41a76fb49a71" class="link-to-page"><a href="Javascript%20DOM/Double%20Click%20Event.html">Double Click Event</a></figure><figure id="a3a4a164-1fed-467c-8b7e-bd7ea7899d94" class="link-to-page"><a href="Javascript%20DOM/Change%20Event.html">Change Event</a></figure><figure id="98d937fa-e328-429c-8a8e-34a5359711b1" class="link-to-page"><a href="Javascript%20DOM/Tugas%2041%20JS.html">Tugas 41 JS</a></figure><figure id="886d2dec-f998-42af-8fdd-d7c4e5624032" class="link-to-page"><a href="Javascript%20DOM/Copy%20dan%20Paste%20Event.html">Copy dan Paste Event</a></figure><figure id="5cd37026-8fcd-49c6-92a8-05ca9235b11d" class="link-to-page"><a href="Javascript%20DOM/Drag%20dan%20Drop%20Event.html">Drag dan Drop Event</a></figure><figure id="a4fce61d-b32f-4dd4-96bb-1bb2d27a7b42" class="link-to-page"><a href="Javascript%20DOM/Error%20Event.html">Error Event</a></figure><figure id="0b6e6ddc-eeaa-4f95-b0d2-a2b21b77d311" class="link-to-page"><a href="Javascript%20DOM/Focus%20Event.html">Focus Event</a></figure><figure id="63131091-24d8-46eb-9ad4-492b92dd4525" class="link-to-page"><a href="Javascript%20DOM/Keypress%20Keydown%20dan%20Keyup%20Event.html">Keypress, Keydown, dan Keyup Event</a></figure><figure id="55bc3709-1a89-4404-904c-8196a50c9657" class="link-to-page"><a href="Javascript%20DOM/MouseOver%20dan%20MouseOut%20Event.html">MouseOver dan MouseOut Event</a></figure><figure id="2af34869-8368-45f4-b93f-ea22d0fdc70e" class="link-to-page"><a href="Javascript%20DOM/Tugas%2042%20JS.html">Tugas 42 JS</a></figure><figure id="596b1892-2fe7-4733-b705-cfb7334dc763" class="link-to-page"><a href="Javascript%20DOM/Geolocation%20Posisi%20Kordinat.html">Geolocation Posisi Kordinat</a></figure><figure id="3637b7b3-d921-4fc6-b7c8-849d52b99819" class="link-to-page"><a href="Javascript%20DOM/History%20Back.html">History Back</a></figure><figure id="abd4a094-ad2c-4eea-aac1-2ea12ed9d5d7" class="link-to-page"><a href="Javascript%20DOM/History%20Forward.html">History Forward</a></figure><figure id="aa91b8bd-85d3-47da-9409-c9cec30edf67" class="link-to-page"><a href="Javascript%20DOM/History%20Go.html">History Go</a></figure><figure id="281f9959-098a-4bf5-8ca6-30bd4b6f4022" class="link-to-page"><a href="Javascript%20DOM/Tugas%2043%20JS.html">Tugas 43 JS</a></figure><figure id="98fd0f00-32d0-4773-b789-188be49f745a" class="link-to-page"><a href="Javascript%20DOM/Item%20HTML%20Collection.html">Item HTML Collection</a></figure><figure id="9754e6c7-15b6-47c5-b86d-b9aba5c2b0e7" class="link-to-page"><a href="Javascript%20DOM/Length%20HTML%20Collection.html">Length HTML Collection</a></figure><figure id="f8b9c11c-0228-428b-892e-fc65679c3109" class="link-to-page"><a href="Javascript%20DOM/Tugas%2044%20JS.html">Tugas 44 JS</a></figure><figure id="73b30b03-f5d6-4d42-a91f-921b35566066" class="link-to-page"><a href="Javascript%20DOM/Hash%20Location.html">Hash Location</a></figure><figure id="f6586c81-cdc9-4b49-b380-0265df4d0ce4" class="link-to-page"><a href="Javascript%20DOM/Host%20Location.html">Host Location</a></figure><figure id="4f2abf1c-1066-4c4c-b641-6bef9c25a406" class="link-to-page"><a href="Javascript%20DOM/Host%20Name%20Location.html">Host Name Location</a></figure><figure id="4ef387be-f13f-4ccb-b6b2-6d869569f364" class="link-to-page"><a href="Javascript%20DOM/Href%20Location.html">Href Location</a></figure><figure id="390fbe7c-677c-4ba4-86c5-77074cd796fa" class="link-to-page"><a href="Javascript%20DOM/Tugas%2045%20JS.html">Tugas 45 JS</a></figure><figure id="e5bb4f62-40e8-405a-83ec-b44c6bbf26a2" class="link-to-page"><a href="Javascript%20DOM/Alert%20Confirm%20Window.html">Alert Confirm Window</a></figure><figure id="bf9438c0-7e82-42cd-864f-97b2305af5e3" class="link-to-page"><a href="Javascript%20DOM/Open%20Window.html">Open Window</a></figure><figure id="96b7020a-afbd-4b22-9106-8e9892e92cb0" class="link-to-page"><a href="Javascript%20DOM/Close%20Window.html">Close Window</a></figure><figure id="804a2de8-4819-47ca-ab67-f4dc246dc633" class="link-to-page"><a href="Javascript%20DOM/Print%20Window.html">Print Window</a></figure><figure id="54a2b75e-c5bb-4cf2-aac4-2a7f46da9e7a" class="link-to-page"><a href="Javascript%20DOM/Iframe%20Window.html">Iframe Window</a></figure><figure id="0e1a5dbf-62e4-4655-a2f6-cafaf1560065" class="link-to-page"><a href="Javascript%20DOM/Prompt%20Window.html">Prompt Window</a></figure><figure id="3ed7bd3e-6690-41f7-9e28-740b256c9101" class="link-to-page"><a href="Javascript%20DOM/Tugas%2046%20JS.html">Tugas 46 JS</a></figure><figure id="021cab1e-8662-4f24-b001-1d1e3780aa4b" class="link-to-page"><a href="Javascript%20DOM/Study%20Kasus.html">Study Kasus</a></figure><figure id="070561ab-f7f8-4935-8cd2-8ac7e020f0ee" class="link-to-page"><a href="Javascript%20DOM/Tugas%20Akhir%20Javascript.html">Tugas Akhir Javascript</a></figure></div></article></body></html>

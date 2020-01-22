@@ -1,0 +1,566 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pengertian Javascript</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="be8d787a-adec-485d-8cb2-7c7fd26d6884" class="page sans"><header><h1 class="page-title"><strong>Pengertian Javascript</strong></h1></header><div class="page-body"><p id="0c25478f-5ad6-4058-8b72-8b2cb0a4810b" class=""><strong>PENGERTIAN JAVASCRIPT</strong></p><p id="cc1cadbd-390b-4cba-b946-1c8a9a90a997" class="">Bagi yang masih awam, tentu akan bertanya-tanya, <em>apa itu JavaScript</em>? <strong>JavaScript</strong> adalah salah satu bahasa pemrograman yang paling banyak digunakan dalam kurun waktu dua puluh tahun ini. Bahkan JavaScript juga dikenal sebagai salah satu dari tiga bahasa pemrograman utama bagi web developer:</p><ol id="4cc9a154-f547-4270-a13a-9b56dc3fc44d" class="numbered-list" start="1"><li>HTML: Memungkinkan Anda untuk menambahkan konten ke halaman web.</li></ol><ol id="d0b22ac5-83ef-4aa0-859f-074434214c2a" class="numbered-list" start="2"><li>CSS: Menentukan layout, style, serta keselarasan halaman website.</li></ol><ol id="722fe100-9a49-4687-bc0f-df8c0c5ec15d" class="numbered-list" start="3"><li>JavaScript: Menyempurnakan tampilan dan sistem halaman web.</li></ol><p id="84089186-716b-4ee1-a16f-44c0fbdd035c" class="">JavaScript dapat<a href="https://www.google.com/url?q=https://www.bitdegree.org/learn/javascript-basics/&amp;sa=D&amp;ust=1575291254170000"> dipelajari</a> dengan cepat dan mudah serta digunakan untuk berbagai tujuan, mulai dari meningkatkan fungsionalitas website hingga mengaktifkan permainan (<em>games</em>) dan software berbasis web. Selain itu, terdapat ribuan template dan aplikasi JavaScript yang bisa Anda gunakan secara gratis dan semuanya ini berkat beberapa situs, seperti Github.</p><h2 id="fe36ec2e-5a9b-4a52-be40-e0e95ea812a3" class=""><strong>Sejarah JavaScript</strong></h2><p id="f1ba1908-9036-4f65-ad9c-9435b3e3e0b1" class="">JavaScript dibuat dan didesain selama sepuluh hari oleh Brandan Eich, seorang karyawan Netscape, pada bulan September 1995. Awalnya bahasa pemrograman ini disebut Mocha, kemudian diganti ke Mona, lalu LiveScript sebelum akhirnya resmi menyandang nama JavaScript. Versi pertama dari bahasa ini hanya terbatas di kalangan Netscape saja. Fungsionalitas yang ditawarkan pun terbatas. Namun, JavaScript terus dikembangkan oleh komunitas developer yang tak henti-hentinya mengerjakan bahasa pemrograman ini.</p><p id="eede01d3-fd09-4135-8f73-e84fc391cb37" class="">Pada tahun 1996, JavaScript secara resmi disebut sebagai ECMAScript, di mana ECMAScript 2 diluncurkan pada tahun 1998 dan ECMAScript 3 diperkenalkan pada tahun 1999. ECMAScript tersebut dikembangkan hingga akhirnya menjadi JavaScript sebagaimana yang kita kenal saat ini. Tak hanya lintas browser, JavaScript juga bisa digunakan di berbagai perangkat, termasuk perangkat mobile dan komputer.</p><p id="1e202bff-57ad-446d-9aa4-02a28f67cc33" class="">Sejak saat itu, JavaScript terus bertumbuh dan berkembang. Pada akhirnya di tahun 2016, sebanyak 92% website diketahui menggunakan JavaScript. Hanya dala kurun waktu dua puluh tahun, JavaScript telah beralih dari bahasa pemrograman yang serba terbatas dan ‘primitif’ menjadi salah satu tool terpenting bagi web developer. Jika sebagian besar waktu dihabiskan untuk berselancar di internet, maka Anda pastinya sudah sangat familiar dengan JavaScript.</p><h2 id="7a30f111-4e26-412f-90df-35e3ea87019d" class=""><strong>Apa Kelebihan JavaScript?</strong></h2><p id="f2958532-6bae-4792-b9c3-eb451e0c1347" class="">Terdapat sejumlah kelebihan JavaScript yang menjadikan bahasa pemrograman ini lebih unggul jika dibandingkan dengan kompetitornya, terutama di beberapa kasus tertentu. Berikut beberapa kelebihan JavaScript:</p><ol id="bc11e0c0-7de5-4377-88d2-c0cd53a37c77" class="numbered-list" start="1"><li>Anda tidak membutuhkan compiler karena web browser mampu menginterpretasikannya dengan HTML;</li></ol><ol id="0eaac581-1cc6-407b-a223-e9d94426dc13" class="numbered-list" start="2"><li>Lebih mudah dipelajari jika dibandingkan dengan bahasa pemrograman lainnya;</li></ol><ol id="477e837c-4808-4c86-bc42-f9b476ad799b" class="numbered-list" start="3"><li>Error atau kesalahan lebih mudah dicari dan ditangani;</li></ol><ol id="748de756-46f6-48ce-b3be-90348fc398f7" class="numbered-list" start="4"><li>Dapat dialihtugaskankan ke elemen halaman web atau even tertentu, misalnya klik atau <em>mouseover</em>;</li></ol><ol id="40d3842b-bf6d-46ea-b683-39f445d1060a" class="numbered-list" start="5"><li>JS dapat digunakan di berbagai browser, platform, dan lain-lain.</li></ol><ol id="2e35fba8-c7ad-4403-81e9-d807b68e540e" class="numbered-list" start="6"><li>Anda dapat menggunakan JavaScript untuk memvalidasi input dan mengurangi keinginan untuk mengecek data secara manual;</li></ol><ol id="96ede6fe-ebcc-42c7-a4f7-b725fe746dce" class="numbered-list" start="7"><li>Dengan JavaScript, website Anda menjadi lebih interaktif dan juga mampu menarik perhatian lebih banyak pengunjung;</li></ol><ol id="11aee13a-b81e-4277-aa34-e1c8afec452e" class="numbered-list" start="8"><li>Lebih cepat dan ringan jika dibandingkan dengan bahasa pemrograman lainnya.</li></ol><h2 id="ece6c979-9c9d-4866-9951-009b80602441" class=""><strong>Apa Saja Kekurangan JavaScript?</strong></h2><p id="0039fa85-1050-4517-84a1-14d80351e3dc" class="">Setiap bahasa pemrograman pasti memiliki beberapa kekurangan. Salah satu penyebabnya adalah semakin populernya bahasa pemrograman yang Anda pilih, termasuk dalam hal ini adalah JavaScript. Popularitas tersebut, sialnya, mengundang para hacker, scammer, dan pihak ketiga berbahaya lainnya untuk mencari celah keamanan. Beberapa kekurangan JavaScript, yaitu:</p><ol id="38faf72e-643e-4943-bb0b-2ed9258bb91f" class="numbered-list" start="1"><li>Berisiko tinggi terhadap eksploitasi;</li></ol><ol id="d145e81b-ce3b-45b1-bd26-82d983e309fc" class="numbered-list" start="2"><li>Dapat dimanfaatkan untuk mengaktifkan kode berbahaya di komputer pengguna;</li></ol><ol id="0e2c48af-6967-4918-8854-a08e69214883" class="numbered-list" start="3"><li>Tidak selalu didukung oleh berbagai browser dan perangkat;</li></ol><ol id="24d09aa9-1e4a-4820-8df5-5515f73a73f5" class="numbered-list" start="4"><li>JS code snippet agak banyak;</li></ol><ol id="9db4638a-73ee-478e-af70-3575ce54cfd2" class="numbered-list" start="5"><li>Dapat di-render secara berbeda pada masing-masing perangkat yang malah mengarah ke inkonsistensi.</li></ol><h2 id="8cfac9ab-54ab-4172-9c70-1cd58f18ccb9" class=""><strong>Bagaimana Cara Kerja dan Fungsi JavaScript di Website Anda?</strong></h2><p id="8590a22d-b4a2-420b-a813-86ada4ccd954" class="">Biasanya JavaScript di-embbed secara langsung ke halaman website atau diarahkan melalui file .js yang terpisah. JavaScript merupakan bahasa dari sisi klien yang berarti script diunduh di perangkat yang dimiliki oleh pengunjung situs Anda, lalu diproses di sana. Berbeda dengan halnya bahasa di sisi server yang dijalankan pada server sebelum bahasa pemrograman tersebut mengirimkan file ke pengunjung situs.</p><p id="f008a40c-d783-4c10-8955-c372aca467f5" class="">Perlu diketahui, sebagian web browser juga menawarkan kesempatan bagi user untuk menonaktifkan JavaScript. Karena itulah, sangat disarankan bagi Anda untuk mencari tahu apa yang terjadi pada <em>event </em>yang diunduh ke mesin yang bahkan tidak men-support-nya.</p><h2 id="5ee68afe-e515-487b-964f-2aa1e90fc36c" class=""><strong>Mengapa JavaScript Berbeda dari Bahasa Pemrograman Lainnya?</strong></h2><p id="f57ee22e-6481-43ba-b50a-df5a090d0071" class="">Alasan mengapa JavaScript menjadi salah satu bahasa pemrograman yang populer adalah kemudahan untuk dipelajari dan digunakan. Bisa dilihat jika sudah banyak developer yang pada akhirnya memilih JavaScript sebagai bahasa pemrograman terbaik. Bahasa pemrograman lainnya hanya diperlukan bilamana seorang developer menginginkan sesuatu yang lebih spesifik.</p><div id="44c1c06d-7637-4950-88f2-80042eb89f56" class="collection-content"><h4 class="collection-title">Berikut beberapa bahasa pemrograman yang paling populer dan banyak digunakan:</h4><table class="collection-content"><thead><tr><th>Bahasa Pemograman</th><th>Penjelasan</th><th>Column</th></tr></thead><tbody><tr id="be61a374-cccd-48f6-a960-182e3c0defe7"><td class="cell-title"><a href="Pengertian%20Javascript/Berikut%20beberapa%20bahasa%20pemrograman%20yang%20paling%20po/HTML.html">HTML</a></td><td class="cell-B9&gt;&quot;">Merupakan singkatan dari Hypertext Markup Languange, HTML dikenal sebagai salah satu bahasa pemrograman yang paling lazim digunakan di web serta membentuk buildin block dari suatu halaman situs. Sebagai contoh, tag HTML yang termasuk &lt;p&gt; untuk paragraf dan &lt;img&gt; untuk gambar.</td><td class="cell-Qsn0"></td></tr><tr id="a0c24e49-4c37-4a5b-8ea5-c1173ad84a63"><td class="cell-title"><a href="Pengertian%20Javascript/Berikut%20beberapa%20bahasa%20pemrograman%20yang%20paling%20po/PHP.html">PHP</a></td><td class="cell-B9&gt;&quot;">PHP merupakan bahasa pemrograman server-side, sedangkan JavaScript adalah bahasa pemrograman yang dijalankan di client-side. Bahasa ini sering terlihat pada sistem manajemen konten berbasis PHP, misalnya WordPress, tapi juga sering digunakan untuk pengembangan back-end karena menyediakan jalan terbaik guna memfasilitasi proses transfer informasi dari dan ke database.</td><td class="cell-Qsn0"></td></tr><tr id="0237cb5f-befb-4c5d-9505-09027583a181"><td class="cell-title"><a href="Pengertian%20Javascript/Berikut%20beberapa%20bahasa%20pemrograman%20yang%20paling%20po/CSS.html">CSS</a></td><td class="cell-B9&gt;&quot;">CSS adalah singkatan dari Cascading Style Sheets. CSS memungkinkan webmaster untuk mengatur style serta menentukan bagaimana masing-masing jenis konten ditampilkan. Untuk menampilkan konten, Anda bisa melakukannya secara manual terhadap setiap elemen dalam HTML. Hanya saja, jika Anda melakukannya di CSS, maka Anda tidak perlu berulang kali menentukan bagaimana elemen-elemen tersebut ditampilkan setiap kali digunakan.</td><td class="cell-Qsn0"></td></tr><tr id="d9035a8d-3d5e-4cbd-936f-37adac69e5fc"><td class="cell-title"><a href="Pengertian%20Javascript/Berikut%20beberapa%20bahasa%20pemrograman%20yang%20paling%20po/JavaScript.html">JavaScript</a></td><td class="cell-B9&gt;&quot;">Fungsi JavaScript, atau yang sering disingkat JS, adalah menjadikan website lebih interaktif. Scriptnya dijalankan di browser user alih-alih server, dan biasanya masuk ke library pihak ketiga untuk menyediakan fungsionalitas tingkat lanjut tanpa mengharuskan developer melakukan coding dari awal.</td><td class="cell-Qsn0"></td></tr></tbody></table></div><p id="2356e159-85f3-4b3b-bd0d-93681471e193" class="">Anggap saja kita sedang membangun sebuah rumah. HTML adalah struktur bangunan rumah dan sandaran bagi pintu dan tembok, sedangkan CSS adalah karpet dan wallpaper yang menghiasi setiap sudut rumah sehingga tampak lebih indah dan menarik. JavaScript, dalam hal ini, menambahkan sifat responsif sehingga Anda bisa membuka pintu dan menyalakan lampu. Anda bisa saja tidak menggunakan lampu atau tidak membutuhkan pintu. Namun, risikonya adalah rumah yang gelap dan usang, layaknya bangunan yang telah berdiri sejak tahun 1995. Hal ini sama seperti ketika Anda memanfaatkan JavaScript untuk webiste.</p><p id="a8581a78-0c9b-4524-8d92-751c783aa163" class="">
+</p></div></article></body></html>

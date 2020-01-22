@@ -1,0 +1,573 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas 4 React JS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="08cd3d77-ae19-46b1-a16b-b72257626013" class="page sans"><header><h1 class="page-title"><strong>Tugas 4 React JS</strong></h1></header><div class="page-body"><p id="ac9f5a20-49c6-4c5a-b0b0-3e825b51c50c" class="">
+</p><p id="e4516f2f-e780-49aa-8257-bb96c535b2f5" class=""><strong>Tujuan :</strong></p><ul id="fe8d6497-2e9d-4edb-a19e-8be2f9bf0643" class="bulleted-list"><li>Memahami cara menghubungkan State dan Input Value.</li></ul><ul id="2d4c5c04-e58c-4130-aba8-79c6498d7de7" class="bulleted-list"><li>Memahami cara penggunaan Dynamic Method.</li></ul><ul id="cd4a27d0-b3f3-4dfb-9c4f-6dccf593111e" class="bulleted-list"><li>Memahami cara penggunaan Conditional Rendering.</li></ul><p id="07cca7bc-e94c-44c2-a2cd-39c150aff68b" class=""><strong>Petunjuk :</strong></p><ul id="db1c956c-5e38-4f52-a5c7-8b65524ff266" class="bulleted-list"><li>Perintah untuk membuat project baru<pre id="13466ea0-def9-4a1e-9946-b6e274ea595e" class="code"><code>create-react-app nama_project_anda</code></pre></li></ul><ul id="41d5f125-46b0-418d-916f-0f57423154c1" class="bulleted-list"><li>Code import component<pre id="c23fb135-b49e-4c68-910c-c87bfd6df6ed" class="code"><code>import nama_component from &quot;file_letak_component&quot;;</code></pre></li></ul><ul id="a6304a85-d9c8-4eab-b661-14a1588a6f96" class="bulleted-list"><li>Code membuat state<pre id="fa031584-f70a-403a-86f6-15129721eda0" class="code"><code>constructor(props) {
+   super(props);
+   this.state = {
+   
+   };
+ }</code></pre></li></ul><ul id="890dc04b-b736-4b45-8b59-800d77e1929e" class="bulleted-list"><li>Code membuat method:<pre id="7f7469ff-b9de-45a6-ac06-59d001f089c5" class="code"><code>nama_method() {
+    }</code></pre></li></ul><p id="23233934-f55a-4dde-bc78-f93ea7c45090" class=""><strong>Link Gambar:</strong><div class="indented"><p id="4e18cdd7-6d29-4ff4-97ce-8045ac49efea" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg&amp;sa=D&amp;ust=1576237525321000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg</a></p><p id="7dbdb9a3-1c1a-4f49-b120-22a3a45f2c9a" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png&amp;sa=D&amp;ust=1576237525321000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png</a></p><p id="f9ccfb4e-d4ed-47f8-a977-b3badab49d7b" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png&amp;sa=D&amp;ust=1576237525322000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png</a></p><p id="8f64c9c6-42c4-4256-9580-61d7b987eed8" class=""><a href="https://www.google.com/url?q=https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%2520nusantara/nasi%2520kentut.png&amp;sa=D&amp;ust=1576237525322000">https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%20nusantara/nasi%20kentut.png</a></p><p id="0be65a19-be89-48f2-9630-d85e4ae52060" class=""><a href="https://www.google.com/url?q=https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg&amp;sa=D&amp;ust=1576237525323000">https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg</a></p></div></p><p id="caa86f71-b06b-4587-9513-8d0613d709a3" class=""><strong>Tugas :</strong></p><p id="0da1eebd-99bf-4b5c-89d7-fc5d678ee0f0" class="">Pada tugas ini anda diminta untuk membuat sebuah project baru dengan nama <strong>tugas_4_react_js</strong> dan anda diminta untuk membuat website dengan ketentuan sebagai berikut :</p><ol id="c3e84a33-a3c4-4723-8fbf-5733a6330cc9" class="numbered-list" start="1"><li>Struktur file yang harus anda buat :<figure id="b90550c1-2171-4b79-a42b-b0d8d16e925d" class="image"><a href="https://lh5.googleusercontent.com/y1Kh41DvRC8cU8WEiYXP0Rqjz8o9G4E5haQTXf1ZbQ8OWjOdTz2H9ZrqYYy8e-kwufOfxRi4Y3FM1X7XZV3ImB3SAXYszgXmt5WPsZtzJjzKVZcdaiju2YAUJ9_QZ2ipfN9Bu8hI"><img src="https://lh5.googleusercontent.com/y1Kh41DvRC8cU8WEiYXP0Rqjz8o9G4E5haQTXf1ZbQ8OWjOdTz2H9ZrqYYy8e-kwufOfxRi4Y3FM1X7XZV3ImB3SAXYszgXmt5WPsZtzJjzKVZcdaiju2YAUJ9_QZ2ipfN9Bu8hI"/></a></figure></li></ol><ol id="a7b822ff-817c-4bc9-98d3-59647bc9b5e2" class="numbered-list" start="2"><li>Pada file ListMakanan.js yang berada di dalam folder ListData buatlah sebuah<strong> class component</strong> yang di dalam nya terdapat <strong>state dan props :</strong><figure id="abfee93b-25e6-435a-9a81-a3dbbe83f198" class="image"><a href="https://lh3.googleusercontent.com/hzIW4vlwWGHGT-ybdXIa83BCRKRCcEfvbPJa6VYaEYZ9AYAN8WAx1SHWHIqWEjKFsbWJ2MEkXsnHQrpsXU4m1LxG1Xa6j1LtX9-rmY6-Y5mZ-B3PvIOn_3az0SPk85-wlOldNJS3"><img src="https://lh3.googleusercontent.com/hzIW4vlwWGHGT-ybdXIa83BCRKRCcEfvbPJa6VYaEYZ9AYAN8WAx1SHWHIqWEjKFsbWJ2MEkXsnHQrpsXU4m1LxG1Xa6j1LtX9-rmY6-Y5mZ-B3PvIOn_3az0SPk85-wlOldNJS3"/></a></figure></li></ol><ol id="04f7cfed-2985-4040-950d-2472bacaefaf" class="numbered-list" start="3"><li>Pada file MenuMakanan.js yang berada di dalam folder page buatlah sebuah <strong>class component</strong> yang di dalamnya terdapat<strong> Dynamic Method, Condition Rendering, </strong> <strong>State, Input Value </strong>dan import file ListMakanan.js yang berada di dalam folder ListData<strong> </strong> :<figure id="772d7666-06e5-4e90-92fa-4164e2d7517e" class="image"><a href="https://lh5.googleusercontent.com/YtfyjNzPLJ8s0RzyLPQ0kEA-_2JKyFmee0czQAvim-nJwksHtzF6YMPp6_BQxeb2PHfEzSZMeXyPE8J0ln40Hw5E85pXoQO81TwoA0h2_Bobo5VbhI7h5L47ivAPh_kOIVwbynAV"><img src="https://lh5.googleusercontent.com/YtfyjNzPLJ8s0RzyLPQ0kEA-_2JKyFmee0czQAvim-nJwksHtzF6YMPp6_BQxeb2PHfEzSZMeXyPE8J0ln40Hw5E85pXoQO81TwoA0h2_Bobo5VbhI7h5L47ivAPh_kOIVwbynAV"/></a></figure><figure id="f9809673-d928-4a1c-b5db-cce17e1ca6dc" class="image"><a href="https://lh3.googleusercontent.com/r4yEbCt3NDYken21Yt8riKqgDiEPFisB8t-xoS3m-2LVte-yKRXnTJZHqHUYmGr0zPz0QHczJ_2Hdu04jmL8svfd5GkJWt9aDss7gPzEptsDxvFhvB6NnW__Q1bmsFRlQpOefW28"><img src="https://lh3.googleusercontent.com/r4yEbCt3NDYken21Yt8riKqgDiEPFisB8t-xoS3m-2LVte-yKRXnTJZHqHUYmGr0zPz0QHczJ_2Hdu04jmL8svfd5GkJWt9aDss7gPzEptsDxvFhvB6NnW__Q1bmsFRlQpOefW28"/></a></figure><figure id="87e50967-fdb7-41c2-ada5-f0fd5634ef69" class="image"><a href="https://lh6.googleusercontent.com/EqJCxJ_9cR6Kw4PNDQKFg9FWruIu2aXesryQ1sU_hYJDvq5ipnf5wUZ_QI0qKxphPcKJc8Vfcv06SMt_vm98uYpVgxFe3BILCmtBLZiHSAtPJx3zR92kXvD-xtCtl1J5iIfZ_wOY"><img src="https://lh6.googleusercontent.com/EqJCxJ_9cR6Kw4PNDQKFg9FWruIu2aXesryQ1sU_hYJDvq5ipnf5wUZ_QI0qKxphPcKJc8Vfcv06SMt_vm98uYpVgxFe3BILCmtBLZiHSAtPJx3zR92kXvD-xtCtl1J5iIfZ_wOY"/></a></figure><figure id="9cc95fc8-e442-43a3-99ab-0048fe7d825f" class="image"><a href="https://lh3.googleusercontent.com/-n9YGlhRzYabEj4KxiX9jyYIJ8xykfFE-zSGntflC30HjkF4YkHJprnL18LCwqT4TAsBpT6zmMfqF8y0lNwyyDa9x2Pzf9DKFNGHuRQyxoX3gMikP2D7jRIAdAnYPRb-zbNHA-S9"><img src="https://lh3.googleusercontent.com/-n9YGlhRzYabEj4KxiX9jyYIJ8xykfFE-zSGntflC30HjkF4YkHJprnL18LCwqT4TAsBpT6zmMfqF8y0lNwyyDa9x2Pzf9DKFNGHuRQyxoX3gMikP2D7jRIAdAnYPRb-zbNHA-S9"/></a></figure></li></ol><ol id="fa0dced7-1212-4a94-ba62-a048f2ed171f" class="numbered-list" start="4"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="c579129f-8ed5-4bc7-a4bc-ed6986f641ba" class="image"><a href="https://lh6.googleusercontent.com/t_QwFyvy9zF6vIErY-NSxdxP1oBjhXkl6mRzjb8BninK7a4qQEPmhM4RdyA74miNJUEhVh48Uy35hzGUPIzVyGjrmj1GAag_GTpnv8DGLpOW38D8fWZRCsPhWUkSSXa6VwPFBijS"><img src="https://lh6.googleusercontent.com/t_QwFyvy9zF6vIErY-NSxdxP1oBjhXkl6mRzjb8BninK7a4qQEPmhM4RdyA74miNJUEhVh48Uy35hzGUPIzVyGjrmj1GAag_GTpnv8DGLpOW38D8fWZRCsPhWUkSSXa6VwPFBijS"/></a></figure></li></ol><p id="86e3d03a-86a1-4728-b756-b7835153e8aa" class="">PENTING : Untuk tugas yang sudah dikerjakan diatas, silahkan disimpan di komputer masing-masing. Di materi selanjutnya akan dijelaskan cara untuk mengumpul TUGAS nya.</p><p id="a03be832-55d2-4ff3-acac-2ceaca701f21" class="">
+</p></div></article></body></html>

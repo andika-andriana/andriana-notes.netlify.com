@@ -1,0 +1,977 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas Akhir</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c6c9bc73-1916-4f10-a9a1-5f859aa0ecff" class="page sans"><header><h1 class="page-title"><strong>Tugas Akhir</strong></h1></header><div class="page-body"><ol id="93af9292-390a-454c-bb41-5c872de594fd" class="numbered-list" start="1"><li>Pastikan Teman Teman Sudah Menginstall Golangnya</li></ol><ol id="12dc9b59-bb5f-436d-82d8-0954b1fd8113" class="numbered-list" start="2"><li>Pastikan teman teman sudah mengerjakan tugas 16 dan 17</li></ol><ol id="d8946eac-c455-4765-9e30-01e1e8b3545c" class="numbered-list" start="3"><li>Teman - Teman Buatlah File di Folder di <strong>c:/go/src/belajargolang</strong><p id="d61b92cb-a2cf-4cdd-8c79-6cfb631e1df6" class=""><strong>(untuk pengguna windows)</strong> dengan nama file <strong>tugasakhir.go</strong></p></li></ol><ol id="9b965ae9-c526-4f45-b3c7-0cc080c537e6" class="numbered-list" start="4"><li>Buatlah Program Dengan Spesifikasi dibawah ini :<ul id="487e02a4-92e8-4f83-9658-b4a77c269360" class="bulleted-list"><li>Teman teman jalankan file tugas17.go untuk memprovide data api nya.</li></ul><ul id="caf51561-f11f-4652-b568-6ec7ddb9deda" class="bulleted-list"><li>Setelah itu teman teman buatlah fungsi dengan http request untuk membaca data dari api, mencari data dari api, mengubah data dari api</li></ul><p id="4e97de0f-b7f7-4427-98c0-465a97d23761" class="">Dan menghapus data dari api.</p><p id="12a5d669-87be-49e9-ba6a-3b68a8c9e706" class=""><strong>Hint : Gunakan query mysql untuk ubah dan hapus data</strong></p></li></ol><ol id="2bfbd894-c20c-432e-9879-bce92ee4a7ec" class="numbered-list" start="5"><li>Happy Codding :</li></ol><hr id="1aa98224-0b0f-4711-8205-a218a52deca6"/><ul id="94cc7fe7-0028-43ad-8067-7b17020ea505" class="bulleted-list"><li>tugas16.go<pre id="6057ccf3-9433-4876-9ecd-f900c3442ca8" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;database/sql&quot;
+import _ &quot;mysql-master&quot;
+
+type student struct {
+	ID          string
+	Nama        string
+	Tinggibadan int
+}
+
+func koneksi() (*sql.DB, error) {
+	db, err := sql.Open(&quot;mysql&quot;, &quot;root:@tcp(127.0.0.1:3306)/db_mahasiswa&quot;)
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
+}
+
+func sqlQuery() {
+	db, err := koneksi()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer db.Close()
+
+	rows, err := db.Query(&quot;select * from tbl_mahasiswa&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer rows.Close()
+
+	var result []student
+
+	for rows.Next() {
+		var each = student{}
+		var err = rows.Scan(&amp;each.ID, &amp;each.Nama, &amp;each.Tinggibadan)
+
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+
+		result = append(result, each)
+	}
+
+	if err = rows.Err(); err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(&quot;\n\t\t - - - Data Mahasiswa - - - \n&quot;)
+
+	for _, each := range result {
+		fmt.Printf(&quot;ID : %s\t | Nama Mahasiswa : %s\t | Tinggi Badan : %d\n&quot;, each.ID, each.Nama, each.Tinggibadan)
+	}
+	fmt.Println(&quot;\n\t\t - - - - - - - - - - - - - \n&quot;)
+}
+
+func main() {
+	sqlQuery()
+}</code></pre></li></ul><ul id="e07a6974-108c-42ec-af0f-63bb13b820f8" class="bulleted-list"><li>tugas17.go<pre id="2dc155cb-5ecd-4d07-8c1c-4fd2280ba0ef" class="code"><code>package main
+
+// package yang diperlukan untuk API dan DB mysql
+import (
+	&quot;database/sql&quot;
+	&quot;encoding/json&quot;
+	&quot;fmt&quot;
+	&quot;net/http&quot;
+)
+import _ &quot;mysql-master&quot;
+
+// deklarari tipe struct
+type mahasiswa struct {
+	ID          string
+	Nama        string
+	Tinggibadan string
+}
+
+// variabel penampung
+var data = []mahasiswa{}
+
+// koneksi ke mysql dan database
+func koneksi() (*sql.DB, error) {
+	db, err := sql.Open(&quot;mysql&quot;, &quot;root:@tcp(127.0.0.1:3306)/db_mahasiswa&quot;)
+
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
+}
+
+// memasukan tabel kedalam variabel penampung
+func get_mahasiswa() {
+	db, err := koneksi()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer db.Close()
+
+	row, err := db.Query(&quot;select * from tbl_mahasiswa&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer db.Close()
+
+	for row.Next() {
+		var each = mahasiswa{}
+		var err = row.Scan(&amp;each.ID, &amp;each.Nama, &amp;each.Tinggibadan)
+
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+		data = append(data, each)
+
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+	}
+}
+
+// func API POST untuk mendapatkan isi tabel mahasiswa
+func tampil_mahasiswa(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set(&quot;Content-type&quot;, &quot;application/json&quot;)
+
+	if r.Method == &quot;POST&quot; {
+		var result, err = json.Marshal(data)
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Write(result)
+		return
+	}
+
+	http.Error(w, &quot;&quot;, http.StatusBadRequest)
+}
+
+// func API POST untuk mendapatkan detail isi tabel mahasiswa
+func detail_mahasiswa(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
+
+	if r.Method == &quot;POST&quot; {
+		var id = r.FormValue(&quot;id&quot;)
+		var result []byte
+		var err error
+
+		for _, each := range data {
+			if each.ID == id {
+				result, err = json.Marshal(each)
+
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+
+				w.Write(result)
+				return
+			}
+		}
+
+		http.Error(w, &quot;Detail Mahasiswa, Gagal Ditampilkan&quot;, http.StatusBadRequest)
+		return
+	}
+
+	http.Error(w, &quot;&quot;, http.StatusBadRequest)
+}
+
+// func main sekaligus rooting dari API dan server
+func main() {
+	get_mahasiswa()
+	http.HandleFunc(&quot;/mahasiswa&quot;, tampil_mahasiswa)
+	http.HandleFunc(&quot;/detail_mahasiswa&quot;, detail_mahasiswa)
+
+	fmt.Println(&quot;Berhasil: Menjalankan Web Server Pada http://localhost:8080/&quot;)
+	http.ListenAndServe(&quot;:8080&quot;, nil)
+}</code></pre></li></ul><ul id="f186d830-c360-47b5-80f6-d350628b6580" class="bulleted-list"><li>tugasakhir.go<pre id="65bb43af-bc1e-4311-83d4-f6f107472404" class="code"><code>package main
+
+import (
+	&quot;bytes&quot;
+	&quot;database/sql&quot;
+	&quot;encoding/json&quot;
+	&quot;fmt&quot;
+	&quot;net/http&quot;
+	&quot;net/url&quot;
+)
+import _ &quot;mysql-master&quot;
+
+var baseURL = &quot;http://localhost:8080&quot;
+
+type mahasiswa struct {
+	ID          string
+	Nama        string
+	Tinggibadan string
+}
+
+func http_request() ([]mahasiswa, error) {
+	var err error
+	var client = &amp;http.Client{}
+	var data []mahasiswa
+
+	request, err := http.NewRequest(&quot;POST&quot;, baseURL+&quot;/mahasiswa&quot;, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	response, err := client.Do(request)
+	if err != nil {
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	err = json.NewDecoder(response.Body).Decode(&amp;data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+
+func http_request_form(ID string) (mahasiswa, error) {
+	var err error
+	var client = &amp;http.Client{}
+	var data mahasiswa
+
+	var param = url.Values{}
+	param.Set(&quot;id&quot;, ID)
+	var payload = bytes.NewBufferString(param.Encode())
+
+	request, err := http.NewRequest(&quot;POST&quot;, baseURL+&quot;/detail_mahasiswa&quot;, payload)
+	if err != nil {
+		return data, err
+	}
+	request.Header.Set(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;)
+
+	response, err := client.Do(request)
+	if err != nil {
+		return data, err
+	}
+	defer response.Body.Close()
+
+	err = json.NewDecoder(response.Body).Decode(&amp;data)
+	if err != nil {
+		return data, err
+	}
+
+	return data, nil
+}
+
+func baca_api() {
+	var mahasiswa, err = http_request()
+	if err != nil {
+		fmt.Println(&quot;Error!&quot;, err.Error())
+		return
+	}
+
+	fmt.Println(&quot;\n&gt; [Baca] Data dari API...&quot;)
+	fmt.Println(&quot;---------------------------------------------&quot;)
+
+	for _, each := range mahasiswa {
+		fmt.Printf(&quot;ID: %s\t Nama: %s\t Tinggi Badan: %s\n&quot;, each.ID, each.Nama, each.Tinggibadan)
+	}
+}
+
+func cari_api() {
+	var mahasiswa, err = http_request_form(&quot;001&quot;)
+	if err != nil {
+		fmt.Println(&quot;Menu tidak Tersedia&quot;, err.Error())
+		return
+	}
+	fmt.Println(&quot;\n&gt; [Cari] Data dari API id = 001...&quot;)
+	fmt.Println(&quot;---------------------------------------------&quot;)
+	fmt.Printf(&quot;ID: %s\t Nama: %s\t Tinggi Badan: %s\n&quot;, mahasiswa.ID, mahasiswa.Nama, mahasiswa.Tinggibadan)
+}
+
+func main() {
+	baca_api()
+	cari_api()
+	sql_crud()
+	fmt.Println(&quot;\nSelesai...\n&quot;)
+}
+
+func connect() (*sql.DB, error) {
+	db, err := sql.Open(&quot;mysql&quot;, &quot;root:@tcp(127.0.0.1:3306)/db_mahasiswa&quot;)
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
+}
+
+func table_view() {
+	db, err := connect()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer db.Close()
+
+	rows, err := db.Query(&quot;select * from tbl_mahasiswa&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer rows.Close()
+
+	var result []mahasiswa
+
+	for rows.Next() {
+		var each = mahasiswa{}
+		var err = rows.Scan(&amp;each.ID, &amp;each.Nama, &amp;each.Tinggibadan)
+
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+
+		result = append(result, each)
+	}
+
+	if err = rows.Err(); err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(&quot;---------------------------------------------&quot;)
+
+	for _, each := range result {
+		fmt.Printf(&quot;ID: %s\t Nama Menu: %s\t Harga: %s\n&quot;, each.ID, each.Nama, each.Tinggibadan)
+	}
+}
+
+func sql_crud() {
+	db, err := connect()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer db.Close()
+
+	_, err = db.Exec(&quot;insert into tbl_mahasiswa values (?, ?, ?)&quot;, &quot;004&quot;, &quot;Joni&quot;, 160)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(&quot;\n&gt; [Menambahkan] Item (Joni)&quot;)
+	table_view()
+
+	_, err = db.Exec(&quot;update tbl_mahasiswa set Tinggibadan = ? where ID = ?&quot;, 165, &quot;004&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(&quot;\n&gt; [Mengubah] Item (Joni, Tinggi 160 &gt; 165)&quot;)
+	table_view()
+
+	_, err = db.Exec(&quot;delete from tbl_mahasiswa where id = ?&quot;, &quot;004&quot;)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(&quot;\n&gt;[Menghapus] Item (Joni)&quot;)
+	table_view()
+}</code></pre></li></ul><ul id="a588d64d-5f7a-4fde-b94a-edf462045bb0" class="bulleted-list"><li>Databases: (db_mahasiswa):<pre id="263fb69b-87a9-4947-86e9-a79536ba719a" class="code"><code>/*
+SQLyog Ultimate v12.5.1 (64 bit)
+MySQL - 10.4.10-MariaDB : Database - db_mahasiswa
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=&#x27;&#x27;*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE=&#x27;NO_AUTO_VALUE_ON_ZERO&#x27; */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_mahasiswa` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `db_mahasiswa`;
+
+/*Table structure for table `tbl_mahasiswa` */
+
+DROP TABLE IF EXISTS `tbl_mahasiswa`;
+
+CREATE TABLE `tbl_mahasiswa` (
+  `ID` char(10) NOT NULL,
+  `Nama` varchar(100) DEFAULT NULL,
+  `Tinggibadan` int(10) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tbl_mahasiswa` */
+
+insert  into `tbl_mahasiswa`(`ID`,`Nama`,`Tinggibadan`) values 
+(&#x27;001&#x27;,&#x27;Andika&#x27;,185),
+(&#x27;002&#x27;,&#x27;Budi&#x27;,189),
+(&#x27;003&#x27;,&#x27;Agus&#x27;,180);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;</code></pre></li></ul><ul id="78c8f6d1-7348-4bcc-a83e-4cdc1d7d89f4" class="bulleted-list"><li>Hasil Akhir:<figure id="1e32de00-a3fd-4ee2-81ff-8461f3e5b7eb" class="image"><a href="Tugas%20Akhir/SS_Tugas_Akhir_Golang.png"><img style="width:1366px" src="Tugas%20Akhir/SS_Tugas_Akhir_Golang.png"/></a></figure></li></ul></div></article></body></html>

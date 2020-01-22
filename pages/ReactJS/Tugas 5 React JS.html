@@ -1,0 +1,575 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas 5 React JS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="975fecdc-42ea-4c2d-a63d-61030e37ed5d" class="page sans"><header><h1 class="page-title"><strong>Tugas 5 React JS</strong></h1></header><div class="page-body"><p id="459b23b5-129c-4feb-8614-d177dc121007" class=""><strong>Tujuan :</strong></p><ul id="a51ab74f-1a97-4ad4-8450-276c0fb4012a" class="bulleted-list"><li>Memahami cara penggunaan Lists dan Keys.</li></ul><ul id="c225b851-95d5-4ba7-baee-358bfaadb556" class="bulleted-list"><li>Memahami cara penggunaan Form.</li></ul><ul id="6fc78d0e-986c-4c3e-a8bb-48997e54e4cc" class="bulleted-list"><li>Memahami cara penggunaan preventDefault.</li></ul><ul id="57286167-73ac-41c4-b787-812092e09167" class="bulleted-list"><li>Memahami cara penggunaan Refs.</li></ul><p id="a3b9a8b6-16d5-4b9d-ab64-e857003e82cb" class=""><strong>Petunjuk :</strong></p><ul id="34f448c8-8149-40a5-a8aa-3820cfe5323b" class="bulleted-list"><li>Perintah untuk membuat project baru:<pre id="ec4b469a-590e-42bf-98e9-aa0e011dd3a3" class="code"><code>create-react-app nama_project_anda</code></pre></li></ul><ul id="61be2a8a-2ed6-4238-b5f4-eaface0afd3a" class="bulleted-list"><li>Code import component:<pre id="6044486e-0119-46c8-8578-38d453b41a20" class="code"><code>import nama_component from &quot;file_letak_component&quot;;</code></pre></li></ul><ul id="22dfe0dc-b01c-464d-9c71-a3a7860b6d8c" class="bulleted-list"><li>Code membuat state:<pre id="6b7f21df-5731-48a9-afcd-a7f0d1f69979" class="code"><code>constructor(props) {
+   super(props);
+   this.state = {
+   
+   };
+ }</code></pre></li></ul><ul id="1607c522-e6d5-406b-92ba-3ddad3c22754" class="bulleted-list"><li>Code membuat method:<pre id="bd92ebd1-1820-400c-a868-4edcf5528b97" class="code"><code>nama_method() {
+    }</code></pre></li></ul><ul id="e98f92d7-5dd4-4cbd-bfd9-bd86841ba651" class="bulleted-list"><li>Code untuk bind method:<pre id="09642c5e-4215-46d5-abff-d66e96983786" class="code"><code>this.nama_method = this.nama_method.bind(this);</code></pre></li></ul><ul id="6f87e092-b0bc-43dc-bc3a-a9b616cd1be8" class="bulleted-list"><li>Code membuat table:<pre id="0940bc8d-bdfe-4f71-a4f9-31255303204e" class="code"><code>&lt;table&gt;
+    &lt;tbody&gt;
+     &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+ &lt;/table&gt;</code></pre></li></ul><p id="1f127a74-971e-4046-afd5-3de71ba9777e" class=""><strong>Link Gambar:</strong><div class="indented"><p id="202ee268-0d5f-4171-ac66-127cf8d4cf69" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg&amp;sa=D&amp;ust=1576287904164000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg</a></p><p id="e06220c3-f9e6-4202-8651-f7a8b47122db" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png&amp;sa=D&amp;ust=1576287904164000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png</a></p><p id="543534b8-f955-4f94-ba9d-22d465e50b4f" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png&amp;sa=D&amp;ust=1576287904164000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png</a></p><p id="229304fd-5417-414d-a505-e4c1e7af75cd" class=""><a href="https://www.google.com/url?q=https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%2520nusantara/nasi%2520kentut.png&amp;sa=D&amp;ust=1576287904165000">https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%20nusantara/nasi%20kentut.png</a></p><p id="e94053bc-25b7-4c47-b54b-0950c5f663cd" class=""><a href="https://www.google.com/url?q=https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg&amp;sa=D&amp;ust=1576287904165000">https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg</a></p></div></p><p id="fc280434-203f-4983-9248-d366f5d73646" class=""><strong>Tugas :</strong></p><p id="1ee04442-18ef-4a0e-a763-3bb8a44ae615" class="">Pada tugas ini anda diminta untuk membuat sebuah project baru dengan nama <strong>tugas_5_react_js</strong> dan anda diminta untuk membuat website dengan ketentuan sebagai berikut :</p><ol id="37a51e02-9f2d-4246-b171-e325d9d61a34" class="numbered-list" start="1"><li>Struktur file yang harus anda buat :<figure id="583e4feb-69b3-4823-b4ff-dbd8645b568e" class="image"><a href="https://lh4.googleusercontent.com/mqA9uUwArfN-SjhgI_m-kTN1tk19xxePv7elXoWH0kO_RmUq3oz1bwPwHyUGi_pLSukGz9VR_M2llSxWuvLtedc_J54JSvGJlCfDwJ5SIePluutm4XwCQ7pa88SGYhqpEjZjp2Tc"><img src="https://lh4.googleusercontent.com/mqA9uUwArfN-SjhgI_m-kTN1tk19xxePv7elXoWH0kO_RmUq3oz1bwPwHyUGi_pLSukGz9VR_M2llSxWuvLtedc_J54JSvGJlCfDwJ5SIePluutm4XwCQ7pa88SGYhqpEjZjp2Tc"/></a></figure></li></ol><ol id="00a3e244-f6ea-4f1e-bdaf-87a9ba7d2e90" class="numbered-list" start="2"><li>Pada file DaftarMakanan.js yang terletak didalam folder Lib buatlah sebuah <strong>function component </strong>:<figure id="85b0b251-f95a-4378-b6aa-c8c8f72c0bbe" class="image"><a href="https://lh5.googleusercontent.com/pr1e1xCvhuET8BbpsrcVIsujFlrnLryW6RzeAVhmbEoPk5v4ukTJuFoqKwwc0baUxLqjX4sP3O8XUMtmkrV-NwHRq3ewzmqoJUKPA1lXIszkwx_RT4_Ex1y9ojPXbGsvwETB_Cn2"><img src="https://lh5.googleusercontent.com/pr1e1xCvhuET8BbpsrcVIsujFlrnLryW6RzeAVhmbEoPk5v4ukTJuFoqKwwc0baUxLqjX4sP3O8XUMtmkrV-NwHRq3ewzmqoJUKPA1lXIszkwx_RT4_Ex1y9ojPXbGsvwETB_Cn2"/></a></figure></li></ol><ol id="f7d6b22c-ae4c-4e58-8f81-8f444c06f33a" class="numbered-list" start="3"><li>Pada file FormMakanan.js yang terletak di dalam folder Form buatlah sebuah <strong>class component </strong>yang di dalam nya terdapat<strong> state, preventDefault, form, refs, Handling Events </strong>:<figure id="17b423b9-9251-4d16-90e3-e9bb48f4c7bf" class="image"><a href="https://lh5.googleusercontent.com/QtoaTeP3CVYFL0LASGS5qVo0LtWZSYic_2XshEaoO43Te2vOvXwwFf_5WVUrg4EFMzaBoON4mS9x0IUJx8ARrArNpPITMRbg2wxnIzl_O2Gfh-ZhYw4VM3uXmykjfATFO-4j2cY9"><img src="https://lh5.googleusercontent.com/QtoaTeP3CVYFL0LASGS5qVo0LtWZSYic_2XshEaoO43Te2vOvXwwFf_5WVUrg4EFMzaBoON4mS9x0IUJx8ARrArNpPITMRbg2wxnIzl_O2Gfh-ZhYw4VM3uXmykjfATFO-4j2cY9"/></a></figure><figure id="71a0368c-f375-4789-a01c-cfde86ab4551" class="image"><a href="https://lh3.googleusercontent.com/J1DwBiJ3ZYkqzn-UC_1j_0vcZ6cBTdQ6fXaS4tCP6hHfaooINZcvqQQL_FJbM-8eBYae-06XVJTC876KmrIjVIgkJdG-fMLU7-5bLb_mjD9PQ3ZHBfdy4Bb0X2x7eDl7wnLrr2Ar"><img src="https://lh3.googleusercontent.com/J1DwBiJ3ZYkqzn-UC_1j_0vcZ6cBTdQ6fXaS4tCP6hHfaooINZcvqQQL_FJbM-8eBYae-06XVJTC876KmrIjVIgkJdG-fMLU7-5bLb_mjD9PQ3ZHBfdy4Bb0X2x7eDl7wnLrr2Ar"/></a></figure></li></ol><ol id="5164e277-265f-45cb-9c2d-86c9e8632e01" class="numbered-list" start="4"><li>Pada file MenuMakanan.js yang terletak di dalam folder Page buatlah sebuah <strong>class component </strong>yang di dalam nya terdapat<strong> state, preventDefault, form, refs, Lists dan Keys dari Internal File, Lists dan Keys dari Eksternal File </strong>:<figure id="fec118f6-e02c-469d-a73e-eefc21fb24f2" class="image"><a href="https://lh4.googleusercontent.com/wAIb1ND2MJVqL-8gzvNmvdyTnvIacw01Ck_9v16feFk9-QyYmqiI9Ekp-DiQILiX4p9rrQZfPCjPWiri8Pt7RCoFKF5-huinQxC9X2DMcOsT06NETd_VMatQcId_4fwARxIPkr5V"><img src="https://lh4.googleusercontent.com/wAIb1ND2MJVqL-8gzvNmvdyTnvIacw01Ck_9v16feFk9-QyYmqiI9Ekp-DiQILiX4p9rrQZfPCjPWiri8Pt7RCoFKF5-huinQxC9X2DMcOsT06NETd_VMatQcId_4fwARxIPkr5V"/></a></figure><figure id="830777a4-04f6-4029-b881-80f8e7402c80" class="image"><a href="https://lh4.googleusercontent.com/glRbLQscPhZUyZQLMMco3FfwM9hbb7aUauYf1yP3wVvgk1_nyq6S7MW6Ql5YU6pBe-zVPBbHNFHy8UA9GuRSce1VsufgOz6jD6xYH3yFwDdW9J3RYHkDUNkzfkXeJYqZ9qQKsyX6"><img src="https://lh4.googleusercontent.com/glRbLQscPhZUyZQLMMco3FfwM9hbb7aUauYf1yP3wVvgk1_nyq6S7MW6Ql5YU6pBe-zVPBbHNFHy8UA9GuRSce1VsufgOz6jD6xYH3yFwDdW9J3RYHkDUNkzfkXeJYqZ9qQKsyX6"/></a></figure><figure id="41bd6bbc-8d77-4e41-860c-e7d74a2f02af" class="image"><a href="https://lh4.googleusercontent.com/RamBTQXKepPOAPEfmhYiS6S9QpDfqpeOZ23LSaX19_v88YbOUrEmMKtftjiQM2l2JyIeiRUEUTpCEY0y30ckVUcGFGQdCaWJwnNBztpcv726d-fxoGsNX5s2d-WRyVwFVPEjlJXG"><img src="https://lh4.googleusercontent.com/RamBTQXKepPOAPEfmhYiS6S9QpDfqpeOZ23LSaX19_v88YbOUrEmMKtftjiQM2l2JyIeiRUEUTpCEY0y30ckVUcGFGQdCaWJwnNBztpcv726d-fxoGsNX5s2d-WRyVwFVPEjlJXG"/></a></figure></li></ol><ol id="4e4683ce-ccfd-4f30-9513-fae0f1b61564" class="numbered-list" start="5"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="0b8fa927-82ca-4b55-b057-4defad71bd2f" class="image"><a href="https://lh6.googleusercontent.com/ArRVKfg-AWwmmNkl1ad8r7tzTycuYq3fWcpVQb793ixmje8Wgh1zCIAEVvtCu8RB5uh0aU9E8nmT9QTbkWfZTnCKrtdtus9bWRS_2TYZN9wikgbtzsjIKPO7Nmiztd7nRl7sdppc"><img src="https://lh6.googleusercontent.com/ArRVKfg-AWwmmNkl1ad8r7tzTycuYq3fWcpVQb793ixmje8Wgh1zCIAEVvtCu8RB5uh0aU9E8nmT9QTbkWfZTnCKrtdtus9bWRS_2TYZN9wikgbtzsjIKPO7Nmiztd7nRl7sdppc"/></a></figure></li></ol><p id="cdef1152-64ee-47a8-bf48-dc5fa818ae84" class="">PENTING : Untuk tugas yang sudah dikerjakan diatas, silahkan disimpan di komputer masing-masing. Di materi selanjutnya akan dijelaskan cara untuk mengumpul TUGAS nya.</p></div></article></body></html>

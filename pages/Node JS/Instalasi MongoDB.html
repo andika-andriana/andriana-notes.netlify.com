@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Instalasi MongoDB</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="95649bed-42f3-48ca-a516-06bfd0753f22" class="page sans"><header><h1 class="page-title">Instalasi MongoDB</h1></header><div class="page-body"><p id="216a8b96-f54a-4e0e-8fdb-6a71d29349ed" class=""><strong>Instalasi MongoDB</strong></p><ol id="a6066f45-e69d-4c1e-9a01-3beef6b365c6" class="numbered-list" start="1"><li>Download file master MongoDB di website resminya di <a href="https://www.google.com/url?q=https://www.mongodb.com/download-center/community&amp;sa=D&amp;ust=1577186492363000">http://www.mongodb.org</a>. Pada tutorial ini menggunakan OS Windows 10 64-bit.<figure id="c4645813-08a6-4cc1-9e4e-e47a5609d9da" class="image"><a href="https://lh6.googleusercontent.com/N6v1kQZVwr5eYHS_Em8Riev-NAUpNXHDDiBd1l9CRdvFe5MUvl38BLB96aa5m4_rwV5ndL5rn-UZisDprhkYvTuQjyDHDkIBbJeEo0S7TkYTLqtsZpEl6yjq1lofLobVRsnK3FMr"><img src="https://lh6.googleusercontent.com/N6v1kQZVwr5eYHS_Em8Riev-NAUpNXHDDiBd1l9CRdvFe5MUvl38BLB96aa5m4_rwV5ndL5rn-UZisDprhkYvTuQjyDHDkIBbJeEo0S7TkYTLqtsZpEl6yjq1lofLobVRsnK3FMr"/></a></figure><p id="87014e6a-72f8-4485-91ce-ba5af079c15f" class="">Gambar: Pilihan versi serta OS komputer</p></li></ol><ol id="db423cfe-898f-4257-9f20-b795a273ca73" class="numbered-list" start="2"><li>Setelah file berhasil di download, klik kanan file tersebut lalu pilih run as administrator. Kemudian Next dan ceklist “I accept the terms in the License Agreement”.<figure id="dc9db373-0a2b-4c46-aa22-2d943cbf0542" class="image"><a href="https://lh3.googleusercontent.com/ACTLYkk9Ts_QZmerfu7wJNKsrDcjPi_X3LbcN8f8l6lC8S_wfR_m2jOntZh0huQKxGgfNbPvUWoEzn7hQAa3h307Rd0ACjlBhZRWtz3K92HFPY0oEHgIqp88A8m2mvpjbVctyJKT"><img src="https://lh3.googleusercontent.com/ACTLYkk9Ts_QZmerfu7wJNKsrDcjPi_X3LbcN8f8l6lC8S_wfR_m2jOntZh0huQKxGgfNbPvUWoEzn7hQAa3h307Rd0ACjlBhZRWtz3K92HFPY0oEHgIqp88A8m2mvpjbVctyJKT"/></a></figure><figure id="c64fe1ec-b425-48fe-81a5-6f8ed0dc1ef5" class="image"><a href="https://lh4.googleusercontent.com/ehv6eP4q2mo7603VaRWwJvGEV6T-aIUypaj9CcgsWWxkjeOGgK3QJvLkqAOfPqrdfQvKJ1IRAPz-R-dma_074yHhO74YkOw6z2Sn2Db6iUjTf39jCMysefLM4nZLVtPIFkcP3oat"><img src="https://lh4.googleusercontent.com/ehv6eP4q2mo7603VaRWwJvGEV6T-aIUypaj9CcgsWWxkjeOGgK3QJvLkqAOfPqrdfQvKJ1IRAPz-R-dma_074yHhO74YkOw6z2Sn2Db6iUjTf39jCMysefLM4nZLVtPIFkcP3oat"/></a></figure><p id="f7a38735-2304-408c-af22-bacf92351dd8" class="">Gambar: License Agreement</p></li></ol><ol id="64e3c887-8838-486b-9c60-06901d3867d9" class="numbered-list" start="3"><li>Pada Choose Setup Type pilih Complete, kemudian pilih Next dan isi service configuration seperti gambar dibawah ini.<figure id="50700ed4-607e-4aea-b621-0a961795e591" class="image"><a href="https://lh6.googleusercontent.com/9Ikx4A2SpiLx81G0O2dZE8ZpjJpnQVYRCxIWgu2zuc0HE-Twm8Z82kZ8ydv4heo7tAJQxR4i9vZPpft-F-3sg9KucaFfwf0VoCIxcnmb9SLu6dr15lmALVDtO70UhgpzV2JkKhj8"><img src="https://lh6.googleusercontent.com/9Ikx4A2SpiLx81G0O2dZE8ZpjJpnQVYRCxIWgu2zuc0HE-Twm8Z82kZ8ydv4heo7tAJQxR4i9vZPpft-F-3sg9KucaFfwf0VoCIxcnmb9SLu6dr15lmALVDtO70UhgpzV2JkKhj8"/></a></figure><figure id="c673756a-d334-4414-85ac-aad09940f385" class="image"><a href="https://lh4.googleusercontent.com/bLYM41qmxHhHatGTHatDfk_ON-0xHfO6ULWDBOVIC_6jr69I5EovwmCE6zrPtisKzo6kmYrFlSGjboUIYfD5yl3g5qBob0Oizmvu1jeLeAurvtXuQ66g46ldjxM2Guw2zF8rqhwN"><img src="https://lh4.googleusercontent.com/bLYM41qmxHhHatGTHatDfk_ON-0xHfO6ULWDBOVIC_6jr69I5EovwmCE6zrPtisKzo6kmYrFlSGjboUIYfD5yl3g5qBob0Oizmvu1jeLeAurvtXuQ66g46ldjxM2Guw2zF8rqhwN"/></a></figure><p id="c0bdcde3-0c0e-41d5-918a-fd56c85b1a45" class="">Gambar: Choose Setup Type dan Service Configuration</p></li></ol><ol id="e4477bbe-dd83-4ea9-b658-af1e84462c72" class="numbered-list" start="4"><li>Setelah itu pilih next untuk melanjutkan proses Ready to Install MongoDB dan tunggu sampai proses instalasi berhasil.<figure id="4ee876dd-d9de-49be-88bc-808f4526b51f" class="image"><a href="https://lh5.googleusercontent.com/vhqokTYwUoJqTzOaAJRwLG4t7gLEO398WtDwHVQvFDClGJcbh8Yby9Rb5SM6Zpdlp1e9wYXawpVo33bYaz6vc4hOpvFl0-awo3TFXOTaCi7wmsgJrBrgubf7l_wDJhhbeeNMG2TV"><img src="https://lh5.googleusercontent.com/vhqokTYwUoJqTzOaAJRwLG4t7gLEO398WtDwHVQvFDClGJcbh8Yby9Rb5SM6Zpdlp1e9wYXawpVo33bYaz6vc4hOpvFl0-awo3TFXOTaCi7wmsgJrBrgubf7l_wDJhhbeeNMG2TV"/></a></figure><figure id="4c668b24-4a79-4dc2-a826-6d39c5742ff5" class="image"><a href="https://lh4.googleusercontent.com/crqFi69z8DNCxP7r9pfLeWof51RdW34iCAggQ7UYM_reY_356xCjC-8cxil1ic8DaMQX4sVoaO85sqBr8TGibPMHSarE1vaH7SnW0yybzNRrJNVoYG1REmSiO9VOQh4JlbtZoOww"><img src="https://lh4.googleusercontent.com/crqFi69z8DNCxP7r9pfLeWof51RdW34iCAggQ7UYM_reY_356xCjC-8cxil1ic8DaMQX4sVoaO85sqBr8TGibPMHSarE1vaH7SnW0yybzNRrJNVoYG1REmSiO9VOQh4JlbtZoOww"/></a></figure><p id="e3d2eac4-9faf-47d3-a850-ba0c54504e6a" class="">Gambar: Proses Ready to install MongoDB</p></li></ol><ol id="7a0ded5a-cdda-4737-af65-413a3500d0bc" class="numbered-list" start="5"><li>Setelah proses instalasi selesai tekan tombol finish.<figure id="29434f1c-0d8d-43b5-bd4e-433facee14e3" class="image"><a href="https://lh6.googleusercontent.com/eU6ybOJTTcYOi_1Au_ClkL3-0q8QJZF3QGavdOiR81NjWJ0y69h_DFy_yNJ2aQGSZluvhTBWBurytk8shY3DDJxVbwJhUYIEcBAENyLmJkInqTl8OltwJnYp0RTFwIVV9SV_cPNh"><img src="https://lh6.googleusercontent.com/eU6ybOJTTcYOi_1Au_ClkL3-0q8QJZF3QGavdOiR81NjWJ0y69h_DFy_yNJ2aQGSZluvhTBWBurytk8shY3DDJxVbwJhUYIEcBAENyLmJkInqTl8OltwJnYp0RTFwIVV9SV_cPNh"/></a></figure><p id="6760ee1d-9a9b-408c-8fd7-88695833cf5c" class="">Gambar: Proses Instalasi Selesai</p></li></ol><ol id="8dbc9964-26fc-4dc0-b488-913188627f61" class="numbered-list" start="6"><li>Sebelum menjalankan MongoDB, setting PATH agar mudah dipanggil saat membuka command prompt. Berikut ini cara melakukan setting PATH. Klik Kanan <strong>My Computer -&gt; Properties</strong>, pilih <strong>Advance</strong> Klik <strong>Environment Variables</strong>, klik tombol edit kemudian isikan parameter berikut ini:<figure id="c29575a9-1988-4ca0-844c-97966b73d96f" class="image"><a href="https://lh3.googleusercontent.com/hWjeBoq_r8wAUuuUHo63x3iZ3Op0_s8KqGJqpMK296BUOpo9UPT4xBmUDOeguGkIZpWTcqEA-oyUHMrjEX1sWZcxBLnj5Fpn66fQoLRBXImn3klKAdOdMzpS5su0jBz8_nVo31Xj"><img src="https://lh3.googleusercontent.com/hWjeBoq_r8wAUuuUHo63x3iZ3Op0_s8KqGJqpMK296BUOpo9UPT4xBmUDOeguGkIZpWTcqEA-oyUHMrjEX1sWZcxBLnj5Fpn66fQoLRBXImn3klKAdOdMzpS5su0jBz8_nVo31Xj"/></a></figure><p id="8c94c35b-58e9-4ea1-950d-f1841daf7a36" class="">Gambar: Edit Environment Variable</p></li></ol><ol id="8a35eef4-d91b-4690-a39d-dcf9c0ae0d44" class="numbered-list" start="7"><li>Buka CMD kemudian ketik perintah mongo. Sekarang sudah masuk ke mongo terminal dan sudah bisa membuat database dengan mongodb.<figure id="266fc2ff-f1ec-4d89-8d42-35f661fcc26a" class="image"><a href="https://lh5.googleusercontent.com/oV92zwg3xba8aQTt4R6RyFQTXmIrDfmJ3quzc5f4qHRMSKKn9jFewIrI_Xy9B6SwAGuGGJpU3ZoGpuw6rNLjExxtaSkFNLjV-y9s26vkDzAFjZaLE7i9jfqly1rxWrjOnRBvRY2t"><img src="https://lh5.googleusercontent.com/oV92zwg3xba8aQTt4R6RyFQTXmIrDfmJ3quzc5f4qHRMSKKn9jFewIrI_Xy9B6SwAGuGGJpU3ZoGpuw6rNLjExxtaSkFNLjV-y9s26vkDzAFjZaLE7i9jfqly1rxWrjOnRBvRY2t"/></a></figure><p id="4e40b794-5c2c-4371-8306-bc89c959734a" class="">Gambar: MongoDB Terminal</p></li></ol></div></article></body></html>

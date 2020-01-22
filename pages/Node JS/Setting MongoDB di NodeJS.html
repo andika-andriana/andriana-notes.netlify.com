@@ -1,0 +1,742 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Setting MongoDB di NodeJS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d6ddec30-67f0-4ef7-88c2-8142723e83da" class="page sans"><header><h1 class="page-title">Setting MongoDB di NodeJS</h1></header><div class="page-body"><p id="2b74ae2b-b814-4b4b-a558-c8296564eb3e" class="">Berikut contoh pengaturan mongoDB pada nodeJS:</p><ol id="1ef1351b-3aa5-4eca-b3d9-c2a524b8e245" class="numbered-list" start="1"><li>Buat folder baru pada drive  C dengan urutan : <code>C:\data\db</code></li></ol><ol id="b1a72516-f5f3-4cce-b643-18d1bba52f50" class="numbered-list" start="2"><li>Buka terminal/cmd jalankan server mongodb dengan mengetikan <code>mongod</code>:<pre id="7d8743fc-ca37-49b6-9b20-68dd80d00d4a" class="code"><code>PS C:\Users\AndikaAndriana&gt; mongod
+2019-12-25T17:50:04.581+0700 I  CONTROL  [main] Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols &#x27;none&#x27;
+2019-12-25T17:50:04.588+0700 I  CONTROL  [initandlisten] MongoDB starting : pid=21652 port=27017 dbpath=C:\data\db\ 64-bit host=AndikaAndriana
+2019-12-25T17:50:04.589+0700 I  CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2019-12-25T17:50:04.589+0700 I  CONTROL  [initandlisten] db version v4.2.2
+2019-12-25T17:50:04.589+0700 I  CONTROL  [initandlisten] git version: a0bbbff6ada159e19298d37946ac8dc4b497eadf
+2019-12-25T17:50:04.589+0700 I  CONTROL  [initandlisten] allocator: tcmalloc
+2019-12-25T17:50:04.589+0700 I  CONTROL  [initandlisten] modules: none
+2019-12-25T17:50:04.590+0700 I  CONTROL  [initandlisten] build environment:
+2019-12-25T17:50:04.591+0700 I  CONTROL  [initandlisten]     distmod: 2012plus
+2019-12-25T17:50:04.591+0700 I  CONTROL  [initandlisten]     distarch: x86_64
+2019-12-25T17:50:04.594+0700 I  CONTROL  [initandlisten]     target_arch: x86_64
+2019-12-25T17:50:04.596+0700 I  CONTROL  [initandlisten] options: {}
+2019-12-25T17:50:04.600+0700 I  STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7641M,cache_overflow=(file_max=0M),session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress],
+2019-12-25T17:50:04.917+0700 I  STORAGE  [initandlisten] WiredTiger message [1577271004:917241][21652:140717144694352], txn-recover: Set global recovery timestamp: (0,0)
+2019-12-25T17:50:05.144+0700 I  RECOVERY [initandlisten] WiredTiger recoveryTimestamp. Ts: Timestamp(0, 0)
+2019-12-25T17:50:05.343+0700 I  STORAGE  [initandlisten] Timestamp monitor starting
+2019-12-25T17:50:05.396+0700 I  CONTROL  [initandlisten]
+2019-12-25T17:50:05.397+0700 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-12-25T17:50:05.400+0700 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-12-25T17:50:05.403+0700 I  CONTROL  [initandlisten]
+2019-12-25T17:50:05.404+0700 I  CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2019-12-25T17:50:05.405+0700 I  CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server.
+2019-12-25T17:50:05.406+0700 I  CONTROL  [initandlisten] **          Start the server with --bind_ip &lt;address&gt; to specify which IP
+2019-12-25T17:50:05.408+0700 I  CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2019-12-25T17:50:05.413+0700 I  CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2019-12-25T17:50:05.415+0700 I  CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2019-12-25T17:50:05.416+0700 I  CONTROL  [initandlisten]
+2019-12-25T17:50:05.419+0700 I  STORAGE  [initandlisten] createCollection: admin.system.version with provided UUID: 00584dac-f566-465f-835c-b00829f7879f and options: { uuid: UUID(&quot;00584dac-f566-465f-835c-b00829f7879f&quot;) }
+2019-12-25T17:50:05.587+0700 I  INDEX    [initandlisten] index build: done building index _id_ on ns admin.system.version
+2019-12-25T17:50:05.593+0700 I  SHARDING [initandlisten] Marking collection admin.system.version as collection version: &lt;unsharded&gt;
+2019-12-25T17:50:05.593+0700 I  COMMAND  [initandlisten] setting featureCompatibilityVersion to 4.2
+2019-12-25T17:50:05.596+0700 I  SHARDING [initandlisten] Marking collection local.system.replset as collection version: &lt;unsharded&gt;
+2019-12-25T17:50:05.597+0700 I  STORAGE  [initandlisten] Flow Control is enabled on this deployment.
+2019-12-25T17:50:05.598+0700 I  SHARDING [initandlisten] Marking collection admin.system.roles as collection version: &lt;unsharded&gt;
+2019-12-25T17:50:05.604+0700 I  STORAGE  [initandlisten] createCollection: local.startup_log with generated UUID: 32b7a08a-c018-41fd-8a34-c0c986563ea0 and options: { capped: true, size: 10485760 }
+2019-12-25T17:50:05.808+0700 I  INDEX    [initandlisten] index build: done building index _id_ on ns local.startup_log
+2019-12-25T17:50:05.809+0700 I  SHARDING [initandlisten] Marking collection local.startup_log as collection version: &lt;unsharded&gt;
+2019-12-25T17:50:06.162+0700 I  FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory &#x27;C:/data/db/diagnostic.data&#x27;
+2019-12-25T17:50:06.168+0700 I  SHARDING [LogicalSessionCacheRefresh] Marking collection config.system.sessions as collection version: &lt;unsharded&gt;
+2019-12-25T17:50:06.168+0700 I  NETWORK  [initandlisten] Listening on 127.0.0.1
+2019-12-25T17:50:06.169+0700 I  CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
+2019-12-25T17:50:06.169+0700 I  STORAGE  [LogicalSessionCacheRefresh] createCollection: config.system.sessions with provided UUID: a4d46173-1bb1-4294-898d-83eb2b5bc4fe and options: { uuid: UUID(&quot;a4d46173-1bb1-4294-898d-83eb2b5bc4fe&quot;) }
+2019-12-25T17:50:06.171+0700 I  NETWORK  [initandlisten] waiting for connections on port 27017
+2019-12-25T17:50:06.376+0700 I  INDEX    [LogicalSessionCacheRefresh] index build: done building index _id_ on ns config.system.sessions
+2019-12-25T17:50:06.563+0700 I  INDEX    [LogicalSessionCacheRefresh] index build: starting on config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: &quot;lsidTTLIndex&quot;, ns: &quot;config.system.sessions&quot;, expireAfterSeconds: 1800 } using method: Hybrid
+2019-12-25T17:50:06.564+0700 I  INDEX    [LogicalSessionCacheRefresh] build may temporarily use up to 500 megabytes of RAM
+2019-12-25T17:50:06.567+0700 I  INDEX    [LogicalSessionCacheRefresh] index build: collection scan done. scanned 0 total records in 0 seconds
+2019-12-25T17:50:06.574+0700 I  INDEX    [LogicalSessionCacheRefresh] index build: inserted 0 keys from external sorter into index in 0 seconds
+2019-12-25T17:50:06.626+0700 I  INDEX    [LogicalSessionCacheRefresh] index build: done building index lsidTTLIndex on ns config.system.sessions
+2019-12-25T17:50:06.687+0700 I  COMMAND  [LogicalSessionCacheRefresh] command config.system.sessions command: createIndexes { createIndexes: &quot;system.sessions&quot;, indexes: [ { key: { lastUse: 1 }, name: &quot;lsidTTLIndex&quot;, expireAfterSeconds: 1800 } ], $db: &quot;config&quot; } numYields:0 reslen:114 locks:{ ParallelBatchWriterMode: { acquireCount: { r: 2 } }, ReplicationStateTransition: { acquireCount: { w: 3 } }, Global: { acquireCount: { r: 1, w: 2 } }, Database: { acquireCount: { r: 1, w: 2, W: 1 } }, Collection: { acquireCount: { r: 4, w: 1, R: 1, W: 2 } }, Mutex: { acquireCount: { r: 3 } } } flowControl:{ acquireCount: 1 } storage:{} protocol:op_msg 517ms
+2019-12-25T17:50:07.003+0700 I  SHARDING [ftdc] Marking collection local.oplog.rs as collection version: &lt;unsharded&gt;</code></pre></li></ol><ol id="f743e1ab-bd83-4ea2-98ba-a041e8638d87" class="numbered-list" start="3"><li>Kemudian buka terminal/cmd baru masuk kedalam project kita, lalu install module mongoose agar project kita dapat terhubung dengan mongoDB:<pre id="8f416931-5375-4377-b0cd-5cf1b5d996a2" class="code"><code>PS C:\1-repo-belajar\nodeJS\nodeProjects\resthub&gt; npm install mongoose --save
+npm WARN resthub@1.0.0 No repository field.
+
++ mongoose@5.8.3
+added 19 packages from 13 contributors and audited 152 packages in 9.827s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e438b02-9709-45e0-aea0-83ff339ef664"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Mongoose adalah sebuah module pada NodeJS yang di install menggunakan npm, berfungsi sebagai penghubung antara NodeJS dan database nosql MongoDB.</div></figure></li></ol><ol id="445ad647-ce66-4a9f-8e04-738e4196d421" class="numbered-list" start="4"><li>Kemudian install juga module body-parser:<pre id="9b66f9cf-e749-496d-84f2-0be90b8ef371" class="code"><code>PS C:\1-repo-belajar\nodeJS\nodeProjects\resthub&gt; npm install body-parser --save                                                       
+npm WARN resthub@1.0.0 No repository field.
+
++ body-parser@1.19.0
+updated 1 package and audited 184 packages in 4.611s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="85bd5171-646b-44ff-a3d2-311e06237b7f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">body-parser kita butuhkan supaya API yang kita buat bisa membaca data yang dikirimkan oleh user baik melalui form ataupun yang berupa JSON.</div></figure></li></ol><ol id="003ef705-c715-42dd-bcd4-33c313c0d7c3" class="numbered-list" start="5"><li>Buka project pada text editor kita (contoh: atom.io) pada index.js import package mongoose dan body-parser:<pre id="37b19bb6-a63c-4117-8361-8300c95f425f" class="code"><code>// filename: index.js
+
+// import express
+let express = require(&quot;express&quot;);
+
+// import API Router
+let apiRoutes = require(&quot;./apiRoutes&quot;);
+
+<mark class="highlight-yellow_background">// import mongoose
+let mongoose = require(&quot;mongoose&quot;);
+
+// import body-parser
+let bodyParser = require(&quot;body-parser&quot;);</mark>
+
+// initialize app
+let app = express();
+
+// setup server
+var port = process.env.PORT || 8080;
+
+// send message for default URL
+app.get(&quot;/&quot;, (req, res) =&gt; res.send(&quot;Hello Dunia with Express dan Nodemon!&quot;));
+
+// app apiRoutes
+app.use(&quot;/api&quot;, apiRoutes);
+
+// launch app to listen specified PORT
+app.listen(port, function() {
+  console.log(&quot;Running resthub on port: &quot; + port);
+});</code></pre></li></ol><ol id="a3a41200-00b9-4114-b627-cee1f14ee8f2" class="numbered-list" start="6"><li>Kemudian lakukan configurasi body-parser:<pre id="344c5589-bb8d-4858-ac2e-a61a2bc25429" class="code"><code>// filename: index.js
+
+// import express
+let express = require(&quot;express&quot;);
+
+// import API Router
+let apiRoutes = require(&quot;./apiRoutes&quot;);
+
+// import mongoose
+let mongoose = require(&quot;mongoose&quot;);
+
+// import body-parser
+let bodyParser = require(&quot;body-parser&quot;);
+
+// initialize app
+let app = express();
+
+// setup server
+var port = process.env.PORT || 8080;
+
+<mark class="highlight-yellow_background">// configuration body-parser
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+app.use(bodyParser.json());</mark>
+
+// send message for default URL
+app.get(&quot;/&quot;, (req, res) =&gt; res.send(&quot;Hello Dunia with Express dan Nodemon!&quot;));
+
+// app apiRoutes
+app.use(&quot;/api&quot;, apiRoutes);
+
+// launch app to listen specified PORT
+app.listen(port, function() {
+  console.log(&quot;Running resthub on port: &quot; + port);
+});</code></pre></li></ol><ol id="79b5954a-8a5d-47c9-9510-8d752ee402bd" class="numbered-list" start="7"><li>Kemudian hubungkan project dengan mongoose dengan menuliskan kode didalam index.js:<pre id="64469430-db96-42b4-8a3f-e5fa00db0e2e" class="code"><code>// filename: index.js
+
+// import express
+let express = require(&quot;express&quot;);
+
+// import API Router
+let apiRoutes = require(&quot;./apiRoutes&quot;);
+
+// import mongoose
+let mongoose = require(&quot;mongoose&quot;);
+
+// import body-parser
+let bodyParser = require(&quot;body-parser&quot;);
+
+// initialize app
+let app = express();
+
+// setup server
+var port = process.env.PORT || 8080;
+
+// configuration body-parser
+app.use(
+  bodyParser.urlenconded({
+    extended: true
+  })
+);
+app.use(bodyParser.json());
+
+<mark class="highlight-yellow_background">// connect mongoose and set connection variable
+mongoose.connect(&quot;mongodb://localhost/resthub&quot;);
+var db = mongoose.connection;</mark>
+
+// send message for default URL
+app.get(&quot;/&quot;, (req, res) =&gt; res.send(&quot;Hello Dunia with Express dan Nodemon!&quot;));
+
+// app apiRoutes
+app.use(&quot;/api&quot;, apiRoutes);
+
+// launch app to listen specified PORT
+app.listen(port, function() {
+  console.log(&quot;Running resthub on port: &quot; + port);
+});</code></pre><p id="b947752d-dcad-4833-b65f-2a71f989a056" class="">
+</p></li></ol></div></article></body></html>

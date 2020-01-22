@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>React Native With Native Base</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a4dd4ca1-1867-45cc-a00c-a0bf811525b7" class="page sans"><header><h1 class="page-title">React Native With Native Base</h1></header><div class="page-body"><p id="7cc881ea-c56a-4b99-9677-b1524bcbe5f4" class="">NativeBase adalah perpustakaan komponen UI dengan sumber terbuka dan gratis untuk React Native untuk membangun aplikasi seluler asli untuk platform iOS dan Android. NativeBase juga mendukung web dari versi 2.4.1.</p><p id="b8e9e37a-37db-48de-acac-0a15b7f0b8c3" class="">Berikut contoh penerapannya pada project React-Native:</p><ul id="2e68a44e-5521-4186-b9e8-8644843c9744" class="bulleted-list"><li>Buat project baru dengan react-native:<pre id="fae4cb2f-7090-482d-a6a4-418a1a1cc6b6" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative&gt; react-native init react_native_base          This will walk you through creating a new React Native project in C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\react_native_base
+Using yarn v1.21.1
+Installing react-native...
+yarn add v1.21.1
+info No lockfile found.
+[1/4] Resolving packages...
+warning react-native &gt; fbjs-scripts &gt; core-js@2.6.11: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+warning react-native &gt; fbjs &gt; core-js@2.6.11: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+warning react-native &gt; create-react-class &gt; fbjs &gt; core-js@1.2.7: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+warning react-native &gt; metro-babel-register &gt; core-js@2.6.11: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+[2/4] Fetching packages...
+info fsevents@1.2.11: The platform &quot;win32&quot; is incompatible with this module.
+info &quot;fsevents@1.2.11&quot; is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning &quot;react-native &gt; metro-react-native-babel-transformer@0.56.3&quot; has unmet peer dependency &quot;@babel/core@*&quot;.
+warning &quot; &gt; react-native@0.61.5&quot; has unmet peer dependency &quot;react@16.9.0&quot;.
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 380 new dependencies.
+info Direct dependencies
+└─ react-native@0.61.5
+info All dependencies
+├─ @babel/generator@7.7.7
+├─ @babel/helper-builder-binary-assignment-operator-visitor@7.7.4
+...
+Done in 165.62s.
+info Setting up new React Native app in C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\react_native_base
+info Adding required dependencies
+yarn add v1.21.1
+[1/4] Resolving packages...
+info There appears to be trouble with your network connection. Retrying...
+warning jest &gt; jest-cli &gt; jest-config &gt; jest-environment-jsdom &gt; jsdom &gt; left-pad@1.3.0: use String.prototype.padStart()
+[2/4] Fetching packages...
+info fsevents@1.2.11: The platform &quot;win32&quot; is incompatible with this module.
+info &quot;fsevents@1.2.11&quot; is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning &quot;@react-native-community/eslint-config &gt; eslint-plugin-react@7.12.4&quot; has incorrect peer dependency &quot;eslint@^3.0.0 || ^4.0.0 || ^5.0.0&quot;.
+warning &quot;@react-native-community/eslint-config &gt; eslint-plugin-react-native@3.6.0&quot; has incorrect peer dependency &quot;eslint@^3.17.0 || ^4 || ^5&quot;.
+warning &quot;@react-native-community/eslint-config &gt; @typescript-eslint/eslint-plugin@1.13.0&quot; has incorrect peer dependency &quot;eslint@^5.0.0&quot;.
+warning &quot;@react-native-community/eslint-config &gt; @typescript-eslint/eslint-plugin &gt; tsutils@3.17.1&quot; has unmet peer dependency &quot;typescript@&gt;=2.8.0 || &gt;= 3.2.0-dev || &gt;= 3.3.0-dev || &gt;= 3.4.0-dev || &gt;= 3.5.0-dev || &gt;= 3.6.0-dev || &gt;= 3.6.0-beta || &gt;= 3.7.0-dev || &gt;= 3.7.0-beta&quot;.
+warning &quot;@react-native-community/eslint-config &gt; @typescript-eslint/parser@1.13.0&quot; has incorrect peer dependency &quot;eslint@^5.0.0&quot;.
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 179 new dependencies.
+info Direct dependencies
+├─ @react-native-community/eslint-config@0.0.5
+├─ eslint@6.8.0
+├─ jest@24.9.0
+├─ react-test-renderer@16.9.0
+└─ react@16.9.0
+info All dependencies
+├─ @jest/core@24.9.0
+├─ @jest/reporters@24.9.0
+...
+Done in 149.28s.
+info Adding required dev dependencies
+yarn add v1.21.1
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+Done in 15.26s.
+
+  Run instructions for iOS:
+    • cd C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\react_native_base &amp;&amp; npx react-native run-ios
+    - or -
+    • Open react_native_base\ios\react_native_base.xcodeproj in Xcode or run &quot;xed -b ios&quot;
+    • Hit the Run button
+
+  Run instructions for Android:
+    • Have an Android emulator running (quickest way to get started), or a device connected.
+    • cd C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\react_native_base &amp;&amp; npx react-native run-android
+
+PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative&gt;</code></pre></li></ul><ul id="ee3e4d8d-a78f-4784-9082-d682accfd276" class="bulleted-list"><li>Kemudian load project yang kita buat pada text editor:<figure id="8dad1394-282c-4a83-95ab-c20b69b009ae" class="image"><a href="React%20Native%20With%20Native%20Base/Untitled.png"><img style="width:922px" src="React%20Native%20With%20Native%20Base/Untitled.png"/></a></figure></li></ul><ul id="579f6217-a9c6-468d-b8b0-d84935795da3" class="bulleted-list"><li>Buat terminal/cmd kemudian install native-base dengan kode :<pre id="0bbe8d13-8943-4756-aaa6-7f74ad37bff9" class="code"><code>PS C:\Users\react_native_base&gt; npm install native-base --save
+&gt; core-js@2.6.11 postinstall C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\react_native_base\node_
+modules\core-js
+&gt; node -e &quot;try{require(&#x27;./postinstall&#x27;)}catch(e){}&quot;
+
+Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!
+The project needs your help! Please consider supporting of core-js on Open Collective or Patreon:
+&gt; https://opencollective.com/core-js
+&gt; https://www.patreon.com/zloirock
+
+Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)
+┌────────────────────────────────────────────────────────────────────────────────────────────┐
+│ NativeBase 2.0 has been succesfully installed!                                             │
+│ Run `node node_modules/native-base/ejectTheme.js` to copy over theme config and variables. │
+│ Head over to the docs for detailed information on how to make changes to the theme.        │
+└────────────────────────────────────────────────────────────────────────────────────────────┘
+Thank you for using native-base!
+If you rely on this package, please consider supporting our open collective:
+
+&gt; https://opencollective.com/NativeBase/donate
+
++ native-base@2.13.8
+added 74 packages from 38 contributors, removed 38 packages, updated 878 packages and audited 952777 packages in
+364.451s
+
+19 packages are looking for funding
+  run `npm fund` for details
+
+found 4 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details</code></pre></li></ul><ul id="dd292751-9db1-4861-9f07-2caebf17b47f" class="bulleted-list"><li>Kemudian install peer dependencies:<pre id="50a704e1-3273-4724-8db2-d1071705bf38" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\ReactNative\react_native_base&gt; react-native link
+info Linking assets to ios project
+warn Group &#x27;Resources&#x27; does not exist in your Xcode project. We have created it automatically for you.
+info Linking assets to android project
+success Assets have been successfully linked to your project</code></pre></li></ul><ul id="7c374619-f143-45cb-b906-1545f9ea4998" class="bulleted-list"><li>Buat contoh component button pada App.js:<pre id="7517dc16-b901-421a-807c-e572689cb12a" class="code"><code>/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
+import React, {Component} from &#x27;react&#x27;;
+import {Container, Button, Text} from &#x27;native-base&#x27;;
+
+export default class App extends Component&lt;Props&gt; {
+  render() {
+    return (
+      &lt;Container style={{margin: 50}}&gt;
+        &lt;Button&gt;
+          &lt;Text&gt;Button -- Native Base&lt;/Text&gt;
+        &lt;/Button&gt;
+      &lt;/Container&gt;
+    );
+  }
+}</code></pre></li></ul><ul id="b6c6a59c-4125-4951-9309-ec7c218741d3" class="bulleted-list"><li>Jika berhasil, Avd akan memunculkan tombol seperti berikut:<figure id="8d50e3c8-c906-4b4e-be3e-ae1d977af70f" class="image"><a href="React%20Native%20With%20Native%20Base/Untitled%201.png"><img style="width:371px" src="React%20Native%20With%20Native%20Base/Untitled%201.png"/></a></figure></li></ul></div></article></body></html>

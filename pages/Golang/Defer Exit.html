@@ -1,0 +1,631 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Defer &amp; Exit</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="051dd792-39fc-4146-a493-b5b6092df749" class="page sans"><header><h1 class="page-title">Defer &amp; Exit</h1></header><div class="page-body"><ol id="2c0f5237-6a31-472a-b529-d04e3a2f315d" class="numbered-list" start="1"><li><strong>Defer &amp; Exit</strong><p id="a8df25c0-06de-4b46-bed9-73ff55756be1" class=""><strong>Defer</strong> digunakan untuk mengakhirkan eksekusi sebuah statement tepat sebelum blok fungsi selesai. Sedangkan <strong>Exit</strong> digunakan untuk menghentikan program secara paksa (ingat, menghentikan program, tidak seperti <code>return</code> yang hanya menghentikan blok kode).</p></li></ol><ol id="1d504bc2-19e1-4312-b518-9f48867b2dfe" class="numbered-list" start="2"><li><strong>Penerapan keyword </strong><code><strong>defer</strong></code><p id="25b13c75-6d61-4fba-9073-8c9176b38438" class="">Seperti yang sudah dijelaskan secara singkat di atas, bahwa defer digunakan untuk mengakhirkan eksekusi baris kode <strong>dalam skope blok fungsi</strong>. Ketika eksekusi blok sudah hampir selesai, statement yang di-defer dijalankan.</p><p id="b6e2491b-4693-47bc-b30d-862fddf69365" class="">Defer bisa ditempatkan di mana saja, awal maupun akhir blok. Tetapi tidak mempengaruhi kapan waktu dieksekusinya, akan selalu dieksekusi di akhir.</p><p id="50e63c28-fdec-4990-9132-6ed2c9a802bf" class="">Contoh:</p><pre id="f8ef6232-ff7b-4084-93e9-f68e0967256f" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    defer fmt.Println(&quot;halo&quot;)
+    fmt.Println(&quot;selamat datang&quot;)
+}</code></pre><p id="f7bd9f9d-6d84-453b-a6a9-30f19352e3a3" class="">Output:</p><pre id="94bb4d86-6152-4089-8f54-37c42d82ee94" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\defer.go
+selamat datang
+halo</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="71f2b20f-82d0-4220-b5c0-f97bd608526b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Keyword <code>defer</code> di atas akan mengakhirkan ekseusi <code>fmt.Println(&quot;halo&quot;)</code>, efeknya pesan <code>&quot;halo&quot;</code> akan muncul setelah <code>&quot;selamat datang&quot;</code>.</div></figure><p id="decb3895-9799-40d7-acef-087e4c53e6bc" class="">Statement yang di-defer akan tetap muncul meskipun blok kode diberhentikan ditengah jalan menggunakan <code>return</code>. </p><p id="082ed053-025e-45aa-b290-73e87d86c13e" class="">Contohnya seperti pada kode berikut:</p><pre id="8a3d3299-543f-45f6-8923-23794e4ae375" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	orderSomeFood(&quot;pizza&quot;)
+	orderSomeFood(&quot;burger&quot;)
+}
+
+func orderSomeFood(menu string) {
+	defer fmt.Println(&quot;Terimakasih, silakan tunggu&quot;)
+	if menu == &quot;pizza&quot; {
+		fmt.Print(&quot;Pilihan tepat!&quot;, &quot; &quot;)
+		fmt.Print(&quot;Pizza ditempat kami paling enak!&quot;, &quot;\n&quot;)
+		return
+	}
+
+	fmt.Println(&quot;Pesanan anda:&quot;, menu)
+}</code></pre><p id="f4e865c2-8d67-4496-95ab-eecce4170c84" class="">Output:</p><pre id="b865ed44-99d6-49ab-9bea-03e16f5126fd" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\defer.go
+Pilihan tepat! Pizza ditempat kami paling enak!
+Terimakasih, silakan tunggu
+Pesanan anda: burger
+Terimakasih, silakan tunggu</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8a518995-0e14-4301-bb6f-6ad800a9ca81"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Info tambahan, ketika ada banyak statement yang di-defer, maka kesemuanya akan dieksekusi di akhir secara berurutan.</div></figure></li></ol><ol id="fa9fbd10-7615-4082-9e03-3fc695f77862" class="numbered-list" start="3"><li><strong>Kombinasi </strong><code><strong>defer</strong></code><strong> dan IIFE</strong><p id="71a40072-6236-4c8a-be04-60593e6673d4" class="">Penulis ingatkan lagi bahwa eksekusi defer adalah di akhir blok fungsi, bukan blok lainnya seperti blok seleksi kondisi.</p><pre id="e3a7e437-e055-4656-9e17-d4119b77722b" class="code"><code>func main() {
+    number := 3
+
+    if number == 3 {
+        fmt.Println(&quot;halo 1&quot;)
+        defer fmt.Println(&quot;halo 3&quot;)
+    }
+
+    fmt.Println(&quot;halo 2&quot;)
+}</code></pre><p id="6f7d5fc7-5733-44bb-b6d8-c377e126cc8c" class="">Output:</p><pre id="309423b8-d6ee-40fe-b832-410b4b2f445b" class="code"><code>halo 1
+halo 2
+halo 3</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="239c1ded-09b9-444e-a6fd-735694858172"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada contoh di atas <code>halo 3</code> akan tetap di print setelah <code>halo 2</code> meskipun statement defer dipergunakan dalam blok seleksi kondisi <code>if</code>. Hal ini karena defer eksekusinya terjadi pada akhir blok fungsi (dalam contoh di atas <code>main()</code>), bukan pada akhir blok <code>if</code>.</div></figure><p id="82d98a61-810d-401e-9f08-7243f7bd7f68" class="">Agar <code>halo 3</code> bisa dimunculkan di akhir blok <code>if</code>, maka harus dibungkus dengan IIFE. </p><p id="70cecc61-1666-4187-bdbe-d4e2f5b52339" class="">Contoh:</p><pre id="1c1f5860-93ef-4757-95ee-5bb8240d3d92" class="code"><code>func main() {
+    number := 3
+
+    if number == 3 {
+        fmt.Println(&quot;halo 1&quot;)
+        func() {
+            defer fmt.Println(&quot;halo 3&quot;)
+        }()
+    }
+
+    fmt.Println(&quot;halo 2&quot;)
+}</code></pre><p id="8254abef-8faa-427a-a0ac-79eae927e166" class="">Output:</p><pre id="14f235aa-78f8-41be-bf1d-95012ea39310" class="code"><code>halo 1
+halo 3
+halo 2</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="88cb8862-31f1-4d4f-ba03-17e88544a4ef"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Bisa dilihat <code>halo 3</code> muncul sebelum <code>halo 2</code>, karena dalam blok seleksi kondisi <code>if</code> eksekusi defer terjadi dalam blok fungsi anonymous (IIFE).</div></figure></li></ol><ol id="2cc5a048-7e61-4f75-a5d6-bc7f0cb50fbf" class="numbered-list" start="4"><li><strong>Penerapan Fungsi </strong><code><strong>os.Exit()</strong></code><p id="0e350b43-a663-4845-8b06-25f197693246" class="">Exit digunakan untuk menghentikan program secara paksa pada saat itu juga. Semua statement setelah exit tidak akan di eksekusi, termasuk juga defer.</p><p id="3bad85eb-12a7-4f0a-8201-ed2ade2001fd" class="">Fungsi <code>os.Exit()</code> berada dalam package <code>os</code>. Fungsi ini memiliki sebuah parameter bertipe numerik yang wajib diisi. Angka yang dimasukkan akan muncul sebagai <strong>exit status</strong> ketika program berhenti.</p><p id="87eb0a0c-0f4c-494d-9011-adb2b140e01b" class="">Contoh:</p><pre id="c6c2f109-c8b2-42d2-bd79-25afc8c85c94" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;os&quot;
+
+func main() {
+	defer fmt.Println(&quot;halo&quot;)
+	os.Exit(1)
+	fmt.Println(&quot;selamat datang&quot;)
+}</code></pre><p id="fd02a8ad-dcdb-4721-84ca-8fe23156cf18" class="">Output:</p><pre id="57a14bc0-2db4-425b-a441-1c3e6c559406" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\exit.go
+exit status 1</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="33efcf7c-60b9-4fc6-a587-806c8a1dfeb8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Meskipun <code>defer fmt.Println(&quot;halo&quot;)</code> ditempatkan sebelum <code>os.Exit()</code>, statement tersebut tidak akan dieksekusi, karena di-tengah fungsi program dihentikan secara paksa.</div></figure><p id="222de2cb-e12b-44ca-a8bb-796747cb9406" class="">
+</p></li></ol></div></article></body></html>

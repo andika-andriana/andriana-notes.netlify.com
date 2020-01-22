@@ -1,0 +1,642 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Select .. JOIN</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d6d4ff97-a6df-4b7b-8786-26d0fdbe995d" class="page sans"><header><h1 class="page-title">Select .. JOIN</h1></header><div class="page-body"><p id="910cc2cd-2051-4d07-9e82-3ea6b62b30d3" class=""><strong>Select .. JOIN</strong><div class="indented"><p id="9cace2a2-c4e9-4613-bb3a-8db22d0db342" class="">Join adalah penggabungan table yang dilakukan melalui kolom / key tertentu yang memiliki nilai terkait untuk mendapatkan satu set data dengan informasi lengkap.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="dfbe9e61-ce25-408d-9a58-cb35ecb14d2b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Lengkap disini artinya kolom data didapatkan dari kolom-kolom hasil join antar table tersebut.</div></figure><p id="b8ecc6a9-2509-4fa8-9f47-de721a9f44e4" class="">Pada bahasa SQL, operasi join atau penggabungan antar table adalah operasi dasar database relasional yang sangat penting. Untuk mendukung perancangan database relasional yang baik</p><p id="e4e91d1a-b817-406f-b3d6-51b165619e3e" class="">JOIN sangat penting untuk Anda pahami, jika ingin menghasilkan output data yang valid, menjamin integritas data, dan meminimalisir redudansi data.</p></div></p><p id="5d6111c4-9204-405b-8ff4-0e07842d0437" class=""><strong>Persiapan</strong><div class="indented"><p id="0ea5ee39-ca88-488d-a952-dfcf22b2ef02" class="">Untuk mempermudah saya dalam menjelaskan fungsi dari masing-masing join ini, disini saya telah menyediakan satu database dimana terdapat dua tabel yang saling berhubungan didalamnya. Adapun bentuk skema desain dari database saya adalah seperti gambar berikut:</p><figure id="34c56af2-0d0d-4320-aff2-c3859549060b" class="image"><a href="Select%20JOIN/Untitled.png"><img style="width:710px" src="Select%20JOIN/Untitled.png"/></a></figure><p id="7367b623-2aac-4df0-8f93-0bc3cf3301e5" class="">Dimana primary key karyawan_id pada table karyawan berelasi dengan foreign key karyawan_id pada table gaji.</p><ul id="dea32968-ef4e-4e19-a49f-d3e4545073bf" class="bulleted-list"><li>Jika anda belum memiliki struktur table diatas, silahkan buat sebuah database dan eksekusi query berikut ini untuk membuat struktur table.<p id="5c15e032-8af9-4ef7-b2c1-eef0cc9a9923" class="">Table Karyawan:</p><pre id="2b9b027a-92aa-4bde-aed2-a6ef1a40cfbd" class="code"><code>CREATE TABLE karyawan (
+    karyawan_id VARCHAR(10) PRIMARY KEY,
+    karyawan_nama VARCHAR(100)
+);</code></pre><p id="22966d40-4ed9-41b4-8ff8-fec05fff1783" class="">Table Gaji:</p><pre id="7733a084-21c4-438c-bea7-8b260ab72e56" class="code"><code>CREATE TABLE gaji (
+    gaji_id VARCHAR(10) PRIMARY KEY,
+    karyawan_id VARCHAR(10),
+    gaji_pokok DOUBLE,
+    FOREIGN KEY (karyawan_id) REFERENCES karyawan(karyawan_id)
+)ENGINE=INNODB;</code></pre><p id="3bf0bc3b-b949-4e88-8155-829ec97cb228" class="">Insert beberapa data pada table karyawan dengan mengeksekusi query berikut:</p><pre id="24e47637-3099-4570-aa18-23e09d9cc525" class="code"><code>INSERT INTO karyawan (karyawan_id,karyawan_nama)VALUES 
+(&#x27;001&#x27;,&#x27;Santi&#x27;),(&#x27;002&#x27;,&#x27;Dewi&#x27;),(&#x27;003&#x27;,&#x27;Joko&#x27;),
+(&#x27;004&#x27;,&#x27;Putri&#x27;),(&#x27;005&#x27;,&#x27;Nadya&#x27;),(&#x27;006&#x27;,&#x27;Febri&#x27;);</code></pre><p id="02c93a6f-000b-475a-82db-4e8dda180b6f" class="">Insert juga beberapa data pada table gaji dengan mengeksekusi query berikut:</p><pre id="dc66342a-f9e0-4f3b-b41c-d62c58caef77" class="code"><code>INSERT INTO gaji (gaji_id,karyawan_id,gaji_pokok) VALUES 
+(&#x27;GJ001&#x27;,&#x27;001&#x27;,&#x27;2000000&#x27;),(&#x27;GJ002&#x27;,&#x27;003&#x27;,&#x27;2500000&#x27;),(&#x27;GJ003&#x27;,&#x27;002&#x27;,&#x27;2200000&#x27;),
+(&#x27;GJ004&#x27;,&#x27;004&#x27;,&#x27;1900000&#x27;),(&#x27;GJ005&#x27;,&#x27;005&#x27;,&#x27;2000000&#x27;);</code></pre><p id="0db879cb-d2f2-4fc3-be2a-ff7056386baf" class="">Adapun data yang dihasilkan seperti gambar berikut:</p><figure id="d3ce6ee6-b70e-4da5-92b4-1b9ae4c82823" class="image"><a href="Select%20JOIN/Untitled%201.png"><img style="width:710px" src="Select%20JOIN/Untitled%201.png"/></a></figure><p id="d83d552e-852e-4aa6-8780-2b6fe65e5556" class="">Pada table diatas, anda dapat melihat bahwa table karyawan terdapat 6 record dan table gaji terdapat 5 record. Pada table gaji terlihat bahwa karyawan dengan karyawan_id 006 tidak ada di table gaji. Dengan kata lain, karyawan dengan id 006 tidak memiliki gaji.</p></li></ul><ol id="93f66dc2-4622-4bf5-8476-33d66023f0e0" class="numbered-list" start="1"><li><strong>INNER JOIN</strong><p id="4eea5f77-2f7e-4462-bf5a-40c4c9b0df88" class="">INNER JOIN adalah tipe join yang akan kita bahas pertama. Tipe join ini akan mengambil semua row dari table asal dan table tujuan dengan kondisi nilai key yang terkait saja, dan jika tidak maka row tersebut tidak akan muncul.</p><p id="c98e7e8e-3a3f-4588-a29d-30123e99cc84" class="">Kalau tidak terdapat kondisi key terkait antar table, maka semua row dari kedua table dikombinasikan.</p><p id="0eef7710-2da0-4975-a8ad-d8941664351f" class="">Contoh:</p><pre id="22b25880-6506-4ab4-89ec-259fc9b8415b" class="code"><code>MariaDB [indonesia]&gt; SELECT * FROM karyawan INNER JOIN gaji
+    -&gt; ON karyawan.karyawan_id=gaji.karyawan_id;
++-------------+---------------+---------+-------------+------------+
+| karyawan_id | karyawan_nama | gaji_id | karyawan_id | gaji_pokok |
++-------------+---------------+---------+-------------+------------+
+| 001         | Santi         | GJ001   | 001         |    2000000 |
+| 003         | Joko          | GJ002   | 003         |    2500000 |
+| 002         | Dewi          | GJ003   | 002         |    2200000 |
+| 004         | Putri         | GJ004   | 004         |    1900000 |
+| 005         | Nadya         | GJ005   | 005         |    2000000 |
++-------------+---------------+---------+-------------+------------+
+5 rows in set (0.001 sec)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="43d2d7de-dc39-4aa5-81c0-22ea7ae18036"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Coba Anda perhatikan jumlah record yang ditampilkan!
+
+Ya, record yang ditampilkan sebanyak 5 record. Karena INNER JOIN hanya memperhitungkan kondisi key yang terkait antara table karyawan dengan table gaji.
+
+Sedangkan karyawan dengan karyawan_id=’006’ tidak ditampilkan, karena tidak terkait dengan table gaji.</div></figure><p id="ad09ea05-730c-4f05-843f-572cb8b49e37" class="">Jika dibuat diagram venn-nya akan terlihat seperti gambar berikut:</p><figure id="ee4d7340-a8c9-4b4c-97d3-39c1c6a4198c" class="image"><a href="http://mfikri.com/assets/images/5dbcdecddddb44c303f6c131dc255a16.jpg"><img src="http://mfikri.com/assets/images/5dbcdecddddb44c303f6c131dc255a16.jpg"/></a></figure></li></ol><ol id="ef289347-1a85-4e83-9a67-a43331f9d0f3" class="numbered-list" start="2"><li><strong>LEFT JOIN</strong><p id="55ea1e7a-9da1-4ab1-b553-03d25a5d7fbb" class="">LEFT JOIN atau biasa juga dikenal dengan LEFT OUTER JOIN merupakan perintah join untuk menampilkan semua data sebelah kiri dari table yang di joinkan dan menampilkan data sebelah kanan yang cocok dengan kondisi join. Jika tidak ditemukan kecocokan, maka akan di set NULL secara otomatis.</p><p id="1ecc9f04-9a45-4b2d-b7c9-6ccb4bbc8553" class="">Contoh:</p><pre id="bcdd0af3-4fbb-4e50-8779-e8b5ab62ce01" class="code"><code>MariaDB [indonesia]&gt; SELECT * FROM karyawan LEFT JOIN gaji
+    -&gt; ON karyawan.karyawan_id=gaji.karyawan_id;
++-------------+---------------+---------+-------------+------------+
+| karyawan_id | karyawan_nama | gaji_id | karyawan_id | gaji_pokok |
++-------------+---------------+---------+-------------+------------+
+| 001         | Santi         | GJ001   | 001         |    2000000 |
+| 003         | Joko          | GJ002   | 003         |    2500000 |
+| 002         | Dewi          | GJ003   | 002         |    2200000 |
+| 004         | Putri         | GJ004   | 004         |    1900000 |
+| 005         | Nadya         | GJ005   | 005         |    2000000 |
+| 006         | Febri         | NULL    | NULL        |       NULL |
++-------------+---------------+---------+-------------+------------+
+6 rows in set (0.001 sec)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ea4eb032-e51c-4eae-9641-a4e28a1bbdb6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Coba Anda perhatikan jumlah record yang ditampilkan!
+
+Ya, record yang ditampilkan sebanyak 6 record. Karena LEFT JOIN akan menampilkan semua table sebelah kiri dari kondisi join yaitu table karyawan.
+
+Semua data pada table karyawan akan ditampilkan, meskipun tidak ada kecocokan key pada table gaji.</div></figure><p id="811bdc09-f476-4dbe-9bb6-a0fc3bfd8021" class="">Jika dibuat diagram venn-nya akan terlihat seperti gambar berikut:</p><figure id="562a62b8-5965-4d03-9187-328505622aec" class="image"><a href="http://mfikri.com/assets/images/bd333cff3bcb84b3907505e1bdd39966.jpg"><img src="http://mfikri.com/assets/images/bd333cff3bcb84b3907505e1bdd39966.jpg"/></a></figure><p id="e42bb597-6483-423c-be2f-96ba3264c380" class="">Selain kondisi diatas, LEFT JOIN juga bisa menampilkan data yang hanya kondisi key pada table tamu (<em>foreign key</em>) kosong (<em>NULL</em>).</p><p id="a51f9151-da92-4de0-8c25-64c7da60c69b" class="">Contoh:</p><pre id="8bb88bbc-0709-4acc-b236-4d5367f00adf" class="code"><code>MariaDB [indonesia]&gt; SELECT * FROM karyawan LEFT JOIN gaji
+    -&gt; ON karyawan.karyawan_id=gaji.karyawan_id
+    -&gt; WHERE gaji.karyawan_id IS NULL;
++-------------+---------------+---------+-------------+------------+
+| karyawan_id | karyawan_nama | gaji_id | karyawan_id | gaji_pokok |
++-------------+---------------+---------+-------------+------------+
+| 006         | Febri         | NULL    | NULL        |       NULL |
++-------------+---------------+---------+-------------+------------+
+1 row in set (0.001 sec)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9a189188-99ec-4cfc-875c-346c92970680"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Data yang ditampilkan hanya 1 record. Hal ini dikarenakan, hanya ada satu data yang belum memiliki kecocokan key pada table tamu.</div></figure><p id="cc0de2ad-b985-4798-9316-a8ac066c862e" class="">Untuk mempermudah anda memahami perbedaan antara kedua LEFT JOIN ini coba perhatikan diagram venn berikut:</p><figure id="cadc9dad-6081-4eb3-83d5-739169e7d1cb" class="image"><a href="http://mfikri.com/assets/images/ea73d0327f0681060160858adb3093f0.jpg"><img src="http://mfikri.com/assets/images/ea73d0327f0681060160858adb3093f0.jpg"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9c4cd812-4e3d-4836-84aa-61e567c91e49"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Dengan melihat perbedaan dari diagram venn tersebut, maka Anda akan mudah memahami bagaimana left join ini bekerja.
+
+Ingat LEFT JOIN ini sangat penting untuk anda pahami, karena disaat Anda mulai mengerjakan project yang cukup kompleks, maka anda akan banyak berkutat dengan left join ini.
+
+Contoh pada kasus diatas, hanya dengan memanfaatkan left join kita bisa menampilkan semua data karyawan yang sudah ada gajinya dan siapa yang belum ada gajinya.
+
+Selain itu anda juga dapat menampilkan semua data karyawan yang belum ada gajinya dengan fungsi LEFT JOIN WHERE NULL.</div></figure></li></ol><ol id="9d912ab2-7718-4314-bc57-97610584ab6b" class="numbered-list" start="3"><li><strong>RIGHT JOIN</strong><p id="cfa4bee5-45e3-4f35-a1f0-2e3f98fe6ac7" class="">Kebalikan dari LEFT JOIN adalah RIGHT JOIN, atau biasa juga dikenal dengan RIGHT OUTER JOIN. RIGHT JOIN akan menampilkan semua data yang ada di table sebelah kanan dan mencari kecocokan key pada table sebelah kiri.</p><p id="c9f0304a-4156-4604-b968-c86c5b48ca1b" class="">Jika tidak ditemukan kecocokan, maka akan di set NULL secara otomatis pada table sebelah kiri.</p><p id="a6ad1a1a-e3c3-4455-a692-54425f209bc9" class="">Contoh:</p><pre id="5f80efff-0f43-4168-b6f2-df5a21e4f634" class="code"><code>MariaDB [indonesia]&gt; SELECT * FROM gaji RIGHT JOIN karyawan
+    -&gt; ON gaji.karyawan_id=karyawan.karyawan_id;
++---------+-------------+------------+-------------+---------------+
+| gaji_id | karyawan_id | gaji_pokok | karyawan_id | karyawan_nama |
++---------+-------------+------------+-------------+---------------+
+| GJ001   | 001         |    2000000 | 001         | Santi         |
+| GJ002   | 003         |    2500000 | 003         | Joko          |
+| GJ003   | 002         |    2200000 | 002         | Dewi          |
+| GJ004   | 004         |    1900000 | 004         | Putri         |
+| GJ005   | 005         |    2000000 | 005         | Nadya         |
+| NULL    | NULL        |       NULL | 006         | Febri         |
++---------+-------------+------------+-------------+---------------+
+6 rows in set (0.001 sec</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="eae8fff7-7b59-4712-8f26-508fde89986d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada output diatas, anda dapat melihat bahwa terdapat NULL pada table sebelah kiri. Hal ini dikarenakan tidak ditemukan kecocokan key diantara kedua table.</div></figure><p id="032d7139-217b-46db-8d8d-082c9d04f545" class="">Untuk lebih mudah memahaminya, perhatikan diagram venn berikut:</p><figure id="a3a93aa9-9455-4e33-ba55-7ee12573a802" class="image"><a href="http://mfikri.com/assets/images/499431693d42aa89eb281493d98c8eac.jpg"><img src="http://mfikri.com/assets/images/499431693d42aa89eb281493d98c8eac.jpg"/></a></figure><p id="d91dccfb-7b53-4080-bff0-95196b842602" class="">Selain kondisi diatas, RIGHT JOIN juga bisa menampilkan data yang hanya kondisi key pada table tamu (<em>foreign key</em>) kosong (<em>NULL</em>).</p><p id="9eb76dbe-f9c1-4da4-89aa-6721b34da06f" class="">Contoh:</p><pre id="a54088d0-6108-4407-8480-e19bd278e9c6" class="code"><code>MariaDB [indonesia]&gt; SELECT * FROM gaji RIGHT JOIN karyawan
+    -&gt; ON gaji.karyawan_id=karyawan.karyawan_id
+    -&gt; WHERE gaji.karyawan_id IS NULL;
++---------+-------------+------------+-------------+---------------+
+| gaji_id | karyawan_id | gaji_pokok | karyawan_id | karyawan_nama |
++---------+-------------+------------+-------------+---------------+
+| NULL    | NULL        |       NULL | 006         | Febri         |
++---------+-------------+------------+-------------+---------------+
+1 row in set (0.001 sec)</code></pre><p id="fb29fd2b-38fa-44eb-aad8-95ccd0a5477a" class="">Data yang ditampilkan hanya 1 record. Hal ini dikarenakan, hanya ada satu data yang belum memiliki kecocokan key pada table tamu.</p><p id="e1770181-92d9-4904-8738-e164a8e3fbd2" class="">Untuk mempermudah anda memahami perbedaan antara kedua RIGHT JOIN ini coba perhatikan diagram venn berikut:</p><figure id="da940db0-bc55-4991-b202-e7407515a456" class="image"><a href="http://mfikri.com/assets/images/41d6860bab2b0a7adbeb6b6c0ba891eb.jpg"><img src="http://mfikri.com/assets/images/41d6860bab2b0a7adbeb6b6c0ba891eb.jpg"/></a></figure><p id="c50fb2f8-b9ab-4890-83b4-0545296af756" class="">Perhatikan diagram venn diatas, dan bandingkan dengan diagram venn sebelumnya.</p></li></ol><ul id="662478df-a192-4a5c-8327-c64a00dbecd6" class="bulleted-list"><li><strong>KESIMPULAN:</strong><p id="ef4bd679-16c6-469b-9ac6-b2e901c2c3be" class="">Pembahasan kali ini adalah tentang JOIN pada MySQL.</p><p id="e51bbb1e-881b-4375-a252-1fe8cff22a81" class="">Terdapat tiga macam JOIN yaitu: INNER JOIN, LEFT JOIN, dan RIGHT JOIN.</p><p id="c36594c2-cbba-426a-a18a-57469fa1c637" class="">INNER JOIN adalah tipe join yang akan kita bahas pertama. Tipe join ini akan mengambil semua row dari table asal dan table tujuan dengan kondisi nilai key yang terkait saja, dan jika tidak maka row tersebut tidak akan muncul.</p><p id="e57ace4a-3ee9-455a-a91f-8cc14624db24" class="">LEFT JOIN merupakan perintah join untuk menampilkan semua data sebelah kiri dari table yang di joinkan dan menampilkan data sebelah kanan yang cocok dengan kondisi join. Jika tidak ditemukan kecocokan, maka akan di set NULL secara otomatis.</p><p id="65269bc2-a45a-4dc3-b95c-9bc497e3acc1" class="">Kebalikan dari LEFT JOIN adalah RIGHT JOIN. RIGHT JOIN akan menampilkan semua data yang ada di table sebelah kanan dan mencari kecocokan key pada table sebelah kiri, jika tidak ditemukan kecocokan, maka akan di set NULL secara otomatis pada table sebelah kiri.</p></li></ul></div></p></div></article></body></html>

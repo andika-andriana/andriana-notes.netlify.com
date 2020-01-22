@@ -1,0 +1,568 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Fungsi Encode URI</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b66d134f-d7ff-4d34-8654-2b8e3ee4653c" class="page sans"><header><h1 class="page-title">Fungsi Encode URI</h1></header><div class="page-body"><p id="0ffba512-ff5d-4a32-9996-ea773923fb6f" class="">Kegunaan Javascript encodeURI itu adalah untuk mengeliminasi string di url sehingga bisa menjadi URL Friendly. </p><p id="49097fd5-a91c-4dcc-b889-f567a5e776ed" class="">Fungsi ini mengkodekan semua karakter khusus, kecuali:, /? : @ &amp; = + $ #</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a382d8a4-772d-4c72-9c9c-828d736601ba"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">penulisan: <mark class="highlight-teal_background">encodeURI(&lt;variabel/Nilai&gt;);</mark></div></figure><ul id="5ae31f74-0ed6-4875-88f9-5b2f5982b9e2" class="bulleted-list"><li>Berikut contoh penerapannya:</li></ul><pre id="890305cb-d94e-4c4f-b635-c6f14b3fe6a4" class="code"><code>var uri = &quot;my test.php?name=ståle&amp;car=saab&quot;;
+var res = encodeURI(uri);</code></pre><ul id="24940984-b3e9-4892-abf3-87d2273de9d3" class="bulleted-list"><li>Output:</li></ul><pre id="d050c551-17db-46f8-84de-7f044f91ffe8" class="code"><code>PS C:\Users\AndikaAndriana\Documents\1-repo-belajar\javascript&gt; node .\encodeUri.js
+my%20test.php?name=st%C3%A5le&amp;car=saab</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7085e296-9375-42c8-aada-171e8e902122"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Contoh dari URI encode yaitu seperti tanda spasi akan diubah menjadi %20, tanda splash akan diubah menjadi %2F, dan lain – lain. </div></figure><div id="42d8a209-9b8f-4307-8400-f1257aaac207" class="collection-content"><h4 class="collection-title">ASCII Encoding Reference</h4><table class="collection-content"><thead><tr><th>Character</th><th>From UTF-8</th><th>From Windows-1252</th></tr></thead><tbody><tr id="694cb4ce-5b27-4057-bcbe-eb58abea495a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/space.html">space</a></td><td class="cell-`Gck">%20</td><td class="cell-:[3(">%20</td></tr><tr id="e90e3734-e587-4c31-90f3-696bad34a3fe"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled.html">!</a></td><td class="cell-`Gck">%21</td><td class="cell-:[3(">%21</td></tr><tr id="582967e5-ef78-4797-93c5-8d304a0f9465"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%201.html">&quot;</a></td><td class="cell-`Gck">%22</td><td class="cell-:[3(">%22</td></tr><tr id="b111f0df-8f9d-4960-9b82-e24fbcb2b345"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%202.html">#</a></td><td class="cell-`Gck">%23</td><td class="cell-:[3(">%23</td></tr><tr id="96c6cf8d-8b59-49aa-a4de-e13e67806ef7"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%203.html">$</a></td><td class="cell-`Gck">%24</td><td class="cell-:[3(">%24</td></tr><tr id="2c0c9ae3-6c58-4613-b002-95b0b7b6f496"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%204.html">%</a></td><td class="cell-`Gck">%25</td><td class="cell-:[3(">%25</td></tr><tr id="4e851b8b-869b-4b7c-bf33-4ef37730aee5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%205.html">&amp;</a></td><td class="cell-`Gck">%26</td><td class="cell-:[3(">%26</td></tr><tr id="629fce3c-8299-4eba-904f-27163a98f965"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%206.html">&#x27;</a></td><td class="cell-`Gck">%27</td><td class="cell-:[3(">%27</td></tr><tr id="afeaacd0-d00f-40be-bf16-5ca10b1b26ca"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%207.html">(</a></td><td class="cell-`Gck">%28</td><td class="cell-:[3(">%28</td></tr><tr id="332a295e-e77b-4d75-bd58-12e39ffa0384"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%208.html">)</a></td><td class="cell-`Gck">%29</td><td class="cell-:[3(">%29</td></tr><tr id="58c9c04f-0e02-4afc-ae78-d80f12e42281"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%209.html">*</a></td><td class="cell-`Gck">%2A</td><td class="cell-:[3(">%2A</td></tr><tr id="4b84f0c7-9a54-49c6-b262-f8d88b06f2cc"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2010.html">+</a></td><td class="cell-`Gck">%2B</td><td class="cell-:[3(">%2B</td></tr><tr id="b6a13ee0-6316-49ee-9de3-fbcb0321c24d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2011.html">,</a></td><td class="cell-`Gck">%2C</td><td class="cell-:[3(">%2C</td></tr><tr id="3bf34a1f-17cc-414e-ae6e-96fd29d3443d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2012.html">-</a></td><td class="cell-`Gck">%2D</td><td class="cell-:[3(">%2D</td></tr><tr id="b080cedf-9a3d-4825-a4aa-12e0c87bc005"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2013.html">.</a></td><td class="cell-`Gck">%2E</td><td class="cell-:[3(">%2E</td></tr><tr id="7a5dd172-418d-4158-9a92-99edcf0cad9b"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2014.html">/</a></td><td class="cell-`Gck">%2F</td><td class="cell-:[3(">%2F</td></tr><tr id="e8a075f1-a74b-4d0e-9100-4c8103551899"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/0.html">0</a></td><td class="cell-`Gck">%30</td><td class="cell-:[3(">%30</td></tr><tr id="952b65bd-043d-466b-a5e1-9ce3048ccd2a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/1.html">1</a></td><td class="cell-`Gck">%31</td><td class="cell-:[3(">%31</td></tr><tr id="33a7e137-3c9b-430d-8d46-0e80f1abc239"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/2.html">2</a></td><td class="cell-`Gck">%32</td><td class="cell-:[3(">%32</td></tr><tr id="32296beb-068b-4620-b9d0-3f4bca995f81"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/3.html">3</a></td><td class="cell-`Gck">%33</td><td class="cell-:[3(">%33</td></tr><tr id="69cedb44-3e55-4a00-a190-44c8a522dd37"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/4.html">4</a></td><td class="cell-`Gck">%34</td><td class="cell-:[3(">%34</td></tr><tr id="7819e8a1-9de7-4a17-8cc7-2450fafbaa30"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/5.html">5</a></td><td class="cell-`Gck">%35</td><td class="cell-:[3(">%35</td></tr><tr id="e4365bc4-652f-44fc-a883-f5ecfd546a04"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/6.html">6</a></td><td class="cell-`Gck">%36</td><td class="cell-:[3(">%36</td></tr><tr id="aa10031c-9da3-4281-85ee-bc15c603bc49"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/7.html">7</a></td><td class="cell-`Gck">%37</td><td class="cell-:[3(">%37</td></tr><tr id="1718b898-edda-474b-915c-a2edbea811cd"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/8.html">8</a></td><td class="cell-`Gck">%38</td><td class="cell-:[3(">%38</td></tr><tr id="31d4e854-7fed-48fb-854d-f81f5c3b354b"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/9.html">9</a></td><td class="cell-`Gck">%39</td><td class="cell-:[3(">%39</td></tr><tr id="b18ae164-f249-4594-b3ad-9cbffb51970c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2015.html">:</a></td><td class="cell-`Gck">%3A</td><td class="cell-:[3(">%3A</td></tr><tr id="0fd99ba2-416a-437f-9cb2-9bca8aced65e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2016.html">;</a></td><td class="cell-`Gck">%3B</td><td class="cell-:[3(">%3B</td></tr><tr id="fb13f5ea-92f6-4b7b-9307-0a7e4dbc46aa"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2017.html">&lt;</a></td><td class="cell-`Gck">%3C</td><td class="cell-:[3(">%3C</td></tr><tr id="584058ee-63fa-448f-94c5-935055e40a00"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2018.html">=</a></td><td class="cell-`Gck">%3D</td><td class="cell-:[3(">%3D</td></tr><tr id="80d99d57-42c1-4752-b1af-fddaec0dacdc"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2019.html">&gt;</a></td><td class="cell-`Gck">%3E</td><td class="cell-:[3(">%3E</td></tr><tr id="76b8b52b-bb83-46e3-9e88-91f36ac4c48e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2020.html">?</a></td><td class="cell-`Gck">%3F</td><td class="cell-:[3(">%3F</td></tr><tr id="d61faa89-991e-4f95-ae18-4db6e3c65621"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2021.html">@</a></td><td class="cell-`Gck">%40</td><td class="cell-:[3(">%40</td></tr><tr id="1db743d8-18ed-42b1-95ec-63508babddd3"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/A.html">A</a></td><td class="cell-`Gck">%41</td><td class="cell-:[3(">%41</td></tr><tr id="7bd2b2af-010e-4cf8-8305-ec6a923c414d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/B.html">B</a></td><td class="cell-`Gck">%42</td><td class="cell-:[3(">%42</td></tr><tr id="5a4f0990-20fb-4376-a468-73f50c98ceae"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/C.html">C</a></td><td class="cell-`Gck">%43</td><td class="cell-:[3(">%43</td></tr><tr id="e083109e-e917-4f5a-9327-5b686d659713"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/D.html">D</a></td><td class="cell-`Gck">%44</td><td class="cell-:[3(">%44</td></tr><tr id="ff2ef684-6230-4a8e-bd1d-408f246128df"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/E.html">E</a></td><td class="cell-`Gck">%45</td><td class="cell-:[3(">%45</td></tr><tr id="91dfd698-4ccd-4072-8089-f96f96281b53"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/F.html">F</a></td><td class="cell-`Gck">%46</td><td class="cell-:[3(">%46</td></tr><tr id="028959a1-0675-4f40-afab-ceddb285897a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/G.html">G</a></td><td class="cell-`Gck">%47</td><td class="cell-:[3(">%47</td></tr><tr id="47b5e214-7f8f-4d87-ba8d-0ed667ac92e1"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/H.html">H</a></td><td class="cell-`Gck">%48</td><td class="cell-:[3(">%48</td></tr><tr id="e2a27bb1-79e6-47f3-9b5b-db96928a4f5e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/I.html">I</a></td><td class="cell-`Gck">%49</td><td class="cell-:[3(">%49</td></tr><tr id="21c0dee5-4288-4e0e-9fed-0858948cf675"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/J.html">J</a></td><td class="cell-`Gck">%4A</td><td class="cell-:[3(">%4A</td></tr><tr id="9472ce7f-d47e-4475-bea1-cf122b88cf59"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/K.html">K</a></td><td class="cell-`Gck">%4B</td><td class="cell-:[3(">%4B</td></tr><tr id="7cd25ced-5060-45a7-9671-7c0d03c41bf2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/L.html">L</a></td><td class="cell-`Gck">%4C</td><td class="cell-:[3(">%4C</td></tr><tr id="4a1ee8ee-1fbc-4fb1-bd16-86156e2a1f2e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/M.html">M</a></td><td class="cell-`Gck">%4D</td><td class="cell-:[3(">%4D</td></tr><tr id="df6e88b8-e797-46ce-9668-ca9dd64b72fd"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/N.html">N</a></td><td class="cell-`Gck">%4E</td><td class="cell-:[3(">%4E</td></tr><tr id="e35429d9-0649-49eb-8891-cb6ab2a1fb9d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/O.html">O</a></td><td class="cell-`Gck">%4F</td><td class="cell-:[3(">%4F</td></tr><tr id="6d053a34-27fa-4dbf-899f-40ca6915e5e5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/P.html">P</a></td><td class="cell-`Gck">%50</td><td class="cell-:[3(">%50</td></tr><tr id="b9710c4f-09d6-4e80-9317-37966b179d4a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Q.html">Q</a></td><td class="cell-`Gck">%51</td><td class="cell-:[3(">%51</td></tr><tr id="f171d1d1-021a-4555-ae39-663254f9d68a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/R.html">R</a></td><td class="cell-`Gck">%52</td><td class="cell-:[3(">%52</td></tr><tr id="6e3ce419-6d27-4d86-8deb-78af00aa0cd8"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/S.html">S</a></td><td class="cell-`Gck">%53</td><td class="cell-:[3(">%53</td></tr><tr id="7f171949-3697-4537-9cdf-cb48e5e0c3cb"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/T.html">T</a></td><td class="cell-`Gck">%54</td><td class="cell-:[3(">%54</td></tr><tr id="77fb4878-f7fe-4bf5-ab4b-95d665bc2675"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/U.html">U</a></td><td class="cell-`Gck">%55</td><td class="cell-:[3(">%55</td></tr><tr id="acf4407d-1807-4929-be65-1a3019ada47c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/V.html">V</a></td><td class="cell-`Gck">%56</td><td class="cell-:[3(">%56</td></tr><tr id="ddc17370-7295-45b2-8ba8-b2eaa0b7bb76"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/W.html">W</a></td><td class="cell-`Gck">%57</td><td class="cell-:[3(">%57</td></tr><tr id="872abec5-f6e6-40b8-9019-3c0fcab40710"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/X.html">X</a></td><td class="cell-`Gck">%58</td><td class="cell-:[3(">%58</td></tr><tr id="ee6bab69-e7dd-4685-a254-f17fdb5e1e78"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Y.html">Y</a></td><td class="cell-`Gck">%59</td><td class="cell-:[3(">%59</td></tr><tr id="47a335a1-6721-45bc-b23d-d7347ff57816"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Z.html">Z</a></td><td class="cell-`Gck">%5A</td><td class="cell-:[3(">%5A</td></tr><tr id="5bd95ba0-8c7c-483b-bd3a-343be1b419db"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2022.html">[</a></td><td class="cell-`Gck">%5B</td><td class="cell-:[3(">%5B</td></tr><tr id="5785867b-6225-4127-9d7c-78159253b97c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2023.html">\</a></td><td class="cell-`Gck">%5C</td><td class="cell-:[3(">%5C</td></tr><tr id="1a600ec0-9e92-4809-89e6-9ed53fffc662"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2024.html">]</a></td><td class="cell-`Gck">%5D</td><td class="cell-:[3(">%5D</td></tr><tr id="c6d0f4c7-d80e-4433-8d4b-fdd3646f27ff"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2025.html">^</a></td><td class="cell-`Gck">%5E</td><td class="cell-:[3(">%5E</td></tr><tr id="ae040d86-5f34-42bd-bf8b-ee51af28fd82"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/_.html">_</a></td><td class="cell-`Gck">%5F</td><td class="cell-:[3(">%5F</td></tr><tr id="4043796b-e6b2-43fe-bd10-a9b836ad4571"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2026.html">`</a></td><td class="cell-`Gck">%60</td><td class="cell-:[3(">%60</td></tr><tr id="40c834c1-c7c5-4c87-b23f-59f7c8a525f8"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/a.html">a</a></td><td class="cell-`Gck">%61</td><td class="cell-:[3(">%61</td></tr><tr id="902a40d5-0c8f-4c02-9f52-582a980213de"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/b.html">b</a></td><td class="cell-`Gck">%62</td><td class="cell-:[3(">%62</td></tr><tr id="eba177ce-22e9-47cd-8c79-e86bb5391c5c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/c.html">c</a></td><td class="cell-`Gck">%63</td><td class="cell-:[3(">%63</td></tr><tr id="445efa91-9200-49f5-b70d-368a65a0aec1"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/d.html">d</a></td><td class="cell-`Gck">%64</td><td class="cell-:[3(">%64</td></tr><tr id="1b6d7f25-3794-4777-9f1c-582e0de9f8ab"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/e.html">e</a></td><td class="cell-`Gck">%65</td><td class="cell-:[3(">%65</td></tr><tr id="a7af6bd1-eca7-4a43-9557-bd72d2460b5c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/f.html">f</a></td><td class="cell-`Gck">%66</td><td class="cell-:[3(">%66</td></tr><tr id="aba2ef36-5b57-4a57-8469-0e63eec7fdab"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/g.html">g</a></td><td class="cell-`Gck">%67</td><td class="cell-:[3(">%67</td></tr><tr id="de9e2ed1-0b15-49c4-8a7f-af7ea16b32b0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/h.html">h</a></td><td class="cell-`Gck">%68</td><td class="cell-:[3(">%68</td></tr><tr id="9d8b30be-fe8b-4196-ba4d-f888b3027962"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/i.html">i</a></td><td class="cell-`Gck">%69</td><td class="cell-:[3(">%69</td></tr><tr id="dde4aa5b-9f6c-4dd4-88eb-d344dad979df"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/j.html">j</a></td><td class="cell-`Gck">%6A</td><td class="cell-:[3(">%6A</td></tr><tr id="42705522-68cc-4cf6-a531-191e3c0d9a2a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/k.html">k</a></td><td class="cell-`Gck">%6B</td><td class="cell-:[3(">%6B</td></tr><tr id="1f8e745b-f521-4bd0-a11c-a1e728b80d57"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/l.html">l</a></td><td class="cell-`Gck">%6C</td><td class="cell-:[3(">%6C</td></tr><tr id="717746a8-e3f8-4b81-8db5-44c71a79c1fe"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/m.html">m</a></td><td class="cell-`Gck">%6D</td><td class="cell-:[3(">%6D</td></tr><tr id="6343fef4-32d1-41d2-b675-203c471ff7e5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/n.html">n</a></td><td class="cell-`Gck">%6E</td><td class="cell-:[3(">%6E</td></tr><tr id="c0547871-ec94-484e-b3f5-8f4e809091f1"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/o.html">o</a></td><td class="cell-`Gck">%6F</td><td class="cell-:[3(">%6F</td></tr><tr id="92e175ce-2b3e-43af-9a57-c97d72fa9c1d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/p.html">p</a></td><td class="cell-`Gck">%70</td><td class="cell-:[3(">%70</td></tr><tr id="3435720f-33ab-4d4c-9419-ff77a7a608ed"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/q.html">q</a></td><td class="cell-`Gck">%71</td><td class="cell-:[3(">%71</td></tr><tr id="49ca2e41-63f7-43f3-a3b0-b8d9e9fb6b29"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/r.html">r</a></td><td class="cell-`Gck">%72</td><td class="cell-:[3(">%72</td></tr><tr id="68021d9e-c917-4021-80ce-5613bc1aea7e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/s.html">s</a></td><td class="cell-`Gck">%73</td><td class="cell-:[3(">%73</td></tr><tr id="f447c843-0d4b-4fe6-bd2e-0ac4511e94c9"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/t.html">t</a></td><td class="cell-`Gck">%74</td><td class="cell-:[3(">%74</td></tr><tr id="a1cc9941-cd3c-4596-a086-00ef1baec69d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/u.html">u</a></td><td class="cell-`Gck">%75</td><td class="cell-:[3(">%75</td></tr><tr id="b7fce91d-60b0-4851-8b94-5dcedf3f25e5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/v.html">v</a></td><td class="cell-`Gck">%76</td><td class="cell-:[3(">%76</td></tr><tr id="94067f01-5768-4cf4-a28e-49293fc5acd5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/w.html">w</a></td><td class="cell-`Gck">%77</td><td class="cell-:[3(">%77</td></tr><tr id="1fe53987-5a6c-4a1f-a00d-8966ba7d9493"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/x.html">x</a></td><td class="cell-`Gck">%78</td><td class="cell-:[3(">%78</td></tr><tr id="c657cbf7-d142-4e8c-9ab2-65a2a4792216"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/y.html">y</a></td><td class="cell-`Gck">%79</td><td class="cell-:[3(">%79</td></tr><tr id="756640c5-8420-4227-a419-c15613664126"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/z.html">z</a></td><td class="cell-`Gck">%7A</td><td class="cell-:[3(">%7A</td></tr><tr id="67a23f03-ed15-4792-a9e5-e304d158fb98"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2027.html">{</a></td><td class="cell-`Gck">%7B</td><td class="cell-:[3(">%7B</td></tr><tr id="65ba5a24-be86-4e46-ac1e-fe20b42791d6"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2028.html">|</a></td><td class="cell-`Gck">%7C</td><td class="cell-:[3(">%7C</td></tr><tr id="d32c51bf-2da6-44a8-a629-9d22cde51395"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2029.html">}</a></td><td class="cell-`Gck">%7D</td><td class="cell-:[3(">%7D</td></tr><tr id="b183f53f-05ae-4602-8e84-fc5fc1591b6c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2030.html">~</a></td><td class="cell-`Gck">%7E</td><td class="cell-:[3(">%7E</td></tr><tr id="5350f2d9-8348-40e1-901e-54066a5b5aea"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2031.html">Untitled</a></td><td class="cell-`Gck">%7F</td><td class="cell-:[3(">%7F</td></tr><tr id="ad1e71dd-1eee-4876-b1b3-6bdc30797edb"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2032.html">`</a></td><td class="cell-`Gck">%E2%82%AC</td><td class="cell-:[3(">%80</td></tr><tr id="b74fa6ce-fddf-4150-b59f-8fe863c0458c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2033.html"></a></td><td class="cell-`Gck">%81</td><td class="cell-:[3(">%81</td></tr><tr id="6e4983f2-15bf-4215-a6d9-77b0799d4085"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2034.html">‚</a></td><td class="cell-`Gck">%E2%80%9A</td><td class="cell-:[3(">%82</td></tr><tr id="18fe0088-58c7-4214-864d-0c1f48e0b058"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2035.html">ƒ</a></td><td class="cell-`Gck">%C6%92</td><td class="cell-:[3(">%83</td></tr><tr id="e0bbd33c-8fc7-4cf1-b57d-046432f01ad0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2036.html">„</a></td><td class="cell-`Gck">%E2%80%9E</td><td class="cell-:[3(">%84</td></tr><tr id="bf2e6fb9-e711-40ef-9abd-27e856023345"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2037.html">…</a></td><td class="cell-`Gck">%E2%80%A6</td><td class="cell-:[3(">%85</td></tr><tr id="d80b4069-9489-4aa5-8185-253e5d7a4f47"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2038.html">†</a></td><td class="cell-`Gck">%E2%80%A0</td><td class="cell-:[3(">%86</td></tr><tr id="202a78df-e8d6-461f-b76b-ef299c8cda65"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2039.html">‡</a></td><td class="cell-`Gck">%E2%80%A1</td><td class="cell-:[3(">%87</td></tr><tr id="5148917b-66e3-4c8f-8b91-05e8ebbd94eb"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2040.html">ˆ</a></td><td class="cell-`Gck">%CB%86</td><td class="cell-:[3(">%88</td></tr><tr id="c062b51d-a159-4c00-b505-81ab27f740c6"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2041.html">‰</a></td><td class="cell-`Gck">%E2%80%B0</td><td class="cell-:[3(">%89</td></tr><tr id="e577ed3f-677f-4ba3-842e-5d16ccd7c6b8"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2042.html">Š</a></td><td class="cell-`Gck">%C5%A0</td><td class="cell-:[3(">%8A</td></tr><tr id="c4bbb174-fa82-46ee-9bd8-a6f1dcb1a695"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2043.html">‹</a></td><td class="cell-`Gck">%E2%80%B9</td><td class="cell-:[3(">%8B</td></tr><tr id="d8802209-4b9b-4462-8f17-2b346b4a1ba2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2044.html">Œ</a></td><td class="cell-`Gck">%C5%92</td><td class="cell-:[3(">%8C</td></tr><tr id="a9870e71-6713-46c4-949d-5bb37a76df52"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2045.html"></a></td><td class="cell-`Gck">%C5%8D</td><td class="cell-:[3(">%8D</td></tr><tr id="5f9ceb47-a07a-41f2-8ec8-34aa92bb741c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2046.html">Ž</a></td><td class="cell-`Gck">%C5%BD</td><td class="cell-:[3(">%8E</td></tr><tr id="6b1f6ccc-4b4c-48f6-b952-e8d26fcc56d3"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2047.html"></a></td><td class="cell-`Gck">%8F</td><td class="cell-:[3(">%8F</td></tr><tr id="0daefc5f-28a1-4007-8de1-b73b86cc003a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2048.html"></a></td><td class="cell-`Gck">%C2%90</td><td class="cell-:[3(">%90</td></tr><tr id="ed5aa31f-2de3-4bbd-8b4d-057fd31d06a4"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2049.html">‘</a></td><td class="cell-`Gck">%E2%80%98</td><td class="cell-:[3(">%91</td></tr><tr id="49d14eae-863f-4662-bba2-4102025deb86"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2050.html">’</a></td><td class="cell-`Gck">%E2%80%99</td><td class="cell-:[3(">%92</td></tr><tr id="42dd1140-a698-430b-864c-d19badc8f7a2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2051.html">“</a></td><td class="cell-`Gck">%E2%80%9C</td><td class="cell-:[3(">%93</td></tr><tr id="98f9fbe2-6837-4b83-a2d8-d3c245addb43"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2052.html">”</a></td><td class="cell-`Gck">%E2%80%9D</td><td class="cell-:[3(">%94</td></tr><tr id="53b3b73f-dd55-42d7-8edf-7ad86783adec"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2053.html">•</a></td><td class="cell-`Gck">%E2%80%A2</td><td class="cell-:[3(">%95</td></tr><tr id="5067b4bb-a269-4639-8e08-9b7ce57cecaa"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2054.html">–</a></td><td class="cell-`Gck">%E2%80%93</td><td class="cell-:[3(">%96</td></tr><tr id="9efe6b13-d004-40b3-b01f-9f7cae72d848"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2055.html">—</a></td><td class="cell-`Gck">%E2%80%94</td><td class="cell-:[3(">%97</td></tr><tr id="d3ac6045-fcea-402e-9e3f-0bc99f3bc4d6"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2056.html">˜</a></td><td class="cell-`Gck">%CB%9C</td><td class="cell-:[3(">%98</td></tr><tr id="3d4ac736-a6c7-48a5-87f4-722eadb05585"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2057.html">™</a></td><td class="cell-`Gck">%E2%84</td><td class="cell-:[3(">%99</td></tr><tr id="58e9cf91-b57b-4ced-8abe-e06672f00961"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2058.html">š</a></td><td class="cell-`Gck">%C5%A1</td><td class="cell-:[3(">%9A</td></tr><tr id="0b92836d-d993-4178-8098-f29fa3a3f0dc"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2059.html">›</a></td><td class="cell-`Gck">%E2%80</td><td class="cell-:[3(">%9B</td></tr><tr id="312358fc-a551-4498-8362-341498cc6a2d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2060.html">œ</a></td><td class="cell-`Gck">%C5%93</td><td class="cell-:[3(">%9C</td></tr><tr id="319d3462-fb26-4618-b1e1-a80857c1f303"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2061.html"></a></td><td class="cell-`Gck">%9D</td><td class="cell-:[3(">%9D</td></tr><tr id="40c2319b-cceb-4073-919f-03483c1ef38d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2062.html">ž</a></td><td class="cell-`Gck">%C5%BE</td><td class="cell-:[3(">%9E</td></tr><tr id="1b196e55-849c-44de-8ba4-51aec1076ac0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2063.html">Ÿ</a></td><td class="cell-`Gck">%C5%B8</td><td class="cell-:[3(">%9F</td></tr><tr id="d7aa568e-4da2-4853-a96c-2edf2144e7aa"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2064.html">Untitled</a></td><td class="cell-`Gck">%C2%A0</td><td class="cell-:[3(">%A0</td></tr><tr id="41813392-8b50-48e8-a614-7fc5b465fddd"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2065.html">¡</a></td><td class="cell-`Gck">%C2%A1</td><td class="cell-:[3(">%A1</td></tr><tr id="ddbca08d-189c-42e9-8edc-da8e734cf6d9"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2066.html">¢</a></td><td class="cell-`Gck">%C2%A2</td><td class="cell-:[3(">%A2</td></tr><tr id="ad6a1c4c-cef0-4101-81be-fcd67ffd5a4a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2067.html">£</a></td><td class="cell-`Gck">%C2%A3</td><td class="cell-:[3(">%A3</td></tr><tr id="dc87309f-f63e-44cf-b738-9f5186cebcf0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2068.html">¤</a></td><td class="cell-`Gck">%C2%A4</td><td class="cell-:[3(">%A4</td></tr><tr id="f3706557-0960-423c-9aed-ddfd80f9fc28"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2069.html">¥</a></td><td class="cell-`Gck">%C2%A5</td><td class="cell-:[3(">%A5</td></tr><tr id="4b8b4fa3-37fd-4d71-aecd-b55b95440fad"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2070.html">¦</a></td><td class="cell-`Gck">%C2%A6</td><td class="cell-:[3(">%A6</td></tr><tr id="c8bb6415-8d19-43ee-9e64-60d9050376d7"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2071.html">§</a></td><td class="cell-`Gck">%C2%A7</td><td class="cell-:[3(">%A7</td></tr><tr id="dd92621c-a7ba-48e7-986d-01b34f15a584"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2072.html">¨</a></td><td class="cell-`Gck">%C2%A8</td><td class="cell-:[3(">%A8</td></tr><tr id="977b8c32-96cc-4056-9580-2469efee22c0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2073.html">©</a></td><td class="cell-`Gck">%C2%A9</td><td class="cell-:[3(">%A9</td></tr><tr id="ddfe12dc-2b66-4e32-b2aa-05d70b546c80"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2074.html">ª</a></td><td class="cell-`Gck">%C2%AA</td><td class="cell-:[3(">%AA</td></tr><tr id="4a44af7d-4600-46fc-bc93-a4662e8a0ba5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2075.html">«</a></td><td class="cell-`Gck">%C2%AB</td><td class="cell-:[3(">%AB</td></tr><tr id="94ba40c6-e733-41fa-8eb3-844e77327cc6"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2076.html">¬</a></td><td class="cell-`Gck">%C2%AC</td><td class="cell-:[3(">%AC</td></tr><tr id="25c12d73-5fdf-4764-aaed-ecd829ecb6a2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2077.html">­</a></td><td class="cell-`Gck">%C2%AD</td><td class="cell-:[3(">%AD</td></tr><tr id="1f55489b-254e-43e0-9e46-3f3fee068da6"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2078.html">®</a></td><td class="cell-`Gck">%C2%AE</td><td class="cell-:[3(">%AE</td></tr><tr id="b9711298-ad31-4d66-84da-ff8b5565c167"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2079.html">¯</a></td><td class="cell-`Gck">%C2%AF</td><td class="cell-:[3(">%AF</td></tr><tr id="06825fff-a380-4a46-b35a-093cf54f2cb5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2080.html">°</a></td><td class="cell-`Gck">%C2%B0</td><td class="cell-:[3(">%B0</td></tr><tr id="dc997d84-964b-4890-bb9f-7286bec2f68c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2081.html">±</a></td><td class="cell-`Gck">%C2%B1</td><td class="cell-:[3(">%B1</td></tr><tr id="0e277534-409e-462e-b005-688fc5d6345b"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2082.html">²</a></td><td class="cell-`Gck">%C2%B2</td><td class="cell-:[3(">%B2</td></tr><tr id="a4fa4208-74e4-4ed2-81de-4f7000945eac"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2083.html">³</a></td><td class="cell-`Gck">%C2%B3</td><td class="cell-:[3(">%B3</td></tr><tr id="b59d6941-5f9e-43de-84dd-1902257e35b3"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2084.html">´</a></td><td class="cell-`Gck">%C2%B4</td><td class="cell-:[3(">%B4</td></tr><tr id="93c86691-5c83-4b77-923a-580a866195ad"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2085.html">µ</a></td><td class="cell-`Gck">%C2%B5</td><td class="cell-:[3(">%B5</td></tr><tr id="fe6772ad-f452-4e5d-949d-06627762754e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2086.html">¶</a></td><td class="cell-`Gck">%C2%B6</td><td class="cell-:[3(">%B6</td></tr><tr id="f45e9f3b-76ce-4f39-b19f-6b89a00889c7"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2087.html">·</a></td><td class="cell-`Gck">%C2%B7</td><td class="cell-:[3(">%B7</td></tr><tr id="64580809-9b12-4de8-bedc-eef879ac34a4"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2088.html">¸</a></td><td class="cell-`Gck">%C2%B8</td><td class="cell-:[3(">%B8</td></tr><tr id="bb2e0926-0878-41c2-ac84-644dbaa96189"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2089.html">¹</a></td><td class="cell-`Gck">%C2%B9</td><td class="cell-:[3(">%B9</td></tr><tr id="b5bc547d-2a78-4965-9296-29509c13921c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2090.html">º</a></td><td class="cell-`Gck">%C2%BA</td><td class="cell-:[3(">%BA</td></tr><tr id="57df17e8-0267-4300-a72d-5a38c676b6a6"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2091.html">»</a></td><td class="cell-`Gck">%C2%BB</td><td class="cell-:[3(">%BB</td></tr><tr id="6786e337-d8c4-42a6-b2c8-ea200095f9a7"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2092.html">¼</a></td><td class="cell-`Gck">%C2%BC</td><td class="cell-:[3(">%BC</td></tr><tr id="b137facb-13fb-4037-b759-fb542d779619"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2093.html">½</a></td><td class="cell-`Gck">%C2%BD</td><td class="cell-:[3(">%BD</td></tr><tr id="8786b648-5e65-4f78-b025-13181ed5d524"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2094.html">¾</a></td><td class="cell-`Gck">%C2%BE</td><td class="cell-:[3(">%BE</td></tr><tr id="0c7462a2-3d56-419f-81a9-d986a53df2b8"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2095.html">¿</a></td><td class="cell-`Gck">%C2%BF</td><td class="cell-:[3(">%BF</td></tr><tr id="bfdc75a7-8e88-4778-b334-450cabf9fbaf"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2096.html">À</a></td><td class="cell-`Gck">%C3%80</td><td class="cell-:[3(">%C0</td></tr><tr id="190b55da-7cd7-440b-abea-dad493b9882d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2097.html">Á</a></td><td class="cell-`Gck">%C3%81</td><td class="cell-:[3(">%C1</td></tr><tr id="3847897f-cf1e-48f0-8e43-d9723a79b6a3"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2098.html">Â</a></td><td class="cell-`Gck">%C3%82</td><td class="cell-:[3(">%C2</td></tr><tr id="bcf02862-6247-49e5-a567-012cc707c6a9"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%2099.html">Ã</a></td><td class="cell-`Gck">%C3%83</td><td class="cell-:[3(">%C3</td></tr><tr id="58bb272d-2549-4170-af7c-046c53ce6d59"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20100.html">Ä</a></td><td class="cell-`Gck">%C3%84</td><td class="cell-:[3(">%C4</td></tr><tr id="a1f910fe-0b79-4a8a-9c58-40782d220b9a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20101.html">Å</a></td><td class="cell-`Gck">%C3%85</td><td class="cell-:[3(">%C5</td></tr><tr id="fc141d94-d05b-4e77-bf66-1754c946cc2f"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20102.html">Æ</a></td><td class="cell-`Gck">%C3%86</td><td class="cell-:[3(">%C6</td></tr><tr id="2c2da124-813c-461b-ab0f-13da02c44c5c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20103.html">Ç</a></td><td class="cell-`Gck">%C3%87</td><td class="cell-:[3(">%C7</td></tr><tr id="e26f721d-93ab-43c7-96c6-a50aeee2e3f5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20104.html">È</a></td><td class="cell-`Gck">%C3%88</td><td class="cell-:[3(">%C8</td></tr><tr id="65c9376c-872d-4f50-91f3-e084102d0c76"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20105.html">É</a></td><td class="cell-`Gck">%C3%89</td><td class="cell-:[3(">%C9</td></tr><tr id="2b6f3be9-9848-45cc-9dab-aaf877310f34"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20106.html">Ê</a></td><td class="cell-`Gck">%C3%8A</td><td class="cell-:[3(">%CA</td></tr><tr id="d6b84e46-67e1-4773-854a-05c763ffb1ec"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20107.html">Ë</a></td><td class="cell-`Gck">%C3%8B</td><td class="cell-:[3(">%CB</td></tr><tr id="72a71fe0-63c7-4588-8f32-305fbbbd8054"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20108.html">Ì</a></td><td class="cell-`Gck">%C3%8C</td><td class="cell-:[3(">%CC</td></tr><tr id="4c7dcbe2-753c-4c0a-8148-7380119a0cf4"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20109.html">Í</a></td><td class="cell-`Gck">%C3%8D</td><td class="cell-:[3(">%CD</td></tr><tr id="c329c44c-ed04-4f82-85e7-59031e63465e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20110.html">Î</a></td><td class="cell-`Gck">%C3%8E</td><td class="cell-:[3(">%CE</td></tr><tr id="d9ac65a2-e87c-4d41-b252-e43311c3bf08"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20111.html">Ï</a></td><td class="cell-`Gck">%C3%8F</td><td class="cell-:[3(">%CF</td></tr><tr id="bbd5898d-ba53-44b9-9df0-721585a79e7e"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20112.html">Ð</a></td><td class="cell-`Gck">%C3%90</td><td class="cell-:[3(">%D0</td></tr><tr id="0845e66c-04b3-4a37-bcc0-c5e1815d8ec9"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20113.html">Ñ</a></td><td class="cell-`Gck">%C3%91</td><td class="cell-:[3(">%D1</td></tr><tr id="7b776596-5860-4be5-a901-9c7c81d5cbef"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20114.html">Ò</a></td><td class="cell-`Gck">%C3%92</td><td class="cell-:[3(">%D2</td></tr><tr id="07a60992-03a1-4c9c-af6a-43813892cc21"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20115.html">Ó</a></td><td class="cell-`Gck">%C3%93</td><td class="cell-:[3(">%D3</td></tr><tr id="18e2c2a5-5767-4e9a-bc4f-d1046fb97df0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20116.html">Ô</a></td><td class="cell-`Gck">%C3%94</td><td class="cell-:[3(">%D4</td></tr><tr id="b9cd5256-b51b-45d8-bcd0-9b23b282fe7f"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20117.html">Õ</a></td><td class="cell-`Gck">%C3%95</td><td class="cell-:[3(">%D5</td></tr><tr id="6e40c5b9-6097-464c-84b3-fb6b7707fbab"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20118.html">Ö</a></td><td class="cell-`Gck">%C3%96</td><td class="cell-:[3(">%D6</td></tr><tr id="cd454088-b65f-4ccc-94d3-cc8eed3cc437"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20119.html">×</a></td><td class="cell-`Gck">%C3%97</td><td class="cell-:[3(">%D7</td></tr><tr id="f8936542-b140-44d8-92cf-8e50972c9855"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20120.html">Ø</a></td><td class="cell-`Gck">%C3%98</td><td class="cell-:[3(">%D8</td></tr><tr id="2fc350ec-d575-4808-bfc0-cf2f72864abf"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20121.html">Ù</a></td><td class="cell-`Gck">%C3%99</td><td class="cell-:[3(">%D9</td></tr><tr id="91495e20-aef7-44c0-9b8c-4c13c2654cb2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20122.html">Ú</a></td><td class="cell-`Gck">%C3%9A</td><td class="cell-:[3(">%DA</td></tr><tr id="45222899-3228-426f-a2ce-033d87848503"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20123.html">Û</a></td><td class="cell-`Gck">%C3%9B</td><td class="cell-:[3(">%DB</td></tr><tr id="dc9e4db5-e794-4ec7-8335-e9cb79268e12"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20124.html">Ü</a></td><td class="cell-`Gck">%C3%9C</td><td class="cell-:[3(">%DC</td></tr><tr id="67bd9173-0e9e-44ae-a522-37001bbf3ae4"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20125.html">Ý</a></td><td class="cell-`Gck">%C3%9D</td><td class="cell-:[3(">%DD</td></tr><tr id="e9d9db85-b3ee-4367-ab1b-30f917f1213d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20126.html">Þ</a></td><td class="cell-`Gck">%C3%9E</td><td class="cell-:[3(">%DE</td></tr><tr id="a3c562b0-c167-47ac-975c-f473238337a9"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20127.html">ß</a></td><td class="cell-`Gck">%C3%9F</td><td class="cell-:[3(">%DF</td></tr><tr id="1dc23183-8957-4883-950d-eec47a2264f8"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20128.html">à</a></td><td class="cell-`Gck">%C3%A0</td><td class="cell-:[3(">%E0</td></tr><tr id="39d44281-24a7-4230-bc45-8996828f9c57"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20129.html">á</a></td><td class="cell-`Gck">%C3%A1</td><td class="cell-:[3(">%E1</td></tr><tr id="b8b3127c-14bc-423a-87c4-7fbece4d9af2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20130.html">â</a></td><td class="cell-`Gck">%C3%A2</td><td class="cell-:[3(">%E2</td></tr><tr id="ec7976cc-c486-4b83-ad3d-9a92740c7a5a"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20131.html">ã</a></td><td class="cell-`Gck">%C3%A3</td><td class="cell-:[3(">%E3</td></tr><tr id="d808f1fb-9545-4730-b8e7-f6efb91fde71"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20132.html">ä</a></td><td class="cell-`Gck">%C3%A4</td><td class="cell-:[3(">%E4</td></tr><tr id="1ce45dc3-1b79-4e4d-a735-3c559b7e9c83"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20133.html">å</a></td><td class="cell-`Gck">%C3%A5</td><td class="cell-:[3(">%E5</td></tr><tr id="c0468482-a445-45a0-b46a-fdaccc9bbfbd"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20134.html">æ</a></td><td class="cell-`Gck">%C3%A6</td><td class="cell-:[3(">%E6</td></tr><tr id="3967223f-1414-48a4-b22f-d0ff95cecfc0"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20135.html">ç</a></td><td class="cell-`Gck">%C3%A7</td><td class="cell-:[3(">%E7</td></tr><tr id="9d9a83a5-04da-4f28-b8f4-8cf882f56f1f"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20136.html">è</a></td><td class="cell-`Gck">%C3%A8</td><td class="cell-:[3(">%E8</td></tr><tr id="a803da20-d175-411a-bb94-9e7a3e56cc05"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20137.html">é</a></td><td class="cell-`Gck">%C3%A9</td><td class="cell-:[3(">%E9</td></tr><tr id="833d7b8a-c254-494f-9bf9-328a7e8e43fe"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20138.html">ê</a></td><td class="cell-`Gck">%C3%AA</td><td class="cell-:[3(">%EA</td></tr><tr id="0d3911d4-1d98-41f0-b19b-67163dbc2961"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20139.html">ë</a></td><td class="cell-`Gck">%C3%AB</td><td class="cell-:[3(">%EB</td></tr><tr id="640b5bb0-0400-4617-8066-d98cf18decaa"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20140.html">ì</a></td><td class="cell-`Gck">%C3%AC</td><td class="cell-:[3(">%EC</td></tr><tr id="2c3e0ae5-b1b4-4ede-b2e5-3e4a73b97a04"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20141.html">í</a></td><td class="cell-`Gck">%C3%AD</td><td class="cell-:[3(">%ED</td></tr><tr id="0dcfd126-9e28-4f0c-a54d-fdc766f70252"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20142.html">î</a></td><td class="cell-`Gck">%C3%AE</td><td class="cell-:[3(">%EE</td></tr><tr id="7d953070-b414-4416-8ff9-9cd2817bf287"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20143.html">ï</a></td><td class="cell-`Gck">%C3%AF</td><td class="cell-:[3(">%EF</td></tr><tr id="71bc7b15-b19e-4222-8ba4-718f51041dad"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20144.html">ð</a></td><td class="cell-`Gck">%C3%B0</td><td class="cell-:[3(">%F0</td></tr><tr id="2496620c-2828-4dda-9124-9b183ba85610"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20145.html">ñ</a></td><td class="cell-`Gck">%C3%B1</td><td class="cell-:[3(">%F1</td></tr><tr id="0545097b-9993-4bb3-aa4a-e6507dda1c56"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20146.html">ò</a></td><td class="cell-`Gck">%C3%B2</td><td class="cell-:[3(">%F2</td></tr><tr id="85d9ad81-d3bf-41b8-ad94-450abc5698b1"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20147.html">ó</a></td><td class="cell-`Gck">%C3%B3</td><td class="cell-:[3(">%F3</td></tr><tr id="a51b453d-e66f-4933-a5b0-3c41587e3cae"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20148.html">ô</a></td><td class="cell-`Gck">%C3%B4</td><td class="cell-:[3(">%F4</td></tr><tr id="42185696-9784-45f5-be01-96295b1552a7"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20149.html">õ</a></td><td class="cell-`Gck">%C3%B5</td><td class="cell-:[3(">%F5</td></tr><tr id="33d32680-548d-4501-9caf-c0d6cdc44108"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20150.html">ö</a></td><td class="cell-`Gck">%C3%B6</td><td class="cell-:[3(">%F6</td></tr><tr id="0e47fb11-07b9-40ef-8d8f-89e18218b958"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20151.html">÷</a></td><td class="cell-`Gck">%C3%B7</td><td class="cell-:[3(">%F7</td></tr><tr id="cb67c3cf-766c-40ce-a763-fc88d04e6fab"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20152.html">ø</a></td><td class="cell-`Gck">%C3%B8</td><td class="cell-:[3(">%F8</td></tr><tr id="2cb762d1-a2f8-46db-bc38-f82fb777fd3d"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20153.html">ù</a></td><td class="cell-`Gck">%C3%B9</td><td class="cell-:[3(">%F9</td></tr><tr id="96981648-0f14-4701-bd03-49dc7c1f61fa"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20154.html">ú</a></td><td class="cell-`Gck">%C3%BA</td><td class="cell-:[3(">%FA</td></tr><tr id="f7bb3f5c-5091-4eb3-a86b-4048701b07e4"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20155.html">û</a></td><td class="cell-`Gck">%C3%BB</td><td class="cell-:[3(">%FB</td></tr><tr id="c90547e5-800c-4e29-850a-f2426a53723c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20156.html">ü</a></td><td class="cell-`Gck">%C3%BC</td><td class="cell-:[3(">%FC</td></tr><tr id="471ccc34-b752-4187-9e8c-1bfa24430d82"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20157.html">ý</a></td><td class="cell-`Gck">%C3%BD</td><td class="cell-:[3(">%FD</td></tr><tr id="b4ee4096-a645-4fa0-a1ac-9738007ebfee"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20158.html">þ</a></td><td class="cell-`Gck">%C3%BE</td><td class="cell-:[3(">%FE</td></tr><tr id="4f55fba5-d7f7-4359-8073-53b4e6152cd3"><td class="cell-title"><a href="Fungsi%20Encode%20URI/ASCII%20Encoding%20Reference/Untitled%20159.html">ÿ</a></td><td class="cell-`Gck">%C3%BF</td><td class="cell-:[3(">%FF</td></tr></tbody></table></div><hr id="41e2fda7-d812-4b8f-8c56-4638907a98ba"/><div id="38922b50-e832-44b4-9e2d-d57955fe4428" class="collection-content"><h4 class="collection-title">URL Encoding Reference</h4><table class="collection-content"><thead><tr><th>ASCII Character</th><th>Description</th><th>URL-encoding</th></tr></thead><tbody><tr id="4d503258-4ea7-45d9-84b0-92e0f896e10c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/NUL.html">NUL</a></td><td class="cell-:b!/">null character</td><td class="cell--x&amp;9">%00</td></tr><tr id="9976b609-fc7f-4a67-a510-a706242e7268"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/SOH.html">SOH</a></td><td class="cell-:b!/">start of header</td><td class="cell--x&amp;9">%01</td></tr><tr id="77cbb8b1-ed54-47d7-a0b3-77b955171a5c"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/STX.html">STX</a></td><td class="cell-:b!/">start of text</td><td class="cell--x&amp;9">%02</td></tr><tr id="b25239d1-22ca-4217-99ad-3e3a8d0045ed"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/ETX.html">ETX</a></td><td class="cell-:b!/">end of text</td><td class="cell--x&amp;9">%03</td></tr><tr id="832c9f10-087d-4829-a27e-2c8af7a5d364"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/EOT.html">EOT</a></td><td class="cell-:b!/">end of transmission</td><td class="cell--x&amp;9">%04</td></tr><tr id="9e784857-a19c-4a93-bf53-8e1bae3896a8"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/ENQ.html">ENQ</a></td><td class="cell-:b!/">enquiry</td><td class="cell--x&amp;9">%05</td></tr><tr id="29c29375-69cc-4c83-8f25-1be42d061840"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/ACK.html">ACK</a></td><td class="cell-:b!/">acknowledge</td><td class="cell--x&amp;9">%06</td></tr><tr id="cef2a64a-9463-4d55-a7ea-2115f7556a81"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/BEL.html">BEL</a></td><td class="cell-:b!/">bell (ring)</td><td class="cell--x&amp;9">%07</td></tr><tr id="5c55cfd9-72ec-4e02-8315-886bc82324cb"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/BS.html">BS</a></td><td class="cell-:b!/">backspace</td><td class="cell--x&amp;9">%08</td></tr><tr id="efe691aa-9acc-414b-8e02-88f92eb81dab"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/HT.html">HT</a></td><td class="cell-:b!/">horizontal tab</td><td class="cell--x&amp;9">%09</td></tr><tr id="e5ca5735-73c2-4905-abf7-9c7ce46fd4e2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/LF.html">LF</a></td><td class="cell-:b!/">line feed</td><td class="cell--x&amp;9">%0A</td></tr><tr id="bac9077b-673d-4489-a4b6-cf203fe10946"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/VT.html">VT</a></td><td class="cell-:b!/">vertical tab</td><td class="cell--x&amp;9">%0B</td></tr><tr id="3981a51b-14bf-404e-abba-aa2b43af4a61"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/FF.html">FF</a></td><td class="cell-:b!/">form feed</td><td class="cell--x&amp;9">%0C</td></tr><tr id="63af816c-0230-4b76-b8db-3f808d4a62df"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/CR.html">CR</a></td><td class="cell-:b!/">carriage return</td><td class="cell--x&amp;9">%0D</td></tr><tr id="c335a91e-65c5-4d9b-883f-22c2ee9801bb"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/SO.html">SO</a></td><td class="cell-:b!/">shift out</td><td class="cell--x&amp;9">%0E</td></tr><tr id="aedcb3fe-536d-48ae-b19c-a1d2b58db5ee"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/SI.html">SI</a></td><td class="cell-:b!/">shift in</td><td class="cell--x&amp;9">%0F</td></tr><tr id="4cc3c6e6-91ac-4901-9da6-274bc3b253b2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/DLE.html">DLE</a></td><td class="cell-:b!/">data link escape</td><td class="cell--x&amp;9">%10</td></tr><tr id="55ca3b12-aa0d-44ca-b2d8-997d57b2bfc2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/DC1.html">DC1</a></td><td class="cell-:b!/">device control 1</td><td class="cell--x&amp;9">%11</td></tr><tr id="784e3041-e8be-43df-ac78-c07fb9244b32"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/DC2.html">DC2</a></td><td class="cell-:b!/">device control 2</td><td class="cell--x&amp;9">%12</td></tr><tr id="5e40c2fd-5219-4bd6-9dbe-5cbc6881a222"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/DC3.html">DC3</a></td><td class="cell-:b!/">device control 3</td><td class="cell--x&amp;9">%13</td></tr><tr id="ab81c667-a257-4797-bf61-9810c0f21311"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/DC4.html">DC4</a></td><td class="cell-:b!/">device control 4</td><td class="cell--x&amp;9">%14</td></tr><tr id="a41a6320-98f8-4bc8-993d-90dcc8b523e5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/NAK.html">NAK</a></td><td class="cell-:b!/">negative acknowledge</td><td class="cell--x&amp;9">%15</td></tr><tr id="9d3e9e19-6f56-48e8-b9f4-ca89bcd0c919"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/SYN.html">SYN</a></td><td class="cell-:b!/">synchronize</td><td class="cell--x&amp;9">%16</td></tr><tr id="553ad63a-d0d2-48bf-9992-d62eb9d0fa68"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/ETB.html">ETB</a></td><td class="cell-:b!/">end transmission block</td><td class="cell--x&amp;9">%17</td></tr><tr id="77ca2170-4234-4978-a915-c88883798f66"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/CAN.html">CAN</a></td><td class="cell-:b!/">cancel</td><td class="cell--x&amp;9">%18</td></tr><tr id="5122363d-9102-4e7b-9505-577d66f0b739"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/EM.html">EM</a></td><td class="cell-:b!/">end of medium</td><td class="cell--x&amp;9">%19</td></tr><tr id="e8666789-5810-4f56-881c-780733755dcc"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/SUB.html">SUB</a></td><td class="cell-:b!/">substitute</td><td class="cell--x&amp;9">%1A</td></tr><tr id="54d48b55-0e70-43ff-ad96-a775bee4cc23"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/ESC.html">ESC</a></td><td class="cell-:b!/">escape</td><td class="cell--x&amp;9">%1B</td></tr><tr id="7f968608-3402-44f9-bf04-7c74dc1bb5e5"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/FS.html">FS</a></td><td class="cell-:b!/">file separator</td><td class="cell--x&amp;9">%1C</td></tr><tr id="d23f06c6-0bdb-42af-851f-8059cbe3d246"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/GS.html">GS</a></td><td class="cell-:b!/">group separator</td><td class="cell--x&amp;9">%1D</td></tr><tr id="42293e88-0541-4844-b88e-50780ee357d2"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/RS.html">RS</a></td><td class="cell-:b!/">record separator</td><td class="cell--x&amp;9">%1E</td></tr><tr id="969793c5-8512-464e-a73a-2e63c43e4e90"><td class="cell-title"><a href="Fungsi%20Encode%20URI/URL%20Encoding%20Reference/US.html">US</a></td><td class="cell-:b!/">unit separator</td><td class="cell--x&amp;9">%1F</td></tr></tbody></table></div><p id="fbcd2200-be18-4cce-abb1-76289ccef4c2" class="">
+</p></div></article></body></html>

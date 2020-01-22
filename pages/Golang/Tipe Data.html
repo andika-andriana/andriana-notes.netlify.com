@@ -1,0 +1,586 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tipe Data</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e3c65bee-3dbe-4538-8a81-f67c38414f4f" class="page sans"><header><h1 class="page-title"><strong>Tipe Data</strong></h1></header><div class="page-body"><p id="6a80b92b-7d12-4773-b98d-aa05b94a3634" class=""><strong>Tipe Data</strong><div class="indented"><p id="dbe6e844-fe98-45e2-8287-dc2580569790" class="">Go mengenal beberapa jenis tipe data, diantaranya adalah tipe data numerik (desimal &amp; non-desimal), string, dan boolean.</p><p id="e5f2522c-0cf7-42b9-a1c1-5c8b0650c4e8" class=""><strong>Tipe Data Numerik Non-Desimal</strong><div class="indented"><p id="d9d4855b-b3b1-4103-ba04-d9d8a4361a27" class="">Tipe data numerik non-desimal atau <strong>non floating point</strong> di Go ada beberapa jenis. Secara umum ada 2 tipe data kategori ini yang perlu diketahui.</p><ul id="9bc5c4b6-9009-465b-b7ba-5b7499c15bcc" class="bulleted-list"><li><code>uint</code> → tipe data untuk bilangan cacah (bilangan positif).</li></ul><ul id="dc5c1895-c6eb-4897-b3c3-dbef081a2202" class="bulleted-list"><li><code>int</code> → tipe data untuk bilangan bulat (bilangan negatif dan positif).</li></ul><p id="ee6d6a2a-c723-4039-a6cd-344981cdd172" class="">Kedua tipe data di atas kemudian dibagi lagi menjadi beberapa jenis, dengan pembagian berdasarkan lebar cakupan nilainya, detailnya bisa dilihat di tabel berikut.</p></div></p><div id="8e3fc81e-bf2d-42e9-963f-01634dc5eef4" class="collection-content"><h4 class="collection-title">Tipe Data Numerik Non-Desimal</h4><table class="collection-content"><thead><tr><th>Tipe data</th><th>Cakupan bilangan</th></tr></thead><tbody><tr id="d3e86de7-fc1f-4f23-819d-2ef86e86879d"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/uint8.html">uint8</a></td><td class="cell-!`L]">0 ↔ 255</td></tr><tr id="2c09f759-01f3-494d-b144-d624f88a9362"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/uint16.html">uint16</a></td><td class="cell-!`L]">0 ↔ 65535</td></tr><tr id="a4a1171e-0fe7-4be5-bfc8-fc3f06ea1b02"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/uint32.html">uint32</a></td><td class="cell-!`L]">0 ↔ 4294967295</td></tr><tr id="c1610b63-955b-4b3c-85d5-27d67970b77a"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/uint64.html">uint64</a></td><td class="cell-!`L]">0 ↔ 18446744073709551615</td></tr><tr id="df7332f4-bd98-4f29-8b87-c8298d5a9769"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/uint.html">uint</a></td><td class="cell-!`L]">sama dengan uint32 atau uint64 (tergantung nilai)</td></tr><tr id="dc0a55c3-c605-4f2e-9a5d-05b934da765a"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/byte.html">byte</a></td><td class="cell-!`L]">0 ↔ 255</td></tr><tr id="f0d5dea9-e11c-4053-92a0-76decf223cd4"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/int8.html">int8</a></td><td class="cell-!`L]">-128 ↔ 127</td></tr><tr id="9faf50e9-2a90-4f0e-ae75-90a6688e02ee"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/int16.html">int16</a></td><td class="cell-!`L]">-32768 ↔ 32767</td></tr><tr id="b8d60641-4c56-4b4b-8663-b4e671c211e3"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/int32.html">int32</a></td><td class="cell-!`L]">-2147483648 ↔ 2147483647</td></tr><tr id="23a9f2fd-c546-4eb3-95c7-a26520fddf81"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/int64.html">int64</a></td><td class="cell-!`L]">-9223372036854775808 ↔ 9223372036854775807</td></tr><tr id="ee901c63-bda7-4060-b3f6-5f217351bee3"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/int.html">int</a></td><td class="cell-!`L]">sama dengan int32 atau int64 (tergantung nilai)</td></tr><tr id="e5f5fc25-b4da-4ca1-bec5-bdb79a3ab79b"><td class="cell-title"><a href="Tipe%20Data/Tipe%20Data%20Numerik%20Non%20Desimal/rune.html">rune</a></td><td class="cell-!`L]">0 ↔ 4294967295</td></tr></tbody></table></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="262464ba-5882-48aa-a0d0-14ed23e3a220"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Dianjurkan untuk tidak sembarangan dalam menentukan tipe data variabel, sebisa mungkin tipe yang dipilih harus disesuaikan dengan nilainya, karena efeknya adalah ke alokasi memori variabel. Pemilihan tipe data yang tepat akan membuat pemakaian memori lebih optimal, tidak berlebihan.</div></figure><p id="426380b8-553a-4ed2-8058-78b7eb1c6dfa" class="">Contoh:</p><pre id="4c9f9c86-a3fd-48b8-a258-7668073dbc71" class="code"><code>var positiveNumber uint8 = 89
+var negativeNumber = -1243423644
+
+fmt.Printf(&quot;bilangan positif: %d\n&quot;, positiveNumber)
+fmt.Printf(&quot;bilangan negatif: %d\n&quot;, negativeNumber)</code></pre><p id="2b8f4535-ca9f-4eae-9a36-6b0aa0496a89" class="">Hasil:</p><pre id="ce66d780-63a7-4bce-a52a-5772b9cbefc4" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\variabel.go
+bilangan positif: 89
+bilangan negatif: -1243423644</code></pre><p id="e70801d4-cef4-41e5-a223-e5e58cec1030" class="">Variabel <code>positiveNumber</code> bertipe <code>uint8</code> dengan nilai awal <code>89</code>. Sedangkan variabel  <code>negativeNumber</code> dideklarasikan dengan nilai awal <code>-1243423644</code>. Compiler secara cerdas akan menentukan tipe data variabel tersebut sebagai <code>int32</code> (karena angka tersebut masuk ke cakupan tipe data <code>int32</code>).</p><p id="c0564c6f-ef94-49a6-b5dc-d199e7d8e5ef" class="">Template <code>%d</code> pada <code>fmt.Printf()</code> digunakan untuk memformat data numerik non-desimal.</p></div></p><p id="88433d1d-5132-4bf4-9b30-a716a2d38a2d" class=""><strong>Tipe Data Numerik Desimal</strong><div class="indented"><p id="14476304-941b-49d1-8ef8-a1d7d220423a" class="">Tipe data numerik desimal yang perlu diketahui ada 2, <code>float32</code> dan <code>float64</code>. Perbedaan kedua tipe data tersebut berada di lebar cakupan nilai desimal yang bisa ditampung. Untuk lebih jelasnya bisa merujuk ke spesifikasi <a href="http://www.h-schmidt.net/FloatConverter/IEEE754.html">IEEE-754 32-bit floating-point numbers</a>.</p><pre id="3ca23506-e6be-4156-be5e-bd63b4ea153b" class="code"><code>var decimalNumber = 2.62
+
+fmt.Printf(&quot;bilangan desimal: %f\n&quot;, decimalNumber)
+fmt.Printf(&quot;bilangan desimal: %.3f\n&quot;, decimalNumber)</code></pre><p id="a81e778d-b7c4-4b77-8f2d-f66db08da191" class="">Pada kode di atas, variabel <code>decimalNumber</code> akan memiliki tipe data <code>float32</code>, karena nilainya berada di cakupan tipe data tersebut.</p><pre id="a769e0bd-6f06-4ec6-83de-cd9106f5f659" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\variabel.go
+bilangan desimal: 2.620000
+bilangan desimal: 2.620</code></pre><p id="9a673b62-d1aa-4442-a393-141053ff52be" class="">Template <code>%f</code> digunakan untuk memformat data numerik desimal menjadi string. Digit desimal yang akan dihasilkan adalah <strong>6 digit</strong>. Pada contoh di atas, hasil format variabel  <code>decimalNumber</code>  adalah <code>2.620000</code>. Jumlah digit yang muncul bisa dikontrol menggunakan <code>%.nf</code>, tinggal ganti  <code>n</code> dengan angka yang diinginkan. Contoh: <code>%.3f</code> maka akan menghasilkan 3 digit desimal,  <code>%.10f</code> maka akan menghasilkan 10 digit desimal.</p></div></p><p id="724d6a57-1afb-49ac-b8df-15f5899aa5ca" class=""><strong>Tipe Data </strong><code><strong>bool</strong></code><strong> (Boolean)</strong><div class="indented"><p id="2335495c-02c5-40c3-b7a2-da203d1525f3" class="">Tipe data <code>bool</code> berisikan hanya 2 variansi nilai, <code>true</code> dan <code>false</code>. Tipe data ini biasa dimanfaatkan dalam seleksi kondisi dan perulangan (yang nantinya akan kita bahas pada bab 12 dan bab 13).</p><pre id="d04ded6c-a6b1-4d77-be7c-999bd8ea07ed" class="code"><code>var exist bool = true
+fmt.Printf(&quot;exist? %t \n&quot;, exist)</code></pre><p id="a416329d-576e-4775-b5d7-52661bdb2ac2" class="">Gunakan <code>%t</code> untuk memformat data <code>bool</code> menggunakan fungsi <code>fmt.Printf()</code>.</p></div></p><p id="b5619a09-bfa9-428f-bd2f-3acf93fd1f4a" class=""><strong>Tipe Data </strong><code><strong>string</strong></code><div class="indented"><p id="b2e62e28-657f-432b-ab7b-6b441d7f16ff" class="">Ciri khas dari tipe data string adalah nilainya di apit oleh tanda <em>quote</em> atau petik dua (<code>&quot;</code>). Contoh penerapannya:</p><pre id="d7da3371-9617-4783-bad1-5784b3a6dc08" class="code"><code>var message string = &quot;Halo&quot;
+fmt.Printf(&quot;message: %s \n&quot;, message)</code></pre><p id="40bbcfe6-9e32-460c-a53c-ae9b5ad084cc" class="">Selain menggunakan tanda quote, deklarasi string juga bisa dengan tanda <em>grave_accent / backticks</em> (<code>`</code>), tanda ini terletak di sebelah kiri tombol 1. Keistimewaan string yang dideklarasikan menggunakan backtics adalah membuat semua karakter didalamnya <strong>tidak di escape</strong>, termasuk <code>\n</code>, tanda petik dua dan tanda petik satu, baris baru, dan lainnya. Semua akan terdeteksi sebagai string.</p><pre id="31507bed-9b79-42e2-b1ea-49542cf19195" class="code"><code>var message = `Nama saya &quot;John Wick&quot;.
+Salam kenal.
+Mari belajar &quot;Golang&quot;.`
+
+fmt.Println(message)</code></pre><p id="8dfffda0-a1e1-4649-b4e4-797bfbcdad98" class="">Ketika dijalankan, output akan muncul sama persisi sesuai nilai variabel <code>message</code> di atas. Tanda petik dua akan muncul, baris baru juga muncul, sama persis.</p><pre id="70d0fbbb-3d87-4fe2-ab0a-18bcd1841132" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\variabel.go
+Nama saya &quot;John Wick&quot;.
+  Salam kenal.
+  Mari belajar &quot;Golang&quot;.</code></pre></div></p><p id="d402f2ed-3958-4ca7-b5f9-f2e775da7211" class=""><strong>Nilai </strong><code><strong>nil</strong></code><strong> &amp; Zero Value</strong><div class="indented"><p id="088db089-d745-4aa6-a85b-ae6d497f1228" class=""><code>nil</code> bukan merupakan tipe data, melainkan sebuah nilai. Variabel yang isi nilainya <code>nil</code> berarti memiliki nilai kosong.</p><p id="2091a0bf-d3da-4a80-9197-08b59b4318fe" class="">Semua tipe data yang sudah dibahas di atas memiliki zero value (nilai default tipe data). Artinya meskipun variabel dideklarasikan dengan tanpa nilai awal, tetap akan ada nilai default-nya.</p><ul id="057f1042-7463-4dc6-b419-6c87485a7423" class="bulleted-list"><li>Zero value dari <code>string</code> adalah <code>&quot;&quot;</code> (string kosong).</li></ul><ul id="e4655216-b9eb-4c61-a3c6-65c7e1cb9478" class="bulleted-list"><li>Zero value dari <code>bool</code> adalah <code>false</code>.</li></ul><ul id="e9e3891c-279f-499e-9c8b-1e4296383829" class="bulleted-list"><li>Zero value dari tipe numerik non-desimal adalah <code>0</code>.</li></ul><ul id="afbbff8d-2443-41f7-8425-a6ebfe706f74" class="bulleted-list"><li>Zero value dari tipe numerik desimal adalah <code>0.0</code>.</li></ul><p id="266d8678-dfd4-4e36-9a77-0cabce0e1d20" class="">Zero value berbeda dengan <code>nil</code>. <code>Nil</code> adalah nilai kosong, benar-benar kosong. <code>nil</code> tidak bisa digunakan pada tipe data yang sudah dibahas di atas. </p><p id="f966e68a-4f69-4ddb-ae1a-eab0e81eae24" class="">Ada beberapa tipe data yang bisa di-set nilainya dengan <code>nil</code>, diantaranya:</p><ul id="c70038db-3768-48c7-93e2-6893c07a1de9" class="bulleted-list"><li>pointer</li></ul><ul id="6d89e090-f602-48da-a937-33450b6c4c1c" class="bulleted-list"><li>tipe data fungsi</li></ul><ul id="61bd4a33-ed56-4b77-92a5-08b411c70aea" class="bulleted-list"><li>slice</li></ul><ul id="30694934-86a2-4fc0-9229-019c9fef4bd9" class="bulleted-list"><li><code>map</code></li></ul><ul id="abd1da9c-0a16-4926-aaba-3ff455ddb006" class="bulleted-list"><li><code>channel</code></li></ul><ul id="e3dba9b5-e57a-4dbd-b2ae-f829d3be290c" class="bulleted-list"><li>interface kosong atau <code>interface{}</code></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4e08987c-f98f-44d5-8c62-50084237f11e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Nantinya kita akan sering bertemu dengan <code>nil</code> setelah masuk pada pembahasan bab-bab tersebut.</div></figure><p id="e38ba39f-5a21-4129-b126-d3ef841fae52" class="">
+</p></div></p></div></article></body></html>

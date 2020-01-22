@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>highest (20) to lowest (1) precedence.</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="da1107f7-fc5c-447b-bf67-6e7e44fe3566" class="page sans"><header><h1 class="page-title">highest (20) to lowest (1) precedence.</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th>Precedence</th><th>Operator type</th><th>Associativity</th><th>Individual operators</th></tr></thead><tbody><tr id="e623204b-a27e-4b4a-9e18-0a6b019430f6"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/21.html">21</a></td><td class="cell-oaN%">Grouping</td><td class="cell-_*bK">n/a</td><td class="cell-f0Ej">( … )</td></tr><tr id="00a3d57a-3387-4b68-9a38-0f8a648bd20f"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/20.html">20</a></td><td class="cell-oaN%">Member Access</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… . …</td></tr><tr id="d8f446da-dacb-4d16-be65-8db42c842cca"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/20%201.html">20</a></td><td class="cell-oaN%">Computed Member Access</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… [ … ]</td></tr><tr id="d4e5d549-1044-4c85-ae97-9b0a42f6bb23"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/20%202.html">20</a></td><td class="cell-oaN%">new (with argument list)</td><td class="cell-_*bK">n/a</td><td class="cell-f0Ej">new … ( … )</td></tr><tr id="252fc1c4-7e4f-4189-be7a-92b7615b9231"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/20%203.html">20</a></td><td class="cell-oaN%">Function Call</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… ( … )</td></tr><tr id="c5509796-48ad-4c6f-b023-d1d75442b382"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/20%204.html">20</a></td><td class="cell-oaN%">Optional chaining</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">?.</td></tr><tr id="e20ef522-266c-49f5-b525-b379aa06093e"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/19.html">19</a></td><td class="cell-oaN%">new (without argument list)</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">new …</td></tr><tr id="e604f816-5d16-42d0-b0b0-dae1d41b94bf"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/18.html">18</a></td><td class="cell-oaN%">Postfix Increment</td><td class="cell-_*bK">n/a</td><td class="cell-f0Ej">… ++</td></tr><tr id="40e553e3-4f0a-412e-8dc4-0d86b4038142"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/18%201.html">18</a></td><td class="cell-oaN%">Postfix Decrement</td><td class="cell-_*bK">n/a</td><td class="cell-f0Ej">… --</td></tr><tr id="1bbfda63-ab21-4ba8-bd24-988a6b29f489"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17.html">17</a></td><td class="cell-oaN%">Logical NOT</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">! …</td></tr><tr id="f47d0191-b0c1-47dc-bc2b-267f504f59da"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%201.html">17</a></td><td class="cell-oaN%">Bitwise NOT</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">~ …</td></tr><tr id="a609b403-9d58-492d-9776-ad76511e61de"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%202.html">17</a></td><td class="cell-oaN%">Unary Plus</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">+ …</td></tr><tr id="69c97f28-1de8-41c2-ad5d-9fbccbb79443"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%203.html">17</a></td><td class="cell-oaN%">Unary Negation</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">- …</td></tr><tr id="efd7f4be-f326-40f7-b64e-2e5c2157f65f"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%204.html">17</a></td><td class="cell-oaN%">Prefix Increment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">++ …</td></tr><tr id="b444be7a-7b05-4fab-93de-a71f628119f5"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%205.html">17</a></td><td class="cell-oaN%">Prefix Decrement</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">-- …</td></tr><tr id="6222a2d8-7aff-4095-b2fe-d26e142f9a66"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%206.html">17</a></td><td class="cell-oaN%">typeof</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">typeof …</td></tr><tr id="5879c203-8c01-4525-b452-59644bcb09b3"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%207.html">17</a></td><td class="cell-oaN%">void</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">void …</td></tr><tr id="a16fa46e-4241-4810-a2a1-8a32a0f6cab8"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%208.html">17</a></td><td class="cell-oaN%">delete</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">delete …</td></tr><tr id="c9c4ef7b-af11-4f00-9dbb-011a8e6dfb27"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/17%209.html">17</a></td><td class="cell-oaN%">await</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">await …</td></tr><tr id="2597e12f-d980-47d5-93f6-2db451614259"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/16.html">16</a></td><td class="cell-oaN%">Exponentiation</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… ** …</td></tr><tr id="7c22a194-9b75-408b-b709-33ba1b0d45a7"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/15.html">15</a></td><td class="cell-oaN%">Multiplication</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… * …</td></tr><tr id="2cc02bba-242b-47b8-aae1-f1aa1d2b57f1"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/15%201.html">15</a></td><td class="cell-oaN%">Division</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… / …</td></tr><tr id="a1d17804-1307-4913-be2b-480cccce82c1"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/15%202.html">15</a></td><td class="cell-oaN%">Remainder</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… % …</td></tr><tr id="0776095e-9b77-47dd-9efb-6486791ccbbc"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/14.html">14</a></td><td class="cell-oaN%">Addition</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… + …</td></tr><tr id="36c94d08-19fc-44a0-a93d-1f086b550bc8"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/14%201.html">14</a></td><td class="cell-oaN%">Subtraction</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… - …</td></tr><tr id="57bac743-2c79-4bb0-866d-014740217e00"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/13.html">13</a></td><td class="cell-oaN%">Bitwise Left Shift</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &lt;&lt; …</td></tr><tr id="7b38a84d-53cf-4878-b598-5deaf8a1c2e9"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/13%201.html">13</a></td><td class="cell-oaN%">Bitwise Right Shift</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &gt;&gt; …</td></tr><tr id="ea500f48-6614-41c6-a7c9-56aff886ec9e"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/13%202.html">13</a></td><td class="cell-oaN%">Bitwise Unsigned Right Shift</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &gt;&gt;&gt; …</td></tr><tr id="7ddcd60f-76ff-49bd-adf3-d51590012d7f"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/12.html">12</a></td><td class="cell-oaN%">Less Than</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &lt; …</td></tr><tr id="298327f0-64d7-47ef-a5d9-da72122af19a"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/12%201.html">12</a></td><td class="cell-oaN%">Less Than Or Equal</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &lt;= …</td></tr><tr id="6105b107-316e-407f-9f19-430e0f6c8218"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/12%202.html">12</a></td><td class="cell-oaN%">Greater Than</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &gt; …</td></tr><tr id="fd873943-4309-444b-9fd3-043b1a0fad68"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/12%203.html">12</a></td><td class="cell-oaN%">Greater Than Or Equal</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &gt;= …</td></tr><tr id="5f1b0e14-1c53-49a3-b12b-b99914484323"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/12%204.html">12</a></td><td class="cell-oaN%">in</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… in …</td></tr><tr id="fb3a717d-0ae6-4073-8287-81250268f0ad"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/12%205.html">12</a></td><td class="cell-oaN%">instanceof</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… instanceof …</td></tr><tr id="bea24099-6b03-4247-8af5-05ed9f0b0a8c"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/11.html">11</a></td><td class="cell-oaN%">Equality</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… == …</td></tr><tr id="1304c9ff-78d3-49c4-ae62-7171009aa735"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/11%201.html">11</a></td><td class="cell-oaN%">Inequality</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… != …</td></tr><tr id="fe608aed-2a31-42aa-83d5-f0d3d7a460ad"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/11%202.html">11</a></td><td class="cell-oaN%">Strict Equality</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… === …</td></tr><tr id="336afeeb-8c7a-4747-9240-3c90829afbf9"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/11%203.html">11</a></td><td class="cell-oaN%">Strict Inequality</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… !== …</td></tr><tr id="99794eab-6fe5-4190-a618-b515154602c5"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/10.html">10</a></td><td class="cell-oaN%">Bitwise AND</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &amp; …</td></tr><tr id="4d5b8a63-7e78-499b-b82a-1c8823db0a2a"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/9.html">9</a></td><td class="cell-oaN%">Bitwise XOR</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… ^ …</td></tr><tr id="9f281ecf-af33-4918-92d3-856adf2a0919"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/8.html">8</a></td><td class="cell-oaN%">Bitwise OR</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… | …</td></tr><tr id="14f5a911-1d20-4c1c-917f-3c8a494dd295"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/7.html">7</a></td><td class="cell-oaN%">Nullish coalescing operator</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… ?? …</td></tr><tr id="b2bd8527-f9d7-45dd-a867-961d9282a9bd"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/6.html">6</a></td><td class="cell-oaN%">Logical AND</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… &amp;&amp; …</td></tr><tr id="9f01eceb-2339-4b75-8966-7817c0d53acf"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/5.html">5</a></td><td class="cell-oaN%">Logical OR</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… || …</td></tr><tr id="b8883369-573a-47a2-a4d6-cd1b47cbf073"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/4.html">4</a></td><td class="cell-oaN%">Conditional</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… ? … : …</td></tr><tr id="d23cf88d-df4b-4f4d-8891-761bc1efb23f"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… = …</td></tr><tr id="a1ddce23-72ff-402b-9dfb-1e9a65e82214"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%201.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… += …</td></tr><tr id="29abe1b5-f121-49b9-bd10-dc51972ad5e3"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%202.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… -= …</td></tr><tr id="f326960d-75b5-4b12-8f59-d0fb9890f369"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%203.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… **= …</td></tr><tr id="378e80bf-b272-4d3d-b0c0-b87e56b16688"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%204.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… *= …</td></tr><tr id="af134fa3-aa5a-40b2-9402-d584ec640758"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%205.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… /= …</td></tr><tr id="04da221a-4e6d-4a74-8a32-21cddeb0e735"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%206.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… %= …</td></tr><tr id="dfe557f5-f913-429d-8d31-1553a107ecf0"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%207.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… &lt;&lt;= …</td></tr><tr id="bdf2bbbb-1cb8-408c-8c4c-785a64f69521"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%208.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… &gt;&gt;= …</td></tr><tr id="8feb34bd-e795-4eb8-b4c8-c1b89f99177a"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%209.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… &gt;&gt;&gt;= …</td></tr><tr id="9463133d-a7d9-4494-b1de-75b230fee461"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%2010.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… &amp;= …</td></tr><tr id="26ce427d-f333-4570-a968-843257531f13"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%2011.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… ^= …</td></tr><tr id="b6484c82-e22a-4978-aef5-99a8add0c5a7"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/3%2012.html">3</a></td><td class="cell-oaN%">Assignment</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">… |= …</td></tr><tr id="f2cf68fe-51de-493b-a151-09c5c2bdd1ff"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/2.html">2</a></td><td class="cell-oaN%">yield</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">yield …</td></tr><tr id="25ca5137-0b9e-4759-b2fd-6cb85436cf21"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/2%201.html">2</a></td><td class="cell-oaN%">yield*</td><td class="cell-_*bK">right-to-left</td><td class="cell-f0Ej">yield* …</td></tr><tr id="30526da0-f3fa-4279-8b4a-faa09a965f20"><td class="cell-title"><a href="highest%2020%20to%20lowest%201%20precedence/1.html">1</a></td><td class="cell-oaN%">Comma / Sequence</td><td class="cell-_*bK">left-to-right</td><td class="cell-f0Ej">… , …</td></tr></tbody></table></div></article></body></html>

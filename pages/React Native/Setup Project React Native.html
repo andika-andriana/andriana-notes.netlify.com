@@ -1,0 +1,583 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Setup Project React Native</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f346ff75-a31c-43ba-a101-cd65128daf08" class="page sans"><header><h1 class="page-title">Setup Project React Native</h1></header><div class="page-body"><p id="35dc6441-5e89-4e98-b793-3aec8f75bf5b" class="">Berikut adalah contoh penerapan Setup React Native kedalam leptop/pc dengan os windows 64bit.</p><ol id="2fcb636a-dec1-41ca-857e-5906f379020f" class="numbered-list" start="1"><li>Kunjungi situs resmi react native: <a href="https://www.google.com/url?q=https://facebook.github.io/react-native/&amp;sa=D&amp;ust=1577366898217000">https://facebook.github.io/react-native</a><figure id="d734b1ee-dd85-46cf-86d4-099f97499ba8" class="image"><a href="Setup%20Project%20React%20Native/Untitled.png"><img style="width:1211px" src="Setup%20Project%20React%20Native/Untitled.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="02375f75-ec22-4921-b0f8-717f143a925b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pilih get started</div></figure></li></ol><ol id="32c58503-a3c1-453f-ba64-d328dd62f454" class="numbered-list" start="2"><li>Terdapat dua cara untuk melakukan installasi react native:<ul id="456b4828-0d07-43a6-9fc6-606a27203581" class="bulleted-list"><li>Expo CLI Quickstart</li></ul><ul id="768441b1-2516-44cc-8db4-175dd0ee5712" class="bulleted-list"><li>React Native CLI Quickstart</li></ul><figure id="8aab5008-f45a-4f90-a163-7e6e6edeb6aa" class="image"><a href="Setup%20Project%20React%20Native/Untitled%201.png"><img style="width:828px" src="Setup%20Project%20React%20Native/Untitled%201.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="71b1d394-daf0-4088-9f01-6ffed6250ebf"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kali ini kita pilih React Native CLI</div></figure></li></ol><ol id="31099521-2d9b-4dbb-883f-3b645cbfd991" class="numbered-list" start="3"><li>Pilih OS windows dan pilih target os yang ingin di buat, disini saya memilih Android:<figure id="7ca53509-b5a4-486c-a4d4-9e0628fc3c8a" class="image"><a href="Setup%20Project%20React%20Native/Untitled%202.png"><img style="width:862px" src="Setup%20Project%20React%20Native/Untitled%202.png"/></a></figure></li></ol><ol id="a7cac4b7-d4af-450c-b51e-ea863be6b28d" class="numbered-list" start="4"><li>Selanjutnya tersedia ketereangan dependencies yang harus di install, disini saya akan menginstal Java SE Development Kit (JDK).<figure id="5f361edb-ffde-4d28-8f58-71b50dc5bb7a" class="image"><a href="Setup%20Project%20React%20Native/Untitled%203.png"><img style="width:818px" src="Setup%20Project%20React%20Native/Untitled%203.png"/></a></figure></li></ol><ol id="8a3aaef3-47ba-463e-aaac-d82f52a70462" class="numbered-list" start="5"><li>Download Sesuaikan dengan OS yang digunakan:<figure id="07ef2b6a-8cea-4c88-9791-b48331130d62" class="image"><a href="Setup%20Project%20React%20Native/Untitled%204.png"><img style="width:562px" src="Setup%20Project%20React%20Native/Untitled%204.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="778ec998-a70a-46c4-a557-6d44c5fa47ac"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Wajib menggunakan jdk versi 8 keatas (permintaan dari React Native)</div></figure></li></ol><ol id="65c63736-d653-4a14-9547-ebc1bab24b6c" class="numbered-list" start="6"><li>Jika proses download telah selesai, maka lakukan proses penginstallan JDK:
+<a href="https://www.google.com/url?q=https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&amp;sa=D&amp;ust=1577366898217000">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a><figure id="e5635d4c-37f4-41d1-a266-39e478038e85" class="image"><a href="Setup%20Project%20React%20Native/Untitled%205.png"><img style="width:596px" src="Setup%20Project%20React%20Native/Untitled%205.png"/></a></figure></li></ol><ol id="9d6e1c2d-c467-4e2e-a4d8-47e114ea6aac" class="numbered-list" start="7"><li>Kemudian download Node JS dan lakukan penginstallan: 
+<a href="https://www.google.com/url?q=https://nodejs.org/en/download/&amp;sa=D&amp;ust=1577366898217000">https://nodejs.org/en/download/</a><figure id="b0feb43c-3779-4d6f-8d0c-5a6f5a1f1c52" class="image"><a href="Setup%20Project%20React%20Native/Untitled%206.png"><img style="width:1057px" src="Setup%20Project%20React%20Native/Untitled%206.png"/></a></figure></li></ol><ol id="26bd2439-d29c-4da9-a5bf-bc83faa7406f" class="numbered-list" start="8"><li>Download Android Studio :
+<a href="https://www.google.com/url?q=https://developer.android.com/studio/index.html&amp;sa=D&amp;ust=1577366898218000">https://developer.android.com/studio/index.html</a><figure id="db8c5e14-66be-48f3-85bd-c6ccf5df8dae" class="image"><a href="Setup%20Project%20React%20Native/Untitled%207.png"><img style="width:991px" src="Setup%20Project%20React%20Native/Untitled%207.png"/></a></figure></li></ol><ol id="e2fa742f-c980-421d-8a67-53d9cef35fa3" class="numbered-list" start="9"><li>Setelah proses download Selesai kemudian Install&gt; Klik Next:<figure id="bc7233a1-1b2d-44b1-b63b-84425d67bb3f" class="image"><a href="Setup%20Project%20React%20Native/Untitled%208.png"><img style="width:497px" src="Setup%20Project%20React%20Native/Untitled%208.png"/></a></figure></li></ol><ol id="3fc5526d-ea92-40ee-8f22-b23db746c39c" class="numbered-list" start="10"><li>Klik Next<figure id="da71a151-c9fc-4a70-b508-c7f89b48aea7" class="image"><a href="Setup%20Project%20React%20Native/Untitled%209.png"><img style="width:497px" src="Setup%20Project%20React%20Native/Untitled%209.png"/></a></figure></li></ol><ol id="9857b959-024f-4ae2-b09c-27e8720a0a85" class="numbered-list" start="11"><li>Agree<figure id="7828031c-8368-4ec9-8c1e-d1a3779c127e" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2010.png"><img style="width:499px" src="Setup%20Project%20React%20Native/Untitled%2010.png"/></a></figure></li></ol><ol id="62faadc7-8b82-4f55-a2f5-785bb9f5703d" class="numbered-list" start="12"><li>Pilih Install:<figure id="3f83cb7c-8295-487c-87ff-1a6febb82d44" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2011.png"><img style="width:499px" src="Setup%20Project%20React%20Native/Untitled%2011.png"/></a></figure></li></ol><ol id="fcc980b5-43f3-4f26-ac1a-f107428b1606" class="numbered-list" start="13"><li>Tunggu proses penginstallan sampai selesai:<figure id="16add204-1e94-4f8c-afd9-3b41e0b70592" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2012.png"><img style="width:500px" src="Setup%20Project%20React%20Native/Untitled%2012.png"/></a></figure></li></ol><ol id="3e2e30dd-eecc-472d-bbef-9f8d00347808" class="numbered-list" start="14"><li>Klik Next,<figure id="34cfdb4a-965e-46cf-bf35-228bf5bc27c0" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2013.png"><img style="width:496px" src="Setup%20Project%20React%20Native/Untitled%2013.png"/></a></figure></li></ol><ol id="b5aed2d8-afab-45dc-a661-3cbed82d44d4" class="numbered-list" start="15"><li>Klik Finish<figure id="f48b3bce-50c5-4d76-a720-bcd03679e026" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2014.png"><img style="width:501px" src="Setup%20Project%20React%20Native/Untitled%2014.png"/></a></figure></li></ol><ol id="b0eb097b-e494-418c-b722-5cbf8147bcec" class="numbered-list" start="16"><li>Pilih OK<figure id="11c18835-26ee-4de9-9296-1c317beedf36" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2015.png"><img style="width:435px" src="Setup%20Project%20React%20Native/Untitled%2015.png"/></a></figure></li></ol><ol id="50486dd4-4a31-4648-8107-964cab75e3d2" class="numbered-list" start="17"><li>Tunggu proses loading selesai.<figure id="e84828e3-5bf4-40bb-b382-58bec8012bec" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2016.png"><img style="width:399px" src="Setup%20Project%20React%20Native/Untitled%2016.png"/></a></figure></li></ol><ol id="158fafbe-937b-4d53-923e-d1464aa3e8e3" class="numbered-list" start="18"><li>Pilih Don&#x27;t Send<figure id="b9948b28-766a-498e-ad92-07a14939c41b" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2017.png"><img style="width:564px" src="Setup%20Project%20React%20Native/Untitled%2017.png"/></a></figure></li></ol><ol id="2a6053fa-2b1b-4a33-a620-54b79b2cae18" class="numbered-list" start="19"><li>Klik Next<figure id="9fd0fb3a-17d9-42ca-b74b-73fb1d7d928d" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2018.png"><img style="width:785px" src="Setup%20Project%20React%20Native/Untitled%2018.png"/></a></figure></li></ol><ol id="be65f154-1d97-4e93-b1da-5d73cab48390" class="numbered-list" start="20"><li>Pilih Custom installlation<figure id="3d867796-2e2c-4b57-965e-380ba16c3546" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2019.png"><img style="width:785px" src="Setup%20Project%20React%20Native/Untitled%2019.png"/></a></figure></li></ol><ol id="a5a840da-81d5-4c29-b485-65274f111b54" class="numbered-list" start="21"><li>Sesuaikan UI theme<figure id="3f752623-cc39-45db-a73c-bae32a7ac8f3" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2020.png"><img style="width:785px" src="Setup%20Project%20React%20Native/Untitled%2020.png"/></a></figure></li></ol><ol id="ab3a8ca4-1521-44e6-9d66-224a0f82be19" class="numbered-list" start="22"><li>Setup Configurasi apa saja yang di install:<figure id="8748936b-e081-48f8-9abf-601de4f5d477" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2021.png"><img style="width:784px" src="Setup%20Project%20React%20Native/Untitled%2021.png"/></a></figure></li></ol><ol id="211fd051-26a6-40e1-9dc7-bdd3f7b59fa1" class="numbered-list" start="23"><li>Klik Verify Setting dan klik finish<figure id="ff78b3bd-1c83-478a-836f-47ce4d37ec64" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2022.png"><img style="width:784px" src="Setup%20Project%20React%20Native/Untitled%2022.png"/></a></figure></li></ol><ol id="099e9570-a838-476f-87c1-f57bee7417a3" class="numbered-list" start="24"><li>Tunggu proses selesai:<figure id="885966a0-aa56-490f-909b-6a61d8f5c054" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2023.png"><img style="width:786px" src="Setup%20Project%20React%20Native/Untitled%2023.png"/></a></figure></li></ol><ol id="4685149a-2777-49ff-b4be-46a16006bf68" class="numbered-list" start="25"><li>Setelah selesai, kemudian klik finish:<figure id="114cd9d0-0708-4d51-896d-a7dc7a081418" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2024.png"><img style="width:782px" src="Setup%20Project%20React%20Native/Untitled%2024.png"/></a></figure></li></ol><ol id="1044cce0-bcfb-4d85-9732-b95cf32e5892" class="numbered-list" start="26"><li>Maka akan muncul jendela baru (Welcome):<figure id="375577d4-d8e4-430b-a1b1-48933c988e6a" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2025.png"><img style="width:662px" src="Setup%20Project%20React%20Native/Untitled%2025.png"/></a></figure></li></ol><ol id="7aeb8f30-a87d-4316-9999-3f377042abf4" class="numbered-list" start="27"><li>Kemudian Klik configure dan pilih SDK manager:<figure id="23e6bb36-f985-43d7-b921-09d24bbb92e0" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2026.png"><img style="width:771px" src="Setup%20Project%20React%20Native/Untitled%2026.png"/></a></figure></li></ol><ol id="fd392d24-4e55-4463-bcf4-eb5f7c05d699" class="numbered-list" start="28"><li>Kemudian beralih ke menu seacrh pada windows dan cari Environtment Variable:<figure id="b7244838-37f8-42e3-9b5e-d2bb20867d4c" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2027.png"><img style="width:782px" src="Setup%20Project%20React%20Native/Untitled%2027.png"/></a></figure></li></ol><ol id="c6cc5c3d-8732-418e-af7e-84bb7acb8c46" class="numbered-list" start="29"><li>Kemudian pilih Environtment VAR..<figure id="a0dee795-948c-4a88-a790-a62176a221d4" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2028.png"><img style="width:408px" src="Setup%20Project%20React%20Native/Untitled%2028.png"/></a></figure></li></ol><ol id="4e48661b-96e8-487d-955d-e18a2a226c76" class="numbered-list" start="30"><li>Klik NEW<figure id="ece5215a-a7e9-497c-8094-19912c0b7f55" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2029.png"><img style="width:617px" src="Setup%20Project%20React%20Native/Untitled%2029.png"/></a></figure></li></ol><ol id="d52eb302-d6c2-457d-a692-724803f43a2e" class="numbered-list" start="31"><li>Isikan nama variable:<figure id="6ca9a931-f2ad-4b37-8401-a8ec7a997e55" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2030.png"><img style="width:651px" src="Setup%20Project%20React%20Native/Untitled%2030.png"/></a></figure></li></ol><ol id="974f7c07-29be-4aad-9045-da8ab6ef6eba" class="numbered-list" start="32"><li>Kemudian isikan Value dari SDK manager:<figure id="40660c47-3677-463a-b459-ac0310d3b206" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2031.png"><img style="width:1010px" src="Setup%20Project%20React%20Native/Untitled%2031.png"/></a></figure></li></ol><ol id="c3922b51-eacb-499f-a5da-2648092806e7" class="numbered-list" start="33"><li>Kemudian paste dan klik oke.<figure id="793ae30a-d9f0-4a9c-9202-7c8d733656a0" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2032.png"><img style="width:653px" src="Setup%20Project%20React%20Native/Untitled%2032.png"/></a></figure></li></ol><ol id="121828c2-4489-402c-9072-0390470d409e" class="numbered-list" start="34"><li>Kemudian pilih Edit pada Path kembali untuk config platfform-toolsnya:<figure id="2bf62895-1171-4384-a2f0-1027b06d000e" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2033.png"><img style="width:615px" src="Setup%20Project%20React%20Native/Untitled%2033.png"/></a></figure></li></ol><ol id="b933b505-395a-43bf-b9d5-19cc90dc3e60" class="numbered-list" start="35"><li>Kemudian klik new dan pastekan kembali lokasi SDK:<figure id="cd1ec7ae-b4ac-445d-8547-b1d883453ba3" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2034.png"><img style="width:524px" src="Setup%20Project%20React%20Native/Untitled%2034.png"/></a></figure></li></ol><ol id="136c379f-b8de-4cf9-a1b5-5247400df16d" class="numbered-list" start="36"><li>Kemudian tambahkan <code>\platform-tools</code> dan klik ok:<figure id="2f6b523e-131f-472d-bbe8-1c03d62cf39e" class="image"><a href="Setup%20Project%20React%20Native/Untitled%2035.png"><img style="width:522px" src="Setup%20Project%20React%20Native/Untitled%2035.png"/></a></figure></li></ol><ol id="0356a4ad-0d19-4b9c-9bc0-aea1ea57f5e6" class="numbered-list" start="37"><li>Untuk memastikan proses penginstallan dan setup sudah berhasil, maka kita lakukan pengecekan menggunakan terminal/cmd ketikan:<pre id="406fc92c-d03a-475d-8577-b1c1fe769efb" class="code"><code>PS C:\Users\AndikaAndriana&gt; npm install -g react-native-cli
+C:\Users\AndikaAndriana\AppData\Roaming\npm\react-native -&gt; C:\Users\AndikaAndriana\AppData\Roaming\npm\node_modules\react-native-cli\index.js
++ react-native-cli@2.0.1
+added 72 packages from 25 contributors in 17.743s
+
+PS C:\Users\AndikaAndriana&gt; react-native --version
+react-native-cli: 2.0.1
+react-native: n/a - not inside a React Native project directory
+
+PS C:\Users\AndikaAndriana&gt; node --version
+v12.14.0
+
+PS C:\Users\AndikaAndriana&gt; java -version
+java version &quot;1.8.0_231&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_231-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.231-b11, mixed mode)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0b74e734-c509-491f-ad4d-30aa984de86d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Jika versi dari semua dependencies sudah berhasil muncul maka installasi sudah selesai.</div></figure></li></ol></div></article></body></html>

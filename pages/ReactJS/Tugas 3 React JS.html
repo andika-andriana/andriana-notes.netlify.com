@@ -1,0 +1,579 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas 3 React JS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9ebad671-71a7-4e16-8acb-98f0fb5c3ce3" class="page sans"><header><h1 class="page-title"><strong>Tugas 3 React JS</strong></h1></header><div class="page-body"><p id="dd9ca476-97e8-4d18-ac7d-8a799c31a81d" class=""><strong>Tujuan :</strong></p><ul id="2519831b-3168-4f0f-82b7-a9ae43178c1d" class="bulleted-list"><li>Memahami cara penggunaan Handling Events dan Parameters.</li></ul><ul id="8306e026-e86b-41b1-8fb9-6f590fbe2670" class="bulleted-list"><li>Memahami cara penggunaan preventDefault.</li></ul><ul id="f264e54d-032b-45e2-a31a-8c7898e82c8c" class="bulleted-list"><li>Memahami cara penggunaan Handling Events onChange pada Input Element.</li></ul><ul id="e27f1689-5496-491e-9b5d-7c8c8555699d" class="bulleted-list"><li>Memahami cara penggunaan Event Target Value.</li></ul><ul id="308774bf-24de-4532-8459-7a2cc2c68b7b" class="bulleted-list"><li>Memahami cara penggunaan Set Default Input Value.</li></ul><ul id="e5c48cb5-cad8-48e1-b8f2-00fc3a947055" class="bulleted-list"><li>Memahami cara penggunaan setState.</li></ul><p id="17665775-707f-44aa-bf4e-25e91822a0f2" class=""><strong>Petunjuk :</strong></p><ul id="07884fde-9fad-4c16-a097-6782c507de26" class="bulleted-list"><li>Perintah untuk membuat project baru:<pre id="5b1cc494-d7b0-4794-aa32-0b4852ebf376" class="code"><code>create-react-app nama_project_anda</code></pre></li></ul><ul id="58a5f57b-a145-4695-abe2-40f15f980ff7" class="bulleted-list"><li>Code import component:<pre id="ccec076e-de70-4efe-8149-d520aeadd14d" class="code"><code>import nama_component from &quot;file_letak_component&quot;;</code></pre></li></ul><ul id="b1e4c990-a10d-4c54-b724-674265b47e69" class="bulleted-list"><li>Code membuat state dan props:<pre id="12921595-ea71-49a7-a97f-0d83779f6a48" class="code"><code>constructor(props) {
+   super(props);
+   this.state = {
+   
+   };
+ }</code></pre></li></ul><ul id="0b2cc1ef-8cae-4f33-8f4a-fed57a8ed847" class="bulleted-list"><li>Code membuat class baru:<pre id="b42fa184-1624-4f50-86bf-75bdf22743fa" class="code"><code>import React, { Component } from &#x27;react&#x27;;
+
+class Nama_class_anda extends Component {
+ render() {
+   return (
+     
+   );
+ }
+}
+export default Nama_class_anda ;</code></pre></li></ul><p id="bfc63aa2-8462-4dac-aa1f-32303e835ce0" class=""><strong>Link Gambar:</strong><div class="indented"><p id="1e050b0a-6894-4531-9eba-74b17269a6d5" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg&amp;sa=D&amp;ust=1576211016614000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg</a></p><p id="862f1ceb-3956-4681-9c88-34e75c092a10" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png&amp;sa=D&amp;ust=1576211016615000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png</a></p><p id="3a63c227-f8a6-4cc2-afaf-71f89213012c" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png&amp;sa=D&amp;ust=1576211016615000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png</a></p><p id="97d45b6e-ae05-4b4a-8fbe-f768963e9d12" class=""><a href="https://www.google.com/url?q=https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%2520nusantara/nasi%2520kentut.png&amp;sa=D&amp;ust=1576211016616000">https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%20nusantara/nasi%20kentut.png</a></p><p id="f2568191-2030-46a6-be73-86c5727b1908" class=""><a href="https://www.google.com/url?q=https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg&amp;sa=D&amp;ust=1576211016616000">https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg</a></p></div></p><p id="79d65c1e-8e09-453f-9d90-a21f049de1d8" class=""><strong>Tugas :</strong></p><p id="ad92a45b-c81b-4b4a-9e3f-56d8c7e4ff21" class="">Pada tugas ini anda diminta untuk membuat sebuah project baru dengan nama <strong>tugas_3_react_js</strong> dan anda diminta untuk membuat website dengan ketentuan sebagai berikut :</p><ol id="7f6eb23e-9a52-43c3-a184-be2368d19caa" class="numbered-list" start="1"><li>Struktur file yang harus anda buat:<figure id="2c3503c1-c6b3-4f64-8ab9-b0c96e26409a" class="image"><a href="https://lh5.googleusercontent.com/d9F5A9y_hphXBVI7DQs299_SLqJcG1wZO7riL7G1yHSaGv1mujPGQxKPIgdw9321eKpkoRZ1FBFglptOMIExbytbAdR0snLq9gUfWphwQUCtQX1YLzQnFo18KPf9piml1PV1S8eB"><img src="https://lh5.googleusercontent.com/d9F5A9y_hphXBVI7DQs299_SLqJcG1wZO7riL7G1yHSaGv1mujPGQxKPIgdw9321eKpkoRZ1FBFglptOMIExbytbAdR0snLq9gUfWphwQUCtQX1YLzQnFo18KPf9piml1PV1S8eB"/></a></figure></li></ol><ol id="ff2e0242-4ef4-46c9-ba6f-4aa2dff43643" class="numbered-list" start="2"><li>Pada file TopEvents.js yang berada di dalam folder Events buatlah sebuah <strong>function component</strong> yang di dalam nya terdapat <strong>preventDefault</strong><strong>, </strong><strong>Handling Events Dan Parameter</strong> :<figure id="30379521-d19d-4a3f-a781-154831ed087c" class="image"><a href="https://lh6.googleusercontent.com/RohVG_zOsezP4YArRDZ7br90rZSj7qzriALzZdLPIo8C90XfA1DDi1_lAoTESFL6TMugnZsPdEDBlbMt3dgi4cKjVJu6Rw-4H3AXURv_5jkJA6w1kmvFtUBptrpJnSxMoqoaQAzj"><img src="https://lh6.googleusercontent.com/RohVG_zOsezP4YArRDZ7br90rZSj7qzriALzZdLPIo8C90XfA1DDi1_lAoTESFL6TMugnZsPdEDBlbMt3dgi4cKjVJu6Rw-4H3AXURv_5jkJA6w1kmvFtUBptrpJnSxMoqoaQAzj"/></a></figure></li></ol><ol id="a171a4b8-84c8-4edc-aa17-7daf0614c5ca" class="numbered-list" start="3"><li>Pada file Footer.js yang berada di dalam folder Page buatlah sebuah <strong>class component </strong>dan <strong>import </strong>file TopEvents.js yang berada di dalam folder Events :<figure id="8d265e38-dbba-4c03-9c14-171e6e1f766d" class="image"><a href="https://lh5.googleusercontent.com/HnSWTyYEHxVhYDz6i-3izpUyNmJXH3jR2GfOvD7Qcu0x3ZlElV6Ica-Zt9KBwrdaYimhs2Z2-_OM8IP8Rj0ahDX5VIQNnODYpXevkDoZQ-kHkRepdMIKxDGdKfkvyxOQWATfl39Y"><img src="https://lh5.googleusercontent.com/HnSWTyYEHxVhYDz6i-3izpUyNmJXH3jR2GfOvD7Qcu0x3ZlElV6Ica-Zt9KBwrdaYimhs2Z2-_OM8IP8Rj0ahDX5VIQNnODYpXevkDoZQ-kHkRepdMIKxDGdKfkvyxOQWATfl39Y"/></a></figure></li></ol><ol id="ac3da784-a06b-4dc6-8abe-915403c590fe" class="numbered-list" start="4"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="16e12426-69bb-4740-96c2-93bf41534cfe" class="image"><a href="https://lh4.googleusercontent.com/9O5TedYpsTNxdEfjoWQfOYlTUml8ZSpKnThskrd_0imhoL-yQZZ29oRQWiryhPuUPD-xOPuqDfOfmcvnESTbYXn5GhtMSYkabJDwqkofdm7W-PfhWxV0HYzQPJpl5AbnLyoetUPU"><img src="https://lh4.googleusercontent.com/9O5TedYpsTNxdEfjoWQfOYlTUml8ZSpKnThskrd_0imhoL-yQZZ29oRQWiryhPuUPD-xOPuqDfOfmcvnESTbYXn5GhtMSYkabJDwqkofdm7W-PfhWxV0HYzQPJpl5AbnLyoetUPU"/></a></figure></li></ol><ol id="4d1d050a-9a84-445b-a6ad-2eff13bae1b7" class="numbered-list" start="5"><li>Pada file ListMakanan.js yang berada di folder ListData buatlah sebuah <strong>class component</strong> yang di dalamnya terdapat <strong>state dan props</strong><figure id="bc2bc9f8-f9d3-4a07-b2a2-8abe4257c3b4" class="image"><a href="https://lh3.googleusercontent.com/XixVuXA1VPCGoF0BCukM7W6BclARNyViMWjQRVSJHYtVT69E7MANMiuIyS7Oa8PtI0UR7ggPYs471X3CiLLM4oOR-ExDBNZRS99b8bZSV_wxG8NTCtw-Qh0t27SPS8s95q6b0Hb-"><img src="https://lh3.googleusercontent.com/XixVuXA1VPCGoF0BCukM7W6BclARNyViMWjQRVSJHYtVT69E7MANMiuIyS7Oa8PtI0UR7ggPYs471X3CiLLM4oOR-ExDBNZRS99b8bZSV_wxG8NTCtw-Qh0t27SPS8s95q6b0Hb-"/></a></figure></li></ol><ol id="c08fa2f3-485e-420d-8e5f-79453f92e1d7" class="numbered-list" start="6"><li>Pada file MenuMakanan.js yang berada di folder Page buatlah sebuah <strong>class component</strong> yang di dalamnya terdapat <strong>props, Handling Events onChange pada Input Element (tampilkan response ke dalam console), Event Target Value </strong>dan <strong>import </strong>file ListMakanan.js yang berada di dalam folder ListData:<figure id="4d1a4be4-1dfe-4ceb-a86e-3144243995ae" class="image"><a href="https://lh5.googleusercontent.com/ue-ZZIKPHEnTj-Efhv7GyAm8NAMWMZwUJzmbTAt4YuaqoGC4BUdi-uRiuZOzrIRoteMnkBT8KycOc_VjedY-qWtVT6eq4WmPexq8cqlhX3e3_yzRNz6dm6qTob4jcwbzCnfTQqml"><img src="https://lh5.googleusercontent.com/ue-ZZIKPHEnTj-Efhv7GyAm8NAMWMZwUJzmbTAt4YuaqoGC4BUdi-uRiuZOzrIRoteMnkBT8KycOc_VjedY-qWtVT6eq4WmPexq8cqlhX3e3_yzRNz6dm6qTob4jcwbzCnfTQqml"/></a></figure><figure id="ab00e231-4e78-4dae-8860-5b9a8fab30de" class="image"><a href="https://lh4.googleusercontent.com/GLZiX18lMOIL221w0XKtJq9gp4HhutRe90Hc6EP81w4Eh_AA8UMZEXM1E2ftUV9sqlOh_sJgDjCrymY4kpq9sskMBWJgpfUSIdj7U3Fb5_sUr2YgFuQ78VIleS38q8_6bMeKCe5i"><img src="https://lh4.googleusercontent.com/GLZiX18lMOIL221w0XKtJq9gp4HhutRe90Hc6EP81w4Eh_AA8UMZEXM1E2ftUV9sqlOh_sJgDjCrymY4kpq9sskMBWJgpfUSIdj7U3Fb5_sUr2YgFuQ78VIleS38q8_6bMeKCe5i"/></a></figure><figure id="fd2f4508-9642-466d-b8af-ce77822d4a58" class="image"><a href="https://lh5.googleusercontent.com/a6vYw4FK6CJFOf3QCH2qb8Iob2I_KdliHjWm-9_pig5jISliuYy0FQLdaGZhzyTPtP0KfE9VnXr6pOz1IjRxz-u8hnEOeOG4g4BAES59JOLBiJO3G-ha9uj6RHmciyAiYnwOJW41"><img src="https://lh5.googleusercontent.com/a6vYw4FK6CJFOf3QCH2qb8Iob2I_KdliHjWm-9_pig5jISliuYy0FQLdaGZhzyTPtP0KfE9VnXr6pOz1IjRxz-u8hnEOeOG4g4BAES59JOLBiJO3G-ha9uj6RHmciyAiYnwOJW41"/></a></figure></li></ol><ol id="9f65293e-3fe7-49ff-a1c5-9c9d4518bbb9" class="numbered-list" start="7"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="98fbe829-9d3d-48b4-8c06-060c5e76d3ce" class="image"><a href="https://lh6.googleusercontent.com/jr9TFVjNFclVSt_3TFph9RnMxtFqNz3s6__iAl93G6K_ev0P6NAb6t8QJrSrAx0jrSMY4fDKJYS9wF2076LjY_XhuPRrkxRifaycekL6O7R96p0ZJlLp1wPFUpYj2cJmOsLIX4Ci"><img src="https://lh6.googleusercontent.com/jr9TFVjNFclVSt_3TFph9RnMxtFqNz3s6__iAl93G6K_ev0P6NAb6t8QJrSrAx0jrSMY4fDKJYS9wF2076LjY_XhuPRrkxRifaycekL6O7R96p0ZJlLp1wPFUpYj2cJmOsLIX4Ci"/></a></figure></li></ol><ol id="f15627eb-d40f-47e4-bbd0-8311818598a0" class="numbered-list" start="8"><li>Pada file App.js silahkan anda import semua menu yang ada :<figure id="6b75a647-6b2b-4aa6-901a-e779f26cd0f8" class="image"><a href="https://lh6.googleusercontent.com/hQW_scrNRS6tmYRwCTnWhymMFjCp62DS2VnNSnc_MPzWdCFnpVWxUE69R5VM-oGfrNmWCwMlf3l1CfBjA2oACU5_bF1-VxMxh6DHeP63yeuTuMu93Umw6lAwRYywFWwRALBMvis-"><img src="https://lh6.googleusercontent.com/hQW_scrNRS6tmYRwCTnWhymMFjCp62DS2VnNSnc_MPzWdCFnpVWxUE69R5VM-oGfrNmWCwMlf3l1CfBjA2oACU5_bF1-VxMxh6DHeP63yeuTuMu93Umw6lAwRYywFWwRALBMvis-"/></a></figure></li></ol><ol id="73e90f31-e31b-47b6-b241-ad3261def965" class="numbered-list" start="9"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="f87cf5f6-6504-4dff-97ae-73856ab269d7" class="image"><a href="https://lh6.googleusercontent.com/UrHUp3TU_NIu5XmkKO2MiO-8v8cDCHgzGVShW0HS48zVpS-41TDcfh_mlHunQ3MYX5L1cYIjJsPReNS48O9vgcAwJJ0zvEvF5KNfQTRAGpd59t4L_4oKGkO-SYEeCos2tHMXoQ2c"><img src="https://lh6.googleusercontent.com/UrHUp3TU_NIu5XmkKO2MiO-8v8cDCHgzGVShW0HS48zVpS-41TDcfh_mlHunQ3MYX5L1cYIjJsPReNS48O9vgcAwJJ0zvEvF5KNfQTRAGpd59t4L_4oKGkO-SYEeCos2tHMXoQ2c"/></a></figure></li></ol><p id="b987fe8e-3a25-42a4-9100-ab72f5e4e879" class="">PENTING : Untuk tugas yang sudah dikerjakan diatas, silahkan disimpan di komputer masing-masing. Di materi selanjutnya akan dijelaskan cara untuk mengumpul TUGAS nya.</p></div></article></body></html>

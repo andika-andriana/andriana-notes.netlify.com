@@ -1,0 +1,693 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Interaksi Dengan API (GET)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="505219e9-6ab4-49e8-b877-7db9c1feb734" class="page sans"><header><h1 class="page-title">Interaksi Dengan API (GET)</h1></header><div class="page-body"><p id="e6193bd6-b8c1-4a7a-bb3c-0215b279c225" class="">Kali ini kita akan belajar pemanggilan API denga request Fetch dan GET pada React:</p><ul id="fb3eb0cd-9151-413a-9ea3-0d1ae456e091" class="bulleted-list"><li>Data API dummy <a href="https://jsonplaceholder.typicode.com/posts">https://jsonplaceholder.typicode.com/posts</a><p id="da2c2bc3-aa46-476a-bb5c-48dfdf8c7f82" class="">sintak Awal:</p><pre id="e0669882-dee0-41c9-aa54-eec7cb113b0b" class="code"><code>fetch(&#x27;<a href="https://jsonplaceholder.typicode.com/posts">https://jsonplaceholder.typicode.com/posts</a>&#x27;)
+  .then(response =&gt; response.json())
+  .then(json =&gt; console.log(json))</code></pre></li></ul><ol id="5ccf264b-ca2d-4bec-8522-cbb4f25c7d25" class="numbered-list" start="1"><li>Menggunakan Fetch library built in React:<ul id="984091a3-7a88-4b3b-8180-917609393736" class="bulleted-list"><li>Buka project yang telah kita buat pada text editor (contoh: hello-Api pada Atom);<figure id="991030ef-89ac-4b9c-82f7-43c71ae8c086" class="image"><a href="Application%20Programming%20Interface%20API%20With%20React/Untitled.png"><img style="width:166px" src="Application%20Programming%20Interface%20API%20With%20React/Untitled.png"/></a></figure></li></ul><ul id="4d69448f-727c-4542-b75e-7d7d38ea0689" class="bulleted-list"><li>Hapus file bawaan project yang tidak kita gunakan:<figure id="b7e5ffe0-9609-422d-b642-1c4ee3d1b935" class="image"><a href="React%20With%20Materialize%20CSS/Untitled.png"><img style="width:302px" src="React%20With%20Materialize%20CSS/Untitled.png"/></a></figure></li></ul><ul id="c8df322c-6e42-46d3-823b-becacaaad616" class="bulleted-list"><li>Modifikasi file yang terhubung dengan file-file yang kita hapus tadi:<figure id="1b3bc9e2-40d9-4c2a-be28-6d8961282c01" class="image"><a href="React%20With%20Materialize%20CSS/Untitled%201.png"><img style="width:1364px" src="React%20With%20Materialize%20CSS/Untitled%201.png"/></a></figure></li></ul><ul id="6099e1bf-efba-42e3-af4b-39d594da13e9" class="bulleted-list"><li>Jalan kan project, jika project sukses berjalan maka penghapusan file yang tidak digunakan sukses:<figure id="5847c2b1-e004-4558-94df-378a816f70fe" class="image"><a href="React%20With%20Materialize%20CSS/Untitled%202.png"><img style="width:629px" src="React%20With%20Materialize%20CSS/Untitled%202.png"/></a></figure></li></ul><ul id="c60b824e-67c6-4b69-a49d-4db44d136058" class="bulleted-list"><li>Masukan kode sintak awal pada API dummy kedalam App.js (Buat componentDidMount untuk memasukan API dummy):<pre id="c13b79f2-7eab-449d-a327-34879ad39485" class="code"><code>import React, { Component } from &quot;react&quot;;
+
+class App extends Component {
+
+ <mark class="highlight-yellow_background"> componentDidMount() {
+    fetch(&quot;https://jsonplaceholder.typicode.com/posts&quot;)
+      .then(response =&gt; response.json())
+      .then(json =&gt; console.log(json));
+  }
+</mark>
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello API&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;</code></pre></li></ul><ul id="c078c14b-885a-46b4-94ca-98f0fdce66d5" class="bulleted-list"><li>Lihat hasil pada browser jika sudah berhasil maka akan tampil data Array sesuai dengan apa yang diberikan API dummy pada link(<mark class="highlight-yellow_background">&quot;https://jsonplaceholder.typicode.com/posts&quot;</mark>):<figure id="7642c8c3-79d0-48f8-a045-7ec6a6e6c68b" class="image"><a href="Interaksi%20Dengan%20API%20GET/Untitled.png"><img style="width:1365px" src="Interaksi%20Dengan%20API%20GET/Untitled.png"/></a></figure></li></ul><ul id="a17feb14-aeb6-48b3-a5b3-21a8eea3bcc8" class="bulleted-list"><li>Kemudian kita akan memanggil lebih spesifik lagi, data tersebut akan kita tampung kedalam state kemudian ditampilkan menggunakan perulangan map, Berikut contoh kodenya:<pre id="711ef0c4-979b-4d4d-af70-e9d3aad7b5ce" class="code"><code>import React, { Component } from &quot;react&quot;;
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataAPI: []
+    };
+  }
+  componentDidMount() {
+    fetch(&quot;https://jsonplaceholder.typicode.com/posts&quot;)
+      .then(response =&gt; response.json())
+      .then(res =&gt; {
+        this.setState({
+          dataAPI: res
+        });
+      });
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello API&lt;/h1&gt;
+        {this.state.dataAPI.map((data, index) =&gt; {
+          return (
+            &lt;div key={index}&gt;
+              &lt;p&gt;{data.title}&lt;/p&gt;
+            &lt;/div&gt;
+          );
+        })}
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;</code></pre></li></ul><ul id="61c53b67-29a2-45d1-aca6-c63518dd203d" class="bulleted-list"><li>Browser akan menampilkan title sesuai API dummy:<figure id="93aa069c-b94e-4022-a09a-9809daf2e35f" class="image"><a href="Interaksi%20Dengan%20API%20GET/Untitled%201.png"><img style="width:1009px" src="Interaksi%20Dengan%20API%20GET/Untitled%201.png"/></a></figure></li></ul></li></ol><ol id="3cf3332a-154c-4700-a6ae-1d90cf371ba9" class="numbered-list" start="2"><li>Melakukan request API menggunakan library 3rd party Axios:<ul id="1030cb7f-940a-48b9-953e-528e4290ebb1" class="bulleted-list"><li>import axios yang sudah kita install pada project:<pre id="5e4e45c5-2daf-450a-9dcf-e4eb4273dcb1" class="code"><code>import axios from &quot;axios&quot;;</code></pre></li></ul><ul id="b8508391-3c63-4e01-84a1-184a6a8677a0" class="bulleted-list"><li>lakukan request GET pada App.js:<pre id="5359e283-29ae-4375-afa1-22bfdbb04562" class="code"><code>import React, { Component } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+class App extends Component {
+
+  componentDidMount() {
+    axios
+      .get(&quot;https://jsonplaceholder.typicode.com/posts&quot;)
+      .then(res =&gt; console.log(res));
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello API&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;</code></pre></li></ul><ul id="e7e10bca-3e72-4b74-98b5-b03dd3d9fa68" class="bulleted-list"><li>Kemudian cek hasil pada console browser:<figure id="1b372f41-b255-4353-8c34-99c196fab4c5" class="image"><a href="Interaksi%20Dengan%20API%20GET/Untitled%202.png"><img style="width:1363px" src="Interaksi%20Dengan%20API%20GET/Untitled%202.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9d8655e1-b502-4f60-bd0b-522788fcbcd4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Terlihat perbedaanya request pada axios hasilkan lebih lengkap daripada request yang dihasilkan fetch</div></figure></li></ul><ul id="3bd6ff34-458e-4062-b705-0b6366001406" class="bulleted-list"><li>Kita akan coba request lebih spesifik lagi:<pre id="ae498f3c-e7fc-4ce7-a50c-069f1b1b3a2a" class="code"><code>import React, { Component } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+class App extends Component {
+
+  componentDidMount() {
+    axios
+      .get(&quot;https://jsonplaceholder.typicode.com/posts&quot;)
+      .then(res =&gt; console.log(res.data));
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello API&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;</code></pre></li></ul><ul id="b652806c-9565-40fb-b278-6fa3d56cb022" class="bulleted-list"><li>Maka yang dihasilkan hanya data arraynya saja:<figure id="0f556701-a139-4413-bfef-45eb7d0c7332" class="image"><a href="Interaksi%20Dengan%20API%20GET/Untitled%203.png"><img style="width:1361px" src="Interaksi%20Dengan%20API%20GET/Untitled%203.png"/></a></figure></li></ul><ul id="66c6c600-c50e-4463-a304-75d61b533d3d" class="bulleted-list"><li>Kemudian data tersebut akan kita simpan kedalam state dan menampilkan data attribute title menggunakan perulangan map.<pre id="58ae5dfb-d93c-4d19-98c4-1f9a1cf68bf7" class="code"><code>import React, { Component } from &quot;react&quot;;
+import axios from &quot;axios&quot;;
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataAPI: []
+    };
+  }
+  componentDidMount() {
+    axios.get(&quot;https://jsonplaceholder.typicode.com/posts&quot;).then(res =&gt; {
+      this.setState({ dataAPI: res.data });
+    });
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello API&lt;/h1&gt;
+        {this.state.dataAPI.map((data, index) =&gt; {
+          return (
+            &lt;div key={index}&gt;
+              &lt;p&gt;{data.title}&lt;/p&gt;
+            &lt;/div&gt;
+          );
+        })}
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;</code></pre></li></ul><ul id="aaccd750-71a6-4c25-827f-c85c899f7c70" class="bulleted-list"><li>Hasil pada browser:<figure id="6cb3bd34-199f-401b-901b-80fb8f38c590" class="image"><a href="Interaksi%20Dengan%20API%20GET/Untitled%204.png"><img style="width:681px" src="Interaksi%20Dengan%20API%20GET/Untitled%204.png"/></a></figure></li></ul></li></ol></div></article></body></html>

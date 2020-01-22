@@ -1,0 +1,574 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tugas 6 React JS</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1cf2f7ac-b8e6-4318-a1e8-b70611c10f7a" class="page sans"><header><h1 class="page-title"><strong>Tugas 6 React JS</strong></h1></header><div class="page-body"><p id="2083332a-8e72-4a22-8406-5a50fa61d65f" class=""><strong>Tujuan :</strong></p><ul id="09b7a163-03f9-4ece-85f8-0cfbb562aff1" class="bulleted-list"><li>Memahami cara penggunaan CSS.</li></ul><ul id="2576d10f-2530-43c5-b672-6c17d1aa5bf0" class="bulleted-list"><li>Memahami cara installasi Routing.</li></ul><ul id="f518826d-7f19-40ce-8909-2ef505039894" class="bulleted-list"><li>Memahami cara penerapan Routing.</li></ul><ul id="33a142c8-7806-4f36-89a6-e99349262199" class="bulleted-list"><li>Memahami cara penggunaan Navigasi Routing.</li></ul><p id="884b0264-addb-4ac1-9a18-bba5572bf800" class=""><strong>Petunjuk :</strong></p><ul id="7d26701e-859f-4cb6-922e-6ff553ab26cc" class="bulleted-list"><li>Perintah untuk membuat project baru:<pre id="9582ff6c-a439-4bf6-8d77-751f9ddb6fc7" class="code"><code>create-react-app nama_project_anda</code></pre></li></ul><ul id="b6e24aa7-7cc8-42e3-a443-20aa07ffc2ab" class="bulleted-list"><li>Perintah untuk installasi routing:<pre id="a01e9734-782b-46f1-a0d4-3207cfd95c68" class="code"><code>npm install --save react-router-dom</code></pre></li></ul><ul id="0ad23fe4-756f-4add-bc70-bd3609e4e515" class="bulleted-list"><li>Code membuat router:<pre id="116cee90-9d32-46cb-8b65-f92b953c4630" class="code"><code>import { BrowserRouter as Router, Route } from &quot;react-router-dom&quot;;
+
+
+ &lt;Router&gt;
+   &lt;div&gt;
+     &lt;Route path=&quot;nama_path&quot; exact component={nama_component} /&gt;
+     &lt;Route path=&quot;nama_path&quot; component={nama_component} /&gt;
+  &lt;/div&gt;
+ &lt;/Router&gt;</code></pre></li></ul><p id="4bb0d9e2-c1d5-4c71-a992-306d92a9c8e4" class=""><strong>Link Gambar:</strong><div class="indented"><p id="36af5674-d34e-4784-8068-0b11fb641770" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg&amp;sa=D&amp;ust=1576302635089000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/nasipadang.jpg</a></p><p id="91c8f271-49ea-4bda-86ed-69b6c4f8aa11" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png&amp;sa=D&amp;ust=1576302635089000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sate.png</a></p><p id="c4d04a55-9f81-442f-8e6d-9457325c7e70" class=""><a href="https://www.google.com/url?q=https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png&amp;sa=D&amp;ust=1576302635090000">https://s3-ap-southeast-1.amazonaws.com/niomic/img/sample/sotolamongan.png</a></p><p id="8fac3869-d50d-474d-a8b2-49b91d8ded70" class=""><a href="https://www.google.com/url?q=https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%2520nusantara/nasi%2520kentut.png&amp;sa=D&amp;ust=1576302635091000">https://www.dbs.com/iwov-resources/images/newsroom/indonesia/Blog/masakan%20nusantara/nasi%20kentut.png</a></p><p id="f6ca2467-4b77-4e39-b8e3-554cc265609d" class=""><a href="https://www.google.com/url?q=https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg&amp;sa=D&amp;ust=1576302635092000">https://pesona.travel/media/nasi-kuning-sarapan-khas-nusantara-bermakna-mendalam_144651_1140.jpg</a></p><p id="4d511977-0596-4181-a636-58d9bcde37b8" class=""><a href="https://www.google.com/url?q=https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-cendol.jpg&amp;sa=D&amp;ust=1576302635093000">https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-cendol.jpg</a></p><p id="0583b951-8416-4d61-8bdc-a7f6f229d6f8" class=""><a href="https://www.google.com/url?q=https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-pisang-hijau.jpg&amp;sa=D&amp;ust=1576302635093000">https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-pisang-hijau.jpg</a></p><p id="0a425523-f91b-4d9c-bbb9-21b25e0c50fd" class=""><a href="https://www.google.com/url?q=https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-kacang-merah.jpg&amp;sa=D&amp;ust=1576302635094000">https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-kacang-merah.jpg</a></p><p id="5d936ae4-b899-463d-9974-e34831804547" class=""><a href="https://www.google.com/url?q=https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-pleret.jpg&amp;sa=D&amp;ust=1576302635095000">https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-pleret.jpg</a></p><p id="b30ded4e-b6cb-4545-bc7b-fbb25f634841" class=""><a href="https://www.google.com/url?q=https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-legen.jpg&amp;sa=D&amp;ust=1576302635095000">https://www.gotravelly.com/blog/wp-content/uploads/2017/12/minuman-tradisional-indonesia-es-legen.jpg</a></p><p id="41a97318-1235-47a4-aa64-36827dac7de3" class=""><a href="https://www.google.com/url?q=https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto%3Dcompress%26cs%3Dtinysrgb%26dpr%3D2%26h%3D650%26w%3D940&amp;sa=D&amp;ust=1576302635096000">https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940</a></p><p id="d9fdfd1e-1536-4cda-b39f-3c023c58d0f0" class=""><a href="https://www.google.com/url?q=https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto%3Dcompress%26cs%3Dtinysrgb%26dpr%3D1%26w%3D500&amp;sa=D&amp;ust=1576302635097000">https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500</a></p></div></p><p id="3048dfb8-b64d-4907-a558-aea7892054a8" class="">
+</p><p id="2d3321be-d895-42cd-abaf-f0dee44a564e" class=""><strong>Problem</strong></p><p id="02dc74f4-1f5b-4166-aca4-8ef4746b827a" class="">Pada tugas ini anda diminta untuk membuat sebuah project baru dengan nama <strong>tugas_6_react_js</strong> dan anda diminta untuk membuat website dengan ketentuan sebagai berikut :</p><ol id="8aa2dd42-9e6c-4490-ace1-39215017cc05" class="numbered-list" start="1"><li>Struktur file yang harus anda buat :<figure id="045e2b6d-dca7-492a-b22d-b5e44dea8182" class="image"><a href="https://lh5.googleusercontent.com/OeIEJOGAAvKmzCE1dSvF7ftESk2vaVZkwvjRdWvCE8EEJpD9uvsLpH0lZ7cZPgNwAHsX8zpURhAU4IRgO4gm8o2Z9F61h8hZ9X0HY7amTfXiD4j-5Ey68KqusVRHRrxiUBI7uawc"><img src="https://lh5.googleusercontent.com/OeIEJOGAAvKmzCE1dSvF7ftESk2vaVZkwvjRdWvCE8EEJpD9uvsLpH0lZ7cZPgNwAHsX8zpURhAU4IRgO4gm8o2Z9F61h8hZ9X0HY7amTfXiD4j-5Ey68KqusVRHRrxiUBI7uawc"/></a></figure></li></ol><ol id="8ae273bb-39d9-4740-9e40-68852a667e25" class="numbered-list" start="2"><li>Untuk file Header.css dan Kontak.css silahkan anda buka pada link di bawah :<p id="1d969e1a-4caf-4e98-a14c-c1baa221a8f4" class="">Kontak.css :</p><p id="e37dbc2f-5a95-4acf-8340-ab95a8cdde06" class=""><a href="https://www.google.com/url?q=https://docs.google.com/document/d/e/2PACX-1vSquwF1o5bAkVUkjRYnYvjxs7AFHRaQfXTnfGZtI0_HFhWnjzBiHH4SFPPe4GpasfKiullxd7iAWXRI/pub?embedded%3Dtrue&amp;sa=D&amp;ust=1576302635099000">https://docs.google.com/document/d/e/2PACX-1vSquwF1o5bAkVUkjRYnYvjxs7AFHRaQfXTnfGZtI0_HFhWnjzBiHH4SFPPe4GpasfKiullxd7iAWXRI/pub?embedded=true</a></p><p id="539110a3-8f3c-41dc-bcb9-d20b16595c60" class="">Header.css :</p><p id="1dfd19b7-2f8f-456b-a491-c7b3d56d44d1" class=""><a href="https://www.google.com/url?q=https://docs.google.com/document/d/e/2PACX-1vT-9u6OGmni_XLzySR2iDPzNNpQ_lD95KE2Yk6JLLO_TiSQeAfsXT3ZZ8ZCbmhVOwPoE3WKSd9R8uf3/pub?embedded%3Dtrue&amp;sa=D&amp;ust=1576302635100000">https://docs.google.com/document/d/e/2PACX-1vT-9u6OGmni_XLzySR2iDPzNNpQ_lD95KE2Yk6JLLO_TiSQeAfsXT3ZZ8ZCbmhVOwPoE3WKSd9R8uf3/pub?embedded=true</a></p></li></ol><ol id="874df10d-3df9-4b3c-8f76-a69a3fcded60" class="numbered-list" start="3"><li>Pada appRoute.js buatlah sebuah <strong>function component </strong>yang di dalam nya terdapat <strong>navigation routing</strong>:<figure id="05433ccd-d567-494e-bb79-e97111537411" class="image"><a href="https://lh6.googleusercontent.com/N9pai4pija9jd17lzZAeUndPYR-oZVVvlK7K7wz3HXv0RPjGJ72bcSqdWzDenM2fXwjU63hDRfZl2XDejcCnkQUqljxSihTNARfXh7ha4TpJdZpD1vZQMcxhFg8Ht7Ko1ChXdqqh"><img src="https://lh6.googleusercontent.com/N9pai4pija9jd17lzZAeUndPYR-oZVVvlK7K7wz3HXv0RPjGJ72bcSqdWzDenM2fXwjU63hDRfZl2XDejcCnkQUqljxSihTNARfXh7ha4TpJdZpD1vZQMcxhFg8Ht7Ko1ChXdqqh"/></a></figure></li></ol><ol id="8506132f-a2f4-4e36-88a4-737f19ee8fe1" class="numbered-list" start="4"><li>Pada Header.js buatlah sebuah <strong>class component </strong>yang di dalam nya terdapat <strong>link </strong>dan import file Header.css yang berada di dalam folder Style :<figure id="0a263f22-fa7c-4857-b8e4-70ff29ef0dba" class="image"><a href="https://lh3.googleusercontent.com/fKMr7yuVlb8pGVfjMRjONfi_g4qE1XoFOnoKMw_7FrLU-X5D2MMzdeeR4kJdGZoIJRRrUuWI4qkNpH18iFET70nirpJ5avWXb1QPDlQLn1xB1FXkQf37Qnupcz40F28pNwJOKrK4"><img src="https://lh3.googleusercontent.com/fKMr7yuVlb8pGVfjMRjONfi_g4qE1XoFOnoKMw_7FrLU-X5D2MMzdeeR4kJdGZoIJRRrUuWI4qkNpH18iFET70nirpJ5avWXb1QPDlQLn1xB1FXkQf37Qnupcz40F28pNwJOKrK4"/></a></figure><figure id="beee9fe6-fefa-4e92-a019-e5c61d8fbc7e" class="image"><a href="https://lh6.googleusercontent.com/vgIDVQbQeFH48cV4OdffLst23hCJI17kJp_FhLqYNqWGnGn_l-rINuwQAuHA0P1ZwDVwmIYV-y1RPW6WfgHlm5bE6IZt5VA61aZPCtZZWMXbJPY7sn6vB-HdYKCSAkYE0aVMb7PN"><img src="https://lh6.googleusercontent.com/vgIDVQbQeFH48cV4OdffLst23hCJI17kJp_FhLqYNqWGnGn_l-rINuwQAuHA0P1ZwDVwmIYV-y1RPW6WfgHlm5bE6IZt5VA61aZPCtZZWMXbJPY7sn6vB-HdYKCSAkYE0aVMb7PN"/></a></figure></li></ol><ol id="ed2e9ffb-b7b6-4783-a79f-ef557cf602a8" class="numbered-list" start="5"><li>Pada MenuHome.js buatlah sebuah <strong>class component </strong>dan import file Header.js dan Header.css yang berada di dalam folder Style :<figure id="046a2d43-7c66-4ee3-8122-6758cb55d3da" class="image"><a href="https://lh4.googleusercontent.com/oycy0zmwwpwRZY5PskzDlfSrm0McHxMSRk5yuzNT6ACQLtvrrVUw7UmntbRcZVBL-pNvqi3hJoMlHYxbji6F7RfQ0ld79FWJyezXM5T5HvFv2kRcucigOv_47PMSbE3yhi8gJcjf"><img src="https://lh4.googleusercontent.com/oycy0zmwwpwRZY5PskzDlfSrm0McHxMSRk5yuzNT6ACQLtvrrVUw7UmntbRcZVBL-pNvqi3hJoMlHYxbji6F7RfQ0ld79FWJyezXM5T5HvFv2kRcucigOv_47PMSbE3yhi8gJcjf"/></a></figure></li></ol><ol id="ab3ede77-15e8-4774-b4d9-02845054d339" class="numbered-list" start="6"><li>Pada App.js buatlah sebuah <strong>class component </strong>dan import file MenuHome.js yang berada di dalam folder Page :<figure id="a3796664-dde3-4173-af96-27c00ef42cf0" class="image"><a href="https://lh5.googleusercontent.com/a1WiyvPZkyDha5hNbpaMFYcL4fAgHlk43n1eqgUyt_FFDbbB2ZkMyy1DRnkm6ECmHQOUKG9J0K3PIHdYCs9j9isK1vhpqXfOp_HmNg9nNKwFeXeAwJmG24nCUb-JhKmsDMzxo7fB"><img src="https://lh5.googleusercontent.com/a1WiyvPZkyDha5hNbpaMFYcL4fAgHlk43n1eqgUyt_FFDbbB2ZkMyy1DRnkm6ECmHQOUKG9J0K3PIHdYCs9j9isK1vhpqXfOp_HmNg9nNKwFeXeAwJmG24nCUb-JhKmsDMzxo7fB"/></a></figure></li></ol><ol id="3d71b9c7-5618-428e-a233-4052bed5b063" class="numbered-list" start="7"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="4ec782de-4464-42cd-aed9-252301bc2cf9" class="image"><a href="https://lh4.googleusercontent.com/11DF7kOIpaYqxRbMcIP-nj23nEFn4FB--SG8i7iKQRtGOeqIYbi-32zEs1klNiklqD99f9Pnwi8KbAPR2eo2XjcOB-YghjsN-wk82c6xmIiTkhEeFq6agXUy0GIipGwFVXI5jjrR"><img src="https://lh4.googleusercontent.com/11DF7kOIpaYqxRbMcIP-nj23nEFn4FB--SG8i7iKQRtGOeqIYbi-32zEs1klNiklqD99f9Pnwi8KbAPR2eo2XjcOB-YghjsN-wk82c6xmIiTkhEeFq6agXUy0GIipGwFVXI5jjrR"/></a></figure></li></ol><ol id="330a7d73-3c59-4c8b-8a4f-f244cfcf9442" class="numbered-list" start="8"><li>Pada Kontak.js buatlah sebuah <strong>class component </strong>dan import file Header.js dan Kontak.css yang berada di dalam folder Style :<figure id="b5c8bb2a-c589-4f86-955f-b13f7b929e0f" class="image"><a href="https://lh3.googleusercontent.com/aSLQ5RnhR9vM8Mkhc92OxZmOZP0ewwkNegA9ZRj_-bAAD1d10dgSLMqlbbJkzGgGLJVBGQ3r3dWYZ-zqADqFk0HEKVZEAV7qQoffDlh17cTsZbtK6XyC8QYAd7DH3Tif76pifMS1"><img src="https://lh3.googleusercontent.com/aSLQ5RnhR9vM8Mkhc92OxZmOZP0ewwkNegA9ZRj_-bAAD1d10dgSLMqlbbJkzGgGLJVBGQ3r3dWYZ-zqADqFk0HEKVZEAV7qQoffDlh17cTsZbtK6XyC8QYAd7DH3Tif76pifMS1"/></a></figure></li></ol><ol id="82046c6e-77e3-4b72-819f-9275159ab301" class="numbered-list" start="9"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="210e7b55-aa24-430b-a127-49143787618d" class="image"><a href="https://lh3.googleusercontent.com/MIMpTYY5-0jlAZ6WFXg_JNODlkpOgSgqDcUYX1FoDzjeXHReApPJhKQICL0whpblAbn_2yiSMalXmg2m1IDXB3GClz--2mZDu3FrhSooFWSqZfa1zu5DOUAInSAHqnvhYmMIIXP7"><img src="https://lh3.googleusercontent.com/MIMpTYY5-0jlAZ6WFXg_JNODlkpOgSgqDcUYX1FoDzjeXHReApPJhKQICL0whpblAbn_2yiSMalXmg2m1IDXB3GClz--2mZDu3FrhSooFWSqZfa1zu5DOUAInSAHqnvhYmMIIXP7"/></a></figure></li></ol><ol id="48425d23-be4a-4a80-bf36-4177f394d20e" class="numbered-list" start="10"><li>Pada MenuMakanan.js buatlah sebuah <strong>class component </strong>dan import file Header.js dan DaftarMakanan.js yang berada di dalam folder Lib yang di dalam nya terdapat <strong>lists dan keys dari external file</strong> :<figure id="9cac667b-5f5d-4020-8add-8c1e0daeb3d9" class="image"><a href="https://lh3.googleusercontent.com/wrZ6ScEqf6Du8yYPVEw-a7B7V2OctLJZ8XmFdZX0vCNvtn27W5wFUAf6Kbs5-Yd-El0WQnyluAEmv1E1icE-u9CKNsENALneSFXZFfRTM-VOxBdD-VzIcs9sgNGWjMk2spsxBQeo"><img src="https://lh3.googleusercontent.com/wrZ6ScEqf6Du8yYPVEw-a7B7V2OctLJZ8XmFdZX0vCNvtn27W5wFUAf6Kbs5-Yd-El0WQnyluAEmv1E1icE-u9CKNsENALneSFXZFfRTM-VOxBdD-VzIcs9sgNGWjMk2spsxBQeo"/></a></figure><figure id="b20a883b-2ac2-4edb-8eb0-b6c3618aa934" class="image"><a href="https://lh6.googleusercontent.com/rOw2WwiJ-vLPqdhqJ86d0Pb-I_V1yEzurUP-SEaQQsJrpcEFv4YUPfta9FuqoZxVi0CR48Ed6skyOk92Ob4sRqgrdx5aUo7ltkWIniWPB6OgdqC0mo4Cqu4A_Oevgy9pXWuaVQuj"><img src="https://lh6.googleusercontent.com/rOw2WwiJ-vLPqdhqJ86d0Pb-I_V1yEzurUP-SEaQQsJrpcEFv4YUPfta9FuqoZxVi0CR48Ed6skyOk92Ob4sRqgrdx5aUo7ltkWIniWPB6OgdqC0mo4Cqu4A_Oevgy9pXWuaVQuj"/></a></figure></li></ol><ol id="94774dd5-e4f4-4f6d-94f7-b8dcecbfa9ed" class="numbered-list" start="11"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="1bea311a-8f02-4b8f-8163-8a7089a9b730" class="image"><a href="https://lh3.googleusercontent.com/XOepKKn3j2gQhs-qu7E_Kj9lbsgzLAu2e_XLFE04L94ihbBXADre2TQzFNlkyv-8WpmBShbafbjQcsBsTgdP7IaFFIf2j5FlExsqKa4GmuchJqQ9ZNNj671ByOZAtRS-qRxYkISq"><img src="https://lh3.googleusercontent.com/XOepKKn3j2gQhs-qu7E_Kj9lbsgzLAu2e_XLFE04L94ihbBXADre2TQzFNlkyv-8WpmBShbafbjQcsBsTgdP7IaFFIf2j5FlExsqKa4GmuchJqQ9ZNNj671ByOZAtRS-qRxYkISq"/></a></figure></li></ol><ol id="99c72d5c-e42f-4294-b610-5dea154af14f" class="numbered-list" start="12"><li>Pada MenuMinuman.js buatlah sebuah <strong>class component </strong>dan import file Header.js dan DaftarMinuman.js yang berada di dalam folder Lib yang di dalam nya terdapat <strong>lists dan keys dari external file</strong> :<figure id="039ca5f3-6b3c-4e20-b654-06c402e16121" class="image"><a href="https://lh3.googleusercontent.com/UOBqSkYAgIeY3ga8W9h5q29C_5mF32jq4m0P14C11T8I4KNMaVp_eujnxk9aoZr7YiOwKUXtlCHf1MQFgLvUkZurpU5pXY7UK82vqOi1mX1_f8CFMmhBLDGWsovZ92dwDcBqfjAN"><img src="https://lh3.googleusercontent.com/UOBqSkYAgIeY3ga8W9h5q29C_5mF32jq4m0P14C11T8I4KNMaVp_eujnxk9aoZr7YiOwKUXtlCHf1MQFgLvUkZurpU5pXY7UK82vqOi1mX1_f8CFMmhBLDGWsovZ92dwDcBqfjAN"/></a></figure><figure id="6c6028c0-594c-4438-a765-3db114b1222f" class="image"><a href="https://lh5.googleusercontent.com/qwOAhyO9yWV_Khk4OlQ5yCUnEbOZ5DZ6V5ylnvMw-sdiMchnkp3zbhzeT35REiZBbVakf_UbXFdXQJLbpRV_1cnpRhxfB-jzmYXIfc4H3SHVYcKSiw0LlQUWPc99wJgn7Lx1iVgr"><img src="https://lh5.googleusercontent.com/qwOAhyO9yWV_Khk4OlQ5yCUnEbOZ5DZ6V5ylnvMw-sdiMchnkp3zbhzeT35REiZBbVakf_UbXFdXQJLbpRV_1cnpRhxfB-jzmYXIfc4H3SHVYcKSiw0LlQUWPc99wJgn7Lx1iVgr"/></a></figure></li></ol><ol id="f10ca159-d29e-4067-9af0-f61b7f77e0e2" class="numbered-list" start="13"><li>Code yang ditulis di atas akan menampilkan halaman seperti pada gambar dibawah:<figure id="64967eaa-164f-4f4d-8bdc-b003e117334f" class="image"><a href="https://lh5.googleusercontent.com/_mswLR03RT_KzaPGsJrcHp_hpFpcgwPr6xktg-ZdH7BO1wxkW85ovUtHF7VpL7D-OtuYXSZPLg-iqzReKELe0j6ikoSdD03oljFJnf5dmJPuUjKoL0Z6Xw7_U7aJ9FS3ZdDJS-Tb"><img src="https://lh5.googleusercontent.com/_mswLR03RT_KzaPGsJrcHp_hpFpcgwPr6xktg-ZdH7BO1wxkW85ovUtHF7VpL7D-OtuYXSZPLg-iqzReKELe0j6ikoSdD03oljFJnf5dmJPuUjKoL0Z6Xw7_U7aJ9FS3ZdDJS-Tb"/></a></figure></li></ol><p id="d7645b5f-46ed-414d-aadd-ff4f58ca14da" class="">PENTING : Untuk tugas yang sudah dikerjakan diatas, silahkan disimpan di komputer masing-masing. Di materi selanjutnya akan dijelaskan cara untuk mengumpul TUGAS nya.</p></div></article></body></html>

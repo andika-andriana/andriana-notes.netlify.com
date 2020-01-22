@@ -1,0 +1,598 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Variabel</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d645d199-f1db-459f-8df2-655eddbfb081" class="page sans"><header><h1 class="page-title">Variabel</h1></header><div class="page-body"><p id="3557cd18-f205-4c17-a168-1c799f5e4aa3" class=""><strong>Variabel</strong><div class="indented"><p id="4cab9574-938b-44a4-a14a-b46bd6eeff31" class="">Go mengadopsi dua jenis penulisan variabel, yang dituliskan tipe data-nya dan yang tidak. Kedua cara tersebut valid dan tujuannya sama, pembedanya hanya cara penulisannya saja.</p></div></p><p id="c715389c-6b2a-4622-bc26-3bb96ce4bba2" class=""><strong>Deklarasi Variabel Beserta Tipe Data</strong><div class="indented"><p id="a469781e-cd47-4a73-a9cc-0ca8f1095c75" class="">Go memiliki aturan cukup ketat dalam hal penulisan variabel. Ketika deklarasi, tipe data yg digunakan harus dituliskan juga. Istilah lain dari konsep ini adalah <code><strong>manifest typing</strong></code>.</p><p id="e420b27a-9f82-4ad7-a326-de63f151b17c" class="">Berikut adalah contoh cara pembuatan variabel yang tipe datanya harus ditulis.</p><pre id="2612b150-67bf-410d-bd58-0a5b8ba585db" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    var firstName string = &quot;Andika&quot;
+
+    var lastName string
+    lastName = &quot;Andriana&quot;
+
+    fmt.Printf(&quot;halo %s %s!\n&quot;, firstName, lastName)
+}</code></pre><p id="7761d5be-be11-44b3-8b03-aa759b9f93f7" class="">Keyword <code>var</code> di atas digunakan untuk deklarasi variabel, contohnya bisa dilihat pada <code>firstName</code> dan <code>lastName</code>.</p><p id="415e2145-ea22-4490-9603-cb3b4fca7bcb" class="">Nilai variabel <code>firstName</code> diisi langsung ketika deklarasi, berbeda dibanding <code>lastName</code> yang nilainya diisi setelah baris kode deklarasi, hal seperti ini diperbolehkan di Go.</p><pre id="b348641d-beec-42a3-a529-7a11c86681e0" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\variabel.go
+halo Andika Andriana!</code></pre></div></p><p id="e64acd89-fb97-4170-b292-a3c9751b1b5d" class=""><strong>Deklarasi Variabel Menggunakan Keyword </strong><code><strong>var</strong></code><div class="indented"><p id="2d95d1bd-cb75-465e-acab-66504f43efe8" class="">Pada kode di atas bisa dilihat bagaimana sebuah variabel dideklarasikan dan di-set nilainya. Keyword <code>var</code> digunakan untuk membuat variabel baru.</p><p id="e59b6de3-fa6e-4f10-8018-9ae2980059de" class="">Skema penggunaan keyword var:</p><pre id="3527e1b4-2495-452d-996a-29687a158b3b" class="code"><code>var &lt;nama-variabel&gt; &lt;tipe-data&gt;
+var &lt;nama-variabel&gt; &lt;tipe-data&gt; = &lt;nilai&gt;</code></pre><p id="3bf9edae-8369-4aea-8d76-487341a0c278" class="">Contoh:</p><pre id="dd32c212-ffa9-4efb-9cf9-4343f32ebc6e" class="code"><code>var lastName string
+var firstName string = &quot;john&quot;</code></pre><p id="7e61440a-00e2-4f4c-9510-bf7716919590" class="">Nilai variabel bisa di-isi langsung pada saat deklarasi variabel.</p></div></p><p id="3149bf34-d98e-4c15-b83b-212524685158" class=""><strong>Penggunaan Fungsi </strong><code><strong>fmt.Printf()</strong></code><div class="indented"><p id="36e1f720-617f-49d1-be70-1b84382ddfbb" class="">Fungsi ini digunakan untuk menampilkan output dalam bentuk tertentu. Kegunaannya sama seperti fungsi <code>fmt.Println()</code>, hanya saja struktur outputnya didefinisikan di awal.</p><p id="d55d3653-829b-425f-9e35-afb92aff93c2" class="">Perhatikan bagian <code>&quot;halo %s %s!\n&quot;</code>, karakter <code>%s</code> disitu akan diganti dengan data <code>string</code> yang berada di parameter ke-2, ke-3, dan seterusnya.</p><p id="7b133643-bba9-44b6-8520-4820f20a8169" class="">Ketiga baris kode di bawah ini menghasilkan output yang sama, meskipun cara penulisannya berbeda.</p><pre id="0ad8406c-4858-497d-bec6-7c52bbfa0f05" class="code"><code>fmt.Printf(&quot;halo john wick!\n&quot;)
+fmt.Printf(&quot;halo %s %s!\n&quot;, firstName, lastName)
+fmt.Println(&quot;halo&quot;, firstName, lastName + &quot;!&quot;)</code></pre><p id="b9066c47-e309-4204-b931-1a464ebdf897" class="">Tanda plus (<code>+</code>) jika ditempatkan di antara string, fungsinya adalah untuk penggabungan string (istilah lainnya: concatenation).</p><p id="eb5e7981-af03-4520-9058-ed0f620937cc" class="">Fungsi <code>fmt.Printf()</code> tidak menghasilkan baris baru di akhir text, oleh karena itu digunakanlah literal <code>\n</code> untuk memunculkan baris baru di akhir. Hal ini sangat berbeda jika dibandingkan dengan fungsi <code>fmt.Println()</code> yang secara otomatis menghasilkan new line (baris baru) di akhir.</p></div></p><p id="c7c18b5d-b7ae-4d8a-83dc-65a429c57ab0" class=""><strong>Deklarasi Variabel Tanpa Tipe Data</strong><div class="indented"><p id="4ebff11d-d82e-4b3a-8106-578d5582ccc6" class="">Selain <strong>manifest typing</strong>, Go juga mengadopsi metode <code><strong>type inference</strong></code>, yaitu metode deklarasi variabel yang tipe data-nya ditentukan oleh tipe data nilainya, cara kontradiktif jika dibandingkan dengan cara pertama. Dengan metode jenis ini, keyword <code>var</code> dan tipe data tidak perlu ditulis.</p><pre id="2a5631f1-9ee9-46a5-b96b-935a57347530" class="code"><code>var firstName string = &quot;john&quot;
+lastName := &quot;wick&quot;
+
+fmt.Printf(&quot;halo %s %s!\n&quot;, firstName, lastName)</code></pre><p id="005bb2bc-be0c-4720-899e-2ff00a4aa308" class="">Variabel <code>lastName</code> dideklarasikan dengan menggunakan metode type inference. Penandanya tipe data tidak dituliskan pada saat deklarasi. Pada penggunaan metode ini, operand <code>=</code> harus diganti dengan <code>:=</code> dan keyword <code>var</code> dihilangkan.</p><p id="16369f10-caef-42bc-9fc5-2cf8df2a9111" class="">Tipe data <code>lastName</code> secara otomatis akan ditentukan menyesuaikan value atau nilai-nya. Jika nilainya adalah berupa <code>string</code> maka tipe data variabel adalah <code>string</code>. Pada contoh di atas, nilainya adalah string <code>&quot;wick&quot;</code>.</p><p id="4252b90d-1e41-453a-8f8e-607247f5f0fa" class="">Diperbolehkan untuk tetap menggunakan keyword <code>var</code> pada saat deklarasi meskipun tanpa menuliskan tipe data, dengan ketentuan tidak menggunakan tanda <code>:=</code>, melainkan tetap menggunakan <code>=</code>.</p><pre id="f192d816-6658-4bc4-8db3-e30dd223878b" class="code"><code>// menggunakan var, tanpa tipe data, menggunakan perantara &quot;=&quot;
+var firstName = &quot;john&quot;
+
+// tanpa var, tanpa tipe data, menggunakan perantara &quot;:=&quot;
+lastName := &quot;wick&quot;</code></pre><p id="047a8593-c0fd-4336-a77a-9a61a3f31f1e" class="">Kedua deklarasi di atas maksudnya sama. Silakan pilih yang nyaman di hati.</p><p id="a0a1d105-7865-42c4-a616-d09fff6678a7" class="">Tanda <code>:=</code> hanya digunakan sekali di awal pada saat deklarasi. Untuk assignment nilai selanjutnya harus menggunakan tanda <code>=</code>, contoh:</p><pre id="ae90af77-478f-4086-b49b-b745ee2a9084" class="code"><code>lastName := &quot;wick&quot;
+lastName = &quot;ethan&quot;
+lastName = &quot;bourne&quot;</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="760a7344-ce82-4b19-94e9-f39388119778"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Perlu diketahu, deklarasi menggunakan := hanya bisa dilakukan di dalam blok fungsi.</div></figure></div></p><p id="d0f9b317-318d-401d-98c3-d749b36aadcb" class=""><strong>Deklarasi Multi Variabel</strong><div class="indented"><p id="f1a5c4d1-7015-4d22-a4ec-1f5572754e0b" class="">Go mendukung metode deklarasi banyak variabel secara bersamaan, caranya dengan menuliskan variabel-variabel-nya dengan pembatas tanda koma (<code>,</code>). Untuk pengisian nilainya-pun diperbolehkan secara bersamaan.</p><pre id="4826897b-a47a-4a36-b58d-3cdf787da740" class="code"><code>var first, second, third string
+first, second, third = &quot;satu&quot;, &quot;dua&quot;, &quot;tiga&quot;</code></pre><p id="bd676b67-ce80-421a-9e02-3481c6232acd" class="">Pengisian nilai juga bisa dilakukan bersamaan pada saat deklarasi. Caranya dengan menuliskan nilai masing-masing variabel berurutan sesuai variabelnya dengan pembatas koma (<code>,</code>).</p><pre id="e3647a1f-aaed-462a-9090-5f0c2c6a7130" class="code"><code>var fourth, fifth, sixth string = &quot;empat&quot;, &quot;lima&quot;, &quot;enam&quot;</code></pre><p id="bc7f21d3-f43f-4ae5-b43c-5cf4fc750059" class="">Kalau ingin lebih ringkas:</p><pre id="8d35093d-323b-478c-8a4b-c06164b6fb23" class="code"><code>seventh, eight, ninth := &quot;tujuh&quot;, &quot;delapan&quot;, &quot;sembilan&quot;</code></pre><p id="81e1c7cf-3421-4db1-bda1-db651b5ec36b" class="">Dengan menggunakan teknik `type inference`, deklarasi multi variabel bisa dilakukan untuk variabel-variabel yang tipe data satu sama lainnya berbeda.</p><pre id="af364146-449e-444e-b90b-7ea891dc6817" class="code"><code>one, isFriday, twoPointTwo, say := 1, true, 2.2, &quot;hello&quot;</code></pre></div></p><p id="270d435b-5fb8-4ab1-9615-1abae5e40a7b" class=""><strong>Variabel Underscore </strong><code><strong>_</strong></code><div class="indented"><p id="569ac00e-220b-4a01-9364-2898bf25e25f" class="">Go memiliki aturan unik yang jarang dimiliki bahasa lain, yaitu tidak boleh ada satupun variabel yang menganggur. Artinya, semua variabel yang dideklarasikan harus digunakan. Jika ada variabel yang tidak digunakan tapi dideklarasikan, error akan muncul dan program tidak bisa di-run ataupun di-compile.</p><pre id="bd23d94f-5fa8-4fe7-8f21-6eacc2f050f2" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\variabel.go
+# command-line-arguments
+.\variabel.go:7:6: variabel_1 declared and not used</code></pre><p id="594fd8ca-5c60-4aa0-8867-10ed2b2d19c1" class="">Underscore (<code>_</code>) adalah predefined variabel yang bisa dimanfaatkan untuk menampung nilai yang tidak dipakai. Bisa dibilang variabel ini merupakan keranjang sampah.</p><pre id="cca64df6-896c-414d-8ae4-bc9ab73397ed" class="code"><code>_ = &quot;belajar Golang&quot;
+_ = &quot;Golang itu mudah&quot;
+name, _ := &quot;john&quot;, &quot;wick&quot;</code></pre><p id="da7cd215-babb-4beb-8fbc-3cff7d042a09" class="">Pada contoh di atas, variabel <code>name</code> akan berisikan text <code>john</code>, sedang nilai <code>wick</code> ditampung oleh variabel underscore, menandakan bahwa nilai tersebut tidak akan digunakan.</p><p id="6ff3cfd1-cd17-4c2b-9a69-d9176e006eb6" class="">Variabel underscore adalah predefined, jadi tidak perlu menggunakan <code>:=</code> untuk pengisian nilai, cukup dengan <code>=</code> saja. Namun khusus untuk pengisian nilai multi variabel yang dilakukan dengan metode type inference, boleh didalamnya terdapat variabel underscore.</p><p id="3a56dcdb-560b-4d48-897a-6545237d2c8d" class="">Biasanya variabel underscore sering dimanfaatkan untuk menampung nilai balik fungsi yang tidak digunakan.</p><p id="25d0df54-59c5-4dad-b790-f059e94eba6d" class="">Perlu diketahui, bahwa isi variabel underscore tidak dapat ditampilkan. Data yang sudah masuk variabel tersebut akan hilang. Ibaratkan variabel underscore seperti blackhole, objek apapun yang masuk kedalamnya, akan terjebak selamanya di-dalam singularity dan tidak akan bisa keluar 😁</p></div></p><p id="eb76d0ec-1707-4a63-8789-cc940ce70be5" class=""><strong>Deklarasi Variabel Menggunakan Keyword </strong><code><strong>new</strong></code><div class="indented"><p id="f541a0ed-c837-44b3-92b2-1fd77f575e8e" class="">Keyword <code>new</code> digunakan untuk membuat variabel <strong>pointer</strong> dengan tipe data tertentu. Nilai data default-nya akan menyesuaikan tipe datanya.</p><pre id="924836a8-021f-4b81-bcc7-a8e0481f9f99" class="code"><code>name := new(string)
+
+fmt.Println(name)   // 0x20818a220
+fmt.Println(*name)  // &quot;&quot;</code></pre><p id="94adddf7-56ce-4e1b-8956-9f1c7e43d486" class="">Variabel <code>name</code> menampung data bertipe <strong>pointer string</strong>. Jika ditampilkan yang muncul bukanlah nilainya melainkan alamat memori nilai tersebut (dalam bentuk notasi heksadesimal). Untuk menampilkan nilai aslinya, variabel tersebut perlu di-<strong>dereference</strong> terlebih dahulu, menggunakan tanda asterisk (<code>*</code>).</p></div></p><p id="5ac89a15-a670-4c13-9272-534f97fdbe58" class=""><strong>Deklarasi Variabel Menggunakan Keyword </strong><code><strong>make</strong></code><div class="indented"><p id="b00f4102-6321-4268-b9a1-6651d4c5dae0" class="">Keyword ini hanya bisa digunakan untuk pembuatan beberapa jenis variabel saja, yaitu:</p><ul id="d30da46b-f369-4100-9406-8791af3fcf6c" class="bulleted-list"><li>channel</li></ul><ul id="c451ac00-daa5-42d3-b3de-df572363ec99" class="bulleted-list"><li>slice</li></ul><ul id="b6dcc901-a500-49ca-8a98-eb63ff2701e0" class="bulleted-list"><li>map</li></ul><p id="4ca94da8-ed04-49a0-a8d9-26915413b6d9" class="">Ketika sudah masuk ke pembahasan masing-masing poin tersebut, akan terlihat apa kegunaan dari keyword <code>make</code> ini.</p></div></p></div></article></body></html>

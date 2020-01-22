@@ -1,0 +1,565 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pengenalan (Introduction)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f4be531c-1970-4c06-ae70-b9d746ca1209" class="page sans"><header><h1 class="page-title">Pengenalan (Introduction)</h1></header><div class="page-body"><figure id="be8d787a-adec-485d-8cb2-7c7fd26d6884" class="link-to-page"><a href="Pengenalan%20Introduction/Pengertian%20Javascript.html">Pengertian Javascript</a></figure><figure id="3d9ae769-640e-4b39-9ba9-a8cede5cf38d" class="link-to-page"><a href="Pengenalan%20Introduction/Persiapan%20Javascript.html">Persiapan Javascript</a></figure><figure id="a59dd970-7e72-45f6-a2f0-f16f4ec12b2f" class="link-to-page"><a href="Pengenalan%20Introduction/Install%20node%20js%20pada%20OS%20Windows.html">Install node.js pada OS Windows</a></figure><figure id="3614e733-8946-4353-9ed3-a7f76f814d25" class="link-to-page"><a href="Pengenalan%20Introduction/Menjalankan%20Console%20Log%20Dengan%20Variable.html">Menjalankan Console Log Dengan Variable</a></figure><figure id="cc9d1bd4-8d71-494d-a657-ecd7462a5395" class="link-to-page"><a href="Pengenalan%20Introduction/Mengenal%20Syntax%20Var%20Let%20dan%20Const.html">Mengenal Syntax Var, Let dan Const</a></figure><figure id="237d8180-eb40-4eab-925f-c99428ee8b97" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%201%20JS.html">Tugas 1 JS</a></figure><figure id="e856ddf5-94d9-44aa-8446-67d17e6f4e7c" class="link-to-page"><a href="Pengenalan%20Introduction/Membuat%20Variabel%20Tanpa%20Syntax%20Variable.html">Membuat Variabel Tanpa Syntax Variable</a></figure><figure id="b0f54b1a-ddf3-4363-9e68-4a5a3b23277d" class="link-to-page"><a href="Pengenalan%20Introduction/Tipe%20Data%20Number%20Pada%20JS.html">Tipe Data Number Pada JS</a></figure><figure id="79142128-9209-4220-aceb-08c9796c4610" class="link-to-page"><a href="Pengenalan%20Introduction/Tipe%20Data%20String%20Pada%20JS.html">Tipe Data String Pada JS</a></figure><figure id="6c3a4ff5-8490-4d58-bb0d-159978f587da" class="link-to-page"><a href="Pengenalan%20Introduction/Tipe%20Data%20Boolean%20Pada%20JS.html">Tipe Data Boolean Pada JS</a></figure><figure id="38e0f5ab-1e4e-409c-821b-0f9deb51f61b" class="link-to-page"><a href="Pengenalan%20Introduction/Tipe%20Data%20null%20undifined%20Pada%20JS.html">Tipe Data null &amp; undifined Pada JS</a></figure><figure id="18174dfb-6ed3-4dfd-9f6d-22402f5ab835" class="link-to-page"><a href="Pengenalan%20Introduction/Tipe%20Data%20Array%20Pada%20Javascript.html">Tipe Data Array Pada Javascript</a></figure><figure id="c2379d6a-e02f-471b-87de-eb1f4a7161b4" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%202%20JS.html">Tugas 2 JS</a></figure><figure id="eef99848-68e5-418c-9fc8-fe856910fede" class="link-to-page"><a href="Pengenalan%20Introduction/Membuat%20Menjalankan%20Function.html">Membuat &amp; Menjalankan Function</a></figure><figure id="66c95032-96d1-4c52-a0d2-bcec49c6f7c2" class="link-to-page"><a href="Pengenalan%20Introduction/Mengembalikan%20Nilai%20Function.html">Mengembalikan Nilai Function</a></figure><figure id="588fd1f7-14ea-4dbd-880b-6ccb19947852" class="link-to-page"><a href="Pengenalan%20Introduction/Membuat%20Argument%20Parameter%20Pada%20Function.html">Membuat Argument/Parameter Pada Function</a></figure><figure id="2dccc107-fdab-45b7-ad88-a45c41b77cc0" class="link-to-page"><a href="Pengenalan%20Introduction/Membuat%20Argument%20Parameter%20Secara%20Default.html">Membuat Argument/Parameter Secara Default</a></figure><figure id="b9ae415b-bb77-4494-b0bf-829de24e4c09" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%203%20JS.html">Tugas 3 JS</a></figure><figure id="97976997-c5c3-4859-a6e4-241322b37e74" class="link-to-page"><a href="Pengenalan%20Introduction/Struktur%20Logika%20If%20Else.html">Struktur Logika If &amp; Else</a></figure><figure id="13e22ed3-f195-49e3-802d-4cd380ff2206" class="link-to-page"><a href="Pengenalan%20Introduction/Struktur%20Logika%20If%20Else%20If.html">Struktur Logika If &amp; Else If</a></figure><figure id="8ee5037f-77a0-416e-aa7c-37886167daa3" class="link-to-page"><a href="Pengenalan%20Introduction/Nested%20If%20Else.html">Nested If &amp; Else</a></figure><figure id="faa7768c-71ac-4faf-a350-5b02fcbb440b" class="link-to-page"><a href="Pengenalan%20Introduction/If%20Else%20Berdasarkan%20Tipe%20Data.html">If &amp; Else Berdasarkan Tipe Data</a></figure><figure id="d2b5b599-6ecc-4d57-871c-2b11e7bb4fda" class="link-to-page"><a href="Pengenalan%20Introduction/Struktur%20Logika%20Switch.html">Struktur Logika Switch</a></figure><figure id="3158de63-972a-4465-901b-40d3da1c3e44" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%204%20JS.html">Tugas 4 JS</a></figure><figure id="c938e643-73ee-4242-b44e-6e77caee4db7" class="link-to-page"><a href="Pengenalan%20Introduction/Perulangan%20For.html">Perulangan For</a></figure><figure id="bdf37f14-39bf-4bf0-9583-493df719aa28" class="link-to-page"><a href="Pengenalan%20Introduction/Perulangan%20While.html">Perulangan While</a></figure><figure id="24175e88-b5b2-4970-b341-036d78897e75" class="link-to-page"><a href="Pengenalan%20Introduction/Perulangan%20Do%20While.html">Perulangan Do While</a></figure><figure id="7acc39d8-b2a8-4bb5-a401-8449bff889b0" class="link-to-page"><a href="Pengenalan%20Introduction/Perulangan%20Bersarang%20Nested%20Loop.html">Perulangan Bersarang (Nested Loop)</a></figure><figure id="bc1abaa1-b95e-4fdc-b28e-eeabdd4ce529" class="link-to-page"><a href="Pengenalan%20Introduction/Infinity%20Loop.html">Infinity Loop</a></figure><figure id="764ffcbf-afa7-4d9b-bc89-67e8ae52d24c" class="link-to-page"><a href="Pengenalan%20Introduction/Perintah%20Break%20Dan%20Continue%20Pada%20Perulangan.html">Perintah Break Dan Continue Pada Perulangan</a></figure><figure id="a528ce18-2a5c-4143-bb13-3576850deb78" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%205%20JS.html">Tugas 5 JS</a></figure><figure id="c75d7d06-ed77-418d-8902-07644b67e0ec" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%206%20JS.html">Tugas 6 JS</a></figure><figure id="b404d2dd-169b-453d-84f1-e635de40f943" class="link-to-page"><a href="Pengenalan%20Introduction/Membuat%20Array%20Bercabang%20Nested%20Array.html">Membuat Array Bercabang (Nested Array)</a></figure><figure id="635685ac-e71b-47a7-aab8-abd8b6ecdb7c" class="link-to-page"><a href="Pengenalan%20Introduction/Menampilkan%20Element%20Array%20Dengan%20Perulangan.html">Menampilkan Element Array Dengan Perulangan</a></figure><figure id="74815e82-19d7-4808-9329-e0cbc563faff" class="link-to-page"><a href="Pengenalan%20Introduction/Perulangan%20For%20Of.html">Perulangan For Of</a></figure><figure id="3b17bbb3-363d-4b68-9e0e-e54ab46ec9e8" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%207%20JS.html">Tugas 7 JS</a></figure><figure id="cb8e797c-6bea-4258-8b74-f9a54760ade3" class="link-to-page"><a href="Pengenalan%20Introduction/Format%20Dasar%20Object.html">Format Dasar Object</a></figure><figure id="6a3e5198-db73-4990-abe3-aa522dcdc6d5" class="link-to-page"><a href="Pengenalan%20Introduction/Array%20Dalam%20Object.html">Array Dalam Object</a></figure><figure id="eb42d8fa-8404-42b9-8e7d-c98c538f219a" class="link-to-page"><a href="Pengenalan%20Introduction/Object%20Property.html">Object Property</a></figure><figure id="312dfdcf-a8dd-47a4-ab51-f5b0b6bbd939" class="link-to-page"><a href="Pengenalan%20Introduction/Menambah%20Object%20Property.html">Menambah Object Property</a></figure><figure id="3b4a0e75-a872-430b-b50f-03c765696acc" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%208%20JS.html">Tugas 8 JS</a></figure><figure id="779c1668-b3e6-44ed-b4a7-ee7aeafec4d7" class="link-to-page"><a href="Pengenalan%20Introduction/Mengubah%20Object%20Property.html">Mengubah Object Property</a></figure><figure id="f186e9c5-dd62-47e7-b038-2bce7f175a6a" class="link-to-page"><a href="Pengenalan%20Introduction/Function%20Dalam%20Properti%20Object.html">Function Dalam Properti Object</a></figure><figure id="d2f0fac6-ad1b-4fe6-b17e-f6f1b147b71b" class="link-to-page"><a href="Pengenalan%20Introduction/Nested%20Object.html">Nested Object</a></figure><figure id="3a0e691d-018a-4166-8c59-83edced226e0" class="link-to-page"><a href="Pengenalan%20Introduction/Perulangan%20Object%20dengan%20For%20In.html">Perulangan Object dengan For In</a></figure><figure id="55b5f085-4395-4e01-a141-7183c897d809" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%209%20JS.html">Tugas 9 JS</a></figure><figure id="5d567b28-788c-4f97-9fd5-3ea4932cfc03" class="link-to-page"><a href="Pengenalan%20Introduction/Melakukan%20Pengecekan%20Tipe%20Data.html">Melakukan Pengecekan Tipe Data</a></figure><figure id="9b553dad-2a40-4ef6-b5ac-b741db71d064" class="link-to-page"><a href="Pengenalan%20Introduction/Membuat%20Komentar%20Atau%20Comment.html">Membuat Komentar Atau Comment</a></figure><figure id="23f85329-6e4b-4079-8cc5-9ac088532344" class="link-to-page"><a href="Pengenalan%20Introduction/Operator.html">Operator</a></figure><figure id="df2ec278-a61b-473a-815c-419ec0d66403" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Aritmatika.html">Operator Aritmatika</a></figure><figure id="db3ab78a-eaf0-45dc-9f1e-1a1fc4866daa" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Increment%20Decrement.html">Operator Increment &amp; Decrement</a></figure><figure id="b094955d-962a-4053-be2e-ab4b4e83ff77" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Perbandingan.html">Operator Perbandingan</a></figure><figure id="2ec6365e-1285-4321-b566-12315d1345c6" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Logika.html">Operator Logika</a></figure><figure id="9885bd25-d5e4-477e-a9d8-7783ed4986a4" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%2010%20JS.html">Tugas 10 JS</a></figure><figure id="d739dcf9-f909-4547-b28c-e6f848cefe83" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Tipe%20Data%20String.html">Operator Tipe Data String</a></figure><figure id="86d6b0da-c9c3-4091-a956-bd59c3c0dce4" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Assignment.html">Operator Assignment</a></figure><figure id="217f9a78-f44e-43b5-8a43-8c963f0d98eb" class="link-to-page"><a href="Pengenalan%20Introduction/Operator%20Spread.html">Operator Spread</a></figure><figure id="16a8b260-e44d-4851-a457-83e64cf9d3da" class="link-to-page"><a href="Pengenalan%20Introduction/Urutan%20Operator%20Dalam%20JavaScript.html">Urutan Operator Dalam JavaScript</a></figure><figure id="4935c290-1f74-48f4-9fff-3eb20a8949ed" class="link-to-page"><a href="Pengenalan%20Introduction/Tugas%2011%20JS.html">Tugas 11 JS</a></figure></div></article></body></html>

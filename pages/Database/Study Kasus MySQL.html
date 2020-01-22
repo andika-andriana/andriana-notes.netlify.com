@@ -1,0 +1,732 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Study Kasus MySQL</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cd70ad20-2911-4dcc-a50c-c58bd64e86d7" class="page sans"><header><h1 class="page-title"><strong>Study Kasus MySQL</strong></h1></header><div class="page-body"><ol id="7f4fbe63-9e84-44a9-8162-b2759e5520d5" class="numbered-list" start="1"><li>Buat database studykasus<pre id="5ef51c26-b953-4b2e-a530-5266abfe7261" class="code"><code>MariaDB [(none)]&gt; CREATE DATABASE StudyKasus;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]&gt; USE StudyKasus;
+Database changed</code></pre></li></ol><ol id="ed2cefc4-6d12-43d4-9789-4b24ffdd7903" class="numbered-list" start="2"><li>Buat table country dengan struktur sebagai berikut:<figure id="de49e232-b95c-48ac-8779-a6b9c619dc51" class="image"><a href="https://lh6.googleusercontent.com/dsqNB1DJmBleuzwzOG0k7qhasSwL5pbRK4GgfNt2hO-7STg3qxbMWLWUL-lqjJUZEtc87hvZ5SX1ABJ2_O7ErHPW6ACN37eQYMzXvLs2aAoFE3zcB-N-l-evhpn2q2tqLLSJ8h-v"><img src="https://lh6.googleusercontent.com/dsqNB1DJmBleuzwzOG0k7qhasSwL5pbRK4GgfNt2hO-7STg3qxbMWLWUL-lqjJUZEtc87hvZ5SX1ABJ2_O7ErHPW6ACN37eQYMzXvLs2aAoFE3zcB-N-l-evhpn2q2tqLLSJ8h-v"/></a></figure><pre id="5bd75300-74c6-4362-aa5e-235b6014470b" class="code"><code>MariaDB [StudyKasus]&gt; CREATE TABLE country(
+    -&gt; country_id SMALLINT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    -&gt; country VARCHAR(50) NOT NULL,
+    -&gt; last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    -&gt; );
+Query OK, 0 rows affected (0.324 sec)</code></pre></li></ol><ol id="29c913f2-413b-4c50-b19d-133a07631336" class="numbered-list" start="3"><li>Buat table city dengan struktur sebagai berikut:<figure id="7598776f-ba67-44bf-99e6-f40ff5c026cb" class="image"><a href="https://lh3.googleusercontent.com/8418yif-ickpKe1Gb2oXlWSxDbDXhlcbRgh1Hn1abxr9In479WHykEnjhYeDrawIg5SIlgNCFrfkgXme0xC7-mhOONDsBAYPlaZAh7qL81V9jQhUgeXHkSrnDge_3wBNWcVzpE1-"><img style="width:672px" src="https://lh3.googleusercontent.com/8418yif-ickpKe1Gb2oXlWSxDbDXhlcbRgh1Hn1abxr9In479WHykEnjhYeDrawIg5SIlgNCFrfkgXme0xC7-mhOONDsBAYPlaZAh7qL81V9jQhUgeXHkSrnDge_3wBNWcVzpE1-"/></a></figure><pre id="3213171c-5530-4ce6-b732-8df150f86b46" class="code"><code>MariaDB [StudyKasus]&gt; CREATE TABLE city
+    -&gt; (
+    -&gt; city_id SMALLINT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    -&gt; city VARCHAR(50) NOT NULL,
+    -&gt; country_id SMALLINT(5) UNSIGNED,
+    -&gt; last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    -&gt; );
+Query OK, 0 rows affected (0.333 sec)
+
+MariaDB [StudyKasus]&gt; ALTER TABLE city ADD FOREIGN KEY (country_id) REFERENCES country(country_id);
+Query OK, 0 rows affected (0.899 sec)
+Records: 0  Duplicates: 0  Warnings: 0</code></pre></li></ol><ol id="a0243179-10e6-41ee-a53f-a29b27505f6e" class="numbered-list" start="4"><li>Download <a href="https://www.google.com/url?q=https://drive.google.com/file/d/1duiOMXM3pZCnutM0qjTjabL7SrtlWQi0/view?usp%3Dsharing&amp;sa=D&amp;ust=1577179038562000">country.sql</a> dan <a href="https://www.google.com/url?q=https://drive.google.com/file/d/1E_m5KyHEJgAvVLaZt9HPX9-nxsVUo69A/view?usp%3Dsharing&amp;sa=D&amp;ust=1577179038562000">city.sql</a> kemudian import data dummy tersebut ke masing-masing table!
+<a href="https://drive.google.com/file/d/1duiOMXM3pZCnutM0qjTjabL7SrtlWQi0/view">https://drive.google.com/file/d/1duiOMXM3pZCnutM0qjTjabL7SrtlWQi0/view</a><p id="73248bca-d574-413a-9b48-e26aeb7b1b43" class=""><a href="https://drive.google.com/file/d/1E_m5KyHEJgAvVLaZt9HPX9-nxsVUo69A/view">https://drive.google.com/file/d/1E_m5KyHEJgAvVLaZt9HPX9-nxsVUo69A/view</a></p><figure id="139d6138-1a04-4669-b700-08d1d333d03e" class="image"><a href="Study%20Kasus%20MySQL/Untitled.png"><img style="width:865px" src="Study%20Kasus%20MySQL/Untitled.png"/></a></figure><pre id="0fc88e98-a06e-4a8f-8d05-6f08fafce4f8" class="code"><code>MariaDB [StudyKasus]&gt; SOURCE C:\Users\AndikaAndriana\Documents\1-repo-belajar\Database\StudyKasus\country.sql
+Query OK, 109 rows affected (0.123 sec)
+Records: 109  Duplicates: 0  Warnings: 0
+
+MariaDB [StudyKasus]&gt; SOURCE C:\Users\AndikaAndriana\Documents\1-repo-belajar\Database\StudyKasus\city.sql
+Query OK, 600 rows affected (0.150 sec)
+Records: 600  Duplicates: 0  Warnings: 0</code></pre></li></ol><ol id="31a815aa-0a61-4872-9d9f-dd561c15fec2" class="numbered-list" start="5"><li>Buat user Alan dengan Password ‘ujianmysql’ kemudian berikan hak akses untuk table country dan city dari database studykasus!<pre id="bd56275b-683a-44ae-b0e7-1c80a29f8fb7" class="code"><code>MariaDB [mysql]&gt; CREATE USER &#x27;Alan&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;ujianmysql&#x27;;
+Query OK, 0 rows affected (0.025 sec)
+
+MariaDB [mysql]&gt; GRANT SELECT, DELETE ON StudyKasus.country TO Alan@localhost;
+Query OK, 0 rows affected (0.043 sec)
+
+MariaDB [mysql]&gt; GRANT SELECT, DELETE ON StudyKasus.city TO Alan@localhost;
+Query OK, 0 rows affected (0.040 sec)</code></pre></li></ol><ol id="c35601f1-47a5-4cdd-8f4e-9ee9e283a6c9" class="numbered-list" start="6"><li>Tampilkan 30 data untuk kolom country As `Country’s Name`, last_update As `Last Modified` dari tabel country diurutkan berdasarkan kolom country dari A ke Z!<pre id="3a6c7d15-e8b3-41da-a546-c7d30eff3ac4" class="code"><code>PS C:\Users\AndikaAndriana&gt; mysql -u Alan -p                                                                     Enter password: **********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 51
+Server version: 10.4.10-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.
+
+MariaDB [(none)]&gt; USE StudyKasus;
+Database changed
+
+MariaDB [StudyKasus]&gt; SHOW TABLES;
++----------------------+
+| Tables_in_studykasus |
++----------------------+
+| city                 |
+| country              |
++----------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [StudyKasus]&gt; SELECT country AS &#x27;Country\&#x27;s Name&#x27;, last_update AS &#x27;Last Modified&#x27;
+    -&gt; FROM country ORDER BY country ASC LIMIT 30;
++---------------------------------------+---------------------+
+| Country&#x27;s Name                        | Last Modified       |
++---------------------------------------+---------------------+
+| Afghanistan                           | 2006-02-14 21:44:00 |
+| Algeria                               | 2006-02-14 21:44:00 |
+| American Samoa                        | 2006-02-14 21:44:00 |
+| Angola                                | 2006-02-14 21:44:00 |
+| Anguilla                              | 2006-02-14 21:44:00 |
+| Argentina                             | 2006-02-14 21:44:00 |
+| Armenia                               | 2006-02-14 21:44:00 |
+| Australia                             | 2006-02-14 21:44:00 |
+| Austria                               | 2006-02-14 21:44:00 |
+| Azerbaijan                            | 2006-02-14 21:44:00 |
+| Bahrain                               | 2006-02-14 21:44:00 |
+| Bangladesh                            | 2006-02-14 21:44:00 |
+| Belarus                               | 2006-02-14 21:44:00 |
+| Bolivia                               | 2006-02-14 21:44:00 |
+| Brazil                                | 2006-02-14 21:44:00 |
+| Brunei                                | 2006-02-14 21:44:00 |
+| Bulgaria                              | 2006-02-14 21:44:00 |
+| Cambodia                              | 2006-02-14 21:44:00 |
+| Cameroon                              | 2006-02-14 21:44:00 |
+| Canada                                | 2006-02-14 21:44:00 |
+| Chad                                  | 2006-02-14 21:44:00 |
+| Chile                                 | 2006-02-14 21:44:00 |
+| China                                 | 2006-02-14 21:44:00 |
+| Colombia                              | 2006-02-14 21:44:00 |
+| Congo, The Democratic Republic of the | 2006-02-14 21:44:00 |
+| Czech Republic                        | 2006-02-14 21:44:00 |
+| Dominican Republic                    | 2006-02-14 21:44:00 |
+| Ecuador                               | 2006-02-14 21:44:00 |
+| Egypt                                 | 2006-02-14 21:44:00 |
+| Estonia                               | 2006-02-14 21:44:00 |
++---------------------------------------+---------------------+
+30 rows in set (0.001 sec)</code></pre></li></ol><ol id="64ce67ee-a306-457d-8bbb-341a53115a96" class="numbered-list" start="7"><li>Tampilkan 20 data untuk kolom city As `City’s Name`, last_update As `Last Modified` dari tabel city diurutkan berdasarkan kolom <mark class="highlight-purple_background">country</mark> dari Z ke A!<pre id="0afa8f2b-bd1d-49a7-9ac0-c2daed86c1ed" class="code"><code>MariaDB [StudyKasus]&gt; SELECT city AS &#x27;City\&#x27;s Name&#x27;, last_update AS &#x27;Last Modified&#x27;
+    -&gt; FROM city ORDER BY <mark class="highlight-yellow_background">country</mark> ASC LIMIT 20;
+ERROR 1054 (42S22): <mark class="highlight-yellow_background">Unknown column &#x27;country&#x27; in &#x27;order clause&#x27;</mark>
+MariaDB [StudyKasus]&gt; DESC city;
++-------------+----------------------+------+-----+---------------------+-------------------------------+
+| Field       | Type                 | Null | Key | Default             | Extra                         |
++-------------+----------------------+------+-----+---------------------+-------------------------------+
+| city_id     | smallint(5) unsigned | NO   | PRI | NULL                | auto_increment                |
+| city        | varchar(50)          | NO   |     | NULL                |                               |
+| country_id  | smallint(5) unsigned | YES  | MUL | NULL                |                               |
+| last_update | timestamp            | NO   |     | current_timestamp() | on update current_timestamp() |
++-------------+----------------------+------+-----+---------------------+-------------------------------+
+4 rows in set (0.030 sec)
+
+MariaDB [StudyKasus]&gt; SELECT city AS &#x27;City\&#x27;s Name&#x27;, last_update AS &#x27;Last Modified&#x27;
+    -&gt; <mark class="highlight-yellow_background">FROM city ORDER BY city ASC LIMIT 20;</mark>
++-----------------------+---------------------+
+| City&#x27;s Name           | Last Modified       |
++-----------------------+---------------------+
+| A Corua (La Corua)    | 2006-02-14 21:45:25 |
+| Abha                  | 2006-02-14 21:45:25 |
+| Abu Dhabi             | 2006-02-14 21:45:25 |
+| Acua                  | 2006-02-14 21:45:25 |
+| Adana                 | 2006-02-14 21:45:25 |
+| Addis Abeba           | 2006-02-14 21:45:25 |
+| Aden                  | 2006-02-14 21:45:25 |
+| Adoni                 | 2006-02-14 21:45:25 |
+| Ahmadnagar            | 2006-02-14 21:45:25 |
+| Akishima              | 2006-02-14 21:45:25 |
+| Akron                 | 2006-02-14 21:45:25 |
+| al-Ayn                | 2006-02-14 21:45:25 |
+| al-Hawiya             | 2006-02-14 21:45:25 |
+| al-Manama             | 2006-02-14 21:45:25 |
+| al-Qadarif            | 2006-02-14 21:45:25 |
+| al-Qatif              | 2006-02-14 21:45:25 |
+| Alessandria           | 2006-02-14 21:45:25 |
+| Allappuzha (Alleppey) | 2006-02-14 21:45:25 |
+| Allende               | 2006-02-14 21:45:25 |
+| Almirante Brown       | 2006-02-14 21:45:25 |
++-----------------------+---------------------+
+20 rows in set (0.001 sec)</code></pre></li></ol><ol id="d3b370ea-eb9f-4122-a15a-ffe9b0651d16" class="numbered-list" start="8"><li>Tampilkan 10 data perpaduan dari tabel country dan city seperti gambar berikut!<figure id="420f2b3f-536f-412e-a711-0310cc9658bc" class="image"><a href="https://lh3.googleusercontent.com/R6WKKtaTYDljOqXF5l1MaiP-AI57lx-iTy8AHak1vfReMsZVZ7ZfKzRaEni_QlDzXOZmPzkldDWvl_p7j9HM8T-GtHG4qy5Yr09NOPUkIJa1-pWmOuewc2iuSMpWiZgeT2fMqw4t"><img src="https://lh3.googleusercontent.com/R6WKKtaTYDljOqXF5l1MaiP-AI57lx-iTy8AHak1vfReMsZVZ7ZfKzRaEni_QlDzXOZmPzkldDWvl_p7j9HM8T-GtHG4qy5Yr09NOPUkIJa1-pWmOuewc2iuSMpWiZgeT2fMqw4t"/></a></figure><pre id="52ef5bf6-6992-43e4-bce3-c36620e4a4c3" class="code"><code>MariaDB [StudyKasus]&gt; SELECT country AS &#x27;Country&#x27;, city AS &#x27;Part of City&#x27;
+    -&gt; FROM country INNER JOIN city
+    -&gt; ON country.country_id=city.country_id
+    -&gt; ORDER BY city.city ASC LIMIT 10;
++----------------------+--------------------+
+| Country              | Part of City       |
++----------------------+--------------------+
+| Spain                | A Corua (La Corua) |
+| Saudi Arabia         | Abha               |
+| United Arab Emirates | Abu Dhabi          |
+| Mexico               | Acua               |
+| Turkey               | Adana              |
+| Ethiopia             | Addis Abeba        |
+| Yemen                | Aden               |
+| India                | Adoni              |
+| India                | Ahmadnagar         |
+| Japan                | Akishima           |
++----------------------+--------------------+
+10 rows in set (0.003 sec)</code></pre></li></ol><ol id="00cdd462-f7a2-44e5-ba87-4877ad4ff68f" class="numbered-list" start="9"><li>Export 10 data tersebut dengan perintah “<strong>Export Data SELECT … INTO OUTFILE” </strong>dengan pemisah antar kolom yaitu koma (,) dan dalam format <strong>.txt </strong>dengan nama file yaitu <strong>studykasus.txt:</strong><p id="fe51bad5-3e93-4b8c-88d9-b061d36cf289" class="">Query:</p><pre id="0cca0788-5517-444d-97bb-1a0799ae40f1" class="code"><code>MariaDB [StudyKasus]&gt; SELECT country AS &#x27;Country&#x27;, city AS &#x27;Part of City&#x27;
+    -&gt; INTO OUTFILE &#x27;C:\\Users\\AndikaAndriana\\Documents\\1-repo-belajar\\Database\\StudyKasus\\studykasus.txt&#x27;
+    -&gt; FIELDS TERMINATED BY &#x27;,&#x27; OPTIONALLY ENCLOSED BY &#x27;&quot;&#x27;
+    -&gt; LINES TERMINATED BY  &#x27;\r\n&#x27;
+    -&gt; FROM country INNER JOIN city
+    -&gt; ON country.country_id=city.country_id
+    -&gt; ORDER BY city.city ASC LIMIT 10;
+Query OK, 10 rows affected (0.005 sec)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="052d30e3-2c27-4158-ae62-efde9ddcde30"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Notes:
+Pada saat menggunakan query <code>INTO OUTFILE</code> penulisan directory di mysql menggunakan dua <code>\\</code> bukan <code>\</code> </div></figure><p id="850f969a-5c1c-43ee-9d28-0fb771f6e8da" class="">Txt:</p><pre id="854e772c-018a-4fef-a82f-33aa90d2745a" class="code"><code>&quot;Spain&quot;,&quot;A Corua (La Corua)&quot;
+&quot;Saudi Arabia&quot;,&quot;Abha&quot;
+&quot;United Arab Emirates&quot;,&quot;Abu Dhabi&quot;
+&quot;Mexico&quot;,&quot;Acua&quot;
+&quot;Turkey&quot;,&quot;Adana&quot;
+&quot;Ethiopia&quot;,&quot;Addis Abeba&quot;
+&quot;Yemen&quot;,&quot;Aden&quot;
+&quot;India&quot;,&quot;Adoni&quot;
+&quot;India&quot;,&quot;Ahmadnagar&quot;
+&quot;Japan&quot;,&quot;Akishima&quot;</code></pre></li></ol><p id="1c338320-d217-41a6-b102-a83bff0e4cc3" class="">Ketentuan:</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b181a58d-0046-4eae-8079-bf97a4d83ea0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kerjakan secara berurutan kemudian <strong>capture </strong>kode program tersebut ke dalam aplikasi Microsoft Word atau pengolah kata lainnya. Upload juga <strong>studykasus.txt</strong> yang telah teman-teman kerjakan!</div></figure><p id="fdb355dd-8f8f-4760-b262-4780482de99e" class="">
+</p></div></article></body></html>

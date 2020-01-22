@@ -1,0 +1,673 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Map</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c701d43a-b13c-4f7f-b91c-03db97adc9c6" class="page sans"><header><h1 class="page-title"><strong>Map</strong></h1></header><div class="page-body"><ol id="1a915a7d-6ae6-4699-bba2-e729e71a24f8" class="numbered-list" start="1"><li><strong>Map</strong><p id="2e96f906-c35b-4d33-84be-55956f26a937" class=""><strong>Map</strong> adalah tipe data asosiatif yang ada di Go, berbentuk <em>key-value pair</em>. Untuk setiap data (atau value) yang disimpan, disiapkan juga key-nya. Key harus unik, karena digunakan sebagai penanda (atau identifier) untuk pengaksesan value yang bersangkutan.</p><p id="b265382d-c306-4c08-8136-7168d6ea9d61" class="">Kalau dilihat, <code>map</code> mirip seperti slice, hanya saja indeks yang digunakan untuk pengaksesan bisa ditentukan sendiri tipe-nya (indeks tersebut adalah key).</p></li></ol><ol id="48b4c6c1-9940-4fb7-8589-65fad024a4c2" class="numbered-list" start="2"><li><strong>Penggunaan Map</strong><p id="b8944585-8c16-4f48-80c7-3e014958c73d" class="">Cara menggunakan map cukup dengan menuliskan keyword <code>map</code> diikuti tipe data key dan value-nya. Agar lebih mudah dipahami, </p><p id="be0d2dff-9485-4719-a897-d25b09a5afc7" class="">Silakan perhatikan contoh di bawah ini.</p><pre id="272b531f-543c-4e59-bb8a-784a89c5949c" class="code"><code>var chicken map[string]int
+chicken = map[string]int{}
+
+chicken[&quot;januari&quot;] = 50
+chicken[&quot;februari&quot;] = 40
+
+fmt.Println(&quot;januari&quot;, chicken[&quot;januari&quot;]) // januari 50
+fmt.Println(&quot;mei&quot;,     chicken[&quot;mei&quot;])     // mei 0</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8a577601-a143-4f0d-86f0-48e3134ad7a1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Variabel <code>chicken</code> dideklarasikan sebagai map, dengan tipe data key adalah <code>string</code> dan valuenya <code>int</code>.  Dari kode tersebut bisa dilihat bagaimana cara penggunaan keyword <code>map</code>.
+
+Kode <code>map[string]int</code> maknanya adalah, tipe data <code>map</code> dengan key bertipe <code>string</code> dan value bertipe <code>int</code>.
+
+Default nilai variabel <code>map</code> adalah <code>nil</code>. Oleh karena itu perlu dilakukan inisialisasi nilai default di awal, caranya cukup dengan tambahkan kurung kurawal pada akhir tipe, contoh seperti pada kode di atas: <code>map[string]int{}</code>.
+
+Cara menge-set nilai pada sebuah map adalah dengan menuliskan variabel-nya, kemudian disisipkan <code>key</code> pada kurung siku variabel (mirip seperti cara pengaksesan elemen slice), lalu isi nilainya. Contohnya seperti <code>chicken[&quot;februari&quot;] = 40</code>. Sedangkan cara pengambilan value adalah cukup dengan menyisipkan <code>key</code> pada kurung siku variabel.
+
+Pengisian data pada map bersifat <strong>overwrite</strong>, ketika variabel sudah memiliki item dengan key yang sama, maka value lama akan ditimpa dengan value baru.
+
+Pada pengaksesan item menggunakan key yang belum tersimpan di map, akan dikembalikan nilai default tipe data value-nya. Contohnya seperti pada kode di atas, <code>chicken[&quot;mei&quot;]</code> menghasilkan nilai 0 (nilai default tipe <code>int</code>), karena belum ada item yang tersimpan menggunakan key <code>&quot;mei&quot;</code>.</div></figure></li></ol><ol id="55c17a59-c2c4-4203-9914-fedf6de6e2fa" class="numbered-list" start="3"><li><strong>Inisialisasi Nilai Map</strong><p id="826a2196-f777-4e53-9b0c-5ea549b1dd8a" class="">Zero value dari map adalah <code>nil</code>, maka tiap variabel bertipe map harus di-inisialisasi secara explisit nilai awalnya (agar tidak <code>nil</code>).</p><pre id="9c5dda2d-7e3a-4539-b8a2-a3b7f2c356f6" class="code"><code>var data map[string]int
+data[&quot;one&quot;] = 1
+// akan muncul error!
+
+data = map[string]int{}
+data[&quot;one&quot;] = 1
+// tidak ada error</code></pre><p id="70de83c9-80ea-411d-94e7-0406344528ad" class="">Nilai variabel bertipe map bisa didefinisikan di awal, caranya dengan menambahkan kurung kurawal setelah tipe data, lalu menuliskan key dan value didalamnya. </p><p id="3a5c143c-de13-4bf9-9a9e-2f2a0aab3ee6" class="">Cara ini sekilas mirip dengan definisi nilai array/slice namun dalam bentuk key-value.</p><pre id="b3c6024e-f2d8-469e-99f8-6ac313836a24" class="code"><code>// cara vertikal
+var chicken1 = map[string]int{&quot;januari&quot;: 50, &quot;februari&quot;: 40}
+
+// cara horizontal
+var chicken2 = map[string]int{
+    &quot;januari&quot;:  50,
+    &quot;februari&quot;: 40,
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b02e405e-ef31-48b2-8415-b1c8cefcf9ec"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Key dan value dituliskan dengan pembatas tanda titik dua (<code>:</code>). Sedangkan tiap itemnya dituliskan dengan pembatas tanda koma (<code>,</code>). Khusus deklarasi dengan gaya vertikal, tanda koma perlu dituliskan setelah item terakhir.</div></figure><p id="7a1acd36-b2dd-4aa6-af06-3279e3ceb75a" class="">Variabel <code>map</code> bisa di-inisialisasi dengan tanpa nilai awal, caranya menggunakan tanda kurung kurawal, contoh: <code>map[string]int{}</code>. Atau bisa juga dengan menggunakan keyword  <code>make</code>  dan <code>new</code>. </p><p id="9536f395-5bdc-4367-8bc2-27334df2283a" class="">Contohnya bisa dilihat pada kode berikut. Ketiga cara di bawah ini intinya adalah sama.</p><pre id="8b72b2e7-6eea-4a85-b207-a23cc552fbd8" class="code"><code>var chicken3 = map[string]int{}
+var chicken4 = make(map[string]int)
+var chicken5 = *new(map[string]int)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7845869d-9faf-4a61-a205-68713cf11080"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Khusus inisialisasi data menggunakan keyword <code>new</code>, yang dihasilkan adalah data pointer. Untuk mengambil nilai aslinya bisa dengan menggunakan tanda asterisk (<code>*</code>). Topik pointer akan dibahas lebih detail pada materi selanjutnya.</div></figure></li></ol><ol id="8ef969e6-91e5-49fe-a97b-3941af0cbf59" class="numbered-list" start="4"><li><strong>Iterasi Item Map Menggunakan </strong><code><strong>for</strong></code><strong> - </strong><code><strong>range</strong></code><p id="f1b346e6-4259-472d-9621-fa3d3f569e22" class="">Item variabel <code>map</code> bisa di iterasi menggunakan <code>for</code> - <code>range</code>. Cara penerapannya masih sama seperti pada slice, pembedanya data yang dikembalikan di tiap perulangan adalah key dan value, bukan indeks dan elemen. </p><p id="37ec9ce1-5e04-4ce4-bfac-ce604359d530" class="">Contohnya bisa dilihat pada kode berikut.</p><pre id="c3aab523-5195-4da9-af01-c5f19329c9eb" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var chicken = map[string]int{
+		&quot;januari&quot;:  50,
+		&quot;februari&quot;: 40,
+		&quot;maret&quot;:    34,
+		&quot;april&quot;:    67,
+	}
+
+	for key, val := range chicken {
+		fmt.Println(key, &quot;  \t:&quot;, val)
+	}
+}</code></pre><p id="1b6e23e4-2d69-4601-a5fc-1b17b91ec2df" class="">Outputnya:</p><pre id="0f418e16-4539-492a-a1f6-beba694b88a6" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\map.go
+januari         : 50
+februari        : 40
+maret           : 34
+april           : 67</code></pre></li></ol><ol id="0799eeb2-31e9-4f37-b820-985f227b9418" class="numbered-list" start="5"><li><strong>Menghapus Item Map</strong><p id="3290b33a-9a2b-4a09-a170-9460093e6a09" class="">Fungsi <code>delete()</code> digunakan untuk menghapus item dengan key tertentu pada variabel map. Cara penggunaannya, dengan memasukan objek map dan key item yang ingin dihapus sebagai parameter. Contoh:</p><pre id="ff288eaf-3828-4de3-b9d5-be91309e6743" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var chicken = map[string]int{&quot;januari&quot;: 50, &quot;februari&quot;: 40}
+
+	fmt.Println(len(chicken)) // 2
+	fmt.Println(chicken)
+
+	delete(chicken, &quot;januari&quot;)
+
+	fmt.Println(len(chicken)) // 1
+	fmt.Println(chicken)
+}</code></pre><p id="538d72db-2c5b-47da-9990-c9359dd52725" class="">Item yang memiliki key <code>&quot;januari&quot;</code> dalam variabel <code>chicken</code> akan dihapus.</p><pre id="af36cf56-ef82-4e7b-a750-75834a636516" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\map.go
+2
+map[februari:40 januari:50]
+1
+map[februari:40]</code></pre><p id="9273bef2-950c-4827-b081-6d5248ab01aa" class="">Fungsi <code>len()</code> jika digunakan pada map akan mengembalikan jumlah item.</p></li></ol><ol id="996ca002-c501-47ae-8a65-4b388f1a6be7" class="numbered-list" start="6"><li><strong>Deteksi Keberadaan Item Dengan Key Tertentu</strong><p id="9a64cedb-4e2c-49cb-ba21-ccabe8adaa1b" class="">Ada cara untuk mengetahui apakah dalam sebuah variabel map terdapat item dengan key tertentu atau tidak, yaitu dengan memanfaatkan 2 variabel sebagai penampung nilai kembalian pengaksesan item. </p><p id="727a6507-a422-4886-8bfc-2728d1144398" class="">Return value ke-2 ini adalah opsional, isinya nilai <code>bool</code> yang menunjukkan ada atau tidaknya item yang dicari.</p><p id="9d13dbc5-fb4d-4883-9429-bb5080fb23a2" class="">Contoh:</p><pre id="47e6b0cf-cc9b-4d11-b613-5486bc79e52e" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var chicken = map[string]int{&quot;januari&quot;: 50, &quot;februari&quot;: 40}
+	var value, isExist = chicken[&quot;mei&quot;]
+
+	if isExist {
+		fmt.Println(value)
+	} else {
+		fmt.Println(&quot;item is not exists&quot;)
+	}
+}</code></pre><p id="6a5bc2be-5274-4a5e-b72a-5b9fae56e99f" class="">Hasilnya:</p><pre id="d5deb2c6-c147-4cc3-92eb-9b5bd124eb48" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\map.go
+item is not exists</code></pre></li></ol><ol id="1a53746f-b74f-4c7c-8b93-de46ec48a3b9" class="numbered-list" start="7"><li><strong>Kombinasi Slice &amp; Map</strong><p id="acbeff33-4c94-4834-bbbd-73bd2c8f3147" class="">Slice dan <code>map</code> bisa dikombinasikan, dan sering digunakan pada banyak kasus, contohnya seperti data array yang berisikan informasi siswa, dan banyak lainnya.</p><p id="387a6984-4da6-462f-b52a-18e7df520ae9" class="">Cara menggunakannya cukup mudah, contohnya seperti <code>[]map[string]int</code>, artinya slice yang tipe tiap elemen-nya adalah <code>map[string]int</code>.</p><p id="9a094e40-fed4-47a5-9efc-40a402f010f5" class="">Agar lebih jelas, silakan praktekan contoh berikut.</p><pre id="04df8a14-c871-4c75-b321-5e0962bab886" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var chickens = []map[string]string{
+		map[string]string{&quot;name&quot;: &quot;chicken blue&quot;, &quot;gender&quot;: &quot;male&quot;},
+		map[string]string{&quot;name&quot;: &quot;chicken red&quot;, &quot;gender&quot;: &quot;male&quot;},
+		map[string]string{&quot;name&quot;: &quot;chicken yellow&quot;, &quot;gender&quot;: &quot;female&quot;},
+	}
+
+	for _, chicken := range chickens {
+		fmt.Println(chicken[&quot;gender&quot;], chicken[&quot;name&quot;])
+	}
+}</code></pre><p id="c4fb5a60-b8ad-44e5-8439-f44db51fe7c3" class="">Hasil:</p><pre id="c253eae7-8827-42b5-bd13-434237db68c2" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\map.go
+male chicken blue
+male chicken red
+female chicken yellow</code></pre><p id="c9cf2e36-6e23-4033-9543-aa14931789e7" class="">Variabel <code>chickens</code> di atas berisikan informasi bertipe <code>map[string]string</code>, yang kebetulan tiap elemen memiliki 2 key yang sama.</p><p id="8317f77b-0c0e-4572-82bd-461bb722128a" class="">Jika anda menggunakan versi go terbaru, cara deklarasi slice-map bisa dipersingkat, tipe tiap elemen tidak wajib untuk dituliskan.</p><pre id="518f8a79-802b-4a9b-8d81-90e4183d41ca" class="code"><code>var chickens = []map[string]string{
+    {&quot;name&quot;: &quot;chicken blue&quot;,   &quot;gender&quot;: &quot;male&quot;},
+    {&quot;name&quot;: &quot;chicken red&quot;,    &quot;gender&quot;: &quot;male&quot;},
+    {&quot;name&quot;: &quot;chicken yellow&quot;, &quot;gender&quot;: &quot;female&quot;},
+}</code></pre><p id="e93a0adb-2569-4764-b3ae-a5519b87939e" class="">Dalam <code>[]map[string]string</code>, tiap elemen bisa saja memiliki key yang berbeda-beda, sebagai contoh seperti kode berikut.</p><pre id="67d4adbb-cc74-4c07-b059-8897a4308d39" class="code"><code>var data = []map[string]string{
+    {&quot;name&quot;: &quot;chicken blue&quot;, &quot;gender&quot;: &quot;male&quot;, &quot;color&quot;: &quot;brown&quot;},
+    {&quot;address&quot;: &quot;mangga street&quot;, &quot;id&quot;: &quot;k001&quot;},
+    {&quot;community&quot;: &quot;chicken lovers&quot;}
+}</code></pre></li></ol></div></article></body></html>

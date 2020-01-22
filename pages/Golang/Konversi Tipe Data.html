@@ -1,0 +1,625 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Konversi Tipe Data</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="166da5ce-a0cb-4bfa-ac44-c11846ddecc0" class="page sans"><header><h1 class="page-title"><strong>Konversi Tipe Data</strong></h1></header><div class="page-body"><ol id="cc489182-52b6-4b80-9ca0-d77bdec1962b" class="numbered-list" start="1"><li><strong>Konversi Tipe Data</strong><p id="f81e47bb-594c-4e1c-9f4d-81547f7cadde" class="">Package strconv berisi banyak fungsi yang sangat membantu kita untuk melakukan konversi. Berikut merupakan beberapa fungsi yang dalam package tersebut.</p></li></ol><ol id="85b39d72-beab-45e3-9c3a-61d100c7a6e1" class="numbered-list" start="2"><li><strong>Fungsi </strong><strong>strconv.Atoi()</strong><p id="d0bf378b-03b3-444e-ac09-daafaf20d002" class="">Fungsi ini digunakan untuk konversi data dari tipe string ke int. strconv.Atoi() menghasilkan 2 buah nilai kembalian, yaitu hasil konversi dan error (jika konversi sukses, maka error berisi nil).</p><pre id="e2721748-d25a-4bb7-898a-ac2166897114" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;strconv&quot;
+
+func main() {
+   var str = &quot;124&quot;
+   var num, err = strconv.Atoi(str)
+
+   if err == nil {
+       fmt.Println(num) // 124
+   }
+}</code></pre></li></ol><ol id="73711bb8-c562-4088-97a2-79407baca241" class="numbered-list" start="3"><li><strong>Fungsi </strong><strong>strconv.Itoa()</strong><p id="9ac817d7-4ddd-4a33-8de3-a477450698fe" class="">Merupakan kebalikan dari strconv.Atoi, berguna untuk konversi int ke string.</p><pre id="3bda4e70-cb30-4f53-a8cd-aa0991bc7470" class="code"><code>var num = 124
+var str = strconv.Itoa(num)
+
+fmt.Println(str) // &quot;124&quot;</code></pre></li></ol><ol id="fefb53ef-b02d-467f-a135-0a984eebe679" class="numbered-list" start="4"><li><strong>Fungsi </strong><strong>strconv.ParseInt()</strong><p id="10b2d743-17cf-45a1-835d-d9951ec07a19" class="">Digunakan untuk konversi string berbentuk numerik dengan basis tertentu ke tipe numerik non-desimal dengan lebar data bisa ditentukan.</p><p id="76f74960-8a27-4ec9-ba3f-7244a959c79f" class="">Pada contoh berikut, string &quot;124&quot; dikonversi ke tipe numerik dengan ketentuan basis yang digunakan 10 dan lebar datanya mengikuti tipe int64 (lihat parameter ketiga).</p><pre id="d912c29f-9a1b-478b-b27a-a51c58781f43" class="code"><code>var str = &quot;124&quot;
+var num, err = strconv.ParseInt(str, 10, 64)
+
+if err == nil {
+   fmt.Println(num) // 124
+}</code></pre><p id="c2c29b6c-856a-41b5-ad5d-2cd443f07f58" class="">Contoh lainnya, string &quot;1010&quot; dikonversi ke basis 2 (biner) dengan tipe data hasil adalah int8.</p><pre id="8e6aa860-92b1-451b-afcb-feaa35d947db" class="code"><code>var str = &quot;1010&quot;
+var num, err = strconv.ParseInt(str, 2, 8)
+
+if err == nil {
+   fmt.Println(num) // 10
+}</code></pre></li></ol><ol id="d2455cba-51dc-40b7-8e8e-dd97aa9f2cd7" class="numbered-list" start="5"><li><strong>Fungsi </strong><strong>strconv.FormatInt()</strong><p id="3b3d1f4d-fed1-44ad-91e2-9317f55af1d5" class="">Berguna untuk konversi data numerik int64 ke string dengan basis numerik bisa ditentukan sendiri.</p><pre id="d8787b1c-783e-4e3e-8d38-9cc61329568a" class="code"><code>var num = int64(24)
+var str = strconv.FormatInt(num, 8)
+
+fmt.Println(str) // 30</code></pre></li></ol><ol id="d0fed4bc-2059-4534-992c-05519c46b1b6" class="numbered-list" start="6"><li><strong>Fungsi </strong><strong>strconv.ParseFloat()</strong><p id="8dd2332f-2601-4be5-a6de-a6321ba0eeb8" class="">Digunakan untuk konversi string ke numerik desimal dengan lebar data bisa ditentukan.</p><pre id="c6e2b824-6dd7-43b2-9258-6e51158f5261" class="code"><code>var str = &quot;24.12&quot;
+var num, err = strconv.ParseFloat(str, 32)
+
+if err == nil {
+   fmt.Println(num) // 24.1200008392334
+}</code></pre><p id="63f5f30a-33fa-47f1-8968-928de4e0791b" class="">Pada contoh di atas, string &quot;24.12&quot; dikonversi ke float dengan lebar tipe data float32. Hasil konversi strconv.ParseFloat adalah sesuai dengan standar <a href="https://www.google.com/url?q=https://en.wikipedia.org/wiki/IEEE_floating_point&amp;sa=D&amp;ust=1578388870781000">IEEE Standard for Floating-Point Arithmetic</a>.</p></li></ol><ol id="faa24e48-ea46-4251-8a87-98b18cd884f8" class="numbered-list" start="7"><li><strong>Fungsi </strong><strong>strconv.FormatFloat()</strong><p id="cf281103-2132-4349-8b89-9080b983f8a6" class="">Berguna untuk konversi data bertipe float64 ke string dengan format eksponen, lebar digit desimal, dan lebar tipe data bisa ditentukan.</p><p id="15963d49-c674-4729-a736-081e503ace13" class="">Pada kode di atas, Data 24.12 yang bertipe float64 dikonversi ke string dengan format eksponen f atau tanpa eksponen, lebar digit desimal 6 digit, dan lebar tipe data float64.</p><pre id="f1a56e95-bf31-4dc3-9dfe-caefde1ebe3f" class="code"><code>var num = float64(24.12)
+var str = strconv.FormatFloat(num, &#x27;f&#x27;, 6, 64)
+
+fmt.Println(str) // 24.120000</code></pre><p id="ce462db8-60e3-4921-bda4-8388c9c4683e" class="">Ada beberapa format eksponen yang bisa digunakan. Detailnya bisa dilihat di tabel berikut.</p><div id="7a10d6d8-6a33-4c89-b6a6-2274b8e690bf" class="collection-content"><h4 class="collection-title">Format Eksponen</h4><table class="collection-content"><thead><tr><th>Format</th><th>Penjelasan</th></tr></thead><tbody><tr id="932dcd32-3d02-4228-9c95-a058caba7bf4"><td class="cell-title"><a href="Konversi%20Tipe%20Data/Format%20Eksponen/b.html">b</a></td><td class="cell-!eYK">-ddddp±ddd, a, eksponen biner (basis 2)</td></tr><tr id="62fe838f-93de-424b-bd78-0bbe91b017c9"><td class="cell-title"><a href="Konversi%20Tipe%20Data/Format%20Eksponen/e.html">e</a></td><td class="cell-!eYK">-d.dddde±dd, a, eksponen desimal (basis 10)</td></tr><tr id="6776c882-fc1c-4105-9dd4-4574f6ec971a"><td class="cell-title"><a href="Konversi%20Tipe%20Data/Format%20Eksponen/E.html">E</a></td><td class="cell-!eYK">-d.ddddE±dd, a, eksponen desimal (basis 10)</td></tr><tr id="2da38fb9-d68f-4656-8659-63ab7b80e7db"><td class="cell-title"><a href="Konversi%20Tipe%20Data/Format%20Eksponen/f.html">f</a></td><td class="cell-!eYK">-ddd.dddd, tanpa eksponen</td></tr><tr id="599a1feb-abdc-4203-83c5-5968f354f2a4"><td class="cell-title"><a href="Konversi%20Tipe%20Data/Format%20Eksponen/g.html">g</a></td><td class="cell-!eYK">Akan menggunakan format eksponen e untuk eksponen besar dan f untuk selainnya</td></tr><tr id="36a08039-e4bf-4a5b-8ac5-71e9762390ea"><td class="cell-title"><a href="Konversi%20Tipe%20Data/Format%20Eksponen/G.html">G</a></td><td class="cell-!eYK">Akan menggunakan format eksponen E untuk eksponen besar dan f untuk selainnya</td></tr></tbody></table></div></li></ol><ol id="4c42d668-979b-463d-8f07-2a8b64f97eb6" class="numbered-list" start="8"><li><strong>Fungsi </strong><strong>strconv.ParseBool()</strong><p id="6b2b51d1-87bd-4f15-9aff-adeebe42f23c" class="">Digunakan untuk konversi string ke bool.</p><pre id="6033d200-4989-474c-979d-e2779589c0dc" class="code"><code>var str = &quot;true&quot;
+var bul, err = strconv.ParseBool(str)
+
+if err == nil {
+   fmt.Println(bul) // true
+}</code></pre></li></ol><ol id="f3444734-9156-4e96-a873-75dfa64a40ec" class="numbered-list" start="9"><li><strong>Fungsi </strong><strong>strconv.FormatBool()</strong><p id="903b9835-17c4-475e-809c-8bd0a03ffb1a" class="">Digunakan untuk konversi bool ke string.</p><pre id="22641a5c-a442-4441-8781-7a4f73365ccb" class="code"><code>var bul = true
+var str = strconv.FormatBool(bul)
+
+fmt.Println(str) // 124</code></pre></li></ol><ol id="2d3ddfdd-228c-4002-9fa1-868582bdaa87" class="numbered-list" start="10"><li><strong>Konversi Data Menggunakan Casting</strong><p id="d2bbca71-1212-48af-9ed5-3099ae48dfd5" class="">Keyword tipe data bisa digunakan untuk casting. Cara penggunaannya adalah dengan menuliskan tipe data sebagai fungsi dan menyisipkan data yang akan dikonversi sebagai parameternya.</p><pre id="ece45d17-83a1-421c-b0eb-6e4fb5de92b2" class="code"><code>var a float64 = float64(24)
+fmt.Println(a) // 24
+
+var b int32 = int32(24.00)
+fmt.Println(b) // 24</code></pre></li></ol><ol id="f8da8fac-bf7d-4976-ab83-3b7f831852fe" class="numbered-list" start="11"><li><strong>Casting </strong><strong>string</strong><strong> ↔ </strong><strong>byte</strong><p id="2922d91b-d8d5-44f6-a21b-3c4e8ea24028" class="">String sebenarnya adalah slice/array byte. Di Golang sebuah karakter biasa (bukan unicode) direpresentasikan oleh sebuah elemen slice byte. Tiap elemen slice berisi data int dengan basis desimal, yang merupakan kode ASCII dari karakter dalam string.</p><p id="1ecba816-f5db-4393-a3de-ad97dc2dfa41" class="">Cara mendapatkan slice byte dari sebuah data string adalah dengan meng-casting-nya ke tipe []byte.</p><pre id="62d0c8dc-47b3-4938-8790-e029bbdc3767" class="code"><code>var text1 = &quot;halo&quot;
+var b = []byte(text1)
+
+fmt.Printf(&quot;%d %d %d %d \n&quot;, b[0], b[1], b[2], b[3])
+// 104 97 108 111</code></pre><p id="1c5aa00d-5bbc-453f-9e27-e36792ba2f88" class="">Pada contoh di atas, string dalam variabel text1 dikonversi ke []byte. Tiap elemen slice byte tersebut kemudian ditampilkan satu-per-satu.</p><p id="f588f940-a6be-456e-b46a-166ded835be0" class="">Contoh berikut ini merupakan kebalikan dari contoh di atas, data bertipe []byte akan dicari bentuk string-nya.</p><pre id="cfbfb58b-2ef7-473e-89eb-f2480c6b2bbb" class="code"><code>var byte1 = []byte{104, 97, 108, 111}
+var s = string(byte1)
+
+fmt.Printf(&quot;%s \n&quot;, s)
+// halo</code></pre><p id="c323dc00-f68d-49d4-906e-ac7b7ea34d7e" class="">Pada contoh di-atas, beberapa kode byte dituliskan dalam bentuk slice, ditampung variabel byte1. Lalu, nilai variabel tersebut di-cast ke string, untuk kemudian ditampilkan.</p><p id="32cc9d90-2ff3-499b-9fd7-3c7c7be85c75" class="">Selain itu, tiap karakter string juga bisa di-casting ke bentuk int, hasilnya adalah sama yaitu data byte dalam bentuk numerik basis desimal, dengan ketentuan literal string yang digunakan adalah tanda petik satu (&#x27;).</p><p id="5367da47-1bf0-42a1-a60f-397bcca4b70c" class="">Juga berlaku sebaliknya, data numerik jika di-casting ke bentuk string dideteksi sebagai kode ASCII dari karakter yang akan dihasilkan.</p><pre id="1adc7cf0-2d72-4c68-b6ca-ad6283fb56f3" class="code"><code>var c int64 = int64(&#x27;h&#x27;)
+fmt.Println(c) // 104
+
+var d string = string(104)
+fmt.Println(d) // hf</code></pre></li></ol></div></article></body></html>

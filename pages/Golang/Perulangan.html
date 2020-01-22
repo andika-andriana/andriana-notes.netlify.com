@@ -1,0 +1,681 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Perulangan</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8f004b41-936e-4fdf-b951-af6ffc34e322" class="page sans"><header><h1 class="page-title"><strong>Perulangan</strong></h1></header><div class="page-body"><p id="983e377c-1a05-433d-9c93-bf2e66d74158" class=""><strong>Perulangan</strong><div class="indented"><p id="15af0fa7-3a4a-4da8-b14f-eb15527bda33" class="">Perulangan adalah proses mengulang-ulang eksekusi blok kode tanpa henti, selama kondisi yang dijadikan acuan terpenuhi. Biasanya disiapkan variabel untuk iterasi atau variabel penanda kapan perulangan akan diberhentikan.</p><p id="0e7fb24a-1bcd-4b42-8384-22eff3d296b2" class="">Di Go keyword perulangan hanya <strong>for</strong> saja, tetapi meski demikian, kemampuannya merupakan gabungan <code>for</code>, <code>foreach</code>, dan <code>while</code> bahasa pemrograman lain.</p></div></p><p id="416880c4-edca-4339-bacb-e16d4fda0844" class=""><strong>Perulangan Menggunakan Keyword </strong><code><strong>for</strong></code><div class="indented"><p id="5939e503-e009-40c3-b9d9-1cd839aa3b90" class="">Ada beberapa cara standar menggunakan <code>for</code>. Cara pertama dengan memasukkan variabel counter perulangan beserta kondisinya setelah keyword. Perhatikan dan praktekan kode berikut:</p><pre id="6c469efa-94a4-492c-9fff-165c8e9c25b2" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	for i := 0; i &lt; 5; i++ {
+		fmt.Println(&quot;Angka&quot;, i)
+	}
+}</code></pre><p id="fc276a6d-3dc6-4b06-bcda-d9dfc9c3c99b" class="">Hasil:</p><pre id="1591ad50-899c-4ab2-b38f-7452819b5573" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\perulangan.go
+Angka 0
+Angka 1
+Angka 2
+Angka 3
+Angka 4</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1af4fa47-145e-40da-bb51-59c596ee8031"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Perulangan di atas hanya akan berjalan ketika variabel <code>i</code> bernilai dibawah <code>5</code>, dengan ketentuan setiap kali perulangan, nilai variabel <code>i</code> akan di-iterasi atau ditambahkan 1 (<code>i++</code> artinya ditambah satu, sama seperti <code>i = i + 1</code>). Karena <code>i</code> pada awalnya bernilai 0, maka perulangan akan berlangsung 5 kali, yaitu ketika <code>i</code> bernilai 0, 1, 2, 3, dan 4.</div></figure></div></p><p id="911ad423-596c-4565-917f-1aa7adca02fb" class=""><strong>Penggunaan Keyword </strong><code><strong>for</strong></code><strong> Dengan Argumen Hanya Kondisi</strong><div class="indented"><p id="556bb4e9-da78-424c-88ff-e668428b7f0e" class="">Cara ke-2 adalah dengan menuliskan kondisi setelah keyword <code>for</code> (hanya kondisi). Deklarasi dan iterasi variabel counter tidak dituliskan setelah keyword, hanya kondisi perulangan saja. Konsepnya mirip seperti <code>while</code> milik bahasa pemrograman lain.</p><p id="f5d28845-f955-41a9-9291-5c9eba927c08" class="">Kode berikut adalah contoh <code>for</code> dengan argumen hanya kondisi (seperti <code>if</code>), output yang dihasilkan sama seperti penerapan for cara pertama.</p><p id="175581ff-b011-4fe2-913e-b972cb4e32f9" class="">Contoh:</p><pre id="16d98acd-8eb3-4fd9-90fd-f005aee9a1d1" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var i = 0
+
+	for i &lt; 5 {
+		fmt.Println(&quot;Angka&quot;, i)
+		i++
+	}
+}</code></pre><p id="a2b698b3-9a9d-4ce7-a263-2726dc93aa8f" class="">Hasil:</p><pre id="253bddd1-6f32-4836-bb4d-ef7c95762e36" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\perulangan.go
+Angka 0
+Angka 1
+Angka 2
+Angka 3
+Angka 4</code></pre></div></p><p id="928e7653-304a-42d2-ac0d-8e15608d8b8c" class=""><strong>Penggunaan Keyword </strong><code><strong>for</strong></code><strong> Tanpa Argumen</strong><div class="indented"><p id="10f8fa7e-da7c-4333-8ecb-7d1a72f9faab" class="">Cara ke-3 adalah <code>for</code> ditulis tanpa kondisi. Dengan ini akan dihasilkan perulangan tanpa henti (sama dengan <code>for true</code>). Pemberhentian perulangan dilakukan dengan menggunakan keyword <code>break</code>, Contoh:</p><pre id="a7c9a26b-eb5f-48cf-ae90-e4267d4f80db" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var i = 0
+
+	for {
+		fmt.Println(&quot;Angka&quot;, i)
+
+		i++
+		if i == 5 {
+			break
+		}
+	}
+}</code></pre><p id="0195e1d2-8139-49e5-88a9-282569a04a10" class="">Hasil:</p><pre id="45bae003-06c8-4043-a899-1f481cb0dfdc" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\perulangan.go
+Angka 0
+Angka 1
+Angka 2
+Angka 3
+Angka 4</code></pre><p id="248dce3e-ef25-410a-8462-09c76dc5589e" class="">Dalam perulangan tanpa henti di atas, variabel <code>i</code> yang nilai awalnya <code>0</code> di-inkrementasi. Ketika nilai <code>i</code> sudah mencapai <code>5</code>, keyword <code>break</code> digunakan, dan perulangan akan berhenti.</p></div></p><p id="f978f2ae-f6a9-44d5-8bff-3f8502954147" class=""><strong>Penggunaan Keyword </strong><code><strong>for</strong></code><strong> - </strong><code><strong>range</strong></code><div class="indented"><p id="e45c1c98-4091-457f-8ae9-3a3eac4453ee" class="">Cara ke-4 adalah perulangan dengan menggunakan kombinasi keyword <code>for</code> dan <code>range</code>. </p><p id="e382c886-d076-4daf-9a56-524c00654735" class="">Cara ini biasa digunakan untuk me-looping data bertipe array. Detailnya akan dibahas dalam materi selanjutnya.</p></div></p><p id="ab2e74c7-1bd0-441c-a46e-4f41347d0ca9" class=""><strong>Penggunaan Keyword </strong><code><strong>break</strong></code><strong> &amp; </strong><code><strong>continue</strong></code><div class="indented"><p id="8a6d3c97-e5f9-4e88-b29c-f9d27140a374" class="">Keyword <code>break</code> digunakan untuk menghentikan secara paksa sebuah perulangan, sedangkan <code>continue</code> dipakai untuk memaksa maju ke perulangan berikutnya.</p><p id="d9cc36dc-4cdd-4b7b-b481-496e0f7eea12" class="">Berikut merupakan contoh penerapan <code>continue</code> dan <code>break</code>. Kedua keyword tersebut dimanfaatkan untuk menampilkan angka genap berurutan yang lebih besar dari 0 dan dibawah 8, Contoh:</p><pre id="e00ecec4-e182-428c-8899-bd7dcc9425c5" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	for i := 1; i &lt;= 10; i++ {
+		if i%2 == 1 {
+			continue
+		}
+
+		if i &gt; 8 {
+			break
+		}
+
+		fmt.Println(&quot;Angka&quot;, i)
+	}
+}</code></pre><p id="6539bd42-7a69-4e9f-a77b-e6873e69df24" class="">Hasil:</p><pre id="f1ce4384-26f2-418e-b5b3-6bf171968f42" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\perulangan.go
+Angka 2
+Angka 4
+Angka 6
+Angka 8</code></pre><p id="5cbbc93c-3d48-45f2-af4e-61afc857fc0d" class="">Kode di atas akan lebih mudah dicerna jika dijelaskan secara berurutan. Berikut adalah penjelasannya.</p><ol id="169bf6f5-4858-4e9b-8408-8073f684ba4d" class="numbered-list" start="1"><li>Dilakukan perulangan mulai angka 1 hingga 10 dengan <code>i</code> sebagai variabel iterasi.</li></ol><ol id="6e36277f-eefa-4c0b-a129-798edaea19ed" class="numbered-list" start="2"><li>Ketika <code>i</code> adalah ganjil (dapat diketahui dari <code>i % 2</code>, jika hasilnya <code>1</code>, berarti ganjil), maka akan dipaksa lanjut ke perulangan berikutnya.</li></ol><ol id="8de4a695-3e29-4b8e-9762-7c86dfdcf84f" class="numbered-list" start="3"><li>Ketika <code>i</code> lebih besar dari 8, maka perulangan akan berhenti.</li></ol><ol id="1cd22e46-0647-4dd1-ba5e-085aec20ac0a" class="numbered-list" start="4"><li>Nilai <code>m</code> ditampilkan.</li></ol></div></p><p id="98c78cb7-c5e1-413a-b816-23437b679837" class=""><strong>Perulangan Bersarang</strong><div class="indented"><p id="3e332129-7154-4488-aee6-e7db3c6bed72" class="">Tak hanya seleksi kondisi yang bisa bersarang, perulangan juga bisa. </p><p id="ce1dadc0-d35b-4bf2-ab1a-de266ccb2a69" class="">Cara pengaplikasiannya kurang lebih sama, tinggal tulis blok statement perulangan didalam perulangan, Contoh:</p><pre id="d7af61c3-c18b-403f-975c-a555b9e246d3" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	for i := 0; i &lt; 5; i++ {
+		for j := i; j &lt; 5; j++ {
+			fmt.Print(j, &quot; &quot;)
+		}
+
+		fmt.Println()
+	}
+}</code></pre><p id="86a86dcf-5b4e-46d7-b5ba-770c2197aab8" class="">Hasil:</p><pre id="f879be48-4556-4ad8-9b6f-84911c801ded" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\perulangan.go
+0 1 2 3 4
+1 2 3 4
+2 3 4
+3 4
+4</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1d9d8dd1-7293-45bf-b329-c63db270057a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada kode di atas, untuk pertama kalinya fungsi <code>fmt.Println()</code> dipanggil tanpa disisipkan parameter. Cara seperti ini bisa digunakan untuk menampilkan baris baru. Kegunaannya sama seperti output dari statement <code>fmt.Print(&quot;\n&quot;)</code>.</div></figure></div></p><p id="b11454b6-6700-4344-b86d-758e0e7eee24" class=""><strong>Pemanfaatan Label Dalam Perulangan</strong><div class="indented"><p id="7b95ba9d-1c43-4de4-b5e5-97c72d91bf5a" class="">Di perulangan bersarang, <code>break</code> dan <code>continue</code> akan berlaku pada blok perulangan dimana ia digunakan saja. Ada cara agar kedua keyword ini bisa tertuju pada perulangan terluar atau perulangan tertentu, yaitu dengan memanfaatkan teknik pemberian <strong>label</strong>.</p><p id="94167424-5ed8-446f-a496-8b76a20b2c2b" class="">Program untuk memunculkan matriks berikut merupakan contoh penerapan label perulangan.</p><p id="ddedd5b4-4804-4919-bd0a-0aea2037a460" class="">Contoh:</p><pre id="c7427d14-6e4d-4dec-8f44-d78f50b14505" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+outerLoop:
+	for i := 0; i &lt; 5; i++ {
+		for j := 0; j &lt; 5; j++ {
+			if i == 3 {
+				break outerLoop
+			}
+			fmt.Print(&quot;matriks [&quot;, i, &quot;][&quot;, j, &quot;]&quot;, &quot;\n&quot;)
+		}
+	}
+}</code></pre><p id="f49f80f0-6dc5-426b-8a75-379784ac42cd" class="">Hasil:</p><pre id="3005b7ce-82a8-4edf-8bd5-421886fc7d1c" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run  .\perulangan.go                                                           matriks [0][0]
+matriks [0][1]
+matriks [0][2]
+matriks [0][3]
+matriks [0][4]
+matriks [1][0]
+matriks [1][1]
+matriks [1][2]
+matriks [1][3]
+matriks [1][4]
+matriks [2][0]
+matriks [2][1]
+matriks [2][2]
+matriks [2][3]
+matriks [2][4]</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="50860551-9ccd-4bae-b017-338cdea67f5e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Tepat sebelum keyword <code>for</code> terluar, terdapat baris kode <code>outerLoop:</code>. Maksud dari kode tersebut adalah disiapkan sebuah label bernama <code>outerLoop</code> untuk <code>for</code> dibawahnya. Nama label bisa diganti dengan nama lain (dan harus diakhiri dengan tanda titik dua atau <em>colon</em> (<code>:</code>) ).
+
+Pada <code>for</code> bagian dalam, terdapat seleksi kondisi untuk pengecekan nilai <code>i</code>. Ketika nilai tersebut sama dengan <code>3</code>, maka <code>break</code> dipanggil dengan target adalah perulangan yang dilabeli <code>outerLoop</code>, perulangan tersebut akan dihentikan.</div></figure></div></p></div></article></body></html>

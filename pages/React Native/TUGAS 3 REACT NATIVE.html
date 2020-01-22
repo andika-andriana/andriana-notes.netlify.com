@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TUGAS 3 REACT NATIVE</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f4f04010-d347-4769-84c2-d853c7cf50cb" class="page sans"><header><h1 class="page-title"><strong>TUGAS 3 REACT NATIVE</strong></h1></header><div class="page-body"><p id="9876845f-0db2-49df-a3ae-d8138dfeef4b" class=""><strong>Tujuan :</strong></p><ul id="ce44a867-dcb4-45cb-9f10-01d684c24896" class="bulleted-list"><li>Memahami cara penggunaan handling touches.</li></ul><ul id="4550bfed-32a6-4acb-bca5-554a9ac1317b" class="bulleted-list"><li>Memahami cara penggunaan style.</li></ul><ul id="ce227e40-a927-445d-838d-06e91cf8f0d4" class="bulleted-list"><li>Memahami cara penggunaan layout.</li></ul><p id="98102714-319c-4437-9ec7-47ad3b4e9a1e" class=""><strong>Petunjuk :</strong></p><ul id="ff247efa-eae9-4796-a7ac-34f53cee3285" class="bulleted-list"><li>Perintah untuk membuat project baru :<pre id="dbcfa9c9-3a70-475f-9cd5-15610d0615ad" class="code"><code>React-native init nama_project_yang_ingin_anda_buat</code></pre></li></ul><ul id="8913fb67-bf33-4fda-8d9c-2cf8150bb83f" class="bulleted-list"><li>Code Membuat Class Component<pre id="1b57e0de-dd70-4201-8147-9d8f2cfdbdb7" class="code"><code>class nama_class_component extends Component {
+                render() {
+                   return (
+                        // Tuliskan Code anda Di Sini
+);  } }</code></pre></li></ul><ul id="f2f6e4f4-199d-46e9-b1c3-ab0a3a5960f8" class="bulleted-list"><li>Code Membuat Function Component<pre id="618a45d3-47e2-4be7-8146-f0bba9c9b213" class="code"><code>const nama_function_component = () =&gt; {
+
+
+};</code></pre></li></ul><p id="af401a67-0a2c-4806-8096-9c2318ae258a" class=""><strong>Tugas :</strong><div class="indented"><p id="5944646d-b35c-40d3-ad2e-15a95ebbd695" class="">Pada tugas ini anda diminta untuk membuat sebuah project baru dengan nama tugas3_react_native :</p><ol id="72d1014b-f37d-44b1-a3e8-8882eb9d2577" class="numbered-list" start="1"><li>Buatlah Folder Dengan Nama Component :</li></ol><ol id="de3fe942-a19f-40ee-87ed-11d1ad87bbfb" class="numbered-list" start="2"><li>Di Dalam Folder Component Buatlah File Dengan Nama Barang.js Dengan Ketentuan :<ul id="9df6f6bf-df69-4526-b0d8-94d35dc71151" class="bulleted-list"><li>Buatlah state.</li></ul><ul id="0e9691f9-ca1d-455b-b99b-d5f2b0cffcf3" class="bulleted-list"><li>Buatlah 2 Function Untuk mengeset state yang telah di buat :</li></ul><ul id="2384a262-8fc6-4d42-aa70-1e129c990110" class="bulleted-list"><li>Di Dalam Salah Satu Function Tambahkan Kondisi :<pre id="125b1254-d6a2-41ca-9ff4-1dbfdace1510" class="code"><code>if (this.state.jumlah &gt; 0) {
+    //Tulis Code Anda
+
+    } else {
+     alert(&quot;Jumlah Tidak Boleh Kurang Dari 0&quot;);
+   }</code></pre></li></ul><ul id="b16b04d6-3ec9-4f9f-8fa1-ad0625ada3e6" class="bulleted-list"><li>Buatlah 2 TouchableOpacity Lalu Ketika TouchableOpacity Ditekan Maka Akan Memanggil Function Yang Telah Dibuat.</li></ul><ul id="cfcf10bc-2589-4f17-b3ff-97723d537aad" class="bulleted-list"><li>Di Dalam TouchableOpacity Tambahkan Property Style.</li></ul><ul id="f80d3f9c-e75d-4bc4-b84b-4b631dcd083f" class="bulleted-list"><li>Di Dalam Component TouchableOpacity Tambahkan Component Text Untuk Menampilkan Tulisan :<pre id="0add1586-aa77-4efb-b3bb-ac8997212161" class="code"><code>&lt;TouchableOpacity&gt;
+    &lt;Text &gt;//Masukkan Code Ande &lt;/Text&gt;
+
+  &lt;/TouchableOpacity&gt;</code></pre></li></ul><ul id="28b9fd6e-3955-4041-b9d7-64ead04122a4" class="bulleted-list"><li>Ketika Salah Satu TouchableOpacity Di Tekan Ketika State Jumlah &gt; 0 Maka Akan Menampilkan Pesan</li></ul><ul id="6bdad12f-a89b-4e61-bdff-e51c92ba7660" class="bulleted-list"><li>Tampilkan State Yang Telah Di Buat.</li></ul></li></ol><ol id="08ee44bb-956d-4175-9f24-563f260e44aa" class="numbered-list" start="3"><li>Di Dalam Folder Component Buatlah File Dengan Nama Headers.js Dengan Ketentuan :<ul id="d84e1582-9813-4c22-b92e-b75f6dec23e0" class="bulleted-list"><li>Buatlah Component Text Dengan Tulisan Tugas 3 React Native Lalu Tambahkan Property Style.</li></ul><ul id="3030704f-cca5-4927-a9fd-0379ba695649" class="bulleted-list"><li>Buatlah Component Text Yang Menampilkan Props Yang Di Dapat Dari App.js Lalu Tambahkan Property Style.</li></ul></li></ol><ol id="f41ee62d-4dfe-4c94-af95-a6d5cb5767c2" class="numbered-list" start="4"><li>Di Dalam File App.js :<ul id="d6f91529-4a37-494b-b69b-33b731769683" class="bulleted-list"><li>Import File Barang.js Yang Berada Di Dalam Folder Component.</li></ul><ul id="c6a16d83-1afd-471f-88ac-1bff57b762c0" class="bulleted-list"><li>Import File Headers.js Yang Berada Di Dalam Folder Component.</li></ul><ul id="899e7ea7-ffa0-413a-925e-36a12cb34995" class="bulleted-list"><li>Di Dalam Component Barang Buat Props <code>data=&quot;SELAMAT DATANG&quot;</code></li></ul></li></ol><ol id="8add0f88-61b8-4df2-998c-cfd582c8ab11" class="numbered-list" start="5"><li>Tampilan Aplikasi :</li></ol><figure id="43435ddc-c99c-4ad4-83f7-c9964c891647" class="image"><a href="https://lh6.googleusercontent.com/EnMgDKDYI6xrEx_owxjCQkNcadzQv7azF0nYOjK7pdwkpAP_IQGC8_0pdRlHCJFQJAxSMzjy6tJbjaP5a_t5nl8F5lm1jHgpX9LgCZU8LErznPIWCXHU9Qur0NRdjn8rPpJ_wG0E"><img src="https://lh6.googleusercontent.com/EnMgDKDYI6xrEx_owxjCQkNcadzQv7azF0nYOjK7pdwkpAP_IQGC8_0pdRlHCJFQJAxSMzjy6tJbjaP5a_t5nl8F5lm1jHgpX9LgCZU8LErznPIWCXHU9Qur0NRdjn8rPpJ_wG0E"/></a></figure><figure id="5b9170b6-5759-45a3-9fca-c5c4a5d4f2c4" class="image"><a href="https://lh5.googleusercontent.com/7IsbkcvAiIw6hb3DYjP_oIMBI09fiTJJGl17IQG13URNbLaDQir_PkPzgVcu9CrZsSwIY3BbOmNqzty6ETZeF7izN61RyzxLdj_pTFarcyKcTGmaJLHwfUuPKnWXPDp8SV7phzNR"><img src="https://lh5.googleusercontent.com/7IsbkcvAiIw6hb3DYjP_oIMBI09fiTJJGl17IQG13URNbLaDQir_PkPzgVcu9CrZsSwIY3BbOmNqzty6ETZeF7izN61RyzxLdj_pTFarcyKcTGmaJLHwfUuPKnWXPDp8SV7phzNR"/></a></figure><figure id="c41fb7ff-175d-445b-921d-938780e40b52" class="image"><a href="https://lh5.googleusercontent.com/uRyROQ4Oh0sRYZtAue7lbX692SPVutjuFKNVdzB-YQZwDrFIFLoO33UnJLiKQ8-5J_qUZli2TJPYAZKsD_-_RkyvBamNLER9qZLNdTwg7ZlQLRI_DbP5YUjGin7kuZR5gmIOpDzH"><img src="https://lh5.googleusercontent.com/uRyROQ4Oh0sRYZtAue7lbX692SPVutjuFKNVdzB-YQZwDrFIFLoO33UnJLiKQ8-5J_qUZli2TJPYAZKsD_-_RkyvBamNLER9qZLNdTwg7ZlQLRI_DbP5YUjGin7kuZR5gmIOpDzH"/></a></figure></div></p><hr id="74f257a7-f1db-417d-9344-9783c16c0a0a"/><ul id="1b7fe849-9b3a-48a6-84ec-bf98883204fc" class="bulleted-list"><li>App.js:<pre id="50f0b0b1-17f2-4e43-b6d9-ce457456b5d8" class="code"><code>/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
+import React, {Component} from &#x27;react&#x27;;
+import {View, Text, StatusBar} from &#x27;react-native&#x27;;
+import Barang from &#x27;./Component/Barang&#x27;;
+import Header from &#x27;./Component/Header&#x27;;
+
+export default class App extends Component&lt;Props&gt; {
+  render() {
+    return (
+      &lt;View&gt;
+        &lt;StatusBar backgroundColor=&quot;grey&quot; /&gt;
+        &lt;View&gt;
+          &lt;Header data=&quot;SELAMAT DATANG&quot; /&gt;
+        &lt;/View&gt;
+        &lt;Barang /&gt;
+      &lt;/View&gt;
+    );
+  }
+}</code></pre></li></ul><ul id="a7899f7e-98ba-4e1d-9257-4cd5dbadca49" class="bulleted-list"><li>Component\Header.js:<pre id="2fa732c9-2579-4a69-8aaf-d1e2811061bb" class="code"><code>import React, {Component} from &#x27;react&#x27;;
+import {View, Text} from &#x27;react-native&#x27;;
+
+export default class Header extends Component {
+  render() {
+    return (
+      &lt;View style={{backgroundColor: &#x27;olivedrab&#x27;, padding: 20}}&gt;
+        &lt;Text style={{color: &#x27;white&#x27;, fontSize: 12, textAlign: &#x27;center&#x27;}}&gt;
+          Tugas 3 React Native
+        &lt;/Text&gt;
+        &lt;Text
+          style={{
+            color: &#x27;purple&#x27;,
+            fontSize: 20,
+            textAlign: &#x27;center&#x27;,
+            margin: 5,
+          }}&gt;
+          {this.props.data}
+        &lt;/Text&gt;
+      &lt;/View&gt;
+    );
+  }
+}</code></pre></li></ul><ul id="efe78245-1989-44ee-8d12-17225c24cf5c" class="bulleted-list"><li>Component\Barang.js:<pre id="23cc63f5-02b0-4eb7-8d3f-1c26d38e240d" class="code"><code>import React, {Component} from &#x27;react&#x27;;
+import {View, TouchableOpacity, Text, StyleSheet} from &#x27;react-native&#x27;;
+
+export default class Barang extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      jumlah: 0,
+    };
+  }
+
+  handleTambah = () =&gt; {
+    this.setState({jumlah: this.state.jumlah + 1});
+  };
+
+  handleKurang = () =&gt; {
+    if (this.state.jumlah &gt; 0) {
+      this.setState({jumlah: this.state.jumlah - 1});
+    } else {
+      alert(&#x27;Jumlah Tidak Boleh Kurang Dari 0&#x27;);
+    }
+  };
+
+  render() {
+    return (
+      &lt;View&gt;
+        &lt;View&gt;
+          &lt;Text style={{textAlign: &#x27;right&#x27;, marginRight: 8}}&gt;
+            Jumlah : {this.state.jumlah}
+          &lt;/Text&gt;
+          &lt;Text style={{textAlign: &#x27;center&#x27;, marginTop: 30}}&gt;
+            Silahkan Tekan Tombol Dibawah
+          &lt;/Text&gt;
+        &lt;/View&gt;
+        &lt;View style={styles.buttonContainer}&gt;
+          &lt;View&gt;
+            &lt;TouchableOpacity
+              style={{
+                width: 100,
+                height: 30,
+                backgroundColor: &#x27;green&#x27;,
+              }}
+              onPress={this.handleTambah}
+              value={this.state.jumlah}&gt;
+              &lt;Text style={{textAlign: &#x27;center&#x27;, fontSize: 20, color: &#x27;white&#x27;}}&gt;
+                +
+              &lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;
+          &lt;/View&gt;
+          &lt;View&gt;
+            &lt;TouchableOpacity
+              style={{
+                width: 100,
+                height: 30,
+                backgroundColor: &#x27;red&#x27;,
+              }}
+              onPress={this.handleKurang}
+              value={this.state.inputan}&gt;
+              &lt;Text
+                style={{
+                  textAlign: &#x27;center&#x27;,
+                  fontSize: 20,
+                  color: &#x27;white&#x27;,
+                }}&gt;
+                -
+              &lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;
+          &lt;/View&gt;
+        &lt;/View&gt;
+        &lt;View style={{margin: 50}}&gt;
+          &lt;Text style={{textAlign: &#x27;center&#x27;, color: &#x27;blue&#x27;, fontSize: 50}}&gt;
+            {this.state.jumlah}
+          &lt;/Text&gt;
+        &lt;/View&gt;
+      &lt;/View&gt;
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flex: 1,
+    flexDirection: &#x27;row&#x27;,
+    margin: 30,
+    justifyContent: &#x27;space-around&#x27;,
+  },
+});</code></pre></li></ul><ul id="f10f75bd-9b14-4c6b-8f98-f01d218340fa" class="bulleted-list"><li>Hasil AVD:<figure id="22b1b94d-e402-473f-9ef9-c534e80a5808" class="image"><a href="TUGAS%203%20REACT%20NATIVE/1_Screenshot_App.png"><img style="width:370px" src="TUGAS%203%20REACT%20NATIVE/1_Screenshot_App.png"/></a></figure><figure id="982a41f8-3bcf-4c91-8913-9835f6d1d90d" class="image"><a href="TUGAS%203%20REACT%20NATIVE/2_Screenshot_App_Tambah.png"><img style="width:369px" src="TUGAS%203%20REACT%20NATIVE/2_Screenshot_App_Tambah.png"/></a></figure><figure id="34cb73ec-f563-4dea-bbea-b4c5acf03d30" class="image"><a href="TUGAS%203%20REACT%20NATIVE/3_Screenshot_App_Kurang.png"><img style="width:369px" src="TUGAS%203%20REACT%20NATIVE/3_Screenshot_App_Kurang.png"/></a></figure><figure id="d9ebe20a-abf4-4d70-a6eb-4cc34db06c21" class="image"><a href="TUGAS%203%20REACT%20NATIVE/4_Screenshot_App_Alert.png"><img style="width:370px" src="TUGAS%203%20REACT%20NATIVE/4_Screenshot_App_Alert.png"/></a></figure></li></ul></div></article></body></html>

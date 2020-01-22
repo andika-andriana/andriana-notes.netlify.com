@@ -1,0 +1,620 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Character set dan Collation di dalam MySQL</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3ecf74a6-9bb5-486e-90b9-5d35d64926bd" class="page sans"><header><h1 class="page-title">Character set dan Collation di dalam MySQL</h1></header><div class="page-body"><ol id="6de30c64-969c-4ce4-a3a2-d581dafa3b7f" class="numbered-list" start="1"><li><strong>Database, Character set dan Collection</strong><p id="c8a30c98-edf3-4999-9aef-7d8bb9ff1af3" class="">Beberapa query terkait database:</p><ul id="c0e89dae-e0f5-4581-be28-bfba12a1ba09" class="bulleted-list"><li>CREATE DATABASE / CREATE SCHEMA</li></ul><ul id="1383eb12-78f0-4b27-add7-b3f775de0dce" class="bulleted-list"><li>USE DATABASE</li></ul><ul id="d30f175a-bd39-4449-b2d4-43c30135dc77" class="bulleted-list"><li>SHOW DATABASES</li></ul><ul id="1d6f73b6-d72a-4d5c-9565-8b51abbfdd45" class="bulleted-list"><li>DROP DATABASE / DROP SCHEMA</li></ul><p id="cce5f501-f8dc-44c4-afcf-4490b87a6aff" class=""><mark class="highlight-yellow_background">Schema merupakan istilah lain dari database sehingga bisa digunakan sebagai perintah alternatif. </mark>Query tambahan yang belum dibahas untuk pembuatan database adalah mengenai <strong>character set</strong> dan <strong>collation</strong>.</p></li></ol><ol id="4fb66ebd-b810-4608-8471-79fa88d98f99" class="numbered-list" start="2"><li><strong>Pengertian Character set dan Collation </strong> <p id="c1739d32-d897-49d4-835c-fc856cad641d" class=""><mark class="highlight-yellow_background">Character set (biasa disingkat sebagai charset) adalah kumpulan karakter yang bisa dipahami oleh komputer. Sedangkan collation adalah aturan pengurutan data berdasarkan charset.</mark></p><p id="b399bf9a-e4c9-4273-b35c-3e4681d36e2e" class="">Charset mengatur bagaimana MySQL menyimpan setiap karakter ke dalam tabel. Tag &lt;meta charset=&quot;UTF-8&quot;&gt;. UTF-8 adalah salah satu contoh dari character set.</p><p id="4dcb4206-1e46-4bcd-8ea9-e5821e9e651d" class="">Materi tentang charset dan collation ini sebenarnya baru diperlukan jika berencana menyimpan huruf non-latin ke dalam MySQL, seperti karakter jepang, korea, china atau arab. Untuk alphabet latin yang kita gunakan sehari-hari, charset dan collation tidak terlalu berpengaruh.</p></li></ol><ol id="0028bb7d-b7f5-41e7-aa54-66fb6e3af280" class="numbered-list" start="3"><li><strong>Character Set di dalam MySQL</strong> <p id="790a0540-fd6e-4700-82f2-fcaa6b385639" class="">MySQL mendukung hampir semua character set yang ada. Untuk melihat apa saja character set yang tersedia, bisa menjalankan query <mark class="highlight-yellow_background">SHOW CHARACTER SET</mark>:</p><pre id="515ec7e2-5e1a-4e43-a5e6-4da1963f23af" class="code"><code>mysql&gt; SHOW CHARACTER SET;
++----------+-----------------------------+---------------------+--------+
+| Charset  | Description                 | Default collation   | Maxlen |
++----------+-----------------------------+---------------------+--------+
+| big5     | Big5 Traditional Chinese    | big5_chinese_ci     |      2 |
+| dec8     | DEC West European           | dec8_swedish_ci     |      1 |
+| cp850    | DOS West European           | cp850_general_ci    |      1 |
+| hp8      | HP West European            | hp8_english_ci      |      1 |
+| koi8r    | KOI8-R Relcom Russian       | koi8r_general_ci    |      1 |
+| latin1   | cp1252 West European        | latin1_swedish_ci   |      1 |
+| latin2   | ISO 8859-2 Central European | latin2_general_ci   |      1 |
+| swe7     | 7bit Swedish                | swe7_swedish_ci     |      1 |
+
+. . . . .
+| macroman | Mac West European           | macroman_general_ci |      1 |
+| cp852    | DOS Central European        | cp852_general_ci    |      1 |
+| latin7   | ISO 8859-13 Baltic          | latin7_general_ci   |      1 |
+| utf8mb4  | UTF-8 Unicode               | utf8mb4_general_ci  |      4 |
+| cp1251   | Windows Cyrillic            | cp1251_general_ci   |      1 |
+| utf16    | UTF-16 Unicode              | utf16_general_ci    |      4 |
+| utf16le  | UTF-16LE Unicode            | utf16le_general_ci  |      4 |
+| cp1256   | Windows Arabic              | cp1256_general_ci   |      1 |
+| cp1257   | Windows Baltic              | cp1257_general_ci   |      1 |
+| utf32    | UTF-32 Unicode              | utf32_general_ci    |      4 |
+| binary   | Binary pseudo charset       | binary              |      1 |
+| geostd8  | GEOSTD8 Georgian            | geostd8_general_ci  |      1 |
+| cp932    | SJIS for Windows Japanese   | cp932_japanese_ci   |      2 |
+| eucjpms  | UJIS for Windows Japanese   | eucjpms_japanese_ci |      3 |
++----------+-----------------------------+---------------------+--------+
+40 rows in set (0.01 sec)</code></pre><p id="330fac80-5672-43f5-aba0-4a253a898e05" class="">Terdapat 40 charset yang bisa dipilih. Di kolom <em>Description </em>kita bisa membaca penjelasannya. Misalnya <strong>big5</strong> charset yang ditujukan untuk karakter <strong>Traditional Chinese</strong>.</p><p id="face2012-e76e-4cdf-af96-555f7aa979ce" class="">Di kolom paling kanan, Maxlen menunjukkan maksimal byte dari setiap charset. latin1 hanya butuh 1 byte, sedangkan utf32 butuh 4 byte.</p><p id="134e71f0-5813-46f1-8e9a-499d020fa37f" class="">Kolom ketiga dari tabel charset diatas berisi Default collation. Yakni sebuah aturan pengurutan karakter untuk suatu charset. Pengurutan ini perlu karena ada perbedaan di beberapa bahasa.</p><p id="241d75e9-c4fa-42be-a11d-c6bab4bb1c4e" class="">Untuk melihat apa saja collation yang didukung oleh MySQL bisa menjalankan query <mark class="highlight-yellow_background">SHOW COLLATION</mark>:</p><pre id="f431404f-2f1d-4fc2-8269-07ae8a5a9655" class="code"><code>+----------+-----------------------------+---------------------+-----------+
+| Collation                | Charset  | Id  | Default | Compiled | Sortlen |
++----------+-----------------------------+---------------------+-----------+
+
+| utf32_danish_ci          | utf32    | 171 |         | Yes      |       8 |
+| utf32_lithuanian_ci      | utf32    | 172 |         | Yes      |       8 |
+| utf32_slovak_ci          | utf32    | 173 |         | Yes      |       8 |
+| utf32_spanish2_ci        | utf32    | 174 |         | Yes      |       8 |
+| utf32_roman_ci           | utf32    | 175 |         | Yes      |       8 |
+| utf32_persian_ci         | utf32    | 176 |         | Yes      |       8 |
+| utf32_esperanto_ci       | utf32    | 177 |         | Yes      |       8 |
+| utf32_hungarian_ci       | utf32    | 178 |         | Yes      |       8 |
+| utf32_sinhala_ci         | utf32    | 179 |         | Yes      |       8 |
+. . . . .
+| utf32_croatian_ci        | utf32    | 181 |         | Yes      |       8 |
+| utf32_unicode_520_ci     | utf32    | 182 |         | Yes      |       8 |
+| utf32_vietnamese_ci      | utf32    | 183 |         | Yes      |       8 |
+| binary                   | binary   |  63 | Yes     | Yes      |       1 |
+| geostd8_general_ci       | geostd8  |  92 | Yes     | Yes      |       1 |
+| geostd8_bin              | geostd8  |  93 |         | Yes      |       1 |
+| cp932_japanese_ci        | cp932    |  95 | Yes     | Yes      |       1 |
+| cp932_bin                | cp932    |  96 |         | Yes      |       1 |
+| eucjpms_japanese_ci      | eucjpms  |  97 | Yes     | Yes      |       1 |
+| eucjpms_bin              | eucjpms  |  98 |         | Yes      |       1 |
++--------------------------+----------+-----+---------+----------+---------+
+219 rows in set (0.00 sec)</code></pre><p id="b891381f-c143-4d97-9956-de348a3c3c50" class="">Terdapat 219 pilihan collation! Akan tetapi, kita tidak bisa sembarang memilih collation. Sebuah collation hanya bisa digunakan untuk character set tertentu saja. Misalnya collation big5_chinese_ci dan big5_bin hanya bisa untuk character set <strong>big5</strong>. Ini bisa dilihat di kolom Charset dari tabel diatas.</p><p id="2a68960c-d496-40e9-b0d1-cffeaa422906" class="">Untuk bisa “membaca” character set apa sebuah collation bisa dipakai, kita bisa pecah nama collation menjadi 3 pola:</p><pre id="53ff45ee-5bb1-44bb-b3d2-952f9212f658" class="code"><code>&quot;nama charset&quot;_&quot;nama bahasa / negara&quot;_&quot;case sensitifity&quot;.</code></pre><p id="86559655-f54f-473d-8de6-0ec3c9411735" class="">Akhiran _ci berarti <strong>case insensitif</strong>, _cs berarti <strong>case sensitif</strong>, dan _bin berarti <strong>binary</strong>. Sebagai contoh, <mark class="highlight-yellow_background">utf32_croatian_ci</mark> artinya collation ini digunakan untuk charset utf32, bahasa kroasia, dan bersifat case insensitif (tidak membedakan huruf besar dan kecil).</p><p id="69aa5f7f-5316-43e7-b85b-ebe1eeb13b63" class="">
+</p></li></ol></div></article></body></html>

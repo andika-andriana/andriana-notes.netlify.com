@@ -1,0 +1,919 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Study Kasus</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0117a439-f856-4962-9a35-12e394dc6e32" class="page sans"><header><h1 class="page-title">Study Kasus</h1></header><div class="page-body"><p id="38855392-0cd1-4708-942a-430dce47421a" class="">Kali ini kita akan membuat aplikasi ekatalog dengan framework laravel dengan PHP:</p><ol id="0f9fb8a7-a492-4941-b770-1cbafec0a162" class="numbered-list" start="1"><li>Buat project Ekatalog dengan fw laravel dan load projectnya pada text editor:<figure id="8240ce17-c186-4fbf-8b3f-e4ca662e5c50" class="image"><a href="Study%20Kasus/Untitled.png"><img style="width:291px" src="Study%20Kasus/Untitled.png"/></a></figure></li></ol><ol id="deb4a8de-8c1c-4905-99a2-c680c0342bb0" class="numbered-list" start="2"><li>Kita akan membuat Aplikasi Ekatalog dengan konsep seperti:<figure id="b2b1c3fd-b0b4-47a4-97a5-9115c34c59e7" class="image"><a href="Study%20Kasus/Untitled%201.png"><img style="width:985px" src="Study%20Kasus/Untitled%201.png"/></a></figure></li></ol><ol id="09b39538-fb11-48b0-8591-ecae5013d208" class="numbered-list" start="3"><li>Buat database terlebih dahulu menggunakan PhpMyAdmin (ekatalog):<figure id="ce67ed13-e761-475d-99a4-00c03e7519e0" class="image"><a href="Study%20Kasus/Untitled%202.png"><img style="width:859px" src="Study%20Kasus/Untitled%202.png"/></a></figure></li></ol><ol id="6cc7eb8b-c961-4962-b8f3-05ee83a64633" class="numbered-list" start="4"><li>Hubungkan database tersebut dengan project laravel kita:<figure id="3fb272b7-399f-4218-a780-2121a52d9511" class="image"><a href="Study%20Kasus/Untitled%203.png"><img style="width:867px" src="Study%20Kasus/Untitled%203.png"/></a></figure></li></ol><ol id="d1d9dc4f-4e78-411c-a269-8c40222063a1" class="numbered-list" start="5"><li>Buat table pada database tersebut menggunakan fungsi migration yang tersedia pada php artisan pada project laravel:<pre id="2a93ae4a-d6c2-4ff9-a017-58142002993e" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:migration tbl_katalog
+Created Migration: 2019_12_31_075715_tbl_katalog</code></pre></li></ol><ol id="a7ef7bed-ec1e-4946-9105-063cf235811d" class="numbered-list" start="6"><li>Setelah melakukan migration maka akan muncul file baru, kemudian isikan struktur tabel pada file tersebut:<figure id="b3fc0ad3-3be9-4608-83ab-70061ac836bf" class="image"><a href="Study%20Kasus/Untitled%204.png"><img style="width:868px" src="Study%20Kasus/Untitled%204.png"/></a></figure><pre id="3b03a918-feaa-4f18-9b82-5ad4e6ff7a4b" class="code"><code>&lt;?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class TblKatalog extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+      Schema::create(&#x27;tbl_katalog&#x27;, function(Blueprint $table){
+        $table-&gt;increments(&#x27;id&#x27;);
+        $table-&gt;string(&#x27;nama_produk&#x27;);
+        $table-&gt;string(&#x27;berat&#x27;);
+        $table-&gt;float(&#x27;harga&#x27;);
+        $table-&gt;string(&#x27;gambar&#x27;);
+        $table-&gt;string(&#x27;keterangan&#x27;);
+      });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}</code></pre></li></ol><ol id="3b5b2c1c-893f-43ed-86cf-39bdccc8d045" class="numbered-list" start="7"><li>gunakan create-user-table file yang didapat dari fungsi migration untuk membuat table user yang kita butuhkan:<figure id="c0a4a600-5c6e-4e1d-8b20-405d2225d581" class="image"><a href="Study%20Kasus/Untitled%205.png"><img style="width:672px" src="Study%20Kasus/Untitled%205.png"/></a></figure></li></ol><ol id="da379aee-c5ae-4ed6-b1a1-fcff3c4082d3" class="numbered-list" start="8"><li>Kemudian buat struktur tablenya pada file <code>create_users_table.php</code>:<pre id="788ab48e-20ad-42d1-8d84-daa1a4beb9da" class="code"><code>&lt;?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create(&#x27;tbl_user&#x27;, function (Blueprint $table) {
+            $table-&gt;increments(&#x27;id&#x27;);
+            $table-&gt;string(&#x27;name&#x27;);
+            $table-&gt;string(&#x27;username&#x27;)-&gt;unique();
+            $table-&gt;string(&#x27;password&#x27;);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop(&#x27;users&#x27;);
+    }
+}</code></pre></li></ol><ol id="52d250a8-a0aa-4db6-84c2-020457c1029d" class="numbered-list" start="9"><li>Buat tabel pertanyaan menggunakan fungsi migration lagi:<pre id="4074ae1a-e1b8-4b36-82ea-472ce76c5c00" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:migration tbl_pertanyaan
+Created Migration: 2019_12_31_080957_tbl_pertanyaan</code></pre></li></ol><ol id="dd66b593-aed1-435c-93b0-b2509b97a98b" class="numbered-list" start="10"><li>kemudian buat struktur tabelnya dalam file tersebut:<figure id="c43066d2-de75-4590-bd06-69592566115b" class="image"><a href="Study%20Kasus/Untitled%206.png"><img style="width:1036px" src="Study%20Kasus/Untitled%206.png"/></a></figure><pre id="922d92c1-a52d-4204-a517-1a2789a260f3" class="code"><code>&lt;?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class TblPertanyaan extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+      Schema::create(&#x27;tbl_pertanyaan&#x27;, function(Blueprint $table){
+        $table-&gt;increments(&#x27;id&#x27;);
+        $table-&gt;string(&#x27;pertanyaan&#x27;);
+        $table-&gt;string(&#x27;jawaban&#x27;);
+      });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}</code></pre></li></ol><ol id="86513f29-20fa-4064-8904-9ba3ba6a35fb" class="numbered-list" start="11"><li>Kemudian migrate table dan struktur table kedalam database dengan menggunakan php artisan:<pre id="2a039ae8-7d35-489f-bc85-659b5cdb370f" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan migrate
+Migration table created successfully.
+Migrated: 2014_10_12_000000_create_users_table
+Migrated: 2014_10_12_100000_create_password_resets_table
+Migrated: 2019_12_31_075715_tbl_katalog
+Migrated: 2019_12_31_080957_tbl_pertanyaan</code></pre></li></ol><ol id="7ce7237e-9868-4e5f-bd70-e290f6d25a5b" class="numbered-list" start="12"><li>Kemudian buka phpmyadmin, refresh dan dan jika berhasil table dan struktur table akan terbuat:<figure id="054d493a-7bc3-4b86-8c29-51f3308222c0" class="image"><a href="Study%20Kasus/Untitled%207.png"><img style="width:1146px" src="Study%20Kasus/Untitled%207.png"/></a></figure></li></ol><ol id="2673a5d2-0b32-4a72-abb9-b4fac81be3e7" class="numbered-list" start="13"><li>Hapus table yang tidak kita perlukan:<figure id="b5a1ad52-fa54-44f5-be8e-03143524e9a5" class="image"><a href="Study%20Kasus/Untitled%208.png"><img style="width:1174px" src="Study%20Kasus/Untitled%208.png"/></a></figure></li></ol><ol id="09dad60e-d83f-499c-bf9e-e5be529aafa6" class="numbered-list" start="14"><li>Kemudian buat model pada project kita menggunakan php artisan, yang akan difungsikan untuk membaca dan menulis data kedalam tabel katalog pada database:<pre id="0b7c08a9-ab52-492b-a4ad-87605deeb175" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:model tbl_katalog
+Model created successfully.</code></pre></li></ol><ol id="aac9a5ca-fbf1-42f6-afe8-8fc9115528d1" class="numbered-list" start="15"><li>Deklarasikan sebuah model pada model tbl_katalog:<pre id="9ef2868a-b140-410a-8def-0685e2406010" class="code"><code>&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tbl_katalog extends Model
+{
+  public $timestamps = false;
+  protected $table = &quot;tbl_katalog&quot;;
+  protected $fillable = [&#x27;nama_produk&#x27;,&#x27;berat&#x27;,&#x27;harga&#x27;,&#x27;gambar&#x27;,&#x27;keterangan&#x27;];
+}</code></pre></li></ol><ol id="223e0641-1d47-43f4-9eea-e18f390e7103" class="numbered-list" start="16"><li>Buat juga controller pada project kita:<pre id="cecce4a3-1c50-43f4-b76f-418698d5c3e9" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:controller Barang
+Controller created successfully.</code></pre></li></ol><ol id="adf3a832-eef4-4c15-b660-7d7500fe209b" class="numbered-list" start="17"><li>Kemudian buatlah fungsi didalamnya yang dapat melakukan fungsi APIs (Controller Barang):<pre id="03dba634-684c-4dc5-85e1-7329e444941b" class="code"><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\tbl_katalog;
+use Illuminate\Support\Facades\DB;
+
+class Barang extends Controller
+{
+  public function store(Request $request){
+    $this-&gt;validate($request, [
+      &#x27;file&#x27; =&gt; &#x27;required|max:2048&#x27;
+    ]);
+    $file = $request-&gt;file(&#x27;file&#x27;);
+    $nama_file = time().&quot;_&quot;.$file-&gt;getClientOriginalName();
+    $tujuan_upload = &#x27;data_file&#x27;;
+    if($file-&gt;move($tujuan_upload,$nama_file)){
+      $data = tbl_katalog::create([
+        &#x27;nama_produk&#x27; =&gt; $request-&gt;nama_produk,
+        &#x27;berat&#x27; =&gt; $request-&gt;berat,
+        &#x27;harga&#x27; =&gt; $request-&gt;harga,
+        &#x27;gambar&#x27; =&gt; $nama_file,
+        &#x27;keterangan&#x27; =&gt; $request-&gt;keterangan
+      ]);
+      $res[&#x27;message&#x27;] = &quot;Berhasil Menambahkan Data&quot;;
+      $res[&#x27;values&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;message&#x27;] = &quot;Gagal Menambahkan Data&quot;;
+      return response($res);
+    }
+  }
+
+  public function getData(){
+    $data = DB::table(&#x27;tbl_katalog&#x27;)-&gt;get();
+    if(count($data) &gt; 0){
+      $res[&#x27;message&#x27;] = &quot;Berhasil&quot;;
+      $res[&#x27;value&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;message&#x27;] = &quot;Gagal atau Data Kosong&quot;;
+      return response($res);
+    }
+  }
+
+  public function destroy($id){
+    $data = DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;get();
+    foreach($data as $katalog){
+      $image_path = &#x27;http://localhost/APIREST/public&#x27; .$katalog-&gt;gambar;
+      if(file_exists(public_path(&#x27;data_file/&#x27;.$katalog-&gt;gambar))){
+        @unlink(public_path(&#x27;data_file/&#x27;.$katalog-&gt;gambar));
+        DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;delete();
+        $res[&#x27;message&#x27;] = &quot;Data Berhasil Dihapus&quot;;
+        return response($res);
+      }else{
+        $res[&#x27;message&#x27;] = &quot; &quot;;
+        return response($res);
+      }
+    }
+  }
+
+  public function getDetail($id){
+    $data = DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$id)-&gt;get();
+    if(count($data) &gt; 0){
+      $res[&#x27;message&#x27;] = &quot;Berhasil, Loading Detail&quot;;
+      $res[&#x27;value&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;message&#x27;] = &quot;Gagal, Data Tidak Ditemukan&quot;;
+      return response($res);
+    }
+  }
+
+  public function update(Request $request){
+    if(!empty($request-&gt;file)){
+    $this-&gt;validate($request, [
+      &#x27;file&#x27; =&gt; &#x27;required|max:2048&#x27;
+    ]);
+      // menyimpan data file yang diupload ke variable $file
+      $file = $request-&gt;file(&#x27;file&#x27;);
+      $nama_file = time().&quot;_&quot;.$file-&gt;getClientOriginalName();
+      // isi dengan nama folder tempat kemana file diupload
+      $tujuan_upload = &#x27;data_file&#x27;;
+      $file-&gt;move($tujuan_upload,$nama_file);
+      // mengambil data spesifik by id
+      $data = DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;get();
+      foreach($data as $katalog){
+        @unlink(public_path(&#x27;data_file/&#x27;.$katalog-&gt;gambar));
+        $ket = DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+          &#x27;nama_produk&#x27; =&gt; $request-&gt;nama_produk,
+          &#x27;berat&#x27; =&gt; $request-&gt;berat,
+          &#x27;harga&#x27; =&gt; $request-&gt;harga,
+          &#x27;gambar&#x27; =&gt; $nama_file,
+          &#x27;keterangan&#x27; =&gt; $request-&gt;keterangan
+        ]);
+        $res[&#x27;message&#x27;] = &quot;Success Update and Replace Image&quot;;
+        $res[&#x27;values&#x27;] = $ket;
+        return response($res);
+      }
+    }else{
+      $data = DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;get();
+      foreach($data as $katalog){
+        $ket = DB::table(&#x27;tbl_katalog&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+          &#x27;nama_produk&#x27; =&gt; $request-&gt;nama_produk,
+          &#x27;berat&#x27; =&gt; $request-&gt;berat,
+          &#x27;harga&#x27; =&gt; $request-&gt;harga,
+          &#x27;keterangan&#x27; =&gt; $request-&gt;keterangan
+        ]);
+        $res[&#x27;message&#x27;] = &quot;Success Update&quot;;
+        $res[&#x27;values&#x27;] = $ket;
+        return response($res);
+      }
+    }
+  }
+}</code></pre></li></ol><ol id="f184b46f-850e-4108-90cc-ef092d439d95" class="numbered-list" start="18"><li>Buat Controller untuk Pertanyaan dan juga Model untuk tabel pertanyaan:<pre id="7b888f79-d09f-4c8b-a16e-a7b8891127f0" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:controller Pertanyaan
+Controller created successfully.
+PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:model tbl_pertanyaan
+Model created successfully.</code></pre></li></ol><ol id="36364936-eb94-42e2-bef1-4ae082ba6c84" class="numbered-list" start="19"><li>Isikan struktur Model tbl_pertanyaan seperti dibawah ini:<pre id="c2bb5afa-44c8-47f2-b2d9-0a9d560fc6ce" class="code"><code>&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tbl_pertanyaan extends Model
+{
+  public $timestamps = false;
+  protected $table = &quot;tbl_pertanyaan&quot;;
+  protected $fillable = [&#x27;pertanyaan&#x27;,&#x27;jawaban&#x27;];
+}</code></pre></li></ol><ol id="b9380ee5-8cdd-4d67-b4cf-8c0d9e192e89" class="numbered-list" start="20"><li>Isikan juga function pada controller Pertanyaan:<pre id="55de7278-7e5e-4828-a481-43cbb326aeaf" class="code"><code>&lt;?php
+
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\tbl_pertanyaan;
+use App\Http\Requests;
+
+class Pertanyaan extends Controller
+{
+  public function Pertanyaan(Request $request){
+    $data = tbl_pertanyaan::create([
+      &#x27;pertanyaan&#x27; =&gt; $request-&gt;pertanyaan,
+      &#x27;jawaban&#x27; =&gt; &#x27;null&#x27;
+    ]);
+    $res[&#x27;message&#x27;] = &quot;Pertanyaan Terupload&quot;;
+    $res[&#x27;values&#x27;] = $data;
+    return response($res);
+  }
+
+  public function Jawaban(Request $request){
+    $ket = DB::table(&#x27;tbl_pertanyaan&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+      &#x27;jawaban&#x27; =&gt; $request-&gt;jawaban,
+    ]);
+    $res[&#x27;message&#x27;] = &quot;Jawaban Terupload&quot;;
+    $res[&#x27;values&#x27;] = $ket;
+    return response($res);
+  }
+}</code></pre></li></ol><ol id="e1e23795-7815-4b24-8d7b-d36213510c0e" class="numbered-list" start="21"><li>Buat Controller <code>Akun</code> dan Model <code>tbl_user</code>:<pre id="8ad551d0-fc4f-49c3-ad7a-5996a66ef6a1" class="code"><code>PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:controller Akun
+Controller created successfully.
+PS C:\xampp\htdocs\Ekatalog&gt; php artisan make:model tbl_user
+Model created successfully.</code></pre></li></ol><ol id="a15402fb-6608-4a4a-8f8e-0fdd01cfa468" class="numbered-list" start="22"><li>Isikan controller Akun dengan function berikut:<pre id="535482dd-8616-4b51-8484-2b74d1a649b7" class="code"><code>&lt;?php
+
+namespace App\Http\Controllers;
+use App\tbl_user;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests;
+
+class Akun extends Controller
+{
+  public function getDetail($username){
+    $data = DB::table(&#x27;tbl_user&#x27;)-&gt;where(&#x27;username&#x27;,$username)-&gt;get();
+    if(count($data) &gt; 0){
+      $res[&#x27;message&#x27;] = &quot;Berhasil, Log-in&quot;;
+      $res[&#x27;value&#x27;] = $data;
+      return response($res);
+    }else{
+      $res[&#x27;message&#x27;] = &quot;Gagal, Log-in&quot;;
+      return response($res);
+    }
+  }
+  public function Tambah(Request $request){
+    $data = tbl_user::create([
+      &#x27;name&#x27; =&gt; $request-&gt;name,
+      &#x27;username&#x27; =&gt; $request-&gt;username,
+      &#x27;password&#x27; =&gt; $request-&gt;password,
+    ]);
+    $res[&#x27;message&#x27;] = &quot;Sukses Tambah&quot;;
+    $res[&#x27;values&#x27;] = $data;
+    return response($res);
+  }
+  public function Ubah(Request $request){
+    $ket = DB::table(&#x27;tbl_user&#x27;)-&gt;where(&#x27;id&#x27;,$request-&gt;id)-&gt;update([
+      &#x27;name&#x27; =&gt; $request-&gt;name,
+      &#x27;username&#x27; =&gt; $request-&gt;username,
+      &#x27;password&#x27; =&gt; $request-&gt;password,
+    ]);
+    $res[&#x27;message&#x27;] = &quot;Sukses Ubah&quot;;
+    $res[&#x27;values&#x27;] = $ket;
+    return response($res);
+  }
+}</code></pre></li></ol><ol id="b999b181-9fe6-4b50-9c8e-a5e5eff00ffa" class="numbered-list" start="23"><li>Kemudian isikan juga struktur pada Model tbl_user sebagai berikut:<pre id="d7e36126-8a3d-4d24-8aa4-c132c2c54d48" class="code"><code>&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tbl_user extends Model
+{
+  public $timestamps = false;
+  protected $table = &quot;tbl_user&quot;;
+  protected $fillable = [&#x27;name&#x27;,&#x27;username&#x27;,&#x27;password&#x27;];
+}</code></pre></li></ol><ol id="89dbfab9-35c8-4f88-9262-c3928baf42c8" class="numbered-list" start="24"><li>Kemudian buat routing untuk semua fungsi yang kita buat:<pre id="d43786c9-9648-4aab-aebf-a7cff1afb0eb" class="code"><code>&lt;?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It&#x27;s a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+Route::get(&#x27;/&#x27;, function () {
+    return view(&#x27;welcome&#x27;);
+});
+
+Route::post(&#x27;/pushData&#x27;,&#x27;Barang@store&#x27;);
+Route::post(&#x27;/updateData&#x27;,&#x27;Barang@update&#x27;);
+Route::post(&#x27;/pertanyaan&#x27;,&#x27;Pertanyaan@Pertanyaan&#x27;);
+Route::post(&#x27;/jawaban&#x27;,&#x27;Pertanyaan@Jawaban&#x27;);
+Route::get(&#x27;/getData&#x27;,&#x27;Barang@getData&#x27;);
+Route::get(&#x27;/destroy/{id}&#x27;,&#x27;Barang@destroy&#x27;);
+Route::get(&#x27;/getDetail/{id}&#x27;,&#x27;Barang@getDetail&#x27;);
+Route::post(&#x27;/TambahAkun&#x27;,&#x27;Akun@Tambah&#x27;);
+Route::post(&#x27;/UbahAkun&#x27;,&#x27;Akun@Ubah&#x27;);
+Route::get(&#x27;/getUser/{id}&#x27;,&#x27;Akun@getDetail&#x27;);</code></pre></li></ol><ol id="8c1dcf4c-2678-4965-9a7d-a7aa505565c0" class="numbered-list" start="25"><li>Sebelum server kita jalankan, kita akan mendisable VerifyCsrfToken pada kernel:<figure id="98f2c1c8-502c-427d-9663-bd8259b82249" class="image"><a href="Membuat%20API%20POST%20Data%20Laravel/Untitled%201.png"><img style="width:872px" src="Membuat%20API%20POST%20Data%20Laravel/Untitled%201.png"/></a></figure></li></ol><ol id="f5aa6fdd-9487-4c7d-a1ed-c0d419b9320b" class="numbered-list" start="26"><li>Kemudian jalankan php artisan serve untuk mencoba API POST Data yang kita buat:<pre id="6b525056-8fe7-4d92-94ba-ee7968bb50a6" class="code"><code>PS C:\xampp\htdocs\hello-laravel&gt; php artisan serve
+Laravel development server started on http://localhost:8000/</code></pre></li></ol><ol id="6747f544-2bd1-453a-afa4-45e88abc2816" class="numbered-list" start="27"><li>Lakukan testing menggunakan APIs Data dengan postman:<figure id="ec8b549e-9f38-48a0-88e5-39064b44111b" class="image"><a href="Study%20Kasus/Untitled%209.png"><img style="width:1057px" src="Study%20Kasus/Untitled%209.png"/></a></figure><figure id="cb9ee2a5-b945-4547-9e9e-0f7fdd61f0a4" class="image"><a href="Study%20Kasus/Untitled%2010.png"><img style="width:1059px" src="Study%20Kasus/Untitled%2010.png"/></a></figure><figure id="4694ae60-4658-4cd0-97d8-65163604832f" class="image"><a href="Study%20Kasus/Untitled%2011.png"><img style="width:1058px" src="Study%20Kasus/Untitled%2011.png"/></a></figure><figure id="f3672ab2-9102-41e5-b33c-741a1538c9a1" class="image"><a href="Study%20Kasus/Untitled%2012.png"><img style="width:1061px" src="Study%20Kasus/Untitled%2012.png"/></a></figure><figure id="e4d4ed9a-4650-4da9-b776-ec1d2a87843f" class="image"><a href="Study%20Kasus/Untitled%2013.png"><img style="width:1055px" src="Study%20Kasus/Untitled%2013.png"/></a></figure><figure id="41625c35-208c-4df3-9464-63f093f826af" class="image"><a href="Study%20Kasus/Untitled%2014.png"><img style="width:1056px" src="Study%20Kasus/Untitled%2014.png"/></a></figure><figure id="2f8765a7-0973-4721-8ba4-e45dc333e927" class="image"><a href="Study%20Kasus/Untitled%2015.png"><img style="width:1063px" src="Study%20Kasus/Untitled%2015.png"/></a></figure><figure id="58d1467d-5aef-4187-bd46-86c8ef21f2c9" class="image"><a href="Study%20Kasus/Untitled%2016.png"><img style="width:1056px" src="Study%20Kasus/Untitled%2016.png"/></a></figure><figure id="191a322f-0910-4c18-9e1d-2062d38bdd44" class="image"><a href="Study%20Kasus/Untitled%2017.png"><img style="width:1058px" src="Study%20Kasus/Untitled%2017.png"/></a></figure><figure id="5eea7126-2d9c-4afd-9e89-7047a50fe36d" class="image"><a href="Study%20Kasus/Untitled%2018.png"><img style="width:1065px" src="Study%20Kasus/Untitled%2018.png"/></a></figure></li></ol><ol id="0af03dfd-839d-4b22-9b80-feda7d4a5390" class="numbered-list" start="28"><li>Hasil isi table pada database:<figure id="d29aac0e-0c92-4f72-8226-1a08b17e0ed7" class="image"><a href="Study%20Kasus/Untitled%2019.png"><img style="width:1162px" src="Study%20Kasus/Untitled%2019.png"/></a></figure><figure id="6a922d58-690c-472d-8e6a-6d2a258930fe" class="image"><a href="Study%20Kasus/Untitled%2020.png"><img style="width:1051px" src="Study%20Kasus/Untitled%2020.png"/></a></figure><figure id="b7fc7bb5-1551-46ac-9d45-be46b952596e" class="image"><a href="Study%20Kasus/Untitled%2021.png"><img style="width:1360px" src="Study%20Kasus/Untitled%2021.png"/></a></figure></li></ol></div></article></body></html>

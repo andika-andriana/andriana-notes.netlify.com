@@ -1,0 +1,571 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Membuat Database dan Tabel di PHPMyAdmin</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="30afe770-a30f-4669-a412-1e709ad854ed" class="page sans"><header><h1 class="page-title">Membuat Database dan Tabel di PHPMyAdmin</h1></header><div class="page-body"><p id="643645ee-04fe-490c-afbe-652ac156f566" class="">Kali ini kita akan coba membuat database dan tabel dari phpMyAdmin. </p><p id="1fd02ba9-4b72-4217-b75c-00947388e33e" class="">Mari mulai dari database terlebih dahulu.</p><figure id="85f23fc9-fdd0-42a0-8655-97347d7bd3f5" class="image"><a href="https://lh4.googleusercontent.com/Ip4fe_qrOowQBP6zo0cWRH4-GSaO87RYE60GdnybBPgs5ItkgmIl0WqFkzl8f7bVLxk2c_CDke7hwZkBj57n8ko-wd22N-vDkhuPNgcyZo6cyMgrY3vtwvEe6BLzMA9eCKfjKedT"><img src="https://lh4.googleusercontent.com/Ip4fe_qrOowQBP6zo0cWRH4-GSaO87RYE60GdnybBPgs5ItkgmIl0WqFkzl8f7bVLxk2c_CDke7hwZkBj57n8ko-wd22N-vDkhuPNgcyZo6cyMgrY3vtwvEe6BLzMA9eCKfjKedT"/></a></figure><p id="e45bace7-7040-487e-bbd8-206f3e772a11" class="">Gambar: Membuat database menggunakan phpMyAdmin</p><p id="2459a8df-1090-4c7e-956a-3985e0508ce2" class="">Untuk membuat database, klik menu <strong>Databases </strong>di bagian atas halaman home <strong>(1)</strong>. Selanjutnya akan tampil jendela seperti gambar diatas.</p><p id="ab526b4b-3c7c-429c-950d-e5127ec5344d" class="">Halaman ini dipakai untuk memanajemen database <strong>(2)</strong>. Di bawah kotak input pembuatan database, terdapat daftar seluruh database yang ada di dalam MySQL. Kita bisa menghapus database, atau klik salah satu database untuk melihat tabel apa saja yang ada di dalamnya.</p><p id="96aa29fc-fce3-4d0a-9648-189bf463a84f" class="">Untuk membuat database baru, ketik nama database di isian kotak input <strong>Create database</strong>. Dalam contoh ini saya akan membuat database sekolah <strong>(3)</strong>.</p><p id="7fe43d68-fc44-43ba-b01a-8336e8c9fe34" class="">Disampingnya <strong>(4)</strong>, terdapat menu pilihan untuk <strong>Collation </strong>. Pilihan ini sebenarnya sudah gabungan antara charset dan collation. Disini kita bisa menentukan apa <em>charset </em>dan <em>collation </em>yang akan dipakai. Atau biarkan pilihan default (Collation) untuk menggunakan settingan bawaan phpMyAdmin.</p><p id="36ccc4bd-6ab9-415d-b8e9-8e2dc0b9b657" class="">Terakhir, klik tombol Create untuk membuat database sekolah<strong> (5)</strong>.</p><figure id="f76f4469-a23c-42fc-970e-7d0e4f140bb1" class="image"><a href="https://lh5.googleusercontent.com/oLpMGCHsl1xjO3UZKHVftGutHmzmx3JokIB5UxjeadBdgJwkOTG4Nfp-dYpebKNmT9Zw4e030DcR5YH5wJ5iePPRyg18PsrI0_64zYlLNdfl0ZTKgMYN2LQIYGDzKSvFFLFBiLhW"><img src="https://lh5.googleusercontent.com/oLpMGCHsl1xjO3UZKHVftGutHmzmx3JokIB5UxjeadBdgJwkOTG4Nfp-dYpebKNmT9Zw4e030DcR5YH5wJ5iePPRyg18PsrI0_64zYlLNdfl0ZTKgMYN2LQIYGDzKSvFFLFBiLhW"/></a></figure><p id="7f4e494a-4108-4c67-b3f2-76ac10fd908d" class="">Gambar: Membuat tabel menggunakan phpMyAdmin</p><p id="717b5cf3-445b-4f4f-aeb0-36ca92e2dbeb" class="">Setelah tombol Create dipilih, kita langsung diarahkan ke form untuk pembuatan tabel. Silahkan ketik nama tabel di kotak input <strong>Name</strong>. Sebagai contoh, saya akan membuat tabel siswa <strong>(1)</strong>.</p><p id="73591bdf-9e53-4294-ab5b-9d41b38e9714" class="">Di sebelahnya <strong>(2)</strong>, terdapat pilihan <strong>Number of columns</strong>. Ini adalah jumlah kolom untuk tabel yang akan dibuat. Saya berencana membuat <strong>4 kolom</strong> untuk tabel siswa.</p><p id="25b144a5-6b21-44c6-9ba2-2e8ac70fa77a" class="">Setelah isian nama dan jumlah kolom tabel, klik tombol <strong>Go </strong>untuk masuk ke jendela pembuatan struktur kolom <strong>(3)</strong>.</p><figure id="75db4e09-27ec-4c57-a121-c05296ea1d43" class="image"><a href="https://lh4.googleusercontent.com/dBFtgSljqGyhZcX3gGDK9lSi9WaAG42iGvTI1-9N5P67y1Nj4cn38U50S8xsyu4A7Q8IxC1ElvGk2XBV9rLB2WMG2wjxs9-Et-gyKAdw4KP6E4y55MEDeSh8_wgvBW7Oul1MBaZw"><img src="https://lh4.googleusercontent.com/dBFtgSljqGyhZcX3gGDK9lSi9WaAG42iGvTI1-9N5P67y1Nj4cn38U50S8xsyu4A7Q8IxC1ElvGk2XBV9rLB2WMG2wjxs9-Et-gyKAdw4KP6E4y55MEDeSh8_wgvBW7Oul1MBaZw"/></a></figure><p id="bf01fe91-5642-4f2a-b62f-84d54a73d78e" class="">Gambar: Membuat struktur tabel siswa</p><p id="5b95c6d9-719d-4a7a-98c7-cc56a1596b81" class="">Jendela berikutnya adalah untuk menginput detail struktur kolom. Karena saya memilih 4 kolom, maka akan tampil 4 baris kotak input untuk setiap kolom pada tabel siswa. Jika ternyata anda berubah pikiran dan ingin menambah kolom lain, bisa mengisi kotak input di bagian paling atas <strong>(1)</strong>.</p><p id="bf498e4b-ea5a-4b12-948a-1fed69d0deff" class="">Setiap baris terdapat berbagai isian yang bisa kita pilih <strong>(2)</strong>. Berikut penjelasannya :</p><ul id="902445cd-2a10-49e9-984a-7a0b6cf4a5b9" class="bulleted-list"><li><strong>Name</strong>: untuk inputan nama kolom. </li></ul><ul id="410f6ef6-fc8a-48d3-b24c-eabbe8241533" class="bulleted-list"><li><strong>Type</strong>: tipe data dari kolom, seperti INT, VARCHAR, atau DATE. Hampir semua tipe data ini sudah kita pelajari, kecuali tipe data khusus spasial untuk GIS (sistem informasi geografis).</li></ul><ul id="9c7b92c6-86e9-4a81-bf2c-92e102601a80" class="bulleted-list"><li><strong>Length/Values</strong>: untuk batasan tipe data. Pilihan ini hanya berlaku untuk tipe data tertentu saja, seperti INT, CHAR atau VARCHAR. Sebagai contoh untuk membuat VARCHAR (50), angka 50 diisi pada kotak input ini.</li></ul><ul id="e7d8baa2-f6af-4e76-8b45-5fb1969c72fc" class="bulleted-list"><li><strong>Default</strong>: Memilih nilai default untuk kolom.</li></ul><ul id="10ecf40e-4e3d-4e6b-9dfe-45af488a1e74" class="bulleted-list"><li><strong>Collation</strong>: Memilih nilai collation untuk kolom (termasuk charset).</li></ul><ul id="53471bf6-43c9-4248-890d-d5090de4e43a" class="bulleted-list"><li><strong>Attributes</strong>: Menambahkan atribut khusus seperti UNSIGNED, BINARY, atau ZEROFILL. Sama seperti Length/Values, pilihan ini hanya untuk tipe data tertentu saja. Misalkan UNSIGNED dan ZEROFILL hanya bisa dipakai untuk tipe data number.</li></ul><ul id="539efc5f-fe3e-4d46-bdb3-7808bcd7088f" class="bulleted-list"><li><strong>Null</strong>: Apakah kolom bisa diisi nilai NULL atau tidak.</li></ul><ul id="bcb7f2d1-ab19-4876-886b-ee87c9fdb123" class="bulleted-list"><li><strong>Index</strong>: Apakah kolom akan menggunakan index tertentu, seperti PRIMARY KEY atau UNIQUE. Ketika memilih index, akan muncul jendela tambahan untuk menentukan nama index.</li></ul><ul id="60fda06d-c60c-4ef0-9c28-e4ba387d901e" class="bulleted-list"><li><strong>A_I </strong>: Apakah kolom di set sebagai AUTO_INCREMENT. Pilihan ini hanya berlaku untuk tipe data number, terutama INT.</li></ul><ul id="89a1633e-850b-47e6-ba59-4520a3446606" class="bulleted-list"><li><strong>Comments</strong>: Komentar untuk kolom, yakni berupa penjelasan tambahan. Komentar ini tidak akan diproses oleh MySQL, fungsinya hanya untuk catatan.</li></ul><p id="0d097094-ba1a-4854-a96d-fbf4d9e440c9" class="">Setelah inputan struktur setiap kolom, dibawahnya <strong>(4)</strong> terdapat pilihan untuk <strong>Table comments</strong>, <strong>Collation </strong>serta <strong>Storage Engine</strong>. Disini kita bisa menginput komentar untuk kolom (hanya sekedar catatan), memilih collation, serta memilih storage engine. Misalnya ingin membuat tabel dengan tipe <strong>MyISAM</strong>, maka pengaturannya bisa diubah disini.</p><p id="def31e81-e831-4982-97bd-3c8f80acd832" class="">Untuk melihat apa query yang akan dipakai untuk membuat tabel, klik tombol <strong>Preview SQ</strong>L. Berikut hasil query yang saya dapat <strong>(5)</strong>:</p><pre id="1d946c7f-79bb-408b-ad48-1ae69473cbfb" class="code"><code>CREATE TABLE `sekolah`.`siswa` (
+`nis` VARCHAR(10) NOT NULL ,
+`nama` VARCHAR(100) NOT NULL ,
+`tanggal_lahir` DATE NOT NULL ,
+`tinggi_badan` TINYINT UNSIGNED NULL DEFAULT NULL ,
+PRIMARY KEY (`nis`)
+) ENGINE = InnoDB;</code></pre><p id="6855f3f2-5264-4b36-9bc4-5e609ed02ff5" class="">Tidak berbeda dengan query yang sudah kita pelajari sepanjang materi ini. Saya yakin anda juga sudah paham arti semua kode SQL ini. Berikutnya, klik tombol <strong>Save </strong>untuk membuat tabel siswa.</p><figure id="d9e5bc7f-75c5-4457-86f0-d7aeb759fc4d" class="image"><a href="https://lh6.googleusercontent.com/hVsC7oue6_O9EQOlxul8nJaE-E4CfEic0qwaU0-bh7p6B0Sb9atF68BrH6avORgunHAX3d_1JySCcvsdy-bY3ANJDav0_oV7e_ik5IG780uccPkJzVpSQ2HoOjW1b-NXxoqTQTco"><img src="https://lh6.googleusercontent.com/hVsC7oue6_O9EQOlxul8nJaE-E4CfEic0qwaU0-bh7p6B0Sb9atF68BrH6avORgunHAX3d_1JySCcvsdy-bY3ANJDav0_oV7e_ik5IG780uccPkJzVpSQ2HoOjW1b-NXxoqTQTco"/></a></figure><p id="a329740b-dc11-4153-a2d6-2f6ab1cf4dbc" class="">Gambar: Pengelolaan struktur tabel siswa</p><p id="4f14b7dc-875f-4fea-b8ea-5084d78aa232" class="">Kita sampai ke halaman <strong>Structure</strong>. Ini adalah halaman untuk pengelolaan struktur kolom tabel <strong>(1)</strong>.</p><p id="fce214b6-336d-4ae6-9936-9198e48413e8" class="">Di sisi atas terdapat tombol <strong>Relation view</strong>, tombol ini bisa dipakai untuk menginput relasi ke dalam tabel, yakni membuat batasan<em> referential integrity </em><strong>(2)</strong>.</p><p id="c231da26-dbcf-4662-8600-94b20a9a0ef1" class="">Struktur kolom sendiri ditampilkan di sisi kiri tabel<strong> (3)</strong>, yakni berbagai informasi seperti nama kolom, tipe data, serta berbagai atribut kolom.</p><p id="f247ace9-07a0-415c-92d1-55545eeff541" class="">Di sebelah kanan tabel <strong>(4)</strong>, terdapat beberapa tombol yang bisa dipakai untuk memanajemen struktur kolom, seperti mengubah kolom (<em>CHANGE</em>), menghapus kolom (<em>DROP</em>), menambahkan key, dll. Jika anda ingin mengubah kolom, maka akan dibawa ke tampilan seperti halaman sebelum ini.</p><p id="d403a41e-81b3-43cd-a199-ccb0a63eb8e2" class="">Untuk mengubah banyak kolom sekaligus, bisa dengan men-checklist setiap kolom lalu klik tombol yang ada di bawah tabel <strong>(5)</strong>. Jika ingin menambahkan 1 kolom, bisa diinput di baris paling bawah <strong>(6)</strong>.</p></div></article></body></html>

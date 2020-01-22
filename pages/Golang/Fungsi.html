@@ -1,0 +1,640 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Fungsi</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9ed4994d-2519-4dd2-a9bf-27c7f09a6c23" class="page sans"><header><h1 class="page-title"><strong>Fungsi</strong></h1></header><div class="page-body"><ol id="6f9fd7ae-ecd2-47c2-977f-8385e770bb8f" class="numbered-list" start="1"><li><strong>Fungsi</strong><p id="277c7e51-8b2a-4e3c-80ed-3c724d9bbbe4" class="">Fungsi merupakan aspek penting dalam pemrograman. Definisi fungsi sendiri adalah sekumpulan blok kode yang dibungkus dengan nama tertentu. Penerapan fungsi yang tepat akan menjadikan kode lebih modular dan juga <em>dry</em> (kependekan dari <em>don&#x27;t repeat yourself</em>), tak perlu menuliskan banyak kode yang kegunaannya berkali-kali, cukup sekali saja lalu panggil sesuai kebutuhan.</p></li></ol><ol id="fe8b6aa0-7e13-427c-a1c3-a0f44359a599" class="numbered-list" start="2"><li><strong>Penerapan Fungsi</strong><p id="80fd6d7e-0f73-45b0-9ec8-b0f807f08ffb" class="">Sebenarnya tanpa sadar, kita sudah menerapkan fungsi di materi sebelum ini, yaitu pada fungsi <code>main</code>. Fungsi <code>main</code> merupakan fungsi yang paling utama pada program Go.</p><p id="0c743129-c2ee-4154-adab-894e230db980" class="">Cara membuat fungsi cukup mudah, yaitu dengan menuliskan keyword <code>func</code>, diikuti setelahnya nama fungsi, kurung yang berisikan parameter, dan kurung kurawal untuk membungkus blok kode.</p><p id="31f48d55-aca4-431b-824b-d1132dd19a84" class="">Parameter sendiri adalah variabel yang disisipkan pada saat pemanggilan fungsi.</p><p id="86420569-795a-43d0-ac56-94120949a84e" class="">Silakan lihat dan praktekan kode tentang implementasi fungsi berikut:</p><pre id="8c4538e0-a9a9-4da0-af58-270df9979a0b" class="code"><code>package main
+
+import &quot;fmt&quot;
+import &quot;strings&quot;
+
+func main() {
+    var names = []string{&quot;John&quot;, &quot;Wick&quot;}
+    printMessage(&quot;halo&quot;, names)
+}
+
+func printMessage(message string, arr []string) {
+    var nameString = strings.Join(arr, &quot; &quot;)
+    fmt.Println(message, nameString)
+}</code></pre><p id="82371a95-7c5d-4035-a06c-778220e92bbe" class="">Pada kode di atas, sebuah fungsi baru dibuat dengan nama <code>printMessage</code> memiliki 2 buah parameter yaitu string <code>message</code> dan slice string <code>arr</code>.</p><p id="ac1fc596-fe68-4e22-8c5e-a0b77b6aabfa" class="">Fungsi tersebut dipanggil dalam <code>main</code>, dengan disisipkan 2 buah data sebagai parameter, data pertama adalah string <code>&quot;hallo&quot;</code> yang ditampung parameter <code>message</code>, dan parameter ke 2 adalah slice string <code>names</code> yang nilainya ditampung oleh parameter <code>arr</code>.</p><p id="edbe3d58-1042-4195-be45-eeeea5bac595" class="">Di dalam <code>printMessage</code>, nilai <code>arr</code> yang merupakan slice string digabungkan menjadi sebuah string dengan pembatas adalah karakter <strong>spasi</strong>. Penggabungan slice dapat dilakukan dengan memanfaatkan fungsi <code>strings.Join()</code> (berada di dalam package <code>strings</code>).</p><p id="26bb47de-539e-4925-a398-fccd8609a54b" class="">hasil dari kode diatas:</p><pre id="fd92c41e-7ab2-48f1-8a16-1e8f5f642c7e" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\fungsi.go
+halo John Wick</code></pre></li></ol><ol id="0b345876-43cf-413b-be2f-82f64fa37e63" class="numbered-list" start="3"><li><strong>Fungsi Dengan Return Value / Nilai Balik</strong><p id="9d43ffbd-eaea-4734-ad3e-56d9b0beaa37" class="">Sebuah fungsi bisa didesain tidak mengembalikan nilai balik (<em>void</em>), atau bisa mengembalikan suatu nilai. Fungsi yang memiliki nilai kembalian, harus ditentukan tipe data nilai baliknya pada saat deklarasi.</p><p id="a861cc1e-1a42-40e9-9e14-a9ee3dcd24a5" class="">Program berikut merupakan contoh penerapan fungsi yang memiliki return value.</p><pre id="d4dfda0a-7475-4793-a1ec-fff1f6c5ad57" class="code"><code>package main
+
+import (
+    &quot;fmt&quot;
+    &quot;math/rand&quot;
+    &quot;time&quot;
+)
+
+func main() {
+    rand.Seed(time.Now().Unix())
+    var randomValue int
+
+    randomValue = randomWithRange(2, 10)
+    fmt.Println(&quot;random number:&quot;, randomValue)
+    randomValue = randomWithRange(2, 10)
+    fmt.Println(&quot;random number:&quot;, randomValue)
+    randomValue = randomWithRange(2, 10)
+    fmt.Println(&quot;random number:&quot;, randomValue)
+}
+
+func randomWithRange(min, max int) int {
+    var value = rand.Int() % (max - min + 1) + min
+    return value
+}</code></pre><p id="e34c9aa7-38aa-4eaa-a88b-b15a525b245f" class="">Fungsi <code>randomWithRange</code> bertugas untuk <em>generate</em> angka acak sesuai dengan range yang ditentukan, yang kemudian angka tersebut dijadikan nilai kembalian fungsi.</p><p id="f18841a3-ed69-4674-9b24-b0f92d9975d5" class="">Hasil dari kode diatas:</p><pre id="c2f782b2-ceff-4dca-b2e5-c8746c94551a" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\fungsi.go
+random number: 4
+random number: 8
+random number: 6</code></pre><p id="b0a02097-3626-4c77-b028-21f42d742cc2" class="">Cara menentukan tipe data nilai balik fungsi adalah dengan menuliskan tipe data yang diinginkan setelah kurung parameter. Bisa dilihat pada kode di atas, bahwa <code>int</code> merupakan tipe data nilai balik fungsi <code>randomWithRange</code>.</p><pre id="32227132-e754-4e74-a427-edd1a24f7824" class="code"><code>func randomWithRange(min, max int) int</code></pre><p id="20d60b3c-1bd5-4b59-a6e2-9d7fbf793933" class="">Sedangkan cara untuk mengembalikan nilai itu sendiri adalah dengan menggunakan keyword <code>return</code> diikuti data yang ingin dikembalikan. Pada contoh di atas, <code>return value</code> artinya nilai variabel <code>value</code> dijadikan nilai kembalian fungsi.</p><p id="04af7f1e-936a-4fbd-a2c4-d9d24280a815" class="">Eksekusi keyword <code>return</code> akan menjadikan proses dalam blok fungsi berhenti pada saat itu juga. Semua statement setelah keyword tersebut tidak akan dieksekusi.</p><p id="3f580d87-1b09-480f-a34f-61ef0db36126" class="">Dari kode di atas mungkin ada beberapa hal yang belum pernah kita lakukan pada bab-bab sebelumnya, kita akan bahas satu-persatu.</p><ul id="c6fd4312-4937-4956-9c48-b2fc203e7ee3" class="bulleted-list"><li><strong>Penggunaan Fungsi </strong><code><strong>rand.Seed()</strong></code><p id="26e3bfba-3b4d-447e-b677-9890ed07abe8" class="">Fungsi ini diperlukan untuk memastikan bahwa angka random yang akan di-generate benar-benar acak. Kita bisa gunakan angka apa saja sebagai nilai parameter fungsi ini (umumnya diisi <code>time.Now().Unix()</code>).</p><pre id="a2319843-b0a2-4e8b-a42c-769ecdb18f7b" class="code"><code>rand.Seed(time.Now().Unix())</code></pre><p id="e298aab8-6b39-4632-8fdf-38a45a307d38" class="">Fungsi <code>rand.Seed()</code> berada dalam package <code>math/rand</code>, yang harus di-import terlebih dahulu sebelum bisa dimanfaatkan.</p><p id="03961833-80da-43bf-85a3-3c1ac9c60282" class="">Package <code>time</code> juga perlu di-import karena kita menggunakan fungsi <code>(time.Now().Unix())</code> disitu.</p></li></ul><ul id="05c8f0f6-4176-4e21-b089-a37daf297328" class="bulleted-list"><li><strong>Import Banyak Package</strong><p id="eb975809-a89b-44d2-8117-49d8b04f8f52" class="">Penulisan keyword <code>import</code> untuk banyak package bisa dilakukan dengan dua cara, dengan menuliskannya di tiap package, atau cukup sekali saja, bebas.</p><pre id="6342f9e1-2fa0-4fd9-a9ba-dd0eeb2eb624" class="code"><code>import &quot;fmt&quot;
+import &quot;math/rand&quot;
+import &quot;time&quot;
+
+// atau
+
+import (
+    &quot;fmt&quot;
+    &quot;math/rand&quot;
+    &quot;time&quot;
+)</code></pre></li></ul><ul id="b8ec4509-3616-4b17-8c12-143f61bdfae3" class="bulleted-list"><li><strong>Deklarasi Parameter Bertipe Data Sama</strong><p id="daaae7e6-20c5-4c7d-9de0-fae4d5404a5e" class="">Khusus untuk fungsi yang tipe data parameternya sama, bisa ditulis dengan gaya yang unik. Tipe datanya dituliskan cukup sekali saja di akhir. </p><p id="f8284ead-d53d-49c1-8d40-9afab46ea52c" class="">Contohnya bisa dilihat pada kode berikut.</p><pre id="b0b91092-e11f-4c10-aa1c-794386c2779a" class="code"><code>func nameOfFunc(paramA type, paramB type, paramC type) returnType
+func nameOfFunc(paramA, paramB, paramC type) returnType
+
+func randomWithRange(min int, max int) int
+func randomWithRange(min, max int) int</code></pre></li></ul></li></ol><ol id="e526beff-46e8-4cba-8fee-7f23791732d8" class="numbered-list" start="4"><li><strong>Penggunaan Keyword </strong><code><strong>return</strong></code><strong> Untuk Menghentikan Proses Dalam Fungsi</strong><p id="237c8e66-8971-4134-9407-404f2b4a89b9" class="">Selain sebagai penanda nilai balik, keyword <code>return</code> juga bisa dimanfaatkan untuk menghentikan proses dalam blok fungsi dimana ia dipakai. </p><p id="b4a68692-470b-483a-b434-f640936477da" class="">Contohnya bisa dilihat pada kode berikut.</p><pre id="0b218dd6-014b-4cf9-993c-79947009d002" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    divideNumber(10, 2)
+    divideNumber(4, 0)
+    divideNumber(8, -4)
+}
+
+func divideNumber(m, n int) {
+    if n == 0 {
+        fmt.Printf(&quot;invalid divider. %d cannot divided by %d\n&quot;, m, n)
+        return
+    }
+
+    var res = m / n
+    fmt.Printf(&quot;%d / %d = %d\n&quot;, m, n, res)
+}</code></pre><p id="0e8cabe2-5498-4f70-ae79-152609ce0c65" class="">Fungsi <code>divideNumber</code> didesain tidak memiliki nilai balik. Fungsi ini dibuat untuk membungkus proses pembagian 2 bilangan, lalu menampilkan hasilnya.</p><p id="bf03eca1-22db-41dd-b27a-3dcfd7037949" class="">Didalamnya terdapat proses validasi nilai variabel pembagi, jika nilainya adalah 0, maka akan ditampilkan pesan bahwa pembagian tidak bisa dilakukan, lalu proses dihentikan pada saat itu juga (dengan memanfaatkan keyword <code>return</code>). Jika nilai pembagi valid, maka proses pembagian diteruskan.</p><pre id="3ad2b64d-7bf8-4dfa-b9ad-f613fd3ae602" class="code"><code>PS C:\Go\src\belajarGolang&gt; go run .\fungsi.go
+10 / 2 = 5
+invalid divider. 4 cannot divided by 0
+8 / -4 = -2</code></pre></li></ol></div></article></body></html>

@@ -1,0 +1,667 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Fungsi Closure</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4c5dd781-72a7-4d55-ace4-5cf0a762eefb" class="page sans"><header><h1 class="page-title"><strong>Fungsi Closure</strong></h1></header><div class="page-body"><ol id="b92fca27-f89c-4984-8657-5381f0cc2b03" class="numbered-list" start="1"><li><strong>Fungsi Closure</strong><p id="a92e15fb-ff05-45ba-8611-0f1534ee3e23" class="">Definisi <strong>Closure</strong> adalah sebuah fungsi yang bisa disimpan dalam variabel. Dengan menerapkan konsep tersebut, kita bisa membuat fungsi didalam fungsi, atau bahkan membuat fungsi yang mengembalikan fungsi.</p><p id="99dc526c-a088-49db-8a57-a53d9285659d" class="">Closure merupakan <em>anonymous function</em> atau fungsi tanpa nama. Biasa dimanfaatkan untuk membungkus suatu proses yang hanya dipakai sekali atau dipakai pada blok tertentu saja.</p></li></ol><ol id="2d34ad20-8262-4469-ae41-fbeb4ac72c09" class="numbered-list" start="2"><li><strong>Closure Disimpan Sebagai Variabel</strong><p id="2a5b68ed-1feb-4c46-ba10-afd35d7d7453" class="">Sebuah fungsi tanpa nama bisa disimpan dalam variabel. Variabel yang menyimpan closure memiliki sifat seperti fungsi yang disimpannya. Di bawah ini adalah contoh program sederhana untuk mencari nilai terendah dan tertinggi dari suatu array. Logika pencarian dibungkus dalam closure yang ditampung oleh variabel <code>getMinMax</code>.</p><p id="b08008a8-dee7-4130-8bb7-1504f48a66e0" class="">Contoh:</p><pre id="a8008070-281c-4ff9-a626-1fd6f55344bd" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var getMinMax = func(n []int) (int, int) {
+		var min, max int
+		for i, e := range n {
+			switch {
+			case i == 0:
+				max, min = e, e
+			case e &gt; max:
+				max = e
+			case e &lt; min:
+				min = e
+			}
+		}
+		return min, max
+	}
+
+	var numbers = []int{2, 3, 4, 3, 4, 2, 3}
+	var min, max = getMinMax(numbers)
+	fmt.Printf(&quot;data : %v\nmin  : %v\nmax  : %v\n&quot;, numbers, min, max)
+}</code></pre><p id="ae4932b0-344a-48d2-bc00-5b59c09fbeb9" class="">Output program:</p><pre id="c9ed3bfa-2b6c-46f0-83cd-34d95d55f301" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\fungsi-closure.go
+data : [2 3 4 3 4 2 3]
+min  : 2
+max  : 4</code></pre><p id="2244d47e-a609-49b1-a1f5-1f814ea29686" class="">Bisa dilihat pada kode di atas bagiamana sebuah closure dibuat dan dipanggil. Sedikit berbeda memang dibanding pembuatan fungsi biasa. Fungsi ditulis tanpa nama, lalu ditampung dalam variabel.</p><pre id="77c401c5-b872-45e4-bf09-caa81fa436a1" class="code"><code>var getMinMax = func(n []int) (int, int) {
+    // ...
+}</code></pre><p id="c95af80f-171d-42d1-bb38-b8ebd3919b2c" class="">Cara pemanggilannya, dengan menuliskan nama variabel tersebut sebagai fungsi, seperti pemanggilan fungsi biasa.</p><pre id="507e8444-4676-4f92-8710-42ba03e5f35a" class="code"><code>var min, max = getMinMax(numbers)</code></pre><p id="c9fabc97-f1f9-4309-a220-919fc24af1e4" class="">Berikut adalah penjelasan tambahan mengenai kode di atas</p><ul id="8f4df559-7c4e-4428-8f79-f59785aed311" class="bulleted-list"><li><strong>Penggunaan Template String </strong><code><strong>%v</strong></code><p id="592a3588-722f-4ef9-9739-1859e7a93a93" class="">Template <code>%v</code> digunakan untuk menampilkan segala jenis data. Bisa array, int, float, bool, dan lainnya.</p><pre id="f5a5a202-de4f-4a6c-beb6-9e91ed173e60" class="code"><code>fmt.Printf(&quot;data : %v\nmin  : %v\nmax  : %v\n&quot;, numbers, min, max)</code></pre><p id="6e4cc6d5-6762-4fae-ba15-d83df94e05f6" class="">Bisa dilihat pada statement di atas, data bertipe array dan numerik ditampilkan menggunakan <code>%v</code>. Template ini biasa dimanfaatkan untuk menampilkan sebuah data yang tipe nya bisa dinamis atau belum diketahui. Sangat tepat jika digunakan pada data bertipe <code>interface{}</code> </p></li></ul></li></ol><ol id="c7aae4ad-d105-4bf2-902c-61e82cbe76da" class="numbered-list" start="3"><li><strong>Immediately-Invoked Function Expression (IIFE)</strong><p id="77111bad-606b-4e2a-b541-e497f477b396" class="">Closure jenis ini dieksekusi langsung pada saat deklarasinya. Biasa digunakan untuk membungkus proses yang hanya dilakukan sekali, bisa mengembalikan nilai, bisa juga tidak.</p><p id="ea823da4-37bc-4c17-9bdd-3262177d4b68" class="">Di bawah ini merupakan contoh sederhana penerapan metode IIFE untuk filtering data array.</p><pre id="f20baedd-36cd-46cc-8288-2ccdccb460d8" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+	var numbers = []int{2, 3, 0, 4, 3, 2, 0, 4, 2, 0, 3}
+
+	var newNumbers = func(min int) []int {
+		var r []int
+		for _, e := range numbers {
+			if e &lt; min {
+				continue
+			}
+			r = append(r, e)
+		}
+		return r
+	}(3)
+
+	fmt.Println(&quot;original number :&quot;, numbers)
+	fmt.Println(&quot;filtered number :&quot;, newNumbers)
+}</code></pre><p id="d24f1064-6143-400f-a4e6-2b87d734f4c5" class="">Output program:</p><pre id="2b521c56-3f07-4d34-bbc4-4e5e29474e12" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\IIFE.go
+original number : [2 3 0 4 3 2 0 4 2 0 3]
+filtered number : [3 4 3 4 3]</code></pre><p id="66faebe8-e5e0-454e-ae36-b8ad9ee74745" class="">Ciri khas IIFE adalah adanya kurung parameter tepat setelah deklarasi closure berakhir. Jika ada parameter, bisa juga dituliskan dalam kurung parameternya.</p><pre id="8ba89bfc-241a-41c5-9c07-31077b18ae24" class="code"><code>var newNumbers = func(min int) []int {
+    // ...
+}(3)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="086706ba-9d15-4a92-aa8f-1a1bf0291568"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Pada contoh di atas IIFE menghasilkan nilai balik yang kemudian ditampung <code>newNumber</code>. Perlu diperhatikan bahwa yang ditampung adalah <strong>nilai kembaliannya</strong> bukan body fungsi atau <strong>closure</strong>.</div></figure><p id="dfc44f92-d041-4d09-a40e-ddea4e456c24" class="">Closure bisa juga dengan gaya manifest typing, caranya dengan menuliskan skema closure-nya sebagai tipe data. </p><p id="27473e08-985f-430c-a9de-edf7d732bc47" class="">Contoh:</p><pre id="00677d65-160b-457b-aa2a-dfd33be6a633" class="code"><code>var closure (func (string, int, []string) int)
+closure = func (a string, b int, c []string) int {    // ..}</code></pre></li></ol><ol id="d1dc6051-544f-4da1-9f30-7de145dadf2a" class="numbered-list" start="4"><li><strong>Closure Sebagai Nilai Kembalian</strong><p id="22e35ada-25ef-496d-91cb-d14be9248bab" class="">Salah satu keunikan closure lainnya adalah bisa dijadikan sebagai nilai balik fungsi, cukup aneh memang, tapi pada suatu kondisi teknik ini sangat membantu. Di bawah ini disediakan sebuah fungsi bernama <code>findMax()</code>, fungsi ini salah satu nilai kembaliannya berupa closure.</p><p id="0e949949-3200-4e0b-9d82-5599aa65fc0b" class="">Contoh:</p><pre id="5c80a64b-29ca-45fa-b6c2-504301070b16" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func findMax(numbers []int, max int) (int, func() []int) {
+    var res []int
+    for _, e := range numbers {
+        if e &lt;= max {
+            res = append(res, e)
+        }
+    }
+    return len(res), func() []int {
+        return res
+    }
+}</code></pre><p id="280bf56f-62e6-4f55-acf5-7b541a8fd12e" class="">Nilai kembalian ke-2 pada fungsi di atas adalah closure dengan skema <code>func() []int</code>. Bisa dilihat di bagian akhir, ada fungsi tanpa nama yang dikembalikan.</p><pre id="bf14e4e6-1282-4e0f-9b95-645babc9d2ec" class="code"><code>return len(res), func() []int {
+    return res
+}</code></pre><p id="b1e4105f-df17-47d7-97d3-43dc374d4914" class="">Fungsi tanpa nama yang akan dikembalikan boleh disimpan pada variabel terlebih dahulu. </p><p id="e1d452a5-5936-41d1-80c4-9216535c8f80" class="">Contohnya:</p><pre id="ff423ad3-1387-4b60-ac3f-cd2633916c91" class="code"><code>var getNumbers = func() []int {    
+	return res
+}return len(res), getNumbers`</code></pre><p id="b2696ae6-ba7c-4dce-9ea7-3356f35ae7e9" class="">Sedikit tentang fungsi <code>findMax()</code>, fungsi ini digunakan untuk mencari banyaknya angka-angka yang nilainya di bawah atau sama dengan angka tertentu. Nilai kembalian pertama adalah jumlah angkanya. Nilai kembalian kedua berupa closure yang mengembalikan angka-angka yang dicari. </p><p id="f4b17ce4-5424-4194-95f3-58ca6ccfb786" class="">Berikut merupakan contoh implementasi fungsi tersebut.</p><pre id="847b7cbc-afe0-4ca4-a775-6b4c020bebe4" class="code"><code>package main
+
+import &quot;fmt&quot;
+
+func findMax(numbers []int, max int) (int, func() []int) {
+    var res []int
+    for _, e := range numbers {
+        if e &lt;= max {
+            res = append(res, e)
+        }
+    }
+    return len(res), func() []int {
+        return res
+    }
+}
+func main() {
+    var max = 3
+    var numbers = []int{2, 3, 0, 4, 3, 2, 0, 4, 2, 0, 3}
+    var howMany, getNumbers = findMax(numbers, max)
+    var theNumbers = getNumbers()
+
+    fmt.Println(&quot;numbers\t:&quot;, numbers)
+    fmt.Printf(&quot;find \t: %d\n\n&quot;, max)
+
+    fmt.Println(&quot;found \t:&quot;, howMany)    // 9
+    fmt.Println(&quot;value \t:&quot;, theNumbers) // [2 3 0 3 2 0 2 0 3]
+}</code></pre><p id="c83cf770-3a80-4884-8efd-85ada8a7ce64" class="">Output program:</p><pre id="cfe44b2c-b120-4b02-a052-59cace317972" class="code"><code>PS C:\Go\src\belajar-golang&gt; go run .\fungsi-closure.go
+numbers : [2 3 0 4 3 2 0 4 2 0 3]
+find    : 3
+
+found   : 9
+value   : [2 3 0 3 2 0 2 0 3]</code></pre></li></ol></div></article></body></html>
