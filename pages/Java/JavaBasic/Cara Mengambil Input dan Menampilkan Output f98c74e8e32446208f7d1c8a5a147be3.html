@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cara Mengambil Input dan Menampilkan Output</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f98c74e8-e324-4620-8f7d-1c8a5a147be3" class="page sans"><header><h1 class="page-title"><strong>Cara Mengambil Input dan Menampilkan Output</strong></h1></header><div class="page-body"><p id="8b70a2e2-b88f-4ba4-a629-8835aaebe9f1" class="">Seperti yang kita ketahui, program komputer terdiri dari tiga komponen utama, yaitu: input, proses, dan output.</p><ul id="bba5b286-0b15-4de3-b154-e2e3e7fda931" class="bulleted-list"><li>Input: nilai yang kita masukan ke program</li></ul><ul id="254865d9-5593-4656-ba1b-f853514b2374" class="bulleted-list"><li>Proses: langkah demi langkah yang dilakukan untuk mengelola input menjadi sesuatu yang berguna</li></ul><ul id="95df3ed7-f4d1-415f-b56e-1f9af9d80c45" class="bulleted-list"><li>Output: hasil pengolahan</li></ul><p id="99d54724-bd39-42a8-9f59-6ee7758cc7ea" class="">Semua bahasa pemrograman telah menyediakan fungs-fungsi untuk melakukan input dan output.</p><p id="01ff05bf-0c53-478a-a9d5-d043bc1deb4c" class="">Java sendiri sudah menyediakan tiga class untuk mengambil input:</p><ol id="16547cb1-f6f3-4d61-9ce4-8cece235b2b9" class="numbered-list" start="1"><li>Class Scanner;</li></ol><ol id="a3e7d0bf-46ce-4136-8e59-c4507e34138e" class="numbered-list" start="2"><li>Class BufferReader;</li></ol><ol id="27c78a5f-61bb-4d3d-b5a0-66c1c576d023" class="numbered-list" start="3"><li>dan Class Console.</li></ol><p id="de1790ab-c250-4373-9109-e040a2b42d59" class="">Tiga class tersebut untuk mengambil input pada program berbasis teks <em>(console)</em>. Sedangkan untuk GUI menggunakan class yang lain seperti JOptionPane dan inputbox pada form.</p><p id="d05f8dd4-1ca9-4546-b683-d5a6f9712323" class="">Sementara untuk outputnya, Java menyediakan fungsi <code>print()</code>, <code>println()</code>, dan <code>format()</code>.</p><h2 id="a370f568-6e52-4e5b-adfa-08b1589cf3cb" class=""><strong>Mengambil Input dengan Class Scanner</strong></h2><p id="0b3bc8da-0539-476e-af40-f4794ef68f98" class=""><em>Scanner</em> merupakan <em>class</em> yang menyediakan fungsi-fungsi untuk mengambil input dari keyboard.</p><p id="b9591f5d-225c-48a2-8e47-3669f227f052" class="">Agar kita bisa menggunakan Scanner, kita perlu mengimpornya ke dalam kode:</p><p id="a30def89-3c05-4e4b-9f52-d98cd47c7d86" class=""><code>import java.util.Scanner;</code></p><p id="ff7af07e-c502-4958-8d15-310a633aaa4e" class="">Lebih jelasnya…</p><h3 id="c70de7ae-d720-4b1e-a400-91b7dfc98a0a" class=""><strong>Mari Kita Praktik</strong></h3><p id="0e2376af-fc8f-4b86-bdee-63fb56b23787" class="">Sekarang adalah pertemuan ke-2, jadi buatlah paket baru bernama <em>pertemuan2</em> pada <em>source packages</em>.</p><p id="ef645c36-1bb4-4784-bdaa-0fa5ed2f43a0" class="">Klik kanan pada <em>souce packages</em>, kemudian pilih <em>new package</em>:</p><figure id="fdf8ef58-4c3a-474f-94a7-6b8af964f3bf" class="image"><a href="https://3.bp.blogspot.com/-YZLPVlWVvHQ/VhpjaEIl__I/AAAAAAAAB_E/WB_Qw6L78Yc/s1600/Membuat%2Bpaket%2Bpertemuan%2Bke-2%2Blab%2Bjava%2Bpetani%2Bkode.png"><img src="https://3.bp.blogspot.com/-YZLPVlWVvHQ/VhpjaEIl__I/AAAAAAAAB_E/WB_Qw6L78Yc/s1600/Membuat%2Bpaket%2Bpertemuan%2Bke-2%2Blab%2Bjava%2Bpetani%2Bkode.png"/></a></figure><p id="7b9e7e52-53f7-4c45-b5c9-731de6c38356" class="">Kemudian isi nama paket dengan <em>pertemuan2</em>, lalu klik <em>Finish</em>:</p><figure id="e25b1804-e37c-492f-ad1f-66c3fa07fe97" class="image"><a href="https://4.bp.blogspot.com/-J9Y0ysNqe8U/VhpmrUXIqFI/AAAAAAAAB_Q/q2ltmcQ6iD0/s1600/Memberikan%2Bnama%2Bpaket%2Bpertemuan2%2B-%2Blab%2Bjava%2Bpetani%2Bkode.jpg"><img src="https://4.bp.blogspot.com/-J9Y0ysNqe8U/VhpmrUXIqFI/AAAAAAAAB_Q/q2ltmcQ6iD0/s1600/Memberikan%2Bnama%2Bpaket%2Bpertemuan2%2B-%2Blab%2Bjava%2Bpetani%2Bkode.jpg"/></a></figure><p id="44f3cc9f-6306-43e6-8d23-41cfd46bd77b" class="">Setelah itu, lanjutkan dengan membuat kelas <em>(java class)</em> baru di paket <em>pertemuan2</em>:</p><figure id="a43fa0b5-63f8-4151-be46-b34f728d540c" class="image"><a href="https://2.bp.blogspot.com/-nElyKZ4egCY/VhpquwCc_PI/AAAAAAAAB_c/zgx6c92MiOY/s1600/membuat%2Bkelas%2Bbaru%2Bdi%2Bpaket%2Bpertemuan2%2B-%2Blab%2Bjava%2Bpetani%2Bkode.png"><img src="https://2.bp.blogspot.com/-nElyKZ4egCY/VhpquwCc_PI/AAAAAAAAB_c/zgx6c92MiOY/s1600/membuat%2Bkelas%2Bbaru%2Bdi%2Bpaket%2Bpertemuan2%2B-%2Blab%2Bjava%2Bpetani%2Bkode.png"/></a></figure><p id="84dd54d0-3b4f-4e6d-ac3f-5a0376db632f" class="">Berikan nama: <em>DataKaryawan</em>. Kemudian klik <em>Finish</em>:</p><figure id="6593ffbd-b698-49e8-93c0-591aa345c59b" class="image"><a href="https://2.bp.blogspot.com/-FmWjzrULjYw/Vhpq8pW1fhI/AAAAAAAAB_k/t_HFSSzDyUM/s1600/Membuat%2Bkelas%2BDataKaryawan%2Bdi%2Bpaket%2Bpertemuan2%2B-%2Blab%2Bjava%2Bpetani%2Bkode.png"><img src="https://2.bp.blogspot.com/-FmWjzrULjYw/Vhpq8pW1fhI/AAAAAAAAB_k/t_HFSSzDyUM/s1600/Membuat%2Bkelas%2BDataKaryawan%2Bdi%2Bpaket%2Bpertemuan2%2B-%2Blab%2Bjava%2Bpetani%2Bkode.png"/></a></figure><p id="c88cb79c-c91d-4cbe-8e08-fa91752124bc" class="">Setelah itu, silahkan ikuti kode berikut ini:</p><pre id="f054cedf-bd99-4244-8bf3-53358e28a002" class="code"><code>package pertemuan2;
+
+// mengimpor Scanner ke program
+import java.util.Scanner;
+
+<em>public</em> <em>class</em> DataKaryawan { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// deklarasi variabel 
+		String nama, alamat; int usia, gaji; 
+		// membuat scanner baru 
+		Scanner keyboard = new Scanner(System.in); 
+		// Tampilkan output ke user 
+		System.out.println(&quot;### Pendataan Karyawan PT. Petani Kode ###&quot;);
+		System.out.print(&quot;Nama karyawan: &quot;); 
+		// menggunakan scanner dan menyimpan apa yang diketik di variabel nama 
+		nama = keyboard.nextLine(); 
+		// Tampilkan output lagi 
+		System.out.print(&quot;Alamat: &quot;); 
+		// menggunakan scanner lagi 
+		alamat = keyboard.nextLine();
+		System.out.print(&quot;Usia: &quot;);
+		usia = keyboard.nextInt(); 
+		System.out.print(&quot;Gaji: &quot;); 
+		gaji = keyboard.nextInt(); 
+		// Menampilkan apa yang sudah simpan di variabel 
+		System.out.println(&quot;--------------------&quot;);
+		System.out.println(&quot;Nama Karyawan: &quot; + nama); 
+		System.out.println(&quot;Alamat: &quot; + alamat); 
+		System.out.println(&quot;Usia: &quot; + usia + &quot; tahun&quot;);
+		System.out.println(&quot;Gaji: Rp &quot; + gaji); }
+}</code></pre><p id="0414e540-798c-4e15-8378-efbb930a557c" class="">Perlu diperhatikan, penggunakan fungsi untuk mengambil data bergantung dari tipe data yang digunakan.</p><p id="d5739f3c-b6c5-4dac-b830-27cad30a2f16" class="">Misal, tipe datanya adalah <em>String</em>, maka fungsi atau <em>method</em> yang dipakai adalah <code>nextLine()</code>.</p><p id="4d718e05-d3e4-4699-aa07-7a12b8e968c7" class="">Begitu juga dengan tipe data lain, <em>Integer</em> menggunakan <code>nextInt()</code>,  <em>Double</em> menggunakan <code>nextDouble()</code>, dsb.</p><p id="40033449-be93-4f77-b34b-91f670c3f5a2" class="">Setelah selesai membuat program, silahkan dijalankan. Klik kanan kemudian pilih <em>Run File</em> atau tekan tombol [Shift]+[F6].</p><figure id="d2be52cc-415f-459f-a9ab-2f30dd5dacbd" class="image"><a href="https://1.bp.blogspot.com/-SZK84ux2_ic/VhpyyY7R3eI/AAAAAAAAB_0/BC6M4FtlG0s/s1600/Hasil%2Boutput%2Bprogram%2BDataKaryawan%2B-%2Blab%2Bjava%2Bpetani%2Bkode.png"><img src="https://1.bp.blogspot.com/-SZK84ux2_ic/VhpyyY7R3eI/AAAAAAAAB_0/BC6M4FtlG0s/s1600/Hasil%2Boutput%2Bprogram%2BDataKaryawan%2B-%2Blab%2Bjava%2Bpetani%2Bkode.png"/></a></figure><h2 id="d7f841bf-8351-4237-b043-78604fa83aa2" class=""><strong>Mengambil Input dengan Class BufferReader</strong></h2><p id="a70bd6de-b821-4f35-ae03-5258dd759e8b" class="">Class <code>BufferReader</code> sebenarnya tidak hanya untuk mengambil input dari keyboard saja.</p><p id="e9f95117-6d20-4752-9355-f1038a7ed26e" class="">Class ini juga dapat digunakan untuk membaca input dari file dan jaringan.</p><p id="57befb9c-2727-4285-b671-7709f4019c75" class="">Class ini terletak di dalam paket <code>java.io</code>.</p><p id="f595cb9d-e388-4c05-b7de-82ba176beb6a" class="">Silahkan diimpor untuk dapat menggunakan class <code>BufferReader</code>.</p><p id="190e6961-f3dd-4fc0-afa7-939245f4f443" class=""><code>import java.io.BufferedReader;</code></p><h3 id="8caef31a-84ae-4023-a967-3e705af284d8" class=""><strong>Mari kita coba…</strong></h3><p id="8537f6ea-e021-481f-81df-9a8a8a1c2c10" class="">Silahkan buat class baru bernama <code>ContohBufferReader</code>, kemudian isi dengan kode berikut ini.</p><pre id="d2eac369-d0c5-4889-abff-b9a0c95c02a1" class="code"><code>package pertemuan2;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+<em>public</em> <em>class</em> ContohBufferReader { 
+	<em>public</em> <em>static</em> void main(String[] args) <em>throws</em> IOException { 
+		String nama; 
+		// Membuat objek inputstream 
+		InputStreamReader isr = new InputStreamReader(System.in); 
+		// membuat objek bufferreader 
+		BufferedReader br = new BufferedReader(isr); 
+		// Mengisi varibel nama dengan Bufferreader 
+		System.out.print(&quot;Inputkan nama: &quot;); 
+		nama = br.readLine(); 
+		// tampilkan output isi variabel nama 
+		System.out.println(&quot;Nama kamu adalah &quot; + nama);
+	}
+}</code></pre><p id="6e408680-e20b-4ac7-abd0-3a5925e74ecc" class="">Ternyata class <code>BufferReader</code> tidak bisa bekerja sendirian. Dia juga butuh teman yaitu: class <code>InputStreamReader</code> dan class <code>IOException</code>.</p><p id="87540c30-625a-4828-a4e8-a4698435053b" class="">Sekarang mari kita coba jalankan programnya:</p><figure id="caf8697b-369f-4310-ae55-470c0224ebb0" class="image"><a href="https://3.bp.blogspot.com/-qBCtkCN4QEg/WOK766Qwq5I/AAAAAAAAEhY/Wkllh98veisOrEpv0-drFAJ912NZJ1wsACLcB/s1600/hasil%2Boutput%2Bdengan%2Binput%2Bbufferreader.png"><img src="https://3.bp.blogspot.com/-qBCtkCN4QEg/WOK766Qwq5I/AAAAAAAAEhY/Wkllh98veisOrEpv0-drFAJ912NZJ1wsACLcB/s1600/hasil%2Boutput%2Bdengan%2Binput%2Bbufferreader.png"/></a></figure><p id="64e58d75-cc5a-4381-8b1c-5ea95b198dfb" class="">Perbedaan <code>BufferReader</code> dengan <code>Scanner</code> terlihat dari fungsi atau <em>method</em> yang dipakai.</p><p id="5ff57a0e-b5c5-47de-b33e-30768c691e3e" class=""><code>Scanner</code> menggunakan <code>next()</code>, sedangkan <code>BufferReader</code> menggunakan <code>readLine()</code>.</p><p id="f9a078d4-2408-44dd-8368-36c0f4618e8d" class="">Lalu untuk tipe data integer, <code>BufferReader</code> menggunakan fungsi <code>read()</code> saja. Hal ini dapat kita lihat dalam <em>hint autocomplete</em> .</p><figure id="0b170ab7-5cad-4180-aa68-513c352ee482" class="image"><a href="https://1.bp.blogspot.com/-A-kKjomAxnc/WOK-HbuuvQI/AAAAAAAAEhk/qoJT2ce9w1kCyXA-XH9A5oBPp9rUw4VcQCLcB/s1600/Tipe%2Bdata%2Buntuk%2Bbuffereader.png"><img src="https://1.bp.blogspot.com/-A-kKjomAxnc/WOK-HbuuvQI/AAAAAAAAEhk/qoJT2ce9w1kCyXA-XH9A5oBPp9rUw4VcQCLcB/s1600/Tipe%2Bdata%2Buntuk%2Bbuffereader.png"/></a></figure><p id="3b1512fe-6b62-460b-be9d-15c3dc1bb309" class=""><strong>Tips</strong>: Tekan <code>Ctrl</code>+<code>Spasi</code> saat menulis kode untuk menampilkan <em>hint autocomplete</em> .</p><h2 id="22461533-7c0a-48bf-b388-c922d1c7357f" class=""><strong>Mengambil Input dengan Class Console</strong></h2><p id="9a208584-33c7-4ea1-99c0-59e71e71e4e2" class="">Class <code>Console</code> hampir sama dengan <code>BufferReader</code>. Dia juga menggunakan fungsi <code>readLine()</code> untuk mengambil input.</p><p id="d2ce6f7a-0ea8-4d8e-876f-69c28f3d6b60" class="">Akan tetapi…</p><p id="d04b2002-dd58-4e6d-a58a-6f4791ef03dc" class="">Class ini hanya bisa digunakan di lingkungan console saja, seperti Terminal dan CMD.</p><p id="bf396dcc-9022-4528-ba17-73071def39a2" class="">Class <code>Console</code> tidak bisa digunakan langsung di Netbeans.</p><p id="d29ed52b-b24f-4ff6-9451-a78c3cbc9b09" class="">Maka dari itu, kita harus kompilasi secara manual.</p><p id="5b443554-a3fa-46ec-92c2-0eb5654e56e8" class="">Untuk menggunakan class ini, kita perlu mengimpornya terlebih dahulu.</p><p id="aa4026e3-866b-4b9c-8952-e02a2280e209" class=""><code>import java.io.Console;</code></p><h3 id="d5d39623-0efa-4a18-b87b-10891b938b0e" class=""><strong>Mari kita coba…</strong></h3><p id="84540ce3-0cc3-4bd2-bfde-e9d8824a13a8" class="">Buatlah file baru bernama <code>InputConsole.java</code> dengan isi sebagai berikut:</p><pre id="2b7bc212-c901-43b2-8ceb-6990d8a0302e" class="code"><code>import java.io.Console;
+
+<em>public</em> <em>class</em> InputConsole { 
+		<em>public</em> <em>static</em> void main(String[] args) { 
+			String nama; int usia; 
+			// membuat objek console 
+			Console con = System.console(); 
+			// mengisi variabel nama dan usia dengan console 
+			System.out.print(&quot;Inputkan nama: &quot;); 
+			nama = con.readLine(); 
+			System.out.print(&quot;Inputkan usia: &quot;); 
+			usia = Integer.parseInt(con.readLine()); 
+			// mengampilkan isi variabel nama dan usia 
+			System.out.println(&quot;Nama kamu adalah: &quot; + nama); 
+			System.out.println(&quot;Saat ini berusia &quot; + usia + &quot; tahun&quot;); 
+		}
+}</code></pre><p id="1fa6d38c-7229-4864-834d-2f3ce864805d" class=""><strong>Perhatikan</strong>: dalam kode di atas, kita menggunakan fungsi <code>Integer.parseInt(con.readLine())</code> untuk tipe data integer. Artinya, kita merubah tipe data String ke Integer.</p><p id="786810fb-27ac-4d69-abd3-3dd649245948" class="">Karena <code>Console</code> tidak memiliki nilai kembalian berupa integer untuk fungsi <code>read()</code>.</p><p id="9fa3f00b-8a86-4087-8fa5-cf0ef05d3d67" class="">Lanjut…</p><p id="18a1d4c2-7123-44ed-ae26-e1cbbde7c29d" class="">Setelah itu, lakukan kompilasi melalui Terminal atau CMD. Buka terminal, kemudian masuk ke direktori tempat menyimpan kodenya.</p><p id="d08d3360-6e55-486d-ba6a-25a49e7f9468" class="">Ketik perintah: <code>javac InputConsole.java</code> untuk melakukan kompilasi.</p><p id="62f44912-6cd5-4d8b-ae6b-7d6479db6b4d" class="">Setelah itu, ketik perintah <code>java InputConsole</code> untuk menjalankannya:</p><figure id="739f0677-fc91-4aad-b5c6-dfaa06d8a8d6" class="image"><a href="https://4.bp.blogspot.com/-53BqUuOe0fU/WOLFjSxxltI/AAAAAAAAEh8/PlkhbCsflDcbFc3UujbMsiiGIO9W66j-ACLcB/s1600/input%2Bconsole%2Bjava.png"><img src="https://4.bp.blogspot.com/-53BqUuOe0fU/WOLFjSxxltI/AAAAAAAAEh8/PlkhbCsflDcbFc3UujbMsiiGIO9W66j-ACLcB/s1600/input%2Bconsole%2Bjava.png"/></a></figure><h2 id="f79a213b-5636-4d52-ad58-5930e263b9a4" class=""><strong>Menampilkan Output</strong></h2><p id="6d4d67d6-4347-49f6-9e38-bffc1cb2ff8f" class="">Kita sudah mengenal beberapa cara mengambil input dari keyboard untuk program berbasis teks.</p><p id="50862638-d53f-4ffb-a9c2-158f7e99d6d5" class="">Sekarang bagaimana dengan outputnya?</p><p id="d0c65794-a103-4916-a757-49de3071d8eb" class="">Ada beberapa fungsi yang sudah disediakan oleh Java:</p><ol id="7d8dad96-b1d4-4957-a070-5722e778b1a4" class="numbered-list" start="1"><li>Fungsi <code>System.out.print()</code></li></ol><ol id="64e71288-ae35-4f4c-be32-15f6a871e0ce" class="numbered-list" start="2"><li>Fungsi <code>System.out.println()</code></li></ol><ol id="bccd3868-5ea5-4096-afd4-a71a6b333872" class="numbered-list" start="3"><li>Fungsi <code>System.out.format()</code></li></ol><p id="f4195b7e-64ec-46e3-83f6-02f1b0707aee" class="">Apa saja perbedaan dari fungsi-fungsi tersebut?</p><p id="38462d38-c251-402f-9993-e692c883f5a1" class="">Mari kita bahas…</p><h3 id="8141d0eb-aa7b-431e-abe4-7b08a6f45c2b" class=""><strong>Fungsi </strong><code><strong>print()</strong></code><strong> vs </strong><code><strong>println()</strong></code></h3><p id="661064d4-6911-4934-9479-fd70bba1286d" class="">Fungsi <code>print()</code> dan <code>println()</code> sama-sama digunakan untuk menampilkan teks.</p><p id="03b26c0a-96c9-48c8-b2dd-be4ded425453" class="">Lalu apa bedanya?</p><p id="ef7c1c57-190d-4368-adc6-6169c0f1691d" class="">Fungsi <code>print()</code> akan menampilkan teks apa adanya. Sedangkan <code>println()</code> akan menampilkan teks dengan ditambah baris baru.</p><p id="f038eaae-82f0-4c61-aaec-46becaf940b5" class="">Mari kita coba dalam kode:</p><pre id="85d2d16e-a099-4f08-a30f-6b1447e5659e" class="code"><code>package eksperimen;
+
+<em>public</em> <em>class</em> PrintVsPrinln { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		System.out.print(&quot;ini teks yang dicetak dengan print()&quot;); 
+		System.out.println(&quot;sedangkan ini teks yang dicetak dengan println()&quot;); 
+		System.out.print(&quot;pake print() lagi&quot;); 
+	}
+}</code></pre><p id="af08c057-322d-4009-bb1f-aa4fe7270be6" class="">Sekarang lihat hasil outputnya:</p><figure id="cf09d3b8-233a-4a42-afbf-dab8406e4e7e" class="image"><a href="https://4.bp.blogspot.com/-M-uiSVwlinw/WOWXFYWJy3I/AAAAAAAAEkY/nV8w_c257SAs_KxHN6-8bQHEYFRj-QzwwCPcB/s1600/Perbedaan%2Bfungsi%2Bprint%2Bdan%2Bprintln%2Bdi%2Bjava.png"><img src="https://4.bp.blogspot.com/-M-uiSVwlinw/WOWXFYWJy3I/AAAAAAAAEkY/nV8w_c257SAs_KxHN6-8bQHEYFRj-QzwwCPcB/s1600/Perbedaan%2Bfungsi%2Bprint%2Bdan%2Bprintln%2Bdi%2Bjava.png"/></a></figure><h3 id="4b8e0d5b-e875-4289-b204-6c18e954fb42" class=""><strong>Menggabungkan String</strong></h3><p id="b464e583-1b0a-487c-ada3-0cdfcd4c7094" class="">Ketika menggunakan fungsi <code>print()</code> maupun <code>println()</code>, kadang kita perlu mengambil teks dari variabel dan menggabungkannya dengan teks yang lain.</p><p id="fbe8ec8d-b6b3-4ef5-910e-9f33a4c12a67" class="">Misalnya seperti ini:</p><p id="066e6516-b930-47ac-a7b5-f9d2839ede91" class="">Kita punya variabel <code>namaDepan</code> dan <code>namaBelakang</code>:</p><pre id="ba02fd91-c90b-44f2-bc1e-57676a01bd54" class="code"><code>String namaDepan = &quot;Petani&quot;;
+String namaBelakang = &quot;Kode&quot;;</code></pre><p id="330c39bf-c2d6-4f39-b684-be1a8173afca" class="">Kemudian kita ingin menampilkannya dengan fungsi <code>print()</code>, maka kita hanya perlu memasukkannya ke sana.</p><pre id="f5236230-6710-46f5-a9b2-b114df05d2b6" class="code"><code>System.out.print(namaDepan);
+System.out.print(namaBelakang);</code></pre><p id="f2cb60cb-036d-435b-92cf-a0d516f313e9" class="">Kode tersebut akan menghasilkan: <code>PetaniKode</code></p><p id="df67dfc6-bf2a-4d63-bce8-1b399b26caa9" class="">Sebenarnya kita tidak perlu menggunakan dua fungsi <code>print()</code>, karena kita bisa menggabungkannya dengan operator <code>+</code>.</p><p id="bef9a1df-c259-4f4e-93bf-1d7bb57944fa" class="">Contoh:</p><pre id="2580fdf8-904b-4185-bcbf-557f1ff5d9d8" class="code"><code>System.out.print(namaDepan + namaBelakang);</code></pre><p id="f9f05e82-9bc0-4298-ab07-ce233e33ca25" class="">Agar ada spasi, tinggal ditambahkan saja spasi:</p><pre id="70473301-26d8-49e6-9d2f-650115f141a4" class="code"><code>System.out.print(namaDepan + &quot; &quot; + namaBelakang);</code></pre><h3 id="f79163ac-16d6-472e-893f-919ef81df8e2" class=""><strong>Format String</strong></h3><p id="70951844-31c2-40fb-a21d-15eeb8612c81" class="">Sedangkan untuk menggabungkan String yang lebih kompleks, kita bisa menggunakan fungsi <code>format()</code>.</p><p id="d1e9f4fa-93e5-4d13-9617-5df5d6e7aa84" class="">Contoh:</p><pre id="378e87b8-78be-463e-8f84-26a2fd473db8" class="code"><code>package eksperimen;
+
+<em>public</em> <em>class</em> FormatString { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		String namaDepan = &quot;Petani&quot;; 
+		String namaBelakang = &quot;Kode&quot;; 
+		System.out.format(&quot;Nama saya %s %s %n&quot;, namaDepan, namaBelakang); 
+	}
+}</code></pre><p id="e6079d6c-5703-44b4-a4fa-7b2393a0fe96" class=""><strong>Perhatikan</strong>: di sana kita menggunakan simbol <code>%s</code> untuk mengambil nilai dari variabel di sampingnya. <code>%s</code> artinya string.</p><p id="2a896a73-6d8c-4244-b460-cf45e467f33e" class="">Selain <code>%s</code>, ada juga simbol lain:</p><ul id="d12bc5a2-fb6a-442d-b683-a277e839bd29" class="bulleted-list"><li><code>%d</code> untuk desimal atau angka;</li></ul><ul id="212dbbf6-85a2-42e9-9503-3d63c8ac93f2" class="bulleted-list"><li><code>%f</code> untuk bilangan pecahan;</li></ul><ul id="a0f4a766-33bd-4bd0-8104-7ef1c89e73d3" class="bulleted-list"><li><code>%n</code> untuk baris baru, bisa juga pakai <code>\n</code>;</li></ul><ul id="4aff20e0-4796-45c3-aba7-02c179665535" class="bulleted-list"><li>dan masih banyak lagi, cek di <a href="https://docs.oracle.com/javase/tutorial/java/data/numberformat.html">dokumentasi java</a>.</li></ul><figure id="2697d51c-df87-4371-b37e-25ddb965ee88" class="image"><a href="https://4.bp.blogspot.com/-gyWiJrJNbFY/WOWc2S6aXlI/AAAAAAAAEk4/xBtlY6v5yUQAUsDpJ_fDdY8zBQ27x7L-ACPcB/s1600/Format%2BString%2Bdi%2BJava.png"><img src="https://4.bp.blogspot.com/-gyWiJrJNbFY/WOWc2S6aXlI/AAAAAAAAEk4/xBtlY6v5yUQAUsDpJ_fDdY8zBQ27x7L-ACPcB/s1600/Format%2BString%2Bdi%2BJava.png"/></a></figure><p id="30ff5660-3fa2-4665-8c35-2da37f30ee28" class="">Kode di atas akan menghasilkan: <code>Nama saya Petani Kode</code></p><p id="74ac6890-ccc2-4251-acc0-182fb6d06f3e" class="">
+</p></div></article></body></html>

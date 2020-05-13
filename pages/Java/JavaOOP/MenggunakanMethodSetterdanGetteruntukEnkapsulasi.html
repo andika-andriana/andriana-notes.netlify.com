@@ -1,0 +1,655 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Menggunakan Method Setter dan Getter untuk Enkapsulasi</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b2683b0d-97ea-4a77-928d-f7d73707ce3e" class="page sans"><header><h1 class="page-title"><strong>Menggunakan Method Setter dan Getter untuk Enkapsulasi</strong></h1></header><div class="page-body"><p id="80a07e1a-a653-4696-86bc-767db4344cb0" class="">Method setter dan getter adalah dua method yang tugasnya untuk mengambil dan mengisi data ke dalam objek.</p><p id="a1407d40-f1bd-4a9e-9ecd-d0203e3597a4" class="">Dalam OOP kita sering mendengar istilah <em>encapsulation</em> (pembungkusan), di mana data dibungkus dengan modifier <code>private</code> agar tidak bisa diakses secara langsung dari luar class.</p><figure id="b16e46a3-4817-45e6-addf-8d3026fbf175" class="image"><a href="https://www.petanikode.com/img/java/oop/setget/objek-setter-getter.png"><img style="width:576px" src="https://www.petanikode.com/img/java/oop/setget/objek-setter-getter.png"/></a></figure><p id="c000a332-9648-44ab-8632-b01e64dae354" class="">Nah method setter dan getter inilah yang akan membantu kita mengakses data tersebut.</p><p id="1aaa567a-f9b2-4944-ad55-1463b57f026d" class="">Mengapa harus dibuat seperti ini?</p><p id="192d8a26-f069-4de9-844d-006ed2f5da46" class="">Ada beberapa alasannya:</p><ol id="b67b7e0b-b922-48e7-a8da-d5977336f8ef" class="numbered-list" start="1"><li>Untuk meningkatkan keamanan data;</li></ol><ol id="7f799a7a-3ef0-4d89-95fb-5b4ccf7a5297" class="numbered-list" start="2"><li>Agar lebih mudah dalam mengontrol atribut dan dan method;</li></ol><ol id="56a690f4-78c1-496a-b830-5a9fe16ac83f" class="numbered-list" start="3"><li>Class bisa kita buat menjadi <em>read-only</em> dan <em>write-only</em>;</li></ol><ol id="0714d92c-994d-4ac1-ac43-6ec1aa92c535" class="numbered-list" start="4"><li>dan fleksibel: programmer dapat mengganti sebagian dari kode tanpa harus takut berdampak pada kode yang lain.</li></ol><h2 id="4829431f-694d-4814-bc20-93bb16beec37" class=""><strong>Cara Membuat Method Setter dan Getter</strong></h2><p id="9f4e7743-6994-4fe8-9117-475640e7d87c" class="">Cara membuat method setter dan getter sama saja seperti membuat method biasa.</p><p id="73b08cd4-2571-4981-b92f-907676d03230" class="">Contoh:</p><pre id="b8f949ab-1729-4bcd-b4f3-6b3c99e3416e" class="code"><code><em>class</em> User { 
+	<em>private</em> String username; 
+	<em>private</em> String password; 
+
+	// ini method setter 
+	<em>public</em> void setUsername(String username){ 
+		this.username = username; 
+	} 
+	<em>public</em> void setPassword(String password){ 
+		this.password = password;
+	 } 
+
+	// ini method getter 
+	<em>public</em> String getUsername(){ 
+		return this.username; 
+	} 
+	<em>public</em> String getPassword(){ 
+		return this.password; 
+	}
+}</code></pre><p id="60801664-4454-4b33-81f0-30c51b9f4170" class="">Method setter dan getter harus diberikan modifier <code>public</code>, karena method ini akan diakses dari luar class.</p><p id="b982f0e4-ba38-4c60-9f18-c455fda6d956" class="">Perbedaan method setter dengan getter terletak pada nilai kembalian, parameter, dan isi method-nya.</p><p id="62e1e0d3-87e7-428d-9348-524d7df75744" class="">Method setter tidak memiliki nilai kembalian <code>void</code> (kosong). Karena tugasnya hanya untuk mengisi data ke dalam atribut.</p><p id="48031b9e-a45e-42c7-a310-720177408ed4" class="">Sedangkan method getter memiliki nilai kembalian sesuai dengan tipe data yang akan diambil.</p><figure id="6f3595e1-683d-4ddc-a106-1601ddec4844" class="image"><a href="https://www.petanikode.com/img/java/oop/setget/setget.png"><img src="https://www.petanikode.com/img/java/oop/setget/setget.png"/></a></figure><p id="1278944b-8bde-4ca4-a417-6c11ee8e6bee" class="">Nama method setter dan getter harus diawali dengan <code>set</code> untuk setter dan <code>get</code> untuk getter.</p><p id="47773509-39a3-4343-810b-223171a4c359" class="">Apa boleh menggunakan bahasa indonesia? misalnya <code>isi</code> untuk setter dan <code>ambil</code> untuk getter.</p><p id="90631aed-4a84-410d-b35d-1d0f55574638" class="">Boleh-boleh saja, tapi ini tidak dianjurkan. Karena jika kita bekerja dengan tim, tim yang lain akan kesulitan. Apalagi dalam tim tersebut menggunakan bahasa inggris.</p><h2 id="2efc2f80-50dc-4c26-b88a-e1d965548c11" class=""><strong>Menggunakan Method Setter dan Getter</strong></h2><p id="9591d177-3fbc-4d4b-96f3-6579ae980694" class="">Setelah kita membuat method setter dan getter, kita bisa mengakses atau menggunakannya seperti method biasa.</p><p id="4654e8dd-2521-4ddc-a0a4-5e304c86187c" class="">Contoh:</p><pre id="3f6bca00-fabe-45be-be10-72f7d00dbfe5" class="code"><code>// Kode ini ditulis di dalam method main
+// membuat objek dari class User
+User dian = new User();
+// menggunakan method setter
+dian.setUsername(&quot;dian&quot;);
+dian.setPassword(&quot;kopiJava&quot;);
+// menggunakan method getter
+System.out.println(&quot;Username: &quot; + dian.getUsername());
+System.out.println(&quot;Password: &quot; + dian.getPassword());</code></pre><p id="92769ea2-9125-4fbc-a373-faf5036fa4b0" class="">Hasil output:</p><figure id="8a5dca37-82b8-490a-bb62-b1fec6bf8313" class="image"><a href="https://www.petanikode.com/img/java/oop/setget/hasil-output-setget.png"><img src="https://www.petanikode.com/img/java/oop/setget/hasil-output-setget.png"/></a></figure><h2 id="4b0566a8-ba95-4212-8918-e2f42c37c19d" class=""><strong>Tips Cepat Membuat Method Setter dan Getter di Netbeans</strong></h2><p id="79c10149-d89f-4b67-90f0-238fc642df4c" class="">Kita sudah membuat contoh setter dan getter untuk dua atribut data.</p><p id="4bcdb2fb-af75-47ae-b47b-d7c2a633c304" class="">Bagaiman akalau ada banyak data? misal ada 10 atribut yang membutuhkan method setter dan getter.</p><p id="de085939-3803-42f8-ac65-ea5cdbef1c20" class="">Kita bisa memanfaatkan fitur generator di Netbeans.</p><p id="fb415099-7e4d-4add-a90b-b3eace9e10ac" class="">Caranya:</p><p id="b4ea41db-114d-408d-bd88-14bb45d2d245" class="">Pertama buat dulu atribut data yang akan dibuatkan method setter dan getter seperti ini:</p><pre id="805a0b6b-1991-4058-80a6-0280b4eff9b1" class="code"><code><em>class</em> Book { 
+	<em>private</em> String title; 
+	<em>private</em> String author; 
+	<em>private</em> String price;
+	<em>private</em> String isbn; 
+	<em>private</em> String year;
+}</code></pre><p id="dcec3f62-14e3-4153-a98e-6a4f0f1430ec" class="">Setelah itu klik kanan, lalu pilih <strong>Insert Code…</strong> atau tekan tombol <code>Alt</code>+<code>Insert</code> sehingga akan muncul menu seperti ini:</p><figure id="8fe190c1-b4ab-4abc-b00c-71d27b5a766e" class="image"><a href="https://www.petanikode.com/img/java/oop/setget/generator-setter-getter.png"><img src="https://www.petanikode.com/img/java/oop/setget/generator-setter-getter.png"/></a></figure><p id="16ed4980-d710-4fe7-92cf-661f866275f7" class="">Pilih <strong>Setter and Getter</strong> untuk masuk ke menu generator Setter dan Getter. Lalu tentukan atribut yang akan dibuatkan method setter dan getter-nya.</p><figure id="95dd7110-e788-4af2-bb3e-5140d0e6d3e3" class="image"><a href="https://www.petanikode.com/img/java/oop/setget/atribut-generator-setter-getter.png"><img src="https://www.petanikode.com/img/java/oop/setget/atribut-generator-setter-getter.png"/></a></figure><p id="d1907f5a-040a-44d5-8b2c-3b4dfc4d4a50" class="">Kalik <strong>Generate</strong> untuk membuatnya…</p><figure id="75c6b748-63a5-47fb-91aa-7b0465f9477d" class="image"><a href="https://www.petanikode.com/img/java/oop/setget/generator-setget.gif"><img src="https://www.petanikode.com/img/java/oop/setget/generator-setget.gif"/></a></figure><p id="ce3ceeed-6518-4554-9a23-911e5738aae9" class="">Selesai dalam sekejap…</p><p id="6e122bd7-e277-4925-adbd-c21b7be5d306" class="">Generator setter dan getter tidak hanya ada di Netbeans saja. Pada IDE seperti Intellij dan Android Studio juga ada.</p><p id="9a8cc741-688d-4897-b83e-efc110f07ccb" class="">Namun mungkin tombol atau menu untuk mengaksesnya berbeda.</p><h2 id="f2e3332d-9ca1-44e0-9f85-327545b92085" class=""><strong>Apa Selanjutnya?</strong></h2><p id="42e0230a-6b17-41cd-bd86-c1c71a9ab007" class="">Intinya… method setter dan getter bertugas untuk mengakses dan mengisi data ke dalam objek.</p><p id="f1a12077-a853-4868-8e88-ec77353ea520" class="">Kita akan banyak menemukannya di contoh-contoh kasus tertentu. Seperti dalam pembuatan model data, pembuatan aplikasi android, dll.</p></div></article></body></html>

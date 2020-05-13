@@ -1,0 +1,729 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memahami Prinsip Polimorfisme dalam OOP</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4940eb49-43bb-4110-9f51-5ef3be02ae63" class="page sans"><header><h1 class="page-title"><strong>Memahami Prinsip Polimorfisme dalam OOP</strong></h1></header><div class="page-body"><p id="471daa38-7628-425c-bb9b-c13dafd2c8fa" class="">Pemrograman berorientasikan objek atau OOP, memiliki beberapa pilar atau konsep penting yang harus dipahami.</p><p id="9dcde368-bbff-47f4-a9fe-9b03f3371ae6" class="">Diantaranya ada: Class, Objek, Enkapsulasi, Inheritance, dan lainnya.</p><p id="88a42beb-aa1f-4a2a-a5c2-b203cafef42d" class="">Berikutnya, kita akan belajar tentang Polimorfisme.</p><h2 id="1c28c2d6-e3df-4cb4-a816-c9a92215faba" class=""><strong>Apa itu Polimorfisme?</strong></h2><p id="c63a8be8-6f59-41b7-bc31-829dccb6a7b1" class=""><em>Poly</em> artinya banyak, <em>morfisme</em> artinya bentuk.</p><p id="928b7979-ad8a-4bb7-a08a-ad83e949463e" class="">Polimorfisme (bahasa inggris <em>polymorphism</em>) adalah sebuah prinsip dalam biologi di mana organisme atau spesies dapat memiliki banyak bentuk atau tahapan <em>(stages)</em>. </p><p id="62828cc7-8dcb-43a3-8434-6c53f341cec1" class="">Prinsip ini juga diadopsi pada pemrograman berorientasikan objek.</p><p id="49a04ed8-f482-4b22-a5f1-8e7ae44d1481" class="">Sehingga kita dapat definisikan sebagai berikut:</p><p id="52c64f60-0b94-4866-9708-1641d22db1b0" class="">Polimorfisme dalam OOP adalah sebuah prinsip di mana class dapat memiliki banyak <strong>“bentuk”</strong> method yang berbeda-beda meskipun namanya sama.</p><p id="35e284ff-1aed-45bb-8d37-ca7ec1c770b9" class="">“Bentuk” di sini dapat kita artikan: isinya berbeda, parameternya berbeda, dan tipe datanya berbeda.</p><p id="ca271c3f-2860-47ce-8523-c27e2ea3abbe" class="">Polimorfisme pada Java ada dua macam:</p><ol id="4b1ef57d-6109-4a71-8d3f-04cd46b81c39" class="numbered-list" start="1"><li>Static Polymorphism (Polimorfisme statis);</li></ol><ol id="d9c60a65-1150-480e-94fa-43ec8d23eed1" class="numbered-list" start="2"><li>Dynamic Polymorphism (Polimorfisme dinamis).</li></ol><p id="f07706d5-50e5-43dd-90cf-1b7e6b9b71f1" class="">Beda dari keduanya terletak pada cara membuat polimorfismenya.</p><p id="5760a56e-2014-44cb-bd36-dc3a65ba887b" class="">Polimorfisme statis menggunakan <strong>method overloading</strong> sedangkan polimorfisme dinamis menggunakan <strong>method overriding</strong>.</p><p id="4cc13659-672f-4f4e-9f41-496c9a433ea0" class="">Karena kamu baru mendengar kedua hal ini, mari kita bahas perbedaanya lebih detail:</p><h2 id="503eda88-11ac-48eb-be30-f015bc8f2171" class=""><strong>Perbedaan Method Overloading dengan Method Overriding</strong></h2><p id="46966944-adae-4f0d-afc1-7407bdf0ae93" class="">Method overloading terjadi pada <strong>sebuah class</strong> yang memiliki <strong>nama method yang sama</strong> tapi memiliki <strong>parameter dan tipe data yang berbeda</strong>.</p><p id="eaba306c-0e0d-40be-b313-aed96014adf9" class="">Kata kunci yang perlu kamu ingat:</p><p id="92d5183e-4f34-42d9-8e25-64e310ed0240" class="">“Dalam satu class”</p><p id="3f7873c3-fe62-459b-8406-b751e0f7a0f0" class="">“Nama method sama”</p><p id="f40f109a-d32a-4fee-b5fd-642be9f38d9a" class="">“Tipe data dan parameter beda”</p><p id="8100efc3-11b8-4c86-8421-d989bb6f80eb" class="">Itulah method <strong>Overloading</strong>.</p><p id="2622ee6b-9ab3-4c30-9087-a59040fc4962" class="">Contohnya gimana?</p><p id="9d861c2e-c529-4466-be0f-11c1510211ed" class="">Contohnya misalkan kita memiliki class <code>Lingkaran.java</code>. Pada class ini terdapat method <code>luas()</code>.</p><p id="206a9529-6713-4cf7-a1b8-644c28b3e79e" class="">Nah, si method <code>luas()</code> ini bisa saja memiliki parameter yang berbeda.</p><p id="c5f30bc1-3fed-418b-9aea-53ba7ed6b2ea" class="">Misalnya kita ingin menghitung luas berdasarkan jari-jari (radius) atau diameter.</p><p id="486038f7-5ee5-4513-9697-f5ebd71b2833" class="">Maka kita dapat membuat class-nya seperti ini:</p><pre id="cf2d0d9f-a575-430f-888e-13d1b21c1b8f" class="code"><code><em>class</em> Lingkaran { 
+	// method menghitung luas dengan jari-jari 
+	float luas(float r){ 
+		return (float) (Math.PI * r * r); 
+	} 
+	// method menghitung luas dengan diameter 
+	double luas(double d){ 
+		return (double) (1/4 * Math.PI * d); 
+	}
+}</code></pre><p id="e4e1ca56-3261-4820-aae0-b5d4fe93bfd7" class="">Coba perhatikan!</p><p id="07e5660b-9bbf-4d00-a992-535756818a2d" class="">Class <code>Lingkaran</code> memiliki dua method yang namanya sama, yakni <code>luas()</code>.</p><p id="97a1920a-713e-43f8-8a2e-b9d1d9e9903b" class="">Tapi parameter dan tipe datanya berbeda..</p><p id="1ff4ce25-b8c8-4919-bf31-41e7b3a8ad00" class="">..dan juga isi atau rumus di dalamnya berbeda.</p><p id="2ca8c374-8115-4ab9-b666-ec2c77ec12de" class="">Inilah yang disebut polimorfisme statis.</p><p id="aa249bcb-e1d9-48ef-a8cc-951a4927d84a" class="">Sudah paham ‘kan?</p><p id="87b85a51-5246-4514-af0a-7982ad722a92" class="">Lalu Polimorfisme yang dinamis gimana?</p><p id="7e37be84-df40-4ee1-a900-0a3620252d4b" class="">Plimorfisme dinamis biasanya terjadi saat kita menggunakan pewarisan <em>(inheritance)</em> dan implementasi <em>interface</em>.</p><p id="fb5a95d7-a4a6-4a54-81a7-39e4784f8ce2" class="">Seperti yang sudah kita ketahui:</p><p id="d20ba62a-5e65-478a-abab-b191ae341e09" class="">Pada pewarisan, kita bisa mewariskan atribut dan method dari <em>class</em> induk ke <em>class</em> anak.</p><p id="09bafeee-e7ad-4c04-9082-99d4f9c056a6" class=""><em>Class</em> anak akan memiliki nama method yang sama dengan class induk dan anak yang lainnya.</p><p id="e91fd17a-e5ed-44e6-a416-93f49e1187e3" class="">Nah! Di sinilah akan terjadi polimorfisme.</p><figure id="6ecc417d-d037-4b7e-9e76-072c2643c456" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/diagram-inheritance.png"><img src="https://www.petanikode.com/img/java/oop/poly/diagram-inheritance.png"/></a></figure><p id="20c549ae-659d-4d19-956f-9520f761d1bc" class="">Class anak akan memiliki nama method yang sama, tapi nanti isi dan parameternya bisa berbeda dari class induk.</p><p id="4ecf1828-7b23-4499-8892-cd5326d51c7f" class="">Karena si class anak melakukan <em>method overriding</em> (mendindih method) yang diwariskannya.</p><p id="1f7d6631-1a73-4137-8a86-3318b4db904e" class="">Polimofirme dinamis juga bisa terjadi saat menggunakan <em>interface</em>.</p><figure id="5361562f-77ea-4256-ac78-894ef58536c0" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/diagram-interface.png"><img src="https://www.petanikode.com/img/java/oop/poly/diagram-interface.png"/></a></figure><p id="9137f54b-474b-419b-84f8-834b5fe2b2c5" class="">Oh iya, buat kamu yang belum tahu <em>interface</em>..</p><blockquote id="77d6b3a7-0103-41e2-bd4f-7a12488e9b87" class="">Interface adalah class kosong yang berisi nama-nama method yang nanti harus diimplementasikan pada class lain. Dalam pengimplementasiannya bisa saja tiap-tiap class akan mengimplementasikan secara berbeda dengan nama method yang sama.</blockquote><p id="deb99c7c-44f3-4507-af27-462a888a6703" class="">Nah! kelihatan kan bedanya?</p><p id="42e0111f-8ee5-4720-b868-af28c285382f" class="">Jadi polimorfisme statis hanya terjadi dalam satu class saja.</p><p id="df8cfd5f-f2c4-459d-a853-4a52fa3f5c21" class="">Sedangkan polimorfisme dinamis terjadi pada saat ada hubungan dengan class lain seperti <em>inheritance</em>.</p><p id="593a950a-0b9d-4c15-ae46-15e5e5843ff0" class="">Oke sekarang mari kita lihat contohnya:</p><h2 id="502a1b9d-461d-43f1-ace0-247a9af312a2" class=""><strong>Contoh Program Polimorfisme Dinamis</strong></h2><p id="16d8b7ec-84aa-47cd-8693-063893bb351b" class="">Contoh program polimorfisme dinamis sebenarnya sudah pernah kita buat pada pembahasan inheritance.</p><p id="560316c3-2180-44f1-9472-a03aa8018520" class="">Kita coba bahas lagi ya…</p><p id="57a003c5-92fa-4e31-ac36-ad70b74612d8" class="">Perhatikan diagram ini:</p><figure id="a518e81f-25a4-4d2c-975b-13bfa0ecff5a" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/polimorfisme-inheritance.png"><img src="https://www.petanikode.com/img/java/oop/poly/polimorfisme-inheritance.png"/></a></figure><p id="711b9256-6752-42f4-90f1-6094ff96e238" class="">Pada diagram tersebut, terdapat class <code>BangunDatar</code> yang memiliki tiga <em>subclass</em>, yaitu: <code>Persegi</code>, <code>Lingkaran</code>, dan <code>Segitiga</code>.</p><p id="17633be1-c9da-493c-9644-62b5f80f04a4" class="">Setiap class memiliki method yang sama yaitu <code>luas()</code> dan <code>keliling()</code>. Akan tetapi method-method ini memiliki isi rumus yang berbeda.</p><p id="088ab6fd-5f6f-45b4-ae61-fb324d0d3559" class="">Mari kita coba buat dalam progarm Java…</p><p id="0f24e932-aef7-4fd3-a8f9-51e81cc1f23d" class="">Buatlah proyek baru di Netbeans,</p><figure id="332fdb53-032e-4ff3-b7c6-9b29f9bf018d" class="image"><a href="https://www.petanikode.com/img/java/file/new-project.png"><img src="https://www.petanikode.com/img/java/file/new-project.png"/></a></figure><p id="6aba3253-b725-4e4f-af23-60c0215bda25" class="">Berikan nama <code>ContohPolimorfisme</code>:</p><figure id="4813ce9b-a3a0-4c58-a696-83b4b0431322" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/project-name.png"><img src="https://www.petanikode.com/img/java/oop/poly/project-name.png"/></a></figure><p id="7cd63f67-0410-45dd-9c63-a22e612f5b87" class="">Setelah itu, buat package baru dengan nama <code>bangundatar</code>.</p><figure id="7141daa4-4d81-4925-ad3c-28e286574ed0" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/package-bangundatar.gif"><img src="https://www.petanikode.com/img/java/oop/poly/package-bangundatar.gif"/></a></figure><p id="b3e752ab-5655-4a84-ac6f-7238fb0dab71" class="">Buat class baru di dalam package <code>bangundatar</code>. Caranya, klik kanan lalu pilih <strong>New Java Class</strong>.</p><figure id="1faecfb8-5f9a-4043-8012-629bfeb865e5" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/new-class.gif"><img src="https://www.petanikode.com/img/java/oop/poly/new-class.gif"/></a></figure><p id="bf5df8ae-e7d2-41c0-9204-2274aab6dde9" class="">Buatlah class baru dengan <code>BangunDatar</code>, kemudian isi dengan kode berikut:</p><pre id="724163b0-6c4e-408a-b366-5ff673a59a2d" class="code"><code>package bangundatar;
+
+<em>public</em> <em>class</em> BangunDatar { 
+	float luas(){ 
+		System.out.println(&quot;Menghitung luas bangun datar&quot;); 
+		return 0; 
+	} 
+	float keliling(){ 
+		System.out.println(&quot;Menghitung keliling bangun datar&quot;); 
+		return 0; 
+	}
+}</code></pre><p id="357b3c14-5982-48eb-a03c-60b04c3d5f06" class="">Berikutnya buat class lagi dengan nama <code>Persegi</code> dan isi kodenya seperti ini:</p><pre id="c822e2f8-4380-4af7-8382-fd53fb203f9a" class="code"><code>package bangundatar;
+<em>public</em> <em>class</em> Persegi <em>extends</em> BangunDatar{ 
+	int sisi; 
+	<em>public</em> Persegi(int sisi) { 
+		this.sisi = sisi; 
+	} 
+	@Override <em>public</em> float luas() { 
+		return this.sisi * this.sisi; 
+	} 
+	@Override <em>public</em> float keliling(){ 
+	return this.sisi * 4; 
+	}
+}</code></pre><p id="adaccf15-63fc-41a3-ad44-d19fe319ecda" class="">Berikutnya buat class <code>Segitiga</code> dengan isi sebagai berikut:</p><pre id="1c629d5e-7212-4185-b2ad-37d192293853" class="code"><code>package bangundatar;
+<em>public</em> <em>class</em> Segitiga <em>extends</em> BangunDatar{ 
+	int alas;
+	int tinggi; 
+	<em>public</em> Segitiga(int alas, int tinggi) { 
+		this.alas = alas;
+		this.tinggi = tinggi; 
+	} 
+	@Override <em>public</em> float luas(){ 
+		return this.alas * this.tinggi; 
+	}
+}</code></pre><p id="c9e21a0d-f57d-4b2a-ae33-f7db2420e98d" class="">Berikutnya buat class <code>Lingkaran</code> dengan isi sebagai berikut:</p><pre id="cdf99b4c-5c51-4829-a8af-53b651e88fe9" class="code"><code>package bangundatar;
+<em>public</em> <em>class</em> Lingkaran <em>extends</em> BangunDatar { 
+	int r; 
+	<em>public</em> Lingkaran(int r) { 
+		this.r = r; 
+	} 
+	@Override <em>public</em> float luas(){ 
+		return (float) (Math.PI * r * r); 
+	} 
+	@Override <em>public</em> float keliling(){ 
+		return (float) (2 * Math.PI * r); 
+	}
+}</code></pre><p id="f9595ad7-4a4a-4fb7-b87d-604a75157441" class="">Terakhir, buat class <code>Main</code> dengan isi sebagai berikut:</p><pre id="9d3fa741-0c7c-484f-bf20-c1f0a8d4be1d" class="code"><code>package bangundatar;
+<em>public</em> <em>class</em> Main { <em>public</em> <em>static</em> void main(String[] args) { 
+	BangunDatar bangunDatar = new BangunDatar(); 
+	Persegi persegi = new Persegi(4); 
+	Segitiga segitiga = new Segitiga(6, 3); 
+	Lingkaran lingkaran = new Lingkaran(50); 
+	// memanggil method luas dan keliling 
+	bangunDatar.luas(); 
+	bangunDatar.keliling(); 
+	System.out.println(&quot;Luas persegi: &quot; + persegi.luas()); 
+	System.out.println(&quot;keliling persegi: &quot; + persegi.keliling()); 
+	System.out.println(&quot;Luas segitiga: &quot; + segitiga.luas()); 
+	System.out.println(&quot;Luas lingkaran: &quot; + lingkaran.luas()); 
+	System.out.println(&quot;keliling lingkaran: &quot; + lingkaran.keliling()); }
+}</code></pre><p id="9200ce18-7811-481a-bacd-1a8f8f3d7b76" class="">Sekarang kita sudah punya lima class di dalam package <code>bangundatar</code>.</p><figure id="326e7ae7-f689-4e01-9eea-1315776aeb6a" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/class-di-bangundatar.png"><img style="width:480px" src="https://www.petanikode.com/img/java/oop/poly/class-di-bangundatar.png"/></a></figure><p id="38953a96-bd1d-445a-8994-39495d0016f8" class="">Class yang bisa dijalankan hanyalah class <code>Main</code>, karena ia memiliki method main.</p><p id="4a898a0a-4c10-4058-b9f7-479877311914" class="">Untuk menjalankannya, silahkan klik kanan pada class main.. lalu pilih <strong>Run File</strong>.</p><p id="b5a971b5-b187-4867-8d45-fde481eb474e" class="">Maka hasilnya:</p><figure id="7a815ca0-6d59-4f71-a88f-3df040d3b1eb" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/run.png"><img style="width:576px" src="https://www.petanikode.com/img/java/oop/poly/run.png"/></a></figure><h2 id="baa4f83d-4174-4b28-a50c-1650046a3b54" class=""><strong>Mau Contoh Lagi?</strong></h2><p id="ccdef0d4-1a33-4415-9db6-4cf82d358558" class="">Oke, di contoh yang kedua ini.. kita akan membuat aplikasi untuk mengirim notifikasi dengan Interface.</p><p id="0bdd35e4-81a0-45ff-90c3-676e38b6db3c" class="">Ini adalah bentuk diagramnya:</p><figure id="568970f2-91bf-4a07-be8d-382e0e70e344" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/diagram-interface.png"><img style="width:576px" src="https://www.petanikode.com/img/java/oop/poly/diagram-interface.png"/></a></figure><p id="39f26112-bafa-4134-849d-c90ce93b2025" class="">Mari kita coba buat..</p><p id="06cb1646-d853-4a08-8e2a-d622bc2c9359" class="">Pada proyek <code>ContohPolimorfisme</code>, buatlah package baru dengan nama <code>notifikasi</code>.</p><figure id="86a46321-3ad7-47c8-9d08-44b0bdfcb64d" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/package-notifikasi.png"><img style="width:480px" src="https://www.petanikode.com/img/java/oop/poly/package-notifikasi.png"/></a></figure><p id="90a8065b-a302-4903-bd71-8f5148993959" class="">Setelah itu, di dalam package <code>notifikasi</code>.. buatlah class baru dengan nama <code>InterfaceNotifikasi</code> dan isi kodenya seperti ini:</p><pre id="383fc49e-532d-4e46-854b-1bc35a4d3efd" class="code"><code>package notifikasi;
+<em>public</em> <em>interface</em> InterfaceNotifikasi { 
+	void sendMessage(String receiver, String content);
+}</code></pre><p id="a7b0b328-f5d2-4b36-a41f-ad3785d8de9e" class="">Berikutnya, di dalam package yang sama.. buatlah class baru dengan nama <code>EmailNotification</code> dan isi seperti ini:</p><pre id="21dbdf33-4d07-4250-a502-38f81ec78a1b" class="code"><code>package notifikasi;
+<em>public</em> <em>class</em> EmailNotification <em>implements</em> InterfaceNotifikasi{ 
+	@Override <em>public</em> void sendMessage(String receiver, String content) { 
+		System.out.println(&quot;Mengirim email ke &quot; + receiver + &quot; dengan isi:&quot;); 
+		System.out.println(content); 
+	}
+}</code></pre><p id="16f7b62d-6646-46cd-bcae-aacbaaac058a" class="">Berikutnya, di dalam package yang sama.. buatlah class baru dengan nama <code>SMSNotification</code> dan isi seperti ini:</p><pre id="b0b40862-8001-4c26-b163-e0c0bab2ea07" class="code"><code>package notifikasi;
+<em>public</em> <em>class</em> SMSNotification <em>implements</em> InterfaceNotifikasi{ 
+	@Override <em>public</em> void sendMessage(String receiver, String content) { 
+		System.out.println(&quot;Mengirim SMS ke &quot; + receiver + &quot; dengan isi:&quot;); 
+		System.out.println(content); 
+	}
+}</code></pre><p id="a0a10a89-0762-4138-83c6-6eaed55ec44b" class="">Berikutnya, di dalam package yang sama.. buatlah class baru dengan nama <code>PushNotification</code> dan isi seperti ini:</p><pre id="098b7d91-b432-4652-9fba-319fd90df463" class="code"><code>package notifikasi;
+<em>public</em> <em>class</em> PushNotification <em>implements</em> InterfaceNotifikasi{ 
+	@Override <em>public</em> void sendMessage(String receiver, String content) { 
+		System.out.println(&quot;Mengirim Push Notif ke &quot; + receiver + &quot; dengan isi:&quot;); 
+		System.out.println(content); 
+	}
+}</code></pre><p id="6a7d0e45-a7e8-4651-b491-caf7e6ffe48d" class="">Terakhir, buatlah class <code>Main</code> di dalam package <code>notifikasi</code> dan isi kodenya seperti ini:</p><pre id="ae0b37b2-6dfb-441b-aa66-70d9ce94f8da" class="code"><code>package notifikasi;
+<em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		String emailPenerima = &quot;dian@petanikode.com&quot;; 
+		String nomerHp = &quot;+628111111111&quot;; 
+		String mobileId = &quot;android-123456&quot;; 
+
+		EmailNotification emailNotif = new EmailNotification(); 
+		SMSNotification smsNotif = new SMSNotification(); 
+		PushNotification pushNotif = new PushNotification(); 
+
+		String message = &quot;Tutorial Polimorfisme sudah terbit di Petani Kode, cek sekarang di https://www.petanikode.com/java-oop-polimorfisme&quot;;
+		
+		emailNotif.sendMessage(emailPenerima, message); 
+		smsNotif.sendMessage(nomerHp, message); 
+		pushNotif.sendMessage(mobileId, message); 
+	}
+}</code></pre><p id="690705c6-61af-4cb5-9264-6c87c712cc5a" class="">Hasilnya:</p><figure id="0bc2fa3f-6e9f-41b9-81da-0abde00808c1" class="image"><a href="https://www.petanikode.com/img/java/oop/poly/notif-app.png"><img src="https://www.petanikode.com/img/java/oop/poly/notif-app.png"/></a></figure><p id="f70e5727-c301-4746-a4d9-a8af087e040d" class="">Walapun semua isi method <code>sendMessage()</code> sama, namun nanti pada implementasinya di dunia nyata akan beda-beda.</p><p id="26e3492d-0da5-4f4e-b771-a22ddd8e689c" class=""><code>EmailNotification</code> biasanya akan mengirim email dengan metode SMTP atau API. Sedangkan SMS bisa melalui SMS Gateway.</p><p id="620b82bf-69e4-4703-8a78-64cf70033a22" class="">Begitu juga dengan <code>PushNotofication</code>, nanti akan menggunakan API yang berbeda.</p><p id="3fea571b-0f40-469b-a07b-3fee0f10f662" class="">Nah itulah contoh polimorfisme dengan interface..</p><p id="90548749-5b78-428c-b12d-d582e208c1e9" class="">“Bentuk method-nya beda-beda, tapi namanya sama.”</p></div></article></body></html>

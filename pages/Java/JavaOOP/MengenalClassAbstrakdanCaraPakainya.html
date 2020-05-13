@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mengenal Class Abstrak dan Cara Pakainya</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eae2aae1-befd-41e6-9e76-f31a412cea9c" class="page sans"><header><h1 class="page-title"><strong>Mengenal Class Abstrak dan Cara Pakainya</strong></h1></header><div class="page-body"><p id="fe57d640-ca49-4f52-b498-37c59242b882" class="">Saat mendengar kata “Kendaraan”, apa yang kamu pikirkan pertama kali?</p><p id="b3c13f6c-45cc-44b8-9871-ed36ab1c24eb" class="">Motor?</p><p id="292427a7-6638-419c-bcab-93080f43d925" class="">Mobil?</p><p id="68f0b441-4d23-4aaf-b5f6-d100422d81a6" class="">Pesawat?</p><p id="8856358f-3bc6-4356-8193-1cce20038c58" class="">Apapun itu, semuanya adalah kendaraan.</p><p id="c015649e-d4aa-4d01-b9cc-c2e10b4ab83c" class="">Dan kita juga sudah tahu, kendaraan pasti bisa berjalan.</p><p id="6aa99347-e710-45e1-9f43-08e50d3fc83a" class="">Tapi gimana kalau saya bilang:</p><p id="4c35ad4b-82f1-4b2c-b033-16d974000dfe" class="">“Kendaraan berjalan”</p><p id="5b03814a-968f-491e-9f58-9860a8727d22" class="">Mungkin kamu akan bertanya…</p><p id="56f3f6f1-ffde-4ba8-99cb-d44d1ddff999" class="">Cara jalannya gimana?</p><p id="8707941d-1053-4ed0-ae17-af9bb2c44d3b" class="">Terbang atau jalan di aspal?</p><p id="621f0681-8eef-4dc1-a842-999342280ef8" class="">Saya juga tidak tahu.</p><p id="836b3d9a-60fb-44c6-bbf0-8eedf98ecc67" class="">Inilah yang disebut abstraksi. Kata “Kendaraan” sendiri masih bersifat abstrak. Tapi kita bisa membayangkan konsep kendaraan itu seperti apa.</p><p id="5f160068-f63e-4c6d-8803-8917cce3f6f3" class="">Jika saya bilang:</p><p id="2363fca9-03c0-4d1c-8760-b52dd338f875" class="">“Mobil berjalan”</p><p id="3e4e8ac2-0a2c-4e07-9e98-baa084562749" class="">Kamu pasti sudah tahu maksud saya.</p><p id="3d1759e5-c036-4ac1-ac0a-93975582c017" class="">Mobil adalah benda konkrit atau nyata, sedangkan kendaran masih abstrak.</p><p id="e21002c9-a11b-4f5a-abdc-27d6f781156b" class="">Prinsip abstraksi ini juga ada dalam OOP dan kita sebenarnya sudah pernah menggunakannya.</p><p id="9ac2d938-46b8-407d-bcf7-47d1bcd36572" class="">Namun tidak sadar aja.. kalau itu adalah abstraksi.</p><p id="c283746b-e097-418f-90b0-b11ed6730f74" class="">Nah di Java sendiri, ada yang namanya class abstrak untuk membuat abstraksi.</p><p id="f6a33f4c-a541-4603-94f2-015bf6b98a0a" class="">Apa itu class abstrak?</p><p id="96499594-98b6-433a-a1e6-279fcbb11490" class="">dan bagaimana cara pakainya?</p><p id="b01529b1-9fb3-4b9d-bff0-17bb58443c8f" class="">Mari kita bahas…</p><h2 id="4a18cdd2-64b0-4d20-9c38-dfe2fb29b923" class=""><strong>Apa itu Class Abstrak?</strong></h2><p id="b2b24a7c-c167-4906-8cf2-fb90c58f7afc" class="">Class abstrak adalah class yang masih dalam bentuk abstrak. Karena bentuknya masih abstrak, dia tidak bisa dibuat langsung menjadi objek.</p><p id="4e710765-50e8-49de-a35a-7f0ac20b29ef" class="">Sebuah class agar dapat disebut class abstrak setidaknya <strong>memiliki</strong> satu atau lebih <strong>method abstrak</strong>.</p><p id="56b4813c-a6bc-4915-89d9-c0a70f37fd51" class="">Method abstrak adalah method yang tidak memiliki implementasi atau tidak ada bentuk konkritnya.</p><p id="c0118bea-acf8-4637-bc40-b3baef21654b" class="">Bingung?</p><p id="698bbbe6-04ae-4753-b128-9ae8e3cfd918" class="">Gini aja deh:</p><p id="40cf9e06-485e-45c4-a4bc-4dc24de0c61b" class="">Method abstrak itu adalah method yang tidak memiliki isi.</p><p id="addef90f-3f75-4350-888f-8d1575058ca6" class="">Cuma ada nama saja..</p><pre id="142150d5-db68-4cdc-8897-1b959b7f7cce" class="code"><code>// ini abstrak method
+void sayHello();
+// ini bukan abstrak method karena
+// punya implementasi di body method
+void greeting(){ 
+	System.out.println(&quot;Hello Java&quot;);
+}</code></pre><p id="4dd16d19-020b-4137-a7a8-0e2896244e07" class="">dan class yang menggunakan method ini, secara otomatis akan menjadi class abstrak.</p><h2 id="7c97ef02-3a2f-4df8-9350-3e59dd433328" class=""><strong>Mengapa Harus Pakai Class Abstrak?</strong></h2><p id="d6c34e3b-f5a1-43e6-8428-b39fcb67678e" class="">Kita tahu, class abstrak memang belum bisa digunakan secara langsung.</p><p id="f8add45d-7378-4999-b857-38084e33c1d9" class="">Karena itu, agar class abstrak dapat digunakan, maka ia harus dibuat bentuk konkritnya.</p><p id="3a748b4f-56d6-4fdc-80ca-fc760fc72b46" class="">Cara membuat class abstrak menjadi konkrit adalah dengan membuat implementasi dari method-method yang masih abstrak.</p><p id="800c8557-a932-45df-a1fa-28635b0b80ad" class="">Ini bisa kita lakukan dengan pewarisan (inheritance).</p><p id="c2b439b8-cc30-4add-b16b-3a973e057dfe" class="">Class abstrak biasanya digunakan sebagai class induk dari class-class yang lain. Class anak akan membuat versi konkrit dari class abstrak.</p><p id="d07abbe5-7e36-4f58-96f6-1b3e3a3c24db" class="">Lalu pertanyaanya:</p><p id="6a40ed38-cbde-4928-8ed3-6ea58c7e0368" class="">Mengapa sih class harus dibuat menjadi abstrak?</p><p id="679359f9-83af-431f-ace8-662dc12c894f" class="">Kan bisa saja kita pakai class yang biasa.</p><p id="0fc579be-9f51-4bc3-86b0-da0550331c51" class="">Iya, bisa-bisa saja.</p><p id="cc06cf8e-3175-47cf-b492-02571733faed" class="">Tapi pada suatu kondisi tertentu, class induk tidak ingin kita buat sebagai objek.. karena kode methodnya belum jelas mau diimplementasikan seperti apa.</p><p id="79a401e3-e7d3-4b61-9902-203fad8b79f1" class="">Maka class ini sebaiknya dijadikan abstrak.</p><p id="e37ba76a-85d8-41c6-bd8a-857e9d76a5e4" class="">Biar makin paham, coba perhatikan contoh berikut:</p><pre id="280acae7-2f25-4e61-bb48-4e84afdf3b58" class="code"><code><em>class</em> Database { 
+	String getTableName(){ 
+		return null; 
+	}
+}
+
+<em>class</em> MySQLDatabase <em>extends</em> Database { 
+	@override String getTableName(){ 
+		return this.sql(&quot;SELECT table_name FROM database.tabel&quot;) 
+	}
+}</code></pre><p id="ac17dabb-1a5c-490c-8e52-ad71c05b93f2" class="">Kedua class tersebut merupakan class biasa. Sekarang mari kita coba buat objek dengan class <code>Database</code>.</p><pre id="a4d8c9c4-057c-491b-af93-bb21b2565517" class="code"><code>Database db = new Database();</code></pre><p id="0654e760-74d9-48b8-a2aa-2fcbfde79ce3" class="">Ini akan valid, tapi sebenarnya objek <code>db</code> tidak bisa digunakan.</p><p id="ec28dfb4-a6e8-4111-ac85-c15be39af642" class="">Saat kita memanggil method <code>getTableName()</code> si class <code>Database</code> akan bingung.</p><p id="5436786f-cbce-4fbe-8feb-253916c22a74" class="">Karena belum jelas, gimana metode untuk mengambil nama tabel di database.</p><p id="160d2f4b-c27b-4b93-9991-53b25fd6d2e5" class="">Dan database apa yang akan dipakai?</p><p id="bd13fdd0-340d-433a-8d31-04d9f13d45a8" class="">Karena itu, class <code>Database</code> sebaiknya dibuat menjadi abstrak agar tidak bisa digunakan untuk membuat objek.</p><p id="302ac13c-2d0b-419c-9195-3c939b9e6afd" class="">Oke.. lalu gimana cara membuat class menjadi abstrak?</p><h2 id="2560343c-9ff2-4206-bb75-cbd45f68031a" class=""><strong>Cara Membuat Abstrak Class di Java</strong></h2><p id="8292fb14-0864-47d9-8400-c3548fb52c33" class="">Cara membuat class abstrak adalah dengan memberikan kata kunci <code>abstract</code> kepada class dan method yang ingin dijadikan abstrak.</p><figure id="5a0dfefb-1ed0-4347-a489-ddbf5f4750ea" class="image"><a href="https://www.petanikode.com/img/java/oop/abstrak/abstract.png"><img style="width:720px" src="https://www.petanikode.com/img/java/oop/abstrak/abstract.png"/></a></figure><p id="8f55fad2-573d-49c0-aaf2-363f7e43b9e7" class="">Contoh:</p><pre id="0b519171-e5bb-4aba-a9f2-f77cdb8414cc" class="code"><code><em>abstract</em> <em>class</em> Database { 
+	<em>abstract</em> String getDatabaseName(); 
+	<em>abstract</em> String getTableName();
+}</code></pre><p id="b6aabed8-7e40-449f-b4ca-9376e1a1bd82" class="">Gampang kan?</p><p id="f4982abc-93e5-4c79-a440-03f721753ce6" class="">Sekarang mari kita coba contohnya dalam program.</p><h2 id="2893fe84-ef74-4104-a33c-d3bcc8fe50a4" class=""><strong>Contoh Program Class Abstrak</strong></h2><p id="830b0a8e-79d5-4efa-bdf3-bcb4064ce30f" class="">Baiklah, kita akan coba latihan dengan contoh yang sudah pernah kita buat, yakni bangun datar.</p><p id="a6c8e164-7316-404e-ae33-ce2be7f735cf" class="">Coba perhatikan class diagram berikut:</p><figure id="dc97d6ea-a07f-43ef-b860-c816d2b89ec8" class="image"><a href="https://www.petanikode.com/img/java/oop/abstrak/diagram-class-abstrak.png"><img src="https://www.petanikode.com/img/java/oop/abstrak/diagram-class-abstrak.png"/></a></figure><p id="2788f9e0-7bcd-46d2-bc46-930780ad8c44" class="">Class <code>Shape</code> adalah class abstrak, karena dia punya method abstrak <code>getArea()</code> (hitung luas).</p><p id="7a0e8e1c-2d04-4202-bf68-77592d031eb4" class="">Jika kita membuat objek dengan class <code>Shape</code> dan memanggil method <code>getArea()</code>, maka si class <code>Shape</code> akan bingung.</p><p id="c093f8be-1006-4804-b5a2-b982d17de6ce" class="">Shape atau bentuk bangun datar yang mau dihitung luasnya seperti apa?</p><p id="a0ecb665-aeea-4a04-bd96-bb73c7e0621f" class="">Rumusnya gimana?</p><p id="505c6707-38c3-45f4-94ca-2b207ee38e91" class="">Karena itu, class ini kita jadikan abstrak. Soalnya belum jelas cara ngitung luasnya.</p><p id="56619850-7b8b-4bb2-ad2d-42ff3e2691c2" class="">Dan kita juga semua tahu, kalau Shape atau bangun datar pasti memiliki luas. Tapi cara ngitungnya berbeda-beda.</p><p id="72eed25b-1b91-405c-ab17-38a38e4b51ea" class="">Nah sekarang mari kita coba dalam kode program.</p><p id="df3dbd27-021a-41f9-b431-d71bd7c61cf7" class="">Buatlah proyek baru di Netbeans dengan nama <code>ContohAbstrak</code>.</p><figure id="666e4477-71d2-470f-9b90-5610ea36c6e6" class="image"><a href="https://www.petanikode.com/img/java/oop/abstrak/new-project.png"><img src="https://www.petanikode.com/img/java/oop/abstrak/new-project.png"/></a></figure><p id="b75d3ef0-f4d8-48d1-87e2-d92c4d2247c8" class="">Setelah itu, pada <code>&lt;default package&gt;</code> buat class baru bernama <code>Shape</code> dan isi kodenya sebagai berikut:</p><pre id="ce9be116-b77e-408a-9348-b13d1b87fc92" class="code"><code><em>public</em> <em>abstract</em> <em>class</em> Shape { 
+	String color; 
+	void setColor(String color){ 
+		this.color = color; 
+	} 
+	String getColor(){ 
+		return this.color; 
+	} 
+	<em>abstract</em> float getArea();
+}</code></pre><p id="742909f8-8813-4245-98c1-1c07cd55433c" class="">Berikutnya, buat class <code>Triangle</code>. Class ini merupakan turunan dari class <code>Shape</code>.</p><p id="1063e37f-54fc-4a31-9be0-9cff30dd3703" class="">Berikut ini kode class <code>Triangle</code>:</p><pre id="1e918be2-5ac8-4de1-a351-d5957c13a272" class="code"><code><em>public</em> <em>class</em> Triangle <em>extends</em> Shape { 
+	<em>private</em> float base; 
+	<em>private</em> float height;
+	<em>public</em> Triangle(int base, int height) { 
+		this.base = base; 
+		this.height = height; 
+	} 
+	@Override float getArea() { 
+		return 0.5f * base * height; 
+	}
+}</code></pre><p id="55c93c96-ebfd-4f02-9115-d7dc0d241964" class="">Setelah itu, buat satu lagi turunan dari class <code>Shape</code>, yakni <code>Circle</code>.</p><p id="e14ebc56-ec59-4f98-af0d-b0a98f50f9dd" class="">Berikut ini kode untuk class <code>Circle</code>:</p><pre id="5362fc91-00c3-4791-9647-8e6167311da8" class="code"><code><em>public</em> <em>class</em> Circle <em>extends</em> Shape { 
+	<em>private</em> float radius; 
+	<em>public</em> Circle(float radius) { 
+		this.radius = radius; 
+	} 
+	@Override float getArea() { 
+		return (float) (Math.PI * radius * radius); 
+	}
+}</code></pre><p id="ee69421c-7e71-4b88-9576-f4a823026465" class="">Terakhir, buat class <code>Main</code> untuk mencoba membuat objek dengan class yang sudah dibuat.</p><pre id="dac8a97b-ee14-4b38-89cd-f9a08564566e" class="code"><code><em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek dari class Triangle 
+		Shape segitiga = new Triangle(4, 5); 
+		// membuat objek dari class Circle 
+		Shape lingkaran = new Circle(10); 
+		System.out.println(&quot;Luas Segitiga: &quot; + segitiga.getArea()); 
+		System.out.println(&quot;Luas Lingkaran: &quot; + lingkaran.getArea()); 
+	}
+}</code></pre><p id="c6102a41-fd3d-4e22-ae42-ab27f3baa49e" class="">Coba perhatikan objek <code>segitiga</code> dan <code>lingkaran</code>! Kedua objek ini memiliki tipe yang sama yakni <code>Shape</code>, tapi mereka dibuat dari class yang berbeda.</p><p id="816995f2-8ee9-4c40-be9e-c60b23ffa196" class="">Nah, sekarang coba jalankan programnya. Maka hasilnya:</p><figure id="e1533d92-16df-465b-8cba-6d1f9a62789a" class="image"><a href="https://www.petanikode.com/img/java/oop/abstrak/run-class-abstract.png"><img src="https://www.petanikode.com/img/java/oop/abstrak/run-class-abstract.png"/></a></figure><h2 id="0199531d-2b2f-429f-b463-27c2a72cc4f4" class=""><strong>Apa Bedanya Class Abstrak dengan Interface?</strong></h2><p id="ac427505-7ff5-4a43-9e91-872109945209" class="">Class abstrak dan interface sama-sama digunakan untuk membuat abstraksi.</p><p id="6ad4b980-1389-498f-b54f-ddb08350248e" class="">Keduanya hampir memiliki sifat yang sama. Tapi ada bedanya.</p><p id="8d6979bf-5765-4e39-96fa-68f58be4b823" class="">Apa itu?</p><ol id="aef18800-e5fc-4c6f-bcf3-32d3ca416c1d" class="numbered-list" start="1"><li>di class abstrak kita bisa buat properti atau variabel sedangkan di interface kita cuma bisa buat konstanta saja</li></ol><ol id="496c34a7-c02f-455b-ac35-ab5ecaedb147" class="numbered-list" start="2"><li>di class abstrak kita bisa implementasikan kode method seperti class biasa, sedangkan di interface harus menggunakan <code>default</code></li></ol><ol id="750e2228-1b6a-425c-9e81-701432b7790a" class="numbered-list" start="3"><li>di class abstrak dapat memiliki member <code>private</code> dan <code>protected</code> sedangkan interface harus publik semua</li></ol><ol id="357f500c-6118-4f3f-9a63-0eaacd513ccb" class="numbered-list" start="4"><li>Class abstrak diimpelentasikan dengan pewarisan (<code>extends</code>) sedangkan interaface menggunakan <code>implements</code></li></ol><h2 id="96525c76-5b9f-4094-b603-d64aeac35ae3" class=""><strong>Apa Selanjutnya?</strong></h2><p id="2843a0b1-c701-4dde-a80d-7490f069243d" class="">Intinya, class abstrak adalah class yang bentuknya masih abstrak dan kita harus membuat bentuk konkritnya agar bisa digunakan.</p></div></article></body></html>

@@ -1,0 +1,635 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Installasi JDK dan Editor Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f28c32c2-09b5-4560-a931-cde0926fef70" class="page sans"><header><h1 class="page-title">Installasi JDK dan Editor Java</h1></header><div class="page-body"><h2 id="c918a252-e811-48d3-9db6-231b252cfc33" class=""><strong>Persiapan Alat</strong></h2><p id="081e8db8-4f39-4961-9f4e-59b3ec8f7f0e" class="">Adapun alat-alat yang perlu dispersiapan untuk belajar pemrograman Java di Linux adalah sebagai berikut:<div class="indented"><h3 id="7037d397-a396-4792-bb87-bfc0e55cc106" class=""><strong>1. Teks Editor</strong></h3><p id="61c8d8b2-0b46-45c2-ae41-115118da97a3" class="">Teks editor digunakan untuk menulis kode.</p><figure id="3250f644-3b09-4ec6-b837-5e686b0930d9" class="image"><a href="https://1.bp.blogspot.com/-sB0H3FO2nfI/V9KNFZ4T7AI/AAAAAAAADP4/Ip-QVVjWnug0Q8a5GaKqKurVTPHiSw89gCK4B/s1600/Text%2Beditor%2BNano%2Bdi%2BLinux%2BMint%2B-%2BPetani%2BKode.png"><img src="https://1.bp.blogspot.com/-sB0H3FO2nfI/V9KNFZ4T7AI/AAAAAAAADP4/Ip-QVVjWnug0Q8a5GaKqKurVTPHiSw89gCK4B/s1600/Text%2Beditor%2BNano%2Bdi%2BLinux%2BMint%2B-%2BPetani%2BKode.png"/></a></figure><p id="67e32600-c0ed-4d93-980c-c80513981df1" class="">Silahkan gunakan teks editor favoritmu.</p><h3 id="6060b27d-0c27-407d-a790-57e58efbd701" class=""><strong>2. JDK (Java Development Kit)</strong></h3><p id="35630e13-5dab-4e4c-aa53-71bdd24438de" class="">JDK atau <em>Java Development Kit</em> digunakan untuk mengompilasi, <em>debugging</em> (memeriksa <em>error</em>), dan menjalankan program java.</p><p id="5f935275-9f60-41b3-8cf5-4386732e7aae" class="">Dalam JDK terdapat dua hal yang perlu diktahui:<div class="indented"><ol id="96c70fcd-b61f-4395-8e8b-03c64d8589b4" class="numbered-list" start="1"><li>Kompilator: Bertugas menerjemahkan kode java menjadi <em>bytecode</em>;</li></ol><ol id="3b1cd11b-6882-4883-b2d6-cac6e52af38b" class="numbered-list" start="2"><li><em>Debugger</em>: Bertugas memeriksa <em>error</em> pada kode.</li></ol></div></p><p id="74f83fc6-4e23-4900-b792-6e64ac41d54b" class="">Pada sistem operasi Windows, kita bisa menggunakan JDK dari Oracle. Sedangkan di Linux, kita menggunakan openJDK.</p><p id="c5753be7-a8e5-4c95-abbf-69c02108cf96" class="">Nama paket openJDK di Linux adalah <em>openjdk</em>. Gunakan fasilitas <code>apt-cache search</code> untuk mencari tahu <em>openjdk</em> yang tersedia di server <em>repositori</em>.</p><pre id="0b8205d4-0d47-4608-89e8-1a09c5e9352a" class="code"><code>user@com:~$ apt-cache search openjdk
+. . .
+openjdk-7-jdk - OpenJDK Development Kit (JDK)
+...
+openjdk-6-jdk - OpenJDK Development Kit (JDK)
+...
+openjdk-8-jdk - OpenJDK Development Kit (JDK)
+. . .</code></pre><p id="b26587ff-705d-4b49-9134-ad4a0fb5988b" class="">Tersedia tiga <em>openJDK</em>, manakah yang harus saya instal?</p><p id="5ffd24fe-6aa9-430a-bc98-46a4721ea534" class="">Saya sendiri memilih yang terbaru, yaitu <em>openjdk 8</em>.</p><p id="4bd5e50c-99b4-460f-88da-3984495fb874" class="">Bila di Linux yang kamu gunakan belum tersedia yang versi 8, Saya rekomendasikan menggunakan yang versi 7 saja.</p><p id="6a19dcbe-7a2e-4d0a-a9d6-8bff7eabfc86" class="">Untuk menginstal <em>openjdk 8</em> ketik perintah berikut ini.</p><p id="f9060b68-6dc8-4cec-8490-ef388545f788" class=""><code>sudo apt-get install openjdk-8-jdk</code></p><p id="e28d83b7-230c-44b5-b8ac-f71a44c25b37" class="">Tunggulah sampai prosesnya selesai.</p><p id="6874fc80-1173-4b61-8cfa-c97d0ff5cd22" class="">Setelah itu ketik perintah  <code>java -version</code>  untuk memeriksa versi Java atau JDK yang terinstal.</p><h3 id="f2a26017-04fe-47b5-804c-470b64aa20ee" class=""><strong>3. JRE (Java Runtime Environment)</strong></h3><p id="42d63878-9d65-4183-b676-6c7aa6c5df32" class="">Sementara itu, JRE atau <em>Java Runtime Environment</em> digunakan untuk menjalankan program java.</p><p id="5a61d792-d964-407e-94b7-5f1a668268a1" class="">JRE inilah yang dipasang oleh pengguna bila ingin menjalankan program atau aplikasi java.</p><p id="b37f43b5-35ef-4400-9d41-c0d1a5821964" class="">JRE di Linux dapat diinstal melalui terminal.</p><p id="989e880b-3e4a-4e1a-a061-8af5742b70e2" class="">Sejauh pengalaman saya, setelah menginstal <em>openjdk</em>, JRE juga ikut terinstal.</p><p id="00087b84-e47e-4a59-ae66-328dab4db667" class="">Tapi kalau belum terinstal, silahkan diinstal.</p><p id="bc09b908-76bd-4ed6-9060-b84b341dfba5" class="">Berikut ini perintah untuk menginstal JRE versi 8:</p><p id="42c3b2b2-c866-42ed-b92a-27850a45a2f1" class=""><code>sudo apt-get install openjdk-8-jre</code></p></div></p><h2 id="70e4d996-05f8-4b30-a14c-ab4217de8644" class=""><strong>Membuat program pertama</strong></h2><p id="f886b749-8692-4ba4-8b54-f4b9ee447e8c" class="">Setelah semuanya siap, mari kita coba membuat sebuah program.</p><p id="8b18b896-f9f7-47e2-935b-b0dc5464cd81" class="">Program yang akan kita buat adalah program <code>Hello World</code>. Program ini sangat terkenal di dunia.</p><p id="91906528-2c02-4c34-bd27-27eed6154e5e" class="">Calon programmer harus bisa membuat program ini.</p><p id="07be4e09-8f0a-4663-a20c-db57c417f173" class="">Karena semua programmer yang hebat, pastilah sudah pernah membuat program ini.<div class="indented"><h3 id="86be949f-5bf4-41df-8efb-458eb9743e96" class=""><strong>1. Menulis program</strong></h3><p id="f5c65572-d735-4400-a006-9c4adb19b9b3" class="">Buka teks editor, lalu tulislah program di bawah ini.</p><pre id="7b1528be-e609-4703-bcde-ec55d6e94026" class="code"><code><em>class</em> HelloWorld{ 
+	<em>public</em> <em>static</em> void main(String[] argumen){
+		System.out.println(&quot;Hello World!&quot;);
+	}
+}</code></pre><p id="d2062e9a-ba92-4edd-a794-de3f00161e81" class="">Simpanlah dengan nama <code>HelloWorld.java</code>. Simpan dimana?</p><p id="63c80ebd-6d98-4532-bee4-1ef5a3e3ae6f" class="">Saya sendiri menyimpannya di direktori <em>home</em> agar mudah diakses.</p><figure id="988c18f9-0d7d-44e1-ba45-307c556e8305" class="image"><a href="https://2.bp.blogspot.com/-b3lbw-KNYpU/VLFRhte8VLI/AAAAAAAAA-A/38jMWHVJehs/s1600/simpan%2Bprogram%2Bjava.png"><img src="https://2.bp.blogspot.com/-b3lbw-KNYpU/VLFRhte8VLI/AAAAAAAAA-A/38jMWHVJehs/s1600/simpan%2Bprogram%2Bjava.png"/></a></figure><h3 id="4b8f11c5-55de-4939-a687-10bbfbefdca6" class=""><strong>2. Kompilasi kode</strong></h3><p id="c85c579e-c439-4d98-8759-aafecf268c6a" class="">Saatnya mengompilasi kode program yang sudah ditulis.</p><p id="499da27b-9a16-4921-a3e7-061e12438f77" class="">Sekarang buka terminal dan ketiklah perintah berikut untuk mengopilasi:</p><p id="92f123d0-265f-4ec1-9f21-c3ee0b17b315" class=""><code>javac HelloWorld.java</code></p><p id="b1ccfefa-5ae5-4b4e-97d5-11b32aeca3a3" class="">Karena terismpan di direktori <em>home</em>, jadi tinggal langsung dikompilasi saja.</p><figure id="9ef21a7b-03ef-42ac-b8c0-3ab06d7545ea" class="image"><a href="https://4.bp.blogspot.com/-HQsBgde0pD0/VLFTCz9CaWI/AAAAAAAAA-M/cfMb_LArENI/s1600/kompilasi%2Bprogram%2Bjava%2Bdi%2Blinux.png"><img src="https://4.bp.blogspot.com/-HQsBgde0pD0/VLFTCz9CaWI/AAAAAAAAA-M/cfMb_LArENI/s1600/kompilasi%2Bprogram%2Bjava%2Bdi%2Blinux.png"/></a></figure><p id="aeedbc48-7ab5-4a27-8982-793691567d9e" class="">Kalau tidak ada <em>error</em>, berarti kode programnya sukses dikompilasi.</p><p id="13011373-487c-4b3a-89db-a522fd2e6de3" class="">Setelah itu akan terciptalah sebuah berkas baru bernama <em>HelloWorld.class</em>.</p><p id="07805e19-0d9c-42ee-9fc9-0e11aca64a64" class="">Berkas ini berisi <em>bytecode</em> yang akan dijalankan oleh JRE.</p><figure id="992279fd-9e04-42f1-a4fe-fcd2910afe47" class="image"><a href="https://2.bp.blogspot.com/-ccxNH2Xqz48/VLFZJqfJjuI/AAAAAAAAA-c/2KoJA-ep2MM/s1600/berkas%2Bjava%2Bbytecode.png"><img src="https://2.bp.blogspot.com/-ccxNH2Xqz48/VLFZJqfJjuI/AAAAAAAAA-c/2KoJA-ep2MM/s1600/berkas%2Bjava%2Bbytecode.png"/></a></figure><h3 id="03e8f347-3b57-4512-aa10-8c7f00b2967d" class=""><strong>3. Menjalankan program</strong></h3><p id="d4b5e1d2-c9a1-4652-b19f-5efbfcfcdf8b" class="">Jalankan programnya, gunakan perintah <code>java NamaKelas</code>.</p><figure id="4acdc44c-5929-4a23-85e8-e76ba419dd5a" class="image"><a href="https://1.bp.blogspot.com/-opsN72CWzSY/VLFZSgkZivI/AAAAAAAAA-k/8_HVqKYdIsA/s1600/menjalankan%2BProgram%2Bjava.png"><img src="https://1.bp.blogspot.com/-opsN72CWzSY/VLFZSgkZivI/AAAAAAAAA-k/8_HVqKYdIsA/s1600/menjalankan%2BProgram%2Bjava.png"/></a></figure><h2 id="e04b1759-7cd2-4a72-9b2b-64517174078e" class=""><strong>Pemrograman Java di Linux Menggunakan Netbeans</strong></h2><p id="ccb2c2d6-7977-4b1d-a5ad-2144c952e3c5" class="">Sejauh ini, kita telah berhasil membuat program Java dengan dikompilasi melalui <em>command line</em> atau terminal.</p><p id="cee51c97-f2a5-489b-befa-f7a0b5a92494" class="">Seperitnya akan terasa sedikit melelahkan apabila proses ini terus kita lakukan.</p><p id="08ebc594-d38c-4aa0-bf78-bd98f4251acd" class="">Karena itu, Netbeans hadir untuk membantu kita.</p><h3 id="fd2c8166-3d5a-4187-8a39-facbb7657a2e" class=""><strong>Instalasi Netbeans di Linux</strong></h3><p id="72211296-f530-4355-aac6-d42c372fcddc" class="">Pertama, silahkan download dulu file instalator Netbeans di <a href="https://netbeans.org/downloads/">netbeans.org</a>.</p><figure id="49597286-5b89-44e0-8bc9-3554d2468d56" class="image"><a href="https://3.bp.blogspot.com/-j2XXWggdXac/WOMKMRSdPBI/AAAAAAAAEiQ/uUeB2m27RPoDWpmcZqMq96i49FqO1HqFwCPcB/s1600/Download%2BNetbeans.png"><img src="https://3.bp.blogspot.com/-j2XXWggdXac/WOMKMRSdPBI/AAAAAAAAEiQ/uUeB2m27RPoDWpmcZqMq96i49FqO1HqFwCPcB/s1600/Download%2BNetbeans.png"/></a></figure><p id="11e7a04e-b0fc-46c5-a8d9-1db8139ac0f4" class="">Setelah itu, kita akan mendapatkan skrip instalator Netbeans.</p><figure id="66e42b8a-0188-4cd8-aac9-56b1f738bc6b" class="image"><a href="https://1.bp.blogspot.com/-EpJwVr8u6Ss/WOMLEKY5IxI/AAAAAAAAEi0/VQszzu4RfoIO3G2Pk_KhCavktKbVB1BbACPcB/s1600/1.%2Bfile%2Bscript%2Binstalator%2Bnetbeans.png"><img src="https://1.bp.blogspot.com/-EpJwVr8u6Ss/WOMLEKY5IxI/AAAAAAAAEi0/VQszzu4RfoIO3G2Pk_KhCavktKbVB1BbACPcB/s1600/1.%2Bfile%2Bscript%2Binstalator%2Bnetbeans.png"/></a></figure><p id="5dc5be65-7874-4086-b269-8ff20635ec11" class="">Sekarang tugas kita adalah mengeksekusi skrip tersebut.</p><p id="a2345783-0201-482c-83d9-ab00c2faa2ad" class="">Buka terminal dan ketik perintah berikut:</p><p id="1b0f48da-96d4-4d13-9f74-1f2e5321f7de" class=""><code><em>cd</em></code><code> Dwonloads
+sudo bash netbeans-installer.sh</code></p><p id="5176a946-4fff-46cf-aa9a-93e30bb408ca" class="">Silahkan ikuti saja seperti ini:</p><figure id="bf6af841-c2f6-4550-85ee-6b708aa8b0e3" class="image"><a href="https://2.bp.blogspot.com/-nvORpUg216w/WOMLEKQQGZI/AAAAAAAAEi0/GCZpAqS7GAMDbDQR6HToJgkapun7FC6NgCPcB/s1600/2.%2Beksekusi%2Bskrip%2Bisntalator.png"><img src="https://2.bp.blogspot.com/-nvORpUg216w/WOMLEKQQGZI/AAAAAAAAEi0/GCZpAqS7GAMDbDQR6HToJgkapun7FC6NgCPcB/s1600/2.%2Beksekusi%2Bskrip%2Bisntalator.png"/></a></figure><p id="ba1146a6-b1fc-4cff-be17-a012fb2da80c" class="">Sampai muncul jendela sambutan dari Netbeans.</p><figure id="981a44d2-bf18-4a91-950b-1616dcea7fd6" class="image"><a href="https://3.bp.blogspot.com/-0j27yHyk5Lk/WOMLEOnRB8I/AAAAAAAAEi0/QK6FTbTSJ709FTSbx_kqHvXDsAJP9CYBgCPcB/s1600/3.%2BJendela%2BSambutan.png"><img src="https://3.bp.blogspot.com/-0j27yHyk5Lk/WOMLEOnRB8I/AAAAAAAAEi0/QK6FTbTSJ709FTSbx_kqHvXDsAJP9CYBgCPcB/s1600/3.%2BJendela%2BSambutan.png"/></a></figure><p id="ff49c713-7c46-4ff0-9902-9d411762df46" class="">Klik <strong>Next</strong> untuk melanjutkan.</p><p id="52f40ce4-cf98-4601-b9d4-2e2efdf9776c" class="">Silahkan centang <em>“I accept…&quot;</em> untuk menyetujui persetujuan lisensi Netbeans.</p><figure id="2844b3d6-4a50-4033-bd1d-26e206b6d10e" class="image"><a href="https://3.bp.blogspot.com/-pU4Nt_A17Qc/WOMLENctefI/AAAAAAAAEi0/7peMi950CYEDav7yStBG5zx1bXI2IGdpQCPcB/s1600/4.%2BPersetuajuan%2BLisensi.png"><img src="https://3.bp.blogspot.com/-pU4Nt_A17Qc/WOMLENctefI/AAAAAAAAEi0/7peMi950CYEDav7yStBG5zx1bXI2IGdpQCPcB/s1600/4.%2BPersetuajuan%2BLisensi.png"/></a></figure><p id="3165b5d2-253f-4a3c-8b43-a488af2f0196" class="">Kemudian klik <strong>Next</strong> untuk melanjutkan.</p><p id="3478a678-e844-40b1-96c6-acb4a4a9fd6c" class="">Centang <em>“I accept…&quot;</em> lagi untuk menyetujui lisensi JUnit.</p><figure id="3307e732-b302-4b61-907f-5e3460b64fe3" class="image"><a href="https://1.bp.blogspot.com/-s2CFXs35hgs/WOMLEBuwyKI/AAAAAAAAEi0/OwZIcYz9FromzQztmvANt6ncxzb7uwHsACPcB/s1600/5.%2BPersetujuan%2BLisensi%2BJUnit.png"><img src="https://1.bp.blogspot.com/-s2CFXs35hgs/WOMLEBuwyKI/AAAAAAAAEi0/OwZIcYz9FromzQztmvANt6ncxzb7uwHsACPcB/s1600/5.%2BPersetujuan%2BLisensi%2BJUnit.png"/></a></figure><p id="719465e4-1a2c-43c4-809a-5af936e18612" class="">Kemudian klik <strong>Next</strong> untuk melanjutkan.</p><p id="4de9c872-d9ab-4dca-a50d-8b19bcdc0faa" class="">Setelah itu, pilih lokasi instalasi dan JDK yang akan digunakan.</p><p id="4e06f761-8fd3-44f3-820d-cc32e188684f" class="">Biasanya JDK langsung terdeteksi.</p><figure id="32b9f77f-4177-410c-9de8-40af9057ade3" class="image"><a href="https://3.bp.blogspot.com/-CiSJDQ2KNf0/WOMLEBNmXuI/AAAAAAAAEi0/7YEMA8dagy0PJJWuqtGZxnrQ5eItAU3UwCPcB/s1600/6.%2BMemilih%2BJDK%2Bdan%2BLokasi%2Binstalasi.png"><img src="https://3.bp.blogspot.com/-CiSJDQ2KNf0/WOMLEBNmXuI/AAAAAAAAEi0/7YEMA8dagy0PJJWuqtGZxnrQ5eItAU3UwCPcB/s1600/6.%2BMemilih%2BJDK%2Bdan%2BLokasi%2Binstalasi.png"/></a></figure><p id="89d8c991-9c72-4eb3-b3b3-b91c100b45f6" class="">Klik <strong>Next</strong> untuk melanjutkan.</p><p id="023b8a76-4905-46e0-9ab9-c9535ede8634" class="">Kemudian akan muncul jendela pemilihan lokasi instal GlassFish. Langsung saja klik <strong>Next</strong>.</p><figure id="78169da8-17b7-46ef-a9d7-d605b03befb0" class="image"><a href="https://2.bp.blogspot.com/-E0qzpWgbeOQ/WOMLEHs3n0I/AAAAAAAAEi0/bEDe1kjYkPwH0sjy5xyCRFwa2jj8P7AugCPcB/s1600/7.%2BLokasi%2BInstalasi%2BGlassfish.png"><img src="https://2.bp.blogspot.com/-E0qzpWgbeOQ/WOMLEHs3n0I/AAAAAAAAEi0/bEDe1kjYkPwH0sjy5xyCRFwa2jj8P7AugCPcB/s1600/7.%2BLokasi%2BInstalasi%2BGlassfish.png"/></a></figure><p id="7c6cab58-d634-4ccc-9bf5-88e23e66db96" class="">Setelah itu, akan muncul jendela rangkuman.</p><figure id="5fbc4764-406b-4c42-b397-62372b686b7e" class="image"><a href="https://2.bp.blogspot.com/-8L682xbbydM/WOMLEH0y8lI/AAAAAAAAEi0/OcEcCT1gpv4zKBrguqR9HzPpJeNyMQ6NgCPcB/s1600/8.%2BRangkuman%2BInstalasi.png"><img src="https://2.bp.blogspot.com/-8L682xbbydM/WOMLEH0y8lI/AAAAAAAAEi0/OcEcCT1gpv4zKBrguqR9HzPpJeNyMQ6NgCPcB/s1600/8.%2BRangkuman%2BInstalasi.png"/></a></figure><p id="24edc800-906f-4282-b60a-671bd7cc09f8" class="">Silahkan klik <strong>Install</strong> untuk memulai proses instalasi.</p><p id="580aa290-c1b6-48a7-a461-6355fef43dcf" class="">Proses instalasi sedang berlangsung, mohon ditunggu…</p><figure id="4f603d41-5353-4362-b427-fcb18e11f48f" class="image"><a href="https://4.bp.blogspot.com/-WQV1NYWVojQ/WOMLENjt3OI/AAAAAAAAEi0/RXypLkEaD-8rJfr6wNaxZBOi2XYLjN-nACPcB/s1600/9.%2BProses%2Binstalasi.png"><img src="https://4.bp.blogspot.com/-WQV1NYWVojQ/WOMLENjt3OI/AAAAAAAAEi0/RXypLkEaD-8rJfr6wNaxZBOi2XYLjN-nACPcB/s1600/9.%2BProses%2Binstalasi.png"/></a></figure><p id="4eeb6f4c-f59f-45ea-970f-446803d8a042" class="">Setelah selesai, klik <strong>Finish</strong>.</p><figure id="c1a10b86-7c36-4227-8713-9c40ced60df8" class="image"><a href="https://4.bp.blogspot.com/-TYcoBz90UB8/WOMLEO6MiJI/AAAAAAAAEi0/w0zF-VQAFFIXa7YndgMiyicLAzjo9w1uACPcB/s1600/10.%2BInstalasi%2BSelesai.png"><img src="https://4.bp.blogspot.com/-TYcoBz90UB8/WOMLEO6MiJI/AAAAAAAAEi0/w0zF-VQAFFIXa7YndgMiyicLAzjo9w1uACPcB/s1600/10.%2BInstalasi%2BSelesai.png"/></a></figure><p id="9ecb0e9b-7fbb-465b-867e-e5da8fd0ea4f" class="">Selamat!</p><p id="51bdfe89-f096-4991-8b3d-233a527578f3" class="">Netbeans sudah terinstal.</p><h3 id="824b3f95-0bac-43fa-9b56-f2767ff03b70" class=""><strong>Cara Menggunakan Netbeans</strong></h3><p id="bd24cc7e-33ef-4f7d-b0e0-75c383f43ece" class="">Silahkan buka Netbeans, masuk ke <strong>Menu</strong>&gt;<strong>Programming</strong>&gt;<strong>Netbeans</strong>.</p><figure id="c3da8988-02c9-4004-a722-3f27b381f675" class="image"><a href="https://3.bp.blogspot.com/-5I9GGzDP_yA/WOMQQzTBhqI/AAAAAAAAEjE/vD1c0GMZr1sa9mtbgm70lRdZvm0LSqK0QCPcB/s1600/Membuka%2BNetbeans%2Bdari%2BMenu.png"><img src="https://3.bp.blogspot.com/-5I9GGzDP_yA/WOMQQzTBhqI/AAAAAAAAEjE/vD1c0GMZr1sa9mtbgm70lRdZvm0LSqK0QCPcB/s1600/Membuka%2BNetbeans%2Bdari%2BMenu.png"/></a></figure><p id="aed1d25d-913b-4a0b-8242-312031d6d3e4" class="">Nah, mari kita coba membuat program.</p><p id="43ac8463-dde6-41fb-be4d-87c8067c7f04" class="">Untuk membuat program di Netbeans, kita harus membuat proyek baru.</p><p id="dc14026d-dc3c-4b6d-b7f2-caea44834afc" class="">Klik menu <strong>File</strong>&gt;<strong>New Project</strong> untuk membuat proyek baru.</p><figure id="2cbd79b0-aec5-4ea9-9850-be5de56e4ff0" class="image"><a href="https://4.bp.blogspot.com/-sjMi8VI47Fg/WOMSBeong6I/AAAAAAAAEjM/vPaZkXLgWLIF6RxvjGF0q9IOFw2dz3MeACPcB/s1600/Membuat%2BProyek%2BBaru%2Bdi%2BNetbeans.png"><img src="https://4.bp.blogspot.com/-sjMi8VI47Fg/WOMSBeong6I/AAAAAAAAEjM/vPaZkXLgWLIF6RxvjGF0q9IOFw2dz3MeACPcB/s1600/Membuat%2BProyek%2BBaru%2Bdi%2BNetbeans.png"/></a></figure><p id="4e9456ab-21ee-4b67-9bdf-676d5b1cd1c2" class="">Setelah itu, pilih <strong>Java Application</strong> dan Klik <strong>Next</strong>.</p><figure id="a3355444-d491-4d33-8176-8c32ece03563" class="image"><a href="https://2.bp.blogspot.com/-R559fY33Dsk/WOMTcXsDVLI/AAAAAAAAEjU/4GC9PSvpCZoa7qktGnd1Mx9h5rL1op-hgCPcB/s1600/Pembuatan%2BProyek%2BBaru%2Bdi%2BNetbeans.png"><img src="https://2.bp.blogspot.com/-R559fY33Dsk/WOMTcXsDVLI/AAAAAAAAEjU/4GC9PSvpCZoa7qktGnd1Mx9h5rL1op-hgCPcB/s1600/Pembuatan%2BProyek%2BBaru%2Bdi%2BNetbeans.png"/></a></figure><p id="b8dfbd21-0ff6-480f-8075-43300680497b" class="">Kemudian isi nama aplikasinya dengan <code>HelloWorld</code> dan klik <strong>Finish</strong>.</p><figure id="d2e46702-ace1-49c1-9152-945c8fdd4cea" class="image"><a href="https://2.bp.blogspot.com/-RTl9d1-Loyw/WOMT9YasX7I/AAAAAAAAEjg/sX_T1HqGjmUJ9bGOYZj-uEVzeDcvHc60wCPcB/s1600/Membuat%2BProyek%2BJava%2Bdi%2Bnetbeans.png"><img src="https://2.bp.blogspot.com/-RTl9d1-Loyw/WOMT9YasX7I/AAAAAAAAEjg/sX_T1HqGjmUJ9bGOYZj-uEVzeDcvHc60wCPcB/s1600/Membuat%2BProyek%2BJava%2Bdi%2Bnetbeans.png"/></a></figure><p id="90f17fbc-c886-4e86-b244-960c14442f0e" class="">Tulis kode <em>Hello World</em>, kemudian jalankan.</p><p id="e0bffbfb-5fbf-42a7-8722-e4341027806c" class="">Untuk menjalankan, klik tombol <strong>Run</strong>.</p><figure id="116e43d3-ec7e-4323-ab74-4277e5df4928" class="image"><a href="https://3.bp.blogspot.com/-ecFhJnw4JKs/WOMT9bD-ckI/AAAAAAAAEjg/xuy-zvRjowoDOshlLobbsGyXKRJuWRJagCPcB/s1600/Membuat%2BProgram%2Bdan%2BMenjalankannya%2Bdi%2BNetbeans.png"><img src="https://3.bp.blogspot.com/-ecFhJnw4JKs/WOMT9bD-ckI/AAAAAAAAEjg/xuy-zvRjowoDOshlLobbsGyXKRJuWRJagCPcB/s1600/Membuat%2BProgram%2Bdan%2BMenjalankannya%2Bdi%2BNetbeans.png"/></a></figure></div></p><p id="ece4db14-a70c-4d71-92d1-bdf4da06ccca" class="">
+</p></div></article></body></html>

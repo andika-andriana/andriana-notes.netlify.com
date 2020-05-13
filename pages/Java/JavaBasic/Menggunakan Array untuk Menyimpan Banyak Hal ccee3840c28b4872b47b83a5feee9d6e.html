@@ -1,0 +1,705 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Menggunakan Array untuk Menyimpan Banyak Hal</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ccee3840-c28b-4872-b47b-83a5feee9d6e" class="page sans"><header><h1 class="page-title"><strong>Menggunakan Array untuk Menyimpan Banyak Hal</strong></h1></header><div class="page-body"><p id="5a6d0646-c1a1-48f7-bbe8-9b7a6d90f2c4" class="">Apa yang akan kita lakukan bila memiliki banyak data yang akan disimpan dalam vairabel?</p><p id="54b094e6-23a6-47e0-a71e-e487c3533023" class="">Misalkan kita ingin menyimpan nama-nama teman dalam variabel.</p><p id="7137e4a1-a2a8-4a2c-a4dd-ccc9da4727a4" class="">Maka mungkin kita akan melakukannya seperti ini:</p><pre id="a9651115-f0c9-479a-9a95-1636ec3d4c46" class="code"><code>String namaTeman1 = &quot;Linda&quot;;
+String namaTeman2 = &quot;Santi&quot;;
+String namaTeman3 = &quot;Susan&quot;;
+String namaTeman4 = &quot;Mila&quot;;
+String namaTeman5 = &quot;Ayu&quot;;</code></pre><p id="b04f805b-0fb0-4984-990c-c90424ef12f4" class="">Hal ini sah-sah saja.</p><p id="dbdb7c43-2872-4c30-ad62-d3573d87c538" class="">Akan tetapi…</p><p id="4a9a70d5-755a-499c-99bd-856745ee63ac" class="">Masalahnya bagaimana kala datanya banyak, misalkan ada 100 data, pastinya capek donk membuat variabel sebanyak itu.</p><p id="ae5fe49c-b9ba-4595-807f-db4a91242e22" class="">Karena itu, kita bisa menyimpan itu semua dalam Array.</p><p id="17f47ffd-a0d8-49a7-ae74-073549d69a1a" class=""><strong>Apa itu Array?</strong></p><p id="79a55353-36f5-41e9-9886-6657c82e161f" class="">Array adalah sebuah variabel yang bisa menyimpan banyak data dalam satu variabel.</p><p id="86bbb3d9-0cfb-4b88-b12e-c916eb1915e6" class="">Array menggunakan indeks untuk memudahkan akses terhadap data yang disimpannya.</p><figure id="0fe89e36-3f53-42de-a673-462ce996dff0" class="image"><a href="https://4.bp.blogspot.com/-S515_Xifn20/WPL1deiMlOI/AAAAAAAAEvI/9UXBfcuiPR4Tyojj83Yf45bBkg2MLgPpACPcB/s1600/contoh-array.png"><img src="https://4.bp.blogspot.com/-S515_Xifn20/WPL1deiMlOI/AAAAAAAAEvI/9UXBfcuiPR4Tyojj83Yf45bBkg2MLgPpACPcB/s1600/contoh-array.png"/></a></figure><p id="fbe8cc67-fbf4-41e4-8555-36b5c820eebd" class="">Indeks array selalu dimulai dari <code>0</code>…</p><p id="5b7a7c58-5e57-4dd3-afda-6a5b9b4ceb92" class="">…dan perlu diketahui juga, indeks tidak selalu dalam bentuk angka. Bisa juga karakter atau teks.</p><h2 id="94edb726-a819-4bed-9840-19c3b45717b2" class=""><strong>Cara Membuat Array di Java</strong></h2><p id="d19e1942-a049-4b52-982d-bf708663df95" class="">Cara membuat array kosong:</p><pre id="118042a0-f911-4da3-b3ed-6a9807134ed0" class="code"><code>// cara pertama
+String[] nama;
+// cara kedua
+String nama[];
+// cara ketiga dengan kata kunci new
+String[] nama = new String[5];</code></pre><p id="b79ae95a-fccc-4ab5-b614-456ade6e6b1c" class=""><strong>Parhatikan</strong>:</p><ul id="9e4a3c55-8add-42e3-9901-bee8eada1e2a" class="bulleted-list"><li>Kita menggunakan kurung siku <code>[]</code> untuk membuat array;</li></ul><ul id="4c4f03b0-6364-47ee-9d3b-8fdf617aace7" class="bulleted-list"><li>Kurung siku bisa diletakkan setelah tipe data atau nama array;</li></ul><ul id="9fe50c8c-c375-4f14-bb89-cd26d4b1ced7" class="bulleted-list"><li>Angka <code>5</code> dalam kurung artinya batas atau ukuran array-nya.</li></ul><p id="d7a48303-9e2b-4272-9c78-ba301b1257f1" class="">Array yang kosong siap diisi dengan data. Pastikan mengisinya dengan data yang sesuai dengan tipe datanya.</p><p id="b22741fc-9ed4-4bd3-a6db-3c114559489b" class="">Kita bisa mengisinya seperti ini:</p><pre id="1581a551-adb3-4ae7-8896-2dec7b6c81c2" class="code"><code>nama[0] = &quot;Linda&quot;;
+nama[1] = &quot;Santi&quot;;
+nama[2] = &quot;Susan&quot;;
+nama[3] = &quot;Mila&quot;;
+nama[4] = &quot;Ayu&quot;;</code></pre><p id="b930a6ef-0fbd-49a2-bca2-e2a6d8ffdfcc" class="">Atau kalau tidak mau repot, kita bisa membuat array dan langsung mengisinya.</p><pre id="3f161d78-27f4-4352-9f04-7353a42a5bdd" class="code"><code>String[] nama = {&quot;Linda&quot;, &quot;Santi&quot;, &quot;Susan&quot;, &quot;Mila&quot;, &quot;Ayu&quot;};</code></pre><h2 id="7757a221-6a59-47c8-814e-feec799978c0" class=""><strong>Mengambil Data dari Array</strong></h2><p id="96990108-c6ec-4cc9-9963-7457863957b5" class="">Seperti yang sudah kita ketahui, array memiliki indeks untuk memudahkan kita mengakses datanya.</p><p id="2ca50ae0-0b6e-4257-a5aa-51a3721453fb" class="">Karena itu, kita bisa mengambil datanya dengan cara seperti ini:</p><pre id="860a1559-6f65-465b-901f-2b4d4e8ca093" class="code"><code>// membuat array
+String[] nama = {&quot;Linda&quot;, &quot;Santi&quot;, &quot;Susan&quot;, &quot;Mila&quot;, &quot;Ayu&quot;};
+// mengambil data array
+System.out.println(teman[2]);</code></pre><p id="ed2dc310-3000-4d72-9805-18c37c545214" class="">Kira-kira apa hasil outputnya?</p><p id="01045088-a3f4-4009-9b29-6bc3219e7d66" class="">Yep! benar sekali, hasil outputnya adalah:</p><pre id="f7516297-a24b-48e1-9ab3-a77a3ede6642" class="code"><code>Susan</code></pre><p id="7c178b5f-25a4-4334-a0c9-b8a28fa658d0" class="">Karena <code>Susan</code> terletak di indeks ke-2.</p><h2 id="33a55f27-fb99-4aef-ae9a-d785013c8552" class=""><strong>Menggunakan Perulangan</strong></h2><p id="9e672de4-2f1c-4ebc-9461-d79447fb3704" class="">Mengambil data satu per satu dari array mungkin cukup melelahkan, karena kita harus mengtik ulang nama array-nya dengan indeks yang berbeda.</p><p id="32a3374d-bf05-41eb-88dd-4db5a01ec665" class="">Contoh:</p><pre id="2831a8df-28b4-4dc1-a671-8fab5ea80d06" class="code"><code>System.out.println(teman[0]);
+System.out.println(teman[1]);
+System.out.println(teman[2]);
+System.out.println(teman[3]);</code></pre><p id="156f0f95-3066-4ff4-a9ee-7f70ccc28d31" class="">Bagaimana kalau data array-nya sampai 1000, maka kita harus mengetik kode sebanyak seribu kali.</p><p id="68dcc931-9caf-42a2-9476-50f2e2848d75" class="">Karena itu, disinilah peran perulangan.</p><figure id="a7c3c7da-ce28-4c16-b58f-1e71213a7e21" class="image"><a href="https://4.bp.blogspot.com/-pXqVRCPTKn0/Vxjjx7C66lI/AAAAAAAACvo/jwQlQIf84SoJLlK-PwdAfjFi-Gwqa5F3ACK4B/s1600/Contoh%2BArray%2Bdi%2BJava%2B-%2BPetani%2BKode.png"><img src="https://4.bp.blogspot.com/-pXqVRCPTKn0/Vxjjx7C66lI/AAAAAAAACvo/jwQlQIf84SoJLlK-PwdAfjFi-Gwqa5F3ACK4B/s1600/Contoh%2BArray%2Bdi%2BJava%2B-%2BPetani%2BKode.png"/></a></figure><p id="6f61f086-e09a-415e-844e-6323093b4eb3" class=""><strong>Perhatikan</strong>:</p><p id="0b3a15fb-eb89-4182-8b02-3eeac46c9acb" class="">Di sana kita menggunakan atribut <code>length</code> untuk mengambil panjang array-nya.</p><p id="dcd6cc86-2537-4075-b2b3-f8ab7d895c5d" class="">Jadi, perulangan akan dilakukan sebanyak isi array-nya.</p><h2 id="5d290b01-17cc-43ed-bda7-fb9f95be1986" class=""><strong>Sekarang Mari Kita Latihan</strong></h2><p id="440c4099-647a-42bf-8fa5-e56e0132ef28" class="">Silahkan buat class bernama <code>Buah</code>, kemudian ikuti kode berikut:</p><pre id="0e1fa1fc-563d-46bc-ab8b-7beb18ee2de6" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> Buah { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat array buah-buahan 
+		String[] buah = new String[5]; 
+		// membuat scanner 
+		Scanner scan = new Scanner(System.in); 
+		// mengisi data ke array 
+		for( int i = 0; i &lt; buah.length; i++ ){ 
+			System.out.print(&quot;Buah ke-&quot; + i + &quot;: &quot;); 
+			buah[i] = scan.nextLine(); 
+		} 
+		System.out.println(&quot;---------------------------&quot;); 
+		// menampilkan semua isi array 
+		for( String b : buah ){ 
+			System.out.println(b); 
+		} 
+	}
+}</code></pre><p id="c1e584e7-429e-4c3f-b916-901358075227" class="">Hasil outputnya:</p><figure id="39375e50-1c3c-4ca1-84e5-0bd2d6ee804b" class="image"><a href="https://3.bp.blogspot.com/-Eu9sKzaEPhQ/WPL9CM8eOiI/AAAAAAAAEvk/PKKEamCynOoxHlwY9UV9iGzniKi-8j0SgCPcB/s1600/Hasil%2Boutput%2Bprogram%2Barray.png"><img src="https://3.bp.blogspot.com/-Eu9sKzaEPhQ/WPL9CM8eOiI/AAAAAAAAEvk/PKKEamCynOoxHlwY9UV9iGzniKi-8j0SgCPcB/s1600/Hasil%2Boutput%2Bprogram%2Barray.png"/></a></figure><p id="cf6106f0-96fb-4548-b018-f649f1fe093a" class=""><strong>Perhatikan</strong>:</p><p id="29dcfa57-997a-4882-aae0-129e39b5e620" class="">Di sana kita menggunakan perulangan <code>foreach</code> untuk menampilkan isi array.</p><h2 id="c60dc437-dc0d-40fe-b560-88542128c467" class=""><strong>Array Multi Dimensi</strong></h2><p id="363fe280-2bf3-4b6b-bfdb-032bf5d9e214" class="">Array multi dimensi artinya array yang memiliki lebih dari satu dimensi.</p><p id="7f0dd553-ef6a-48d2-b483-612f89ea913f" class="">Atau kita bisa sebut, array di dalam array.</p><p id="16d7aedf-ba25-4436-bbdc-c2217c7ef9e0" class="">Jumlah dimensinya tidak terbatas, tergantung kita mampunya sampai berapa</p><p id="65bc5f8d-5482-4c58-a294-8cdf345284d8" class="">Contoh berikut ini adalah array dua dimensi:</p><pre id="dd60f8b6-c723-4ad7-ba54-7eb66236d641" class="code"><code>String[][] kontak = { 
+	{&quot;Lili&quot;,&quot;08111&quot;}, {&quot;Lala&quot;,&quot;08122&quot;}, {&quot;Maya&quot;,&quot;08133&quot;}
+};</code></pre><p id="140722e8-f817-46fc-b618-9b780603b813" class="">Indek ke-<code>0</code> pada array <code>kontak</code> berisi array <code>{&quot;lili&quot;,&quot;08111&quot;}</code>.</p><figure id="68d8a12e-db17-4080-81c3-4437466c7c32" class="image"><a href="https://1.bp.blogspot.com/-PX_aCblKjWQ/WPMMC9XYrGI/AAAAAAAAEwc/gVmcSuIdx68ZyqZA9qzid-h_d_Qlq6MvACPcB/s1600/array%2Bdua%2Bdimensi.png"><img src="https://1.bp.blogspot.com/-PX_aCblKjWQ/WPMMC9XYrGI/AAAAAAAAEwc/gVmcSuIdx68ZyqZA9qzid-h_d_Qlq6MvACPcB/s1600/array%2Bdua%2Bdimensi.png"/></a></figure><p id="d92c22ca-3995-45a9-b60d-f7225e883784" class="">Contoh cara mengakses data dari array dua dimensi:</p><figure id="d5889a4d-9f98-42f4-9640-e34097322ac1" class="image"><a href="https://4.bp.blogspot.com/--B8JIXhQjjU/Vxjj-XAAERI/AAAAAAAACvw/h3zXImrKeBg0pjgjAE5df7fi9iXETaQ5wCK4B/s1600/Array%2Bdua%2Bdimensi.png"><img src="https://4.bp.blogspot.com/--B8JIXhQjjU/Vxjj-XAAERI/AAAAAAAACvw/h3zXImrKeBg0pjgjAE5df7fi9iXETaQ5wCK4B/s1600/Array%2Bdua%2Bdimensi.png"/></a></figure><h2 id="3ad25afb-be5f-42e9-9143-1aa28a613541" class=""><strong>Contoh Program Array Multi Dimensi</strong></h2><p id="eb6e8b10-c9ac-4906-bc88-e5591159df79" class="">Biar makin mantap pemahaman kita tentang array multi dimensi, mari kita coba membuat sebuah program.</p><p id="61bb4d4e-3806-49fd-aa5d-f744a9bde49e" class="">Silahkan buat class baru bernama <code>RuangKelas</code> kemudian ikuti kode berikut:</p><pre id="45c8373a-5b8d-4da0-a341-33dad4a7323c" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> RuangKelas { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// Membuat Array dan Scanner 
+		String[][] meja = new String[2][3]; 
+		Scanner scan = new Scanner(System.in); 
+		// mengisi setiap meja 
+		for(int bar = 0; bar &lt; meja.length; bar++){ 
+			for(int kol = 0; kol &lt; meja[bar].length; kol++){ 
+				System.out.format(&quot;Siapa yang akan duduk di meja (%d,%d): &quot;, bar, kol); 
+				meja[bar][kol] = scan.nextLine(); 
+			} 
+		} 
+		// menampilkan isi Array 
+		System.out.println(&quot;-------------------------&quot;); 
+		for(int bar = 0; bar &lt; meja.length; bar++){ 
+			for(int kol = 0; kol &lt; meja[bar].length; kol++){ 
+				System.out.format(&quot;| %s | \t&quot;, meja[bar][kol]); 
+			} 
+			System.out.println(&quot;&quot;); 
+		} 
+		System.out.println(&quot;-------------------------&quot;); 
+	}
+}</code></pre><p id="9b16f24a-664d-4d7a-a476-45cb97538f53" class="">Hasil outputnya:</p><figure id="72069373-7fd5-4926-b3c0-2ab0e91ff868" class="image"><a href="https://2.bp.blogspot.com/-KdgwFPj1DOE/WPM-I_9okwI/AAAAAAAAExA/ELeXJHgmUno_wygnOdDWaiEcbmpacQnIwCPcB/s1600/Hasil%2Boutput%2Bprogram%2Barray%2B2d.png"><img src="https://2.bp.blogspot.com/-KdgwFPj1DOE/WPM-I_9okwI/AAAAAAAAExA/ELeXJHgmUno_wygnOdDWaiEcbmpacQnIwCPcB/s1600/Hasil%2Boutput%2Bprogram%2Barray%2B2d.png"/></a></figure><p id="d7bd1869-baf9-4b6d-b334-40c858502f06" class="">Karena array dua dimensi mirip seperti tabel, maka kita harus melakukan perulangan terhadap baris dan kolomnya.</p><p id="1d3ddfbb-ec8a-4510-b44a-88219df57f31" class="">Lalu bagaimana dengan array 3D, 4D, 5D, dan seterusnya?</p><p id="490415f4-fd9a-4449-91aa-d76a1fad1315" class="">Tentu saja kita harus membuat perulangan bersarang sebanyak dimensinya.</p><p id="09352b34-a386-446c-a3f7-843902eae922" class="">Kalau tiga, ya buat tiga perulangan dan seterusnya.</p><h2 id="662970f0-5687-4993-9e5e-211f624af185" class=""><strong>Array List</strong></h2><p id="7e0bf0c7-056a-4b22-87ef-3a6f40a39bb8" class="">Array yang kita bahas di atas sebenarnya memiliki beberapa kekurangan, seperti:</p><ul id="fbf65d7b-a6ab-48fe-bd94-77885d797c19" class="bulleted-list"><li>Tidak mampu menyimpan data dengan tipe yang berbeda.</li></ul><ul id="1db92c18-6c00-40a3-8c72-a03193fe1f0a" class="bulleted-list"><li>Ukurannya tidak dinamis.</li></ul><p id="eb672b5d-04bb-4e1e-b965-128fc1e59b9a" class="">Maka dari itu, ada Array List yang menutupi kekurangan tersebut.</p><p id="e7b4214e-c0a1-4e39-9780-56f538c4ad57" class="">Array list merupakan sebuah class yang memungkinkan kita membuat sebuah objek untuk menampung apapun.</p><p id="62019521-632e-43bf-9a7e-8f7d33820af7" class="">Untuk menggunakan Array List, kita harus mengimpornya terlebih dahulu.</p><pre id="4909295c-afca-4782-8f06-de6b9fcae827" class="code"><code>import java.util.ArrayList;</code></pre><p id="ec9f1030-f759-4f1e-92c2-f7472e295f17" class="">Setelah itu, baru kita bisa membuat sebuah objek Array List seperti ini:</p><pre id="acb48a96-a852-4897-b200-0feb19e75c61" class="code"><code>ArrayList al = new ArrayList();</code></pre><p id="149b537a-e8b1-4d23-a003-e6552e0638cd" class="">Mari kita coba….</p><h3 id="36ce6ca9-c6e9-4016-94ba-b3a43b156e20" class=""><strong>Contoh Program dengan Array List</strong></h3><p id="2c1cd957-5d59-48e2-86d9-51ed0e36d8a6" class="">Silahkan membuat class dengan nama <code>Doraemon</code>, kemudian ikuti kode berikut:</p><pre id="3bba97ea-4d1e-4b45-acde-1fe8cf1c20bb" class="code"><code>import java.util.ArrayList;
+
+<em>public</em> <em>class</em> Doraemon { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek array list 
+		ArrayList kantongAjaib = new ArrayList(); 
+		// Mengisi kantong ajaib dengan 5 benda 
+		kantongAjaib.add(&quot;Senter Pembesar&quot;); 
+		kantongAjaib.add(532); 
+		kantongAjaib.add(&quot;tikus&quot;); 
+		kantongAjaib.add(1231234.132); 
+		kantongAjaib.add(true); 
+		// menghapus tikus dari kantong ajaib 
+		kantongAjaib.remove(&quot;tikus&quot;); 
+		// Menampilkan isi kantong ajaib 
+		System.out.println(kantongAjaib); 
+		// menampilkan banyak isi kantong ajaib 
+		System.out.println(&quot;Kantong ajaib berisi &quot;+ kantongAjaib.size() +&quot; item&quot;); 
+	}
+}</code></pre><p id="13556cf8-5e2a-41e6-a498-31dbea16743a" class="">Hasil outputnya:</p><figure id="5a346a9f-ef48-42a3-89ca-3078cfb84708" class="image"><a href="https://3.bp.blogspot.com/-7JRiE4HDFSY/WPNEa7eTnLI/AAAAAAAAExg/jrzHNYqskAAA-zZQvgCKif_2pVZhdq6pQCPcB/s1600/Hasil%2Boutput%2Bprogram%2Bdoraemon%2Bdengan%2Barray%2Blist.png"><img src="https://3.bp.blogspot.com/-7JRiE4HDFSY/WPNEa7eTnLI/AAAAAAAAExg/jrzHNYqskAAA-zZQvgCKif_2pVZhdq6pQCPcB/s1600/Hasil%2Boutput%2Bprogram%2Bdoraemon%2Bdengan%2Barray%2Blist.png"/></a></figure><p id="335e83e4-f325-4a1b-aafe-c19ec2cb6bd6" class="">Karena array list (<code>kantongAjaib</code>) merupakan sebuah objek yang terbuat dari class Array List, maka dia punya <em>method</em> (fungsi) untuk melakukan sesuatu.</p><ul id="61d26ecb-ecb8-40f2-bc79-1174cad2010c" class="bulleted-list"><li>Fungsi <code>add()</code> untuk menambahkan sesuatu ke dalam Array List;</li></ul><ul id="e5d29b8b-7baf-46fb-8cb2-d23bf9b14212" class="bulleted-list"><li>Fungsi <code>remove()</code> untuk menghapus sesuatu ke dalam Array List;</li></ul><ul id="eecab2fd-0caa-4b22-90da-fadd894db83f" class="bulleted-list"><li>Fungsi <code>size()</code> untuk mengambil ukuran Array List;</li></ul><ul id="96abf7d8-6dbb-466f-b7bf-fb576e6418ab" class="bulleted-list"><li>Fungsi <code>get(id)</code> untuk mengambil item dalam Array List berdasarkan id atau indeks tertentu.</li></ul><ul id="b0671e9d-8cda-4af2-9b70-7859d11c9fce" class="bulleted-list"><li>dan masih banyak fungsi yang lainnya.</li></ul><p id="c72640ef-af3a-4ef1-bec9-5a28f8912417" class="">Kita telah memahami cara penggunaan Array dalam program Java.</p><p id="960f5f5c-4b3d-48fa-856b-f60239dc728d" class="">Berikut ini ringkasannya:</p><ul id="5f21fd52-f673-44b6-ac22-97075246addf" class="bulleted-list"><li>Array adalah variabel yang bisa menyimpan banyak data;</li></ul><ul id="0e6a806b-953f-4609-b57c-8545f56a878c" class="bulleted-list"><li>Array bisa multi dimensi;</li></ul><ul id="27a3cb08-ed71-40d5-b2b0-b0a5c70adcd6" class="bulleted-list"><li>Array memiliki beberapa kekurangan, akan tetapi sudah ditutupi oleh array list.</li></ul></div></article></body></html>

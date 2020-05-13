@@ -1,0 +1,623 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Variabel</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="71987f4c-30a6-409a-ad23-e8acc62d93a6" class="page sans"><header><h1 class="page-title"><strong>Variabel</strong></h1></header><div class="page-body"><h2 id="9fb9cde7-48c7-4eb3-8178-5ba3047d42b7" class=""><strong>Membuat Variabel</strong></h2><p id="4f082279-401f-4804-8fcd-281bf2d91108" class="">Hal yang perlu diketahui dalam pembuatan variabel di java adalah cara penulisannya.</p><p id="ebada638-1e39-4c0c-b035-86f557464fe5" class="">Formatnya seperti ini:</p><p id="ad98cf77-4f67-4020-9ec4-d131bd3a86da" class=""><code>&lt;tipe data&gt; namaVariabel;</code></p><p id="80a845d5-d1b9-443e-9682-db7aedacb923" class=""><strong>Contoh</strong>:</p><p id="b2f2885e-4f8a-4821-8f29-07cd1f9a745b" class="">Membuat variabel kosong bertipe integer:</p><p id="f1e17a5c-edc5-4e0a-88fe-0a74793309b0" class=""><code>int namaVariabel;</code></p><p id="a78c0384-be2a-4d44-9cae-179428fa9e52" class="">Membuat variabel bertipe integer dan langsung diisi nilai:</p><p id="c0901587-0591-4385-923f-373b3a0a15a8" class=""><code>int namaVariabel = 19;</code></p><p id="0b62d605-535f-4216-b2f3-6aab3305f15c" class="">Membuat sekumpulan variabel yang tipe datanya sama:</p><p id="d7c4805f-4fb0-4957-862d-2f579ea311c2" class=""><code>int a, b, c;</code></p><p id="2345f144-a905-4212-963e-50e120d71fc2" class="">Lalu, dimana itu ditulis?</p><ol id="3fb6917a-5ceb-41a1-b11a-414198f4c1db" class="numbered-list" start="1"><li>Di dalam fungsi <code>main()</code>: variabel yang ditulis di dalam fungsi <code>main()</code> dan fungsi yang lainnya disebut variabel lokal.</li></ol><ol id="49df9aa2-9dd0-4e25-bfbd-ed77d9b11ec5" class="numbered-list" start="2"><li>Di dalam class: Variabel ini disebut variabel class atau global.</li></ol><h2 id="3042637e-08ff-4c7b-850a-2490e7a08495" class=""><strong>Mari Kita Coba Latihan dengan Membuat Program DataDiri</strong></h2><p id="c458d6bf-1a45-4c8a-a74e-80d9017acfa4" class="">Buatlah program baru bernama DataDiri. Silahkan tambahkan kelas <em>(java class)</em> baru di paket <em>(package)</em> <code>pertemuan1</code>.</p><figure id="52cbfeb4-1e35-4a74-8d38-1958133be41d" class="image"><a href="https://1.bp.blogspot.com/-auMt7ptDILY/VhUXJ3fj_FI/AAAAAAAAB5c/phVlb95qgig/s1600/Membuat%2Bjava%2Bclass%2Bdi%2Bnetbeans.png"><img src="https://1.bp.blogspot.com/-auMt7ptDILY/VhUXJ3fj_FI/AAAAAAAAB5c/phVlb95qgig/s1600/Membuat%2Bjava%2Bclass%2Bdi%2Bnetbeans.png"/></a></figure><p id="86e0354d-81c3-487a-be84-6f2206173f7e" class="">Pada jendela yang muncul, isi nama kelasnya dengan <em>DataDiri</em>. Setelah itu, silahkan ikuti kode berikut.</p><figure id="9494bd83-e16d-4f4c-a970-efabf9cf4e6d" class="image"><a href="https://2.bp.blogspot.com/-8e30RYXIhlY/VhnvGo1bPYI/AAAAAAAAB-Q/A63y3RrrzKQ/s1600/Program%2BDataDiri%2B-%2BVariabel%2Bdan%2Btipe%2Bdata%2Bjava.png"><img src="https://2.bp.blogspot.com/-8e30RYXIhlY/VhnvGo1bPYI/AAAAAAAAB-Q/A63y3RrrzKQ/s1600/Program%2BDataDiri%2B-%2BVariabel%2Bdan%2Btipe%2Bdata%2Bjava.png"/></a></figure><p id="ba850de4-f2b2-45b2-8edc-95332f715daa" class="">Setelah itu, coba jalankan dengan menekan tombol [Shift]+[F6]. Analisa dan pahami maksud kode-kode di atas.</p><figure id="f758c116-78a4-4dd9-b0fd-4db1cbef9a59" class="image"><a href="https://2.bp.blogspot.com/-bL-KEN2HXCI/VhnzLOzXvvI/AAAAAAAAB-c/6sUMVdFsPSM/s1600/Program%2BDataDiri%2Bpetani%2Bkode%2Bdengan%2Bjava.png"><img src="https://2.bp.blogspot.com/-bL-KEN2HXCI/VhnzLOzXvvI/AAAAAAAAB-c/6sUMVdFsPSM/s1600/Program%2BDataDiri%2Bpetani%2Bkode%2Bdengan%2Bjava.png"/></a></figure><p id="949ac741-c641-42cd-9fce-281dbc76a852" class="">Hasil outputnya sepertinya salah.</p><p id="d71f7ee9-505e-4eb9-9490-78bff74ddf21" class="">Usia kok nilianya alamat, mengapa demikian?</p><p id="836acb79-f88d-48ff-9241-cac6707f06f8" class="">Itu disebabkan karena kita memanggil variabel <code>alamat</code> pada baris <em>usia</em>.</p><p id="c4334b0c-d5db-4bf0-bf57-4e3ab327b939" class="">Jadi yang akan tampil adalah isi dari variable <code>alamat</code>, bukan isi dari variabel <code>usia</code>.</p><p id="5ec2610e-67f0-4e07-938f-1b1a7db18b02" class="">Perbaikilah kodenya menjadi seperti ini:</p><figure id="e8d56ccc-d1ab-49f9-8730-c57f11abdf58" class="image"><a href="https://1.bp.blogspot.com/-JgBuIhQp5qk/Vhn0m_dG0wI/AAAAAAAAB-o/LmtZaZPGUMs/s1600/Perbaikan%2Bprogram%2BDataDiri%2B-%2Bpetani%2Bkode%2Bdan%2Bjava.png"><img src="https://1.bp.blogspot.com/-JgBuIhQp5qk/Vhn0m_dG0wI/AAAAAAAAB-o/LmtZaZPGUMs/s1600/Perbaikan%2Bprogram%2BDataDiri%2B-%2Bpetani%2Bkode%2Bdan%2Bjava.png"/></a></figure><p id="662cdee9-fd0f-40fa-b612-c420fdd670f3" class="">Dan, … silahkan coba jalankan kembali programnya.</p><figure id="e936c1bf-56c8-4276-bfa7-e3d476c647d4" class="image"><a href="https://2.bp.blogspot.com/-Mlq6BX9Kn1k/Vhn2H52rl4I/AAAAAAAAB-0/QCD-sZtuwx0/s1600/hasil%2Boutput%2BProgram%2BDataDiri%2Bpetani%2Bkode%2Bdengan%2Bjava.png"><img src="https://2.bp.blogspot.com/-Mlq6BX9Kn1k/Vhn2H52rl4I/AAAAAAAAB-0/QCD-sZtuwx0/s1600/hasil%2Boutput%2BProgram%2BDataDiri%2Bpetani%2Bkode%2Bdengan%2Bjava.png"/></a></figure><p id="dbdbb5e8-8b2d-48e8-9300-d49fd3a137d9" class="">Yap! hasilnya sudah benar.</p><h2 id="b83e079d-482b-43ff-bc3e-9c9d97de05a3" class=""><strong>Aturan Penulisan Variabel</strong></h2><p id="6cac74ed-1b7f-48ec-8894-da326a76c0bf" class="">Ternyata tidak boleh sembarangan dalam membuat variabel.</p><p id="739f8309-c895-45b1-8676-e2314b5f0dd1" class="">Ada aturan yang harus diikuit, diantaranya:</p><ul id="2e76b894-e434-4529-a859-fcb7880eff57" class="bulleted-list"><li>Nama variabel tidak boleh menggunakan kata kunci dari Java <em>(reserved word)</em> seperti <code>if</code>, <code>for</code>, <code>switch</code>, dll.</li></ul><ul id="6f5d5537-523b-4dbd-b9b1-39b170da1d3d" class="bulleted-list"><li>Nama variabel boleh menggunakan huruf, angka (0-9), garis bawah <em>(underscore)</em>, dan symbol dollar ($), namun penggunaan garis bawah dan symbol lebih baik dihindari.</li></ul><ul id="65c6fbaa-76a1-4601-822c-a1c52b7f14e8" class="bulleted-list"><li>Nama variabel harus diawali dengan huruf kecil, karena Java menggunakan <a href="https://www.petanikode.com/gaya-penulisan-case-dalam-pemrograman/">gaya CamelCase</a>.</li></ul><ul id="f0c775dc-8d3d-4c36-9184-2e69cb3175b3" class="bulleted-list"><li>Apabila nama variabel lebih dari 1 suku kata, maka kata ke-2 dituliskan dengan diawali dengan huruf besar dan seterusnya, contoh <code>namaVariabel</code>.</li></ul><h2 id="a20a58dd-8e71-472b-b443-1675cd0da5f1" class=""><strong>Latihan Ke-2: Program LuasLingkaran</strong></h2><p id="861ab8a5-d573-47d1-acb6-dfa7a1e07bb9" class="">Mari kita mantapkan pemahaman dengan membuat program <em>LuasLingkaran</em>.</p><p id="ffd02437-3b1c-4227-a4b3-762ae70e962c" class="">Program ini fungsinya untuk menghitung luas lingkaran.</p><p id="a41c1584-ae2b-449d-b4fb-27a0045008ed" class="">Luas lingkaran dapat kita hitung dengan rumus <code>PI x r2</code>.</p><p id="54761677-384f-42c2-89e6-0f2735927285" class="">Sebelum memulai memrogram, sebaiknya kita pahami dulu algoritma dan flowchart-nya:</p><h3 id="81ea0b46-45d5-4fa5-993c-6bb9f1d56a42" class=""><strong>Algoritma</strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e4e6f718-6e55-468a-880d-9a637cd054e8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>Deklarasi: Double luas, PI int r
+Deskripsi: - Input PI = 3.14 r = 18 - Proses luas = PI * r * r - Output cetak luas</code></div></figure><h3 id="b76f5e19-0c0a-4b40-ba33-bd15b32fbe2f" class=""><strong>Flow Chart:</strong></h3><figure id="aff5caef-1df3-494f-9095-f129298ae51a" class="image"><a href="https://4.bp.blogspot.com/-topvJ0egkaI/VhaAEc1i0rI/AAAAAAAAB7c/TLjkOJ1o7jI/s1600/Flow%2BChart%2Bluas%2Blingkaran%2B-%2Bjava.png"><img src="https://4.bp.blogspot.com/-topvJ0egkaI/VhaAEc1i0rI/AAAAAAAAB7c/TLjkOJ1o7jI/s1600/Flow%2BChart%2Bluas%2Blingkaran%2B-%2Bjava.png"/></a></figure><p id="bebf3f39-ffe6-475a-917c-d25eca0f171e" class="">Nah, sudah jelas kan?</p><p id="fde17ee3-afe8-4b0c-a245-2bbc26fc9d8a" class="">Sekarang kita tinggal <em>coding</em> saja.</p><figure id="399fccda-ef02-48c2-b3a2-9040b1fcdf05" class="image"><a href="https://3.bp.blogspot.com/-GKiBCcH0k7Q/VhZ-UqlS0DI/AAAAAAAAB7Q/SJ8Cu-lksvo/s1600/Kode%2Bjava%2Bluas%2Blingkaran.png"><img src="https://3.bp.blogspot.com/-GKiBCcH0k7Q/VhZ-UqlS0DI/AAAAAAAAB7Q/SJ8Cu-lksvo/s1600/Kode%2Bjava%2Bluas%2Blingkaran.png"/></a></figure><p id="cf0ca04e-3f42-4243-9eef-7b83fb5e5c2f" class="">Silahkan dieksekusi dan pertahikan hasilnya.</p></div></article></body></html>

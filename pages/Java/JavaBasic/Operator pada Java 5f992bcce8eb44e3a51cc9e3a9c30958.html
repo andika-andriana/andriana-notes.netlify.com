@@ -1,0 +1,779 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Operator pada Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5f992bcc-e8eb-44e3-a51c-c9e3a9c30958" class="page sans"><header><h1 class="page-title">Operator pada Java</h1></header><div class="page-body"><p id="023569e9-4eb1-48d5-b0ad-891fb2300a87" class="">Operator dalam pemrograman digunakan untuk melakukan operasi tertentu.</p><p id="98b7a73d-e6cd-4e3b-b7b2-513ec88638af" class="">Misalkan kita ingin menjumlahkan nilai dari variabel <code>x</code> dan <code>y</code>, maka kita bisa menggunakan operator penjumlahan (<code>+</code>).</p><p id="d5ddd1a9-0af3-4cb4-a086-fb7891dea226" class=""><code>x + y</code></p><p id="68d3457d-f40d-42e8-a840-71d95764ce1b" class="">Ada enam jenis kelompok operator dalam pemrograman Java:</p><ol id="09693ef1-54de-419f-863b-08b634ce6b6b" class="numbered-list" start="1"><li>Operator Artimatika;</li></ol><ol id="5f543f3a-d818-4811-a96f-b1550f66392c" class="numbered-list" start="2"><li>Operator Penugasan;</li></ol><ol id="851f7e26-6404-4bb2-83e4-c2e853b00689" class="numbered-list" start="3"><li>Operator Pembanding;</li></ol><ol id="fc9a7134-05de-478a-b442-40f64694d521" class="numbered-list" start="4"><li>Operator Logika;</li></ol><ol id="4c756d37-414e-4b50-838c-8062a4c617e3" class="numbered-list" start="5"><li>Operator Bitwise;</li></ol><ol id="7ac170c3-d412-47e7-b46e-58fcda87b986" class="numbered-list" start="6"><li>dan Operator Ternary.</li></ol><p id="645d6fce-327b-4aa8-bd29-4e5ef5b4cac2" class="">Bila digambarkan dalam mind map, akan terlihat seperti ini:</p><figure id="6e9528fe-c152-4d7b-80bd-739ea1c8e533" class="image"><a href="https://3.bp.blogspot.com/-M10K9ZcEPIc/WOb6aBf7zWI/AAAAAAAAEmw/GaLW63U-FGIPyPjEU_7rxNxsranR6dqwACPcB/s1600/Mind%2BMap%2BOperator%2Bdi%2BJava.png"><img src="https://3.bp.blogspot.com/-M10K9ZcEPIc/WOb6aBf7zWI/AAAAAAAAEmw/GaLW63U-FGIPyPjEU_7rxNxsranR6dqwACPcB/s1600/Mind%2BMap%2BOperator%2Bdi%2BJava.png"/></a></figure><p id="a9333919-f47c-4f5e-905c-593001b54d63" class="">Ukuran penuh dari mind map ini dapat kamu lihat di: <a href="https://coggle.it/diagram/WOGCoOqtdwABC7kL">coggle.it</a></p><h2 id="a9b764b8-3bda-4654-ab55-6c0b0b061fe1" class=""><strong>1. Operator Aritmatika</strong></h2><p id="250a486a-bd36-43c4-a303-6dc7be8b75b9" class="">Operator aritmatika digunakan untuk melakukan operasi aritmatika.</p><p id="76643442-42e0-4c7c-9e4b-b83466627900" class="">Operator ini terdiri dari:</p><div id="c6caf09b-a763-4e51-adf7-0990159bc654" class="collection-content"><h4 class="collection-title">Operator Aritmatika</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Nama</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Simbol</th></tr></thead><tbody><tr id="877ccb81-2e7d-4053-88ac-c6175b79cbbd"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Aritmatika%20c6caf09ba7634e51adf70990159bc654/Penjumlahan%20877ccb812e7d405388acc6175b79cbbd.html">Penjumlahan</a></td><td class="cell-hBWz">+</td></tr><tr id="eea94341-8d92-450b-a6e4-a37590196675"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Aritmatika%20c6caf09ba7634e51adf70990159bc654/Pengurangan%20eea943418d92450ba6e4a37590196675.html">Pengurangan</a></td><td class="cell-hBWz">-</td></tr><tr id="fc451f7f-2b28-4470-b24e-34ce49f1fe53"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Aritmatika%20c6caf09ba7634e51adf70990159bc654/Perkalian%20fc451f7f2b284470b24e34ce49f1fe53.html">Perkalian</a></td><td class="cell-hBWz">*</td></tr><tr id="7acd723d-5256-4688-b58f-37329034df7c"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Aritmatika%20c6caf09ba7634e51adf70990159bc654/Pembagian%207acd723d52564688b58f37329034df7c.html">Pembagian</a></td><td class="cell-hBWz">/</td></tr><tr id="f399e8df-545e-4319-a9a9-2401734564d9"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Aritmatika%20c6caf09ba7634e51adf70990159bc654/Sisa%20Bagi%20f399e8df545e4319a9a92401734564d9.html">Sisa Bagi</a></td><td class="cell-hBWz">%</td></tr></tbody></table></div><p id="f55f2c76-9676-4cec-8291-2c7506fbfa44" class="">Bagaimana cara pakainya?</p><h3 id="f3876790-3122-4c7e-bac2-9ba13d462ee5" class=""><strong>Mari kita coba praktik…</strong></h3><p id="a49304a6-9e94-49d1-997b-022ae62a9c1a" class="">Buatlah kelas baru bernama <em>OperatorAritmatika</em>, kemudian ikuti kode berikut:</p><pre id="d1fd9e5f-ff27-407d-87a2-656b6d2e4d2c" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> OperatorAritmatika { 
+	<em>public</em> <em>static</em> void main(String[] args) {
+
+		int angka1; 
+		int angka2; 
+		int hasil; 
+		
+		Scanner keyboard = new Scanner(System.in); 
+		
+		System.out.print(&quot;Input angka-1: &quot;); 
+		angka1 = keyboard.nextInt(); 
+		System.out.print(&quot;Input angka-2: &quot;); 
+		angka2 = keyboard.nextInt(); 
+		// penjumlahan 
+		hasil = angka1 + angka2; 
+		System.out.println(&quot;Hasil = &quot; + hasil); 
+		
+		System.out.print(&quot;Input angka-1: &quot;); 
+		angka1 = keyboard.nextInt(); 
+		System.out.print(&quot;Input angka-2: &quot;); 
+		angka2 = keyboard.nextInt(); 
+		// pengurangan 
+		hasil = angka1 - angka2; 
+		System.out.println(&quot;Hasil = &quot; + hasil); 
+		
+		System.out.print(&quot;Input angka-1: &quot;); 
+		angka1 = keyboard.nextInt(); 
+		System.out.print(&quot;Input angka-2: &quot;); 
+		angka2 = keyboard.nextInt(); 
+		// perkalian 
+		hasil = angka1 * angka2; 
+		System.out.println(&quot;Hasil = &quot; + hasil); 
+		System.out.print(&quot;Input angka-1: &quot;); 
+		angka1 = keyboard.nextInt();
+		System.out.print(&quot;Input angka-2: &quot;); 
+		angka2 = keyboard.nextInt(); 
+		// Pembagian 
+		hasil = angka1 / angka2;
+		System.out.println(&quot;Hasil = &quot; + hasil);
+ 
+		System.out.print(&quot;Input angka-1: &quot;); 
+		angka1 = keyboard.nextInt(); 
+		System.out.print(&quot;Input angka-2: &quot;); 
+		angka2 = keyboard.nextInt(); 
+		// Sisa Bagi 
+		hasil = angka1 % angka2; 
+		System.out.println(&quot;Hasil = &quot; + hasil); 
+
+	}
+}</code></pre><p id="e3e76092-a0ef-41f8-91c0-2068bfeb6d56" class="">Silahkan jalankan programnya:</p><figure id="e338c777-2e98-4af9-8b17-83eeee5cd3be" class="image"><a href="https://4.bp.blogspot.com/-sTdKOiAGLrw/ViIY3VetPNI/AAAAAAAACBE/sYsiVTU82l0/s1600/Hasil%2Boutput%2Bprogram%2Boperator%2Baritmatika.png"><img src="https://4.bp.blogspot.com/-sTdKOiAGLrw/ViIY3VetPNI/AAAAAAAACBE/sYsiVTU82l0/s1600/Hasil%2Boutput%2Bprogram%2Boperator%2Baritmatika.png"/></a></figure><p id="41aea52f-af6d-4ebb-b79d-74ae3d306008" class="">Mudah bukan…?</p><h3 id="90f87bfe-d1aa-4697-beb6-79ca36710e76" class=""><strong>Mau laithan lagi?</strong></h3><p id="3af74376-b640-42a2-93b7-686587a5019d" class="">Semakin banyak latihan, semakin mantap.</p><p id="62e0424b-4246-4bfa-946e-3f1a57a0c06e" class="">Sekarang coba contoh kasus: Program menghitung keliling persegi panjang.</p><figure id="d855791a-a1d8-405a-9e79-bec489a1a194" class="image"><a href="https://4.bp.blogspot.com/-aQDpPVSmbtM/ViIaSaDZvNI/AAAAAAAACBQ/gefP-C0_SYQ/s1600/Kode%2Bprogram%2Bkeliling%2Bpersegi%2Bpanjang.png"><img src="https://4.bp.blogspot.com/-aQDpPVSmbtM/ViIaSaDZvNI/AAAAAAAACBQ/gefP-C0_SYQ/s1600/Kode%2Bprogram%2Bkeliling%2Bpersegi%2Bpanjang.png"/></a></figure><h2 id="cbff9bc6-2d18-49c1-a4fe-b42a95a6397a" class=""><strong>2. Operator Penugasan</strong></h2><p id="01577579-7e9f-4107-a0b1-0529f73b6c55" class="">Operator penugasan <em>(Assignment Operator)</em> fungsinya untuk meberikan tugas pada variabel tertentu. Biasanya untuk mengisi nilai.</p><p id="16c90eac-8767-487c-922b-2642a12e82cd" class="">Contoh:</p><p id="91e3850c-bcd5-4172-a67c-e14525a8cf4b" class=""><code>int a = 10;</code></p><p id="41e2f083-987f-4d4b-9345-918f2adbb592" class="">Variabel <code>a</code> ditugaskan untuk menyimpan nilai <code>10</code>.</p><p id="e2268530-5bf4-469f-b9fa-f45cf09ceb39" class="">Operator Penugasan terdiri dari:</p><div id="1d6539ab-2e18-4025-a068-1ae54e75d8a5" class="collection-content"><h4 class="collection-title">Operator Penugasan</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Nama Operator</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Sombol</th></tr></thead><tbody><tr id="f03e5331-f191-420e-984f-1680bf2be21e"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Penugasan%201d6539ab2e184025a0681ae54e75d8a5/Pengisian%20Nilai%20f03e5331f191420e984f1680bf2be21e.html">Pengisian Nilai</a></td><td class="cell-:gC{">=</td></tr><tr id="9f28ddcf-a9d4-44a6-b128-5d8ccfbcd376"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Penugasan%201d6539ab2e184025a0681ae54e75d8a5/Pengisian%20dan%20Penambahan%209f28ddcfa9d444a6b1285d8ccfbcd376.html">Pengisian dan Penambahan</a></td><td class="cell-:gC{">+=</td></tr><tr id="7dfaa57f-4bce-47a0-b890-9d8e975adf59"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Penugasan%201d6539ab2e184025a0681ae54e75d8a5/Pengisian%20dan%20Pengurangan%207dfaa57f4bce47a0b8909d8e975adf59.html">Pengisian dan Pengurangan</a></td><td class="cell-:gC{">-=</td></tr><tr id="760dc628-c9c2-4d6b-8276-e274954cbc22"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Penugasan%201d6539ab2e184025a0681ae54e75d8a5/Pengisian%20dan%20Perkalian%20760dc628c9c24d6b8276e274954cbc22.html">Pengisian dan Perkalian</a></td><td class="cell-:gC{">*=</td></tr><tr id="6ed15d64-7370-4ce8-a31c-d97c0a6f5dc4"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Penugasan%201d6539ab2e184025a0681ae54e75d8a5/Pengisian%20dan%20Pembagian%206ed15d6473704ce8a31cd97c0a6f5dc4.html">Pengisian dan Pembagian</a></td><td class="cell-:gC{">/=</td></tr><tr id="a2d44714-c186-45ce-8402-f416eca4704d"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Penugasan%201d6539ab2e184025a0681ae54e75d8a5/Pengisian%20dan%20Sisa%20bagi%20a2d44714c18645ce8402f416eca4704d.html">Pengisian dan Sisa bagi</a></td><td class="cell-:gC{">%=</td></tr></tbody></table></div><h3 id="ee001fae-ed6f-4ef5-a099-37576e07ce2e" class=""><strong>Mari Kita Coba…</strong></h3><p id="7bb56d60-248d-4c76-95a7-cc38e550f116" class="">Sekarang, buatlah sebuah kelas baru beranama <em>OperatorPenugasan</em>.</p><p id="e92f296f-349a-48f9-9f1c-6e332f63120c" class="">Kemudian ikuti kode berikut:</p><pre id="d7ae2859-e551-4e5c-a4e2-1d8f88f4ede0" class="code"><code><em>public</em> <em>class</em> OperatorPenugasan { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		int a; 
+		int b; 
+		// Pengisian nilai 
+		a = 5; 
+		b = 10; 
+		// penambahan 
+		b += a; 
+		// sekarang b = 15 
+		System.out.println(&quot;Penambahan : &quot; + b); 
+		// pengurangan 
+		b -= a; 
+		// sekarang b = 10 (karena 15-5) 
+		System.out.println(&quot;Pengurangan : &quot; + b); 
+		// perkalian 
+		b *= a; 
+		// sekarang b = 50 (karena 10*5) 
+		System.out.println(&quot;Perkalian : &quot; + b); 
+		// Pembagian 
+		b /= a; 
+		// sekarang b=10 
+		System.out.println(&quot;Pembagian : &quot; + b); 
+		// Sisa bagi 
+		b %= a; 
+		// sekarang b=0 
+		System.out.println(&quot;Sisa Bagi: &quot; + b); 
+	}
+}</code></pre><p id="7f39669e-079a-4d2f-8a45-24b482ff9870" class="">Hasil outputnya:</p><figure id="a9dc2709-b240-4522-aa19-1ae0f1ba20db" class="image"><a href="https://4.bp.blogspot.com/-xbCfZTUzBqQ/ViIxX2y80pI/AAAAAAAACB4/Y06qPdhwkNs/s1600/hasil%2Boutput%2Bprogram%2Boperator%2Bpenugasan%2Bjava.png"><img src="https://4.bp.blogspot.com/-xbCfZTUzBqQ/ViIxX2y80pI/AAAAAAAACB4/Y06qPdhwkNs/s1600/hasil%2Boutput%2Bprogram%2Boperator%2Bpenugasan%2Bjava.png"/></a></figure><h2 id="669d71cb-8f55-4a97-8d0e-a801e4d10d5b" class=""><strong>3. Operator Pambanding</strong></h2><p id="38c58110-d9e2-40e0-99ec-d29ebdc7130c" class="">Sepeti namanya, tugas oprator ini untuk membandingkan.</p><p id="99903f6b-bb7a-44f4-9df0-20bd4b153677" class="">Operator ini juga dikenal dengan opeartor relasi.</p><p id="a28aadfa-9520-4100-be31-04c4f0a8c3fe" class="">Nilai yang dihasilkan dari operator ini berupa boolean, yaitu: <code>true</code> dan <code>false</code>.</p><p id="423446b7-660e-42d5-805f-8672f545344f" class="">Operator ini terdiri dari:</p><div id="76e7ba13-c536-40a1-9823-761f7ec846bc" class="collection-content"><h4 class="collection-title">Operator Pambanding</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Nama</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Simbol</th></tr></thead><tbody><tr id="a5a5c113-2d39-425b-8d4f-d34b1dd3928f"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Pambanding%2076e7ba13c53640a19823761f7ec846bc/Lebih%20Besar%20a5a5c1132d39425b8d4fd34b1dd3928f.html">Lebih Besar</a></td><td class="cell-5&#x27;:P">&gt;</td></tr><tr id="6f77786f-b241-4fd5-8f5d-a7ff49571dab"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Pambanding%2076e7ba13c53640a19823761f7ec846bc/Lebih%20Kecil%206f77786fb2414fd58f5da7ff49571dab.html">Lebih Kecil</a></td><td class="cell-5&#x27;:P">&lt;</td></tr><tr id="25b6a1ab-5cf3-4988-9480-5ccac3d3e2ce"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Pambanding%2076e7ba13c53640a19823761f7ec846bc/Sama%20Dengan%2025b6a1ab5cf3498894805ccac3d3e2ce.html">Sama Dengan</a></td><td class="cell-5&#x27;:P">==</td></tr><tr id="f7ec5248-2a4a-4d1f-8273-12b08c00fa9b"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Pambanding%2076e7ba13c53640a19823761f7ec846bc/Tidak%20Sama%20dengan%20f7ec52482a4a4d1f827312b08c00fa9b.html">Tidak Sama dengan</a></td><td class="cell-5&#x27;:P">!=</td></tr><tr id="b199cb0e-e2e4-48b1-ba3c-0b73403a7075"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Pambanding%2076e7ba13c53640a19823761f7ec846bc/Lebih%20Besar%20Sama%20dengan%20b199cb0ee2e448b1ba3c0b73403a7075.html">Lebih Besar Sama dengan</a></td><td class="cell-5&#x27;:P">&gt;=</td></tr><tr id="acd30140-f425-4374-8899-ae70740dc9d8"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Pambanding%2076e7ba13c53640a19823761f7ec846bc/Lebih%20Kecil%20Sama%20dengan%20acd30140f42543748899ae70740dc9d8.html">Lebih Kecil Sama dengan</a></td><td class="cell-5&#x27;:P">&lt;=</td></tr></tbody></table></div><p id="0eb65633-74ca-4527-8bd0-38cfe4d13552" class="">contoh:</p><p id="723e8fc1-aad0-4eb5-b33d-4639239ceb02" class=""><code>boolean x = 10 &lt; 12</code></p><p id="656d49d0-6fdb-43cc-af3c-be53b7ff5eb3" class="">Maka <code>x</code> akan bernilai <em>true</em>, karena <code>10</code> lebih kecil dari <code>12</code>.</p><p id="bcaa0740-31d9-43d7-a771-7285386e2e92" class="">Untuk lebih jelasnya…</p><h3 id="6a453c19-bdde-439e-9d0d-01ddafdf260b" class=""><strong>Mari kita coba dalam kode</strong></h3><p id="88219959-c91c-4a66-8c02-797043307c94" class="">Buatlah sebuah kelas baru bernama <em>OperatorPembanding</em>. Kemudian ikuti kode berikut:</p><pre id="4f141c26-93d2-4acb-939b-f15dc62b9c3d" class="code"><code><em>public</em> <em>class</em> OperatorPembanding { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		int nilaiA = 12; 
+		int nilaiB = 4; 
+		boolean hasil; 
+		// apakah A lebih besar dari B? 
+		hasil = nilaiA &gt; nilaiB; 
+		System.out.println(hasil); 
+		// apakah A lebih kecil dari B? 
+		hasil = nilaiA &lt; nilaiB; 
+		System.out.println(hasil); 
+		// apakah A lebih besar sama dengan B? 
+		hasil = nilaiA &gt;= nilaiB; 
+		System.out.println(hasil); 
+		// apakah A lebih kecil samadengan B? 
+		hasil = nilaiA &lt;= nilaiB; 
+		System.out.println(hasil); 
+		// apakah nilai A sama dengan B? 
+		hasil = nilaiA == nilaiB; 
+		System.out.println(hasil); 
+		// apakah nilai A tidak samadengan B? 
+		hasil = nilaiA != nilaiB; 
+		System.out.println(hasil); 
+	}
+}</code></pre><p id="f4d10e98-05c0-48cf-9924-db9e0aca0851" class="">Kode program di atas, akan menghasilkan output seperti ini:</p><figure id="f1713757-248f-4c0a-9f5e-98e0f527ca01" class="image"><a href="https://1.bp.blogspot.com/--FipqMwO8vk/ViI2QfhUtiI/AAAAAAAACCI/d-Rkn5aaIvo/s1600/hasil%2Boutput%2Boperator%2Bpembanding%2Bdi%2Bjava.png"><img src="https://1.bp.blogspot.com/--FipqMwO8vk/ViI2QfhUtiI/AAAAAAAACCI/d-Rkn5aaIvo/s1600/hasil%2Boutput%2Boperator%2Bpembanding%2Bdi%2Bjava.png"/></a></figure><h2 id="fff7ec8c-a399-470e-a27c-29e9ecc50ce4" class=""><strong>4. Operator Logika</strong></h2><p id="ebcb4fc3-7737-4030-82ad-4bf269eefcae" class="">Kalau kamu pernah belajar logika matematika, pasti tidak akan asing dengan operator ini.</p><div id="b9510b35-c4b9-4833-93d8-db44599e4696" class="collection-content"><h4 class="collection-title">Operator Logika</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Nama</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Simbol di Java</th></tr></thead><tbody><tr id="7164f6b6-7c4d-4ce3-9480-64d56c2c782b"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Logika%20b9510b35c4b9483393d8db44599e4696/Logika%20AND%207164f6b67c4d4ce3948064d56c2c782b.html">Logika AND</a></td><td class="cell-/&quot;PO">&amp;&amp;</td></tr><tr id="8cefa75b-9517-4fa4-9cbc-db823be62844"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Logika%20b9510b35c4b9483393d8db44599e4696/Logika%20OR%208cefa75b95174fa49cbcdb823be62844.html">Logika OR</a></td><td class="cell-/&quot;PO">||</td></tr><tr id="88ba6ca8-902e-48a5-a15b-9b8bcdf745b1"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Logika%20b9510b35c4b9483393d8db44599e4696/Negasi%20kebalikan%2088ba6ca8902e48a5a15b9b8bcdf745b1.html">Negasi/kebalikan</a></td><td class="cell-/&quot;PO">!</td></tr></tbody></table></div><p id="95ee3d8e-e559-4ee6-b305-b5a13b085e74" class="">Operator Logika digunakan untuk membuat operasi logika.</p><p id="0ebd8bcb-648f-4b96-b304-4f3af3a2d1ae" class="">Misalnya seperti ini:</p><ul id="c9ebfb9c-ce54-4872-ab83-793c5da85a4d" class="bulleted-list"><li>Pernyataan 1: Petani Kode seorang programmer</li></ul><ul id="f41c1f72-33df-4045-86cd-98afe8224227" class="bulleted-list"><li>Pernyataan 2: Petanikode menggunakan Linux</li></ul><p id="a6dd0d27-577f-404e-964d-0946ebe8946f" class="">Jika ditanya, apakah Petani Kode programmer yang menggunakan Linux?</p><p id="5e817746-e581-494d-baff-a504385ed19f" class="">Tentu kita akan cek dulu kebenarannya</p><ul id="4d876248-7f83-4fad-b36f-c9f8ded34e92" class="bulleted-list"><li>Pernyataan 1: Petani Kode seorang programmer = <code>true</code>.</li></ul><ul id="937786e6-c09f-43f4-a0f4-612677a67af9" class="bulleted-list"><li>Pernyattan 2: Petanikode menggunakan Linux = <code>true</code>.</li></ul><p id="eccde476-d84c-42a9-ab10-1ba765620f0f" class="">Apa petanikode programmer dan menggunakan Linux?</p><pre id="8d43b9b0-3757-47d2-936c-ec626e528041" class="code"><code>Pertnyataan 1 &amp;&amp; Pernyataan 2 = true</code></pre><p id="7f4a18f9-5e8e-4473-bd05-76be414df4ec" class="">Bingung?</p><p id="d7c77ec9-6b59-4f12-8f48-4ad0c423907b" class="">Coba cek lagi tabel kebenaran untuk logika AND.</p><div id="a36a90d7-9d6c-4216-9fc0-f08b3beea410" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Pernyatan 1</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Pernytaan 2</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Logika AND</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Title</th></tr></thead><tbody><tr id="2bed2f88-ab00-4d22-a5bc-364dbd08c7cd"><td class="cell-dqKU"><div class="checkbox checkbox-on"></div></td><td class="cell-CM^f"><div class="checkbox checkbox-on"></div></td><td class="cell-=V~G"><div class="checkbox checkbox-on"></div></td><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Untitled%20Database%20a36a90d79d6c42169fc0f08b3beea410/Untitled%202bed2f88ab004d22a5bc364dbd08c7cd.html">Untitled</a></td></tr><tr id="dab6ed4e-965e-4b5a-ae0e-cef336c9cf94"><td class="cell-dqKU"><div class="checkbox checkbox-on"></div></td><td class="cell-CM^f"><div class="checkbox checkbox-off"></div></td><td class="cell-=V~G"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Untitled%20Database%20a36a90d79d6c42169fc0f08b3beea410/Untitled%20dab6ed4e965e4b5aae0ecef336c9cf94.html">Untitled</a></td></tr><tr id="7dd9457a-a4d8-449c-bdaf-520806a5a45f"><td class="cell-dqKU"><div class="checkbox checkbox-off"></div></td><td class="cell-CM^f"><div class="checkbox checkbox-on"></div></td><td class="cell-=V~G"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Untitled%20Database%20a36a90d79d6c42169fc0f08b3beea410/Untitled%207dd9457aa4d8449cbdaf520806a5a45f.html">Untitled</a></td></tr><tr id="048f00b4-0a05-4c26-b644-e237a19af3cc"><td class="cell-dqKU"><div class="checkbox checkbox-off"></div></td><td class="cell-CM^f"><div class="checkbox checkbox-off"></div></td><td class="cell-=V~G"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Untitled%20Database%20a36a90d79d6c42169fc0f08b3beea410/Untitled%20048f00b40a054c26b644e237a19af3cc.html">Untitled</a></td></tr></tbody></table></div><h3 id="0c3c15b6-74bc-400b-ace9-143409b70baf" class=""><strong>Langsung Saja dicoba Program Berikut</strong></h3><p id="da7c2cc1-f22a-44ff-9258-8d8695026811" class="">Buatlah sebuah kelas baru beranama <em>OperatorLogika</em>. Kemudian ikuti kode berikut ini:</p><figure id="d1ef295f-c644-4f1d-b935-647a83d18271" class="image"><a href="https://1.bp.blogspot.com/-XgnQDMlHkSY/ViI5nPhw98I/AAAAAAAACCU/0Xz2uftqtRs/s1600/kode%2Bprogram%2Boperator%2Blogika%2Bjava.png"><img src="https://1.bp.blogspot.com/-XgnQDMlHkSY/ViI5nPhw98I/AAAAAAAACCU/0Xz2uftqtRs/s1600/kode%2Bprogram%2Boperator%2Blogika%2Bjava.png"/></a></figure><p id="84d7a412-d968-4de8-94bc-96c8802cfadc" class="">Silahkan jalankan dan perhatikan hasilnya:</p><figure id="ed435253-f58c-43ed-8e79-c7465adbeb6e" class="image"><a href="https://4.bp.blogspot.com/-_u_6adjdRdo/ViI6KTfPXSI/AAAAAAAACCc/nAv6omyBC0I/s1600/Hasil%2Boutput%2Bprogram%2Boperator%2Blogika%2Bjava.png"><img src="https://4.bp.blogspot.com/-_u_6adjdRdo/ViI6KTfPXSI/AAAAAAAACCc/nAv6omyBC0I/s1600/Hasil%2Boutput%2Bprogram%2Boperator%2Blogika%2Bjava.png"/></a></figure><h2 id="9d7194ab-f3d6-409f-9240-4a6556cb1f41" class=""><strong>5. Operator Bitwise</strong></h2><p id="3edbeb37-7748-49cc-bce7-11e239509758" class="">Operator bitwise merupkan operator yang digunakan untuk operasi bit (biner). </p><p id="abbfff1b-eea7-4b34-a9a6-55f2a467d841" class="">Operator bitwise terdiri dari:</p><div id="4485fc73-d017-4f8d-b903-4f713cc925cf" class="collection-content"><h4 class="collection-title">Operator Bitwise</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Nama</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Simbol di Java</th></tr></thead><tbody><tr id="99044c95-012a-4816-92bc-706a0c9bf92f"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/AND%2099044c95012a481692bc706a0c9bf92f.html">AND</a></td><td class="cell-cb|8">&amp;</td></tr><tr id="e7415701-ca5f-43a5-ac80-7375b8cf381e"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/OR%20e7415701ca5f43a5ac807375b8cf381e.html">OR</a></td><td class="cell-cb|8">|</td></tr><tr id="613260b8-b7da-49d0-9b54-9fd1ab6f1988"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/XOR%20613260b8b7da49d09b549fd1ab6f1988.html">XOR</a></td><td class="cell-cb|8">^</td></tr><tr id="6b23f3ec-c5d1-4709-a5c8-52d6ee6b6bd7"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/Negasi%20kebalikan%206b23f3ecc5d14709a5c852d6ee6b6bd7.html">Negasi/kebalikan</a></td><td class="cell-cb|8">~</td></tr><tr id="a4c136aa-afe6-4ea0-9d16-2259febf4c6f"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/Left%20Shift%20a4c136aaafe64ea09d162259febf4c6f.html">Left Shift</a></td><td class="cell-cb|8">&lt;&lt;</td></tr><tr id="2d7767fa-f92a-4f78-be84-dcdd89d75311"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/Right%20Shift%202d7767faf92a4f78be84dcdd89d75311.html">Right Shift</a></td><td class="cell-cb|8">&gt;&gt;</td></tr><tr id="e7d4159e-7cd1-4966-9252-60e1066dd111"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/Left%20Shift%20unsigned%20e7d4159e7cd14966925260e1066dd111.html">Left Shift (unsigned)</a></td><td class="cell-cb|8">&lt;&lt;&lt;</td></tr><tr id="d10e7fce-4d18-4a2d-8eb6-cec3c833da0d"><td class="cell-title"><a href="Operator%20pada%20Java%205f992bcce8eb44e3a51cc9e3a9c30958/Operator%20Bitwise%204485fc73d0174f8db9034f713cc925cf/Right%20Shift%20unsigned%20d10e7fce4d184a2d8eb6cec3c833da0d.html">Right Shift (unsigned)</a></td><td class="cell-cb|8">&gt;&gt;&gt;</td></tr></tbody></table></div><p id="0a8e4227-7be6-4e64-b16b-20f5c621089c" class="">Operator ini berlaku untuk tipe data <code>int</code>, <code>long</code>, <code>short</code>, <code>char</code>, dan <code>byte</code>.</p><p id="1b0d1230-d328-4cf6-82fb-177a638ff9f3" class="">Operator ini akan menghitung dari bit-ke-bit.</p><p id="275eb03e-fa19-4df0-968c-959efbe52d10" class="">Misalnya, kita punya variabel <code>a = 60</code> dan <code>b = 13</code>.</p><p id="fe2dea05-dcc6-4c25-b02e-60947b937576" class="">Bila dibuat dalam bentuk biner, akan menjadi seperti ini:</p><pre id="29b4fc39-b670-460e-a04d-9434dd11f41e" class="code"><code>a = 00111100
+b = 00001101</code></pre><p id="d46c1e8f-bf1a-4733-8133-c1e77a50063e" class="">Kemudian, dilakukan operasi bitwise</p><p id="1b4a814d-815e-45cf-9075-a1339ed2293e" class="">Operasi AND</p><pre id="1dffd8bd-caca-4841-aad6-9457cf7ada2b" class="code"><code>a = 00111100
+b = 00001101
+a &amp; b = 00001100</code></pre><p id="fe01e70f-51a0-4b62-8e99-09b2e471edfe" class="">Operasi OR</p><pre id="e56fa4e1-c261-4e3e-ae06-8d3c96813723" class="code"><code>a = 00111100
+b = 00001101
+a | b = 00111101</code></pre><p id="f9983a89-335b-4f3e-8779-f2c977bb5418" class="">Operasi XOR</p><pre id="0e9e6dd4-b55c-484a-a939-10ca30513cb8" class="code"><code>a = 00111100
+b = 00001101
+a ^ b = 00110001</code></pre><p id="8e5ab23f-7a31-494c-946b-dd0cf55b9762" class="">Opearsi NOT (Negasi/kebalikan)</p><pre id="bcf587f0-708b-4fa8-823a-1734636ea547" class="code"><code>a = 00111100
+~a = 11000011</code></pre><p id="0859177e-fc77-4ba8-97be-dfce5d2d47b3" class="">Konsepnya memang hampir sama dengan opeartor Logika. Bedanya, Bitwise digunakan untuk biner.</p><p id="ae5e71e8-1463-4edd-bd60-260e6eabf631" class="">Untuk lebih jelasnya…</p><h3 id="81d1f879-7b6e-4c84-8cf0-f1bbdef74f18" class=""><strong>Mari kita coba dalam program</strong></h3><p id="8bb953f4-0968-44f9-afe0-4a76c846b755" class="">Buat kelas baru dengan nama <code>OperatorBitwise</code>, kemudian ikuti isinya sebagai berikut.</p><pre id="7c3f0d6a-6943-4ad4-854f-953cd754804e" class="code"><code><em>public</em> <em>class</em> OperatorBitwise { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		int a = 60; 
+		/* 60 = 0011 1100 */ 
+		int b = 13; 
+		/* 13 = 0000 1101 */ 
+		int c = 0; 
+		c = a &amp; b; 
+		/* 12 = 0000 1100 */ 
+		System.out.println(&quot;a &amp; b = &quot; + c); 
+
+		c = a | b; 
+		/* 61 = 0011 1101 */ 
+		System.out.println(&quot;a | b = &quot; + c); 
+
+		c = a ^ b; 
+		/* 49 = 0011 0001 */ 
+		System.out.println(&quot;a ^ b = &quot; + c); 
+
+		c = ~a; 
+		/*-61 = 1100 0011 */ 
+		System.out.println(&quot;~a = &quot; + c); 
+
+		c = a &lt;&lt; 2; 
+		/* 240 = 1111 0000 */ 
+		System.out.println(&quot;a &lt;&lt; 2 = &quot; + c); 
+
+		c = a &gt;&gt; 2; 
+		/* 215 = 1111 */ 
+		System.out.println(&quot;a &gt;&gt; 2 = &quot; + c); 
+		
+		c = a &gt;&gt;&gt; 2; 
+		/* 215 = 0000 1111 */ 
+		System.out.println(&quot;a &gt;&gt;&gt; 2 = &quot; + c); 
+	}
+}</code></pre><p id="548a8934-4395-4105-b26b-acc8b1e06b03" class="">Perhatikanlah hasil outputnya:</p><figure id="16382e13-f8e5-4033-96f9-d930dce5d72c" class="image"><a href="https://1.bp.blogspot.com/-bNZH6_FtyGM/ViMrlcqFcrI/AAAAAAAACD4/lCAizcwuZek/s1600/Hasil%2Boutput%2Boperator%2Bbitwise%2Bjava.png"><img src="https://1.bp.blogspot.com/-bNZH6_FtyGM/ViMrlcqFcrI/AAAAAAAACD4/lCAizcwuZek/s1600/Hasil%2Boutput%2Boperator%2Bbitwise%2Bjava.png"/></a></figure><h2 id="460c1809-6067-4c59-9a62-39a63efb2f3a" class=""><strong>6. Operator Ternary</strong></h2><p id="227a0324-abe7-4fc9-948c-ea3cc36da15c" class="">Opertor ini unik, seperti membuat pertanyaan.</p><p id="99fa8d2b-9116-4d55-a4c9-8c71eea3ae18" class="">Simbolnya menggunakan tanda tanya (<code>?</code>) dan titik-dua (<code>:</code>) untuk memisah jawabannya.</p><figure id="2d155b05-a698-4a08-a293-a4811e1f3e61" class="image"><a href="https://3.bp.blogspot.com/-OKB4MDtGjE4/WObxiPfq-wI/AAAAAAAAEmQ/kR9Ldcc1hr88u90060rCff0Gvs4lDRfQgCPcB/s1600/operator%2Bternary%2Bdi%2Bjava.png"><img src="https://3.bp.blogspot.com/-OKB4MDtGjE4/WObxiPfq-wI/AAAAAAAAEmQ/kR9Ldcc1hr88u90060rCff0Gvs4lDRfQgCPcB/s1600/operator%2Bternary%2Bdi%2Bjava.png"/></a></figure><p id="6d016c96-827b-4ee0-b169-7e547f33e7a2" class="">Pada contoh di atas, “Kamu suka aku” adalah pertanyaan atau kondisi yang akan diperiksa.</p><p id="f2f32e4a-2908-4eef-86b5-40a07f222aec" class="">Kalau jawabannya benar, maka <code>iya</code>. Sebaliknya akan <code>tidak</code>.</p><p id="c3ebecf9-f7dc-47e3-b733-3b99dbd27ee6" class="">Lebih jelasnya, mari kita coba…</p><h3 id="35dcccbe-28c6-4a77-9f57-1aa910244e5e" class=""><strong>Program dengan Operator Ternary</strong></h3><p id="f12e76ee-b900-4d99-aa04-8c75d4b8061e" class="">Buatlah sebuah kelas baru dengan nama <code>OperatorTernary</code>, kemudian ikuti kode berikut.</p><pre id="53b1446b-1d36-4fa2-8ab7-ec6ba004a7ba" class="code"><code><em>public</em> <em>class</em> OperatorTernary { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		boolean suka = true; 
+		String jawaban; 
+		// menggunakan operator ternary 
+		jawaban = suka ? &quot;iya&quot; : &quot;tidak&quot;;
+		 // menampilkan jawaban 
+		System.out.println(jawaban); 
+	}
+}</code></pre><p id="91b5ce0f-e1bf-45f1-a7d0-784414644f5f" class="">Hasil outputnya:</p><p id="2f5a99ee-0852-4c2b-9532-a6c80923d018" class=""><code>iya</code></p><p id="0cd03d35-0dec-4470-aadd-39aa3ace8a51" class="">Sekarang coba ganti nilai variabel <code>suka</code> menjadi <code>false</code>, lalu dijalankan lagi.</p><p id="7960a906-f495-491c-ae4e-c1dfa5e29b5f" class="">Pasti akan menghasilkan <code>tidak</code>.</p><p id="874a3e0c-1bed-44a7-bf25-43f8e817252e" class="">Cara lain, dapat juga membuat kondisi seperti ini:</p><pre id="9cd02cac-2f36-468c-a175-27193d40d2fe" class="code"><code>int suka = 8;
+String jawaban = (suka &gt; 5) ? &quot;iya&quot; : &quot;tidak&quot;;</code></pre><p id="8e18858d-2254-4378-9ba5-ac2341c0bb56" class="">
+</p></div></article></body></html>

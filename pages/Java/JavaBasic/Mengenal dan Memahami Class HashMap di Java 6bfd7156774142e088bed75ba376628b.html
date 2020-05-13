@@ -1,0 +1,750 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mengenal dan Memahami Class HashMap di Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6bfd7156-7741-42e0-88be-d75ba376628b" class="page sans"><header><h1 class="page-title"><strong>Mengenal dan Memahami Class HashMap di Java</strong></h1></header><div class="page-body"><p id="ae0301bc-fe32-4e3c-8586-fc9b0ec7304f" class="">Pada kesempatan kali ini, kita akan belajar tentang HashMap. HashMap kadang sering digunakan dalam pembuatan aplikasi Java. Karena itu, HashMap penting untuk kita ketahui.</p><h2 id="3ef95d5a-382c-4a29-ba24-613f5cc95eb1" class=""><strong>Apa itu HashMap?</strong></h2><p id="3af2f3cc-f425-4cf8-aeda-1852486240f3" class="">Class <code>HashMap</code> merupakan class turunan dari class <code>AbstractMap</code> dan implementasi dari interface <code>Map</code>.</p><figure id="d402ee7f-0b9d-460b-95ff-769bab0f71e3" class="image"><a href="https://www.petanikode.com/img/java/hashmap/silsilah-hashmap.png"><img style="width:336px" src="https://www.petanikode.com/img/java/hashmap/silsilah-hashmap.png"/></a></figure><p id="f19c1d32-df4f-46b8-bd38-60e3b3fa0009" class="">HashMap adalah sebuah class yang berisi sekumpulan pasangan nilai <em>(value)</em> dan kunci <em>(key)</em>.</p><p id="f45f66bb-13f6-4821-8fd7-1e59929b0e7c" class="">Nilai bisa dalam bentuk string, integer, boolean, float, double, dan objek. Sedangkan untuk <em>key</em> biasanya dalam bentuk string dan integer.</p><p id="9a37c839-8703-48ea-80ce-8b1ecb6f014d" class="">HashMap bisa dibilang seperti Array asosiatif dalam Java.</p><p id="5674079c-8d9f-452f-bcd1-9092170568fd" class="">Coba perhatikan tabel berikut:</p><figure id="9a0bb29b-7aa3-4267-ba64-ca6400bb4480" class="image"><a href="https://www.petanikode.com/img/java/hashmap/tabel-hashmap.png"><img style="width:528px" src="https://www.petanikode.com/img/java/hashmap/tabel-hashmap.png"/></a></figure><p id="db598d0c-0578-4b6a-93b6-ee9496436186" class="">Tabel di atas terdiri dari pasangan <em>key</em> dan <em>value</em>, seperti inilah isi dari class atau objek HashMap.</p><h2 id="7495ea32-9295-4263-8631-eda9aaa7b5a1" class=""><strong>Cara Membuat HashMap</strong></h2><p id="f10cd359-5aa8-47dd-af12-bfb44518f720" class="">Sebelum bisa menggunakan HashMap, kita harus mengimpornya terlebih dahulu:</p><pre id="17a1682b-e8ff-49ff-a745-4ca65d5e6f43" class="code"><code>import java.util.HashMap;</code></pre><p id="b45c1277-5806-4af2-b4c6-9a5199f4d6e6" class="">Setelah itu baru kita bisa menggunakannya.</p><p id="f63a75c6-4ec7-49ad-a0af-3443c826337d" class="">Nah!, untuk menggunakan HashMap, kita harus membuat objeknya terlebih dahulu. Objek dari Hashmap dapat dibuat dengan kata kunci <code>new</code>.</p><p id="c9611ba6-b7d8-47eb-a8c0-f5d6a844324f" class="">Namun, ada sedikit tambahan untuk menentukan tipe data untuk key dan value yang akan disimpan.</p><figure id="aaa36207-5797-4063-a2ed-e4d32fd913b0" class="image"><a href="https://www.petanikode.com/img/java/hashmap/objek-hashmap.png"><img style="width:672px" src="https://www.petanikode.com/img/java/hashmap/objek-hashmap.png"/></a></figure><p id="982c20e5-4105-4866-ba72-811505d5ecd5" class="">Contoh:</p><pre id="508dad2f-5fa6-43a3-b54c-9a49eeef05e0" class="code"><code>HashMap&lt;Integer, String&gt; days = new HashMap&lt;Integer,String&gt;</code></pre><p id="e4bd1601-1a33-42cc-ad26-a82a58e5fdb1" class="">Pada contoh di atas, kita membuat objek HashMap bernama <code>days</code>. Objek ini dapat kita gunakan untuk menyimpan koleksi data.</p><p id="eec11433-8356-4046-aa3f-dae1614cc2da" class="">Tipe data yang digunakan untuk <em>key</em> adalah <code>Integer</code> dan <em>value</em> adalah <code>String</code>.</p><p id="ca8356ce-ed41-4ad5-b379-205aca4d961e" class=""><strong>Artinya</strong>: key harus bertipe <code>Integer</code> dan nilai yang tersimpan harus dalam bertipe String.</p><p id="96e7dc44-caa1-441d-a1f7-3224e37c6935" class="">Untuk lebih jelasnya, silahkan lanjutkan…</p><h2 id="a13b304a-85b7-4895-8bb3-3c544d3a6212" class=""><strong>Mengisi Nilai ke HashMap</strong></h2><p id="5bfc0f02-ecac-4381-9060-5c6fae153015" class="">Tadi kita sudah membuat objek hashmap bernama <code>days</code> dengan tipe data:</p><ul id="c496f857-1e87-4c96-9449-10fc6450e747" class="bulleted-list"><li>K (key): Integer</li></ul><ul id="29535550-3368-4fba-b799-fa4aac5e3c7d" class="bulleted-list"><li>V (value): String</li></ul><p id="1dbaca17-7b0e-4990-91ac-5e7f3c20f277" class="">Untuk mengisi nilai ke objek <code>days</code>, kita dapat menggunakan method <code>put</code> seperti ini:</p><pre id="2e22a873-e868-44b3-9855-40057bfb8762" class="code"><code>days.put(1, &quot;Minggu&quot;);
+days.put(2, &quot;Senin&quot;);
+days.put(3, &quot;Selasa&quot;);
+days.put(4, &quot;Rabu&quot;);
+days.put(5, &quot;Kamis&quot;);
+days.put(6, &quot;Jum&#x27;at&quot;);
+days.put(7, &quot;Sabtu&quot;);</code></pre><p id="d953c79d-9bf0-404a-9e57-5534011d1839" class="">Perhatikan!</p><p id="b6248ebb-0dc2-4d55-84d7-79188c67343f" class="">Objek HashMap <code>days</code> berisi nama-nama hari dengan key <code>1</code>–<code>7</code>. Kalau tidak percaya, silahkan coba compile contoh program ini:</p><pre id="f6189952-fa78-4087-bffc-384061770fbe" class="code"><code>import java.util.HashMap;
+
+<em>public</em> <em>class</em> CobaHashMap { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek hashmap 
+		HashMap&lt;Integer, String&gt; days = new HashMap&lt;Integer,String&gt;(); 
+		// mengisi nilai ke objek days 
+		days.put(1, &quot;Minggu&quot;); 
+		days.put(2, &quot;Senin&quot;); 
+		days.put(3, &quot;Selasa&quot;); 
+		days.put(4, &quot;Rabu&quot;); 
+		days.put(5, &quot;Kamis&quot;); 
+		days.put(6, &quot;Jum&#x27;at&quot;); 
+		days.put(7, &quot;Sabtu&quot;); 
+		// mencetak semua isi dari objek days 
+		System.out.println(&quot;Isi objek days: &quot; + days); 
+	}
+}</code></pre><p id="b4a89499-5266-4400-b1fb-93f4d43a0ef4" class="">Hasilnya:</p><figure id="05b12713-870f-4bb3-8c60-70c10e5f9da4" class="image"><a href="https://www.petanikode.com/img/java/hashmap/isi-objek-hashmap.png"><img src="https://www.petanikode.com/img/java/hashmap/isi-objek-hashmap.png"/></a></figure><h2 id="053c6a02-7cff-49d7-9417-cc9d27103c0e" class=""><strong>Mengambil Nilai dari HashMap</strong></h2><p id="fe213391-0d7b-4d36-93cc-41ae121202a2" class="">Untuk mengambil nilai dari HashMap, kita bisa menggunakan method <code>get()</code> dengan parameter kuncinya.</p><p id="b2121308-e859-47ed-b3f5-16b2ee262e4c" class="">Contoh:</p><pre id="8bb23e08-528c-4dbd-b838-4d30c2cab970" class="code"><code>// mengambil hari senin
+days.get(2)</code></pre><p id="5592a9b8-ed04-4a78-9508-3110fe4c2ec4" class="">Parhatikan!</p><p id="632faf92-4e91-42eb-b1e0-3a278798610c" class="">Kenapa di sana kita isi parameternya <code>2</code>?</p><p id="7b5701ef-c622-4d73-89fd-8798a6c762f6" class="">Jawabannya karena kita ingin mengambil nilai senin dan nilai tersebut telah diasosiasikan pada objek HashMap dengan key <code>2</code>.</p><p id="def321b7-ae99-45b1-9354-bd79a8f4bd8b" class="">Contoh kode lengkap:</p><pre id="8e11201e-d982-4b42-9a88-91b725f15ea7" class="code"><code>import java.util.HashMap;
+
+<em>public</em> <em>class</em> CobaHashMap { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek hashmap 
+		HashMap&lt;Integer, String&gt; days = new HashMap&lt;Integer,String&gt;(); 
+		// mengisi nilai ke objek days 
+		days.put(1, &quot;Minggu&quot;); 
+		days.put(2, &quot;Senin&quot;); 
+		days.put(3, &quot;Selasa&quot;); 
+		days.put(4, &quot;Rabu&quot;); 
+		days.put(5, &quot;Kamis&quot;); 
+		days.put(6, &quot;Jum&#x27;at&quot;); 
+		days.put(7, &quot;Sabtu&quot;); 
+		// mencetak semua isi dari objek days 
+		System.out.println(&quot;Isi objek days: &quot; + days); 
+		// mengambil hari senin 
+		System.out.println(&quot;Hari kedua: &quot; + days.get(2)); 
+	}
+}</code></pre><p id="658808be-8d8d-4b99-b3e6-eb513d95e611" class="">Hasilnya:</p><figure id="41756477-a989-4467-a8bb-a17b0a69bd6d" class="image"><a href="https://www.petanikode.com/img/java/hashmap/method-get.png"><img src="https://www.petanikode.com/img/java/hashmap/method-get.png"/></a></figure><p id="b41d6b01-7066-4a4f-84a4-e7d4ee59ea62" class="">Coba juga untuk mengambil nilai yang lain, seperti Rabu, Kamis, dan Jum&#x27;at.</p><h2 id="017bd4ed-57ba-486f-beaa-e4265008fce1" class=""><strong>Menghapus Nilai dari HashMap</strong></h2><p id="7bf37395-c4dd-4f32-a16e-cf01b3fa01a5" class="">Ada dua method yang dapat digunakan untuk menghapus nilai dari HashMap:</p><ol id="4ccc4a6e-552c-42b8-9ab9-2371619d2895" class="numbered-list" start="1"><li><code>remove()</code> menghapus salah satu nilai;</li></ol><ol id="c3c574b5-2e38-4f06-a172-05cf822dc2f5" class="numbered-list" start="2"><li><code>clear()</code> menghapus semua nilai;</li></ol><p id="87f6822b-7ed0-41ba-ba4b-f0c3951735c6" class="">Mari kita coba:</p><pre id="e086992d-b55c-45d0-921a-291aa1254d0e" class="code"><code>import java.util.HashMap;
+
+<em>public</em> <em>class</em> CobaHashMap { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek hashmap 
+		HashMap&lt;Integer, String&gt; days = new HashMap&lt;Integer,String&gt;(); 
+		// mengisi nilai ke objek days 
+		days.put(1, &quot;Minggu&quot;); 
+		days.put(2, &quot;Senin&quot;); 
+		days.put(3, &quot;Selasa&quot;); 
+		days.put(4, &quot;Rabu&quot;); 
+		days.put(5, &quot;Kamis&quot;); 
+		days.put(6, &quot;Jum&#x27;at&quot;); 
+		days.put(7, &quot;Sabtu&quot;); 
+		// mencetak semua isi dari objek days 
+		System.out.println(&quot;Isi objek days: &quot; + days); 
+		System.out.println(&quot;Hari kedua: &quot; + days.get(2)); 
+		// menghapus malam minggu &lt;-- jomblo detected :D 
+		days.remove(1); 
+		System.out.println(&quot;Isi objek days: &quot; + days); 
+		// menghapus semua hari &lt;-- oh tidak kiamat donk! 
+		days.clear(); 
+		System.out.println(&quot;Isi objek days: &quot; + days); 
+	}
+}</code></pre><p id="c4f86e2c-f0a6-480b-a616-da0c7854b28b" class="">Hasilnya:</p><figure id="fba97ff4-b993-43c4-a902-9166b61b5fdd" class="image"><a href="https://www.petanikode.com/img/java/hashmap/hapus-nilai.png"><img src="https://www.petanikode.com/img/java/hashmap/hapus-nilai.png"/></a></figure><h2 id="258e5d03-5234-44ef-8e5c-3460e9582f51" class=""><strong>Mengubah Nilai dan Kunci dari HashMap</strong></h2><p id="4b755623-799d-4563-8333-05d12f474aad" class="">Ada dua method yang dapat digunakan untuk mengubah nilai di dalam HashMap:</p><ol id="db803646-7653-4916-99d8-c03404364ce0" class="numbered-list" start="1"><li>Method <code>put()</code></li></ol><ol id="18a10ff5-4452-499e-bb22-07533529eb24" class="numbered-list" start="2"><li>Method <code>replace()</code></li></ol><p id="ec9822bc-77ca-4d7a-9fab-02f7180a0fc0" class="">Apa bedanya?</p><p id="18af0219-8046-4556-aaac-c38492cccaf8" class="">Saya kira tidak ada perbedaan. Keduanya sama-sama bisa digunakan untuk mengubah nilai.</p><p id="8d2e0000-b2da-49ac-84c7-cb5bbdd6c5c6" class="">Namun, sepertinya untuk method <code>replace()</code> nilai yang akan diubah harus sudah ada di dalam HashMap.</p><p id="55f60890-3a4f-400b-b461-8b88514efe38" class="">Sedangkan untuk method <code>put()</code>, dia akan menambahkan yang baru apabila belum ada di dalam HashMap.</p><p id="051359d8-bd7d-4179-bbb5-babc34c37f0e" class="">Mari kita coba:</p><pre id="a5c54c4e-4ca4-4533-b9b9-736add86fc7d" class="code"><code>import java.util.HashMap;
+
+<em>public</em> <em>class</em> CobaHashMap { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek hashmap 
+		HashMap&lt;Integer, String&gt; days = new HashMap&lt;Integer,String&gt;(); 
+		// mengisi nilai ke objek days 
+		days.put(1, &quot;Minggu&quot;); 
+		days.put(2, &quot;Senin&quot;); 
+		days.put(3, &quot;Selasa&quot;); 
+		days.put(4, &quot;Rabu&quot;); 
+		days.put(5, &quot;Kamis&quot;); 
+		days.put(6, &quot;Jum&#x27;at&quot;); 
+		days.put(7, &quot;Sabtu&quot;); 
+		// mengubah hari menggu menjadi hari ahad 
+		days.put(1, &quot;Ahad&quot;); 
+		// mengubah hari rabu menjadi rabo 
+		days.replace(4, &quot;Rabo&quot;); 
+		// mencetak semua isi dari objek days 
+		System.out.println(&quot;Isi objek days: &quot; + days); 
+	}
+}</code></pre><p id="653586a5-a66f-43e9-bbbd-c02460631469" class="">Hasilnya:</p><figure id="61c9065c-d0d3-4ccb-aedd-5c902566d88f" class="image"><a href="https://www.petanikode.com/img/java/hashmap/ubah-nilai.png"><img src="https://www.petanikode.com/img/java/hashmap/ubah-nilai.png"/></a></figure><h2 id="154ad811-b77e-45ea-8acd-88715418fd75" class=""><strong>Method-method HashMap</strong></h2><p id="2dcea293-67bb-451d-9508-8dfcb52b5397" class="">Method-method diatas adalah method-method yang biasa digunakan di dalam HashMap. Sebenarnya masih banyak lagi method lain yang perli kita coba-coba.</p><p id="23da4914-0cd1-491c-91e3-67c6a5e91d8c" class="">Untuk melihatnya, silahkan tekan tombol <code>Ctrl</code>+<code>Spasi</code> pada Netbeans saat menggunakan objek HashMap.</p><figure id="0a69c375-3352-4c3d-97af-70fa7a692c8c" class="image"><a href="https://www.petanikode.com/img/java/hashmap/method-hashmap.png"><img src="https://www.petanikode.com/img/java/hashmap/method-hashmap.png"/></a></figure><p id="d4392378-6189-4583-8e4d-88ae02cc19b4" class="">Berikut ini penjelasan beberapa method:</p><ul id="1c751a6a-cd76-46b0-8c1c-ef2cb652d5de" class="bulleted-list"><li><code>clear()</code> untuk membersihkan isi HashMap;</li></ul><ul id="8c2a060d-cda3-488c-b082-361e3b8deecf" class="bulleted-list"><li><code>isEmpty()</code> untuk mengecek apakah HashMap dalam keadaan kosong atau tidak;</li></ul><ul id="6da782d3-0198-4403-bac4-7c66adda1bba" class="bulleted-list"><li><code>size()</code> untuk mengambil ukuran HashMap (jumlah item di dalam hashmap);</li></ul><ul id="551f27eb-4730-4526-9941-36a683f1f855" class="bulleted-list"><li><code>values()</code> untuk mengambil semua nilai yang ada di dalam HashMap;</li></ul><ul id="e8b21ce9-ce13-4351-ac87-9a42f9696e00" class="bulleted-list"><li><code>keySet()</code> untuk mengambil semua key yang ada di dalam HashMap;</li></ul><ul id="a2fe917d-2e2e-4bd0-bde8-07f124220762" class="bulleted-list"><li><code>clone()</code> untuk menggandakan objek HashMap;</li></ul><ul id="c47fb1df-64ae-4988-a8b2-5045bbd9674b" class="bulleted-list"><li>dll.</li></ul><h2 id="55c9cc75-d4d3-4575-8d06-f6c1dda32358" class=""><strong>Bonus: Contoh Program dengan HashMap</strong></h2><p id="860675d2-e546-4b55-bbbf-f2df7597d4dd" class="">Program ini terdiri dari dua class, yaitu: <code>Buku.java</code> dan <code>BukuHashMap.java</code>. Kedua class ini berada dalam satu package.</p><p id="6a72d5ce-9ba0-4bd5-873a-5d8814837f41" class="">Pada program ini, kamu akan menemukan contoh HashMap yang berisi sekumpulan objek.</p><p id="ce14f0dc-6e21-4207-b649-6e857d458338" class="">Berikut ini isi class <code>Buku.java</code>:</p><pre id="e7aec6dd-8fce-4883-83ab-9bc2ba46024c" class="code"><code><em>public</em> <em>class</em> Buku { 
+	<em>private</em> String title; 
+	<em>private</em> String author; 
+	<em>public</em> Buku(String title, String author) { 
+		this.title = title; 
+		this.author = author; 
+	} 
+	<em>public</em> String getTitle() { 
+		return title; 
+	} 
+	<em>public</em> void setTitle(String title) { 
+		this.title = title; 
+	} 
+	<em>public</em> String getAuthor() { 
+		return author; 
+	} 
+	<em>public</em> void setAuthor(String author) { 
+		this.author = author; 
+	}
+}</code></pre><p id="1dff74a2-4fc6-456f-96fd-227068630032" class="">Berikut ini isi class <code>BukuHashMap.java</code>:</p><pre id="58624a04-64a6-4fab-a74a-aee4843ddb3e" class="code"><code>import java.util.HashMap;
+import java.util.Map;
+
+<em>public</em> <em>class</em> BukuHashMap { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek hashmap 
+		HashMap&lt;String, Buku&gt; books = new HashMap&lt;String, Buku&gt;(); 
+		// membuat objek buku Buku 
+		bukuJava = new Buku(&quot;Tutorial Java&quot;, &quot;Petani Kode&quot;); 
+		Buku bukuKotlin = new Buku(&quot;Pemrograman Kotlin&quot;, &quot;Petani Kode&quot;); 
+		Buku bukuAndroid = new Buku(&quot;Pemrograman Android&quot;, &quot;Petani Kode&quot;); 
+		// mengisi objek hashmap dengan objek buku 
+		books.put(&quot;java&quot;, bukuJava); 
+		books.put(&quot;kotlin&quot;, bukuKotlin); 
+		books.put(&quot;android&quot;, bukuAndroid); 
+		// cetak semua buku 
+		for(Map.Entry b: books.entrySet()){ 
+			Buku buku = (Buku) b.getValue(); 
+			System.out.println(b.getKey() + &quot;: &quot;+ buku.getTitle()); 
+		} 
+	}
+}</code></pre><p id="d80bb2c0-cb93-42ba-bd91-bc53232c7d86" class="">Silahkan coba compile sendiri dan pahami maksud dari kode program di atas.</p><p id="405daefe-156c-4874-8b53-9f4b43afa5e3" class="">Berikut ini hasil outputnya:</p><figure id="113c1c05-7c7c-4ab7-affb-f45df5d82ee6" class="image"><a href="https://www.petanikode.com/img/java/hashmap/buku-hashmap.png"><img src="https://www.petanikode.com/img/java/hashmap/buku-hashmap.png"/></a></figure></div></article></body></html>

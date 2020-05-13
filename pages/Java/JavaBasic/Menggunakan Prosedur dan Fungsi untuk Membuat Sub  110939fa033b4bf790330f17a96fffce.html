@@ -1,0 +1,881 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Menggunakan Prosedur dan Fungsi untuk Membuat Sub-program</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="110939fa-033b-4bf7-9033-0f17a96fffce" class="page sans"><header><h1 class="page-title"><strong>Menggunakan Prosedur dan Fungsi untuk Membuat Sub-program</strong></h1></header><div class="page-body"><p id="02c10e1f-9e55-4b51-909f-1196bcd11f20" class="">Pada contoh program di pembahasan sebelumnya, kita hanya menulis kode intruksi pada fungsi <code>main()</code> saja.</p><p id="3175fcbe-0b11-4b7e-80ab-81929c27ee7e" class="">Fungsi <code>main()</code> adalah fungsi utama dalam program Java. Semua kode yang kita tulis di dalamnya, akan langsung dieksekusi.</p><p id="3c11a266-4565-4a6b-a32f-e560511dc875" class="">Tapi masalahnya sekarang:</p><p id="ab799b97-6803-488c-bb76-a0a8f08c8d30" class="">“Bagaimana kalau kita membuat program yang cukup besar, apakah kita masih bisa menulis semua kodenya di dalam fungsi <code>main()</code>?”</p><p id="c048ae9c-24a0-4ef4-9e07-201335f51a86" class="">Bisa-bisa saja, tapi kurang efektif dan akan menghabiskan banyak tenaga untuk mengetik kodenya.</p><p id="25d6cf8a-252c-4efc-a709-e0cf53b4a1f0" class="">Belum lagi kalau ada error…</p><p id="6bd4624b-6490-48a0-8a80-cec54545a516" class="">“Lalu solusinya bagaimana?”</p><p id="53d579dc-93be-4a7c-95ba-8ba683fce6c3" class="">Solusinya menggunakan prosedur/fungsi.</p><p id="5366c6e4-4118-4e42-ac50-af4a5fa57e26" class="">Prosedur/fungsi dapat memecah program menjadi sub-sub program, sehingga kita bisa membuat program lebih efisien.</p><p id="89e69a8c-2e61-40c6-b2ea-8cb83720c7f5" class="">Penggunaan prosedur/fungsi dapat mengurangi pengetikan kode yang berulang-ulang.</p><p id="44fafff4-1e90-4a43-b338-ba1254f84040" class="">Pada kesempatan ini, kita akan belajar menggunakan prosedur/fungsi pada Java untuk membuat program.</p><p id="1ec33d0e-7558-4db7-816f-baf63d363100" class="">Pertama, kita kenalan dulu dengan prosedur dan fungsi. Setelah itu, dilanjutkan dengan contoh program.</p><h2 id="7d684894-3b29-4ff1-b8fb-7bbf31f8e1cc" class=""><strong>Pengertian Prosedur, Fungsi, dan Method</strong></h2><p id="e76c15b9-e2a2-4562-8bc3-833a4a6bf654" class="">Jangan bingung…karena ketiga-tiganya sama.</p><p id="2b6f1e14-7056-45e5-be95-080eff35b5f7" class="">Prosedur, Fungsi, dan Method itu sama.</p><p id="78ae0381-7029-4577-a3fa-75b076c18f49" class=""><strong>Prosedur</strong> adalah <strong>sebutan</strong> untuk fungsi yang tidak mengembalikan nilai. Fungsi ini biasanya ditandai dengan kata kunci <code>void</code>.</p><p id="35865279-7474-4ded-b2f0-087112074643" class=""><strong>Fungsi</strong> adalah <strong>sebutan</strong> untuk fungsi yang mengembalikan nilai.</p><p id="9a1292a8-c263-459e-8512-2d769560bb1f" class=""><strong>Method</strong> adalah <strong>fungsi</strong> yang berada di dalam Class. Sebutan ini, biasanya digunakan pada OOP.</p><p id="7104d84c-d10a-406b-8697-3f5e870e3235" class="">Untuk memudahkan, mari kita sebut semuanya <strong>fungsi</strong>.</p><h2 id="59cbc3c1-029e-44be-84c3-b8a621d41f4f" class=""><strong>Cara Membuat Fungsi di Java</strong></h2><p id="55e8296c-b6ed-4df9-95d6-df1c741b7184" class="">Fungsi harus dibuat atau ditulis di dalam <em>class</em>.</p><p id="f4a6ee08-38b0-4a1e-822e-abe6d2a6e39e" class="">Struktur dasarnya seperti ini:</p><pre id="2025bad1-8549-4333-bbb0-964ffd64637c" class="code"><code><em>static</em> TypeDataKembalian namaFungsi(){ 
+	// statemen atau kode fungsi
+}</code></pre><p id="a943ced2-3737-4879-9da4-ad092a745fb9" class="">Penjelasan:</p><ul id="5ed96b32-b295-4ffc-bc53-8f8fa579c143" class="bulleted-list"><li>Kata kunci <code>static</code>, artinya kita membuat fungsi yang dapat dipanggil tanpa harus membuat instansiasi objek.</li></ul><ul id="27cc3c64-3938-4b83-9a90-e83861e49fa1" class="bulleted-list"><li><code>TypeDataKembalian</code> adalah tipe data dari nilai yang dikembalikan setelah fungsi dieksekusi.</li></ul><ul id="97b97c9b-85f2-40be-9958-8b6133ae6384" class="bulleted-list"><li><code>namaFungsi()</code> adalah nama fungsinya. Biasanya ditulis dengan huruf kecil di awalnya. Lalu, kalau terdapat lebih dari satu suku kata, huruf awal di kata kedua ditulis kapital.</li></ul><p id="6663000a-1708-40cc-b808-cddd9fec6caa" class="">Contoh:</p><pre id="2f4894ac-4517-49c0-a421-a8f6efc50bf6" class="code"><code><em>static</em> void ucapSalam(){ 
+	System.out.println(&quot;Selamat Pagi&quot;);
+}</code></pre><p id="127af6d7-5e7e-4277-a3b8-da9478249818" class="">Tipe data <code>void</code> artinya kosong, fungsi tersebut tidak mengebalikan nilai apa-apa.</p><h2 id="287303a8-3bc5-4ccb-8083-d31a2cf2adfa" class=""><strong>Cara Memanggil/Eksekusi Fungsi</strong></h2><p id="ebea7253-b200-4a10-9035-ce8ce63c6fb8" class="">Setelah kita membuat fungsi, selanjutnya kita akan mengeksekusi fungsinya.</p><p id="24344e79-a66d-4041-aafe-2f7fb5ba41c3" class="">Fungsi dapat dipanggil dari fungsi <code>main</code> atau dari fungsi yang lainnya.</p><p id="23ae852a-4320-496d-b84a-8fa47516fbd5" class="">Contoh pemanggilan fungsi dalam dalam fungsi <code>main</code>:</p><pre id="268bc990-9a4f-40f8-940e-73cab7d3d237" class="code"><code><em>public</em> <em>static</em> void main(String[] args){ 
+	ucapSalam();
+}</code></pre><p id="412a11d3-ce97-4a76-a7c7-594530db2aea" class="">Maka akan menghasilkan output:</p><pre id="6d60b751-4f47-4414-b452-13c07f1e342d" class="code"><code>Selamat Pagi</code></pre><p id="0edc9354-b3ee-4250-8535-e42f484ae8d1" class="">Kode lengkapnya, silahkan dicoba sendiri:</p><pre id="991d2db9-4e1f-45a1-994e-bcfd20ccb7fb" class="code"><code><em>class</em> BelajarFungsi { 
+	// membuat fungsi ucapSalam() 
+	<em>static</em> void ucapSalam(){ 
+		System.out.println(&quot;Selamat Pagi&quot;); 
+	} 
+	// membuat fungsi main() 
+	<em>public</em> <em>static</em> void main(String[] args){ 
+		// memanggil/eksekusi fungsi ucapSalam() 
+		ucapSalam(); 
+	}
+}</code></pre><h2 id="0ead2c49-93e0-48c4-b7c0-1617debebede" class=""><strong>Fungsi dengan Parameter</strong></h2><p id="3e5e1ad3-4ef2-4242-b85b-f95879715901" class="">Parameter adalah variabel yang menampung nilai untuk diproses di dalam fungsi. Parameter berperan sebagai input untuk fungsi.</p><p id="151c2430-0877-4dda-b432-2cc55f71e06a" class="">Struktur dasarnya seperti ini:</p><pre id="16658394-3655-450a-80c0-2a43e84937e2" class="code"><code><em>static</em> TipeData namaFungsi(TipeData namaParameter, TipeData namaParameterLain){ 
+		// kode fungsi
+}</code></pre><p id="667cdd7e-93f9-4699-8374-48b35490b8f6" class="">Penjelasan:</p><ul id="32933d07-9c65-4dfe-b0b2-1ab00f9eb737" class="bulleted-list"><li>Parameter ditulis di antara tanda kurung <code>(...)</code>;</li></ul><ul id="7d343d17-25e8-4f4d-8401-66e09253e9d5" class="bulleted-list"><li>Parameter harus diberikan tipe data;</li></ul><ul id="230c0ea8-5d47-466e-983f-62041989949b" class="bulleted-list"><li>Bila terdapat lebih dari satu parameter, maka dipisah dengan tanda koma.</li></ul><p id="93d17fdd-0568-48e4-be63-698616bbd887" class="">Contoh fungsi yang memiliki parameter:</p><pre id="7d70a871-76e5-426b-88f9-afec7017b64c" class="code"><code><em>static</em> void ucapin(String ucapan){ 
+	System.out.println(ucapan);
+}</code></pre><p id="8bd60319-1549-4dfa-8c9f-8e5280e7a9c5" class="">Pada contoh tersebut, kita membuat parameter bernama <code>ucapan</code> dengan tipe <code>String</code>. </p><p id="42fedc9c-e0ba-48bd-aae5-2bd7a7cfb1c8" class="">Sehingga kita bisa menggunakan variabel <code>ucapan</code> di dalam fungsi.</p><p id="8202dbae-ca36-409e-964f-7413eacd4739" class="">Cara pemanggilan fungsi yang memiliki parameter:</p><pre id="e5ae7703-5e88-4e01-a509-f608d8d1d0d4" class="code"><code>ucapin(&quot;Hallo!&quot;);
+ucapin(&quot;Selamat datang di pemrograman Java&quot;);
+ucapin(&quot;Saya kira ini bagian terakhir&quot;);
+ucapin(&quot;Sampai jumpa lagi, ya!&quot;);</code></pre><p id="7cd556be-0a3b-4e4f-9699-9ced5ba8835a" class="">Hasil outputnya:</p><pre id="738d5918-f2dd-4c8a-8702-40dd6dc6ed16" class="code"><code>Hallo!
+Selamat datang di pemrograman Java
+Saya kira ini bagian terakhir
+Sampai jumpa lagi, ya!</code></pre><h2 id="ebc009b5-c190-447f-909f-0a1fc8ea8841" class=""><strong>Fungsi yang Mengembalikan Nilai</strong></h2><p id="99ad7b2b-ac8e-40e0-bea6-3da75a94076a" class="">Setelah fungsi memproses data yang diinputkan melalui parameter, selanjutnya fungsi harus mengembalikan nilai agar dapat diolah pada proses berikutnya.</p><p id="15513b4f-6425-4acb-bb2b-7de07426a1ba" class="">Pengembalian nilai pada fungsi menggunakan kata kunci <code>return</code>.</p><p id="c24425a4-2f4b-4eb4-a8cc-396a49bee16a" class="">Contoh:</p><pre id="a948c778-5a16-40ed-9616-eb2ef6dc28fe" class="code"><code><em>static</em> int luasPersegi(int sisi){ 
+	int luas = sisi * sisi; 
+	return luas;
+}</code></pre><p id="debd6b4a-8b0b-4c53-991e-57ce386e5754" class="">Pada contoh tersebut, kita membuat sebuah parameter bernama <code>sisi</code>. </p><p id="e6e6b42c-9364-4833-b015-efe16564b4c5" class="">Kemudian fungsi akan mengembalikan nilai dengan tipe <code>int</code> <em>(integer)</em> dari variabel <code>luas</code>.</p><p id="6dc0c0b8-5aa4-4d35-a86a-511e18fce539" class="">Contoh pemanggilanya:</p><pre id="e01c94a2-ff24-4c47-9a1a-d31cc086abae" class="code"><code>System.out.println(&quot;Luas Persegi dengan panjang sisi 5 adalah &quot; + luasPersegi(5));</code></pre><p id="32fef86d-1f9b-4990-bae7-085dd622c483" class="">Hasil Output:</p><pre id="0e62a3ec-429b-409f-8029-2e480bbd610e" class="code"><code>Luas Persegi dengan panjang sisi 5 adalah 25</code></pre><h2 id="41f3c30d-f21a-4163-bfd2-1268a8da4877" class=""><strong>Pemanggilan Fungsi di Fungsi Lain</strong></h2><p id="0d695837-10fd-473e-af13-61fb091796c9" class="">Fungsi-fungsi dapat saling memanggil untuk memproses data.</p><p id="9ee82c15-75b3-40ff-8299-c7af016a40ec" class="">Contoh, sebuah program Kalkulator Bangun Ruang memiliki fungsi-fungsi: 
+<code>luasPersegi()</code>, <code>luasPersegiPanjang()</code>, <code>luasSegitiga()</code>, <code>luasBalok()</code>, <code>luasKubus()</code> dsb.</p><p id="f9936d2e-4c6d-480f-9913-ee7d911fd4ac" class="">Fungsi-fungsi tersebut dapat saling membantu, contoh fungsi <code>luasKubus()</code> membutuhkan fungsi <code>luasPersegi()</code>.</p><p id="c80950ae-137b-42f8-b8b3-c7eb794847bd" class="">Rumus:</p><pre id="acb18e4c-3df3-4521-8c88-f6cd42da29fc" class="code"><code>Luas Kubus = 6 * luasPersegi;
+Luas Persegi = sisi * sisi;</code></pre><p id="0d909dea-1663-46ae-9636-a8e7fdf27eb3" class="">Maka programnya bisa dibuat seperti ini:</p><pre id="79341840-1ab7-45eb-9b5c-dc8ed9d520cb" class="code"><code><em>public</em> <em>class</em> BangunRuang { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		int s = 12; int luas = luasKubus(s); 
+		System.out.println(luas); 
+	} 
+	// membuat fungsi luasPersegi() 
+	<em>static</em> int luasPersegi(int sisi){ 
+		return sisi * sisi; 
+	} 
+	// membuat fungsi luasKubus() 
+	<em>static</em> int luasKubus(int sisi){ 
+		// memanggil fungsi 
+		luasPersegi return 6 * luasPersegi(sisi); 
+	}
+}</code></pre><p id="dcf29341-ef62-45fd-a05f-21c7be8c8f18" class="">Hasil output</p><pre id="e1d9436d-28d1-4b37-9353-920e8c60a914" class="code"><code>864</code></pre><h2 id="8a0d0040-e420-48e6-84c7-5a042f169b9b" class=""><strong>Fungsi Static dan Non-Static</strong></h2><p id="08186ebd-af2c-45e3-bb5a-41f62e57273f" class="">Pada contoh-contoh diatas, kita menggunakan kata kunci <code>static</code> sebelum membuat fungsi.</p><p id="a11f87d1-0068-4d4b-8fb0-b2a316796804" class="">Kata kunci <code>static</code> akan membuat fungsi dapat dieksekusi langsung, tanpa harus membuat instansiasi objek dari class.</p><p id="2a90cbfe-973b-46ec-a941-76b77086a229" class="">Contoh:</p><pre id="46f968ca-bd76-40e2-a647-65e119cb356c" class="code"><code><em>public</em> <em>class</em> FungsiStatic { 
+	// Fungsi non-static 
+		void makan(String makanan){ 
+			System.out.println(&quot;Hi!&quot;); 
+			System.out.println(&quot;Saya sedang makan &quot; + makanan); 
+		} 
+		// fungsi static 
+		<em>static</em> void minum(String minuman){ 
+			System.out.println(&quot;Saya sedang minum &quot; + minuman); 
+		} 
+		// fungsi main 
+		<em>public</em> <em>static</em> void main(String[] args) { 
+			// pemanggilan fungsi static 
+			minum(&quot;Kopi&quot;); 
+			// mambuat instansiasi objek saya dari class FungsiStatic 
+			FungsiStatic saya = new FungsiStatic(); 
+			// pemanggilan fungsi non-static 
+			saya.makan(&quot;Nasi Goreng&quot;); 
+		}
+}</code></pre><p id="3120f147-115a-4539-be88-24bc11e97a03" class="">Pada contoh tersebut, fungsi <code>makan()</code> adalah fungsi <em>non-static</em>. Sedangkan fungsi <code>minum()</code> adalah fungsi <em>static</em>.</p><p id="bbd245a2-7606-49ea-8c45-c82f37b691de" class="">Hasil output dari program di atas:</p><pre id="032d0aba-bda8-404f-a11d-4e93a3dfc6ad" class="code"><code>Saya sedang minum Kopi
+Hi!
+Saya sedang makan Nasi Goreng</code></pre><p id="82f681f9-cbcc-4ddb-9caf-4f057058e383" class="">Apabila kita tidak membuat objek untuk memanggil fungsi <em>non-static</em>, maka akan terjadi error.</p><h2 id="a1860986-d003-4b42-a538-befcebb9637d" class=""><strong>Variabel Global dan Variabel Lokal pada Java</strong></h2><p id="0c5eaf16-2b18-474d-b8a3-9cda89f05c17" class="">Variabel global adalah variabel yang bisa diakses dari semua fungsi. Sedangkan variabel lokal adalah variabel yang hanya bisa diakses dari dalam fungsi tempat variabel itu berada.</p><p id="0b34dc2d-957c-46ab-914b-4bf6cc597a6f" class="">Mari kita lihat contohnya:</p><pre id="7e9f86d0-cb9c-486a-ba4e-90c8b39aa1b8" class="code"><code><em>class</em> ProgramKu{ 
+	// ini variabel global 
+	<em>static</em> String nama = &quot;Programku&quot;; 
+	<em>static</em> String version = &quot;1.0.0&quot;; 
+	<em>static</em> void help(){ 
+		// ini variabel lokal 
+		String nama = &quot;Petani Kode&quot;; 
+		// mengakses variabel global di dalam fungsi help() 
+		System.out.println(&quot;Nama: &quot; + nama); 
+		System.out.println(&quot;Versi: &quot; + version); 
+	} 
+	<em>public</em> <em>static</em> void main(String args[]){ 
+		// panggil fungsi help() 
+		help(); 
+		System.out.println(&quot;Nama: &quot; + nama); 
+		System.out.println(&quot;Versi: &quot; + version); 
+	}
+}</code></pre><p id="7ecf2ec2-1a70-4908-906d-eeb61b39b1b5" class="">Hasil outputnya:</p><pre id="4b51a9c5-d9df-4580-bf9e-22150a883146" class="code"><code>Nama: Petani Kode
+Versi: 1.0.0
+Nama: Programku
+Versi: 1.0.0</code></pre><p id="b71be22d-269c-43a9-b954-afa6e2e72ef3" class="">Saat pemanggilan fungsi <code>help()</code> kita membuat ulang variabel <code>nama</code>. Sehingga variabel nama menjadi variabel lokal pada fungsi <code>help()</code> dan nilainya berubah menjadi <code>&quot;Petani Kode&quot;</code>.</p><p id="7eeb8719-c835-497d-9d1e-a208e3c2ff02" class="">Sedangkan, saat kita akses lagi variabel nama melalui fungsi <code>main()</code> nilainya tetap sama seperti yang didefinisikan.</p><h2 id="0be38624-8c0a-466b-83b3-bbb990836f89" class=""><strong>Contoh Program dengan Fungsi dan Prosedur</strong></h2><p id="1c7829c9-d7ad-46c6-b942-f359b275a342" class="">Program ini adalah program sederhana dengan fitur sebagai berikut:</p><ol id="6a6de785-9494-47e3-b6bc-4d473d32643d" class="numbered-list" start="1"><li>Baca data dari ArrayList</li></ol><ol id="6a5dc50d-5136-4236-b970-86cc515b3f77" class="numbered-list" start="2"><li>Simpan data ke ArrayList</li></ol><ol id="2a6efd28-2552-493a-8c51-4ca1e8e931a5" class="numbered-list" start="3"><li>Ubah data</li></ol><ol id="1aa41e54-a09b-4af0-84e4-140523de4a05" class="numbered-list" start="4"><li>Hapus Data</li></ol><ol id="4335dbb6-f6c0-4214-a1fe-f92084cdff16" class="numbered-list" start="5"><li>Keluar</li></ol><p id="0aac4af5-9448-4b47-9459-e1bc8b716376" class="">Baiklah, silahkan buat class baru bernama <code>FungsiProsedur</code>. Lalu impor class-class yang dibutuhkan.</p><pre id="bb07bc95-095c-4692-aadf-a44280331d6a" class="code"><code>import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;</code></pre><p id="f508dae2-25b8-44a4-8bf7-1476c7731b2a" class="">Setelah itu buat variabel global di dalam class <code>FungsiProsedur</code>:</p><pre id="48dfdaf3-4ff2-40ed-9d57-831a02b40045" class="code"><code><em>static</em> ArrayList listBuah = new ArrayList();
+<em>static</em> boolean isRunning = true;
+<em>static</em> InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+<em>static</em> BufferedReader input = new BufferedReader(inputStreamReader);</code></pre><p id="6fb5fe8f-c690-48db-84f6-eb968764e93d" class="">Penjelasan:</p><ul id="2fe82ca6-d795-4a37-97d9-b743e87aaa21" class="bulleted-list"><li>Variabel <code>listBuah</code> adalah variabel global untuk menyimpan nama-nama buah.</li></ul><ul id="6f55f74f-8775-4990-8d5f-a2fbbc29a2e2" class="bulleted-list"><li>Variabel <code>isRunning</code> adalah variabel global untuk membuat loop.</li></ul><ul id="c6d845dd-c393-4680-b8b4-f8cf72afd99b" class="bulleted-list"><li>Kemudian <code>inputStreamReader</code> dan <code>input</code> adalah objek yang kita butuhkan untuk mengambil input dari keyboard.</li></ul><p id="b5eba2c0-40d3-4659-9d3b-1b0119492511" class="">Setelah itu, buat masing-masing fungsi.</p><p id="23ad8d98-5dad-4d9b-8d1e-e368d59afa8a" class=""><strong>Fungsi untuk menampilkan menu</strong>:</p><pre id="da31f0db-fa25-426e-a681-0ff863716a7f" class="code"><code><em>static</em> void showMenu() <em>throws</em> IOException { 
+	System.out.println(&quot;========= MENU ========&quot;); 
+	System.out.println(&quot;[1] Show All Buah&quot;); 
+	System.out.println(&quot;[2] Insert Buah&quot;); 
+	System.out.println(&quot;[3] Edit Buah&quot;); 
+	System.out.println(&quot;[4] Delete Buah&quot;); 
+	System.out.println(&quot;[5] Exit&quot;); 
+	System.out.print(&quot;PILIH MENU&gt; &quot;); 
+	int selectedMenu = Integer.valueOf(input.readLine()); 
+	switch(selectedMenu){ 
+		case 1: 
+		showAllBuah(); 
+		break; 
+		case 2: 
+		insertBuah(); 
+		break; 
+		case 3: 
+		editBuah(); 
+		break; 
+		case 4: 
+		deleteBuah(); 
+		break; 
+		case 5: 
+		System.exit(0); 
+		break; 
+		default: 
+		System.out.println(&quot;Pilihan salah!&quot;); 
+	}
+}</code></pre><p id="e06a5a83-4dc9-4f83-8295-affd22911a2c" class="">Fungsi tersebut bertugas untuk menampilkan menu dan menentukan fungsi mana yang akan dipanggil berdasarkan nomer menu yang diinputkan.</p><p id="34a0c195-03f0-435e-acf3-ecd638dc2a7f" class="">Apa itu <code>throws IOException</code>?</p><p id="a6eb5726-f2af-4cb4-a7c0-f460c470f3af" class="">Nanti saya akan bahas di kesempatan berikutnya. Untuk saat ini diabaikan saja dulu. Ini karena kita menggunakan Buffereader, jadi <code>throws IOException</code> wajib ditulis.</p><p id="3d23af76-0f74-46c3-83ca-988a038fe6c4" class=""><strong>Fungsi untuk menampilkan data</strong>:</p><pre id="10419d94-44d0-4667-af55-d313e8e347c4" class="code"><code><em>static</em> void showAllBuah(){ 
+	if(listBuah.isEmpty()){ 
+		System.out.println(&quot;Belum ada data&quot;); 
+	} else { 
+		// tampilkan semua buah 
+		for(int i = 0; i &lt; listBuah.size(); i++){ 
+			System.out.println(String.format(&quot;[%d] %s&quot;,i, listBuah.get(i))); 
+		} 
+	}
+}</code></pre><p id="6e4c2728-925a-4707-b363-0067eb761058" class="">Fungsi tersebut bertugas menampilkan isi dari <code>listBuah</code>. Kalau <code>listBuah</code> kosong, maka akan ditampilkan pesan <code>&quot;Belum ada data&quot;</code>.</p><p id="6d6111d8-2b35-479a-9bdc-4e9863148e37" class=""><strong>Fungsi untuk menambah data buah</strong>:</p><pre id="a0f706f5-87b0-45c1-b153-349c818c6d5e" class="code"><code><em>static</em> void insertBuah() <em>throws</em> IOException{ 
+	System.out.print(&quot;Nama buah: &quot;); 
+	String namaBuah = input.readLine(); 
+	listBuah.add(namaBuah);
+}</code></pre><p id="9e9c0e15-c945-4cbe-901f-6916bc0e5790" class="">Pada fungsi tersebut, kita menggunakan method <code>listBuah.add(namaBuah);</code> untuk menambah data ke dalam <code>listBuah</code> berdasarkan <code>namaBuah</code> yang diberikan.</p><p id="c0b400d5-564b-448f-92d7-964e8bb414a1" class=""><strong>Fungsi untuk mengubah data buah</strong>:</p><pre id="e54f444d-6890-4452-a934-da39f812d659" class="code"><code><em>static</em> void editBuah() <em>throws</em> IOException{ 
+	showAllBuah(); 
+	System.out.print(&quot;Pilih nomer buah: &quot;); 
+	int indexBuah = Integer.valueOf(input.readLine()); 
+	System.out.print(&quot;Nama Baru: &quot;); 
+	String namaBaru = input.readLine(); 
+	// ubah nama buah 
+	listBuah.set(indexBuah, namaBaru);
+}</code></pre><p id="608b8033-92d7-4449-b330-f6e14c27393f" class="">Pertama kita perlu tampilkan dulu daftar buahnya, lalu kita minta user untuk memilih buah mana yang akan diedit.</p><p id="e414c958-b9de-409f-92cc-3940ce672610" class="">Setelah itu, kita update buahnya dengan method <code>listBuah.set(indexBuah, namaBaru);</code>.</p><p id="eb98cf31-a2d1-4aa2-b538-5bd712d7ebfa" class=""><strong>Fungsi untuk menghapus buah</strong>:</p><pre id="2ca94f89-64cf-4cbe-9779-906ef7d63172" class="code"><code><em>static</em> void deleteBuah() <em>throws</em> IOException{ 
+	showAllBuah(); 
+	System.out.print(&quot;Pilih nomer buah: &quot;); 
+	int indexBuah = Integer.valueOf(input.readLine()); 
+	// hapus buah 
+	listBuah.remove(indexBuah);
+}</code></pre><p id="277e2f2a-8f4f-45a1-ad21-7ed4ad9ce63e" class="">Hampir sama seperti edit buah, untuk menghapus buah kita juga butuh nomer indeks buah yang akan dihapus.</p><p id="3e3e6c45-9e32-42a2-a31a-fe8852c66aba" class="">Lalu mengapusnya dengan method <code>listBuah.remove(indexBuah);</code>.</p><p id="a99fd7e9-8601-4b31-af15-37ca093196d9" class=""><strong>Fungsi main</strong>:</p><pre id="4e67e52a-936c-4663-abfa-f1b01e0e822e" class="code"><code><em>public</em> <em>static</em> void main(String[] args) <em>throws</em> IOException { 
+	do { 
+		showMenu(); 
+	} 
+	while (isRunning);
+}</code></pre><p id="bbfeaf67-7c63-40d4-9616-290e1d9154f6" class="">Lengkap sudah, berikut ini bentuk kode lengkapnya.</p><pre id="a80d0a4e-f932-4015-95b6-9a336abc2d35" class="code"><code>import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+<em>public</em> <em>class</em> FungsiProsedur { 
+	
+	<em>static</em> ArrayList listBuah = new ArrayList(); 
+	<em>static</em> boolean isRunning = true; 
+	<em>static</em> InputStreamReader inputStreamReader = new InputStreamReader(System.in); 
+	<em>static</em> BufferedReader input = new BufferedReader(inputStreamReader); 
+	
+	<em>static</em> void showMenu() <em>throws</em> IOException{ 
+		System.out.println(&quot;========= MENU ========&quot;); 
+		System.out.println(&quot;[1] Show All Buah&quot;); 
+		System.out.println(&quot;[2] Insert Buah&quot;); 
+		System.out.println(&quot;[3] Edit Buah&quot;); 
+		System.out.println(&quot;[4] Delete Buah&quot;); 
+		System.out.println(&quot;[5] Exit&quot;); 
+		System.out.print(&quot;PILIH MENU&gt; &quot;); 
+		int selectedMenu = Integer.valueOf(input.readLine()); 
+		switch(selectedMenu){ 
+			case 1: showAllBuah(); 
+			break; 
+			case 2: insertBuah(); 
+			break; 
+			case 3: editBuah(); 
+			break; 
+			case 4: deleteBuah(); 
+			break; 
+			case 5: System.exit(0); 
+			break; 
+			default: System.out.println(&quot;Pilihan salah!&quot;); 
+		} 
+	} 
+	
+	<em>static</em> void showAllBuah(){ 
+		if(listBuah.isEmpty()){ 
+			System.out.println(&quot;Belum ada data&quot;); 
+		} else { 
+			// tampilkan semua buah 
+			for(int i = 0; i &lt; listBuah.size(); i++){ 
+				System.out.println(String.format(&quot;[%d] %s&quot;,i, listBuah.get(i))); 
+			} 
+		} 
+	} 
+
+	<em>static</em> void insertBuah() <em>throws</em> IOException{ 
+		System.out.print(&quot;Nama buah: &quot;); 
+		String namaBuah = input.readLine(); 
+		listBuah.add(namaBuah); 
+	} 
+
+	<em>static</em> void editBuah() <em>throws</em> IOException{ 
+		showAllBuah(); 
+		System.out.print(&quot;Pilih nomer buah: &quot;); 
+		int indexBuah = Integer.valueOf(input.readLine()); 
+		System.out.print(&quot;Nama Baru: &quot;); 
+		String namaBaru = input.readLine(); 
+		// ubah nama buah 
+		listBuah.set(indexBuah, namaBaru); 
+	} 
+	
+	<em>static</em> void deleteBuah() <em>throws</em> IOException{ 
+		showAllBuah(); 
+		System.out.print(&quot;Pilih nomer buah: &quot;); 
+		int indexBuah = Integer.valueOf(input.readLine()); 
+		// hapus buah 
+		listBuah.remove(indexBuah); 
+	} 
+
+	<em>public</em> <em>static</em> void main(String[] args) <em>throws</em> IOException {
+		do { 
+			showMenu(); 
+		} 
+		while (isRunning); 
+	}
+}</code></pre><p id="6025a2ba-9f9b-4f1a-8d9e-73ea0a914c7c" class="">Setelah itu, silahkan dijalankan dan perhatikanlah hasilnya.</p><pre id="0f55c18b-de22-4516-99f2-e86335f99848" class="code"><code>========= <em>MENU</em> ========
+[1] Show All Buah
+[2] Insert Buah
+[3] Edit Buah
+[4] Delete Buah
+[5] Exit
+PILIH MENU&gt; 1
+Belum ada <em>data
+</em>========= <em>MENU</em> ========
+[1] Show All Buah
+[2] Insert Buah
+[3] Edit Buah
+[4] Delete Buah
+[5] Exit
+PILIH MENU&gt; 2
+Nama buah: <em>Apel
+</em>========= <em>MENU</em> ========
+[1] Show All Buah
+[2] Insert Buah
+[3] Edit Buah
+[4] Delete Buah
+[5] Exit
+PILIH MENU&gt; 1
+[0] <em>Apel
+</em>========= <em>MENU</em> ========
+[1] Show All Buah
+[2] Insert Buah
+[3] Edit Buah
+[4] Delete Buah
+[5] Exit
+PILIH MENU&gt;</code></pre><p id="b5ff952b-1d23-44a4-9341-5b8dbfa911b9" class="">Silahkan coba untuk melakukan insert, edit, dan delete.</p></div></article></body></html>

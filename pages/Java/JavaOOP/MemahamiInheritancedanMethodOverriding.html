@@ -1,0 +1,804 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memahami Inheritance dan Method Overriding</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="35352214-5c84-4eff-a993-8bbc3e696ebc" class="page sans"><header><h1 class="page-title"><strong>Memahami Inheritance dan Method Overriding</strong></h1></header><div class="page-body"><p id="f0881e9d-a4c7-427f-bba6-8d325dd4d8f7" class="">Salah satu bentuk hubungannya adalah <em>inheritance</em> (pewarisan). Hubungan ini seperti hubungan keluarga antara orang tua dan anak.</p><p id="6a980468-ff39-4279-8b0d-b145e9aafe66" class="">Sebuah class di Java, bisa memiliki satu atau lebih keturunan atau class anak. Class anak akan memiliki warisan properti dan method dari class ibu.</p><h2 id="c0c9d372-b712-4ca8-b975-d5f697af8ca7" class=""><strong>Kenapa Kita Harus Menggunakan Inheritance?</strong></h2><p id="23fa5486-7dd8-4a87-9c8b-10783be7f018" class="">Misalkan dalam Game, kita akan membuat class-class musuh dengan perilaku yang berbeda.</p><figure id="cc06e37b-75b0-4023-b61e-53c8b5d7303b" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/class-enemy.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/class-enemy.png"/></a></figure><p id="3f4c8057-aa3a-42e8-be3b-91e92cb51223" class="">Lalu kita membuat kode untuk masing-masing kelas seperti ini:</p><p id="3a012da0-d9ed-4aa8-9bd1-d913b1bdf621" class="">File: <code>Zombie.java</code></p><pre id="b7f99e45-f952-45af-9f5c-cac5e0bb326c" class="code"><code><em>class</em> Zombie { 
+	String name; 
+	int hp; 
+	int attackPoin; 
+	
+	void attack(){ 
+	// ... 
+	} 
+	
+	void walk(){ 
+	//... 
+	}
+
+}</code></pre><p id="1175f6a3-cc01-4436-8596-d8732b224be4" class="">File: <code>Pocong.java</code></p><pre id="b1152fbf-e232-4dd1-a6cd-27a27dcdf09b" class="code"><code><em>class</em> Pocong { 
+	String name; 
+	int hp; 
+	int attackPoin;
+	 
+	void attack(){ 
+	// ... 
+	} 
+	void jump(){ 
+	//... 
+	}
+
+}</code></pre><p id="a0258ae2-a9ba-4333-a80d-a9bf10c8ec6a" class="">File: <code>Burung.java</code></p><pre id="ec0ff6c1-6c21-4a4d-a18b-3e153337b8a1" class="code"><code><em>class</em> Burung { 
+	String name; 
+	int hp; 
+	int attackPoin; 
+	
+	void attack(){ 
+	// ... 
+	} 
+	
+	void walk(){ 
+	//... 
+	} 
+	
+	void jump(){ 
+	//... 
+	} 
+	
+	void fly(){ 
+	//... 
+	}
+}</code></pre><p id="04f6c786-ee6e-447f-af8e-69d387c5f710" class="">Apakah boleh seperti ini?</p><p id="b1ed49b3-29cd-4c8b-9f45-cdf3da08936f" class="">Ya, boleh-boleh saja. Akan Tapi tidak efektif, karena kita menulis berulang-ulang properti dan method yang sama.</p><p id="62fd7355-12cf-4fe1-80a0-143c7538d999" class="">Bagaimana solusinya?</p><p id="d1e24892-db8d-447e-8257-a6881c7bd76c" class="">Kita harus menggunakan <em>inheritance</em>.</p><p id="994fbdc3-1bad-4fa5-896e-23311b1c528a" class="">Mari kita lihat member class yang sama:</p><figure id="7cb863b5-29f7-4e32-ae73-7ecfb589846d" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/member-class-sama.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/member-class-sama.png"/></a></figure><p id="45674a6d-7217-4fce-9e9d-00645bd5421e" class="">Setelah menggunakan <em>inheritance</em>, maka akan menjadi seperti ini:</p><figure id="82443e29-eda3-4152-98f8-f0919eb5bff6" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/inheritance.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/inheritance.png"/></a></figure><p id="bcfd0ee9-3196-411c-92ba-4e851b1028e6" class="">Oya, <em>inheritance</em> di StarUML digambarkan dengan garis hubung <em>Generalization</em>.</p><p id="410e9585-2d0f-4484-9441-8f3f3d734c49" class="">Class <code>Enemy</code> adalah class induk yang memiliki anak <code>Zombie</code>, <code>Pocong</code>, dan <code>Burung</code>. Apapun properti yang ada di class induk, akan dimiliki juga oleh class anak.</p><p id="b738ca54-d67a-43ce-a78c-4f7a149c8532" class="">Lalu bagaimana bentuk kodenya dalam Java?</p><p id="ef40e05b-9993-483f-999e-20a18952cd28" class="">Bentuk kodenya akan seperti ini:</p><p id="e3e4fdf5-1a24-4aac-806c-4e8ec0069000" class="">File: <code>Enemy.java</code></p><pre id="99fa0940-e7be-4d79-83e4-7ef688e84f59" class="code"><code><em>class</em> Enemy { 
+	String name; 
+	int hp; 
+	int attackPoin; 
+	
+	void attack(){ 
+		System.out.println(&quot;Serang!&quot;); 
+	}
+	
+}</code></pre><p id="4e16eeae-cfbd-4300-b7ff-ad539d683376" class="">Pada class anak, kita menggunakan kata kunci <code>extends</code> untuk menyatakan kalau dia adalah class turunan dari <code>Enemy</code>.</p><p id="28773eed-cbf0-4746-94dd-754522e4db1f" class="">File: <code>Zombie.java</code></p><pre id="ae9f9d5a-240f-4bc4-b5c5-d2ac5b3b2ba1" class="code"><code><em>class</em> Zombie <em>extends</em> Enemy { 
+	void walk(){ 
+		System.out.println(&quot;Zombie jalan-jalan&quot;); 
+	}
+}</code></pre><p id="d60adcc4-949f-4925-b517-546bf354cad8" class="">File: <code>Pocong.java</code></p><pre id="b2d88b30-fdaa-4753-9d35-57100cb01c85" class="code"><code><em>class</em> Pocong <em>extends</em> Enemy { 
+	void jump(){ 
+		System.out.println(&quot;loncat-loncat!&quot;); 
+	}
+}</code></pre><p id="7306ef04-9923-40e5-b0ee-679310a6c224" class="">File: <code>Burung.java</code></p><pre id="e8a3fd56-8dc7-401c-b331-0d6c41184d20" class="code"><code><em>class</em> Burung <em>extends</em> Enemy { 
+	void walk(){ 
+		System.out.println(&quot;Burung berjalan&quot;); 
+	} 
+	
+	void jump(){ 
+	System.out.println(&quot;Burung loncat-loncat&quot;); 
+	} 
+	
+	void fly(){ 
+		System.out.println(&quot;Burung Terbang...&quot;); 
+	}
+}</code></pre><p id="a5a42a6b-7336-49ab-a4ef-dc1948b07eb2" class="">Lalu, bila kita ingin membuat objek dari class-class tersebut, Kita bisa membuatnya seperti ini:</p><pre id="ef1177fe-3ee5-4165-8012-dd4c6693b860" class="code"><code>Enemy monster = new Enemy();
+Zombie zumbi = new Zombie();
+Pocong hantuPocong = new Pocong();
+Burung garuda = new Burung();</code></pre><h2 id="468102e6-4b5c-4ada-bdcc-cffa0353986f" class=""><strong>Contoh Program Inheritance</strong></h2><p id="82f0471f-1274-4636-a359-56918877cb5a" class="">Setelah memahami konsep <em>inheritance</em>, sekarang mari kita buat contoh program sederhana.</p><p id="7082d133-9c30-40b1-93b4-8767099801a1" class="">Program yang akan kita buat untuk berfungsi untuk menghitung luas dan keliling bangun datar.</p><p id="5b1e2412-98ce-416a-87b1-2c5c1ddb6a85" class="">Bentuk class diagramnya seperti ini:</p><figure id="d2072f53-12a2-410d-b048-562bf23a14de" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/class-bangundatar.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/class-bangundatar.png"/></a></figure><p id="84d9c0bd-e025-4b99-8914-d3763a30a15f" class="">Baik, mari kita buat semua class-class-nya.</p><p id="68c3e975-45cb-456d-9f79-fd2471f9e47b" class="">Buka Netbeans, pada <a href="https://www.petanikode.com/java-oop/">Porject yang kemarin</a>, buatlah <em>package</em> baru bernama <strong>inheritance</strong> di dalam <strong>Source Packages</strong>.</p><figure id="00e3b9da-de0c-427d-8690-cf9dd483e0b0" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/package-baru.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/package-baru.png"/></a></figure><p id="466f18d4-7943-43c7-82d0-585d3e428cbf" class="">Isi nama <em>package</em> dengan <strong>inheritance</strong>.</p><figure id="3ef2d7c5-a8a6-4838-8252-700adc6930d8" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/package-inheritance.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/package-inheritance.png"/></a></figure><p id="e05fd7fb-211f-499a-b4f5-ef7bcef08ef5" class="">Berikutnya buatlah class-class baru berdasarkan diagram di atas.</p><p id="c7209a18-be06-41f4-91bc-92f42196b725" class="">File: <code>inheritance/BangunDatar.java</code></p><pre id="b736c8d4-9622-47ba-87bf-a4467119a810" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> BangunDatar { 
+		float luas(){ 
+			System.out.println(&quot;Menghitung laus bangun datar&quot;); 
+			return 0; 
+		} 
+		float keliling(){ 
+			System.out.println(&quot;Menghitung keliling bangun datar&quot;); 
+			return 0; 
+	}
+}</code></pre><p id="42064451-7e30-4b17-8508-117d4cf82e68" class="">File: <code>inheritance/Persegi.java</code></p><pre id="14ff19fc-d320-4822-81f0-a07b4c4e2958" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> Persegi <em>extends</em> BangunDatar { 
+	float sisi;
+}</code></pre><p id="57ceb1a7-8267-4a1a-860a-1aae21496d48" class="">File: <code>inheritance/Lingkaran.java</code></p><pre id="d5d4ec6f-dc89-47fc-acd7-69a91ab8b7c2" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> Lingkaran <em>extends</em> BangunDatar{ 
+	// jari-jari lingkaran 
+	float r;
+}</code></pre><p id="61060078-f36d-4fba-9afb-53d4568e512d" class="">File: <code>inheritance/PersegiPanjang.java</code></p><pre id="1c6e517e-7a4f-40e4-9a11-81dc04142e03" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> PersegiPanjang <em>extends</em> BangunDatar { 
+	float panjang; 
+	float lebar;
+}</code></pre><p id="12582dbf-b506-4f6a-8a8f-1250c2fbbcc4" class="">File: <code>inheritance/Segitiga.java</code></p><pre id="b9b95815-d19b-4c38-91bf-f744d05ad900" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> Segitiga <em>extends</em> BangunDatar { 
+	float alas; 
+	float tinggi;
+}</code></pre><p id="45574c4e-a470-4b0f-abad-01dacb344b58" class="">File: <code>inheritance/Main.java</code></p><pre id="8772a479-fbc0-4e00-8c9a-84a24a45f736" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek bangun datar 
+		BangunDatar bangunDatar = new BangunDatar(); 
+		// membuat objek persegi dan mengisi nilai properti
+		Persegi persegi = new Persegi(); 
+		persegi.sisi = 2; 
+		// membuat objek Lingkaran dan mengisi nilai properti 
+		Lingkaran lingkaran = new Lingkaran(); 
+		lingkaran.r = 22; 
+		// membuat objek Persegi Panjang dan mengisi nilai properti 
+		PersegiPanjang persegiPanjang = new PersegiPanjang(); 
+		persegiPanjang.panjang = 8; 
+		persegiPanjang.lebar = 4; 
+		// membuat objek Segitiga dan mengisi nilai properti 
+		Segitiga mSegitiga = new Segitiga(); 
+		mSegitiga.alas = 12; 
+		mSegitiga.tinggi = 8; 
+		// memanggil method luas dan keliling 
+		bangunDatar.luas(); 
+		bangunDatar.keliling(); 
+		persegi.luas(); 
+		persegi.keliling(); 
+		lingkaran.luas(); 
+		lingkaran.keliling(); 
+		persegiPanjang.luas(); 
+		persegiPanjang.keliling(); 
+		mSegitiga.luas(); 
+		mSegitiga.keliling(); 
+	}
+}</code></pre><p id="211fa40a-82c3-43b7-82cd-e6b985c9258f" class="">Setelah itu, coba jalankan class <code>Main</code>, maka hasilnya:</p><figure id="722db7b7-5462-4a7e-8cc4-aedd909c6790" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/hasil-program-inheritance.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/hasil-program-inheritance.png"/></a></figure><p id="35669824-a20e-4ff2-8aba-fe8e5161a7a9" class="">Kenapa hasilnya bisa begitu?</p><p id="d5753456-d409-4f83-85a2-f4d00760c3ac" class="">Karena yang kita panggil sebenarnya adalah method <code>luas()</code> dan <code>keliling()</code> milik si induk (<code>BangunDatar</code>).</p><p id="7f3ead92-c7d7-4e41-a86f-e2d054bcdd24" class="">Objek anak dari <code>BangunDatar</code> belum memiliki method <code>luas()</code> dan <code>keliling()</code>, akhirnya mengambil milik induknya.</p><p id="09d6d20e-18b7-4248-b523-4bb6c9d64ad3" class="">Lalu bagaimana kalau kita ingin membuat agar semua class anak memiliki method <code>luas()</code> dan <code>keliling()</code> yang berbeda dari induk?</p><p id="e98b089c-16dd-4768-b270-a757412e85e9" class="">Jawabanya: menggunakan <em>method overriding</em>.</p><h2 id="87fd03d6-7f29-42c6-8224-6325ad85582c" class=""><strong>Method Overriding</strong></h2><p id="b7ab7eea-4574-4e5a-a339-ab6777161599" class="">Method Overriding dilakukan saat kita ingin membuat ulang sebuah method pada sub-class atau class anak.</p><p id="b926ca9a-539d-4d8f-a33b-08fe8e049321" class="">Method Overriding dapat dibuat dengan menambahkan anotasi <code>@Override</code> di atas nama method atau sebelum pembuatan method.</p><p id="1bb32e8d-1bb0-4cc8-92b6-55c192c8dc46" class="">Contoh: <code>Persegi.java</code></p><pre id="856793af-a9d9-492b-8f88-86edd4227cdb" class="code"><code><em>class</em> Persegi <em>extends</em> BangunDatar { 
+		float sisi; 
+		@Override float luas(){ 
+			float luas = sisi * sisi; 
+			System.out.println(&quot;Luas Persegi: &quot; + luas); 
+			return luas; 
+		} 
+		@Override float keliling(){ 
+			float keliling = 4 * sisi; 
+			System.out.println(&quot;Keliling Persegi: &quot; + keliling); 
+			return keliling; 
+		}
+}</code></pre><p id="45eff1bc-ad5d-4b66-933a-f230d3c34968" class="">Artinya kita menulis ulang method <code>luas()</code> dan <code>keliling()</code> di class anak.</p><p id="63f174b4-b720-489b-bfbb-ef669df19f68" class="">Sekarang mari kita buat <em>method overriding</em> untuk semua class anak.</p><p id="37e133d6-d5b5-4a32-9c95-df19d4b0f4b3" class="">File: <code>Lingkaran.java</code></p><pre id="c545ddd2-41cc-4124-9105-0ac5438c21a5" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> Lingkaran <em>extends</em> BangunDatar{ 
+	// jari-jari lingkaran 
+	float r; 
+	@Override float luas(){ 
+		float luas = (float) (Math.PI * r * r); 
+		System.out.println(&quot;Luas lingkaran: &quot; + luas); 
+		return luas; 
+	} 
+	@Override float keliling(){ 
+		float keliling = (float) (2 * Math.PI * r); 
+		System.out.println(&quot;Keliling Lingkaran: &quot; + keliling); 
+		return keliling; 
+	}
+}</code></pre><p id="8c42b559-3270-4d7c-9c64-9213e047c674" class="">Dalam rumus luas dan keliling lingkaran, kita bisa memanfaatkan konstanta <code>Math.PI</code> sebagai nilai PI. Konstanta ini sudah ada di Java.</p><p id="1b9aae73-dd68-44ec-84ae-3f0970ec84af" class="">File: <code>PersegiPanjang.Java</code></p><pre id="62f477f3-e987-420c-9c4d-f1541015d8a5" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> PersegiPanjang <em>extends</em> BangunDatar { 
+	float panjang; 
+	float lebar; 
+	@Override float luas(){ 
+		float luas = panjang * lebar; 
+		System.out.println(&quot;Luas Persegi Panjang:&quot; + luas); 
+		return luas; 
+	} 
+	@Override float keliling(){ 
+		float kll = 2*panjang + 2*lebar; 
+		System.out.println(&quot;Keliling Persegi Panjang: &quot; + kll); 
+		return kll; 
+	}
+}</code></pre><p id="d0c299ef-34d4-4a2b-a8f7-e1acf6099372" class="">File: <code>Segitiga.java</code></p><pre id="12569057-875e-4614-9cb1-85cd0a666756" class="code"><code>package inheritance;
+<em>public</em> <em>class</em> Segitiga <em>extends</em> BangunDatar { 
+	float alas; 
+	float tinggi; 
+	@Override float luas() { 
+		float luas = 1/2 * (alas * tinggi); 
+		System.out.println(&quot;Luas Segitiga: &quot; + luas); 
+		return luas; 
+	}
+}</code></pre><p id="f4f4cbd3-0e1a-47ac-a3b5-56268c72c910" class="">Untuk class <code>Segitiga</code>, kita hanya melakukan <em>override</em> terhadap method <code>luas()</code> saja. Karena untuk method <code>keliling()</code>, segitiga memiliki rumus yang berbeda-beda.</p><p id="24b41701-15a6-45d0-ad03-5afa913d29d7" class="">…atau mungkin bisa diturunkan lagi class segitiga ini menjadi:  <code>SegitigaSiku</code>, <code>SegitigaSamaKaki</code>, <code>SegitigaSamaSisi</code>, dsb.</p><p id="5a8e0348-6b53-423a-a83d-f35ff4cdc7e2" class="">Sekarang mari kita coba eksekusi class <code>Main</code> lagi:</p><figure id="144eb5e8-ddb7-45d4-8a98-2516e507b02c" class="image"><a href="https://www.petanikode.com/img/java/oop/inheritance/hasil-override.png"><img src="https://www.petanikode.com/img/java/oop/inheritance/hasil-override.png"/></a></figure><p id="dc90736e-3ceb-4a99-a0dc-75d334e9b842" class="">Tunggu dulu!</p><p id="bc8bdac5-b1b2-4ee4-9de7-27103bb5c701" class="">Tadi di awal katanya tidak efisien menulis berulang-ulang, lah ini?</p><p id="3b54c764-df17-4ad0-bd3e-8b9f3f802be3" class="">Iya di awal kita menulis atribut dari <code>Enemy</code> yang sama berulang-ulang. Berbeda dengan yang ini, kita memang menulis method yang sama. Tapi isi atau rumus di dalam method-nya berbeda-beda.</p><p id="fa56a9e7-6713-4118-aef0-a90bcf3ef753" class="">Ini nanti akan kita bahas dalam Polymorfisme (banyak bentuk).</p><h2 id="44f358f3-95c1-47f4-b363-ba5c4d5d209a" class=""><strong>Akhir Kata…</strong></h2><p id="6c923837-b239-4fca-8f55-f9618843a9f7" class=""><em>Inheritance</em> adalah salah satu pilar penting dalam OOP yang harus dipahami. Karena kita akan sering menggunakannya dalam pembuatan program.</p></div></article></body></html>

@@ -1,0 +1,829 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memahami 3 Bentuk Percabangan dalam Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a54b9703-c2fc-416b-b1d5-2ff449944957" class="page sans"><header><h1 class="page-title"><strong>Memahami 3 Bentuk Percabangan dalam Java</strong></h1></header><div class="page-body"><p id="6d4234de-3557-433e-a83b-d8ce3272ae02" class="">Kalau kita perhatikan, alur pengeksekusian sebuah kode program dikerjakan satu per satu dari atas sampai ke bawah.</p><p id="24cf37e4-3908-447e-9db7-b93cc83b5f55" class="">Baris demi baris dibaca, kemudian komputer mengerjakan apa yang diperintahkan.</p><p id="842554c8-4b5b-4c53-a39c-fdd191ad1b68" class="">Misalnya seperti ini:</p><figure id="c9172f2f-23d8-4d76-bcf2-fec4842418b0" class="image"><a href="https://2.bp.blogspot.com/-K9oL9zetghQ/WOhpISQO-4I/AAAAAAAAEoE/anwCWCtzMPwFxM7wAH7k46Rj4Ri7xjEhwCPcB/s1600/alur%2Beksekusi%2Bprogram%2Btanpa%2Bflowchart.png"><img src="https://2.bp.blogspot.com/-K9oL9zetghQ/WOhpISQO-4I/AAAAAAAAEoE/anwCWCtzMPwFxM7wAH7k46Rj4Ri7xjEhwCPcB/s1600/alur%2Beksekusi%2Bprogram%2Btanpa%2Bflowchart.png"/></a></figure><p id="2b482e64-7170-4371-ac4f-5eb70e878779" class="">Alur programnya satu, tidak ada belokan atau percabangan.</p><p id="61a4970b-fc92-4106-b2db-20201d0b6c7b" class="">Ngomong-ngomong apa itu percabangan?</p><p id="5eb47e56-e3fc-460c-aa6c-c577aa8d142f" class="">Percabangan hanyalah sebuah istilah yang digunakan untuk menyebut alur program yang bercabang.</p><p id="64225d9b-1b6a-458d-873a-1df9db676e65" class="">Percabangan juga dikenal dengan “Control Flow”, “Struktur Kondisi”, “Struktur IF”, “Decision”, dsb. Semuanya itu sama.</p><p id="e5edc366-bbd3-4b00-802b-de216baa5ec1" class="">Pada diagram alur <em>(Flow Chart)</em> seperti di atas, alurnya memang satu.</p><p id="1c026d29-66aa-487d-80fa-8e537851ad18" class="">Tapi setelah kita menggunakan percabangan, alurnya akan bertambah menjadi seperti ini.</p><figure id="b433917f-c75f-41da-ad5b-d21d2e0942b8" class="image"><a href="https://4.bp.blogspot.com/-VdWpqvZZHFk/WOhuYZN8lxI/AAAAAAAAEos/Rston6k1KwMGagHld2CZoJE38SvZtXC-wCPcB/s1600/contoh-percabangan.png"><img src="https://4.bp.blogspot.com/-VdWpqvZZHFk/WOhuYZN8lxI/AAAAAAAAEos/Rston6k1KwMGagHld2CZoJE38SvZtXC-wCPcB/s1600/contoh-percabangan.png"/></a></figure><p id="bd6a7bf0-cef0-495f-a977-7b2785fe6caa" class="">Lalu bagaimana cara menulis kode percabangan dalam Java?</p><p id="59174093-6e4c-49c5-98c8-ab42a1620dc6" class="">Caranya: menggunakan kata kunci <code>if</code>, <code>else</code>, <code>switch</code>, dan <code>case</code>, dan operator ternary.</p><p id="4b335d59-19c7-4ff4-888c-fa1590f7417f" class="">Contoh format stuktur IF seperti ini:</p><pre id="3dbd1a51-b587-416f-9a5d-e67d35d58698" class="code"><code>if( suatu_kondisi ) { 
+	// lakukan sesuatu kalau kondisi benar 
+	// Lakukan ini juga
+}</code></pre><p id="89c10dc5-53ec-46e4-9f27-c40f34bfd5b2" class=""><code>suatu_kondisi</code> hanya bernilai <code>true</code>/<code>false</code> saja. Kita bisa gunakan operator relasi dan logika di sini.</p><p id="13344949-4d81-4e7d-a731-6a8957f3942d" class="">Untuk lebih jelasnya, nanti akan kita bahas.</p><p id="633d97a8-63e1-47cc-9708-cd628c189263" class="">Sebelumnya, kamu perlu tahu dulu tiga bentuk percabangan pada Java:</p><ol id="0707cb54-21ca-4c14-9e9a-b402c9630727" class="numbered-list" start="1"><li>Percabangan IF</li></ol><ol id="30d446e1-2885-4cc2-b2dc-938027716be0" class="numbered-list" start="2"><li>Percabangan IF/ELSE</li></ol><ol id="012a32f7-809a-4963-8d5f-16a4e6910c99" class="numbered-list" start="3"><li>Percabangan IF/ELSE/IF atau SWITCH/CASE</li></ol><p id="b9219c24-e79e-4769-a55e-7ceca7d1645c" class="">Mari kita bahas satu per satu…</p><h2 id="74b789ec-d8f6-4c6b-9230-4975c646fe02" class=""><strong>1. Percabangan IF</strong></h2><p id="2885e8a9-ea76-416b-8174-672d52350175" class="">Percabangan ini hanya memiliki satu pilihan. Artinya, pilihan di dalam IF hanya akan dikerjakan kalau kondisinya benar.</p><figure id="51a3b029-f743-4051-9785-1696fca5cb88" class="image"><a href="https://2.bp.blogspot.com/-U8SqJhBeFoc/WOh7pR4aSNI/AAAAAAAAEpM/_i52DJOZIm80Ux6fdnVWfmEHx8WdvQfHACPcB/s1600/percabangan-if-dalam-pemrograman.png"><img src="https://2.bp.blogspot.com/-U8SqJhBeFoc/WOh7pR4aSNI/AAAAAAAAEpM/_i52DJOZIm80Ux6fdnVWfmEHx8WdvQfHACPcB/s1600/percabangan-if-dalam-pemrograman.png"/></a></figure><p id="a3dca2cf-11ad-4a7f-a7c1-7edfe3b7b270" class="">Tapi kalau salah… tidak akan melakukan apa-apa. Alias lanjut eksekusi ke perintah berikutnya.</p><p id="d4c124bc-0001-4f78-bd22-dac924b09bfa" class="">Contoh:</p><blockquote id="ef344d2d-c463-4b76-a000-ea8a2a5ffd3a" class="">Pernahkah kalian belanja di toko, kemudian kalau belanja di atas sekian ribu dapat hadiah atau diskon.</blockquote><p id="f707d2fa-b568-47bf-87d7-7c27f4de6f23" class="">Nah! Contoh kasus seperti itu, dapat kita selesaikan dengan menggunakan percabangan ini.</p><p id="9fd0efe3-3044-49e3-bf06-a9880c54eb95" class="">untuk lebih jelasnya…</p><h3 id="ead3fb9e-bb62-42f0-86dc-615610861165" class=""><strong>Mari Kita Membuat Program Hadiah</strong></h3><p id="953c9dc9-9efd-4a01-8c3f-b5aac6925ee7" class="">Misalkan ada sebuah toko buku. Mereka memberikan hadiah berupa perlengkapan sekolah kepada pembeli yang belanja di atas Rp 100.000.</p><p id="a22b2e34-dad6-4be7-8332-ede260554170" class="">Maka programnya bisa kita buat seperti ini:</p><pre id="14fcbb94-f782-4218-9827-ad2da6d8a204" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> Hadiah { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat variabel belanja dan scanner 
+		int belanja = 0; 
+		Scanner scan = new Scanner(System.in); 
+		// mengambil input 
+		System.out.print(&quot;Total Belanjaan: Rp &quot;); 
+		belanja = scan.nextInt(); 
+		// cek apakah dia belanja di atas 100000 
+		if ( belanja &gt; 100000 ) { 
+			System.out.println(&quot;Selamat, anda mendapatkan hadiah!&quot;); 
+		} 
+		System.out.println(&quot;Terima kasih...&quot;); 
+	}
+}</code></pre><p id="4874c122-95a3-40a0-a9d3-a72041e99118" class="">Jalankan programnya dan perhatikanlah hasilnya.</p><figure id="8122d200-ff03-4363-9d53-0e003978914a" class="image"><a href="https://3.bp.blogspot.com/-LGq9_8wC3I8/WOiZIi2nshI/AAAAAAAAEpw/gZtN9le-bfo-Thi4Ct8HWaDM1Dj4d5XsgCPcB/s1600/program%2Bdiskon%2Bdan%2Bhadiah%2Bdengan%2BJava.png"><img src="https://3.bp.blogspot.com/-LGq9_8wC3I8/WOiZIi2nshI/AAAAAAAAEpw/gZtN9le-bfo-Thi4Ct8HWaDM1Dj4d5XsgCPcB/s1600/program%2Bdiskon%2Bdan%2Bhadiah%2Bdengan%2BJava.png"/></a></figure><p id="ddd87875-b63a-4249-85db-96aeee727943" class="">Cobalah untuk memberikan nilai di bawah <code>100000</code> dan perhatikan apa akan yang terjadi.</p><h2 id="1429e527-4191-4891-a433-3c29cc37ddcc" class=""><strong>2. Percabangan IF/ELSE</strong></h2><p id="5a6c765c-22dd-4754-8883-b43fcef0c635" class="">Sedangkan percabangan IF/ELSE memiliki pilihan alternatif kalau kondisinya salah.</p><p id="657bc40d-ea84-4623-bc7c-3376b7014d3e" class=""><strong>IF</strong>: “Jika kondisi benar maka kerjakan ini, kalau tidak silahkan lanjut”</p><p id="4283436a-ba7c-4b80-b618-dddc26ba3ba9" class=""><strong>IF/ESLE</strong>: “Jika kondisi benar maka kerjakan ini, kalau salah maka kerjakan yang itu, setelah itu lanjut”</p><figure id="ef582b32-62e6-4e90-9fdb-8a7e8832312a" class="image"><a href="https://1.bp.blogspot.com/-EBFXR8YanHg/ViyfSNX80-I/AAAAAAAACEI/BVBV3EX_r3Q/s1600/Percabangan%2Bdi%2Bpemrograman%2Bjava.png"><img src="https://1.bp.blogspot.com/-EBFXR8YanHg/ViyfSNX80-I/AAAAAAAACEI/BVBV3EX_r3Q/s1600/Percabangan%2Bdi%2Bpemrograman%2Bjava.png"/></a></figure><p id="93e2fca4-3701-47bb-9e00-b41edac5925b" class="">Begitulah perbedaan IF dengan IF/ELSE.</p><p id="3edbb35f-f30b-4f1a-a2b1-495f84dc3f23" class="">Sekarang mari kita coba dalam kode program…</p><h3 id="a64a1bc2-059b-4428-80ff-8150f77d3e92" class=""><strong>Program Cek Kelulusan</strong></h3><p id="89953af2-33e9-4346-970d-d08f48a60272" class="">Misalkan, kalau nilai siswa lebih besar dari 70, maka ia dinyatakan lulus. Kalau tidak, maka dia gagal.</p><p id="934fe5dc-b38c-4a95-a974-645f518e9a2c" class="">Programnya bisa kita buat seperti ini:</p><pre id="6067032a-daa4-4e5b-8ed5-1c95fbe1b97b" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> CekKelulusan { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat variabel dan Scanner 
+		int nilai; 
+		String nama; 
+		Scanner scan = new Scanner(System.in); 
+		// mengambil input 
+		System.out.print(&quot;Nama: &quot;); 
+		nama = scan.nextLine(); 
+		System.out.print(&quot;Nilai: &quot;); 
+		nilai = scan.nextInt(); 
+		// cek apakah dia lulus atau tidak 
+		if( nilai &gt;= 70 ) { 
+			System.out.println(&quot;Selemat &quot; + nama + &quot;, anda lulus!&quot;); 
+		} else { 
+			System.out.println(&quot;Maaf &quot; + nama + &quot;, anda gagal&quot;); 
+		} 
+	}
+}</code></pre><p id="31fbe490-fba0-4f59-aaca-a7d49e2342a9" class="">Hasil outputnya:</p><figure id="719e0148-9996-4d44-86f8-c784a657742a" class="image"><a href="https://3.bp.blogspot.com/-rLwFoNL9qKk/WO79-OlRsUI/AAAAAAAAEqc/8r_1s5gF0MkIFz3NhZqOs0ocTZeeUT_jgCPcB/s1600/Hasil%2Boutput%2Bprogram%2Bcekkelulusan%2Bjava.png"><img src="https://3.bp.blogspot.com/-rLwFoNL9qKk/WO79-OlRsUI/AAAAAAAAEqc/8r_1s5gF0MkIFz3NhZqOs0ocTZeeUT_jgCPcB/s1600/Hasil%2Boutput%2Bprogram%2Bcekkelulusan%2Bjava.png"/></a></figure><p id="64c0085f-660d-4c4d-b1d5-f50f9a42e2ad" class="">Cobalah untuk merubah nilai yang dimasukkan dan perhatikan apa yang akan terjadi.</p><h3 id="c1711cb2-5496-4337-a365-c6c14cbd2bbf" class=""><strong>Percabangan IF/ELSE dengan Operator Ternary</strong></h3><p id="0a3387d8-9462-4d0d-94ef-bde10f868386" class="">Selain menggunakan struktur seperti di atas, percahangan ini juga dapat menggunakan operator ternary.</p><p id="2b486641-189a-4005-b9f2-fff7369687c8" class="">Operator ternary memiliki konsep yang sama seperti percabganan IF/ELSE.</p><figure id="7f824604-c38d-4beb-8cd2-5d4bc4d3a34e" class="image"><a href="https://3.bp.blogspot.com/-OKB4MDtGjE4/WObxiPfq-wI/AAAAAAAAEmQ/kR9Ldcc1hr88u90060rCff0Gvs4lDRfQgCPcB/s1600/operator%2Bternary%2Bdi%2Bjava.png"><img src="https://3.bp.blogspot.com/-OKB4MDtGjE4/WObxiPfq-wI/AAAAAAAAEmQ/kR9Ldcc1hr88u90060rCff0Gvs4lDRfQgCPcB/s1600/operator%2Bternary%2Bdi%2Bjava.png"/></a></figure><p id="d9f1ceeb-7cf0-4cad-8f32-056d9f4e6eb2" class="">Contoh programnya:</p><pre id="e159f9a9-2eef-44f2-b516-f2cde897384d" class="code"><code><em>public</em> <em>class</em> OperatorTernary { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		boolean suka = true; 
+		String jawaban; 
+		// menggunakan operator ternary 
+		jawaban = suka ? &quot;iya&quot; : &quot;tidak&quot;; 
+		// menampilkan jawaban 
+		System.out.println(jawaban); 
+	}
+}</code></pre><h2 id="fb183852-d2ec-470f-8bc6-371b34881bdb" class=""><strong>3. Percabangan IF/ELSE/IF dan SWITCH/CASE</strong></h2><p id="870a78ed-9b2a-49a2-8e69-ad7cd0b8cdea" class="">Jika percabangan IF/ESLE hanya memiliki dua pilihan saja. Maka percahangan IF/ELSE/IF memiliki lebih dari dua pilihan.</p><p id="bedd2029-c51a-45c0-b931-92530cceba73" class="">Formatnya seperti ini:</p><pre id="373eb62b-8ced-4ee3-ae0c-577d3b948399" class="code"><code>if (suatu kondisi) { 
+	// maka kerjakan ini 
+	// kerjakan perintah ini juga 
+	// …
+} else if (kondisi lain) { 
+	// kerjakan ini 
+	// kerjakan ini juga 
+	// …
+} else if (kondisi yang lain lagi) { 
+	// kerjakan perintah ini 
+	// kerjakan ini juga 
+	// …
+} else { 
+	// kerjakan ini kalau 
+	// semua kondisi di atas 
+	// tidak ada yang benar 
+	// …
+}</code></pre><p id="d5c3e727-780f-4c23-a8bc-8a264fbfa2a5" class="">Coba perhatikan contohnya:</p><figure id="b95017bc-98d2-4ee5-9f82-edf878cc7541" class="image"><a href="https://3.bp.blogspot.com/-9uS-c73seec/VkBISDA0AXI/AAAAAAAACLU/AsWtctwfCN0/s1600/flowchart%2Bpercabangan%2Byang%2Bmemiliki%2Bbanyak%2Bpilihan%2Bkeputusan.png"><img src="https://3.bp.blogspot.com/-9uS-c73seec/VkBISDA0AXI/AAAAAAAACLU/AsWtctwfCN0/s1600/flowchart%2Bpercabangan%2Byang%2Bmemiliki%2Bbanyak%2Bpilihan%2Bkeputusan.png"/></a></figure><p id="edc8d285-9b2a-4e26-a179-215c01362a5d" class="">Jika nilainya lebih besar dari <code>90</code>, maka grade-nya “A”. Sedangkan kalau lebih besar dari <code>80</code>, maka “B+”. Lebih besar dari <code>70</code>, maka “B”, dan seterusnya.</p><p id="35010207-4b70-49f6-9535-c470d339e6e2" class="">Lebih jelasnya, mari kita buat program.</p><h3 id="09d09564-3a1b-4e38-af52-ab2a01a1adcd" class=""><strong>Program HitungGrade</strong></h3><p id="f1788c42-1b2c-4a21-99ea-61ca13b6fb19" class="">Silahkan buat sebuah class baru bernama <code>HitungGrade</code>, kemudian ikuti kode program berikut.</p><pre id="d79db6df-e5e6-4ad9-8b1f-8fba8c72bcb0" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> HitungGrade { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat variabel dan scanner 
+		int nilai; 
+		String grade; 
+		Scanner scan = new Scanner(System.in); 
+		// mengambil input 
+		System.out.print(&quot;Inputkan nilai: &quot;); 
+		nilai = scan.nextInt(); 
+		// higung gradenya 
+		if ( nilai &gt;= 90 ) { 
+			grade = &quot;A&quot;; 
+		} else if ( nilai &gt;= 80 ){ 
+			grade = &quot;B+&quot;; 
+		} else if ( nilai &gt;= 70 ){ 
+			grade = &quot;B&quot;; 
+		} else if ( nilai &gt;= 60 ){ 
+			grade = &quot;C+&quot;; 
+		} else if ( nilai &gt;= 50 ){ 
+			grade = &quot;C&quot;; 
+		} else if ( nilai &gt;= 40 ){ 
+			grade = &quot;D&quot;; 
+		} else { 
+			grade = &quot;E&quot;; 
+		} 
+		// cetak hasilnya 
+		System.out.println(&quot;Grade: &quot; + grade); 
+	}
+}</code></pre><p id="caa93f5c-135a-423f-8f1a-ee2565a41eb0" class="">Hasil outputnya:</p><figure id="301da44a-d972-4a2c-91d7-d939f035cdc5" class="image"><a href="https://3.bp.blogspot.com/-fBW1OCJ8L_o/WO7_E4iXKTI/AAAAAAAAEqs/FsV0dkLWW_UL0P9GWTazQq2HTvEcx4YqQCPcB/s1600/Hasil%2Boutput%2Bprogram%2Bhitung%2Bgrader%2Bnilai.png"><img src="https://3.bp.blogspot.com/-fBW1OCJ8L_o/WO7_E4iXKTI/AAAAAAAAEqs/FsV0dkLWW_UL0P9GWTazQq2HTvEcx4YqQCPcB/s1600/Hasil%2Boutput%2Bprogram%2Bhitung%2Bgrader%2Bnilai.png"/></a></figure><h3 id="550d9647-b6e9-4143-ad2c-2c69e8aef0f6" class=""><strong>Percabangan SWITCH/CASE</strong></h3><p id="12915e7a-2eed-46fd-af99-6d7a12e9a69e" class="">Percabangan SWITCH/CASE sebenarnya adalah bentuk lain dari IF/ELSE/IF.</p><p id="d1b54102-4b10-46d6-bf89-e87b50246b82" class="">Bedanya, percabangan ini menggunakan kata kunci <code>switch</code> dan <code>case</code>.</p><p id="d6b942c2-54ea-455c-b118-1046386d3a0a" class="">Formatnya juga berbeda, tapi cara kerjanya sama.</p><pre id="6b45dea6-1ca1-4ab6-a2d2-0b642bcded2c" class="code"><code>switch(variabel){ 
+	case 1: 
+	// kerjakan kode ini 
+	// kode ini juga 
+	break; 
+	case 2: 
+	// kerjakan kode ini 
+	// kode ini juga 
+	break; 
+	case 3: 
+	// kerjakan kode ini 
+	// kode ini juga 
+	break; 
+	default: 
+	// kerjakan kode ini 
+	// kode ini juga 
+	break;
+}</code></pre><p id="189771b0-5176-4330-980d-76dc4d39dbc5" class="">Perhatikan: <code>case 1</code> artinya nilai <code>variabel</code> yang akan dibandingkan, apakah nilainya sama dengan <code>1</code> atau tidak.</p><p id="821e3e08-a3ff-4755-87ec-90ae92c49d3e" class="">Kalau iya, maka kerjakan kode yang ada di dalam <code>case 1</code>.</p><p id="f69d826e-6047-4e99-b6a7-f72805e02b59" class="">Bisa juga betuknya berbeda, misalnya seperti ini:</p><pre id="d7f12185-bb3c-4363-8123-5cd961af5a5d" class="code"><code>switch (variabel) { 
+	case &#x27;A&#x27;: 
+	// lakukan sesuatu 
+	break; 
+	case &#x27;B&#x27;: 
+	// lakukan ini 
+	break; 
+	default: 
+	// lakukan ini
+}</code></pre><p id="514beb7b-c687-42da-9fab-e70a5f688bd1" class="">Perlu diperhatikan juga: di sana ada kata kunci <code>break</code> dan <code>default</code>.</p><ul id="fe642699-d3fe-498f-81d6-5a4c8318343d" class="bulleted-list"><li><code>break</code> artinya berhenti. Ini untuk memerintahkan komputer untuk berhenti mengecek <code>case</code> yang lainnya.</li></ul><ul id="235be804-2821-4f73-84c1-99585c7c11dd" class="bulleted-list"><li><code>default</code> artinya jika nilai variabel tidak ada yang sama dengan pilihan case di atas, maka kerjakan kode yang ada di dalam <code>default</code>.</li></ul><p id="2a533133-ab8c-46a7-b43a-7feb6dbaa804" class="">Pilihan <code>default</code> bisa juga tidak memiliki <code>break</code>, karena dia adalah pilihan terakhir. Artinya pengecekan akan berakhir di situ.</p><p id="2f07f955-d45d-478d-aee2-0337a63c02b1" class="">Contoh program dengan percabangan SWITCH/CASE</p><pre id="884cc8de-e073-409e-8e65-e4af0ea7b141" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> LampuLalulintas { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat variabel dan Scanner 
+		String lampu; 
+		Scanner scan = new Scanner(System.in); 
+		// mengambil input 
+		System.out.print(&quot;Inputkan nama warna: &quot;); 
+		lampu = scan.nextLine(); 
+		
+		switch(lampu){ 
+			case &quot;merah&quot;: 
+			System.out.println(&quot;Lampu merah, berhenti!&quot;); 
+			break; 
+			case &quot;kuning&quot;: 
+			System.out.println(&quot;Lampu kuning, harap hati-hati!&quot;); 
+			break; 
+			case &quot;hijau&quot;: 
+			System.out.println(&quot;Lampu hijau, silahkan jalan!&quot;); 
+			break; 
+			default: System.out.println(&quot;Warna lampu salah!&quot;); 
+		} 
+
+	}
+}</code></pre><p id="f6176bd4-6e09-4a1c-838e-f1d3980c0df7" class="">Hasil outputnya:</p><figure id="632a5637-799a-47c4-a659-0ecc0afda4ce" class="image"><a href="https://3.bp.blogspot.com/-ojFmHVyblYk/WO7_wHizYNI/AAAAAAAAEq8/huTDmNUAHfM5m-nJ2l50ieGZelChGKJ5wCPcB/s1600/hasil%2Boutput%2Bprogram%2Blampu%2Blalu%2Blintas%2Bswitch%2Bcase.png"><img src="https://3.bp.blogspot.com/-ojFmHVyblYk/WO7_wHizYNI/AAAAAAAAEq8/huTDmNUAHfM5m-nJ2l50ieGZelChGKJ5wCPcB/s1600/hasil%2Boutput%2Bprogram%2Blampu%2Blalu%2Blintas%2Bswitch%2Bcase.png"/></a></figure><p id="93164a23-52fd-43f2-b3d5-c2385d8bfba9" class=""><strong>Eksperimen</strong>: Cobalah untuk menghilangkan <code>break</code> di salah satu <code>case</code> dan perhatikanlah hasilnya.</p><h2 id="068ee281-6908-42c2-b640-d7b9956625a3" class=""><strong>Percabangan dalam Percabangan </strong><em><strong>(Nested)</strong></em></h2><p id="70afda28-19e1-47fd-a510-99f4e459b979" class="">Kita sudah tahu tiga bentuk dasar percabganan di Java. Selanjutnya, kita coba bahas percabangan yang ada di dalam perbangan (perabangan bersarang).</p><p id="6d032f9c-ce4c-4e9b-b3be-b0e1febcfb11" class="">Jadi, percabangan itu bisa dibuat di dalam percabangan. Kadang teknik ini disebut juga <em>nested if</em>.</p><p id="66b81a18-f016-4267-ae95-8577e49c14b0" class="">Contoh kasus:</p><p id="27d8ead2-3307-4be7-a365-1414afe30b42" class="">Misalnya ada model bisinis seperti ini di sebuah toko. Ketika orang membayar di kasir, biasanya ditanya ada kartu member untuk mendapatkan diskon dan sebagainya.</p><pre id="aa7224a6-2870-4ffb-abf3-ce39268733c2" class="code"><code>* Apakah anda punya kartu member ? - ya 
+* Apakah belanjaan anda lebih dari 500rb ? # ya : mendapatkan diskon 50rb # tidak : tidak mendapatkan diskon 
+* Apakah belanjaan anda lebih dari 100rb ? # ya : mendapatkan diskon 15rb # tidak: tidak mendapatkan diskon - tidak 
+* Apakah belanjaan anda lebih dari 100rb ? # ya : mendapatkan diskon 10rb # tidak: tidak mendapatkan diskon</code></pre><p id="a423a667-9280-42d0-9fea-0d88ba54312f" class="">Paham?</p><p id="a4ff2ef4-22c2-4a72-a7f9-f8bdd57ae514" class="">Kalau tidak, coba perhatikan flow chart-nya:</p><figure id="0f87c28f-1a22-42e2-a5ad-86bf53a5c1ec" class="image"><a href="https://2.bp.blogspot.com/-6ZrqC9I8Nxs/VkBWekgFwUI/AAAAAAAACLk/tdhCo5np2lk/s1600/flowchart%2Bpercabangan%2Bbersarang%2Bjava.png"><img src="https://2.bp.blogspot.com/-6ZrqC9I8Nxs/VkBWekgFwUI/AAAAAAAACLk/tdhCo5np2lk/s1600/flowchart%2Bpercabangan%2Bbersarang%2Bjava.png"/></a></figure><p id="c5a9dca5-dc5f-47d5-8d87-3275023f464c" class="">Masih belum paham?</p><p id="44bd8938-253e-4baf-938f-8805c88a78d7" class="">Kalau begitu mari kita coba dalam program.</p><p id="e48e033a-5f4f-4d66-9ae0-1b7cf68a5861" class="">Silahkan buat class baru bernama <code>Kasir</code> dan ikuti kode program berikut ini.</p><pre id="c5b5a90c-157c-494c-bcaa-aabb1ac4652c" class="code"><code>import java.util.Scanner;
+
+<em>public</em> <em>class</em> Kasir { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// deklarasi variabel dan Scanner 
+		int belanjaan, diskon, bayar; 
+		String kartu; 
+		Scanner scan = new Scanner(System.in); 
+		// mengambil input 
+		System.out.print(&quot;Apakah ada kartu member: &quot;); 
+		kartu = scan.nextLine(); 
+		System.out.print(&quot;Total belanjaan: &quot;); 
+		belanjaan = scan.nextInt(); 
+		// proses 
+		if (kartu.equalsIgnoreCase(&quot;ya&quot;)) { 
+			if (belanjaan &gt; 500000) { 
+				diskon = 50000; 
+			} else if (belanjaan &gt; 100000) { 
+				diskon = 15000; 
+			} else { 
+				diskon = 0; 
+			} 
+		} else { 
+			if (belanjaan &gt; 100000) { 
+				diskon = 5000; 
+			} else {
+				 diskon = 0; 
+			} 
+		} 
+		// total yang harus dibayar 
+		bayar = belanjaan - diskon; 
+		// output 
+		System.out.println(&quot;Total Bayar: Rp &quot; + bayar); 
+	}
+}</code></pre><p id="7129c295-bc97-4667-83df-f303ea260073" class="">Hasil outputnya:</p><figure id="52b8774e-868f-4d4d-a432-5dbcdb3e9f93" class="image"><a href="https://3.bp.blogspot.com/-1H-uAWXBmxs/WO8GZByoXbI/AAAAAAAAErc/MDBuvrhyE9U670LjowqU6o8uAMlm30mlACPcB/s1600/Hasil%2Boutput%2Bprogram%2Bif%2Bbersarang.png"><img src="https://3.bp.blogspot.com/-1H-uAWXBmxs/WO8GZByoXbI/AAAAAAAAErc/MDBuvrhyE9U670LjowqU6o8uAMlm30mlACPcB/s1600/Hasil%2Boutput%2Bprogram%2Bif%2Bbersarang.png"/></a></figure><p id="1d3c2096-aed7-4a98-9fce-2c78ef2252d4" class="">Cobalah untuk mengubah nilai yang dimasukkan dan perhatikan hasilnya.</p><p id="fb2d514f-1e27-4d80-86c1-c4f0af572440" class="">Mungkin di sana ada yang perlu diperhatikan:</p><ul id="18f2ccd0-0708-4a1d-9868-b498044516e6" class="bulleted-list"><li>Fungsi <code>equalsIgnoreCase(&quot;ya&quot;)</code> digunakan untuk membandingkan String dengan tidak memperdulikan huruf besar dan kecilnya.</li></ul><ul id="46f378bf-39ee-40c5-a19b-5857f7dd2ae6" class="bulleted-list"><li>Ada juga Fungsi <code>equals()</code>, fungsinya sama. Tapi <code>equals()</code> akan memperhatikan <em>case</em> hurufnya.</li></ul><p id="6a2aa2be-8af5-4675-adbd-c73d3409a8af" class="">Kenapa tidak menggunakan operator <code>==</code> atau <code>!=</code>?</p><p id="f298d5ca-a052-4150-ba40-1cecf7f8f385" class="">Di Java memang seperti itu.</p><p id="6095807f-a8d8-40e1-b140-82a7d38f7b65" class="">Kalau kita ingin membandingkan nilai String, ya… menggunakan fungsi yang dua tadi.</p><p id="7e6e2ba6-509d-4aaf-906e-db45d9e4c9a9" class="">Tapi, kalau membandingkan selain String, maka bisa pakai operator <code>==</code> atau <code>!=</code>.</p><h2 id="227d510f-12b0-400d-9dc3-963bc97e1a4c" class=""><strong>Menggunakan Operator Logika dalam Percabangan</strong></h2><p id="548eb901-f547-44b4-ac50-4d9431f751d2" class="">Operator logika dalam percabangan sebenarnya bisa membuat percabangan menjadi lebih singkat.</p><p id="7d6ed6d0-96f1-41b8-96d1-c2981bac6957" class="">Misal ada program <em>Tilang</em> dengan logika seperti ini:</p><pre id="becdd274-403a-4fd2-840c-cf1b16b47cef" class="code"><code><em>public</em> <em>class</em> Tilang { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		boolean SIM = false; 
+		boolean STNK = true; 
+		// cek apakah dia akan ditilang atau tidak 
+		if(SIM == true){ 
+			if( STNK == true ) { 
+				System.out.println(&quot;Tidak ditilang!&quot;); 
+			} 
+		} else { 
+			System.out.println(&quot;Anda ditilang!&quot;); 
+		} 
+	}
+}</code></pre><p id="0cff9932-6cc6-48ca-8c91-48fc8668a926" class="">Perhatikan: di sana kita menggunakan percabangan bersarang untuk mengecek, apakah dia ditilang atau tidak.</p><p id="66de585c-b849-41bb-a039-e45fc4db5c50" class="">Hal ini sebenarnya bisa disingkat dengan operator logika, sehingga menjadi seperti ini:</p><pre id="bef539ce-5181-495a-b9c1-4ce84b1993ca" class="code"><code><em>public</em> <em>class</em> Tilang { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		boolean SIM = false; 
+		boolean STNK = true; 
+		// cek apakah dia akan ditilang atau tidak 
+		if(SIM == true &amp;&amp; STNK == true){ 
+			System.out.println(&quot;Tidak ditilang!&quot;); 
+		} else { 
+			System.out.println(&quot;Anda ditilang!&quot;); 
+		} 
+	}
+}</code></pre><p id="6550a0d9-017f-417f-81cd-2b61dc754374" class="">Pada kode di atas, kita menggunakan operator AND (<code>&amp;&amp;</code>).</p><p id="fad6ffb4-8e43-4f52-8e74-1558481a2724" class="">Karena logikanya: Si pengendara tidak akan ditilang kalau punya SIM dan STNK.</p><p id="035de2be-6b2f-4f4b-af8c-90da4e58c2f4" class="">Kita sudah pelajari beberapa macam bentuk percabagan dan pernak-perniknya, ringkasananya seperti ini:</p><ol id="935c4adb-4160-4f69-8292-f0da32e4c8cf" class="numbered-list" start="1"><li>Percabangan IF, hanya memiliki satu pilihan;</li></ol><ol id="8eb8d3b8-0ead-49aa-b114-e67603d85ce4" class="numbered-list" start="2"><li>Percabangan IF/ELSE memiliki dua pilihan;</li></ol><ol id="b1810375-bdb5-47e7-b0ca-7fb0f0c8edf4" class="numbered-list" start="3"><li>Percabangan dengan operator ternary adalah bentuk lain dari IF/ELSE;</li></ol><ol id="f64f5bc0-0a1c-46c1-adfd-d8a009bee20c" class="numbered-list" start="4"><li>Percabangan IF/ELSE/IF memiliki lebih dari dua pilihan;</li></ol><ol id="3664b797-1a09-491a-8e45-9748edbb52c5" class="numbered-list" start="5"><li>Percabangan SWITCH/CASE adalah bentuk lain dari IF/ELSE/IF;</li></ol><ol id="93ed180e-df76-4e5c-b988-1229b9016c54" class="numbered-list" start="6"><li>Percabangan bersarang adalah percabangan dalam Percabangan;</li></ol><ol id="6ef09915-4b03-42b8-bcc0-161c665bc122" class="numbered-list" start="7"><li>Penggunaan operator logika dalam percabangan bisa membuat percabangan menjadi lebih singkat.</li></ol><p id="d1422a7f-d8e9-4f18-aabb-d57d3a9db6ad" class="">Wah, ternyata banyak juga ya.</p><p id="dbba8721-55f7-4978-973a-a173711230d6" class="">Intinya pahami yang tiga bentuk itu. Kemudian cobalah cari contoh kasus yang berbeda.</p><p id="cda7334b-620c-4498-bd2e-16064c305887" class="">Semakin banyak latihan semakin mantap.</p></div></article></body></html>

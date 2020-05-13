@@ -1,0 +1,749 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mengenal Class Anonymous di Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ae555aef-4f73-4b5b-8efd-3080a617b37e" class="page sans"><header><h1 class="page-title"><strong>Mengenal Class Anonymous di Java</strong></h1></header><div class="page-body"><p id="7734e25c-4325-4651-9a4b-bc7be6c61583" class="">Pada tutorial ini, kita akan belajar tentang anonymous class di Java. Mulai dari pengenalan dan alasan mengapa harus menggunakan class anonymous, hingga contoh programnya.</p><p id="24037a99-8692-4e7c-9e27-6f0fe073681d" class="">Class ini mungkin jarang kamu gunakan, atau mungkin sudah pernah kamu gunakan tapi tak sadar itu adalah anonymous class.</p><p id="995493a2-1bf1-4fa4-ae18-876876359f06" class="">Karena itu, mari kita bahas…</p><h2 id="b006354d-2ce5-40cb-94e9-1ca6ce5b025b" class=""><strong>Apa itu Class Anonymous?</strong></h2><p id="c5d15b81-039f-42fd-bc36-0ee9d2370333" class="">Class Anonymous adalah class yang <strong>tidak memiliki nama</strong>. Biasanya dibuat hanya untuk <strong>sekali pakai</strong> saja. Pada dasarnya class anonymous sama seperti class biasa. </p><p id="10859865-b3a5-4f90-b894-50da20489f9c" class="">Yang membedakan adalah tujuan ia dibuat.</p><p id="4b6ce813-1f0f-46a2-90e3-77b6ae4a9c53" class="">Biasanya class anonymous dibuat untuk mengimplementasikan interface dan class abstrak secara langsung.</p><p id="5d0db4e1-fd3a-497c-a3a7-842879a98ce2" class="">Class Anonymous mulai ditambahkan pada JDK versi 8. Jadi, buat kamu yang menggunakan JDK versi di bawah 8, maka class anonymous tidak akan bisa digunakan di sana.</p><h2 id="1741b8c3-bb6a-436f-8331-a20c5c69436a" class=""><strong>Mengapa Harus Menggunakan Class Anonymous?</strong></h2><p id="dff20f32-2c29-4c4e-908f-058324a20c51" class="">Anonymous class biasanya kita butuhkan saat tidak ingin membuat implementasi dari interface dan class abstrak dalam file Java yang berbeda.</p><p id="17582331-d05b-4809-af15-daa29eae35aa" class="">Kita ingin.. implementasinya langsung di dalam kode yang sedang ditulis.</p><p id="9b54a63e-b63b-4d45-bd52-8086ae9f60db" class="">Misalnya gini:</p><p id="d5d9bf27-af0a-4e98-8433-ead9f3f2cbf7" class=""><em>(kita pakai contoh kasus)</em></p><p id="7b3e3dd3-6145-4724-b024-0ee86374a3dd" class="">Kita mau pakai sebuah tombol dan tombol tersebut punya interface bernama <code>Clickable</code> yang akan meng-handle bagaimana tombol itu diklik.</p><pre id="c0f5c4f9-2d0c-4a54-b10e-2db7b4d6c150" class="code"><code>// ini interface yang akan menangani klik pada tombol
+<em>interface</em> Clickable { 
+	void onClick(); 
+	void onHover();
+}
+
+// dan ini class Tombol
+<em>class</em> Button { 
+	void setClickAction(Clickable event){ 
+		event.onClick(); 
+	}
+}</code></pre><p id="7c1276f7-326e-432d-b992-738345f8fa09" class="">Biasanya kita akan melakukan implementasi seperti ini:</p><pre id="1876255e-6295-4b85-b999-db09832d7732" class="code"><code><em>class</em> SubmitPost <em>implements</em> Clickable { 
+	// kode implementasi di sini
+}</code></pre><p id="e7188190-daa1-433c-84a3-483dc937d684" class="">Lalu membuat objek tombol pada main method:</p><pre id="a9135b3b-7897-4b18-97cf-808549d0b63c" class="code"><code>Button btn = new Button();
+Clickable submitAction = new SubmitPost();
+btn.setClickAction(submitAction);</code></pre><p id="1f7c998c-3671-4bf3-88f9-f1856ac23c91" class="">Nah ini sebenarnya bisa kita buat lebih sederhana dengan Class Anonymous.</p><pre id="dd63515f-8b49-42e7-9183-4f0fa3113178" class="code"><code>Button btn = new Button();
+Clickable submitAction = new SubmitPost();
+
+// menggunakan class anonymous untuk implementasi interface
+btn.setClickAction(new Clickable(){ 
+	// kode implementasi di sini
+});</code></pre><p id="9c235208-ffe8-4c92-ba72-ea8e31154259" class="">Jadinya kita tidak perlu lagi membuat class <code>SubmitPost</code> atau implementasi dari interface <code>Clickable</code>, karena sudah dibuat dengan class anonymous.</p><p id="e2e71864-85e7-4456-8321-9d5148ac86c9" class="">Sudah paham kan mengapa harus pakai class anonymous?</p><p id="77180fef-a1b7-4508-8805-c6769d5484b9" class="">Biasanya kamu akan menemui kasus ini saat ngoding Android dan Java FX.</p><p id="f42e2a92-14e9-485d-ba05-3e9f919e2307" class="">Baik, kalau begitu mari kita bahas lebih dalam tentang cara membuat dan menggunakan class anonymous.</p><h2 id="16ff9715-a8bb-4dc4-a9f8-fe4c7e360b7b" class=""><strong>Cara Membuat Class Anonymous</strong></h2><p id="090fa618-0070-414c-ab23-f1abed702a59" class="">Class anounymous bersifat seperti ekspresi, ia dapat dibuat seperti membuat variabel.</p><p id="2902f426-fb21-46d7-8fcf-83a9e6c67418" class="">Berikut ini cara membuat class anonymous:</p><figure id="a5b540e3-749e-453d-bf5a-c2fd4952ab3d" class="image"><a href="https://www.petanikode.com/img/java/oop/anonymous/membuat-class-anonymous.png"><img src="https://www.petanikode.com/img/java/oop/anonymous/membuat-class-anonymous.png"/></a></figure><p id="a6659dd4-74b9-4890-813d-ea7818fed20b" class="">Tungu dulu!</p><p id="7f06e58f-d90a-4acb-b082-d9e64a8a89a6" class="">Tadi katanya class anonymous itu tidak memiliki nama..</p><p id="57c1d2e8-095f-4336-a010-66686e3177dc" class="">Tapi kok ini ada nama?</p><p id="a6376c61-6f5f-435b-94fb-dd58140e76f0" class="">Class anonymous memang tidak memiliki nama, namun dalam pembuatannya ia akan menggunakan nama dari Interface atau class abstrak yang ia implementasikan.</p><p id="b77c4ba9-6c27-4bd8-9bb6-cd569a3ff2b0" class="">Kalau nggak begitu, terus bagaimana kita tahu interface atau class abstrak yang mana yang akan dia implementasikan.</p><p id="cef7fdbc-a062-442a-b2e5-b48d54b0ca5e" class="">Class anonymous dapat kita buat di beberapa tempat:</p><ul id="f12c3e69-0eda-4ad2-a6b5-a57bd1672f8f" class="bulleted-list"><li>Fields (pada properti)<pre id="07b6aded-c13f-4c95-99aa-b02aa6e27869" class="code"><code><em>class</em> Sesuatu { 
+	String nama; 
+	int umur; 
+	Anonymous anonField = new Anonymous(){ 
+		// impllementasi di sini 
+	}
+}</code></pre></li></ul><ul id="428acd0a-97fc-4a9a-8259-004df862c478" class="bulleted-list"><li>Di dalam method (parameter dan body)<pre id="79448f22-70f8-4d90-b95b-8242b361682a" class="code"><code><em>class</em> Sesuatu { 
+	String nama; 
+	int umur; 
+	void sayHello(new Anonymous(){ 
+		// kode implementasi di sini 
+	}); 
+	void sayThanks(){ new Anonymous(){ 
+		// kode implementasi di sini 
+	} }
+}</code></pre></li></ul><ul id="501ad7dc-041b-43c0-84fe-18e7f67d6c62" class="bulleted-list"><li>Instance initializers (seperti gambar di atas)<pre id="40d914b1-1749-4bda-9453-145180679b1d" class="code"><code><em>class</em> Sesuatu { 
+	<em>private</em> Anonymous anonobj;
+	void Susuatu(){ 
+		this.anonobj = new Anonymous(){ 
+			// kode implementasi di sini 
+		} 
+	}
+}</code></pre></li></ul><ul id="e08dbb59-4aa1-46a7-bb64-a5fc96f2ef63" class="bulleted-list"><li>Local classes (di dalam inner class)<pre id="c8fafbcf-558d-48c7-8443-98e7611776b5" class="code"><code><em>class</em> Sesuatu { 
+	<em>class</em> Lokal { 
+		void doSomething(){ 
+			new Anonymous(){ 
+				// kode implementasi di sini 
+			} 
+		} 
+	}
+}</code></pre></li></ul><p id="92844954-d471-45a9-b02b-33bbe3be83fb" class="">Oh iya, class anonymous tidak boleh memiliki konstruktor.</p><p id="820b9982-cda5-4e8c-a60b-63efe52bbeee" class="">Oke, sekrang mari kita coba contohnya di dalam program.</p><h2 id="e7bfaad6-20c3-4898-afe7-0391a1bfd65c" class=""><strong>Contoh Program dengan Class Anonymous</strong></h2><p id="c3d0e289-fc38-4a49-8260-5215f8b028e3" class="">Silahkan buka Netbeans, lalu buatlah proyek baru dengan nama <code>ClassAnonymous</code>.</p><figure id="705797aa-3d6c-423a-96db-ae3e60ca4d2e" class="image"><a href="https://www.petanikode.com/img/java/oop/anonymous/new-project.png"><img src="https://www.petanikode.com/img/java/oop/anonymous/new-project.png"/></a></figure><p id="42babd58-13fc-4e12-9a1e-4f1346a640ee" class="">Setelah itu, buat sebuah interface baru pada package <code>&lt;default package&gt;</code> dengan nama <code>Clickable</code> dan isi kodenya seperti ini:</p><pre id="c5491bbc-a857-4413-ba49-e2809fa7adaf" class="code"><code><em>interface</em> Clickable { 
+	void onClick();
+}</code></pre><p id="c3c970eb-696c-400d-9581-861ccabfd429" class="">Setelah itu, buatlah class <code>Button</code> dengan isi seperti ini:</p><pre id="d8f42a30-5a0b-458f-ad8c-ccd63668552e" class="code"><code><em>public</em> <em>class</em> Button { 
+	<em>private</em> Clickable action; 
+	void setClickAction(Clickable action){ 
+		this.action = action; 
+	} 
+	void doClick(){ 
+		action.onClick(); 
+	}
+}</code></pre><p id="a77ce1d8-30e6-48ea-a1a3-080ae01cd82d" class="">Terakhir, buatlah class <code>Main</code> dengan isi seperti ini:</p><pre id="5dc633a5-9f11-4c3f-8769-044de387bcff" class="code"><code><em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		Button btn = new Button(); 
+		// membuat class anonymous untuk implementasi interface 
+		btn.setClickAction(new Clickable() { 
+			@Override <em>public</em> void onClick() { 
+				System.out.println(&quot;Tombol sudah diklik!&quot;); 
+				System.out.println(&quot;Yay!&quot;); 
+			} 
+		}); 
+		// mencoba klik tombol 
+		btn.doClick(); 
+	}
+}</code></pre><p id="69469a8e-26af-43a2-97a8-5ad239d440b3" class="">Semuanya sudah siap, sekarang coba jalankan programnya.</p><p id="fce83ec0-6708-4650-a1e5-df88518f8b2c" class="">Maka hasilnya:</p><figure id="25ea89e0-d9b7-45cb-875b-2bb25f4b1dfe" class="image"><a href="https://www.petanikode.com/img/java/oop/anonymous/contoh-anonymous-class.png"><img src="https://www.petanikode.com/img/java/oop/anonymous/contoh-anonymous-class.png"/></a></figure><h2 id="978a0b12-fef5-4274-bf6a-31d30c03fbf6" class=""><strong>Akses Variabel di Anonymous Class</strong></h2><p id="e205dc0a-858e-40fc-b90c-78f7a160babd" class="">Salah satu keuntungan saat kita menggunakan anonymous class adalah bisa mengakses variabel yang ada di dalam class tempat class anonymous itu dibuat.</p><p id="2c11bf7d-9b94-4441-ad50-e36d8ba7eb1c" class="">Contoh, sekarang coba ubah kode yang ada di class Main menjadi seperti ini:</p><pre id="96b637c9-ace5-463f-9cb8-9d47d09a8703" class="code"><code><em>public</em> <em>class</em> Main { 
+	// membuat variabel di dalam class <em>static</em> 
+	String title = &quot;Tutorial Anonymous Class&quot;; 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat variabel di dalam method main 
+		String name = &quot;Petani Kode&quot;; 
+		Button btn = new Button(); 
+		// membuat class anonymous untuk implemen interface 
+		btn.setClickAction(new Clickable() { 
+			// membuat variabel di dalam class anonymous 
+			String message = &quot;belajar Anonymous Class di Java&quot;; 
+			@Override <em>public</em> void onClick() { 
+				System.out.println(&quot;Tombol sudah diklik!&quot;); 
+				System.out.println(&quot;Yay!&quot;); 
+				// mengakses variabel 
+				System.out.println(&quot;Hello &quot; + name); 
+				System.out.println(title); 
+				System.out.println(message); 
+			} 
+		}); 
+		// mencoba klik tombol 
+		btn.doClick(); 
+	}
+}</code></pre><p id="23f9cbdf-85e0-45f7-b8ef-875f6ccd8596" class="">Hasilnya:</p><figure id="5fdc5e7c-a247-4053-a334-43e9f2799900" class="image"><a href="https://www.petanikode.com/img/java/oop/anonymous/contoh-askes-variabel.png"><img src="https://www.petanikode.com/img/java/oop/anonymous/contoh-askes-variabel.png"/></a></figure><p id="81d50c24-0e9d-4113-8642-c856fb277a4a" class="">Semua variabel yang kita buat bisa diakses dari dalam anonymous class. Hebat kan!</p><p id="42058daa-499f-47d8-aec6-7846a4620d38" class="">Tapi class anonymous juga punya batasan, yakni kita tidak bisa mendeklarasikan member interface dan variabel static di dalamnya.</p><figure id="b2fec5a0-9ec7-4a30-addc-3a635333400d" class="image"><a href="https://www.petanikode.com/img/java/oop/anonymous/static-var.png"><img src="https://www.petanikode.com/img/java/oop/anonymous/static-var.png"/></a></figure><h2 id="cc47f65f-d6f0-4946-8f19-d5559eff020b" class=""><strong>Menggunakan Anonymous Objek</strong></h2><p id="5ad9a38e-219d-4dbb-98ea-f44422217109" class="">Kalau ada class anonymous, pasti juga akan ada objek anonymous.</p><p id="41e0f89e-053c-4fbd-b1b6-eca0d789085b" class="">Objek anonymous adalah objek yang tak memiliki nama dan dia juga biasanya digunakan hanya untuk sekali pakai saja.</p><p id="acbafbc7-6cda-4022-8ae8-41e509c42a36" class="">Sebenarnya pada contoh di atas, kita sudah menggunakan objek anonymous sebagai parameter pada method <code>setActionClick().</code></p><pre id="26703d47-be37-4561-ad26-86bc0c3bac2d" class="code"><code>// jika tidak menggunakan anonymous objek
+// maka kita harus bikin instance baru dari anonymous class
+Clickable clickAction = new Clickable() { 
+	// kode implementasi di sini
+}
+// baru setelah itu dipakai menjadi partameter
+btn.setClickAction(clickAction);
+// Tapi jika menggunakan anonymous objek,
+// kita tak perlu bikin objek baru.
+// langsung saja ditulis seperti ini
+btn.setClickAction(new Clickable(){ 
+	// kode implementasi di sini
+});</code></pre><p id="ada169ca-1c4d-4220-8fd3-e02fe9736d68" class="">Kita juga dapat menggunakan class anonymous secara langsung tanpa harus membuat objek baru.</p><p id="a04c396b-208f-4e8f-b05a-9c161feb43b8" class="">Contohnya:</p><pre id="98b3602f-aff0-48ab-a2f9-ca5ff62e446c" class="code"><code><em>interface</em> Talkable{ 
+	void sayHello();
+}
+
+// implementasi dan langsung digunakan
+new Talkable(){ 
+	@override void sayHello(){ 
+		System.out.println(&quot;Hello World!&quot;); 
+	}
+}.sayHello();
+// ^ karena ini anonymous objek,
+// jadi kita bisa langsung panggil methodnya</code></pre><p id="29d6da0d-e373-426d-865c-d3d10e9b7fd6" class="">Jadi dengan kata kunci <code>new</code>, kita akan bisa membuat anonymous objek.</p><p id="9ad644d9-f73d-4548-a55a-8d57e69ba315" class="">Oh iya, anonymous objek tidak hanya untuk class anonymous saja. Dia juga bisa dipakai untuk class biasa.</p><p id="8f6e83e9-ab4e-45bc-9a85-6cf9e96243b3" class="">Contoh:</p><pre id="aed53451-3719-4591-99bf-b4748c2247c7" class="code"><code>// membuat class biasa
+<em>class</em> Hello { 
+	void saySomething(){ 
+		System.out.println(&quot;Something..&quot;); 
+	}
+}
+// menggunakan class Hello untuk membuat anonymous objek
+new Hello().saySomething();</code></pre><h2 id="f88beb12-a9e2-4876-99c9-038947968478" class=""><strong>Apa Selanjutnya?</strong></h2><p id="24e9eb57-c47d-432c-bc3b-1bdb459ef974" class="">Menurut saya, class anonymous sangat membantu saat kita butuh implementasi langsung dari interface dan class abstrak. Ini akan menghemat waktu kita. Karena tidak perlu bikin class baru lagi secara terpisah.</p><p id="2cced8d8-d981-47bd-8d37-2e055a253b3c" class="">Selain itu, kode program kita juga akan terlihat lebih bersih dan mudah terbaca.</p><p id="f1b6911c-7615-408a-a9b1-80aa3ebffcee" class="">Terimakasih class anonymous</p><p id="0e1b903c-2f4b-407a-982f-14a52aba88ce" class="">Selenjutnya silahkan coba juga latihan mengimplementasikan class abstrak dengan class anonymous.</p><p id="a05371a9-83d7-4d07-8030-b261a77b2bdc" class="">Oh iya, Java punya satu lagi hal yang berbau ‘anonymous’, yakni <em>anonymous function</em> atau dikenal juga dengan <em>lambda expression</em>.</p></div></article></body></html>

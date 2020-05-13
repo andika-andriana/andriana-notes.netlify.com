@@ -1,0 +1,813 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memahami Konsep Dasar OOP (untuk Pemula)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2b77dd10-a3b2-49df-9f30-c55b3bcd8407" class="page sans"><header><h1 class="page-title"><strong>Memahami Konsep Dasar OOP (untuk Pemula)</strong></h1></header><div class="page-body"><p id="bf252011-5518-41d2-9361-f444037d8fda" class="">OOP merupakan hal yang harus dipelajari untuk memahami Java lebih dalam. Karena Java sendiri merupakan bahasa yang didesain untuk OOP.</p><p id="3d61ad5a-c632-4399-a077-fbfd0c3be84c" class="">Buktinya:</p><pre id="8e1b58f2-5ed5-4547-a4af-f1f069bceb87" class="code"><code><em>class</em> Hello { 
+	<em>public</em> <em>static</em> void main(String[] args){ 
+		System.out.println(&quot;Hello World!&quot;); 
+	}
+}</code></pre><p id="3cdd3345-579c-484d-a2e4-996e1d88042c" class="">OOP dikenal sebagai teknik pemrograman modern yang lebih efisien dan banyak digunakan pada <em>Framework</em>.</p><blockquote id="448de0d8-6601-487b-8f06-56ba9d9026cd" class="">Jika kamu ingin memahami Framework, pelajari dulu konsep OOP</blockquote><p id="61504409-e056-4eb8-87e6-58ed8b8d3275" class="">Jadi tidak ada alasan untuk tidak belajar OOP.</p><h2 id="008e3843-2e11-4b06-bb06-38e09c9fdc22" class=""><strong>Mengapa Sih Harus Belajar OOP?</strong></h2><p id="77bf58fe-3d12-4b12-9acf-89837b15d0c0" class="">Mengapa sih OOP itu penting?</p><p id="2e44264e-59a9-47e5-8fb7-a5744075fb7b" class="">Bukannya kita bisa bikin program dengan prosedural saja?</p><p id="ca93f244-63c1-4bf4-b87c-16669286990b" class="">Ya memang bisa…</p><p id="eb13da33-3b87-4a2c-8c66-3c563639e12b" class="">Tapi masalahnya nanti kalau programnya sudah semakin besar dan kompleks.</p><p id="8e615e2b-3815-47c5-a104-fe1ddb8d87ba" class="">Kode program akan sulit di-maintenance.</p><p id="89290ad2-d8a7-4e8d-b6f7-83af6c436796" class="">Pada pemrograman prosedural, kita biasanya memecah program menjadi beberapa prosedur.</p><p id="8851b780-8121-4c0b-891a-e4b6fc2345e6" class="">Lalu membuat variabel global dan lokal untuk menyimpan data.</p><figure id="5c56a4d8-6e6c-4893-bf10-6f69e0047dfa" class="image"><a href="https://www.petanikode.com/img/java/oop/prosedural.png"><img src="https://www.petanikode.com/img/java/oop/prosedural.png"/></a></figure><p id="e398d1d0-b79f-4d4c-b96d-1de432997238" class="">Semakin besar programnya, semakin banyak pula variabel dan prosedur yang harus dibuat.</p><p id="a10ee591-4fd1-45d5-a0e7-3c1b7bfa9362" class="">Lama-kelamaan, kode program akan sulit dimodifikasi.. karena sudah terlalu kompleks.</p><p id="1e2a3d11-a3a9-4c4e-9ae9-574ddb83344f" class="">Di sinilah kita harus menggunakan OOP.</p><h2 id="94fbc1b8-4958-4ee9-995d-2297349045e4" class=""><strong>Apa itu OOP?</strong></h2><p id="11a8d056-1055-4387-9c3d-8408f8a2b081" class="">OOP (<em>Object Oriented Programming</em>) atau dalam bahasa indonesia dikenal dengan pemrograman berorientasikan objek (PBO) merupakan sebuah paradigma atau teknik pemrograman yang <strong>berorientesikan Objek</strong>.</p><p id="324e8cae-17cf-40d9-8ff4-044fb5d0930a" class="">Pada OOP, Fungsi dan variabel <strong>dibungkus</strong> dalam sebuah <strong>objek</strong> atau <em>class</em> yang dapat saling brinteraksi, sehingga membentuk sebuah program.</p><figure id="041b9191-a163-4ce3-b0f7-1a71610b2eda" class="image"><a href="https://www.petanikode.com/img/java/oop/object.png"><img src="https://www.petanikode.com/img/java/oop/object.png"/></a></figure><p id="61ec8727-1218-4732-a3cd-880a4edc8e7b" class="">Dengan demikian, tidak akan ada lagi kode yang “berantakan.”</p><p id="38c5af5d-2cd1-4efd-b99c-a93995cdec9b" class="">Semua akan kita bungkus dalam objek.</p><p id="03e62b70-d5ee-4085-afe2-42eac9dfdbf0" class="">Tapi sebelum membuat objek, kita harus membuat class dulu…</p><h2 id="c5652016-9302-4e0c-8145-57bc8e4f073a" class=""><strong>Class dan Object</strong></h2><p id="65ee9161-c3e0-4025-a251-25ee3a3798c1" class="">Class sebenarnya bertugas untuk mengumpulkan prosedur/fungsi dan variabel dalam satu tempat.</p><p id="834c415c-8d7a-4255-8424-f3ab5bd0cb5e" class="">Contoh:</p><p id="2656fbcd-8c27-43ac-84af-0198c40b6c03" class="">Kita ingin membuat game sederhana, di dalamnya ada kucing dan makanan.</p><figure id="707c2deb-4dc7-4a5d-b505-deb8286d8f70" class="image"><a href="https://www.petanikode.com/img/java/oop/class-cat.png"><img src="https://www.petanikode.com/img/java/oop/class-cat.png"/></a></figure><p id="bafec90a-a9b9-42e8-a1ea-b26463eeeef4" class="">Dengan class, kita bisa menentukan.. mana variabel dan prosedur untuk kucing dan makanan.</p><p id="c03a03e8-4717-4a32-a626-8079c7e0e96b" class="">Class ini nanti yang akan kita pakai untuk membuat objek.</p><p id="30460b72-6c2f-453d-a7d8-8ebff2875f6e" class="">Jadi…</p><blockquote id="a7e63c4c-7ec3-40f2-9129-06515f4184b5" class="">Class adalah rancangan atau blue print dari sebuah objek.</blockquote><p id="9f785b2f-ca4a-442a-a7d2-e0882f27d09f" class="">Sedangkan objek adalah sebuah variabel yang merupakan <em>instance</em> atau perwujudan dari <em>Class</em>.</p><p id="b7eb37d3-1293-4ec0-ad1d-b56a3b534b82" class=""><em>Instance</em> bisa diartikan sebagai wujud dari <em>class</em>.</p><p id="15f91c5f-4c80-47b0-b610-396b23951f2c" class=""><em>Class</em> berisi definisi variabel dan fungsi yang menggambarkan sebuah objek.</p><p id="7cd880da-23ef-478c-9315-6c25b4eb4b98" class="">Dalam OOP:</p><ul id="6e998fb4-62e3-4209-b327-c05cc5c4e0a0" class="bulleted-list"><li><strong>Variabel</strong> disebut <strong>atribut</strong> atau <strong>properti</strong>;</li></ul><ul id="075b16d4-5fa2-4a62-b905-2f1e54e79062" class="bulleted-list"><li><strong>Fungsi</strong> disebut <strong>method</strong>.</li></ul><p id="0e72912d-0fde-4ea9-ab47-4aae08c0d843" class="">Contoh <em>Class</em>:</p><pre id="8575d1a1-630d-476c-b814-34e0e4daf8f9" class="code"><code><em>class</em> NamaClass { 
+	
+	String atribut1; 
+	String atribut2; 
+	
+	void namaMethod(){ 
+		... 
+	} 
+	void namaMethodLain(){
+		... 
+	}
+
+}</code></pre><p id="9019e6d4-87c3-4a52-ad8d-7527c754fa4e" class="">Lalu, Kita biasanya membuat objek <em>(instance)</em> seperti ini:</p><pre id="01c9e09b-c57a-4a77-945d-11c10de17cf0" class="code"><code>NamaClass namaObj = new NamaClass();</code></pre><p id="1ed1e05c-a1cd-4763-9b73-f10db35bd280" class="">Kata kunci <code>new</code> berfungsi untuk membuat objek baru dari <em>class</em> tertentu.</p><p id="cf680e3b-7c2c-4d97-897e-a07bda40173f" class="">Setelah membuat objek, kita bisa mengakses atribut dan method dari objek tersebut.</p><p id="409f0b27-0e3b-4275-89f0-56096edf5a29" class="">Contoh:</p><pre id="9993b95e-4f17-412c-b5ec-a7d94b8bee0d" class="code"><code>namaObj.namaMethod();
+namaObj.atribut1;</code></pre><p id="bbac5abb-1a7b-4a78-bc30-63bf296ac3bd" class="">Tanda titik (<code>.</code>) berfungsi untuk mengakses atribut dan method.</p><h2 id="2ac03f31-79bb-4ce8-9f01-58ec40fd81f7" class=""><strong>Contoh Program OOP</strong></h2><p id="ed0e5eec-e96d-4852-83c7-c8107e8abf76" class="">Kita akan menggunakan Netbeans, silahkan buat project baru.</p><figure id="3e188b66-9cdf-48cd-9aab-1aacec45069a" class="image"><a href="https://www.petanikode.com/img/java/oop/pilih-project.png"><img src="https://www.petanikode.com/img/java/oop/pilih-project.png"/></a></figure><p id="5fa3e17a-0d9d-4e24-8887-0414abcdf6b0" class="">Isi nama project-nya dengan <strong>“BelajarOOP”</strong> dan jangan centang <strong>“Create Main Class”</strong>.</p><figure id="0130934d-4ffd-4d82-b261-419b47e42383" class="image"><a href="https://www.petanikode.com/img/java/oop/project-baru.png"><img src="https://www.petanikode.com/img/java/oop/project-baru.png"/></a></figure><p id="4a526414-030c-486e-bb86-bb703090c9c0" class="">Setelah itu, silahkan buat <em>package</em> baru. Klik kanan pada <strong>&lt;default package&gt;</strong>, lalu pilih <strong>New-&gt;Java Package</strong>.</p><figure id="780db645-c138-4269-9995-1f49c8223151" class="image"><a href="https://www.petanikode.com/img/java/oop/membuat-package.png"><img src="https://www.petanikode.com/img/java/oop/membuat-package.png"/></a></figure><p id="23e1d11a-59f2-4191-b4a1-f4709fd53b90" class="">Isi nama <em>package</em> dengan <strong>“dasar”</strong>:</p><figure id="cc09e537-8d40-40b2-8bbb-309f9f069b87" class="image"><a href="https://www.petanikode.com/img/java/oop/nama-package.png"><img src="https://www.petanikode.com/img/java/oop/nama-package.png"/></a></figure><p id="cc60a542-b306-4270-8b8f-6b7f202c2c7f" class="">Setelah itu, di dalam package <code>dasar</code>, silahkan buat <em>class</em> baru bernama <code>Player.java</code>.</p><p id="e5fa52d0-8854-42ca-85eb-6f465b3c0708" class="">Klik kanan pada package <code>dasar</code> lalu pilih <strong>New-&gt;Java Class</strong>. Setelah itu, isi namanya dengan <code>Player.java</code>.</p><p id="71b50567-ae62-49d0-8669-ab70a2d944f9" class="">Silahkan tulis kode pada <code>Player.java</code> seperti ini:</p><pre id="06ecb683-eaaf-4388-828e-b4dd7d9fd39c" class="code"><code>/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dasar;
+
+/**
+ *
+ * @author andika-andriana
+ */
+public class Player {
+//    deklarasi atribut
+    String name;
+    int speed;
+    int healtPoint;
+    
+//   deklarasi method run
+    void run(){
+        System.out.println(name + &quot; is running..&quot;);
+        System.out.println(&quot;Speed: &quot; + speed);
+        System.out.println(&quot;HealtPoint: &quot; + healtPoint);
+    }
+    
+//  deklarasi method isDead untuk mengecek nilai kesehatan(healtPoint)
+    boolean isDead(){
+        if(healtPoint &lt;= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}</code></pre><p id="e8aade03-6ba7-4ae7-955f-68b967b56e1e" class="">Berikutnya, buat <em>class</em> baru lagi bernama <code>Game.java</code> dan isi kodenya seperti ini:</p><pre id="839e8737-b4bb-423c-b133-8ecf23cb3ae4" class="code"><code>/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dasar;
+
+/**
+ *
+ * @author andika-andriana
+ */
+public class Game {
+    public static void main(String []args){
+        //membuat object Player
+        Player petani = new Player();
+        
+        //mengisi atribut Player
+        petani.name = &quot;Andika Andriana&quot;;
+        petani.speed = 90;
+        petani.healtPoint = 0;
+        
+        //menjalankan method run
+        petani.run();
+        if(petani.isDead()){
+            System.out.println(&quot;Game Over!&quot;);
+        }
+    }
+}</code></pre><p id="069dcb99-cecb-47b4-8239-db2d1ffc2dca" class="">Coba eksekusi <code>Game.java</code> dengan klik kanan pada <code>Game.java</code> lalu pilih <strong>Run File</strong>. Maka hasilnya:</p><figure id="9df15453-3573-4d09-b0cb-a2bd0ee573c2" class="image"><a href="https://www.petanikode.com/img/java/oop/program-oop.png"><img src="https://www.petanikode.com/img/java/oop/program-oop.png"/></a></figure><p id="4a2e6e0a-bb28-4db4-b55a-90e983d65faf" class="">Coba ganti nilai <code>healthPoin</code> menjadi <code>0</code>.</p><pre id="3d0f7d91-3f11-40d4-ae5e-5864369e25fc" class="code"><code>petani.healthPoin = 0;</code></pre><p id="f82e556d-eef4-409e-8f16-7394f6a24a2c" class="">Setelah itu, coba eksekusi lagi:</p><figure id="101d1a95-2e1a-4eb4-acdc-0edb7ac7e1e8" class="image"><a href="https://www.petanikode.com/img/java/oop/output-game-over.png"><img src="https://www.petanikode.com/img/java/oop/output-game-over.png"/></a></figure><h3 id="9db6f0e1-94a9-40fc-aac3-a669704d6fb7" class="">Penjelasan.</h3><p id="97e8cdb8-4897-49fa-9dff-1cd4955f9c40" class="">Baik, kita mulai dari pembuatan <em>class</em>.</p><p id="26d2bedb-c0f1-4c95-9975-ba668bc431ca" class="">Pertama-tama, kita membuat sebuah <em>class</em> dengan nama <code>Player</code>. Class ini mendefinisikan objek Player dalam Game dengan atribut sebagai berikut:</p><ul id="c6bf0289-e72f-4f48-8032-e4f8851da42b" class="bulleted-list"><li><code>name</code> adalah nama objek;</li></ul><ul id="ab5986ad-e540-4c1b-a338-970483fe7617" class="bulleted-list"><li><code>speed</code> adalah kecepatan;</li></ul><ul id="12d4bf4a-4713-490e-a6b1-f7ff5011a9b4" class="bulleted-list"><li><code>healthPoin</code> adalah nilai kesehatan dari player, biasanya disingkat <code>hp</code>.</li></ul><p id="ef56bde6-b9d5-4785-b817-20482ea91cc3" class="">Lalu class <code>Player</code> memiliki method:</p><ul id="7dc3a622-94c8-4b61-bfc0-b6e199b7b94d" class="bulleted-list"><li><code>run()</code> untuk menggerakkan player;</li></ul><ul id="9c8247cc-c453-46a6-96a8-dc049848256c" class="bulleted-list"><li><code>isDead()</code> untuk mengecek kondisi kesehatan player. Method ini akan mengembalikan nilai <code>true</code> apabila nilai <code>hp</code> lebih kecil atau sama dengan nol (<code>0</code>), sebaliknya akan mengembalikan nilai <code>false</code>.</li></ul><p id="2184b965-887d-4128-be4c-c2609478f637" class="">Berikutnya kita membuat objek baru dari class <code>Player</code> pada class <code>Game</code> bernama <code>petani</code>.</p><pre id="d551ff09-546c-46f7-94a6-8ab556287f41" class="code"><code>// membuat objek player
+Player petani = new Player();</code></pre><p id="5b0a38a2-7530-4a79-8ef5-d46305b254d8" class="">Setelah itu mengisi atribut-atributny. Karena kalau tidak diisi akan bernilai <em>Null</em> dan bisa menyebabkan <em>NullPointerException</em>.</p><p id="1928e8a5-168f-4fc0-9b0b-f3ae6a183579" class="">Berikutnya kita coba modifikasi nilai <code>hp</code> menjadi nol.</p><p id="2a146a2f-4ad7-43cf-87ea-e08c35705d17" class="">Hasilnya, pesan <code>Game Over!</code> akan ditampilkan. Karena method <code>isDead()</code> akan mengembalikan nilai <code>true</code> jika nilai <code>hp</code> kurang atau sama dengan nol.</p><h2 id="1ab81e4f-1be2-4dd3-a451-83f0be0463d4" class=""><strong>Contoh Program OOP 2: Program Drone</strong></h2><p id="1bf5c944-4d83-4bf7-9529-4295e6e97eb9" class="">Untuk praktek berikutnya, coba buat class <code>Drone</code>.</p><pre id="35d7ba94-7571-4f6a-94aa-306016caae45" class="code"><code>/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dasar;
+
+/**
+ *
+ * @author andika-andriana
+ */
+public class Drone {
+    
+	// atribut 
+	int energi; 
+	int ketinggian; 
+	int kecepatan; 
+	String merek;
+
+	// method 
+	void terbang(){ 
+		energi--; 
+		if(energi &gt; 10){ 
+			// terbang berarti nilai ketinggian bertambah 
+			ketinggian++; 
+			System.out.println(&quot;Drone terbang...&quot;); 
+		} else { 
+			System.out.println(&quot;Energi lemah: Drone nggak bisa terbang&quot;);
+		} 
+	}
+
+	void matikanMesin(){ 
+		if(ketinggian &gt; 0){ 
+			System.out.println(&quot;Mesin tidak bisa dimatikan karena sedang terbang&quot;); 
+		} else { 
+			System.out.println(&quot;Mesin dimatikan...&quot;); 
+		} 
+	}
+
+	void turun(){ 
+		// ketinggian berkurang, karena turun 
+		ketinggian--; 
+		energi--; 
+		System.out.println(&quot;Drone turun&quot;); 
+	} 
+
+	void belok(){ 
+		energi--; 
+		System.out.println(&quot;Drone belok&quot;); 
+		// belok ke mana? perlu dicek :) 
+	} 
+	
+	void maju(){ 
+		energi--; 
+		System.out.println(&quot;Drone maju ke depan&quot;); 
+		kecepatan++; 
+	} 
+	
+	void mundur(){ 
+		energi--; 
+		System.out.println(&quot;Drone mundur&quot;); 
+		kecepatan++; 
+	}
+	
+
+}</code></pre><p id="9ba253e3-fa3d-4ac8-b8c0-24af82041543" class="">Menjalankan program dengan main class:</p><pre id="4369c3e9-564e-407e-a04c-07f7708dbd8f" class="code"><code>/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dasar;
+
+/**
+ *
+ * @author andika-andriana
+ */
+public class GameDrone {
+    public static void main(String[]args){
+        //membuat object drone
+        Drone drone = new Drone();
+        
+        //assigne value variable
+        drone.merek = &quot;Huawei&quot;;
+        drone.energi = 200;
+        
+        System.out.println(&quot;Merek Drone: &quot; + drone.merek);
+        System.out.println(&quot;Energi Drone: &quot; + drone.energi);
+        System.out.println(&quot;\n&quot;);
+        
+        drone.terbang();
+        if(drone.energi &gt;= 10){
+          drone.maju();
+          drone.belok();
+          drone.turun();
+          drone.matikanMesin();
+        }else{
+          drone.matikanMesin();
+        }
+    }
+}</code></pre><h2 id="97f5a8b5-ac66-425c-b274-0e6076820dcf" class=""><strong>Bagaimana Menentukan Atribut dan Method dari Objek?</strong></h2><p id="251c9cb3-7c75-4982-84cc-e7dc7f235ec8" class="">Seperti yang sudah dijelaskan di awal. Objek memiliki data (atribut) dan operasi (fungsi).</p><p id="11b886ef-816f-4c48-873c-99d8dcbc37e9" class="">Kuncinya:</p><ul id="3a97dab4-a6b7-4c39-9637-192eb2b72fdd" class="bulleted-list"><li>Atribut itu seperti ciri-ciri dari objek.</li></ul><ul id="78d7f0e4-9b8b-4966-9396-a734583eb12c" class="bulleted-list"><li>Method itu seperti tingkah laku atau operasi.</li></ul><p id="6450e65a-afa6-4507-9e13-01c86131123f" class="">Contoh:</p><p id="706441f2-4724-4e21-a390-a76d6ca0b74a" class="">Misalkan kita ingin membuat <em>class</em> dari <code>Senjata</code>.</p><p id="8692242a-95ed-48ad-92fa-c9790fe6a5f6" class="">Apa ciri-ciri dari senjata atau data yang bisa dijadikan atribut?</p><ul id="0893192d-3e1d-47d3-acc3-99d9c5c92360" class="bulleted-list"><li>jumlah peluru</li></ul><ul id="3c008556-e643-4c5e-960a-cfb5bacfcc8c" class="bulleted-list"><li>jenis</li></ul><ul id="0b7a988d-f46b-4fab-94d4-9d272254fe27" class="bulleted-list"><li>nama senjata</li></ul><ul id="949f7d8e-76a1-4366-8ac3-dd0cc1ec66bb" class="bulleted-list"><li>berat</li></ul><ul id="b28c5c74-a285-48a5-aab5-11c06ee910d8" class="bulleted-list"><li>warna</li></ul><ul id="95e96671-c6b6-43fc-bf86-79b3340c29ef" class="bulleted-list"><li>dll</li></ul><p id="8e8709ee-136a-4119-841d-224f93ac4039" class="">Lalu apa tingkah laku atau operasi (fungsi) yang bisa dilakukan?</p><ul id="fa2f0906-5806-4933-91c9-f7c4e7a79c8e" class="bulleted-list"><li>tembak()</li></ul><ul id="11d57eb2-3321-4638-a46e-74135cbe8b8d" class="bulleted-list"><li>lempar()</li></ul><ul id="62bd8a45-1fc8-4353-8241-20b8599e0a82" class="bulleted-list"><li>kurangiPeluru()</li></ul><ul id="898962e9-16b3-4cee-8c78-204f92794abc" class="bulleted-list"><li>reload()</li></ul><ul id="37f097da-cf5f-466e-8663-9f65e69709a8" class="bulleted-list"><li>dll.</li></ul><figure id="4c9ca4bb-252f-4b5d-8130-04e15e771683" class="image"><a href="https://www.petanikode.com/img/java/oop/objek-senjata.png"><img src="https://www.petanikode.com/img/java/oop/objek-senjata.png"/></a></figure><p id="39d10c72-2ed7-4e90-97a6-fabb93d27270" class="">Maka class-nya bisa dibuat seperti ini:</p><pre id="80e62307-b1bd-422e-b580-b04487f75796" class="code"><code><em>class</em> Senjata { 
+	// atribut 
+	String nama; 
+	int jumlahPeluru; 
+	// method 
+	void tembak(){ 
+		//.. 
+		// setelah nembak, kurangi peluru 
+		jumlahPeluru--; 
+	} 
+	void reload(){ 
+		//.. 
+		// kalau di-reload maka jumlah peluru diisi ulang 
+		jumlahPeluru = 300; 
+	}
+}</code></pre><p id="39ce60b4-b643-4edd-9eef-6869e78e4e33" class="">Mudah bukan…</p><h2 id="32992788-b613-46b0-906f-e9c1627a1215" class=""><strong>Mengenal Class Diagram</strong></h2><p id="d988d851-c46d-4ba5-9262-53f455ce9363" class=""><em>Class Diagram</em> adalah sebuah diagram yang menggambarkan hubungan antar <em>class</em>. <em>Class Diagram</em> dapat kita buat dengan aplikasi perancangan (CASE), seperti StarUML.</p><figure id="78028077-bd70-4ab8-a1e5-7cc78b75ace9" class="image"><a href="https://www.petanikode.com/img/java/oop/starUML.png"><img src="https://www.petanikode.com/img/java/oop/starUML.png"/></a></figure><p id="d239dcee-cc8f-4143-a88b-f05e4f7eb7d8" class="">Sebauh <em>class</em> digambarkan dengan sebuah tabel 1 kolom dan 3 baris.</p><p id="8b581602-fdd6-4bba-87ac-890a2d20016b" class="">Baris pertama berisi nama <em>class</em>; Baris kedua berisi atribut; dan Baris ketiga berisi method.</p><figure id="f8caaea5-abb5-4baa-960c-eb4c9272d40f" class="image"><a href="https://www.petanikode.com/img/java/oop/class.png"><img src="https://www.petanikode.com/img/java/oop/class.png"/></a></figure><p id="88f8b668-cfa6-45dd-8f15-51eb20619495" class="">Selain itu, terdapat garis yang menggambarkan hubungan antar <em>class</em>.</p><figure id="3ac2a3de-55b2-4eea-9adf-8ecba7f57d72" class="image"><a href="https://www.petanikode.com/img/java/oop/garis-relasi.png"><img src="https://www.petanikode.com/img/java/oop/garis-relasi.png"/></a></figure><p id="c2c2994f-bd13-4943-b7d8-55b9ae291e9c" class=""><em>Class Diagram</em> biasanya digunakan oleh <em>software engineer</em> untuk merancang software dengan paradigma OOP.</p><p id="ac91cbab-a049-4b00-adb7-0141f780f52a" class="">Sebagai programmer, kita hanya perlu tahu cara membaca dan menuliskannya ke dalam kode.</p><p id="cc30aa54-fe97-4aed-8c82-f8badc25ebfe" class="">Jika kamu tertarik dengan <em>class</em> diagram, bisa membaca buku-buku tentang UML.</p></div></article></body></html>

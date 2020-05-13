@@ -1,0 +1,666 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Apa Fungsi String[] args pada Pemrograman Java?</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="232d90c4-2cd9-473e-a25e-5117a08a75b1" class="page sans"><header><h1 class="page-title"><strong>Apa Fungsi String[] args pada Pemrograman Java?</strong></h1></header><div class="page-body"><p id="f3582dbb-8db1-47a3-88f9-ce6e60b1820f" class="">Saat awal-awal beralajar Java, kita sering menuliskan <code>String[] args</code> pada fungsi <code>main()</code>.</p><pre id="172e875b-6186-4d0c-9273-3e9eff5b300f" class="code"><code><em>class</em> Program { 
+	<em>public</em> <em>static</em> void main(String[] args){ 
+	//... 
+	}
+}</code></pre><p id="2e6fe3a1-e5ee-4d03-b93a-9101ea81bbc8" class="">Tanpa <code>String[] args</code> program tidak akan bisa dieksekusi. Bahkan akan mendapatkan error seperti ini.</p><figure id="1a52e336-6d0d-45a7-938a-a2cd5ae575d5" class="image"><a href="https://www.petanikode.com/img/java/args/program-tanpa-string-args.png"><img src="https://www.petanikode.com/img/java/args/program-tanpa-string-args.png"/></a></figure><p id="41cfa6c2-4d1a-4456-804a-e691b1034d27" class="">Fungsi <code>main()</code> tidak akan dikenali sebagai fungsi <code>main()</code> karena tidak memiliki parameter <code>String[] args</code>.</p><p id="1a893028-bed0-43f6-9074-35778779e852" class="">Apa sih kegunaan dari <code>String[] args</code>?</p><p id="e2a990a4-e522-4c70-acc0-ea92e572d69e" class="">Kenapa kita harus menuliskannya?</p><h2 id="7c09b6b3-bad0-4515-b97f-a0a4e4bd5039" class=""><strong>Mengenal Program Berbasis Teks</strong></h2><p id="9187180b-074e-4719-a05a-6ebd7ed0601f" class="">Sebelum menjawabnya, saya ingin memperkenalkan tentang program berbasis teks atau CLI <em>(Command Line Interface)</em>.</p><p id="6ee15d97-7449-41b0-9ada-aa6494713b42" class="">Program berbasis teks adalah program yang hanya memiliki tampilan dalam bentuk teks saja, biasanya dieksekusi melalui CMD atau Terminal.</p><p id="0323ab4b-1c29-4d48-a98f-b8ba4622fd36" class="">Pada program berbasis teks, kita sering mendengar yang namanya argumen, <em>flags</em>, opsi, dsb.</p><p id="9b7a9d5c-0c90-43a4-bb3d-ed23f67c3277" class="">Contoh:</p><p id="6e58c859-f90c-4fc3-a04e-67e71c454555" class=""><code>java -version</code></p><p id="0dd96472-c40d-4ce7-bd06-8999e2ffd03e" class="">Keterangan:</p><ul id="dd56107d-a981-4455-9a3d-474ec6483d5b" class="bulleted-list"><li><code>java</code> adalah perintah atau program berbasis teks;</li></ul><ul id="ec064a5d-428e-47d2-aed6-49c1135ef3da" class="bulleted-list"><li><code>-version</code> adalah argumen yang kita berikan agar perintah <code>java</code> menampilkan nomer versinya.</li></ul><p id="22bdbac3-ec3a-41ef-b40d-26fe67367aa3" class="">Nah salah satu cara agar program kita bisa menerima argumen seperti itu adalah melalui parameter <code>String[] args</code>.</p><p id="0b0ddd8d-7909-4e2f-81e9-8aeb3ed7df38" class="">Bagaimana caranya, berikut adalah contohnya.</p><h2 id="4d124ac1-6cca-4c87-afbb-a53e285a74ed" class=""><strong>Argumen untuk Program Berbasis Teks</strong></h2><p id="dc3fdcd8-2d8b-409c-a4df-f4dfbb8d315b" class="">Parameter <code>String[] args</code> berupa array dengan tipe data <em>String</em>.</p><p id="d081fb0e-baab-4fc9-b5c1-6f5d6ab91c10" class="">Parameter tersebut akan menampung semua argumen yang kita berikan ke program.</p><p id="7a120687-8825-4406-87f7-72219ba7ffd5" class="">Contoh:</p><p id="cf4d27b1-3c46-4943-aabe-7200a193d8e8" class=""><code>$ programku argumen1 argumen2 argumen3</code></p><p id="e8b38309-6859-4cf3-b73c-ead46b1e43cf" class="">Maka parameter atau variabel <code>args</code> akan berisi:</p><p id="8c714b84-523a-463a-8c8a-af24d610fad2" class=""><code>[&quot;argumen1&quot;, &quot;argumen2&quot;, &quot;argumen3&quot;]</code></p><p id="2cb27523-e54e-41af-beb0-79c8104790d8" class="">Selanjutnya tugas kita tinggal melakukan manipulasi dan pemrosesan terhadap argumen-argumen tersebut.</p><p id="0c0657ec-7116-4eba-a23a-df953cbbe80a" class="">Mari kita coba…</p><p id="47d9cd03-33c1-4dc4-8c62-76123a07a6af" class="">Buatlah sebuah program Java baru bernama <code>Petanikode.java</code>, lalu isi dengan kode berikut:</p><pre id="bfb2ad32-d257-48b6-a257-4a71f1d29512" class="code"><code><em>class</em> Petanikode { 
+	<em>public</em> <em>static</em> void main(String args[]){ 
+		System.out.println(&quot;Argumen yang diberikan:&quot;); 
+		for(int i = 0; i &lt; args.length; i++){ 
+			System.out.println(args[i]); 
+		} 
+	}
+}</code></pre><p id="649b3066-9980-482d-9fa6-408808c4e02c" class="">Setelah itu lakukan kompilasi melalui Terminal, dan eksekusi programnya dengan memberikan beberapa argumen.</p><figure id="92dba8bf-5370-4f7c-a22a-556071698254" class="image"><a href="https://www.petanikode.com/img/java/args/program-petanikode.png"><img src="https://www.petanikode.com/img/java/args/program-petanikode.png"/></a></figure><p id="1257b176-104b-4742-acc1-c33ddb2d140e" class="">Pada eksekusi tersebut, kita memberikan tiga argumen ke program <code>Petanikode</code>, yaitu <code>tes</code>, <code>123</code>, dan <code>percobaan</code>.</p><h2 id="38505452-e859-46f0-b016-44c37a4112e3" class=""><strong>Program Java dengan Argumen</strong></h2><p id="3b88dd08-9f5e-47d3-ab74-1e5e2863c2c0" class="">Baik, kita sudah tahu cara mengambil argumen melalui parameter <code>args</code>.</p><p id="a40bdaaa-aeaf-4628-9f6e-899938c7b61f" class="">Sekarang mari kita coba membuat program sederhana.</p><p id="1936b371-cd6c-4f7e-8802-0caecd9d65c6" class=""><strong>Requirement:</strong></p><p id="3531acc9-a9b6-4cc7-aebd-2ea01ecfdb9d" class="">Berikut ini beberapa argumen yang akan kita berikan ke program.</p><ul id="ce14c1b7-5782-4f3e-bede-b5f5fe05a56c" class="bulleted-list"><li>argumen <code>version</code> akan menampilkan versi program;</li></ul><ul id="9a5bdbd4-1e5c-49fc-b8d1-69fefdab9bfa" class="bulleted-list"><li>argumen <code>help</code> akan menampilkan bantuan program;</li></ul><ul id="ed16cad4-c25d-427e-98ec-31705138570b" class="bulleted-list"><li>argumen <code>hello</code> akan menampilkan pesan <code>Hello World</code>;</li></ul><ul id="b498cef0-2764-41fb-9a46-9048e16738f8" class="bulleted-list"><li>argumen <code>hello [nama]</code> akan menampilkan ucapan salam, misal: <code>Hello Petani Kode</code>.</li></ul><p id="9b43e6cf-9f23-4e33-9b18-782257cb756e" class="">Mari kita buat…</p><p id="b9e11af8-272f-49e2-8fb1-100be38a1a65" class="">Silahkan buat program java baru dengan nama <code>Petani.java</code>, lalu isi dengan kode berikut.</p><pre id="b58ad241-8bb1-4e1e-87c9-5a8b7c300a71" class="code"><code><em>class</em> Petani { 
+		<em>public</em> <em>static</em> void main(String[] args){ 
+			// cek dulu apakah ada argumen yang diberikan atau tidak 
+			if(args.length &gt; 0){ 
+				switch(args[0]){ 
+					case &quot;version&quot;: 
+					// tampilkan versi program 
+					System.out.println(&quot;Petani Version 1.0.0&quot;);
+					break;
+					case &quot;help&quot;: 
+					// tampilkan bantuan program 
+					System.out.println(&quot;Gunakan Perintah berikut:&quot;);
+					System.out.println(&quot;Petani version \t\t untuk mengecek versi&quot;); 
+					System.out.println(&quot;Petani help \t\t untuk menampilkan bantuan ini&quot;); 
+					System.out.println(&quot;Petani hello \t\t untuk menampilkan pesan hello world&quot;); 
+					System.out.println(&quot;Petani hello [nama] \t untuk menampilkan pesan hello [nama]&quot;); break; case &quot;hello&quot;: 
+					// tampilkan pesan hello 
+					if (args.length &gt; 1){ 
+						System.out.println(&quot;Hello &quot; + args[1]); 
+					} else { 
+						System.out.println(&quot;Hello World!&quot;); 
+					} 
+					break; 
+					default: 
+					// tampilkan ucapan argumen tidak dikenali 
+					System.out.println(&quot;argumen tidak dikenali, silahkan ketik `Petani help` untuk bantuan&quot;); 
+				} 
+			} 
+		}
+}</code></pre><p id="0a6387ea-5d5f-4a25-840f-f691a8a82ffc" class="">Setelah itu lakukan kompilasi dan eksekusi dengan memberikan beberapa argumen.</p><figure id="94b54574-4279-414d-98c0-8dd5675a6fd6" class="image"><a href="https://www.petanikode.com/img/java/args/program-args.png"><img src="https://www.petanikode.com/img/java/args/program-args.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="195f1001-d08e-433e-a98c-4f54a7d8b042"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Jadi begitulah manfaat dan fungsi dari <code>String[] args</code>.
+
+Tugasnya untuk menyimpan nilai argumen yang diberikan dari CMD atau terminal, sehingga kita bisa mengolahnya dalam program.
+
+Kita akan banyak membutuhkan <code>String[] args</code> apabila ingin membuat program berbasis teks yang memiliki argumen.</div></figure></div></article></body></html>

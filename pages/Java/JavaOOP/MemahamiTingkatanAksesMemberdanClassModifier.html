@@ -1,0 +1,658 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memahami Tingkatan Akses Member dan Class (Modifier)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8b216b2b-0a9e-4255-a7ea-2b90cae4218f" class="page sans"><header><h1 class="page-title"><strong>Memahami Tingkatan Akses Member dan Class (Modifier)</strong></h1></header><div class="page-body"><p id="63a01d2e-67e6-44a6-87e4-828125efc811" class="">Class dalam program Java dapat saling berhubungan dengan cara memberikan akses terhadap member mereka.</p><p id="0d6c0ba0-42cb-459a-bee1-1bda7f7f7e2d" class="">Salah satu hubungan class yang pernah kita pelajari adalah inheritance (pewarisan).</p><p id="06c8907b-496f-44b9-99ce-71efc3afa470" class="">Semua yang ada di dalam <em>class</em> (atribut dan <em>method</em>) disebut member. Biasanya akan ada tingkatan akses yang disebut modifier.</p><p id="e3ba0467-0aa0-4f6b-b30e-cdd2cf1cac97" class="">Pada hubungan <em>inheritance</em>, semua member di dalam class induk akan bisa diakses oleh class anak (subclass), kecuali member tersebut diberikan modifier <em>private</em>.</p><p id="c8af56a3-9efa-479b-9acd-dc2952adbedd" class="">Perlu diingat:</p><p id="74b56f47-1b6a-44e1-b554-6a6647d3fac9" class="">Modifier tidak hanya bisa diberikan kepada member saja. Tapi juga bisa diberikan kepada interface, enum, dan class itu sendiri.</p><p id="ba8488fc-c5a6-4bd8-87cc-d9ba5f0234c6" class="">Perhatikan kode program berikut:</p><figure id="5ee940ac-6e06-476d-91f4-e41826ad0598" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/modifier.png"><img src="https://www.petanikode.com/img/java/oop/modifier/modifier.png"/></a></figure><p id="cfb749ee-83d1-404c-976c-6e8f69b6e552" class="">Yang saya garis bawahi pada kode di atas adalah modifier. Modifier ini nanti akan menentukan batasan akses member dan class.</p><h2 id="ae8b20e6-4158-4caa-88c5-93466b5d1cfc" class=""><strong>Ada 3 Macam Modifier dalam Java</strong></h2><p id="598227b7-7446-4e5c-b106-471d4cd24781" class="">Secara umum ada 3 macam modifier yang digunakan dalam Java: <code>public</code>, <code>private</code>, dan <code>protected</code>.</p><p id="86c04f0f-2b4b-4ffa-b71d-64ad70db5078" class="">Apabila kita tidak menggunakan tiga kata kunci tersebut, maka member atau class itu tidak menggunakan modifier <em>(no modifier)</em>.</p><p id="048504ed-5664-4c52-a1a3-18d64392c5ca" class="">Masing-masing modifier akan menentukan di mana saja member bisa diakses.</p><p id="27da870a-f9fc-4394-9ee7-0ef60175516b" class="">Berikut ini tabel jangkauan untuk masing-masing modifier:</p><div id="b11b15e5-5831-4791-b7c0-e226fe72bd8c" class="collection-content"><h4 class="collection-title">Ada 3 Macam Modifier dalam Java</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Modifier</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Class</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Package</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Subclass</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>World</th></tr></thead><tbody><tr id="bc4d7cc3-9e47-4b33-8a48-248dfd002882"><td class="cell-title"><a href="Memahami%20Tingkatan%20Akses%20Member%20dan%20Class%20Modifier%208b216b2b0a9e4255a7ea2b90cae4218f/Ada%203%20Macam%20Modifier%20dalam%20Java%20b11b15e558314791b7c0e226fe72bd8c/public%20bc4d7cc39e474b338a48248dfd002882.html">public</a></td><td class="cell-QAXI">Y</td><td class="cell-WZvt">Y</td><td class="cell-tl+A">Y</td><td class="cell-iRdZ">Y</td></tr><tr id="38f23f0f-57b9-4d42-9f7e-5d9f76e20938"><td class="cell-title"><a href="Memahami%20Tingkatan%20Akses%20Member%20dan%20Class%20Modifier%208b216b2b0a9e4255a7ea2b90cae4218f/Ada%203%20Macam%20Modifier%20dalam%20Java%20b11b15e558314791b7c0e226fe72bd8c/protected%2038f23f0f57b94d429f7e5d9f76e20938.html">protected</a></td><td class="cell-QAXI">Y</td><td class="cell-WZvt">Y</td><td class="cell-tl+A">Y</td><td class="cell-iRdZ">N</td></tr><tr id="713f1c1a-12a0-4fbc-820f-e2d7cc43c3a6"><td class="cell-title"><a href="Memahami%20Tingkatan%20Akses%20Member%20dan%20Class%20Modifier%208b216b2b0a9e4255a7ea2b90cae4218f/Ada%203%20Macam%20Modifier%20dalam%20Java%20b11b15e558314791b7c0e226fe72bd8c/no%20modifier%20713f1c1a12a04fbc820fe2d7cc43c3a6.html">no modifier</a></td><td class="cell-QAXI">Y</td><td class="cell-WZvt">Y</td><td class="cell-tl+A">N</td><td class="cell-iRdZ">N</td></tr><tr id="dd460e0c-7d3c-45ea-b643-95ae5eb9e545"><td class="cell-title"><a href="Memahami%20Tingkatan%20Akses%20Member%20dan%20Class%20Modifier%208b216b2b0a9e4255a7ea2b90cae4218f/Ada%203%20Macam%20Modifier%20dalam%20Java%20b11b15e558314791b7c0e226fe72bd8c/private%20dd460e0c7d3c45eab64395ae5eb9e545.html">private</a></td><td class="cell-QAXI">Y</td><td class="cell-WZvt">N</td><td class="cell-tl+A">N</td><td class="cell-iRdZ">N</td></tr></tbody></table></div><p id="89e218b6-f21d-4caa-bfe5-eff978b6a570" class="">Keterangan:</p><ul id="d9d5936f-b1bb-41d3-a6e4-2a1f9764557c" class="bulleted-list"><li><code>Y</code> artinya bisa diakses;</li></ul><ul id="7f8af61b-f80b-41b5-aa1a-f1b54b7c6307" class="bulleted-list"><li><code>N</code> artinya tidak bisa diakses;</li></ul><ul id="6e0bd93f-6222-44a9-a99e-050c22f5bd98" class="bulleted-list"><li><code>Subclass</code> artinya class anak;</li></ul><ul id="b5409375-32f8-4808-97ee-3b27f9e810ba" class="bulleted-list"><li><code>World</code> artinya seluruh package di aplikasi.</li></ul><p id="8443eca6-7685-40c2-9665-d4f3e65735ae" class="">Pada tabel di atas… apabila kita tidak menggunakan modifier (no modifier), maka class dan member hanya akan bisa diakses dari Class itu sendiri dan package (class yang berada satu package dengannya).</p><p id="5eb5cc7a-3747-4d8b-9a6f-2c158c5c4011" class="">Agar bisa diakses dari mana saja, maka kita harus memberikan modifier <code>public</code>.</p><p id="9a9caadd-38cc-4334-af94-2ff46d44d481" class="">Mari kita lihat contohnya…</p><h3 id="d3fdbf14-76a1-406c-8192-86f36165d36f" class=""><strong>1. Public</strong></h3><p id="0deb1f6c-b5a3-4137-882f-7275eb3aae35" class="">Modifier <code>public</code> akan membuat member dan class bisa di akses dari mana saja.</p><p id="0a92cb16-51d4-403e-a664-0141b46fe70d" class="">Contoh:</p><pre id="0d9d3ca0-a1a0-4187-a633-856d7d3514f5" class="code"><code>package modifier;
+
+<em>class</em> Person { 
+	<em>public</em> String name; 
+	<em>public</em> changeName(String newName){ 
+		this.name = newName; 
+	}
+}</code></pre><p id="9dc0466a-6224-4584-8cec-0a9626ca0f16" class="">Pada class <code>Person</code> terdapat dua member, yaitu:</p><ol id="1a1e2797-95d5-4c37-92ac-66be637185de" class="numbered-list" start="1"><li>atribut <code>name</code></li></ol><ol id="f2e6d7eb-1522-4d38-b0fd-9043e1e2b9d2" class="numbered-list" start="2"><li>method <code>changeName()</code></li></ol><p id="135dd183-509e-48f8-9092-2b76b3013e62" class="">Kedua member tersebut kita berikan modifier <code>public</code> artinya mereka akan bisa diakses dari mana saja.</p><p id="731142c0-ee77-4ab9-a82f-5d23330e668e" class="">Namun, class <code>Person</code> tidak kita berikan modifier. Maka yang akan terjadi adalah class tersebut tidak akan bisa diimpor (diakses) dari luar package.</p><figure id="a5d732a2-dbee-4981-b05b-cd22e1ba054d" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/no-modifier.png"><img src="https://www.petanikode.com/img/java/oop/modifier/no-modifier.png"/></a></figure><p id="9aaa8368-2566-4afd-a6ba-f37644ce0556" class="">Percobaan mengakses class Person dari luar package</p><p id="86e1eda1-9bc9-4786-b6a9-5b8418c5f23a" class="">Class <code>Person</code> berada di dalam package <code>modifier</code>, lalu kita coba akses dari <em>default package</em>, maka yang akan terjadi adalah error seperti gambar di atas.</p><p id="2315a9e0-df86-4036-a0e6-c3afa3e7e5c7" class="">Bagaimana solusinya agar bisa diakses dari luar package?</p><p id="5283f4f4-0f69-484e-90b5-f0b2bb497f21" class="">Ya kita harus menambahkan modifier <code>public</code> ke dalam class <code>Person</code>.</p><figure id="5b4b1235-87c0-43d8-b4c0-ed926ea58eb6" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/modifier-class.png"><img src="https://www.petanikode.com/img/java/oop/modifier/modifier-class.png"/></a></figure><p id="ec7c6ffb-8e23-49aa-8b12-e033bf357e8b" class="">Menambahkan modifier pada class Person</p><p id="99f99a71-e7f4-45db-997e-7d28f641ed59" class="">Maka error akan menghilang dan class <code>Person</code> akan bisa diimpor dari package manapun.</p><p id="07e4d730-6c90-487a-afe9-9c6dcb5be221" class="">Pada class diagram, modifier <code>public</code> digambarkan dengan simbol plus (<code>+</code>).</p><p id="71572031-dc75-4e95-b924-3d8bd13e89a5" class="">Contoh:</p><figure id="0d580f98-75fd-4366-a3cc-d517eb5efacc" class="image"><a href="https://www.petanikode.com/img/java/oop/class.png"><img src="https://www.petanikode.com/img/java/oop/class.png"/></a></figure><p id="f4efe531-fbf2-4028-a6eb-c18df68e5dcf" class="">Semua member dalam class <code>Player</code> memiliki modifier <code>public</code>. Perhatikan simbol <code>+</code> yang ada di depannya.</p><h3 id="575ca1a9-e4e1-4bb6-ac89-69dbf06bb5cb" class=""><strong>2. Private</strong></h3><p id="d851bc67-fcb0-4b13-a50e-31c2e1087ec1" class="">Modifier <code>private</code> akan membuat member hanya bisa diakses oleh dari dalam class itu sendiri.</p><p id="eeff5e89-8e61-4e84-8ca8-3879a33551fc" class="">Perlu diingat:</p><p id="cdd360a0-4379-459c-b65e-3aa5c93a3f00" class="">Modifier <code>private</code> tidak bisa diberikan kepada class, enum, dan interface. Modifier <code>private</code> hanya bisa diberikan kepada member class.</p><p id="ae76f7b1-7219-43fb-9fc4-0b1883949017" class="">Contoh:</p><pre id="c571988e-37a3-437b-84be-e44b1cf50552" class="code"><code><em>class</em> Person { 
+	<em>private</em> String name; 
+	<em>public</em> void setName(name){ 
+		this.name = name; 
+	} 
+	<em>public</em> String getName(){ 
+		return this.name; 
+	}
+}</code></pre><p id="204286a6-9555-4acb-a549-c75f407a708e" class="">Pada contoh di atas, kita memberikan modifier <code>private</code> pada atribut <code>name</code> dan modifier <code>public</code> pada method <code>setName()</code> dan <code>getName()</code>.</p><p id="b98c0b23-f709-4811-9f16-7924b94ce4e8" class="">Apabila kita coba mengkases langsung atribut <code>name</code> seperti ini:</p><pre id="a33b9cdd-bf1d-4541-8cb0-c793dfffefd4" class="code"><code>Person mPerson = new Person()
+mPerson.name = &quot;Petani Kode&quot;; // &lt;- maka akan terjadi error di sini</code></pre><p id="36db0bb7-bcb5-4997-83ed-4eeddc88645a" class="">Tidak percaya?</p><p id="a9b40c8a-2146-4f55-9a1e-d685bac56bf7" class="">Coba saja di Netbeans:</p><figure id="650c4321-b07c-48f6-b87a-4cb2bfe53ad1" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/akses-private-error.png"><img src="https://www.petanikode.com/img/java/oop/modifier/akses-private-error.png"/></a></figure><p id="d9bc24e9-dd87-4467-a6c3-1e3ecc748753" class="">Lalu, bagaimana cara mengakses member <code>private</code> dari luar class?</p><p id="cae2dfff-573d-4772-ba69-369329d23472" class="">Kita bisa memanfaatkan method setter dan getter. Karena, method ini akan selalu diberikan modifier <code>public</code>.</p><p id="401b614d-ba74-431f-b7d5-ebb3ba495e1c" class="">Contoh:</p><pre id="223b8da0-1d31-4dfb-a2bc-ed0ee51e5645" class="code"><code>Person mPerson = new Person();
+mPerson.setName(&quot;Petani Kode&quot;);
+System.out.println(&quot;Person Name: &quot; + mPerson.getName());</code></pre><p id="bb822ec9-1248-4136-bc6b-207a719a9427" class="">Pada class diagram, modifier <code>private</code> digambarkan dengan simbol minus (<code>-</code>).</p><figure id="0d6da88e-2d85-4a29-9b20-8acb8608e630" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/class-private.png"><img src="https://www.petanikode.com/img/java/oop/modifier/class-private.png"/></a></figure><h3 id="6ceab3e3-61ad-47fd-a651-bf56be3ae101" class=""><strong>3. Protected</strong></h3><p id="0be781f3-f7a8-4a65-b844-bf232f1bacd4" class="">Modifier <code>protected</code> akan membuat member dan class hanya bisa diakses dari:</p><ol id="28120292-1fd8-466e-90d2-8d9ef31e9b71" class="numbered-list" start="1"><li>Class itu sendiri;</li></ol><ol id="26bb7943-70d0-4c46-b8e8-153c43f3194c" class="numbered-list" start="2"><li>Sub class atau class anak;</li></ol><ol id="922e636e-d04d-4141-afa2-8709951c9a80" class="numbered-list" start="3"><li>Package (class yang berada satu package dengannya).</li></ol><p id="70f522b3-559a-4ec4-b565-4a1b37014d1f" class="">Modifier <code>protected</code> juga hanya boleh digunakan pada member saja.</p><p id="55c57a47-9c7e-4efd-baed-083b2683ad6f" class="">Contoh:</p><pre id="f3abe97f-70e9-4d85-8376-8b5d9bc684a5" class="code"><code>package modifier;
+<em>public</em> <em>class</em> Person { 
+	<em>protected</em> String name; 
+	<em>public</em> void setName(String name){ 
+		this.name = name; 
+	} 
+	<em>public</em> String getName(){ 
+		return this.name; 
+	}
+}</code></pre><p id="7f9d9d73-5ea6-481a-a87b-48a11adbab63" class="">Pada contoh di atas, kita memberikan modifier <code>protected</code> pada atribut <code>name</code>.</p><p id="75be92d7-1075-412d-a664-4d1dd2958d7a" class="">Apabila kita coba mengakses dari class yang satu package dengannya, maka tidak akan terjadi error.</p><p id="5784b77b-a6c5-447a-8d7b-445bf87af44b" class="">Namun, apabila kita mencoba mengakses dari luar package seperti ini:</p><pre id="a386b110-6cd7-4649-86e9-c6082256c0a7" class="code"><code>import modifier.Person;
+
+<em>public</em> <em>class</em> Author { 
+	Person p = new Person(); 
+	<em>public</em> Author() { 
+		// akan terjadi error di sini karena atribut name 
+		// telah diberikan modifier protected 
+		p.name = &quot;Petani Kode&quot;; 
+	}
+}</code></pre><p id="3ed07250-1e45-438f-a398-d59a7c5f5a87" class="">Maka akan terjadi error.</p><figure id="a66e51e3-9735-41ef-874b-748710ce4358" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/modifier-protected.png"><img src="https://www.petanikode.com/img/java/oop/modifier/modifier-protected.png"/></a></figure><p id="cbb25e1d-9663-4b80-9229-f06048957517" class="">Pada class diagram (di StarUML), modifier <code>protected</code> digambarkan dengan tanda pagar (<code>#</code>).</p><figure id="8fcad0b7-d124-4b5d-913b-bc1370fcaa9e" class="image"><a href="https://www.petanikode.com/img/java/oop/modifier/class-diagram-protected.png"><img style="width:240px" src="https://www.petanikode.com/img/java/oop/modifier/class-diagram-protected.png"/></a></figure><h2 id="94ffc1d2-6618-498d-aba0-f809a070e1b9" class=""><strong>Apa Selanjutnya?</strong></h2><p id="6ef0f7e3-8d1c-4e30-9f56-59e55348052b" class="">Kita sudah mengetahui 3 macam modifier dalam Java beserta contohnya. Masing-masing modifier akan menentukan batasan akses untuk member dan class.</p></div></article></body></html>

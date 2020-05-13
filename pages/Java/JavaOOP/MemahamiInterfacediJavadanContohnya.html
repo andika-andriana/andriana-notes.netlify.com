@@ -1,0 +1,735 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memahami Interface di Java (dan Contohnya)</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0b493250-f081-42fd-92ab-17f3ffa1e3f8" class="page sans"><header><h1 class="page-title"><strong>Memahami Interface di Java (dan Contohnya)</strong></h1></header><div class="page-body"><p id="3919f97b-62d7-45f1-8212-995a1f685ee7" class="">Ada yang bilang gini:</p><p id="3711549c-3386-44ca-ab53-5e4798583adf" class="">“Interface adalah <em>blue print</em> dari class. Isi method-nya kosong dan nanti akan diimplementasikan pada class lain.”</p><p id="a0ae1cd1-029c-4323-8e5a-6d37a06a4549" class="">Kamu bisa paham maksudnya?</p><p id="c4c0a1fc-b586-49d9-be1f-bc081ef3b769" class="">Tidak?</p><p id="297c3d0d-d320-446c-b6a4-4010bbea4aae" class="">Sama.. hehe</p><p id="608c929b-e970-4739-9f8e-4687908f3de4" class="">Ya, seperti itulah penjelasan yang saya terima saat baru awal belajar Java dan OOP dulu. Bukan tambah paham, malah bikin bingung.</p><p id="58d63d8e-5e9c-4563-8bb4-214cef859735" class="">Interface memang tak memiliki isi method.. dan pada tutorial sebelumnya kita juga pakai Interface untuk contoh Polimorfisme.</p><p id="3807abf8-be75-4f99-a8f5-e9c08ae59dbe" class="">Tapi bukan itu sebenarnya kegunaan utama dari Interface.</p><h2 id="d3e0ebc1-bbcc-438c-8260-7fdc42de3eb2" class=""><strong>Apa itu Interface?</strong></h2><p id="f0d5b471-50fd-49c1-aafd-700747a4a254" class="">Interface terdiri dari dua kata:</p><pre id="7a618f24-8795-4ce9-a3a3-07c4745cb936" class="code"><code>inter = antar
+face = muka</code></pre><p id="e3c4c410-f626-4425-b57c-2f1f0777d463" class="">Jadi interface adalah antarmuka.</p><p id="bbfbad60-0462-4c97-957e-e9f44ea5b415" class="">Kata ini mungkin sering kamu dengar. Contohnya seperti: GUI <em>(Graphical User Interface)</em> dan CLI <em>(Command Line Interface)</em>.</p><p id="813159b6-c5ee-4380-9ccc-769d57f862f5" class="">Secara umum, <em>interface</em> berfungsi sebagai <strong>penghubung</strong> antara sesuatu yang ‘abstrak’ dengan sesuatu yang nyata.</p><p id="990d80fa-afe7-4dbb-b52c-2972a6c4bdfe" class="">Contoh:</p><p id="8b6034be-3224-4b90-9dae-1ed290c78156" class="">Coba perhatikan handphone-mu, ada berapa tombol di sana?</p><p id="48795ec2-db08-41fb-8f49-cb8998ae1906" class="">Kalau HP zaman sekarang, paling cuma ada dua.. yakni tombol power dan tombol volume.</p><p id="88ed41d3-d93b-459b-9ecb-52fe9318a2c2" class="">Tombol-tombol inilah yang dimaksud interface. Sementara isi dalam HP-nya, kamu tak peduli atau tak akan tahu seberapa kompleks dan abstrak sistem yang ada di sana.</p><figure id="24993954-8a97-457d-8dea-9d5f0771cccc" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/interface.png"><img style="width:528px" src="https://www.petanikode.com/img/java/oop/interface/interface.png"/></a></figure><p id="751c4004-11b4-4288-8e80-557d4be8d49a" class="">Saat kamu menekan tombol di HP mu, ada beberapa hal yang mungkin terjadi:</p><ul id="0d1f2b3d-1a65-4789-8735-e04e94a2fe1a" class="bulleted-list"><li>HP menyala;</li></ul><ul id="5507436b-17ba-4183-aa6f-498dde5410fb" class="bulleted-list"><li>HP mati;</li></ul><ul id="5a157f16-3645-4cb8-af3b-5b3fe6d2300a" class="bulleted-list"><li>Suara HP tambah besar;</li></ul><ul id="0d67b3a5-5576-4b85-9f77-5305ae37076d" class="bulleted-list"><li>Suara HP mengecil;</li></ul><ul id="9eb84102-37dd-4918-b1a5-161560c27329" class="bulleted-list"><li>Mengambil gambar dari kamera;</li></ul><ul id="97770c08-d4d2-4060-a6c1-daba411f29ba" class="bulleted-list"><li>dll.</li></ul><p id="adb5f932-ca9a-47c6-a29d-0887ee406d05" class="">Ini tergantung bagaimana implementasi yang diberikan untuk tombol-tombol tersebut.</p><p id="e2c7cd30-9c4b-43c5-aa43-f6c259fbd323" class="">Beda merek HP, beda lagi cara mereka mengimplementasikannya.</p><p id="064d6bd9-9c60-4997-abc4-0f4329fba2b6" class="">Misal pada HP tertetntu, jika menekan tombol volume 3x.. maka akan mengambil screenshot. Sementara di HP merek lain, kita tidak bisa melakukan ini.</p><p id="2dcc8ac3-151f-4112-abfe-e9b339beb4e9" class="">Nah, konsep ini juga ada di dalam OOP.</p><p id="2fc133b3-b4d3-4c16-af95-b159e384be2b" class="">Bagaimana Contohnya?</p><p id="1dcc0981-fc1b-444e-a5db-b54b100d2fbd" class="">Mari kita lihat:</p><h2 id="1a20589e-fdbd-4338-a7da-f79548d5a313" class=""><strong>Contoh Program Interface</strong></h2><p id="6211c349-8a7c-4ae5-9992-ae971c401336" class="">Biar nyambung dengan penjelasan saya yang tadi, kita akan pakai contoh Handphone.</p><p id="535a3099-575f-4d2f-b7f0-8d9c269c619d" class="">Jadi.. ada dua objek yang akan kita hubungkan dengan interface.</p><p id="15e1ca34-2cc9-4d6c-b105-5d00025168ba" class="">Yakni manusia dan handphone. Manusianya kita sebut saja sebagai PhoneUser. Karena dia akan menggunakan objek HP.</p><p id="230d28f5-bba5-416c-978a-e0bd255c13c9" class="">Maka dapat kita buat class diagramnya seperti ini:</p><figure id="0a1ffb39-3845-4350-a2ac-d43613b8fdab" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/class-diagram-interface.png"><img style="width:672px" src="https://www.petanikode.com/img/java/oop/interface/class-diagram-interface.png"/></a></figure><p id="81c2895f-9782-4e65-a92c-04b2c71c9822" class="">Sekarang mari kita coba buat dalam bentuk kode. Buatlah proyek baru dengan nama <code>ContohInterface</code>.</p><figure id="b6739529-5862-4fc3-b775-e76159a2cfc3" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/new-project.png"><img src="https://www.petanikode.com/img/java/oop/interface/new-project.png"/></a></figure><p id="3b43e4c6-c976-4b0f-b385-7512b749005d" class="">Setelah itu, buat class baru di dalam <code>&lt;default package&gt;</code> dengan nama <code>Phone</code> dan isi kodenya seperti ini:</p><pre id="04dcbf35-fc69-4b9e-80f6-cdd76e769351" class="code"><code><em>public</em> <em>interface</em> Phone { 
+
+	int MAX_VOLUME = 100; 
+	int MIN_VOLUME = 0; 
+	
+	void powerOn(); 
+	void powerOff(); 
+	void volumeUp(); 
+	void volumeDown();
+
+}</code></pre><p id="9cca3a22-890f-45e3-8cab-a7f000df1a8b" class="">Berikutnya, buat lagi class baru dengan nama <code>PhoneUser</code> dan isi kodenya seperti ini:</p><pre id="e275f8dc-5f33-4d8f-bd18-22423bbe033f" class="code"><code><em>public</em> <em>class</em> PhoneUser { 
+	<em>private</em> Phone phone; 
+	<em>public</em> PhoneUser(Phone phone) { 
+		this.phone = phone; 
+	} 
+	void turnOnThePhone(){ 
+		this.phone.powerOn(); 
+	} 
+	void turnOffThePhone(){ 
+		this.phone.powerOff(); 
+	} 
+	void makePhoneLouder(){ 
+		this.phone.volumeUp(); 
+	} 
+	void makePhoneSilent(){ 
+		this.phone.volumeDown(); 
+	}
+}</code></pre><p id="d76c2f6d-c568-41a1-8b93-bab5da757a8f" class="">Berikutnya kita akan membuat class implementasi dari interface <code>Phone</code>. Kita coba buat satu saja dulu.</p><p id="10fbd203-7fca-4d94-bcb7-4f41e00bca57" class="">Silahkan buat class baru dengan nama <code>Xiaomi</code>, kemudian isi kodenya seperti ini:</p><pre id="44be6e1e-0602-483f-82b4-28afec4f95fb" class="code"><code><em>public</em> <em>class</em> Xiaomi <em>implements</em> Phone { 
+	<em>private</em> int volume; 
+	<em>private</em> boolean isPowerOn; 
+	<em>public</em> Xiaomi() { 
+	// set volume awal 
+	this.volume = 50; 
+	} 
+	@Override <em>public</em> void powerOn() { 
+		isPowerOn = true; 
+		System.out.println(&quot;Handphone menyala...&quot;); 
+		System.out.println(&quot;Selamat datang di XIAOMI&quot;); 
+		System.out.println(&quot;Android version 29&quot;); 
+	} 
+	@Override <em>public</em> void powerOff() { 
+		isPowerOn = false; 
+		System.out.println(&quot;Handphone dimatikan&quot;); 
+	} 
+	@Override <em>public</em> void volumeUp() { 
+		if (isPowerOn) { 
+			if (this.volume == MAX_VOLUME) { 
+			System.out.println(&quot;Volume FULL!!&quot;); 
+			System.out.println(&quot;sudah &quot; + this.getVolume() + &quot;%&quot;);
+			 } else { 
+				this.volume += 10;
+				 System.out.println(&quot;Volume sekarang: &quot; + this.getVolume());
+			} 
+		} else { 
+			System.out.println(&quot;Nyalakan dulu donk HP-nya!!&quot;); 
+		} 
+	} 
+	@Override <em>public</em> void volumeDown() { 
+			if (isPowerOn) { 
+				if (this.volume == MIN_VOLUME) { 
+					System.out.println(&quot;Volume = 0%&quot;); 
+				} else { 
+				this.volume -= 10; 
+					System.out.println(&quot;Volume sekarang: &quot; + this.getVolume()); 
+				} 
+		} else { 
+			System.out.println(&quot;Nyalakan dulu donk HP-nya!!&quot;); 
+		} 
+	} 
+	<em>public</em> int getVolume() { 
+			return this.volume; 
+	}
+}</code></pre><p id="c37f8a98-5dd4-4d7b-86bd-4a3ad0f245dd" class="">Terakhir, buatlah class <code>Main</code> dengan isi sebagai berikut:</p><pre id="b7666c7b-b851-4a6f-8eb2-9579fb67d06e" class="code"><code>import java.util.Scanner;
+<em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek HP 
+		Phone redmiNote8 = new Xiaomi(); 
+		// membuat objek user 
+		PhoneUser dian = new PhoneUser(redmiNote8); 
+		// kita coba nyalakan HP-nya 
+		dian.turnOnThePhone(); 
+		// biar enak, kita buat dalam program 
+		Scanner input = new Scanner(System.in);
+		String aksi; while (true) { 
+			System.out.println(&quot;=== APLIKASI INTERFACE ===&quot;); 
+			System.out.println(&quot;[1] Nyalakan HP&quot;); 
+			System.out.println(&quot;[2] Matikan HP&quot;); 
+			System.out.println(&quot;[3] Perbesar Volume&quot;); 
+			System.out.println(&quot;[4] Kecilkan Volume&quot;); 
+			System.out.println(&quot;[0] Keluar&quot;); 
+			System.out.println(&quot;--------------------------&quot;); 
+			System.out.print(&quot;Pilih aksi&gt; &quot;); 
+			aksi = input.nextLine(); 
+			if(aksi.equalsIgnoreCase(&quot;1&quot;)){ 
+				dian.turnOnThePhone(); 
+			} else if (aksi.equalsIgnoreCase(&quot;2&quot;)){ 
+				dian.turnOffThePhone(); 
+			} else if (aksi.equalsIgnoreCase(&quot;3&quot;)){ 
+				dian.makePhoneLouder(); 
+			} else if (aksi.equalsIgnoreCase(&quot;4&quot;)){ 
+				dian.makePhoneSilent(); 
+			} else if (aksi.equalsIgnoreCase(&quot;0&quot;)){ 
+				System.exit(0); 
+			} else { 
+			System.out.println(&quot;Kamu memilih aksi yang salah!&quot;); 
+			} 
+		} 
+	}
+}</code></pre><p id="56729ad0-8acb-4042-b553-bca1cd96e7ab" class="">Sekarang coba jalankan class <code>Main</code>. Caranya, Klik kanan lalu pilih <strong>Run File</strong> atau bisa juga dengan menekan Shift+F6.</p><p id="28954a05-389d-406d-b35e-fd594d59142b" class="">Maka hasilnya:</p><figure id="c2a99861-11e8-45f7-8cb9-ff554295e2ef" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/demo-contoh-program-interface.gif"><img src="https://www.petanikode.com/img/java/oop/interface/demo-contoh-program-interface.gif"/></a></figure><p id="41cdabb8-c33c-42fa-9b8d-46c5f628bee3" class="">Kalau kita perhatikan di dalam method <code>main()</code>.. kita hanya menggunakan objek dari class <code>PhoneUser</code> saja.</p><p id="9a857eed-6d09-418a-bbe3-760ca6f6b881" class="">Coba lihat kode-kode ini:</p><pre id="29b8a721-87df-4814-aca5-f0d41672ea4d" class="code"><code>dian.turnOnThePhone();
+dian.turnOnThePhone();
+dian.turnOffThePhone();
+dian.makePhoneLouder();
+dian.makePhoneSilent();</code></pre><p id="b333c2b7-3afa-4710-b2f7-552511d74b99" class="">Saat kita memanggil method-method ini, maka method yang ada di dalam objek <code>redmiNote8</code> yang akan dipanggil.</p><p id="c1dd622e-aade-4a27-8407-3f43f3059941" class="">Ini karena mereka terhubung dengan interface.</p><p id="44b0b945-4377-44d2-991c-afa669957d68" class="">Lalu pertanyaanya:</p><h2 id="ce41e372-17d2-4706-a83b-07ef6af4b64c" class=""><strong>Mengapa Harus Pakai Interface?</strong></h2><p id="26d5cec3-2844-4d0c-a3dc-fc1e635ceae7" class="">Sebenarnya kita tidak harus selalu menggunakan interface. Tapi dalam kasus tertentu, interface akan sangat berguna.</p><p id="f6a01251-dc0a-42fb-9553-95bf7b48a828" class="">Misalnya gini:</p><p id="a56dae97-70fd-4d43-aafe-219306625032" class="">Kita tahu objek <code>PhoneUser</code> membutuhkan objek dari handphone. Tanpa objek handphone, si objek user nggak akan bisa kita buat.</p><p id="0ba4e096-2b03-4796-83da-6cfb4956ce41" class="">Ini karena kita menetapkan pada konstruktornya.</p><p id="3dd30767-259c-42fb-9758-6c42391fa743" class="">Btw, ini juga disebut hubungan <em>dependency</em>..</p><figure id="7eaa14a5-8774-426e-bb14-9fc4e3fecaaa" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/class-phoneuser.png"><img src="https://www.petanikode.com/img/java/oop/interface/class-phoneuser.png"/></a></figure><p id="bf1541bf-3b13-42e6-ba81-0477bab0adb1" class="">Nah, di sana kita menggunakan interface <code>Phone</code> untuk membuat objek dependency-nya.</p><p id="0996a5d5-99db-47eb-a16f-b6641daf454b" class="">Kalau gak pakai interface memangnya kenapa?</p><p id="564df2e9-108d-4bb0-9d4c-3c7208ae75c4" class="">Untuk menjawab pertanyaan ini, mari kita coba ubah <code>Phone</code> menjadi <code>Xiaomi</code>.</p><figure id="29660149-13a2-4d36-b1b2-8e39aed22742" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/phoneuser-xiaomi.png"><img src="https://www.petanikode.com/img/java/oop/interface/phoneuser-xiaomi.png"/></a></figure><p id="3d16c36f-8949-4d5c-a452-9e832c61f100" class="">Apa yang akan terjadi?</p><p id="b0411344-f427-4fa6-9941-329b587be384" class="">Untuk saat ini tidak akan terjadi apa-apa. Tapi sekarang bagaimana kalau kita punya objek baru dari class yang mengimplementasikan interface <code>Phone</code> juga.</p><p id="eb209eeb-c4ee-4cf3-bc90-b261bf28f307" class="">Kita sebut saja objek baru tersebut adalah <code>iPhoneX</code> yang merupakan instance dari class <code>IPhone</code>.</p><figure id="f08271e2-6cf8-466e-8ac1-385f807a1969" class="image"><a href="https://www.petanikode.com/img/java/oop/interface/phoneuser-iphone.png"><img src="https://www.petanikode.com/img/java/oop/interface/phoneuser-iphone.png"/></a></figure><p id="9ae5d991-9d6b-4ac3-8833-799ef3d0fafa" class="">Maka objek <code>iPhoneX</code> tidak akan bisa diberikan kepada objek <code>PhoneUser</code>. Karena di konstruktornya dia cuma bisa pakai Xiaomi saja.</p><p id="e3ab73e5-d5b4-4e11-b73a-0fad03b9f01f" class="">Jadi.. mengapa kita harus pakai interface?</p><p id="baf402a3-fce0-453a-8419-4421f205b182" class="">Interface akan membuat si objek <code>PhoneUser</code> bisa menggunakan objek handphone apapun, dengan syarat objek handphone tersebut harus mengimplementasikan method dari interface <code>Phone</code>.</p><h2 id="4fca3de6-9421-4768-a939-9c2d7e7e00b8" class=""><strong>Hal-Hal yang tidak boleh dilakukan di Interface</strong></h2><p id="69aa4575-f365-4af7-82bf-495e73aa52ef" class="">Ada beberapa hal yang tidak boleh kamu lakukan saat membuat interface:</p><ul id="3ce32dc0-c443-486c-904b-4dc823aaeeb8" class="bulleted-list"><li>Jangan buat variabel di dalam interface, tapi membuat konstanta boleh;</li></ul><ul id="24ba920e-7303-4752-94d8-274c7da37689" class="bulleted-list"><li>Jangan mengisi method-nya, cukup tuliskan nama method, tipe data, dan parameter saja. Tapi untuk default metod boleh punya isi.<p id="097147bf-084c-4e43-adbd-4d7780bdbe74" class="">Contoh:</p></li></ul><ul id="0a43232c-3211-43c7-8542-87fcb1d7ca2c" class="bulleted-list"><li>Jangan berikan modifier <em>private</em> ataupun <em>protected</em> pada method dan konstanta yang ada di dalam interface.</li></ul><ul id="ef3724ee-a860-4d45-ac52-8ee31cc169d9" class="bulleted-list"><li>Interface tidak bisa dibuat objek instance-nya dengan kata kunci <code>new</code>.</li></ul><p id="8a7eb372-56cf-4d7d-ac68-e7381b78869f" class="">Kalau dilanggar gimana?</p><p id="5da33c68-70d3-4423-9182-a099aa8c9693" class="">Ya programnya akan error!</p><h2 id="c1b30af7-b9ae-422b-9648-97eb5a125ba7" class=""><strong>Apa Selanjutnya?</strong></h2><p id="c6c574a5-ea6e-44ce-ac16-8bf2c4e2a034" class="">Jadi kesimpulannya:</p><p id="f3e0f5ee-bfd5-479c-8667-8a82f6bbe301" class="">Interface merupakan penghubung antar objek. Interface bersifat abstrak, sehingga objek yang menggunakannya tidak akan perduli bagaimana ia diimplementasikan.</p><p id="0ff4f505-ea4d-48e7-bda9-4182c66ca612" class="">Karena bersifat abstrak, interface tidak bisa dibuat objek <em>instance</em> dengan kata kunci <code>new</code>.</p><p id="eb85f7f4-5379-493f-8902-f94444cb5003" class="">Interface sebenarnya mengamalkan prinsip Abstraksi dan Enkapsulasi (pembungkusan).</p></div></article></body></html>

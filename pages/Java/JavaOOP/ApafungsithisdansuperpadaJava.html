@@ -1,0 +1,721 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Apa fungsi &#x27;this&#x27; dan &#x27;super&#x27; pada Java?</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5397e7e8-9871-4bd6-9716-361a228db445" class="page sans"><header><h1 class="page-title"><strong>Apa fungsi &#x27;this&#x27; dan &#x27;super&#x27; pada Java?</strong></h1></header><div class="page-body"><p id="65fa28ec-ba26-4c7c-9f0a-c562c927271e" class="">Kata kunci <code>this</code> dan <code>super</code> sering muncul dalam program Java.</p><p id="d57d6eed-c6ca-40e5-a362-c64ca8eb6a84" class="">Apa sih fungsinya?</p><p id="0ce81493-0640-4c6c-abbf-af5f8b730293" class="">Pada kesempatan ini, kita akan membahasnya…</p><h2 id="bb2d90e4-7a21-4fa5-8dd5-6c5b23f43d6a" class=""><strong>Fungsi </strong><strong>this</strong><strong> pada Java</strong></h2><p id="3bd15eb5-7e1c-4f36-8f7d-a574ad25bf69" class="">Pada tutorial sebelumnya, kita sudah belajar tentang method <em>setter</em> dan <em>getter</em>.</p><p id="bce0744f-fba2-4070-901e-ce147a884b63" class="">Di sana kita menggunakan kata kunci <code>this</code> untuk mengisi variabel.</p><p id="893e9f15-bf7d-4dcc-8add-67e298f322fc" class="">Contoh:</p><pre id="a08f875e-71da-428e-8f66-48991efd70d4" class="code"><code><em>class</em> User { 
+	<em>private</em> String username; 
+	<em>private</em> String password; 
+	// ini method setter 
+	<em>public</em> void setUsername(String username){ 
+		this.username = username; 
+	} 
+	<em>public</em> void setPassword(String password){ 
+		this.password = password; 
+	} 
+	// ini method getter 
+	<em>public</em> String getUsername(){ 
+		return this.username; 
+	} 
+	<em>public</em> String getPassword(){ 
+		return this.password; 
+	}
+}</code></pre><p id="5730d3f4-0f66-4b31-bc48-a4a6ce856475" class="">Lihat! <code>this</code> kita gunakan di setiap method.</p><p id="97fdc69c-a2f0-4c50-9087-0761aec04228" class="">Coba perhatikan salah satu method:</p><pre id="240eeb0a-7352-401c-9b56-1177f8fe01c2" class="code"><code><em>public</em> void setUsername(String username){ 
+	this.username = username;
+}</code></pre><p id="b912277b-fc9f-4658-a302-955b3d99968f" class="">Bagaimana kalau kita hapus <code>this</code> pada method ini?</p><pre id="cafc5c9b-b5a8-4e6a-8e11-07a8fb0a75a7" class="code"><code><em>public</em> void setUsername(String username){ 
+	username = username;
+}</code></pre><p id="5d12b0c6-7304-4f07-98ec-55c784e342d0" class="">Apa yang akan terjadi?</p><p id="4ed55f92-3dab-4721-96ab-31e4e209e6f0" class="">Yak! komputer akan bingung…</p><p id="09d837b1-81c1-4eb8-a841-87dbcd726a85" class="">Karena tidak tahu variabel <code>username</code> yang mana yang dimaksud.</p><p id="eb5c695c-397c-4d4a-a543-b048d65362ab" class="">Apakah variabel yang di class (<code>private String username</code>) ataukah variabel <code>username</code> yang ada di dalam parameter.</p><figure id="9adcf8b3-b5df-4376-acb1-b8ffbf910eb0" class="image"><a href="https://www.petanikode.com/img/java/oop/this-super/ambigu.png"><img src="https://www.petanikode.com/img/java/oop/this-super/ambigu.png"/></a></figure><p id="990e957f-4ae8-4271-a334-21f97d483a19" class="">Jika kita sentuh <em>balon peringatan</em> di samping, maka kita akan mendapatkan pesan: <em><strong>“Assignment To Itself”</strong></em>.</p><figure id="d088b486-7795-46eb-81de-0d10009502c4" class="image"><a href="https://www.petanikode.com/img/java/oop/this-super/self-assign.png"><img src="https://www.petanikode.com/img/java/oop/this-super/self-assign.png"/></a></figure><p id="8c7489a4-97b2-4c31-99e3-0c0efc2a7c1a" class="">Ini artinya variabel tersebut mengisi dirinya sendiri.</p><p id="fe05be22-99a5-4e29-8db8-7a45462aa707" class="">Karena itu, kita harus menggunakan <code>this</code> untuk menyatakan variabel yang dimaksud adalah variabel yang ada di dalam class.</p><pre id="ec93ddfb-cd2b-4813-9e97-930c16c1f5a2" class="code"><code><em>public</em> void setUsername(String username){ 
+	this.username = username;
+}</code></pre><p id="89ff33b9-3bcf-4ab3-b11c-2c35603e226f" class="">Jadi…</p><p id="311f424a-16b4-4cc9-a075-f22dc99a00b3" class="">Kata kunci <code>this</code> digunakan sebagai referensi dari class itu sendiri.</p><p id="cc4682cd-f4e2-4004-a1d3-5fd8caa94ee1" class="">Masih bingung?</p><p id="e534fe21-04c9-4d73-ac0d-a6e280772909" class="">Oke, kalau begitu… setiap menemukan <code>this</code> coba gunakan pandangan ini:</p><blockquote id="11db8934-e69b-427c-915f-ef42eae51259" class="">this artinya class itu sendiri.</blockquote><p id="e9b3eb70-355d-4008-96ed-cba4da9e2f24" class="">Misalnya ada class lagi:</p><pre id="87af5536-25c2-4540-b01d-36c03ff862fa" class="code"><code><em>class</em> Person { 
+	<em>private</em> String name; 
+	<em>public</em> void setName(String name){ 
+		this.name = name; 
+	}
+}</code></pre><p id="1dee9d9b-b1d4-40e5-9d14-9b9bde734597" class="">Maka <code>this</code> yang dimaksud pada class tersebut adalah class <code>Person</code>.</p><p id="d01a3da6-105b-4bb2-886c-d123a3d10010" class="">Apakah kita bisa menggunakan <code>this</code> di luar class?</p><p id="210f9f48-ef43-4ca1-9ebd-36634a9e8563" class="">Tidak.</p><p id="4f81ac82-2fbe-40a9-ac72-f6b9ce5241ef" class=""><code>this</code> hanya bisa digunakan di dalam class saja.</p><p id="4733d626-e06b-4251-adf8-2cbf92cba32e" class="">Coba saja buat fungsi <code>main()</code> lalu gunakan <code>this</code> di sana. Maka yang akan terjadi adalah…</p><figure id="92b924b0-543a-4dd6-851f-28004e5a3a6b" class="image"><a href="https://www.petanikode.com/img/java/oop/this-super/this-main.png"><img src="https://www.petanikode.com/img/java/oop/this-super/this-main.png"/></a></figure><p id="7c1c1a47-3fdd-484e-8132-d607d5e409b9" class="">Yak! programnya akan error.</p><p id="a7668b17-cbf6-47d8-9583-bbae12392f62" class="">Karena variabel yang kita coba akses dari <code>main()</code> adalah variabel yang non-statis dan  <code>this</code> tidak bisa digunakan pada <code>main()</code>.</p><h2 id="ead00b5c-a792-4fb7-a609-9efe1286b3e0" class=""><strong>Fungsi </strong><strong>super</strong><strong> pada Java</strong></h2><p id="2c4c9073-79af-4e03-a16d-71ae7e5eb74a" class="">Jika <code>this</code> merepresentasikan objek dari class itu sendiri, maka <code>super</code> akan merepresentasikan objek dari class induk.</p><p id="61edcd46-035e-41c5-8c95-8041285c031a" class="">Perhatikan contoh ini:</p><p id="f24b4563-d7af-4e98-baec-ceb165940c2f" class="">Kita mencoba membuat class <code>Person</code> yang akan menjadi class induk atau super class.</p><pre id="2d8ead78-8624-4a42-8d8b-3801405c2364" class="code"><code><em>public</em> <em>class</em> Person { 
+	String name = &quot;Petanikode&quot;; 
+	int age = 22;
+}</code></pre><p id="67312975-7a7a-445d-89a4-73271c2db397" class="">Lalu, kita buat class turunannya (sub class), yaitu: class <code>Employee</code>.</p><pre id="c4d44bac-0fe8-4018-bee0-4d780e40f094" class="code"><code><em>public</em> <em>class</em> Employee <em>extends</em> Person { 
+	float salary = 4000f; 
+	String name = &quot;Dian&quot;; 
+	int age = 23; 
+	
+	<em>public</em> void showInfo(){ 
+		System.out.println(&quot;Name: &quot; + <em>super</em>.name);
+		System.out.println(&quot;Age: &quot; + <em>super</em>.age); 
+		System.out.println(&quot;Salary: $&quot; + salary); 
+	}
+
+}</code></pre><p id="c164ca9a-fe94-47ee-8fbe-510702cb3b00" class="">Berikutnya kita membuat class <code>Demo</code> untuk membuat objek dan method <code>main()</code>.</p><pre id="9b3e8b7d-5e12-41d3-b3ed-e88375d4e644" class="code"><code><em>public</em> <em>class</em> Demo { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		Employee dian = new Employee(&quot;Dian&quot;, 23, 4000f); 
+		dian.showInfo(); 
+	}
+}</code></pre><p id="31fcae03-ca93-494e-a95f-ef16515d9f42" class="">Sekarang coba eksekusi class <code>Demo</code>, apa hasil outputnya?</p><figure id="e1d5c7d0-66cb-4f99-93d4-c0ca174a625f" class="image"><a href="https://www.petanikode.com/img/java/oop/this-super/output-super.png"><img src="https://www.petanikode.com/img/java/oop/this-super/output-super.png"/></a></figure><p id="9c2e116b-3c2b-4063-abf3-76af62314a1b" class="">Mengapa hasil outputnya begini?</p><p id="c4789220-46df-458e-b69c-d6dd6b2c4143" class="">Karena pada method <code>showInfo()</code> kita menggunakan kata kunci <code>super</code> untuk mengambil nilai dari variabel yang ada di dalam class induk <em>(super class)</em>.</p><pre id="26a00b31-ed86-4f3d-b247-3ccec4ac69db" class="code"><code><em>public</em> void showInfo(){ 
+	System.out.println(&quot;Name: &quot; + <em>super</em>.name); 
+	System.out.println(&quot;Age: &quot; + <em>super</em>.age); 
+	System.out.println(&quot;Salary: $&quot; + salary);
+}</code></pre><p id="27bf680d-a3f3-4fdf-9fbf-20786ea1017f" class="">Coba ganti <code>super</code> menjadi <code>this</code>…</p><pre id="1bf5ce7d-91f6-4c5b-b4e9-719ec4140177" class="code"><code><em>public</em> void showInfo(){ 
+	System.out.println(&quot;Name: &quot; + this.name); 
+	System.out.println(&quot;Age: &quot; + this.age); 
+	System.out.println(&quot;Salary: $&quot; + salary);
+}</code></pre><p id="cc254344-dde2-49e2-99e3-7c16c30147ed" class="">maka hasil outputnya akan seperti ini.</p><figure id="aff8f742-aecf-48f5-b623-be962bd18749" class="image"><a href="https://www.petanikode.com/img/java/oop/this-super/output-this.png"><img src="https://www.petanikode.com/img/java/oop/this-super/output-this.png"/></a></figure><p id="d5d62368-c072-4525-8aa7-e82677a564b7" class="">Nilai yang diambil adalah nilai yang dari class <code>Employee</code>, karena <code>this</code> mewakili class <code>Employee</code> sedangkan <code>super</code> mewakili kelas induknya, yaitu: <code>Person</code>.</p><p id="769091fe-260e-4812-b4ef-4530ba634b28" class="">Pada kasus ini, kita menggunakan <code>super</code> sebagai sebuah objek untuk mengambil nilai.</p><p id="67ecd038-7d36-4484-8ccf-51ebc283c418" class="">Kata kunci <code>super()</code> juga dapat digunakan untuk memanggil method tertentu dari kelas induk.</p><p id="d43ead90-1c52-49d9-8ef1-92cae3c61707" class="">Contoh:</p><pre id="7978ea11-e3aa-4b6d-b5e5-eb758c372946" class="code"><code>// mengeksekusi konstruktor induk
+<em>super</em>();
+// mengeksekusi sebuah method dari class induk
+<em>super</em>.namaMethod();</code></pre><p id="ec89351f-520f-4789-b174-763aa5b88af8" class="">Mari kita coba…</p><p id="632cac6d-e48b-4b5b-a9ba-6e2e078e3736" class="">Kita ubah class <code>Person</code> menjadi seperti ini:</p><pre id="bf70609f-4913-47c0-888d-df61371306ab" class="code"><code><em>public</em> <em>class</em> Person { 
+	<em>public</em> Person() { 
+		System.out.println(&quot;Eksekusi konstruktor Person()&quot;); 
+	} 
+	<em>public</em> void showMessage(){ 
+		System.out.println(&quot;Hello, ini pesan dari class Person...&quot;); 
+	}
+}</code></pre><p id="bd5c0329-b4a2-4a61-9da9-eb522991a713" class="">Kemudian class <code>Employee</code> kita ubah menjadi seperti ini:</p><pre id="93ed6f71-cd1c-46f8-bb84-7ebab415e596" class="code"><code><em>public</em> <em>class</em> Employee <em>extends</em> Person { 
+	<em>public</em> Employee() { 
+		// eksekusi konstruktor induk 
+		<em>super</em>(); 
+		System.out.println(&quot;Ekekusi konstruktor Employee()&quot;); 
+	} 
+	<em>public</em> void info(){ 
+		<em>super</em>.showMessage(); 
+	}
+}</code></pre><p id="b9e4109d-637a-4f18-bbe2-0f9e9357178d" class="">Lalu di class <code>Demo</code>, kita ubah menjadi seperti ini:</p><pre id="b213d2ec-7a50-4df1-9fbd-101fd6ffb975" class="code"><code><em>public</em> <em>class</em> Demo { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		Employee dian = new Employee();
+		dian.info(); 
+	}
+}</code></pre><p id="5532a7ce-9ba9-4c24-96c7-534cfb29b447" class="">Sekarang coba eksekusi class <code>Demo</code>, maka hasil outputnya akan seperti ini:</p><figure id="a213b1f1-7273-4466-b169-f1ac70226404" class="image"><a href="https://www.petanikode.com/img/java/oop/this-super/super-method.png"><img src="https://www.petanikode.com/img/java/oop/this-super/super-method.png"/></a></figure><p id="c9ac12ea-bdec-40ef-9f07-efd20bd905e9" class="">Perhatikan class <code>Employee</code>, pada konstruktornya kita mengeksekusi konstruktor induk dengan <code>super()</code>.</p><p id="fb71ab41-243c-4e84-9119-7ca5ee2934be" class="">Lalu, pada method <code>info()</code>, kita mengeksekusi method <code>showMessage()</code> dari induk dengan <code>super.showMessage()</code>.</p><p id="42c8f9fc-39c3-4c6f-b1d5-36f6cd42a49d" class="">Maka hasilnya, akan seperti di atas.</p><h2 id="b17caf78-b93e-435f-bb80-79e09b83006f" class=""><strong>Bagaimana Penerapan </strong><strong>this</strong><strong> dan </strong><strong>super</strong><strong> pada Dunia Nyata?</strong></h2><p id="a2ccc47f-3294-46de-bf4c-cb759479f99d" class="">Contoh-contoh di atas mungkint terdengar abstrak, karena tidak mungkin kita membuat program seperti itu di dunia nyata.</p><p id="84f39994-1764-44a6-926e-28c7ded78ad2" class="">Baik, kita akan coba melihat beberapa contoh program di dunia nyata yang menggunakan <code>this</code> dan <code>super</code>.</p><p id="b8eb1b94-7c32-4e31-ba9b-e94619e8a63b" class=""><strong>Pertama</strong>, coba perhatikan program untuk membuat GUI pada tutorial JFrame.</p><pre id="749f040a-18d6-4d87-8c48-c505d7e020fc" class="code"><code>import javax.swing.JFrame;
+
+<em>public</em> <em>class</em> MainWindow <em>extends</em> JFrame { 
+	<em>public</em> MainWindow(){ 
+		this.setTitle(&quot;Jendela Utama&quot;); 
+		this.setSize(600,320); 
+	} 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		MainWindow mWindow = new MainWindow(); 
+		mWindow.setVisible(true); 
+	}
+}</code></pre><p id="d55aed27-bd2c-45da-8292-1895d75bec74" class="">Pada program tersebut, kita membuat class <code>MainWindow</code> dengan meng-extends dari class <code>JFrame</code>.</p><p id="4021d0aa-844c-4255-a23c-d397f3c05e71" class="">Pada program ini, <code>this</code> digunakan untuk mewakili class <code>MainWindow</code> di dalam konstruktornya.</p><pre id="5bb4031f-af37-4e34-babb-2fcf29a74a50" class="code"><code><em>public</em> MainWindow(){ 
+	this.setTitle(&quot;Jendela Utama&quot;); 
+	this.setSize(600,320);
+}</code></pre><p id="323d3799-06c1-4554-b88a-22e7acbd5d94" class="">Method <code>setTitle()</code> dan <code>setSize()</code> didapatkan dari class Induk (<code>JFrame</code>). Karena kita meng-extends dari sana.</p><p id="ab152b1f-a898-4a75-b25e-14c482e1ec14" class="">Mengapa tidak menggunakan <code>super</code>?</p><p id="d038b41b-65f0-4082-a634-d7cf517153dd" class="">Karena yang ingin kita ubah <code>title</code> dan <code>size</code>-nya adalah class <code>MainWindow</code>, bukan class <code>JFrame</code>.</p><p id="dafe3ebe-23c4-49c9-9221-bf4f561a60f6" class=""><strong>Kedua</strong>, coba perhatikan class <code>MainActivity</code> pada Android.</p><pre id="cd0243a7-dd9e-4fc0-a888-90a12542584a" class="code"><code><em>public</em> <em>class</em> MainActivity <em>extends</em> AppCompatActivity { 
+	@Override <em>protected</em> void onCreate(Bundle savedInstanceState) { 
+		<em>super</em>.onCreate(savedInstanceState); 
+		setContentView(R.layout.activity_main); 
+		Toast.makeText(this, &quot;Activity: onCreate()&quot;, Toast.LENGTH_SHORT).show(); 
+	}
+}</code></pre><p id="26f847d3-81c7-40fa-a26f-0b4f8d65ea6b" class="">Perhatikan…</p><p id="7dd7d53e-5c56-4b65-a3cc-ef6929787bb0" class="">Pada class <code>MainActivity</code>, kita menggunakan <code>super</code> untuk memanggil method <code>onCreate()</code> dari class induk (<code>AppCompatActivity</code>).</p><pre id="f5916550-a45e-4329-94bc-b8ad28a4d063" class="code"><code><em>super</em>.onCreate(savedInstanceState);</code></pre><p id="102dd992-80cd-45d4-b091-1d730b8505db" class="">Kemudian kita gunakan <code>this</code> pada <code>Toast.makeText()</code>. <code>this</code> pada kasus ini akan mewakili class <code>MainActivity</code>.</p><p id="eded662c-a0a1-4c0b-b60a-444d79423dc5" class="">Masih banyak lagi contoh-contoh penggunaan <code>this</code> dan <code>super</code> pada dunia nyata.</p><h2 id="ab906832-d654-48df-9a19-b7f1fb5a2fea" class=""><strong>Apa Selanjutnya?</strong></h2><p id="7ba6fa35-1817-43fb-96e2-8cd455286a28" class="">Intinya…</p><p id="30e4c390-67e1-4d39-a853-9f1dcf950d2c" class="">Yang perlu kita pahami dalam <code>this</code> dan <code>super</code> adalah:</p><ul id="d3de3196-3b50-4a7c-a400-7f2baa0949e8" class="bulleted-list"><li><code>this</code>: objek yang mewakili class itu sendiri;</li></ul><ul id="7ee20126-b82c-4bd0-921d-d09d7ecc1548" class="bulleted-list"><li><code>super</code>: objek yang mewakili class induk <em>(super class)</em>.</li></ul><p id="45a47d43-6268-4ea6-9f6e-7a03a971e1a7" class="">Selanjutnya, silahkan pelajari tentang polimorfisme dan method overloading pada Java.</p></div></article></body></html>

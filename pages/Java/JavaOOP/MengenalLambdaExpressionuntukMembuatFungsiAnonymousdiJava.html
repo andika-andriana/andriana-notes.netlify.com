@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mengenal Lambda Expression untuk Membuat Fungsi Anonymous di Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="86570fe6-2b4a-4894-a535-77a51e525de6" class="page sans"><header><h1 class="page-title"><strong>Mengenal Lambda Expression untuk Membuat Fungsi Anonymous di Java</strong></h1></header><div class="page-body"><p id="77e8feab-72c5-46c8-b6b6-bc8e8e480a2e" class="">Istilah <em>anonymous</em> memang untuk menggambarkan sesuatu yang tak memiliki nama. Nah di Java, juga ada fungsi <em>anonymous</em> dan class <em>anonymous</em>.</p><p id="d2314a9c-8f7c-4f47-aed1-cf77177b1685" class="">Apa itu fungsi anonymous?</p><p id="ee3391c1-b0b9-42ef-ad9e-bf33250c70e6" class="">Bagaimana cara membuatnya?</p><p id="d426c8a2-972d-4d60-8206-b155520da803" class="">Mengapa harus menggunakan fungsi anonymous?</p><p id="c7d4c8a0-78c2-4ea9-94ee-72bfb213de4b" class="">Mari kita bahas lebih dalam…</p><h2 id="05bdd3c4-8c68-4762-b200-09c2cc835d01" class=""><strong>Apa itu Fungsi Anonymous?</strong></h2><p id="71510058-044d-447d-ab7e-8b650a6e34de" class="">Fungsi anonymous adalah fungsi yang tidak memiliki nama. Fungsi anonymous di Java dikenal juga dengna <em><strong>lambda expression</strong></em>.</p><p id="a1c3b3e8-a871-46a8-be77-04be364337d3" class="">Fungsi anonymous biasanya dibuat hanya untuk sekali pakai.</p><p id="3f7280f9-90ca-450b-bfc6-a13e0ba113be" class="">Artinya, saat kita membuat fungsi anonymous, kita akan mengeksekusinya saat itu juga. Tidak bisa dipanggil lagi seperti fungsi biasa.</p><p id="1cfa36c9-ee93-49fb-a1ce-2078fdfca27b" class="">Fungsi ini mulai ditambahkan pada JDK 8.</p><p id="4b65b90d-8303-42ee-b7fe-99daaf6b4e4d" class="">Jika kamu menggunakan JDK di bawah 8, maka kamu harus upgrade dulu agar bisa menggunakan fungsi anonymous.</p><p id="693af356-f3a9-4832-ac92-bc51dabe658f" class="">Oke, kalau begitu.. bagaimana cara membaut fungsi anonymous?</p><h2 id="30a48f6a-dd7f-4eae-9aab-a1cc9a18f2e2" class=""><strong>Cara Membuat Fungsi Anonymous di Java</strong></h2><p id="5daf89bd-bfea-4608-a46e-af2f8cee39d2" class="">Berikut ini adalah bentuk umum <em>lambda expression</em> atau fungsi anonymous di Java:</p><figure id="c13210f8-a34a-4a49-8ade-44fe17ba02e5" class="image"><a href="https://www.petanikode.com/img/java/lambda/fungsi-lambda-java.png"><img src="https://www.petanikode.com/img/java/lambda/fungsi-lambda-java.png"/></a></figure><p id="e361f1d9-31d2-4f08-9429-903cae5a8c32" class="">Gampang kan?</p><p id="2973cc4b-17f9-4e7f-8716-686827518441" class="">Ini simbol-simbol yang perlu kamu ingat:</p><p id="aa2fc863-c156-4e0c-9d43-3e23bd99dd5c" class=""><code>() -&gt; {}</code></p><p id="1f6ba1a6-2bb7-49fc-a29a-f71055ba4c69" class="">Keterangan:</p><ul id="0acb352e-3d64-43e2-9dc7-bf4823109af0" class="bulleted-list"><li><code>()</code> tempat kita menaruh parameter.</li></ul><ul id="de18512a-b634-43d9-bc38-326bcf56f174" class="bulleted-list"><li><code>-&gt;</code> (operator lambda) simbol yang menandakan fungsi ini adalah lambda/anonymous.</li></ul><ul id="f36af3d0-8415-43cd-afbf-214e302440da" class="bulleted-list"><li><code>{}</code> body fungsinya.</li></ul><p id="d8d586b7-7d06-4de9-a48c-9738383b858f" class="">Contoh:</p><pre id="27630f54-90eb-4d27-b569-86759bd17316" class="code"><code>(int x, int y) -&gt; { 
+	return x + y 
+}</code></pre><p id="35a8aaa4-960c-4afb-8335-9ffa793939da" class="">Sebenarnya simbol yang perlu diingat adalah simbol lambda (<code>-&gt;</code>), karena simbol ini yang membedakan fungsi anonymous dengan fungsi biasa.</p><p id="4b1c54e4-63e8-4105-9dcd-77a8347e783b" class="">Untuk tanda kurung yang ini <code>()</code> dengan yang ini <code>{}</code>, di fungsi biasa juga ada.</p><p id="cd5898ba-368a-4093-be35-fe2f70495feb" class="">Mari kita lihat contohnya:</p><pre id="8814dd71-7542-4769-b56b-62478591ba9e" class="code"><code>// ini fungsi biasa
+int jumlahkan(int a, int b){ 
+	return a + b;
+}
+
+// ini fungsi anonymous
+(int a, int b) -&gt; { 
+	return a + b 
+}</code></pre><p id="dc7311cf-f895-44cc-891b-51b97aac62f1" class="">Bahkan tanpa kurung kurawal juga bisa:</p><pre id="b628e4ad-5b50-4815-a4a6-9c1cc8eb5745" class="code"><code>(int a, int b) -&gt; return a + b;</code></pre><p id="c4ad6baa-5cb9-47ab-92dc-3e780f2b9b51" class="">Karena cuma ada satu baris ekspresi, maka tanda kurung <code>{}</code> boleh tidak ada.</p><p id="d81d0669-9339-4b56-baf9-75001dfff170" class="">Oh iya, fungsi anonymous dapat kita buat di berbagai tempat seperti:</p><ul id="77644219-3482-4dbb-b8c1-690c74f9d9e6" class="bulleted-list"><li>Pada Deklarasi variabel;<pre id="1e1e2c0d-ddfd-4d66-abbc-32a8fd5399ac" class="code"><code>int variabel = () -&gt; { return 0 };</code></pre></li></ul><ul id="ecd3eead-71e5-4feb-ad02-6fcac726b53e" class="bulleted-list"><li>Pada pengisian variabel dan array;<pre id="7535d0e4-7c39-4c8e-9d97-dcaee7ed59a4" class="code"><code>int variabel;
+int arr;
+
+variabel = () -&gt; { return 0 }; 
+arr = () -&gt; { return {0,4,3,2,1} };</code></pre></li></ul><ul id="598a1b64-395b-45da-bd14-1d2ec7c1dc80" class="bulleted-list"><li>Pada saat mengembalikan nilai dengan return;<pre id="99725c20-9b7e-4ae6-83d1-19ee61bd5f27" class="code"><code>int methodName(){ 
+    return () -&gt; { return 0 };
+}</code></pre></li></ul><ul id="4ad5091b-217d-4b42-ae76-415c7542ffee" class="bulleted-list"><li>Pada body lambda itu sendiri;<pre id="c05b49e4-ab8f-4a77-b03e-05a1de81a97a" class="code"><code>() -&gt; { 
+    return () -&gt; 5 + 2; 
+};</code></pre></li></ul><ul id="613d945e-eb71-4696-a6dd-e1f64d94e22b" class="bulleted-list"><li>Pada ekspresi kondisional (<code>?:</code>)<pre id="f95210ec-dbf2-4539-8377-a7a1840f341e" class="code"><code>String jawab = (int x) -&gt; { x &lt; 10} ? () -&gt; return &quot;yes&quot;: () -&gt; return &quot;no&quot;;</code></pre></li></ul><h2 id="94bb7cf9-64dd-48ce-be60-98aa992f5df5" class=""><strong>Mengapa Harus Pakai Fungsi Anonymous?</strong></h2><p id="7b17a80a-644d-4305-924b-b656ada9877d" class=""><em>Lambda expression</em> atau fungsi anonymous sebenarnya hadir untuk menyempurnakan class anonymous. </p><p id="a326a72c-bd76-4ca3-98d8-39f42d4539ff" class="">Class anonymous biasanya digunakan untuk mengimplementasikan interface dan class abstrak.</p><p id="cf0db3ee-2bca-49b6-97b4-252a5ecdba62" class="">Tapi masalahnya:</p><p id="88975b35-7630-4fcf-8909-2d7b1713bb2e" class="">Saat interface hanya memiliki satu method saja untuk diimplementasikan. Kita harus membuat class (anonymous) baru.</p><p id="16db9b6f-5643-499c-bb1b-20812dc5e47a" class="">Padahal kan kita cuma butuh method-nya saja.</p><p id="60b737cb-1f0a-49d8-bbe8-ddd6f6856489" class="">Di sini lah saat yang tepat untuk menggunakan fungsi anonymous atau <em>lambda expression</em>.</p><p id="49600746-1f19-4889-8459-1dbe193f5b29" class="">Bahkan Netbeans juga akan menyarankan menggunakan <em>lambda expression</em> apabila menemukan kasus ini.</p><figure id="b5db1533-9581-4ad4-8036-a2a634eb1f51" class="image"><a href="https://www.petanikode.com/img/java/lambda/netbeans-rekomendasi.png"><img src="https://www.petanikode.com/img/java/lambda/netbeans-rekomendasi.png"/></a></figure><h2 id="c486aceb-8b26-4010-9450-2df307aef96a" class=""><strong>Contoh Program Fungsi Anonymous</strong></h2><p id="5d415d61-5306-4b48-89f8-7bcf23b2e658" class="">Buatlah proyek baru di Netbeans dengan nama <code>ContohLambda</code>.</p><figure id="f162edc4-619a-44b9-879a-3306dd796070" class="image"><a href="https://www.petanikode.com/img/java/lambda/new-project.png"><img src="https://www.petanikode.com/img/java/lambda/new-project.png"/></a></figure><p id="d6947d7f-2430-4c6c-9402-dcf7d88242c2" class="">Setelah itu, buat sebuah interface baru pada package <code>&lt;default package&gt;</code> dengan nama <code>Clickable</code> dan isi kodenya seperti ini:</p><pre id="7b7284c2-3efa-4665-aced-0cd1c7873c88" class="code"><code><em>interface</em> Clickable { 
+	void onClick();
+}</code></pre><p id="6becc872-fdef-4dce-a039-5f00b80d34e3" class="">Setelah itu, buatlah class <code>Button</code> dengan isi seperti ini:</p><pre id="e558e07a-17c0-4c3a-b30f-3ca30ff3c2a8" class="code"><code><em>public</em> <em>class</em> Button { 
+	<em>private</em> Clickable action; 
+	void setClickAction(Clickable action){ 
+		this.action = action; 
+	} 
+	void doClick(){ 
+		action.onClick(); 
+	}
+}</code></pre><p id="5e390822-1d32-4704-baaf-90c98b849fee" class="">Terakhir, buatlah class <code>Main</code> dengan isi seperti ini:</p><pre id="ce244dbc-0522-42bf-b634-99747c67da03" class="code"><code><em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		Button btn = new Button(); 
+		// membuat class anonymous untuk implementasi interface 
+		btn.setClickAction(new Clickable() { 
+			@Override <em>public</em> void onClick() { 
+				System.out.println(&quot;Tombol sudah diklik!&quot;); 
+				System.out.println(&quot;Yay!&quot;); 
+			} 
+		}); 
+		// mencoba klik tombol 
+		btn.doClick(); 
+	}
+}</code></pre><p id="e70703c1-d331-4c7f-8094-451bcea4cfb4" class="">Perhatikan baris kode yang saya tandai di atas..</p><p id="563381df-21a7-47f9-9b3e-c16a1f7d7f11" class="">Di sana kita menggunakan class anonymous untuk mengimplementasikan interface <code>Clickable</code>.</p><p id="b7e91c17-21f0-441a-a73a-732807ec3853" class="">Nah, kalau mau lebih sederhana.. kita bisa pakai <em>lambda expression</em>.</p><p id="d7feb6ca-5da8-4cca-bd56-9030d5c6b209" class="">Sekarang coba ubah kodenya menjadi seperti ini:</p><pre id="3e177ba4-c5b5-4571-ba17-823c2a473b27" class="code"><code><em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		Button btn = new Button(); 
+		// membuat class anonymous untuk implementasi interface 
+		btn.setClickAction(() -&gt; { 
+			System.out.println(&quot;Tombol sudah diklik!&quot;); 
+			System.out.println(&quot;Yay!&quot;); 
+		}); 
+		// mencoba klik tombol 
+		btn.doClick(); 
+	}
+}</code></pre><p id="9707d2a5-7f5e-4222-a21b-be2ab7b35a3e" class="">Lebih sederhana yang mana?</p><p id="e47fe5a9-c6fb-4604-8733-4474d73aee5f" class="">Tentu saja yang menggunakan <em>lambda expression</em>.</p><p id="6e4b381a-740b-46d2-a40b-be6b505cc44d" class="">Berikut ini hasil output dari program tersebut:</p><figure id="54e0c1f0-8170-4086-a977-eac1b4fc68b8" class="image"><a href="https://www.petanikode.com/img/java/oop/anonymous/contoh-anonymous-class.png"><img src="https://www.petanikode.com/img/java/oop/anonymous/contoh-anonymous-class.png"/></a></figure><h2 id="67a5fa19-e1dc-492e-b487-ca863b910383" class=""><strong>Akses Variabel untuk Fungsi Anonymous</strong></h2><p id="60457804-ba76-40c0-97d4-e73af4467515" class="">Pada dasarnya, fungsi anonymous adalah bentuk sederhana dari class anonymous.</p><p id="0f4db3fa-0f86-4220-9c42-31a9eecb51b2" class="">Jadi dia akan memiliki akses variabel yang sama seperti class anonymous.</p><p id="42d451e0-29a9-46be-bc55-525fcba8eec6" class="">Kalau tidak percaya, coba buktikan dengan membuat variabel di luar fungsi anonymous.</p><p id="f63671c8-4ae3-4120-a162-dbe133df2f1b" class="">Lalu akses variabel tersebut dari dalam fungsi anonymous.</p><pre id="94851c70-2d82-49df-b6ce-8bb4954032c8" class="code"><code><em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		Button btn = new Button(); 
+		String name = &quot;Petani Kode&quot;; 
+		// membuat class anonymous untuk implementasi interface 
+		btn.setClickAction(() -&gt; { 
+			System.out.println(&quot;Tombol sudah diklik!&quot;); 
+			System.out.println(&quot;Yay!&quot;); 
+			System.out.println(&quot;Hello &quot; + name); 
+		}); 
+		// mencoba klik tombol 
+		btn.doClick(); 
+	}
+}</code></pre><p id="9a66da58-a89c-4b70-967a-18da063c653d" class="">Fungsi anonymous akan bisa mengakses variabel yang berada di dalam class (variabel global), dan lokal yang ada di method tempat anonymous class digunakan.</p><h2 id="21a972d7-af63-4d10-b7c5-b1770694996e" class=""><strong>Akhir Kata…</strong></h2><p id="7db13bf9-7f8c-49e2-9b82-03c9cd3bb6af" class="">Intinya:</p><p id="f23b2179-82e3-4f1a-8937-a2088b49eaa8" class="">Fungsi anonymous hanya bisa digunakan saat ingin mengimplementasikan interface yang memiliki satu method.</p><p id="87eb5a63-dac3-4720-9860-0e3cd8570397" class="">Jika interface itu memiliki lebih dari satu method, maka sebaiknya pakai class anonymous.</p><p id="a43e6e6d-b698-4bcd-9c4e-1813c07d9b71" class="">Sekian..</p></div></article></body></html>

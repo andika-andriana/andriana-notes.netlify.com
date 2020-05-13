@@ -1,0 +1,672 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pengenalan Struktur &amp; Program Pertama Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="261d77cb-8fd5-404c-a721-bc556899b1aa" class="page sans"><header><h1 class="page-title"><strong>Pengenalan Struktur &amp; Program Pertama Java</strong></h1></header><div class="page-body"><p id="f63a936f-1995-4205-a83e-e5118ff940de" class="">Setiap bahasa pemrograman memiliki struktur dan aturan penulisan sintaks yang berbeda-beda.</p><p id="a690d873-803b-429e-8263-77f2d615a545" class="">Java merupakan bahasa pemrograman yang dikembangkan dari bahasa C dan tentunya akan banyak mengikuti gaya penulisan C.</p><p id="0b176fda-2af7-45ee-9ab9-09a0cd3e49dd" class="">Coba perhatikan program berikut:</p><pre id="77ca3840-650a-47ba-87fb-88a068307f44" class="code"><code>package com.petanikode.program;
+
+<em>class</em> Program { 
+	<em>public</em> <em>static</em> void main(String args[]){ 
+		System.out.println(&quot;Hello World&quot;); 
+	}
+}</code></pre><p id="2a75e01e-b8f9-4db0-8380-bfea74df68ba" class="">Banyak hal yang kita belum ketahui.</p><p id="5d5f410b-96d0-4680-b276-76c45bd88af3" class="">Apa itu <code>package</code>? Apa itu <code>class</code>?…dan mengapa ditulis seperti itu?</p><p id="1de4f2bd-ddd8-42d1-90a0-0014adca2dd4" class="">Oleh sebab itu, kita perlu belajar sintaks dasar dan struktur program Java.</p><h2 id="417fe0ff-bc35-48dc-bf0d-22830b854ca8" class=""><strong>Struktur Dasar Program Java</strong></h2><p id="64508252-d698-4ee1-ad48-bd27e2e3f2ab" class="">Struktur program Java secara umum dibagi menjadi 4 bagian:<div class="indented"><ol id="ac4a3bfd-e5d2-41e1-b9db-d62de8a6196d" class="numbered-list" start="1"><li>Deklarasi Package</li></ol><ol id="3047a7bf-cf3c-4f3f-a339-00e4159f7d9f" class="numbered-list" start="2"><li>Impor Library</li></ol><ol id="6a1f62f3-0ea4-463c-a041-a1c1fe3319a7" class="numbered-list" start="3"><li>Bagian Class</li></ol><ol id="a8da71e8-1cd9-4294-8d7e-a45da6acba7f" class="numbered-list" start="4"><li>Method Main</li></ol></div></p><p id="c931f3be-aca9-45a5-9a0f-0c49ec604486" class="">Mari kita lihat contohnya:</p><pre id="aa0d50eb-c205-4374-b2f4-734eef28aee1" class="code"><code>package com.petanikode.program; //&lt;- 1. deklarasi package
+
+import java.io.File; //&lt;- 2. Import library
+
+<em>class</em> Program { //&lt;- 3. Bagian class 
+	<em>public</em> <em>static</em> void main(String args[]){ //&lt;- 4. Method main 
+		System.out.println(&quot;Hello World&quot;); 
+	}
+}</code></pre><p id="95a144e0-6427-4813-ac2a-b06d0ba262ad" class="">Mari kita bahas, satu-per-satu…<div class="indented"><h3 id="864568a0-31fb-4039-8a84-608781a98556" class=""><strong>1. Deklarasi Package</strong></h3><p id="48980c92-5c96-4b6a-a71c-4af07c7ced3d" class="">Package merupakan sebuah folder yang berisi sekumpulan program Java.</p><p id="21864e22-a52b-47f9-96c0-3e18280aec8d" class="">Deklarasi package biasanya dilakukan saat membuat program atau aplikasi besar.</p><p id="c35f9daf-326b-40d6-b702-83ab80d41b3a" class="">Contoh deklarasi package:</p><pre id="e12f750e-f8e1-40e5-ac96-51daa32dbfe3" class="code"><code>package com.petanikode.program;</code></pre><p id="d614b36c-61ba-4938-bc8a-a2d52eebdf54" class="">Biasanya nama package mengikuti nama domain dari sebauh vendor yang mengeluarkan program tersebut.</p><p id="1ceec702-54b2-475e-be1b-be8959be51d4" class="">Pada contoh di atas, <code>com.petanikode</code> adalah nama domain dari petani kode.</p><p id="f4aba36c-e643-4a02-80c7-610dba9af7b0" class="">Aturannya: nama domain dibalik, lalu diikuti nama programnya.</p><p id="bf7f3476-9502-4da9-a5c5-00a11b329955" class="">Bagaimana kalau kita tidak mendeklarasikan <em>package</em>?</p><p id="bafba89f-6507-4d4c-9cc2-1d0268329612" class="">Boleh-boleh saja dan programnya akan tetap bisa jalan.</p><p id="d2685fe3-0667-4204-bb32-afb81640cc53" class="">Tapi nanti saat produksi, misalnya saat <a href="https://www.petanikode.com/topik/android/">membuat aplikasi Android</a>.</p><p id="cadb1fef-03b4-4a96-bba6-ef23d20cd24c" class="">Kita wajib mendeklarasikan <em>package</em>.</p><h3 id="3e81b032-405b-4369-88c0-6ed921d46cd2" class=""><strong>2. Bagian Impor</strong></h3><p id="65fbfd3e-1c9b-4fc0-8691-10e4d7b29559" class="">Pada bagian ini, kita melakukan import library yang dibutuhkan pada program.</p><p id="9244af7d-daf9-4599-a557-c0277dcee6ce" class="">Library merupakan sekumpulan <em>class</em> dan fungsi yang bisa kita gunakan dalam membuat program.</p><p id="acc5a458-82bf-426e-9c32-6692bbca8324" class="">Contoh impor library:</p><pre id="ccedf0ae-b674-4a46-9b90-e21311fc1604" class="code"><code>import java.util.Scanner;</code></pre><p id="d9a69477-9811-44dd-848b-b1859cf7f590" class="">Pada contoh tersebut, kita mengimpor class <code>Scanner</code> dari package <code>java.util</code>.</p><h3 id="7b237e9b-22b2-49fd-9e6a-a4c502a599b7" class=""><strong>3. Bagian Class</strong></h3><p id="6951bdf7-58dc-428d-9d47-9fe01d8ab1dd" class="">Java merupakan bahasa pemrograman yang menggunakan paradigma OOP <em>(Object Oriented Programming)</em>.</p><p id="7b3283eb-ca43-4c5a-8e2d-247435bb7c60" class="">Setiap program harus dibungkus di dalam class agar nanti bisa dibuat menjadi objek.</p><p id="0d07f9d2-410c-45b3-b182-89ecf07e0837" class="">Kalau kamu belum paham apa itu OOP?</p><p id="d18b88b1-5ecd-466e-abc9-52b750cd45d4" class="">Cukup pahami class sebagai deklarasi nama program.</p><pre id="c9d40cce-3e63-4869-8af0-89b83b24c392" class="code"><code><em>class</em> NamaProgram { 
+	<em>public</em> <em>static</em> void main(String args[]){ 
+		System.out.println(&quot;Hello World&quot;); 
+	}
+}</code></pre><p id="c665b551-aae2-448a-a650-0a81cac33187" class="">Ini adalah blok class.</p><p id="e991154e-8b64-45b5-93a8-7117d986826d" class="">Blok class dibuka dengan tanda kurung kurawal <code>{</code> kemudian ditutup atau diakhiri dengan <code>}</code>.</p><p id="8e07d258-5d11-4670-8823-5c04f79adb55" class="">Di dalam blok class, kita dapat mengisinya dengan method atau fungsi-fungsi dan juga variabel.</p><p id="5bed432e-3745-4547-886d-43c76cce096e" class="">Pada contoh di atas, terdapat method <code>main()</code>.</p><h3 id="6173b791-1aca-4297-89f5-1071c5831f68" class=""><strong>4. Method Main</strong></h3><p id="ae4231f1-e240-4ea6-9b7a-9694bbfc2e3f" class="">Method <code>main()</code> atau fungsi <code>main()</code> merupakan blok program yang akan dieksekusi pertama kali. Ini adalah entri point dari program.</p><p id="89a5ebb3-00d1-41b9-ae35-017c6ef9189d" class="">Method <code>main()</code> wajib kita buat. Kalau tidak, maka programnya tidak akan bisa dieksekusi.</p><p id="cf6dd20a-aac7-4fa0-8fd9-24f9742ea526" class="">Contoh method <code>main()</code>.</p><pre id="10c5bb88-f530-474f-a7ec-413ff0f75bea" class="code"><code><em>public</em> <em>static</em> void main(String args[]){ 
+	System.out.println(&quot;Hello World&quot;);
+}</code></pre><p id="1b4f44c5-2984-43b0-a237-7ef00c774077" class="">Penulisannya harus seperti ini…</p><p id="9166e264-d68d-4a90-9ca0-c4b634ade017" class="">Method <code>main()</code> memiliki parameter <code>args[]</code>. Parameter ini nanti akan menyimpan sebuah nilai dari argumen di <em>command line</em>.</p><p id="19d74294-6649-4fea-bfd5-b442457f5626" class="">Lalu di dalam method <code>main()</code>, terdapat statement atau fungsi:</p><pre id="7c9f064b-c9e0-468c-bb77-ef8255c81be6" class="code"><code>System.out.println(&quot;Hello World&quot;);</code></pre><p id="fe368744-01f1-424f-abcc-9ed6af9efb5b" class="">Ini adalah fungsi untuk menampilkan teks ke layar monitor.</p><figure id="232d90c4-2cd9-473e-a25e-5117a08a75b1" class="link-to-page"><a href="Apa%20Fungsi%20String%20args%20pada%20Pemrograman%20Java%20232d90c42cd9473ea25e5117a08a75b1.html">Apa Fungsi String[] args pada Pemrograman Java?</a></figure></div></p><h2 id="e3824393-4def-44d9-91ad-c9b28969f16b" class=""><strong>Statement dan Ekspresi pada Java</strong></h2><p id="0d39f374-f613-4e10-889c-b1ebcedb8d9b" class="">Statement dan eksrepsi adalah bagian terkecil dalam program. Setiap statement dan ekspresi di Java, harus diakhiri dengan titik koma (<code>;</code>).</p><p id="b1e801a5-2464-4097-a331-505f5d1b6123" class="">Contoh statemen dan ekspresi:</p><pre id="d6239b00-5235-4a02-827a-f13b912d7cff" class="code"><code>System.out.println(&quot;Hello World&quot;);
+System.out.println(&quot;Apa kabar?&quot;);
+var x = 3;
+var y = 8;
+var z = x + y;</code></pre><p id="7c203234-7974-4dc1-917d-561b075bc0a2" class="">Statemen dan ekspresi akan menjadi instruksi yang akan dikerjakan oleh komputer. Pada contoh di atas, kita menyuruh komputer untuk menampilkan teks <code>&quot;Hello World&quot;</code>, dan <code>&quot;Apa kabar?&quot;</code>. Lalu kita menyuruhnya untuk menghitung nilai <code>x + y</code>.</p><h2 id="6b6f822b-79e2-4076-8c13-b51b4028309b" class=""><strong>Blok Program Java</strong></h2><p id="426a34cf-8ac1-4886-a1fd-697117b9fb6d" class="">Blok program merupakan kumpulan dari statement dan ekspresi yang dibungkus menjadi satu.</p><p id="3ad12300-58c1-42ee-b382-c26259070e6d" class="">Blok program selalu dibuka dengan kurung kurawal <code>{</code> dan ditutup dengan <code>}</code>.</p><p id="ee7d171a-f2b1-4435-adde-ef90d1b63544" class="">Contoh blok program:</p><pre id="7f7cc7ce-c03e-44ce-a1b6-cdc132e48020" class="code"><code>// blok program main
+<em>public</em> <em>static</em> void main(String args[]){ 
+	System.out.println(&quot;Hello World&quot;); 
+	System.out.println(&quot;Hello Kode&quot;); 
+	// blok program if 
+	if( true ){ 
+		System.out.println(&#x27;True&#x27;); 
+	} 
+	// blok program for 
+	for ( int i = 0; i&lt;10; i++){
+		System.out.println(&quot;Perulangan ke&quot;+i); 
+	}
+}</code></pre><p id="553809db-d8ba-4ce0-be2f-1f53f4758b35" class="">Intinya: jika kamu menemukan kurung <code>{</code> dan <code>}</code>, maka itu adalah sebauh blok program.</p><p id="4fde162b-d522-4aa4-920c-782443cabea0" class="">Blok program dapat juga berisi blok program yang lain <em>(nested)</em>.</p><p id="6d3dfd55-775c-4b9c-aef6-88ca6bb5b89b" class="">Pada contoh di atas, blok program <code>main()</code> berisi blok <em>if</em> dan <em>for</em>.</p><h2 id="8b2d3e87-da9e-46d1-8314-7aaae7e1f847" class=""><strong>Penulisan Komentar pada Java</strong></h2><p id="423858b0-1705-4a0c-8214-b723a7bb4c71" class="">Komentar merupakan bagian program yang tidak akan dieksekusi oleh komputer.</p><p id="31d58fe8-b88d-4eed-8c46-1f24c936e6d0" class="">Komentar biasanya digunakan untuk:</p><ul id="561a42ca-5009-4a28-a975-cee5cf4c2867" class="bulleted-list"><li>Memberi keterangan pada kode program;</li></ul><ul id="0e5ff36a-4c8a-481e-ac1f-97f6b0382e24" class="bulleted-list"><li>Menonaktifkan fungsi tertentu;</li></ul><ul id="2f118727-0328-4347-a56b-55841c738fc2" class="bulleted-list"><li>Membuat dokumentasi;</li></ul><ul id="d0c5eec1-8d28-478f-8faa-a2c0601f7daf" class="bulleted-list"><li>dll.</li></ul><p id="83ede24b-4d73-41e1-a326-b6613de19451" class="">Penulisan komentar pada java, sama seperti pada bahasa C. Yaitu menggunakan:</p><ol id="9b8d83b2-8d7c-40d0-8aae-edc0f96a4aa8" class="numbered-list" start="1"><li>Garis miring ganda (<code>//</code>) untuk komentar satu baris;</li></ol><ol id="6a9835d5-a766-47a0-95cf-e2bbc59a757a" class="numbered-list" start="2"><li>Garis miring bintang (<code>/*...*/</code>) untuk komentar yang lebih dari satu baris.</li></ol><p id="874d331e-8aea-4bd4-8ac7-dd125ba6c5c5" class="">Contoh:</p><pre id="2d1c4ac4-e59c-41c3-8b7a-5e034c968dac" class="code"><code><em>public</em> <em>static</em> void main(String args[]){ // ini adalah komentar satu baris 
+	System.out.println(&quot;Hello World&quot;); // komentar akan diabaikan oleh komputer 
+	// berikut ini fungsi yang di-non-aktifkan dengan komentar 
+	// System.out.println(&quot;Hello World&quot;); 
+	/* Ini adalah penulisan komentar yang lebih dari satu baris */
+}</code></pre><h2 id="91b6af10-6b7f-4e7a-886c-5328940ca5c5" class=""><strong>Penulisan String dan Karakter</strong></h2><p id="fc9a4b60-805a-4531-bc4b-46bb1dd1d676" class="">String merupakan kumpulan dari karakter. Kita sering mengenalnya dengan teks.</p><p id="934846d1-cdc5-4736-85f5-d604035412ee" class="">Contoh string: <code>&quot;Hello world&quot;</code></p><p id="e0ee5b9c-0848-494d-ab73-556768065ab5" class="">Aturan penulisan string pada Java, harus diapit dengan tanda petik ganda seperti pada contoh di atas.</p><p id="2aa0bb2f-7754-4950-9539-6f6db48a9399" class="">Apabila diapit dengan tanda petik tunggal, maka akan menjadi sebuah karakter.</p><p id="caf73d11-8b17-467b-ad93-4fb26c8d6b97" class="">Contoh: <code>&#x27;Hello world&#x27;</code>.</p><p id="fa6cab70-6cea-413b-b0d0-0894019d14cb" class="">Jadi harap dibedakan:</p><ul id="a9000ef4-f2b0-4909-86dd-5340000f1cf3" class="bulleted-list"><li>Tanda petik ganda (<code>&quot;...&quot;</code>) untuk membuat string;</li></ul><ul id="d6222da1-d570-4efb-8b9a-be357bd7f942" class="bulleted-list"><li>Sedangkan tanda petik tunggal (<code>&#x27;...&#x27;</code>) untuk membuat karakter.</li></ul><h2 id="cc3a621d-76f9-4670-8dfa-828c1cf811f9" class=""><strong>Case Sensitive</strong></h2><p id="689d391c-41b9-4f45-ab60-91c752551877" class="">Java bersifat <strong>Case Sensitive</strong>, artinya huruf besar atau kapital dan huruf kecil dibedakan.</p><p id="47ca3192-fb10-4346-aa30-cda2306805bd" class="">Contoh:</p><pre id="746434ab-3cd7-48dd-b6aa-ccf7cdc80fd0" class="code"><code>String nama = &quot;Petani Kode&quot;;
+String Nama = &quot;petanikode&quot;;
+String NAMA = &quot;Petanikode.com&quot;;
+System.out.println(nama);
+System.out.println(Nama);
+System.out.println(NAMA);</code></pre><p id="0e0844da-93fb-4409-9968-bc92ea05874b" class="">Tiga variabel tersebut merupakan tiga variabel yang bebeda, mesikipun sama-sama bernam <code>nama</code>.</p><p id="e06953f2-6a95-4bc0-b96e-989226b3b3fc" class="">Banyak pemula yang sering salah pada hal ini. Karena tidak bisa membedakan mana variabel yang menggunakan huruf besar dan mana yang menggunakan huruf kecil.</p><p id="5077dd6e-7c4d-493d-a7a7-75d8138e37a5" class="">Apabila kita membuat variabel seperti ini:</p><pre id="b5df86da-f650-4be6-971a-f146b6862c3d" class="code"><code>String jenisKelamin = &quot;Laki-laki&quot;;</code></pre><p id="63a24c31-0824-4b6e-8467-44a49ea49533" class="">Maka kita harus memanggilnya seperti ini:</p><pre id="0bd2d4e0-7127-419f-bd78-a605f5509d5f" class="code"><code>System.out.println(jenisKelamin);</code></pre><p id="4192cad9-bd4b-4ecb-8e5c-69fec764a0f3" class="">Bukan seperti ini:</p><pre id="ee4b2164-138f-4b07-960a-a6ad2c2e209b" class="code"><code>System.out.println(jeniskelamin);</code></pre><p id="db983727-92b3-4f4e-9ddb-854d28809122" class="">Perhatikan, huruf <code>K</code> adalah huruf kapital.</p><h2 id="9ea08331-474b-4520-9c50-5f8b91405f6b" class=""><strong>Gaya Penulisan Case</strong></h2><p id="ef392213-fba1-49a2-86e6-d3885113ca17" class="">Gaya penulisan case (case style) yang digunakan oleh Java adalah: <strong>camelCase</strong>, <strong>PascalCase</strong>, dan <strong>ALL UPPER</strong>.</p><p id="5f86da37-97fb-43ba-8cd1-fe0d56d60266" class="">Gaya penulisan <em>camelCase</em> digunakan pada nama variabel, nama objek, dan nama method.</p><p id="b9573eeb-2052-47ab-bf14-5bc731d9075e" class="">Contoh:</p><pre id="b8361b6f-d25a-4716-8808-cb38b01ccf4c" class="code"><code>String namaSaya = &quot;Dian&quot;;</code></pre><p id="a2da6157-3fb6-47df-9f8f-c665ee158a99" class="">Lalu untuk <em>PascalCase</em> digunakan pada penulisan nama class.</p><p id="0e25d380-59aa-4c96-9778-fe98646f4ac8" class="">Contoh:</p><pre id="130d0527-857d-4e0b-a209-343eea8cb36e" class="code"><code><em>class</em> HelloWOrld { //...
+}</code></pre><p id="44d27998-1477-4b3c-beb2-230e8b12d590" class="">Perhatikan nama class-nya, kita menggunakan huruf kapital di awal, dan huruf kapital pada huruf <code>W</code> untuk memisahkan dua suku kata.</p><p id="b99a4d58-e90f-4822-8b10-61b26eff5317" class="">Sedangkan <em>camelCase</em> huruf depannya menggunakan huruf kecil, dan awalan suku kata berikutnya menggunakan huruf besar.</p><pre id="d0ba4bb3-2125-4e74-8027-bb65ca7fbaba" class="code"><code>// ini camelCase
+belajarJava
+// ini PascalCase
+BelajarJava</code></pre><p id="19632144-c2d4-4cf9-bbf5-1d9a215c8188" class="">Lalu, penulisan <em>ALL UPPER</em> atau semuanya kapital digunakan pada pembuatan nama konstanta.</p><p id="d07c39a9-49ba-4d50-b5a9-49e672f55c5f" class="">Contoh:</p><pre id="bf8c1c4b-645e-40ea-a8ec-63857908ed42" class="code"><code><em>public</em> <em>final</em> String DB_NAME = &quot;petanikode&quot;;</code></pre><p id="c33f21e2-b6e0-4664-b1a1-c2aadccfd124" class="">Untuk penulisan dua suku kata atau lebih, <em>ALL UPPER</em> dipisah dengan garus bawah atau <em>underscore</em> (<code>_</code>).</p><p id="63a4315d-2f6c-4dd5-8c70-c0f9e24975fc" class="">Apakah boleh saya menulis sembarangan?</p><p id="9fe55198-ab4b-464e-9047-78d9daeaa8be" class="">Misal untuk nama class menggunakan <em>ALL UPPER</em>?</p><p id="d9887a04-8fb0-49af-8968-a8cece142549" class="">Boleh-boleh saja, programnya tidak akan error. Tetapi kode program yang kamu tulis akan terlihat kotor dan keluar dari garis pandu yang sudah ditetapkan.</p></div></article></body></html>
