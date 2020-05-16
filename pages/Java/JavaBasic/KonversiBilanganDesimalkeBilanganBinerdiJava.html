@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Java Advance</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Konversi Bilangan Desimal ke Bilangan Biner di Java</title><style>
 /* webkit printing magic: print all background colors */
 html {
 	-webkit-print-color-adjust: exact;
@@ -618,5 +618,39 @@ blockquote {
 .checkbox-off {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
-
-</style></head><body><article id="fa0081c6-8e73-451f-8409-e65cd14d6a83" class="page sans"><header><h1 class="page-title">Java Advance</h1></header><div class="page-body"><blockquote id="cc272d33-35bb-4ff0-97bb-5d0ae0ef3efb" class="">Materi Belajar Tentang Dasar Bahasa Pemrograman Java Advanced</blockquote><figure class="link-to-page"><a href="JavaAdvanced/CaraMembacadanMenulisFilediJava.html">Cara Membaca dan Menulis File di Java</a></figure><figure class="link-to-page"><a href="JavaAdvanced/MembuatAplikasiTodoListdenganJavadanFile.html">Membuat Aplikasi Todo List dengan Java dan File</a></figure><figure class="link-to-page"><a href="JavaAdvanced/BelajarMenggunakanJavadanDatabaseMySQL.html">Belajar Menggunakan Java dan Database MySQL</a></figure><figure class="link-to-page"><a href="JavaAdvanced/MembuatJendeladenganJFrame.html">Membuat Jendela dengan JFrame</a></figure><figure class="link-to-page"><a href="JavaAdvanced/CaraMenggunakanJOptionPaneuntukMembuatDialog.html">Cara Menggunakan JOptionPane untuk Membuat Dialog</a></figure><figure class="link-to-page"><a href="JavaAdvanced/TrikAgarJendelaJFrameSelaluTampildiTengahLayar.html">Trik Agar Jendela JFrame Selalu Tampil di Tengah Layar</a></figure><figure class="link-to-page"><a href="JavaAdvanced/BagaimanaCaraMenanganiEventKlik.html">Bagaimana Cara Menangani Event Klik</a></figure><figure class="link-to-page"><a href="JavaAdvanced/CaraMenggunakanMavenpadaProyekAplikasiJava.html">Cara Menggunakan Maven pada Proyek Aplikasi Java</a></figure><figure class="link-to-page"><a href="JavaAdvanced/ApaituXMLdanKenapaPentingdalamPemrograman.html">Apa itu XML dan Kenapa Penting dalam Pemrograman</a></figure><figure class="link-to-page"><a href="JavaAdvanced/MenggunakanGSONuntukSerialisasidanDeserialisa.html">Menggunakan GSON untuk Serialisasi dan Deserialisa</a></figure><figure class="link-to-page"><a href="JavaAdvanced/ApaituGradledanBagaimanaCaraMenggunakannyadiJava.html">Apa itu Gradle dan Bagaimana Cara Menggunakannya di Java</a></figure><figure class="link-to-page"><a href="JavaAdvanced/PersiapanPemrogramanAndroiddiLinuxMenggunakanAndroidStudio.html">Persiapan Pemrograman Android di Linux Menggunakan Android Studio</a></figure><figure class="link-to-page"><a href="JavaAdvanced/EmulatorAlternatifuntukAndroidStudio.html">Emulator Alternatif untuk Android Studio</a></figure><figure class="link-to-page"><a href="JavaAdvanced/PemrogramanAndroidMengenalActivitydanSiklusHidup.html">Pemrograman Android Mengenal Activity dan Siklus Hidup</a></figure><figure class="link-to-page"><a href="JavaAdvanced/PemrogramanAndroidCaraPeriksaKonektivitas.html">Pemrograman Android Cara Periksa Konektivitas</a></figure><figure class="link-to-page"><a href="JavaAdvanced/EbookdanVideoPemrogramanAndroidGratisdariGoogle.html">Ebook dan Video Pemrograman Android Gratis dari Google</a></figure></div></article></body></html>
+	
+</style></head><body><article id="05d105cd-0b60-4418-96ad-62cd75588e20" class="page sans"><header><h1 class="page-title"><strong>Konversi Bilangan Desimal ke Bilangan Biner di Java</strong></h1></header><div class="page-body"><p id="610fea7c-dce4-4bab-b9c0-41ff85225359" class="">Konversi bilangan desimal ke biner sangat mudah dilakukan di Java, karena ada <em>method</em> atau fungsi yang sudah disediakan untuk melakukannya. Berikut ini tampilan program konversi yang saya buat dengan Java (Swing).</p><figure id="82cc2573-c88d-4ddf-b581-4606ce326dc0" class="image"><a href="https://4.bp.blogspot.com/-yRpuezdZqlw/VyKc3J8no-I/AAAAAAAACx4/U5AojmPQXuQ0Zp9SztMpCexi24lbugbegCK4B/s1600/Program%2BKonversi%2BBilangan%2BDesimal%2Bke%2BBiner.png"><img src="https://4.bp.blogspot.com/-yRpuezdZqlw/VyKc3J8no-I/AAAAAAAACx4/U5AojmPQXuQ0Zp9SztMpCexi24lbugbegCK4B/s1600/Program%2BKonversi%2BBilangan%2BDesimal%2Bke%2BBiner.png"/></a></figure><p id="30bbc252-c261-4d9b-82dd-18aa5cebc08e" class="">Terdapat dua tombol pada program tersebut. Tombol pertama berfungsi untuk menentukan tipe konversinya (Desi-ke-Bin atau Bin-ke-Desi). Kode yang dikerjakan di tombol tersebut adalah sebagai berikut.</p><pre id="bf4f7b2d-3983-4775-9073-345ac0a37845" class="code"><code><em>private</em> void btnTipeKonversiActionPerformed(java.awt.event.ActionEvent evt) { 
+	if(btnTipeKonversi.getText().equals(&quot;=&gt;&quot;)){ 
+		btnTipeKonversi.setText(&quot;&lt;=&quot;); 
+	} else { 
+		btnTipeKonversi.setText(&quot;=&gt;&quot;); 
+	} 
+	if(btnTipeKonversi.getText().equals(&quot;=&gt;&quot;)){ 
+		txtBiner.setEnabled(false); 
+		txtBiner.setText(&quot;&quot;); 
+		txtDesimal.setEnabled(true); 
+	} else { 
+		txtBiner.setEnabled(true); 
+		txtDesimal.setEnabled(false); 
+		txtDesimal.setText(&quot;&quot;); 
+	}
+}</code></pre><p id="8521000b-68d7-4716-beaf-b1b38e01a431" class="">Sedangkan tombol berikutnya berfungsi untuk mengkonversi bilangan yang diinputkan. Kodenya sebagai berikut.</p><pre id="c6fe2a0f-b148-4249-8b3f-04600eeaf291" class="code"><code><em>private</em> void btnKonversiActionPerformed(java.awt.event.ActionEvent evt) { 
+	try { 
+		if(txtBiner.getText().isEmpty()){ 
+			int desi = Integer.valueOf(txtDesimal.getText()); 
+			// konversi ke biner 
+			String bin = Integer.toBinaryString(desi); 
+			txtBiner.setText(bin); 
+		} else {
+			String biner = txtBiner.getText(); 
+			// konversi ke desimal 
+			int des = Integer.parseInt(biner, 2); 
+			txtDesimal.setText(String.valueOf(des)); 
+		} 
+	} catch (Exception e) { 
+		JOptionPane.showMessageDialog(null, &quot;Input tidak valid: &quot; + e.getMessage()); 
+	} finally { 
+		txtBiner.setEnabled(true); 
+		txtDesimal.setEnabled(true); 
+	}
+}</code></pre><p id="f9a88f9b-7c88-4b4a-9ac3-c86b0ffc1847" class=""><em>Method</em> atau fungsi yang melakukan konversi adalah <code>Integer.toBinaryString()</code> dan <code>Integer.parseInt()</code>.</p><p id="10fdd73d-dd47-44eb-b0a5-e224572a1b50" class="">Fungsi <code>Integer.toBinaryString()</code> memiliki parameter dengan tipe <em>integer</em>. Sedangkan fungsi <code>Integer.parseInt()</code> memiliki parameter dengan tipe <em>string</em> dan <em>integer</em> untuk nilai basis bilangannya. Nilai <code>2</code> diberikan untuk menentukan bilangan berbasis <code>2</code>.</p><p id="a1646398-ef28-4e1f-8051-d18d70a468a9" class="">Hasil uji coba:</p><figure id="c0d5e74d-4962-4362-941f-3455d21876de" class="image"><a href="https://2.bp.blogspot.com/-d2hVS5LUkHQ/VyKgxCofSBI/AAAAAAAACyA/h1rLws6TW5U19y_STI5zlGjC5-Cx-s5NACLcB/s1600/Hasil%2BUji%2BCoba%2BProgram%2BKonversi%2BBilangan%2BDesimal%2BKe%2BBiner.png"><img src="https://2.bp.blogspot.com/-d2hVS5LUkHQ/VyKgxCofSBI/AAAAAAAACyA/h1rLws6TW5U19y_STI5zlGjC5-Cx-s5NACLcB/s1600/Hasil%2BUji%2BCoba%2BProgram%2BKonversi%2BBilangan%2BDesimal%2BKe%2BBiner.png"/></a></figure></div></article></body></html>

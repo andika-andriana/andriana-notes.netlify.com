@@ -1,0 +1,721 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Menggunakan GSON untuk Serialisasi dan Deserialisasi Data JSON di Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="48f274fa-08ea-4831-b33c-bf2ee1820637" class="page sans"><header><h1 class="page-title"><strong>Menggunakan GSON untuk Serialisasi dan Deserialisasi Data JSON di Java</strong></h1></header><div class="page-body"><p id="72b1923e-f260-4b54-8e0f-002eccdf25b8" class="">GSON adalah library racikan Google untuk melakukan serialisasi dan deserialisasi data JSON dengan mudah.</p><p id="809bdce2-14fa-44e4-8c71-0e6b22c09e19" class="">Serialisasi adalah proses mengubah objek Java menjadi JSON. Sedangkan deserialisasi adalah proses mengubah JSON menjadi obejek Java.</p><p id="e096e070-1333-4d7e-baf2-fad4e8258f4f" class="">Serialisasi dan deserialisasi biasanya dilakukan saat kita bekerja dengan <a href="https://www.petanikode.com/slim-api/">webservice</a>.</p><p id="de80e68d-0445-49fd-9734-0e02372ee5ca" class="">Pada kesempatan ini, kita akan belajar menggunakan library GSON untuk serialisasi dan deserialisasi data JSON secara langsung dari kode dan deserialisasi dari webservice.</p><p id="e4e2806d-4218-47f7-96a1-8a8a701a7459" class="">Mari kita mulai…</p><h2 id="436c10bc-7653-46ca-aa74-32de97bbb77c" class=""><strong>Membuat Project dengan Maven</strong></h2><p id="21bc5dd1-0c8a-4e88-8239-0e9e25073d24" class="">Pada tutorial ini, kita akan <a href="https://www.petanikode.com/java-maven/">menggunakan Maven</a> untuk membuat project dan menginstal library GSON.</p><p id="bf735fbd-040e-448e-a1da-d1514a655ada" class="">Silahkan ketik perintah berikut ini untuk membuat project dengan Maven.</p><pre id="e5586270-8b5c-4ec8-b7f4-370aca72c6da" class="code"><code>mvn archetype:generate \
+-DgroupId=com.petanikode.app \
+-DartifactId=petanikode-app \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DinteractiveMode=<em>false</em></code></pre><p id="15313167-f8a8-4dad-b153-8479d8110577" class="">Setelah itu, silahkan buka project ini dengan teks editor atau IDE.</p><h2 id="69061765-89e6-4c33-abc5-10d6d69e4a20" class=""><strong>Menambahkan Library GSON ke Project</strong></h2><p id="7b0e9dda-645a-4e7a-9436-67815b0ad1df" class="">Berikutnya kita akan tambahkan Si <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.2">GSON</a> dengan cara menambahkan kode <em>depdency</em> ini:</p><pre id="2e64c6c7-10a8-49e3-ac76-646fd160a25b" class="code"><code>&lt;!-- https://mvnrepository.com/artifact/com.google.code.gson/gson --&gt;
+&lt;dependency&gt; 
+	&lt;groupId&gt;com.google.code.gson&lt;/groupId&gt; 
+	&lt;artifactId&gt;gson&lt;/artifactId&gt; 
+	&lt;version&gt;2.8.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><p id="443eb3fb-6173-4309-9784-71549bec4a8f" class="">di dalam file <code>pom.xml</code>.</p><figure id="739f4792-28d6-4749-b160-7072799f1922" class="image"><a href="https://www.petanikode.com/img/java/maven/pom-gson.png"><img src="https://www.petanikode.com/img/java/maven/pom-gson.png"/></a></figure><p id="4e96f9a0-6246-4668-bb04-4522c4d39237" class="">Setelah itu, ketik perintah berikut ini untuk menginstalnya:</p><pre id="1ad22b91-bf61-4bb2-ad09-6638fab97347" class="code"><code>mvn install</code></pre><figure id="c6d88fb2-feb3-4a86-8461-15f3cfa472b5" class="image"><a href="https://www.petanikode.com/img/java/maven/mvn-install.gif"><img src="https://www.petanikode.com/img/java/maven/mvn-install.gif"/></a></figure><p id="9d47f4c6-fcc4-42c6-a79b-39331cf45e28" class="">Tunggu sampai prosesnya selsai…</p><h2 id="3f6a6fbd-8949-4d0a-ad80-1901713c1701" class=""><strong>Membuat Class Model</strong></h2><p id="845b40c8-4633-4c8d-9ed1-e1ea1a0293b3" class="">Sebelum kita bisa menggunakan GSON, kita harus membuat class model yang akan menjadi template objeknya.</p><p id="f92831e2-66ea-4a4d-b13e-a1275a4bd51e" class="">Sebagai contoh, kita akan menggunakan class <code>User</code>. Silahkan buat class <code>User</code> seperti ini:</p><pre id="5856d145-5ba8-4c0c-b048-167d4fd0db19" class="code"><code><em>public</em> <em>class</em> User { 
+	<em>public</em> String name, email; 
+	<em>public</em> int umur; 
+	<em>public</em> User(String name, String email, int umur){ 
+		this.name = name; 
+		this.email = email; 
+		this.umur = umur; 
+	}
+}</code></pre><h2 id="708bc3fb-ca7e-4561-b39f-963b95224129" class=""><strong>Membuat Class Main</strong></h2><p id="fe5d370d-0d9e-4296-8599-dbe9608740af" class="">Untuk melakukan percobaan, kita akan membuat class <code>Main.java</code> dengan isi sebagai berikut:</p><pre id="83b69eff-8248-48d9-b459-281a6b373b3e" class="code"><code>import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+<em>public</em> <em>class</em> Main { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		User mUser = new User(&quot;Petani Kode&quot;, &quot;info@petanikode.com&quot;, 22); 
+		// ubah objek menjadi string 
+		JSON Gson gson = new Gson(); 
+		String jsonUser = gson.toJson(mUser); 
+		System.out.println(jsonUser); 
+		// ubah string JSON menjadi Objek 
+		Gson gsonBuilder = new GsonBuilder().create(); 
+		User myUser = gsonBuilder.fromJson(jsonUser, User.class);
+		System.out.println(myUser.name); 
+	}
+}</code></pre><p id="79bb8fd3-90ed-4467-841a-4a43ad7105e3" class="">…maka hasilnya:</p><figure id="3f779516-bcd6-4adb-8f05-8fb3401b751c" class="image"><a href="https://www.petanikode.com/img/java/gson/hasil-sersialisasi-deserialisasi.png"><img src="https://www.petanikode.com/img/java/gson/hasil-sersialisasi-deserialisasi.png"/></a></figure><h3 id="34a98730-77c9-4a60-9910-ad7b943040f2" class=""><strong>Penjelasan:</strong></h3><p id="5a7633dc-99b7-4c68-9c9e-dbb4d1550019" class="">Sebelum dapat menggunakan class dari library GSON, kita harus mengimportnya terlebih dahulu.</p><pre id="a37797a9-44c5-4a3c-b986-595fc5f0a52e" class="code"><code>import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;</code></pre><p id="1ac0a7ab-cc09-40b9-805d-722e9d10cfcf" class="">Setelah itu, kita coba membuat objek bernama <code>mUser</code>.</p><pre id="87f666ab-b70c-45c5-ade9-883c2ec44f58" class="code"><code>User mUser = new User(&quot;Petani Kode&quot;, &quot;info@petanikode.com&quot;, 22);</code></pre><p id="d1603656-d838-44ba-a7aa-356dc1592b86" class="">Berikutnya kita buat objek <code>gson</code> dan mengubah objek <code>mUser</code> menjadi JSON.</p><pre id="1432675d-48d5-4e1e-9b89-93e2b53a0ac7" class="code"><code>// ubah objek menjadi string JSON
+Gson gson = new Gson();
+String jsonUser = gson.toJson(mUser);
+System.out.println(jsonUser);</code></pre><p id="b27e59df-4a59-4578-b5a4-deff381053bf" class="">Kita menggunakan method <code>toJson()</code> dengan paramter objek dari class yang akan kita ubah ke dalam bentuk JSON (serialisasi).</p><p id="a5396aea-2dc3-4c92-987e-eb441d2beabf" class="">Sedangkan untuk proses mengubah JSON menjadi Objek, caranya seperti ini:</p><pre id="52401bdd-5e45-4d41-b4c5-95bda081e42b" class="code"><code>Gson gsonBuilder = new GsonBuilder().create();
+User myUser = gsonBuilder.fromJson(jsonUser, User.class);
+System.out.println(myUser.name);</code></pre><p id="e80c8e58-954e-4abe-b6bc-7af2a4588049" class="">Pertama kita buat dulu objek GSON dari <code>GsonBuilder().create()</code>. Setelah itu membuat Obejek <code>myUser</code> dengan method <code>fromJson()</code>.</p><p id="2b11f855-2677-4f06-8278-36f7b3e15dc2" class="">Method <code>fromJson()</code> memiliki dua parameter:</p><pre id="bb131177-fb9e-4795-b4f5-8061ba1fa172" class="code"><code>gsonBuilder.fromJson(&lt;string JSON&gt;, User.class);</code></pre><h2 id="412b9f7e-4e6d-4543-8ab0-88ab3ec60c98" class=""><strong>Desrialisasi JSON dari Webservice</strong></h2><p id="e9823cc5-4d03-4860-9c37-fdd3401a3aaa" class="">Untuk mengubah JSON ke objek Java dari data JSON yang ada di web service, kita membutuhkan library tambahan lagi. Yaitu: library untuk melakukan <em>HTTP Request</em> ke webservicenya.</p><p id="c28d7f0d-2ad8-440b-912d-820776925929" class="">Ada banyak sekali library untuk melakukan <em>HTTP Request</em> di Java. Kita akan coba pakai library <em>Apache HttpClient</em>.</p><p id="1b7aea56-68b6-4179-893c-0d9c134e49e8" class="">Silahkan tambahkan ke dalam <em>depedencies</em>.</p><pre id="2487af2a-df81-4a2d-8d89-f626e227baf6" class="code"><code>&lt;!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient --&gt;
+&lt;dependency&gt; 
+	&lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt; 
+	&lt;artifactId&gt;httpclient&lt;/artifactId&gt; 
+	&lt;version&gt;4.5.4&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><p id="65d13a7e-00bd-443a-8c18-09f2e5ee9b12" class="">Lakukan instalasi lagi:</p><pre id="e9ddca62-8517-4174-89b3-2c864b64ee49" class="code"><code>mvn install</code></pre><p id="1e3681a9-da4d-4c35-99bd-26d66250c349" class="">Setelah itu, kita akan buat kode untuk melakukan <em>HTTP Request</em> ke webservice untuk mengambil data JSON. Nanti hasil dari HTTP Request ini akan berupa string JSON.</p><p id="10d0aa05-bb98-429d-acd2-180b30a3022f" class="">Kita akan mengambil data JSON dari: <a href="https://api.github.com/users/petanikode">https://api.github.com/users/petanikode</a></p><p id="76015871-d5c8-4e10-98ac-0ab5d52c51a6" class="">Langkah yang dilakukan berikutnya adalah membuat class untuk data JSON tersebut. Silahkan buat class baru bernama <code>GithubUser</code> seperti ini:</p><pre id="275beef4-d710-405f-a7a0-728de4831ddf" class="code"><code><em>public</em> <em>class</em> GithubUser { 
+	String name; 
+	String email; 
+	String blog; 
+	String location; 
+	String html_url;
+}</code></pre><p id="8b342921-0fc2-4616-be9f-e82b4f5081ed" class="">Nama properti yang digunakan, pastikan sama seperti nama properti pada JSON-nya. Karena kalau tidak, properti tersebut akan bernilai <code>null</code>.</p><p id="5cd51fdc-6906-4848-b168-e91fc93e83aa" class="">Untuk tipe data, kita berikan saja semuanya <code>String</code>. Karena properti yang ingin kita ambil berteipe string semua.</p><p id="9104f9c9-d921-4ce3-b20d-80444f2cb492" class="">Setelah itu, modifikasi class <code>Main.java</code> menjadi seperti ini:</p><pre id="9d21de5f-d6c6-428c-bf25-b744ab724574" class="code"><code>import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+<em>public</em> <em>class</em> Hello {
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		User mUser = new User(&quot;Petani Kode&quot;, &quot;info@petanikode.com&quot;, 22); 
+		// ubah objek menjadi string 
+		JSON Gson gson = new Gson(); 
+		String jsonUser = gson.toJson(mUser); 
+		System.out.println(jsonUser); 
+		// ubah string JSON menjadi Objek 
+		Gson gsonBuilder = new GsonBuilder().create(); 
+		User myUser = gsonBuilder.fromJson(jsonUser, User.class); 
+		System.out.println(myUser.name); 
+		// deserialisasi data JSON dari Webservice 
+		try { 
+			String jsonWeb = getJson(&quot;https://api.github.com/users/petanikode&quot;); 
+			GithubUser gitUser = gson.fromJson(jsonWeb, GithubUser.class); 
+			System.out.println(&quot;Hasil deserialisasi dari Webservice: &quot;); 
+			System.out.println(gitUser.name); 
+			System.out.println(gitUser.email); 
+			System.out.println(gitUser.blog); 
+			System.out.println(gitUser.location); 
+			System.out.println(gitUser.html_url); 
+		} catch (Exception e) { 
+			System.out.println(&quot;Terjadi masalah: &quot; + e.getMessage()); 
+		} 
+	} 
+	<em>public</em> <em>static</em> String getJson(String url) <em>throws</em> Exception { 
+		HttpClient client = new DefaultHttpClient(); 
+		HttpGet request = new HttpGet(url); 
+		// add request header 
+		request.addHeader(&quot;User-Agent&quot;, &quot;Mozilla/5.0&quot;); 
+		HttpResponse response = client.execute(request); 
+		System.out.println(&quot;\nSending &#x27;GET&#x27; request to URL : &quot; + url); 
+		System.out.println(&quot;Response Code : &quot; + response.getStatusLine().getStatusCode()); 
+		BufferedReader rd = new BufferedReader( new InputStreamReader(response.getEntity().getContent())); 
+		StringBuffer result = new StringBuffer(); 
+		String line = &quot;&quot;; 
+		while ((line = rd.readLine()) != null) { 
+			result.append(line); 
+		} 
+		return result.toString(); 
+	}
+}</code></pre><p id="bc4384c0-3ee8-48ca-a258-63d6865bcd3d" class="">Pada kode di atas, kita menambahkan <em>method</em> <code>getJson()</code> untuk melakukan <em>HTTP Request</em> ke webservice dengan library <em>Apache HTTP Client</em>. Hasil kembalian dari <em>method</em> ini adalah String JSON.</p><p id="61069d05-ee57-4bd3-a51f-0f8939deaef3" class="">Lalu diserialisasi oleh GSON, maka hasilnya akan seperti ini:</p><figure id="61c01023-5feb-41ec-8f43-7faa2ae76770" class="image"><a href="https://www.petanikode.com/img/java/gson/hasil-deserialisasi-webservice.png"><img src="https://www.petanikode.com/img/java/gson/hasil-deserialisasi-webservice.png"/></a></figure><h2 id="dd9c7f74-b3aa-45d6-9dbd-fa87ad59134e" class=""><strong>Akhir Kata…</strong></h2><p id="72d229f3-9259-490e-98c7-923203a04c80" class="">Itulah cara menggunakan GSON untuk melakukuan serialisasi dan deserialisasi data JSON di Java. Berikutnya silahkan eksperimen sendiri.</p><ul id="6efbcde6-f10e-422f-89a9-4e6196f173f9" class="bulleted-list"><li>Baca JSON dari File lalu deserialisasi dengan GSON.</li></ul><ul id="259c77a0-1233-46c1-a2b1-794e00b55bbe" class="bulleted-list"><li>Serialisasi objek menjadi JSON, lalu kirim ke Webservice.</li></ul><p id="2e44039a-766d-4aff-a1be-e5fa1375b922" class="">Selalamt bereksperimen.</p><p id="08f4d6d8-7c80-410e-8aa4-923d6547eb7a" class="">Referensi:</p><ul id="11f7a0ca-914d-488e-a68a-048e584e08da" class="bulleted-list"><li><a href="https://en.wikipedia.org/wiki/Gson">Wikipedia GSON</a></li></ul><ul id="139ac257-5aad-40a2-aad4-98997a9b20d1" class="bulleted-list"><li><a href="https://hc.apache.org/">Apache HTTP Components</a></li></ul></div></article></body></html>

@@ -1,0 +1,770 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pemrograman Android: Mengenal Activity dan Siklus Hidupnya</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f661a827-a3c8-4ae0-9fd6-195b60f53a3d" class="page sans"><header><h1 class="page-title"><strong>Pemrograman Android: Mengenal Activity dan Siklus Hidupnya</strong></h1></header><div class="page-body"><p id="e42cf35f-f0d6-4e05-900f-9e00bf0f5d7f" class="">Aplikasi Android setidaknya memiliki satu atau lebih <em>Activity</em>.</p><p id="674c354e-ca94-4194-aa7d-8a03dc8ae29d" class="">“Bagaimana kalau tidak memiliki <em>Activity</em>?”</p><p id="fddc4ca9-bc88-414f-8b8f-160de39089b8" class="">Aplikasi itu akan menjadi aplikasi yang hanya bisa berjalan secara <em>background</em> saja dan tidak memiliki tampilan apa-apa.</p><p id="405e29f8-9350-46d0-add5-3e2bf8566123" class="">Pada kesempatan ini kita akan berkenalan dengan <em>Activity</em> dan memahami siklus hidup <em>Activity</em> dalam aplikasi.</p><p id="4cc5e2c9-1453-4726-bc20-446f9d5367f9" class="">Mari kita mulai…</p><h2 id="5b0f0b62-1b8f-4aa2-9279-e4187243ea14" class=""><strong>Pengertian </strong><em><strong>Activity</strong></em></h2><p id="138366ab-9fb4-483a-b60e-02cf91da83ff" class=""><em>Activity</em> adalah komponen yang dapat dilihat oleh pengguna, sehingga mereka dapat berinteraksi dengan aplikasi.</p><p id="dc95436f-f25f-4518-a268-e290bcd10fa2" class="">Bila dibandingkan dengan aplikasi web dan desktop, <em>Activity</em> sama seperti halaman dan <em>form</em>.</p><div id="8edcc988-4c9d-4aa9-b1d4-c71b00237ddd" class="collection-content"><h4 class="collection-title">Pengertian Activity</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Android</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Web</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Desktop</th></tr></thead><tbody><tr id="59f9544c-c03f-405d-9e1b-790e5ac187f7"><td class="cell-title"><a href="Pemrograman%20Android%20Mengenal%20Activity%20dan%20Siklus%20H%20f661a827a3c84ae09fd6195b60f53a3d/Pengertian%20Activity%208edcc9884c9d4aa9b1d4c71b00237ddd/Activity%2059f9544cc03f405d9e1b790e5ac187f7.html">Activity</a></td><td class="cell-*)-&lt;">Halaman</td><td class="cell-Pwr#">Form</td></tr></tbody></table></div><p id="0f35101a-290a-40c8-99f4-6c8f98749232" class=""><em>Activity</em> tidak hidup abadi selamanya, dia bisa diciptakan dan dihancurkan.</p><p id="f9515fdf-1f20-49e4-9ca0-9bfe45692e4b" class=""><em>Activity</em> memiliki siklus hidup <em>(lifecycle)</em> yang merupakan kondisi yang akan dialami saat diciptakan sampai dihancurkan.</p><p id="5811fecd-cf0b-48cb-a354-4052fa286a34" class="">Ada beberapa kondisi yang akan dialami oleh <em>Activity</em> seperti yang tergambar pada <em>flow chart</em> berikut ini.</p><figure id="e82edfde-c1ba-4cd6-b01e-36ff38d73ea3" class="image"><a href="https://www.petanikode.com/img/android/activity/siklus-hidup-activity.png"><img src="https://www.petanikode.com/img/android/activity/siklus-hidup-activity.png"/></a></figure><p id="3348347b-7a59-4b36-8911-986074d6d731" class=""><strong>Penjelasannya</strong>:</p><ul id="c4053545-eae8-4289-998b-2c61f99ad5f9" class="bulleted-list"><li><code>onCreate()</code> adalah kondisi awal saat <em>Activity</em> baru diciptakan, biasanya dilakukan inisialisasi pada tahapan ini.</li></ul><ul id="18ec95bf-eb5c-4ea4-811f-0ec514305c4a" class="bulleted-list"><li><code>onStart()</code> adalah saat <em>Activity</em> dimulai</li></ul><ul id="33349d7e-59b9-4108-8dea-4b9810240771" class="bulleted-list"><li><code>onResume()</code> adalah saat <em>Activity</em> dibuka kembali, biasanya dieksekusi setelah <code>onPause()</code></li></ul><ul id="86abc77c-90ae-4152-8984-20346f083a97" class="bulleted-list"><li><code>onPause()</code> akan dipanggil saat ada <em>Activity</em> lain yang terbuka.</li></ul><ul id="c26e62da-39cc-4758-82d5-338325b2276d" class="bulleted-list"><li><code>onStop()</code> adalah kondisi saat <em>Activity</em> tidak ditampilkan dilayar (biasanya saat pengguna menekan tombol Home).</li></ul><ul id="de973b5a-c0fd-4c5f-b53a-b33acb962f29" class="bulleted-list"><li><code>onRestart()</code> adalah kondisi saat <em>Activity</em> kembali dibuka oleh pengguna.</li></ul><ul id="6b0fac1e-36e2-4c65-b48f-6037ebff4ae1" class="bulleted-list"><li><code>onDestroy()</code> adalah kondisi saat <em>Activity</em> dihancurkan pada memori.</li></ul><h2 id="f0512d04-0955-4460-8e09-654db02aadec" class=""><strong>Latihan </strong><em><strong>Activity</strong></em></h2><p id="d4ee7ae3-0465-44a7-87cf-d5645e72fe36" class="">Baik! agar lebih paham pembahasan di atas, sekarang kita latihan dengan membuat aplikasi sederhana.</p><h3 id="ceb9c3b7-a509-4adf-a9a4-3e9e45562f46" class=""><strong>Membuat Proyek Baru</strong></h3><p id="85a2394a-9ba5-4ae6-8303-4a82a1e2feaa" class="">Silahkan buat proyek baru dengan nama <em><strong>LatihanActivity</strong></em>.</p><figure id="4f8d7e76-1377-41af-a1f7-d00d179ff7da" class="image"><a href="https://www.petanikode.com/img/android/activity/nama-proyek.png"><img src="https://www.petanikode.com/img/android/activity/nama-proyek.png"/></a></figure><p id="e9d7279b-4bb6-43ec-b250-ba3d95f4a577" class="">Kemudian tentukan minimum SDK yang digunakan.</p><figure id="a84407f3-b66a-4e19-b1e0-16dbccfd1f55" class="image"><a href="https://www.petanikode.com/img/android/activity/minimum-sdk.png"><img src="https://www.petanikode.com/img/android/activity/minimum-sdk.png"/></a></figure><p id="0fc8beab-8755-4fc7-a21e-bd5aff7d6795" class="">Selanjutnya, pilih jenis <em>Activity</em> yang akan dibuat. Pilih saja <em><strong>Blank Activity</strong></em>.</p><figure id="d89ee169-9ce6-4d78-acae-2936a83b4f7a" class="image"><a href="https://www.petanikode.com/img/android/activity/pilih-activity.png"><img src="https://www.petanikode.com/img/android/activity/pilih-activity.png"/></a></figure><p id="5c6469d3-3b96-4504-b2f5-ceaa21c09318" class="">Setelah itu, isi nama Activity-nya dengan <em><strong>MainActivity</strong></em>.</p><figure id="1136a776-9f8b-4c5d-b1ff-286e213ebcac" class="image"><a href="https://www.petanikode.com/img/android/activity/nama-activity.png"><img src="https://www.petanikode.com/img/android/activity/nama-activity.png"/></a></figure><p id="0236646d-e129-4612-aff4-0e268646533c" class="">Tunggulah beberapa saat…</p><p id="86644f0c-7550-421a-b918-dd976d145f58" class="">Proyek kita sedang dibuat.</p><h3 id="4bdc0563-2fca-4be4-8f0e-b222e7581e3b" class=""><strong>Saatnya </strong><em><strong>Coding</strong></em></h3><p id="78f0926d-34d9-410b-a38c-385d645b1c70" class="">Aplikasi ini hanya bertugas menampilkan pesan dengan <em>Toast</em>, untuk menujukan kondisi siklus hidup <em>Activity</em>.</p><p id="cdaf3539-16b6-46c5-8659-6d9bce0d55a4" class="">Ada dua tombol yang akan kita buat:</p><ol id="91d57396-593d-4dcd-ae2f-616d164bdba5" class="numbered-list" start="1"><li>Tombol untuk membuka <em>Activity</em> lain (buka URL dengan browser);</li></ol><ol id="8e6cb7ed-9ccf-4073-b2b5-d03ea22c9037" class="numbered-list" start="2"><li>Tombol untuk menutup <em>Activity</em>.</li></ol><p id="bea2a648-123e-42fc-8ae9-c3087dba75a3" class="">Mari kita buat…</p><p id="aa136987-05fc-4e0a-b67b-84cc0ea153ca" class="">Silahkan buka file <code>activity_main.xml</code>, kemudian kondisikan kodenya seperti ini.</p><p id="eeed545a-c62b-4a5d-8801-2e97fc97f02e" class=""><em>(jangan dicopas, sebaiknya diketik sendiri agar lebih paham)</em></p><pre id="cf0e1f6b-d91c-4af2-8cf1-da6e60b08008" class="code"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout 
+	xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; 
+	xmlns:tools=&quot;http://schemas.android.com/tools&quot; 
+	android:id=&quot;@+id/activity_main&quot; 
+	android:layout_width=&quot;match_parent&quot; 
+	android:layout_height=&quot;match_parent&quot; 
+	android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot; 
+	android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot; 
+	android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot; 
+	android:paddingTop=&quot;@dimen/activity_vertical_margin&quot; 
+	android:orientation=&quot;vertical&quot; 
+	tools:context=&quot;com.petanikode.latihanactivity.MainActivity&quot;
+&gt; 
+	&lt;Button 
+		android:id=&quot;@+id/btn_start_activity&quot; 
+		android:text=&quot;Buka Activity Lain&quot; 
+		android:layout_marginBottom=&quot;@dimen/activity_vertical_margin&quot; 
+		android:layout_width=&quot;match_parent&quot; 
+		android:layout_height=&quot;wrap_content&quot; 
+	/&gt; 
+	&lt;Button 
+		android:id=&quot;@+id/btn_close&quot; 
+		android:text=&quot;Tutup Activity&quot; 
+		android:layout_marginBottom=&quot;@dimen/activity_vertical_margin&quot; 
+		android:layout_width=&quot;match_parent&quot; 
+		android:layout_height=&quot;wrap_content&quot; 
+	/&gt;
+&lt;/LinearLayout&gt;</code></pre><p id="c203d621-ccd1-40c4-bf04-c5d282b72e79" class="">Maka sekarang kita memiliki dua buah tombol.</p><figure id="b141d181-7add-4426-ba95-2b27aee353a3" class="image"><a href="https://www.petanikode.com/img/android/activity/layout-app.png"><img src="https://www.petanikode.com/img/android/activity/layout-app.png"/></a></figure><p id="c763a26e-61d5-4bc3-b794-b8cdf56fac61" class="">Setelah itu, silahkan buka <code>MainActivity.java</code> dan ikuti kode berikut.</p><pre id="b2cea603-a972-4ecb-90eb-1f8778297e4b" class="code"><code>package com.petanikode.latihanactivity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;&lt;/b&gt;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    // deklarasi komponen
+    Button btnClose, btnStartActivity;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // inisialisasi komponen
+        btnClose = (Button) findViewById(R.id.btn_close);
+        btnStartActivity = (Button) findViewById(R.id.btn_start_activity);
+
+        btnClose.setOnClickListener(this);
+        btnStartActivity.setOnClickListener(this);
+
+        Toast.makeText(this, &quot;Activity: onCreate()&quot;, Toast.LENGTH_SHORT).show();&lt;/b&gt;
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        Toast.makeText(this, &quot;Activity: onStart()&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Toast.makeText(this, &quot;Activity: onResume()&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Toast.makeText(this, &quot;Activity: onPause()&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Toast.makeText(this, &quot;Activity: onStop()&quot;, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_start_activity:
+                // buka activity browser
+                Intent petanikodeActivity = new Intent(Intent.ACTION_VIEW);
+                petanikodeActivity.setData(Uri.parse(&quot;http://petanikode.com&quot;));
+                startActivity(petanikodeActivity);
+                break;
+            case R.id.btn_close:
+                finish();
+                break;
+        }
+    }
+}</code></pre><p id="b7e9e802-2838-492c-8581-58bab781193a" class="">Setelah itu, silahkan coba jalankan aplikasi dari menu <em><strong>run</strong></em>–&gt;___Run (app)___ …</p><figure id="6bb16e9e-95b6-4d6a-8b0c-e2c1e454c0e8" class="image"><a href="https://www.petanikode.com/img/android/activity/demo-latihan-activity.gif"><img src="https://www.petanikode.com/img/android/activity/demo-latihan-activity.gif"/></a></figure><h3 id="4348ea02-4cf8-480f-b9eb-a4fb953ae217" class=""><strong>Bedah Kode</strong></h3><p id="5dd9c15c-f1f0-4a74-8010-2af56d157131" class="">Pertama kita membutuhkan beberpa <em>Class</em> untuk melengkapi aplikasi ini:</p><pre id="6f6bea89-9fac-4561-93d7-df94bb1402f7" class="code"><code>import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;</code></pre><p id="63acc133-db12-4700-8e86-ec3d53c9ff07" class="">Lalu ada <em>Class</em> <code>MainActivity</code> yang merupakan turunan dari <em>Class</em> <code>AppCompatActivity</code> dan mengimplementasikan <em>Interface</em> <code>View.OnClickListener</code> untuk meng-handle <em>event</em> <code>onClick()</code>.</p><pre id="ef4b33bf-af12-4d64-819f-c0c8af73a201" class="code"><code><em>public</em> <em>class</em> MainActivity <em>extends</em> AppCompatActivity <em>implements</em> View.OnClickListener { 
+	//...
+}</code></pre><p id="918775e1-19bd-4f51-9c98-0ef997831c66" class="">Selanjutnya, kita deklarasikan komponen (dua tombol) yang dibutuhkan dalam kode.</p><pre id="fec577e8-6dbf-488e-8b62-33bbf77a9484" class="code"><code>// deklarasi komponen
+Button btnClose, btnStartActivity;</code></pre><p id="7b70c0f9-6b3b-42bf-8295-d50a4e7801f8" class="">Dua tombol tersebut, kemudian diinisialisasikan pada <em>method</em> <code>onCreate()</code>. <em>Method</em> ini akan dieksekusi setiap <em>Activity</em> dicitpakan.</p><pre id="d164daf3-cfb1-4e1d-83f5-14c8187196e8" class="code"><code>@Override <em>protected</em> void onCreate(Bundle savedInstanceState) { 
+	<em>super</em>.onCreate(savedInstanceState); 
+	setContentView(R.layout.activity_main); 
+	// inisialisasi komponen 
+	btnClose = (Button) findViewById(R.id.btn_close); 
+	btnStartActivity = (Button) findViewById(R.id.btn_start_activity); 
+	btnClose.setOnClickListener(this); 
+	btnStartActivity.setOnClickListener(this); 
+	Toast.makeText(this, &quot;Activity: onCreate()&quot;, Toast.LENGTH_SHORT).show();
+}</code></pre><p id="84b1098b-f071-4e36-a33e-d1011cde5dc0" class="">Dalam inisialisasi komponen, kita membuat objek dari komponen yang ada di <code>activity_main.xml</code> ke java dengan bantuan fungsi <code>findViewById()</code>.</p><pre id="8fa1c53c-a438-4e76-99ea-aa4c1335523d" class="code"><code>btnClose = (Button) findViewById(R.id.btn_close);
+btnStartActivity = (Button) findViewById(R.id.btn_start_activity);</code></pre><p id="2ac0f739-c42b-41bd-a7f0-723632c7efaf" class="">Setelah itu, kita bisa tentukan <em>Class</em> yang akan meng-handle komponen tersebut apabila diklik dengan method <code>setOnClickListener()</code>.</p><pre id="a177f157-6fca-45fa-9083-8bee44caa201" class="code"><code>btnClose.setOnClickListener(this);
+btnStartActivity.setOnClickListener(this);</code></pre><p id="2bee5d37-6680-464e-8d33-e50903a3cb90" class="">Selanjutnya, kita tampilkan pesan <em>Toast</em> pada method <code>onStart()</code>, <code>onStop()</code>, <code>onPause()</code> dan <code>onResume()</code>.</p><pre id="09c36052-0dbe-463d-8083-a4faeb8ce7d9" class="code"><code>@Override
+<em>protected</em> void onStart(){ 
+	<em>super</em>.onStart(); 
+	Toast.makeText(this, &quot;Activity: onStart()&quot;, Toast.LENGTH_SHORT).show();
+}
+@Override
+<em>protected</em> void onResume(){ 
+	<em>super</em>.onResume(); 
+	Toast.makeText(this, &quot;Activity: onResume()&quot;, Toast.LENGTH_SHORT).show();
+}
+@Override
+<em>protected</em> void onPause(){ 
+	<em>super</em>.onPause(); 
+	Toast.makeText(this, &quot;Activity: onPause()&quot;, Toast.LENGTH_SHORT).show();
+}
+@Override
+<em>protected</em> void onStop(){ 
+	<em>super</em>.onStop(); 
+	Toast.makeText(this, &quot;Activity: onStop()&quot;, Toast.LENGTH_SHORT).show();
+}</code></pre><p id="a21352fe-bc46-41b6-a0c1-82ffa5aa296d" class="">Terakhir, kita buat kode untuk meng-handle <em>event</em> <code>onClick()</code> (saat tombol diklik).</p><pre id="9308a553-779c-4188-a681-57cfe3165ba5" class="code"><code>@Override
+<em>public</em> void onClick(View view) { 
+	switch (view.getId()){ 
+	case R.id.btn_start_activity: 
+			// buka activity browser 
+			Intent petanikodeActivity = new Intent(Intent.ACTION_VIEW); 
+			petanikodeActivity.setData(Uri.parse(&quot;http://petanikode.com&quot;)); 
+			startActivity(petanikodeActivity); 
+			break; 
+	case R.id.btn_close: finish(); 
+			break; 
+	}
+}</code></pre><p id="0d21199a-7f66-4c65-9902-caddc17db6c3" class="">Pada kode di atas, kita menggunakan fungsi <code>finish()</code> untuk mengakhiri <em>Activity</em>.</p><p id="ecb10046-4b9f-479d-9940-d59e930f70e0" class="">Maka setelah pemanggilan fungsi <code>finish()</code>, <em>Activity</em> akan menjadi <code>onStop()</code> atau <code>onDestroy()</code> bila sudah terhapus dalam memori.</p><p id="47b53643-64c8-4574-8278-f9490b92e8d1" class="">“Tunggu dulu…mana <code>onDestroy()</code>, kok tidak dibuat coding-nya?”</p><p id="299fa735-9235-40a5-a2c6-fe92826c4453" class="">Terkait dengan <code>onDestroy()</code> saya sudah coba membuatnya di <em>MainActivity</em>, tapi belum bisa dieksekusi.</p><p id="d1c89f67-ed7d-46f4-8ac3-a47ebf8b1682" class="">Menurut beberapa pendapat di StackOverflow, <code>onDestroy()</code> berlaku unutk <em>Activity</em> yang di-<code>finish()</code> secara eksplisit.</p><p id="60319ebd-b96d-4b8c-b0ce-591be60149db" class="">Silahkan cek diskusinya:</p><ul id="e7c34521-7a30-4fcf-91fb-9c6720aa269a" class="bulleted-list"><li><a href="https://stackoverflow.com/a/6117374/2658551">Why implement onDestroy() if it is not guaranteed to be called?</a></li></ul><ul id="42497483-90b9-4f29-97ec-7005926689e2" class="bulleted-list"><li><a href="https://stackoverflow.com/questions/4449955/activity-ondestroy-never-called">Activity OnDestroy never called?</a></li></ul><h2 id="a9c3ebad-0e0b-48c5-95d9-dfbf2b5aeb44" class=""><strong>Apa Selanjutnya?</strong></h2><p id="48ba997b-d076-4d1b-9237-bba3788d4334" class="">Kita sudah mengenal dan belajar menggunakan <em>Activity</em>, namun masih banyak yang harus kita pelajari tentang <em>Activity</em> diantaranya:</p><ul id="cc4a9abc-b912-4890-9f06-112420e0874a" class="bulleted-list"><li>Cara Membuka <em>Activity</em> Lain dengan Membawa Data ke sana.</li></ul><ul id="9eaaee31-6a2d-426f-91d1-6692539dc95e" class="bulleted-list"><li>Cara Membuka Implisit dan Eksplisit <em>Activity</em>.</li></ul><ul id="b3c971c4-73e5-4aa7-9996-c8ed47d4052b" class="bulleted-list"><li>Cara Membuka <em>Activity</em> dan Mengembalikan Data dari sana.</li></ul><p id="e7cfa717-588f-4a72-ad6b-730f7e8ae62c" class="">Sekian dulu tutorial android kali ini. Sampai jumpa di tutorial berikutnya.</p></div></article></body></html>

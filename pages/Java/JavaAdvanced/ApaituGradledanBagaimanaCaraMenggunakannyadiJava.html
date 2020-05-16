@@ -1,0 +1,756 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Apa itu Gradle dan Bagaimana Cara Menggunakannya di Java?</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dcc8f9b7-6a5a-4dc3-968e-2df286d7ae93" class="page sans"><header><h1 class="page-title"><strong>Apa itu Gradle dan Bagaimana Cara Menggunakannya di Java?</strong></h1></header><div class="page-body"><p id="828b4367-58c7-4286-9a28-89afc9ab556a" class="">Setelah belajar dasar Java, bisa nggak kita lanjut belajar android?</p><p id="973fdf60-8e42-44ec-a646-6745a4f14c13" class="">Bisa-bisa saja.</p><p id="31045e93-bd4e-485c-a4b3-8058d9a91d86" class="">Tapi tinggu dulu!</p><p id="b0ff3474-d45b-46da-9f9b-20ebbf4bf78d" class="">Ada sebuah <em>tool</em> yang harus kamu ketahui.</p><p id="1dd39079-b2b5-4930-8fc8-115c4b5480a2" class="">Yaitu:</p><figure id="06bd3fdd-5797-46fd-822b-523b09675b34" class="image"><a href="https://www.petanikode.com/img/java/gradle/gradle-meme.jpeg"><img style="width:336px" src="https://www.petanikode.com/img/java/gradle/gradle-meme.jpeg"/></a></figure><p id="88a6129f-e1bb-4f85-8c5b-9787d2a96cb2" class="">Banyak yang salah saat baru mulai belajar pemrograman Android.</p><p id="5da10e3e-1f6e-447c-af96-298de1134b1d" class="">Berbekal pengetahuian Java, mereka langsung belajar android begitu saja.</p><p id="5fa5ba2e-1a22-4e56-9b6e-454d732f148a" class="">Padahal gradle <strong>wajib diketahui</strong>.</p><p id="b7f6374d-01e0-4f90-aa68-dfabc35d48ee" class="">Selain Gradle, kamu juga harusnya belajar XML untuk memahami layout di android.</p><p id="a6feac42-1311-45fe-9ec3-7411e6c9fcf1" class="">Gradle akan membantu kita dalam mengembangkan aplikasi android, bahkan tidak hanya android saja.</p><p id="13194c7f-39dd-48a8-9157-72948aa94542" class="">Gradle juga dapat digunakan untuk mengembangkan aplikasi lain, seperti Web, Desktop, Bot, dll.</p><p id="aeff4cdc-de37-4dab-8c6b-f2c886866753" class="">Apa sih Gradle itu?</p><p id="b4b64538-0f61-4c0e-bf53-086beb23a63f" class="">Apa kegunaanya di Java dan Android?</p><p id="4d9ae126-82ae-4c44-9c06-e993297989c0" class="">Mengapa kita harus menggunakan Gradle?</p><p id="1bf193ec-5047-47b7-8d05-92593dc87328" class="">Mari kita bahas…</p><h2 id="b703e496-4be1-4f49-8f92-ad71c94081b8" class=""><strong>Apa itu Gradle?</strong></h2><p id="1dcf3490-d8e5-4daf-9c87-5e3a8b654dcd" class="">Gradle adalah sebuah program yang berfungsi untuk melakukan <em>build</em> secara otomatis. Karena itu, Gradle sering disebut sebagai <em>build-tool</em>.</p><p id="08b23d7b-f2d5-4ec4-8a4d-854327071d13" class=""><em>Build</em> di sini bisa kita artikan sebagai aktivitas melakukan <em>compile</em> dan <em>packaging</em>.</p><p id="7e794081-e2a6-422a-a59f-51b01e929bfc" class="">Bukannya kita bisa compile java melalui command line seperti ini:</p><p id="02897cd7-e27b-49ae-905d-33af10868160" class=""><code>javac HelloWorld.java</code></p><p id="752a0c7d-3dfb-48d3-9ad2-2bb1d40204c8" class="">Yap! bisa saja.</p><p id="ac2cb306-c59d-4b0f-b137-696bd0f975b7" class="">Tapi masalahnya kalau ada banyak file Java dan ada library yang dipakai..</p><p id="cbebf06e-4159-4477-837d-44a64651bd43" class="">Bagaiman kita compile-nya?</p><p id="805a5de2-907e-412e-b212-f32761eac85c" class="">Belum lagi, library yang satu membutuhkan library yang lain dan harus men-download-nya.</p><p id="4afc9502-36e5-45d1-916c-db5d1cc4b421" class="">Pasti ribet kan..</p><p id="4803d715-d1dd-44cc-98ba-7b9a301281fa" class="">Nah di sinilah kita butuh <em>build tools</em> seperti Gradle.</p><p id="40ed8a7b-383d-4331-aec7-b223e234c145" class="">Konsep kerja Gradle sama seperti Apache Ant dan <a href="https://www.petanikode.com/java-maven/">Apache Maven</a>.</p><p id="1a89b500-7dca-4aff-b2df-5b622d3cd939" class="">Namun, bedanya terletak pada bahasa DSL yang digunakan. Gradle menggunakan Groovy dan Kotlin, sedangkan Maven dan Ant menggunakan XML.</p><p id="ab9473ac-08d4-4dfc-97ff-6df55b32e37b" class="">Gradle tidak hanya digunakan untuk Java, Gradle juga bisa digunakan untuk bahasa pemrograman Lain seperti <a href="https://www.petanikode.com/tutorial/c++">C++</a>, Groovy, <a href="https://www.petanikode.com/tutorial/javascript/">Javascript</a>, <a href="https://www.petanikode.com/topik/kotlin">Kotlin</a>, Scala, dll.</p><h2 id="155e4b07-494f-4fc1-8ec1-0e5e5d1cd7e5" class=""><strong>Instalasi Gradle</strong></h2><p id="6a649ca0-d6d6-4b04-8e58-197580f40928" class="">Ada beberapa cara untuk menginstal gradle:</p><ol id="a1c219c5-2ea2-4f3d-b21d-9f0a0031285c" class="numbered-list" start="1"><li>Melalui SDKman</li></ol><ol id="15fb375c-c247-4c91-aedf-7b12a3565130" class="numbered-list" start="2"><li>Melalui Paket Zip</li></ol><ol id="a16682db-cf4a-465c-9d7f-1c228bebad1b" class="numbered-list" start="3"><li>Melalui package manager seperti <code>apt-get</code>, <code>yum</code>, <code>zhypper</code>, dll.</li></ol><p id="6a53debd-1229-4360-95e4-f14866c50ae5" class="">Cara termudah, yang mana?</p><p id="37706827-ecca-45f2-ba7d-b36b60c4c063" class="">Menurut saya, cara yang paling mudah: Nomer <code>1</code> dan <code>3</code>.</p><p id="25e1ddfc-0cb7-4056-939c-45d3be8a16d5" class="">Karena kita tinggal jalankan perintahnya…</p><p id="5e6f4123-f3c7-46a5-9af3-706f3626a65e" class="">…dan Gradle akan terinstal.</p><p id="e85d4a60-6934-4023-9cc0-7e07ee0521e6" class="">Namun, masing-masing memiliki kelebihan dan kekurangan.</p><p id="e50fc1fe-22b5-4627-9031-f226a139a25a" class="">Untuk lebih jelasnya mari kita bahas dan coba.</p><h3 id="6737e5ff-ed2f-4ae8-bca9-66df198c341c" class=""><strong>1. Cara Install Gradle dengan SDKman</strong></h3><p id="0ee2a6d3-83ce-4cce-9378-97be92b0b144" class="">SDKman atau SDK Manager adalah sebuah tools yang digunakan untuk instal dan update SDK seperti JDK, Android SDK dan tools lainnya.</p><p id="7427ff8d-be3e-4976-9504-01c8ac777f9d" class="">SDKman juga bisa digunakan di Windows dan Mac OS, jadi buat kamu yang menggunakan sistem operasi itu.. bisa ikuti cara ini.</p><p id="a6679784-686f-4362-a8e0-9bd291e56f42" class="">Sebelum instal Gradle dengan SDKman, kita harus menginstal SDKman-nya terlebih dahulu.</p><p id="183259ea-099c-4f0b-893e-2baf469b3eb8" class="">Silahkan buka terminal dan ketik perintah berikut:</p><pre id="cd49b665-2008-460a-a3e6-221dba31e863" class="code"><code>curl -s &quot;https://get.sdkman.io&quot; | bash
+<em>source</em> &quot;<em>$HOME</em>/.sdkman/bin/sdkman-init.sh&quot;</code></pre><p id="cd016e14-82b6-4a6d-a6b9-10eac6612c56" class="">Setelah itu, baru kita bisa instal Gradle dengan perintah ini:</p><pre id="d4aeab08-01cb-45ef-95b5-eab0a23268aa" class="code"><code>sdk install gradle</code></pre><p id="f9468018-f3c2-4826-b7cc-ffa5fb5fa706" class="">Maka SDKman akan menginstal Gradle versi terakhir.</p><p id="97185028-cfe2-46da-afc4-7963438feaf6" class="">Tunggulah sampai prosesnya selesai.</p><figure id="bb47ac9d-6437-4109-8a96-1354536a76fd" class="image"><a href="https://www.petanikode.com/img/java/gradle/sdk-install-gradle.gif"><img src="https://www.petanikode.com/img/java/gradle/sdk-install-gradle.gif"/></a></figure><p id="eec11a2d-25a6-4d97-82e9-f992d1d10a37" class="">Oh iya, kamu juga bisa menginstal versi yang lain secara spesifik dengan perintah seperti ini:</p><pre id="f2ab5759-f136-4a7b-bbad-1bf2b823ecfb" class="code"><code>sdk install gradle 6.0.1</code></pre><h3 id="4f237df8-d2a7-43fc-bd42-fce221da074c" class=""><strong>2. Install Gradle Secara Manual</strong></h3><p id="6a534274-8a07-454c-be48-2a79dfbfc665" class="">Kita juga bisa meninstal gradle secara manual dengan mendownload file binary-nya.</p><p id="710e2e2e-1c8d-4b89-ad82-30bc8171a937" class="">Silahkan buka <a href="https://gradle.org/releases/">https://gradle.org/releases/</a> untuk mendapatkan link download.</p><p id="41374911-f0ac-40da-aec9-81f21a3004ed" class="">Kemudian ketik perintah berikut untuk menginstal.</p><pre id="b0a21847-73fb-4a38-9896-1bcd0ab3154c" class="code"><code># buat folder tempat instal gradle
+mkdir -p ~/apps/gradle
+# download gradle
+wget https://services.gradle.org/distributions/gradle-6.0.1-bin.zip -O gradle.zip
+# ekstrak gradle
+unzip gradle.zip -d ~/apps/gradle</code></pre><p id="e1f1c8fb-b2c0-4eec-a6aa-0ae51053a406" class="">Setelah itu, kita tinggal tambahkan alamat PATH folder gradle ke dalam environtment variabel.</p><p id="e3cd18f5-7055-416c-a12e-b521f151bfeb" class="">Caranya, buka file <code>.bashrc</code> kemudian tambahkan kode berikut di akhir file tersebut:</p><pre id="44401a5c-1667-4999-87d6-0b123daf5cb3" class="code"><code><em>export</em> <em>PATH</em>=<em>$PATH</em>:~/apps/gradle/bin</code></pre><h3 id="61d12a0b-6b35-46ef-9ac4-eb448e79b13a" class=""><strong>3. Cara Install Gradle Melalui APT</strong></h3><p id="8c5023aa-148a-44c9-84a9-c2598fe9d84c" class="">Gradle juga tersedia di repositori Ubuntu, jadi kamu bisa menginstalnya dengan perintah <code>apt</code>.</p><figure id="389ceccb-8121-48ab-bec5-86344451cf16" class="image"><a href="https://www.petanikode.com/img/java/gradle/apt-gradle.png"><img src="https://www.petanikode.com/img/java/gradle/apt-gradle.png"/></a></figure><p id="aa1b2a8a-6853-48e8-8c23-47e599d5e58b" class="">Tetapi biasanya hanya ada versi lama saja. Untuk versi terbaru, saya sarankan menggunakan SDKman atau instal manual.</p><p id="3bca132f-c90d-4318-b632-c826127d0eb8" class="">Setelah instal Gradle jangan lupa dicek, apakah sudah terinstal dengan benar atau belum</p><p id="e601d837-85e0-49d3-acee-148c54bb03d5" class="">Caranya, ketik saja perintah:</p><pre id="bfef8f1b-97ba-45c2-9454-be97c945d4a2" class="code"><code>gradle -version</code></pre><p id="cb2fc45d-20ef-4c75-8315-4126c8821477" class="">Jika muncul seperti ini:</p><figure id="66311c1e-4c0e-4236-85de-c24d6baf64ee" class="image"><a href="https://www.petanikode.com/img/java/gradle/versi-gradle.png"><img src="https://www.petanikode.com/img/java/gradle/versi-gradle.png"/></a></figure><p id="73a8f2f4-6dfa-4feb-a3fa-1162e36c5f88" class="">Berarti gradle sudah terinstal dengan benar dan berikutnya kita tinggal belajar menggunakannya.</p><h2 id="8f0e00c9-a75a-49c6-8777-8be1b1c50e7a" class=""><strong>Membuat Project Java dengan Gradle</strong></h2><p id="c618d9d9-83b5-4269-b173-a52a119a19e6" class="">Ada dua cara yang bisa kamu lakukan untuk membuat proyek Java dengan Gradle.</p><ol id="0145607b-418e-46ac-a8eb-07d5cf9abe97" class="numbered-list" start="1"><li>Melalui command line,</li></ol><ol id="448b2395-1221-4277-8a98-ca497f4f84d2" class="numbered-list" start="2"><li>Melalui IDE seperti Netbeans, Intellij, dll.</li></ol><p id="12277a39-553c-4614-b8d7-7319a4291649" class="">Kita akan coba dulu melalui Command Line.</p><p id="1f3fc618-ed16-4159-be1b-e78ec2eedcf2" class="">Baiklah, silahkan buka Terminal atau CMD. Kemudian ketik perintah berikut:</p><pre id="28b1a85d-0511-45dd-bcf6-7d99bbe2aee0" class="code"><code># membuat folder
+mkdir belajar-gradle
+<em>cd</em> belajar-gradle</code></pre><p id="911d6b3e-a38a-45b9-8352-7b423f325d3c" class="">Setelah itu, ketik:</p><p id="abbd5202-435d-4d8c-9f58-91ba030c5cfb" class=""><code>gradle init</code></p><p id="4b95f2f4-98e6-4849-87e5-65c8a382f5bc" class="">Setelah itu, kita akan diminta untuk menentukan jenis proyek, bahasa pemrograman, framework testing, dan DSL untuk konfigurasi Gradle.</p><p id="4f43a59c-7733-4969-9558-b3e17b00a60c" class="">Silahkan pilih:</p><ol id="01d4c865-d938-4171-9da9-6cebab416bd9" class="numbered-list" start="1"><li>Jenis Proyek pilih <code>2: Application</code></li></ol><ol id="04f44a5e-731c-4f7e-8ed8-34f820dead3a" class="numbered-list" start="2"><li>Bahasa pilih <code>3: Java</code></li></ol><ol id="d08a301e-da85-4591-838e-e44f438e0962" class="numbered-list" start="3"><li>DSL pilih <code>1: Groovy</code></li></ol><ol id="5cd5d07d-3169-44c9-bb6e-9eb9f75b254e" class="numbered-list" start="4"><li>Test Framework pilih <code>1: JUnit 4</code></li></ol><p id="11e30a07-48da-4c9b-92f0-bf39c2f30849" class="">Untuk nama proyek dan source package, dikosongkan saja.</p><p id="76a90f0d-2a7c-4a7d-ac14-b010d22e994c" class="">Kalau belum jelas, silahkan ikuti ini:</p><figure id="6a94b6c8-d32a-4e39-8ad2-174c53515dc6" class="image"><a href="https://www.petanikode.com/img/java/gradle/gradle-init.gif"><img src="https://www.petanikode.com/img/java/gradle/gradle-init.gif"/></a></figure><p id="88a75c92-d7a0-43af-99dd-402c8a76598a" class="">Perintah <code>gradle ini</code> akan membuatkan kita proyek baru sesuai dengan pilihan yang sudah kita tentukan.</p><p id="4a8f99de-972d-4239-955b-94a08a1cfdbc" class="">Ini adalah struktur direktori dari hasil yang baru saja kita buat:</p><figure id="ad1145fe-e05b-47e8-97a6-77d1608d6e08" class="image"><a href="https://www.petanikode.com/img/java/gradle/dir-project.png"><img src="https://www.petanikode.com/img/java/gradle/dir-project.png"/></a></figure><p id="7cd6e171-d0e6-4bee-8b8e-34eadbdaf9ad" class="">Kamu juga bisa mengeceknya sendiri.</p><p id="b9e30cad-6008-4e25-a058-4ef9ef78b963" class="">Proyek ini tentunya akan bisa juga kita buka di IDE yang mendukung Gradle.</p><p id="b5ce4286-d00b-460d-8cc8-d8b5ddbff1ad" class="">Berikut ini penjelasan dari struktur direktori tersebut:</p><ul id="fb674dce-9da1-4ff4-8d63-61970684219d" class="bulleted-list"><li><code>gradle</code> berisi gradle wrapper;</li></ul><ul id="dece8147-bf4b-48da-981b-82f9decdb097" class="bulleted-list"><li><code>src</code> berisi source code Java, di sini lah kita akan menulis program;</li></ul><ul id="87a2d5d8-40bf-47ca-ac04-ed55ad93225c" class="bulleted-list"><li><code>test</code> berisi kode untuk testing dengan JUnit;</li></ul><ul id="d0b155dd-66c2-4693-bb80-03010465e88f" class="bulleted-list"><li><code>build.gradle</code> berisi informasi tentang project, library yang dibutuhkan aplikasi, plugin dan repository yang digunakan, task yang akan dikerjakan gradle, dll. Intinya file ini lah yang akan digunakan oleh gradle sebagai instruksi untuk melakukan <em>build</em> aplikasi.</li></ul><ul id="77821846-6c0c-4563-8353-d173029e8659" class="bulleted-list"><li><code>gradlew</code> adalah file binary untuk menjalankan gradle warapper di Lunux dan Mac OS</li></ul><ul id="f478ffa4-1f59-420d-a893-a2dedb2813cc" class="bulleted-list"><li><code>gradlew.bat</code> adalah file binary untuk menjalankan gradle warapper di Windows</li></ul><ul id="6fa50689-16e6-4faa-bc12-0220daecda54" class="bulleted-list"><li><code>settings.gradle</code> berisi informasi tentang konfigurasi untuk gradle, seperti proyek mana yang akan di-build.</li></ul><p id="9cb8ab23-7ccc-4840-8d66-49904139ad67" class="">Struktur direktori ini akan bergantung dari jenis proyek yang kita buat. Misalnya proyek android, tentu akan berbeda dengan yang ini.</p><h2 id="22dfd959-0235-4b50-9ebf-568ad5a8d11b" class=""><strong>Apa itu Gradle Wrapper?</strong></h2><p id="5f783d48-d43f-4c17-99fa-b7bc04807d2e" class="">Gradle wrapper adalah gradle yang tertanam di dalam proyek. Gradle wrapper akan diinstal disetiap menjalankan proyek baru.</p><p id="b8dd0b94-5186-4e3a-8405-936135add402" class="">Mengapa tidak menggunakan gradle yang sudah kita install di komputer?</p><p id="482e8251-fef1-4546-88f2-930f473b7126" class="">Karena agar versi gradle yang digunakan tetap sama.</p><p id="dad6b3d1-bf7e-44b3-8abc-c6fa5f9cd1bf" class="">Misalkan kita bekerja di dalam tim, nah kita tidak tahu setiap anggota tim yang lainnya menggunakan gradle versi berapa.</p><p id="23cbda5c-dee7-47e6-97ae-a62c768176f0" class="">Bisa saja versi lama, bisa juga versi yang baru. Beda versi beda juga konfigurasinya.</p><p id="430f6a80-845b-4dc8-acaf-f76a3fee97cf" class="">Nah agar proyeknya tidak rusak, maka kita bisa kunci versi gradle-nya dengan menggunakan gradle wrapper.</p><p id="bb21bdce-16a9-4584-8522-c7b214657890" class="">Jadi setiap anggota tim yang akan menjalankan proyek tersebut, akan menginstal versi gradle yang sama.</p><p id="952fb0ea-8da9-4aef-9792-47cb6d5a8a81" class="">Mau bukti?</p><p id="9a794271-3687-47ee-90cc-443884bfe03f" class="">OK, sekarang coba jalankan gradlenya dengan mengetik:</p><pre id="62a9cdd0-99ba-4b6f-bed4-0bee05755291" class="code"><code># Linux dan mac
+./gradlew
+# windows
+gradlew</code></pre><p id="e21a963b-1813-4f1a-9378-b20eb5f45327" class="">Hasilnya:</p><figure id="1ce16494-2a6b-4633-9dfe-16f407cb8314" class="image"><a href="https://www.petanikode.com/img/java/gradle/gradle-download.png"><img src="https://www.petanikode.com/img/java/gradle/gradle-download.png"/></a></figure><p id="ecd42f35-5ddf-40eb-80c8-7876f53aa19d" class="">Ini akan berjalan cukup lama, tergantung dari koneksi internetmu.</p><p id="622d0c84-eeae-42b2-a881-7f28adcfd1c5" class="">Jika cepat, ya cepat. Jika lambat ya lambat..</p><p id="c962e9ba-7d49-46ce-8b97-3ccd9d9e5b5b" class="">Jadi jangan heran, saat kamu membuka proyek android milik orang lain dan saat dijalankan pertama kali pasti akan lama.</p><p id="1fba1a2a-ffe0-41b4-89be-b6cd700222dd" class="">Karena ia harus men-download gradle dulu dan library yang dibutuhkan.</p><p id="b2cfa041-6992-4a8f-8eca-01a56b8a5ee0" class="">Setelah itu baru melakukan <em>compile</em> dan <em>build</em>.</p><h2 id="ba29870c-0841-4a6e-9efc-f959868b3666" class=""><strong>Build dan Run Aplikasi</strong></h2><p id="99725df6-1d2d-4dad-9710-97ab985dc4f8" class="">Sekarang sudah siap, mari kita coba build dan run aplikasinya.</p><p id="9989b613-e04e-4169-a58e-d7cda42ba5d5" class="">Silahkan ketik perintah berikut untuk build.</p><pre id="113dbcd1-2fa9-47d3-b5fb-3a8e517d0333" class="code"><code># Linux dan mac
+./gradlew build
+# windows
+gradlew build</code></pre><p id="ebfe20dc-b4f3-4ba0-bf95-aedaf63181db" class="">Tunggu sampai prosesnya selesai.</p><figure id="c0988459-5ae5-4fb6-8928-477449ed66e0" class="image"><a href="https://www.petanikode.com/img/java/gradle/build.gif"><img src="https://www.petanikode.com/img/java/gradle/build.gif"/></a></figure><p id="d95e6704-96a1-46aa-b96d-8cbf2ba85f50" class="">Maka hasilnya akan ada folder baru dengan nama <code>build</code>.</p><figure id="9b9300bc-ded9-4c20-9c4a-43bd67757326" class="image"><a href="https://www.petanikode.com/img/java/gradle/folder-build.png"><img src="https://www.petanikode.com/img/java/gradle/folder-build.png"/></a></figure><p id="04a515b1-b4ec-49af-9e0b-fa97de86626c" class="">Folder ini berisi file yang siap untuk didistribusikan seperti file <code>.class</code>, <code>JAR</code>, <code>TAR</code> dan <code>ZIP</code>.</p><p id="cd655a8a-ef67-4ac2-8b10-b51f6bd9f6b4" class="">Jika kamu menggunakan gradle pada android, biasanya di sana akan ada output <code>APK</code>.</p><p id="94a4ae71-110c-4962-b9be-88a2aaf46457" class="">Lalu untuk menjalankan aplikasinya bagaimana?</p><p id="9666af17-e107-42fb-861c-a9040c2d7138" class="">Gampang, kita tinggal ganti <code>build</code> menjadi <code>run</code> saja.</p><pre id="eeccfede-3d90-40a3-a8a7-da9b09e2b13d" class="code"><code># Linux dan mac
+./gradlew run
+# windows
+gradlew run</code></pre><p id="0b7a9a2e-2651-4f00-bddd-f0ca8c9ca6d4" class="">Maka hasilnya:</p><figure id="4157583a-1160-4d98-ba98-7e3001cc35ce" class="image"><a href="https://www.petanikode.com/img/java/gradle/run-app.gif"><img src="https://www.petanikode.com/img/java/gradle/run-app.gif"/></a></figure><p id="c63c51f4-8be2-4136-9a38-5f9e108aaa65" class="">Nah, jika kamu ingin membersihkan hasil build.. maka bisa menggunakan perintah:</p><pre id="76f5bf01-9d9f-4629-80bb-39740a213798" class="code"><code># Linux dan mac
+./gradlew clean
+# windows
+gradlew clean</code></pre><h2 id="4a1dfac0-0088-4af2-b0ed-ba438f83a412" class=""><strong>Membuat Task untuk Gradle</strong></h2><p id="61377d12-437e-483f-b324-05d3e73dfb15" class="">Gradle bekerja dengan mengikuti <em>task</em> (tugas) yang kita berikan.</p><p id="5bf875ee-8126-41a1-9f35-339e6cf269ed" class="">Sebenarnya saat kita menjalankan <code>build</code>, <code>run</code>, dan <code>clean</code>.. kita sedang menyuruh gradle untuk mengerjakan task tersebut.</p><p id="949d5427-501b-47cd-8a69-9c27c949620c" class="">Kita juga bisa membuat custom <em>task</em> sendiri di dalam file <code>build.gradle</code>.</p><p id="2c75492a-8e90-4b89-b218-78e5a9babbae" class="">Tapi sebelum itu, mari kita lihat dulu daftar <em>task</em> yang sudah ada di dalam proyek ini.</p><p id="c8cb0746-bb9e-47dd-8603-c1b61ef3faf4" class="">Caranya ketik perintah:</p><pre id="1fef89c8-d750-4494-9fb9-1608c5546ea4" class="code"><code># Linux dan Mac
+./gradlew task
+# Windows
+gradlew task</code></pre><p id="8ccc42d5-b958-4b84-ad35-ee5d826f515a" class="">Hasilnya:</p><figure id="f9ba5ba3-01d7-4a20-b63a-389553681501" class="image"><a href="https://www.petanikode.com/img/java/gradle/task-list.png"><img src="https://www.petanikode.com/img/java/gradle/task-list.png"/></a></figure><pre id="5a110211-4c38-425a-913d-f588ed44ed23" class="code"><code>Hasil Lengkapdian@petanikode~/t/belajar-gradle&gt; ./gradlew task
+&gt; Task :tasks
+------------------------------------------------------------
+Tasks runnable from root project
+------------------------------------------------------------
+Application tasks
+-----------------
+run - Runs this project as a JVM application
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+jar - Assembles a jar archive containing the main classes.
+testClasses - Assembles test classes.
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+Distribution tasks
+------------------
+assembleDist - Assembles the main distributions
+distTar - Bundles the project as a distribution.
+distZip - Bundles the project as a distribution.
+installDist - Installs the project as a distribution as-is.
+Documentation tasks
+-------------------
+javadoc - Generates Javadoc API documentation for the main source code.
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project &#x27;belajar-gradle&#x27;.
+components - Displays the components produced by root project &#x27;belajar-gradle&#x27;. [incubating]
+dependencies - Displays all dependencies declared in root project &#x27;belajar-gradle&#x27;.
+dependencyInsight - Displays the insight into a specific dependency in root project &#x27;belajar-gradle&#x27;.
+dependentComponents - Displays the dependent components of components in root project &#x27;belajar-gradle&#x27;. [incubating]
+help - Displays a help message.
+model - Displays the configuration model of root project &#x27;belajar-gradle&#x27;. [incubating]
+outgoingVariants - Displays the outgoing variants of root project &#x27;belajar-gradle&#x27;.
+projects - Displays the sub-projects of root project &#x27;belajar-gradle&#x27;.
+properties - Displays the properties of root project &#x27;belajar-gradle&#x27;.
+tasks - Displays the tasks runnable from root project &#x27;belajar-gradle&#x27;.
+Verification tasks
+------------------
+check - Runs all checks.
+test - Runs the unit tests.
+Rules
+-----
+Pattern: clean&lt;TaskName&gt;: Cleans the output files of a task.
+Pattern: build&lt;ConfigurationName&gt;: Assembles the artifacts of a configuration.
+Pattern: upload&lt;ConfigurationName&gt;: Assembles and uploads the artifacts belonging to a configuration.
+To see all tasks and more detail, run gradlew tasks --all
+To see more detail about a task, run gradlew help --task &lt;task&gt;
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed</code></pre><p id="fbbc09bc-71e2-4208-ae56-6f6713ac2136" class="">Ternyata ada banyak sekali task yang sudah disediakan secara default oleh Gradle.</p><p id="1200bb79-822e-4ddc-914c-c9d042c7ec9e" class="">Nah sekarang.. mari kita coba membuat custom task!</p><p id="f5ba830a-b7e0-47f4-bea5-a07c7041994f" class="">Jika kita membuat project di awal menggunakan DSL Groovy, maka task harus dibuat dengan bahasa Groovy. Tapi jika menggunakan Kotlin, maka task harus dibuat dengan Kotlin juga.</p><p id="72b6fda6-2fa8-45f7-b8d9-4289f8bb6ef9" class="">Berikut ini adalah format cara membuat task dengan bahasa Groovy:</p><figure id="468e1973-7947-4c28-a09f-d68c4559703f" class="image"><a href="https://www.petanikode.com/img/java/gradle/task.png"><img src="https://www.petanikode.com/img/java/gradle/task.png"/></a></figure><p id="5fce040b-4c69-4527-98d4-229b7cf2db00" class="">Oke, sekarang mari kita coba..</p><p id="103ed4c7-7bae-4ed3-9cca-0d7a8d513fc0" class="">Silahkan tambahkan kode berikut pada bagian akhir di file <code>build.gradle</code>.</p><pre id="6fbf85a9-6d82-4458-bed9-2e5814865a22" class="code"><code>tasks.register(&quot;hello&quot;) { 
+	description = &#x27;Menampilkan pesan hello world&#x27; doLast { 
+		println &#x27;Hello, World!&#x27; 
+	}
+}</code></pre><pre id="4b95da4d-b60f-401b-83bf-03301b6bf84b" class="code"><code>Sehingga menjadi sepert ini:
+	/* 
+	* This file was generated by the Gradle &#x27;init&#x27; task. 
+	* 
+	* This generated file contains a sample Java project to get you started. 
+	* For more details take a look at the Java Quickstart chapter in the Gradle 
+	* User Manual available at https://docs.gradle.org/6.0.1/userguide/tutorial_java_projects.html 
+	*/
+plugins { 
+	// Apply the java plugin to add support for Java 
+	id &#x27;java&#x27; 
+	// Apply the application plugin to add support for building a CLI application. 
+	id &#x27;application&#x27;
+}
+repositories { 
+	// Use jcenter for resolving dependencies. 
+	// You can declare any Maven/Ivy/file repository here. 
+	jcenter()
+}
+dependencies { 
+	// This dependency is used by the application. 
+	implementation &#x27;com.google.guava:guava:28.0-jre&#x27; 
+	// Use JUnit test framework 
+	testImplementation &#x27;junit:junit:4.12&#x27;
+}
+application { 
+	// Define the main class for the application. 
+	mainClassName = &#x27;belajar.gradle.App&#x27;
+}
+tasks.register(&quot;hello&quot;) { 
+	description = &#x27;Menampilkan pesan hello world&#x27; 
+	doLast { 
+		println &#x27;Hello, World!&#x27; 
+	}
+}</code></pre><p id="f68e72d9-4101-4e0b-acce-015521b9f051" class="">Setelah itu, coba jalankan lagi perintah:</p><pre id="a85c9ab0-1800-44cb-85b3-bac6731b02a4" class="code"><code># Linux dan Mac
+./gradlew tasks --all
+# Windows
+gradlew tasks --all</code></pre><p id="27511bc5-8399-4ce3-8566-3d97bc7f48d8" class="">Maka hasilnya:</p><figure id="3c6bf9d9-76ed-4248-8ec5-55e9e2c3f1b3" class="image"><a href="https://www.petanikode.com/img/java/gradle/task-hello.png"><img src="https://www.petanikode.com/img/java/gradle/task-hello.png"/></a></figure><p id="f369cb78-d125-44b9-b2ea-74447554cb19" class="">Selanjutnya, mari kita coba eksekusi task tersebut. Silahkan gunakan perintah berikut:</p><pre id="449d4d89-999a-4c72-bf7a-b288b064ff9e" class="code"><code># Linux dan Mac
+./gradlew hello
+# Windows
+gradlew hello</code></pre><p id="33da1342-6b5a-4802-beb8-11775f0b371c" class="">Maka hasilnya:</p><figure id="498f5926-9c5f-4f6c-92b8-408ca1c25254" class="image"><a href="https://www.petanikode.com/img/java/gradle/run-task-hello.png"><img src="https://www.petanikode.com/img/java/gradle/run-task-hello.png"/></a></figure><p id="835b640c-7b64-4eef-874e-ebda8f7bb9f3" class="">Task <code>hello</code> adalah <em>custom task</em> yang kita buat sendiri. Ini biasanya akan kita butuhkan saat gradle tidak menyediakan task yang kita inginkan. Misalnya, task untuk melakukan <em>deploy</em>, pembuatan peket <code>deb</code>, <code>exe</code>, <code>msi</code>, dll.</p><h2 id="5c979b01-231b-4aa4-aeab-8973bb355673" class=""><strong>Menginstal Library dengan Gradle</strong></h2><p id="93ba5781-8b1a-4f33-a2c4-c6f6f6ae2eba" class="">Saat proeses <em>build</em> dan <em>run</em>, gradle akan otomatis mencari dan menginstal library yang dibutuhkan oleh aplikasi.</p><p id="563bbc0a-9f27-4e9a-b4c2-e52bf236d78e" class="">Coba perhatikan blok <code>depedencies</code> pada file <code>build.gradle</code>.</p><pre id="c02b30e3-6588-44bc-857f-28c49dd0e6f8" class="code"><code>dependencies { 
+	// This dependency is used by the application. 
+	implementation &#x27;com.google.guava:guava:28.0-jre&#x27; 
+	// Use JUnit test framework 
+	testImplementation &#x27;junit:junit:4.12&#x27;
+}</code></pre><p id="747f2913-325e-47f7-a852-7364e420d427" class="">Di sini lah kita akan menentukan library yang akan digunakan oleh aplikasi.</p><p id="e1b0f761-f852-4e72-b0ff-c0c4018eca13" class="">Sebagai contoh, misalnya saya membutuhkan library GSON.. maka kita bisa tulis seperti ini:</p><pre id="116de3b5-0e7a-47c3-ae5b-d43106a4195c" class="code"><code>dependencies { 
+	// This dependency is used by the application. 
+	implementation &#x27;com.google.guava:guava:28.0-jre&#x27; 
+	implementation &#x27;com.google.code.gson:gson:2.8.6&#x27; 
+	// Use JUnit test framework 
+	testImplementation &#x27;junit:junit:4.12&#x27;
+}</code></pre><p id="9c392456-b220-4d60-add6-eb62604199eb" class="">Artinya, saya akan menginstal library <code>gson</code> dengan versi <code>2.8.6</code>.</p><p id="c8840afd-4a2f-42b0-9757-3fd761d0b1c6" class="">Dari mana kita tahu nama dan versi library yang akan diinstal?</p><p id="cdfa88fb-a453-4c6a-990b-ac5eba0eda88" class="">Ini bisa kita cari dari web penyedia library Java seperti Github, <a href="https://bintray.com/">JFog Bintray</a> dan <a href="https://mvnrepository.com/">maven central</a>.</p><h2 id="cd09d2d2-adfe-4393-b1a1-7e67646b9e0f" class=""><strong>Apa Selanjutnya?</strong></h2><p id="0d3d0045-82ea-4e3c-9b9d-60d5d3cd0cae" class="">Begitulah cara menggunakan gradle untuk proyek Java.</p><p id="5966dc04-bbb3-43df-8f80-6a55cad75f5e" class="">Gampang ‘kan?</p><p id="531958f3-21f8-4e19-a15f-3e2ca7d7c220" class="">Sebenarnya di beberapa IDE sudah terintegrasi dengan Gradle. Contohnya seperti <a href="https://www.petanikode.com/android-studio-linux/">Android Studio</a> dan Intellij. Cara menggunakan Gradle di IDE tentunya lebih mudah, tinggal klik-klik saja..</p><p id="8112d50c-d2db-4dfe-bb32-8e63a5b47a87" class="">Karena itu, selanjutnya silahkan coba sendiri menggunakan gradle di IDE yang kamu sukai.</p></div></article></body></html>

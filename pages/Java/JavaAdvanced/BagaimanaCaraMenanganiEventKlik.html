@@ -1,0 +1,631 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Bagaimana Cara Menangani Event Klik?</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="90679ec2-e286-4a5c-b753-0003e97bb1e1" class="page sans"><header><h1 class="page-title"><strong>Bagaimana Cara Menangani Event Klik?</strong></h1></header><div class="page-body"><p id="366b9015-4cdd-4171-98e4-b777fc1abe75" class="">Pada program desktop, <strong>klik</strong> sering dilakukan oleh pengguna.</p><p id="8cc36933-2f23-4470-a4d0-8e11adf3ec19" class="">Lalu, bagaimana cara menangai event ini?</p><p id="9226e6c9-40d0-4050-a61f-a71a51d2550c" class="">Misal saat pengguna program mengklik sebuah tombol, nanti kita ingin program melakukan sesuatu di sana.</p><p id="8070cc56-9815-4b28-9b6e-166527dd4714" class="">Itulah yang akan kita pelajari pada tutorial ini.</p><p id="506f05f4-e661-493d-9d75-f1923385c641" class="">Oya, tutorial ini menggunakan <strong>Netbeans</strong> agar lebih mudah dalam pembuatan dan desain form.</p><p id="d7ac0d3b-513a-4285-9bc6-5e51b6113fa7" class="">Karena bisa <em>drag/drop</em>…</p><h2 id="bc708c37-3a4a-4667-a0e2-c689620749b2" class=""><strong>1. Membuat Project Baru</strong></h2><p id="ffa9aa19-bf01-41d7-ad07-d8e8d1ead93a" class="">Silahkan buka Netbeans, lalu klik <strong>New Project</strong> dan pilih <strong>Java Application</strong>.</p><figure id="03707917-079e-4c6b-beea-416851ae1e1b" class="image"><a href="https://www.petanikode.com/img/swing/klik/new-project.png"><img src="https://www.petanikode.com/img/swing/klik/new-project.png"/></a></figure><p id="15e86a21-e442-4cc9-9311-eae9b6394815" class="">Setelah itu, isi nama project dengan: <code>TutorialSwing</code> dan jangan centang <strong>Create Main Class</strong>.</p><figure id="630b9e9a-ee97-4ff1-b354-9018295634b2" class="image"><a href="https://www.petanikode.com/img/swing/klik/project-name.png"><img src="https://www.petanikode.com/img/swing/klik/project-name.png"/></a></figure><p id="fdba51a7-36b2-4692-aa25-68349f677d15" class="">Setelah itu, buat <em>package</em> baru pada <code>&lt;default package&gt;</code> dengan nama <code>click</code>. <em>Package</em> ini akan berisi sebuah <em>form</em> JFrame.</p><figure id="95ec4484-75ba-48e7-a486-755a105b854d" class="image"><a href="https://www.petanikode.com/img/swing/klik/package-click.gif"><img src="https://www.petanikode.com/img/swing/klik/package-click.gif"/></a></figure><p id="98445b3c-add3-4b2c-aa67-d1996f989b75" class="">Setelah itu, buatlah sebuah JFrame baru.</p><figure id="9e93ae73-1ec1-493c-b083-e0eb6f79a67e" class="image"><a href="https://www.petanikode.com/img/swing/klik/new-jframe.gif"><img src="https://www.petanikode.com/img/swing/klik/new-jframe.gif"/></a></figure><p id="3d938acd-bd2b-4de6-9797-db9098d5d53a" class="">Isi nama JFrame dengan: <code>AplikasiKlik</code>.</p><figure id="93378d69-94da-45d9-b615-71b49aa9af3a" class="image"><a href="https://www.petanikode.com/img/swing/klik/nama-jframe.png"><img src="https://www.petanikode.com/img/swing/klik/nama-jframe.png"/></a></figure><p id="00bc2dc1-014e-48b0-bcd3-44598b8986bb" class="">Langkah berikutnya kita akan menambahkan beberapa komponen…</p><h2 id="6d3f34f8-79b6-4187-a2b9-f7293f6c7028" class=""><strong>2. Mendesain Form JFrame</strong></h2><p id="3e106d61-ef8f-4b8f-9b30-00a191a8c2ca" class="">Silahkan tambahkan komponen berikut:</p><ol id="c46a19b9-70a0-4981-b36b-ca65a57f7cbc" class="numbered-list" start="1"><li>1 buah jTextField;</li></ol><ol id="f95643c5-7537-41c4-a7ab-e8c0fa642edd" class="numbered-list" start="2"><li>1 buah jButton;</li></ol><ol id="3e8f637d-f86d-417c-a544-4b8c0d36cdcd" class="numbered-list" start="3"><li>2 buah jLabel untuk label jTextField dan label <em>message</em>.</li></ol><figure id="36afd9b3-5d52-4dcc-b552-d3f5478389b3" class="image"><a href="https://www.petanikode.com/img/swing/klik/desainform.gif"><img src="https://www.petanikode.com/img/swing/klik/desainform.gif"/></a></figure><p id="7fd2e4a5-63a3-405a-87a4-5176a8ac79c0" class="">Sehingga desainnya menjadi seperti ini:</p><figure id="7332fe5b-a232-4d82-ab2d-0fe771aff915" class="image"><a href="https://www.petanikode.com/img/swing/klik/desainform.png"><img src="https://www.petanikode.com/img/swing/klik/desainform.png"/></a></figure><p id="59046083-b512-446f-ab6f-792cc3c6fa9c" class="">Langkah berikutnya, kita harus mengubah nama variabel untuk beberapa komponen.</p><p id="f983a5cc-42c5-4c0f-bb11-dd34e0e31bc0" class="">Ini bertujuan untuk memudahkan kita untuk mengakses komponen di dalam kode program.</p><p id="8a964692-beae-49e8-ad25-071a83eb82fb" class="">Karena <strong>Variable Name</strong> akan menjadi sebuah objek di dalam kode Java.</p><p id="ba2d4b4e-e30d-44cc-b460-915d5061a714" class="">Silahkan klik salah satu komponen. Lalu pada bagian <strong>Code</strong> (dekat <em>propertis</em>), isi <strong>Variable Name</strong>…</p><figure id="32e2a0b1-2b6c-4ad3-9e1d-c0d354389977" class="image"><a href="https://www.petanikode.com/img/swing/klik/variable-name.png"><img src="https://www.petanikode.com/img/swing/klik/variable-name.png"/></a></figure><p id="544eea10-4ddc-413d-8152-59f9e552bff4" class="">…untuk masing-masing komponen seperti berikut:</p><figure id="6a17e81b-295f-4b8f-956e-b558298380eb" class="image"><a href="https://www.petanikode.com/img/swing/klik/nama-komponen.png"><img src="https://www.petanikode.com/img/swing/klik/nama-komponen.png"/></a></figure><h2 id="21e59830-f57a-443f-9916-b8c0da04439c" class=""><strong>3. Menambahkan Handler pada Tombol</strong></h2><p id="3e5e3df7-cad2-4bcd-894f-b6eda0f49215" class="">Kita ingin agar tombol diklik, nanti program melakukan sesuatu.</p><p id="1589d547-f60b-41e6-9662-54bcd44a9c6e" class="">Maka caranya adalah dengan menambahkan fungsi atau method untuk menangani <em>event</em> klik pada tombol.</p><p id="7976141d-7176-4fa1-8019-374809ea959d" class="">Cara menambahkannya:</p><p id="7c269675-208b-4a32-8844-0ad7783d70c5" class="">Klik kanan pada tombol, lalu pilih <strong>Events</strong>-&gt;<strong>Action</strong>-&gt;<strong>actionPerformed</strong> atau bisa juga dengan klik ganda pada tombolnya.</p><figure id="f926ffe9-d48c-4b01-9310-dcf794f72b93" class="image"><a href="https://www.petanikode.com/img/swing/klik/event.gif"><img src="https://www.petanikode.com/img/swing/klik/event.gif"/></a></figure><p id="db377107-9040-4ab2-b54b-7745f8892351" class="">Maka kita akan memiliki sebauh method baru di dalam kode:</p><figure id="b38a61ef-5f60-40d2-b138-5c96fa35ae27" class="image"><a href="https://www.petanikode.com/img/swing/klik/method-click.png"><img src="https://www.petanikode.com/img/swing/klik/method-click.png"/></a></figure><p id="c4ef2072-2755-4e7d-b784-f855c3fcb563" class="">Sekarang, coba kita ubah isi <em>method</em> tersebut menjadi seperti ini:</p><pre id="53e24086-5ad4-4c09-9de6-36cd215b9570" class="code"><code><em>private</em> void btnHelloActionPerformed(java.awt.event.ActionEvent evt) { 
+		String nama = txtNama.getText().toString().trim(); 
+		labelMessage.setText(&quot;Hello &quot; + nama);
+}</code></pre><p id="6acbcc34-b4b7-4de4-ba4a-207b1083ab97" class="">Sehingga akan menjadi seperti ini:</p><figure id="d4053825-f784-4cf3-bd47-ee86947b9f1a" class="image"><a href="https://www.petanikode.com/img/swing/klik/isi-method-click.png"><img src="https://www.petanikode.com/img/swing/klik/isi-method-click.png"/></a></figure><p id="8cccb778-f2f2-4c0d-a5a0-f5829571aa20" class="">Penjelasan:</p><p id="16380188-ad53-4f5c-a9c9-526b9e34101c" class="">Pertama, kita membuat sebuah variabel <code>nama</code> yang isinya kita ambil dari objek <code>txtNama</code>. Objek ini merupakan komponen dari TextField.</p><p id="fd96b8ea-e5fe-47ab-9101-b37377655f87" class="">Kita menggunakan method <code>getText()</code> untuk mengambil teksnya, lalu kita gunakan method <code>toString()</code> untuk mengubahnya menjadi String.</p><p id="9d7de5aa-edc7-4a3e-b1fa-f0d8e81a9d13" class="">Terakhir, kita gunakan method <code>trim()</code> untuk menghapus spasi di depan dan di belakang teks-nya.</p><p id="abeaf677-a5c3-4fcc-a419-91a34100d3e6" class="">…dan setelah itu…</p><p id="fd05b83b-66c0-4e7b-bb22-2a3216c98f37" class="">Kita menampilkannya ke dalam komponen <code>labelMessage</code> dengan menggunakan method <code>setText()</code>.</p><h2 id="f2900fbf-6275-4f70-9abd-0d577e8aa9bb" class=""><strong>4. Percobaan…</strong></h2><p id="7670fb98-46da-4f0c-8697-1a54145075a4" class="">Sekarang, mari kita coba jalankan programnya. Klik kanan pada <code>AplikasiKlik.java</code> kemudian pilih <strong>Run File</strong> atau tekan <code>Shift</code>+<code>F6</code>.</p><p id="068d9eae-004b-44fe-a073-31e90c38dae8" class="">Maka hasilnya:</p><figure id="80928422-666e-43b4-a9ed-4ef7e2ab726d" class="image"><a href="https://www.petanikode.com/img/swing/klik/demo-program.gif"><img src="https://www.petanikode.com/img/swing/klik/demo-program.gif"/></a></figure><h2 id="cac5f400-bc04-43f1-962f-b1c4f4d72847" class=""><strong>5. Membuat Program Kalkukator</strong></h2><p id="20a7bfb8-396b-4a0d-a361-aadd0f02adab" class="">Biar pemahaman kita semakin mantap, mari kita coba membuat program kalkulator penjumlahan.</p><p id="242a204b-1fe9-4802-9d4d-ce6ec181fd99" class="">Silahkan buat sebuah JFrame baru dengan nama <code>Kalkulator</code> di dalam <em>package</em> <code>click</code>.</p><p id="653a07f6-2f5e-43ef-8e0b-e1836af2d9e8" class="">Setelah itu buat desain dan <em>Variabel Name-nya</em> seperti ini.</p><figure id="99cb167f-f676-43f6-85a5-0a86ba63db29" class="image"><a href="https://www.petanikode.com/img/swing/klik/form-kalkulator.png"><img src="https://www.petanikode.com/img/swing/klik/form-kalkulator.png"/></a></figure><p id="8ff6d3fc-c9bc-46b8-ab4f-dd8b128a8b4e" class="">Setelah itu, klik 2x pada <code>btnHitung</code> untuk menambahkan method handler untuk event click.</p><p id="718a58f9-82b3-4567-bfb7-26b375772316" class="">Kemudian isi kode method-nya seperti ini:</p><pre id="4bff5c17-d40a-4406-9820-1ec4f6474e5b" class="code"><code><em>private</em> void btnHitungActionPerformed(java.awt.event.ActionEvent evt) { 
+		int nilaiA = Integer.valueOf(txtNilaiA.getText()); 
+		int nilaiB = Integer.valueOf(txtNilaiB.getText()); 
+		int hasil = nilaiA + nilaiB; 
+		// tampilkan hasil ke label 
+		labelHasil.setText(String.valueOf(hasil));
+}</code></pre><p id="97524dd6-5f83-40cd-8bb1-f360205e5659" class="">Penjelasan:</p><p id="b5209e73-fc0b-474b-8a4f-8784efafd12d" class="">Pertama kita membuat vairabel <code>nilaiA</code>, <code>nilaiB</code>, dan <code>hasil</code> dengan tipe <code>int</code> (Integer).</p><p id="e4198fb6-ff61-45f1-802a-72153fa883e8" class="">Variabel <code>nilaiA</code> kita ambil nilainya dari <code>txtNilaiA</code>. Karena teks dari <code>txtNilaiA</code> bertipe String, maka kita harus mengubahnya menjadi integer agar dapat disimpan di dalam variabel <code>nilaiA</code>.</p><p id="2683c2df-b5f9-45ce-b94a-02390c03fcf4" class="">Kita menggunakan method <code>Integer.valueOf()</code> untuk mengubah string menjadi integer.</p><p id="252f76f8-dad5-4534-8573-b98808929af0" class="">Kita juga melakukan hal yang sama pada variabel <code>nilaiB</code>.</p><p id="50bbf1b1-ce42-4377-9d4e-127d940a96cf" class="">Berikutnya pada variabel <code>hasil</code>, kita isi dengan hasil penjumlahan dari <code>nilaiA</code> dan <code>nilaiB</code>.</p><p id="a7eed97c-88be-488c-ba2e-9f62196e8c30" class="">Terakhir, kita tampilkan hasilnya ke dalam <code>labelHasil</code>.</p><p id="ba9d4429-c52e-46bc-909e-603ea6bd254d" class="">Karena method <code>setText()</code> hanya menerima parameter berupa string, maka kita harus ubah lagi tipe data dari variabel <code>hasil</code> menjadi string dengan method <code>String.valueOf()</code>.</p><p id="92ce88e7-6acf-4eb5-99e7-e4d017871856" class="">Sekarang coba eksekusi programnya dengan klik kanan pada file <code>Kalkulator.java</code>, lalu pilih <strong>Run File</strong>.</p><p id="ccc16676-e4c7-458f-846d-f83a1561c607" class="">Hasilnya:</p><figure id="4df3f6c3-7617-418b-b35a-e190b34afef0" class="image"><a href="https://www.petanikode.com/img/swing/klik/demo-kalkulator.gif"><img src="https://www.petanikode.com/img/swing/klik/demo-kalkulator.gif"/></a></figure><h2 id="4a388db0-876e-493c-a606-29f2b0b961f4" class=""><strong>Apa Selanjutnya?</strong></h2><p id="12c7c510-0bae-48a3-b181-169a0f0ba892" class="">Event klik merupakan event yang sering dilakukan oleh <em>user</em>. Selain event klik, masih terdapat beberapa event lagi.</p><p id="d3bd96d7-54ee-4ab3-962b-03e650e007f1" class="">Seperti:</p><ul id="521ae061-08d2-4a57-8749-59685b376b05" class="bulleted-list"><li>Saat tombol keyboard diklik;</li></ul><ul id="ce6819e9-1095-4b82-9c4b-b3c9d1838d38" class="bulleted-list"><li>Saat pointer melintasi <em>(mouse over)</em>;</li></ul><ul id="b0f9cd2f-b582-424c-bbe8-06692fa57059" class="bulleted-list"><li>Saat jendela ditutup;</li></ul><ul id="50a6ef4e-99ae-4a59-beb8-d415a39a484a" class="bulleted-list"><li>Saat TextField diisi;</li></ul><ul id="441458c7-475c-4dff-9510-db3373dd5919" class="bulleted-list"><li>dll.</li></ul><p id="8f872de7-de1e-4360-af2c-947e4d4ce68c" class="">Selengkapnya, kita bisa lihat dengan klik kanan pada sebuah komponen, lalu pilih <em>events</em>.</p><p id="10606e10-b920-4a74-872c-6ab7b04be638" class="">Cobalah untuk bereksperimen dengan event-event tersebut.</p></div></article></body></html>

@@ -1,0 +1,622 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Ebook dan Video Pemrograman Android Gratis dari Google</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+</style></head><body><article id="816217bb-ac77-4d85-943d-426e0b0a5577" class="page sans"><header><h1 class="page-title"><strong>Ebook dan Video Pemrograman Android Gratis dari Google</strong></h1></header><div class="page-body"><p id="006bb54c-7461-420c-a8db-0f1d958a5409" class="">Buat yang belum tahu:</p><p id="8e5e2110-ebf5-487e-9d3e-431e1e56a041" class="">Google saat ini sedang mengadakan program untuk melatih <strong>100.000</strong> developer Android di Indonesia.</p><p id="bbd64b40-0c03-4996-b9b5-7c2fa23877c4" class="">Google ingin membuat pendidikan developer Android kelas dunia bisa diakses oleh semua pelajar dan developer di seluruh Indonesia. </p><p id="505e84ec-8488-4c8c-8d8d-93a71c43b33a" class="">Saat ini Google sudah bekerja sama dengan beberapa universitas di Indonesia:</p><ul id="3b12375a-c7e7-4cec-839b-1c58509b34c6" class="bulleted-list"><li>Institut Teknologi Bandung</li></ul><ul id="75b5d46e-f692-41db-a523-826ae3103a6f" class="bulleted-list"><li>Universitas Gadjah Mada</li></ul><ul id="b4d93bd8-a011-42ce-afd6-0ca335779999" class="bulleted-list"><li>Universitas Bina Nusantara</li></ul><ul id="e0ca0964-dd4e-4137-b63a-f883fac5092b" class="bulleted-list"><li>Universitas Katolik Parahyangan</li></ul><ul id="1d1c5bbd-d858-4161-8f42-e1407122b718" class="bulleted-list"><li>President University</li></ul><ul id="266e4bef-d79a-4019-b310-fe3a3cc29c6f" class="bulleted-list"><li>Institut Teknologi Harapan Bangsa</li></ul><ul id="b4e97cfe-fbbc-4ac0-aa3a-dc510aaf0b60" class="bulleted-list"><li>Universitas Telkom</li></ul><ul id="d06b5a0a-6b1c-4858-ad39-1513d6cb0f67" class="bulleted-list"><li>Universitas Kristen Maranatha</li></ul><p id="a8580ea7-7e49-4f39-8939-67cb8ad6998e" class="">Nah untuk mendukung program ini, Google sudah menyediakan ebook/modul dan video tutorial pemrograman android.</p><p id="143d2422-7de0-4bf9-a6cf-a7fe0c999b23" class="">Modul dan video ini dipublikasikan gratis dengan lisensi <em>Creative Commons Attribution-NonCommercial 4.0</em>.</p><p id="6826ab8d-e740-481c-9a97-2aaa34298287" class="">Ada dua modul yang disediakan, yaitu: modul teori dan praktek.</p><p id="4db33b37-eacd-4c69-ae23-063ae0b086a2" class="">Modul tersedia dalam bahasa inggris dan indonesia.</p><h2 id="7e4870ed-7599-4a73-ab54-f2b4d89bd102" class=""><strong>Modul Teori Pemrograman Android</strong></h2><p id="51f0087e-b407-47e7-bf40-9fe3d7888578" class="">Modul ini berisi konsep dan teori dasar pemrograman android. Cocok digunakan untuk kuliah teori.</p><figure id="2f0ad983-de93-4915-982b-ad883abee096" class="image"><a target="_blank" href="https://www.petanikode.com/img/android/ebook/modul-teori-pemrograman-android.png"><img src="https://www.petanikode.com/img/android/ebook/modul-teori-pemrograman-android.png"/></a></figure><p id="830d75eb-0311-41ea-84ae-c49acfa319d2" class="">Ebook Teori Pemrograman Android V1</p><p id="f7aa6c56-8da1-461a-bfc1-e5d5f38790e0" class="">Link: <a target="_blank" href="https://google-developer-training.github.io/android-developer-fundamentals-course-concepts/idn/">Baca online</a></p><p id="29ab6041-66c5-48e3-9bf4-2c8df476e2a8" class="">Apa saja yang akan dipelajari?</p><ul id="738c603e-dada-4af3-b9b6-8c1c7c1fef59" class="bulleted-list"><li>Unit 1. Pengenalan Dasar Pemrograman Android</li></ul><ul id="997e918b-5e71-4092-b84f-bb4b351c12bc" class="bulleted-list"><li>Unit 2. Merancang UI/UX</li></ul><ul id="05fcff75-208f-4b3c-a689-a8a649e3e469" class="bulleted-list"><li>Unit 3. Background Task</li></ul><ul id="bbb5e43c-bb45-4d88-8433-e9c10dde6c75" class="bulleted-list"><li>Unit 4. Menggunakan Database</li></ul><ul id="b948617c-5f40-4f4c-b66f-04a0f54869cd" class="bulleted-list"><li>Unit 5. Penutup</li></ul><h2 id="f19bd41b-c4e0-4ef0-8d7b-19158918ec93" class=""><strong>Modul Praktikum Pemrograman Android</strong></h2><p id="4286635c-a944-412f-9ad5-3a56f8eb8ba2" class="">Modul ini berisi praktek pemrograman android, dilengkapi dengan tugas yang harus dikerjakan. Bisa digunakan untuk kuliah praktikum.</p><figure id="92da60a7-a379-477a-936d-ab7dd013e8e6" class="image"><a target="_blank" href="https://www.petanikode.com/img/android/ebook/modul-praktek-pemrograman-android.png"><img src="https://www.petanikode.com/img/android/ebook/modul-praktek-pemrograman-android.png"/></a></figure><p id="5ec1d98c-2429-4916-9765-23aff36194bc" class="">Ebook Praktikum Pemrograman Android V1</p><p id="d14afda9-0e42-4d7d-967d-d7f96c21f3ed" class="">Link: <a target="_blank" href="https://google-developer-training.github.io/android-developer-fundamentals-course-practicals/idn/index.html">Baca online</a></p><p id="fc24e19f-69e9-45ef-b166-c8f33257edd4" class="">Apa saja yang akan dipelajari?</p><ul id="27af1775-7004-478e-9f5f-300e877a9634" class="bulleted-list"><li>Unit 1. Pengenalan Dasar Pemrograman Android</li></ul><ul id="be9bf165-8b60-4453-8218-ebd90d7046be" class="bulleted-list"><li>Unit 2. Merancang UI/UX</li></ul><ul id="76337f04-fed6-4abb-8361-1296e15686b3" class="bulleted-list"><li>Unit 3. Background Task</li></ul><ul id="5bfe43ba-1e8f-48c2-bb9a-4b9e15eae8aa" class="bulleted-list"><li>Unit 4. Menggunakan Database</li></ul><ul id="2919c027-e532-41a5-8676-0d8341d0d64f" class="bulleted-list"><li>Tugas</li></ul><h2 id="39c8501a-de4f-4687-b493-73070ba6f30b" class=""><strong>Video Tutorial Pemrograman Android</strong></h2><p id="81faef0a-8fb0-4372-a028-a0710ccdeb3b" class="">Buat kamu yang kesulitan belajar dari buku, Google sudah menyediakan video tutorial dan kursus di Udacity.</p><p id="9190f661-e9b2-453e-9869-3f47a5d13fd0" class=""><strong>Video tutorial pemrograman android resmi dari Google</strong>:</p><p id="397935bd-eab2-41aa-a1df-81863359faf2" class="">Untuk kursus pemrograman android, silahkan menuju ke <a target="_blank" href="https://www.udacity.com/indonesia">https://www.udacity.com/indonesia</a>.</p><h2 id="0e35f1fb-ef56-47ec-b59d-3b47896e6a07" class=""><strong>Slide Presentasi Pemrograman Android dan Silabus</strong></h2><p id="9e3bc118-f322-4e09-b326-f972f918a8dc" class="">Selain modul dan video, Google juga menyediakan slide presentasi dan silabus (rencana pengajaran) untuk pengajar, guru, dosen, instruktor, tutor.</p><figure id="03b421c0-c221-4abc-8ffd-7e29ce6daa90" class="image"><a target="_blank" href="https://www.petanikode.com/img/android/ebook/slide-silabus-pemrograman-android.png"><img src="https://www.petanikode.com/img/android/ebook/slide-silabus-pemrograman-android.png"/></a></figure><p id="ae464df9-17e8-4daf-9deb-3db850f7f87e" class="">Silahkan download di: [<a target="_blank" href="https://drive.google.com/drive/u/0/folders/0B5Kg0X0yIQ1Pbk5yVGdsSFFjR28?hl=id"> Google Drive</a>]</p><h2 id="952e0c82-119a-4c2b-897e-33c3a4a81f3a" class=""><strong>Modul Android untuk Tingkat Mahir</strong></h2><figure id="ff55ba32-57d7-406f-b69c-6ed350e25a87" class="image"><a target="_blank" href="https://www.petanikode.com/img/android/ebook/adv.png"><img src="https://www.petanikode.com/img/android/ebook/adv.png"/></a></figure><p id="c0153880-0d9e-490d-876e-7fd6d5495446" class="">Buat kamu yang sudah menguasai bahasa pemrograman Java dan memiliki beberapa pengalaman mengembangkan aplikasi android, ini adalah modul untukmu.</p><p id="57f54dcb-9bed-4be2-9834-2acfd532a46a" class="">Download: <a target="_blank" href="https://google-developer-training.github.io/android-developer-advanced-course-concepts/android-developer-advanced-course-concepts.pdf">PDF</a> | <a target="_blank" href="https://google-developer-training.github.io/android-developer-advanced-course-concepts/"> Baca Online</a> | <a target="_blank" href="https://drive.google.com/drive/folders/1MRqvBGEDtNtpDyKd8sulMJreFCz1JxgC">Slide Presentasi</a> | <a target="_blank" href="https://codelabs.developers.google.com/advanced-android-training/">Course</a> | <a target="_blank" href="https://github.com/google-developer-training/android-advanced">Source Code</a></p><p id="4662a62c-8563-471e-8e06-16858680957f" class="">Pada modul tingkat lanjut ini, akan dibahas beberapa topik, seperti:</p><ul id="a48ce814-89ab-415f-94ab-caf3ed75a21b" class="bulleted-list"><li>Peningkatan UI</li></ul><ul id="f21dfc86-9023-44a9-9709-4f4eccc4c19a" class="bulleted-list"><li>Sensor</li></ul><ul id="b16e7685-1967-4f6e-a257-22e16446a23a" class="bulleted-list"><li>Performa</li></ul><ul id="2d2a43c9-6aa2-47fc-907d-bb11e4d9b890" class="bulleted-list"><li>Localization (untuk aplikasi multibahasa)</li></ul><ul id="d4ef9032-d27c-4339-94d9-13f2cafbeb3c" class="bulleted-list"><li>Accessibility</li></ul><ul id="587f78bb-2196-4e90-ae8b-d8cff0ecd135" class="bulleted-list"><li>Geo Location</li></ul><ul id="cebc4b3c-755f-4174-a7cf-af8374cf1a30" class="bulleted-list"><li>Place</li></ul><ul id="44e21a4d-42ea-4d7d-a49d-a4f9e126fcff" class="bulleted-list"><li>Mapping</li></ul><ul id="19975993-a5fd-44bc-8b0a-9f1f12c190ba" class="bulleted-list"><li>Custom Views</li></ul><ul id="8aba52a2-7015-43f4-b6f0-b0ab7f299bd2" class="bulleted-list"><li>Canvas</li></ul><ul id="dd778152-a217-40a8-8a8b-0e57bf589265" class="bulleted-list"><li>Animasi</li></ul><ul id="afdefabb-9c4a-42b2-8a7a-64e310a1fd14" class="bulleted-list"><li>dll.</li></ul><h2 id="49685ff8-916e-45d3-ad34-05ec955a7e96" class=""><strong>Update Versi 2: Android Develoepr Fundamentals</strong></h2><p id="55788de9-d747-41cf-931a-9008539ce6cd" class="">Pada bulan september 2018, Tim training Google Developer mengeluarkan modul versi ke-2 dari modul <strong>Android Developer Fundamentals</strong>. <a target="_blank" href="https://www.petanikode.com/ebook-android/#fn:2">2</a></p><p id="cfdc0a0f-3990-44f5-81cd-75dd11d3a0a0" class="">Apa saja yang baru di versi 2?</p><ul id="19aaa71a-14bd-4620-9393-9b123dd01f36" class="bulleted-list"><li>Practical codelabs are updated to reflect that the Empty Template in Android Studio creates a project that uses <code>ConstraintLayout</code>.</li></ul><ul id="b77c702c-0872-48d7-be14-ea02bdbcbf69" class="bulleted-list"><li>Removed lessons on SQLite and content providers.</li></ul><ul id="42f8b3c5-e898-4caf-9156-208ffc9095ff" class="bulleted-list"><li>Added lessons on using Room database and Architecture Components. (These lessons are identical to the lessons in the Advanced Android Development course.)</li></ul><ul id="cab79d6f-5362-40a3-9a96-b13474a450be" class="bulleted-list"><li>Removed Unit 5. This unit was completely conceptual and had no accompanying practicals. We found that people were not using the lessons in this unit.</li></ul><ul id="cae024a9-951a-4339-be2e-0da8e24bdcb0" class="bulleted-list"><li>We have changed the location of the Concepts and Practicals:</li></ul><ul id="4b895470-e883-42f8-b68d-16f778c25ae7" class="bulleted-list"><li>Concept lessons are published in GitHub pages.</li></ul><ul id="95711b90-e5ab-4308-9af7-5d0a5f1852b5" class="bulleted-list"><li>Tutorials are published as Google codelabs.</li></ul><ul id="5bc49ac0-0b1c-46d4-b25e-63158e847aea" class="bulleted-list"><li>We used Android Studio 3.1 to build the apps used in this course.</li></ul><p id="0a87a670-f550-4e4f-92b1-55f8b56db04b" class="">Versi 2 bisa kamu dapatkan di: [<a target="_blank" href="https://drive.google.com/drive/folders/1ScnPdVWxnPxgeFUrXwxFEjXCURpUqsHN"> Google Drive</a>]</p><figure id="2944f97a-083e-463e-b2fd-1b0f89b7f93c" class="image"><a target="_blank" href="https://www.petanikode.com/img/android/ebook/v2.png"><img src="https://www.petanikode.com/img/android/ebook/v2.png"/></a></figure><p id="5cd67470-e24e-49bd-848b-6a05209e84fb" class="">Modul Android Fundametal V2</p><p id="e01b024b-6180-4131-9a9f-f5fc84ed34a8" class="">Kamu juga bisa membaca modul versi ke-2 secara online di: [<a target="_blank" href="https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/index.html"> Baca Online</a>]</p><p id="9902d3f6-30e2-472f-ae77-59484006d269" class="">Namun, sepertinya versi 2 belum ada terjemahan bahasa indonesianya.</p><h2 id="24b50048-b735-4c80-9559-8d6b5aed49f2" class=""><strong>Akhir Kata…</strong></h2><p id="21e3a003-fa95-4b8a-bb0e-cbad626d75e7" class="">Jika kamu serius ingin menjadi android developer, coba baca semua modul di atas baik yang teori dan praktiknya.</p><p id="b928790f-91d5-4712-a09e-1a0051bc6e00" class="">O ya, jangan lupa juga untuk praktik.</p><p id="db828730-ad58-4824-8a0d-c6aca2e46d08" class="">Karena <strong>sekedar tahu saja tidak akan cukup</strong>.</p><p id="99e2f170-602d-4212-b63f-f2878f46565f" class=""><strong>Kamu butuh praktik, praktik, dan praktik!</strong></p><p id="f4e61a17-4821-4c16-8d01-4c4fecd6df23" class="">Setelah itu, lanjutkan ke modul tingkat mahir (advance) untuk mempelajari beberapa fitur penting di android.</p><p id="e30f2dbe-7d7a-4873-8dd5-c5529baea565" class="">…dan akhir kata, selamat menikmati ebook dan video android dari Google, semoga bermanfaat untuk semua.</p><hr id="68eb3628-ac10-455e-bf9e-cc1a3432cd20"/><ol id="6dc0916c-e5ae-414c-abed-1459f0443735" class="numbered-list" start="1"><li><a target="_blank" href="https://developers.google.com/training/programs/indonesia/?hl=id">https://developers.google.com/training/programs/indonesia/?hl=id</a></li></ol></div></article></body></html>

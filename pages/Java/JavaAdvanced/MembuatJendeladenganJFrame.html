@@ -1,0 +1,729 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Membuat Jendela dengan JFrame</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f253cbe4-eea0-4965-a025-36fd075e2559" class="page sans"><header><h1 class="page-title">Membuat Jendela dengan JFrame</h1></header><div class="page-body"><p id="80057132-b34b-4f57-a846-d7e04cc5dbd6" class="">Jendela merupakan komponen utama sebuah aplikasi GUI.</p><p id="bf1b78be-ae12-4c72-b133-6e4cc3de9744" class="">Di dalam jendela kita memasukan berbagai macam komponen seperti tombol, teks, combobox, dan lain-lain.</p><p id="6688e2b7-aed3-44e9-8094-ed6b816f754c" class="">Jendela pada pemrograman Swing dapat kita buat dengan Class <code>JFrame</code>.</p><p id="f31b7d33-5a0d-4062-8833-f7b36341cf2b" class="">Pada kesempatan ini, kita akan belajar cara membuat jendela dengan dua metode:</p><ol id="61e5201a-5ed5-4fbe-968c-a24e03ac6b32" class="numbered-list" start="1"><li><em>Hard Coding</em></li></ol><ol id="35d316e1-715e-4127-981a-0ded41fd277b" class="numbered-list" start="2"><li><em>Drag and drop</em></li></ol><p id="aecee45f-9a92-4943-b76b-915fa8603198" class="">Mari kita mulai…</p><h2 id="58eb29ec-c844-4f8e-9488-c8c1dbce3f7e" class=""><strong>Membuat Proyek Baru</strong></h2><p id="6048a1b3-ba4a-4e01-b103-dbea10e17200" class="">Sebelum kita mulai mulai membuat jendela, buatlah proyek baru pada Netbeans.</p><figure id="56e1e322-5089-4596-b156-5e8d0154e730" class="image"><a href="https://www.petanikode.com/img/swing/jendela/membuat-proyek.png"><img src="https://www.petanikode.com/img/swing/jendela/membuat-proyek.png"/></a></figure><p id="504c2797-dd45-4983-8132-eed6133101a8" class="">Isi nama proyeknya dengan <code>BelajarSwing</code> dan jangan centang <em><strong>“Create Main Class”</strong></em>.</p><figure id="80777d2f-9201-49cf-bcb5-8d17c88aa2e4" class="image"><a href="https://www.petanikode.com/img/swing/jendela/nama-proyek.png"><img src="https://www.petanikode.com/img/swing/jendela/nama-proyek.png"/></a></figure><p id="4f59f7bc-6449-4b0e-b7f7-b018aa8a08ad" class="">Setelah itu, buat sebuah package baru.</p><figure id="74cb5bbf-daf1-40b2-9ad4-0608be62c5a2" class="image"><a href="https://www.petanikode.com/img/swing/jendela/membuat-package.png"><img src="https://www.petanikode.com/img/swing/jendela/membuat-package.png"/></a></figure><p id="d569de1b-4840-4e26-b190-1624fe7d348d" class="">Isi nama package-nya dengan <code>jendela</code>.</p><figure id="0ba9c598-8668-4f75-a9d8-dac828dcebfb" class="image"><a href="https://www.petanikode.com/img/swing/jendela/nama-package.png"><img src="https://www.petanikode.com/img/swing/jendela/nama-package.png"/></a></figure><h2 id="1d0ca239-9a2a-4a8d-823d-ff6bc71047c2" class=""><strong>Membuat Jendela JFrame dengan </strong><em><strong>Hard Coding</strong></em></h2><p id="924f0fac-d1ae-4290-b41b-4e1fbbb9853e" class=""><em>Hard Coding</em> adalah teknik membuat jendela JFrame dengan menuliskan langsung kode Java untuk membuat Jendela.</p><p id="4cb72a64-6c9d-4dea-8a41-846f8975684b" class="">Jendela dibuat dengan objek JFrame, lalu disesuaikan atribut-atributnya.</p><p id="895f8cc0-db80-40da-a56e-572ec7fe7fea" class="">Untuk lebih jelasnya, mari kita praktek langsung…</p><p id="6b9335a9-fa5d-42b4-8cff-b2b62113d6be" class="">Buat sebuah class baru di dalam package <code>jendela</code> dengan nama <code>FirstWindow.java</code>, setelah itu buat kodenya seperti ini:</p><pre id="af571211-0c79-4db3-ae2d-d9021bc4217e" class="code"><code>import javax.swing.JFrame;
+
+<em>public</em> <em>class</em> FirstWindow { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// membuat objek jendela 
+		JFrame myWindow = new JFrame(); 
+		// berikan judul pada jendela 
+		myWindow.setTitle(&quot;Jendela Program&quot;); 
+		// tentukan ukuran jendela 
+		myWindow.setSize(400, 200); 
+		// tampilkan jendela ke layar 
+		myWindow.setVisible(true); 
+	}
+}</code></pre><p id="5a39a0c8-1040-4e51-9f9b-29d92c54bd92" class="">Setelah itu jalankan programnya dengan menekan Shift+F6 atau klik kanan, lalu pilih <strong>Run File</strong>.</p><p id="6a7a31ba-5c81-49b9-9d3e-17ed47002fb2" class="">Hasilnya:</p><figure id="299fdb1b-8275-4829-9ad6-421794a79696" class="image"><a href="https://www.petanikode.com/img/swing/jendela/jendela-pertama.png"><img src="https://www.petanikode.com/img/swing/jendela/jendela-pertama.png"/></a></figure><p id="9ef5e6ba-4974-4ba4-87c3-5996a2415af7" class="">Apa maksud dari kode di atas?</p><p id="24eac970-21f4-4c37-8a07-f89955657c4f" class="">Baik, saya akan jelaskan.</p><p id="bb3955e1-bede-42f3-9f00-618979960a3f" class="">Perama dimulai dari mengimpor JFrame.</p><pre id="a9a5a183-099e-4cd6-921d-6b897887e580" class="code"><code>import javax.swing.JFrame;</code></pre><p id="c9c7c48c-b63c-4108-860e-f9af92dcf3e0" class="">Karena kita membutuhkan class <code>JFrame</code>, maka kita harus mengimpornya dari package <code>javax.swing</code>.</p><p id="76030e9b-52ae-4956-a0a8-dc7e52626ec9" class="">Selanjutnya kita bisa membuat objek jendela dari class JFrame.</p><pre id="ca515ef2-53d5-4c43-adac-bce9c4c56b9a" class="code"><code>JFrame myWindow = new JFrame();</code></pre><p id="277dac6a-2077-48a8-b5e3-3205650d74a0" class="">Setelah itu, kita bisa mengatur properti jendela dengan mengeksekusi method-method yang tersedia dari calss JFrame seperti memberikan judul, mengatur ukuran, mengatur posisi, dsb.</p><pre id="03bffafe-980c-473a-bce5-acdef552d2bb" class="code"><code>// berikan judul pada jendela
+myWindow.setTitle(&quot;Jendela Program&quot;);
+// tentukan ukuran jendela
+myWindow.setSize(400, 200);
+// tampilkan jendela ke layar
+myWindow.setVisible(true);</code></pre><p id="c22a4779-b2c7-4e17-a596-866af1b85bfb" class="">Sudah paham?</p><p id="4f9d8753-bfbb-49a1-a409-73f68ea1e7c4" class="">Bagus.</p><p id="7fe8e5bd-1e98-4284-b108-9f8e9a2da9df" class="">Tapi, bagaimana kalau kita ingin membaut jendela untuk aplikasi yang besar dan kompleks?</p><p id="33558d85-d4da-41e5-8d7a-7f9d80a950ec" class="">Apabila kita menggunakan cara <em>hard coding</em>, kita bisa membuat class turunan dari JFrame.</p><p id="fdf81865-c83f-42e9-b4ba-9af552f7f1bc" class="">Seperti ini:</p><ul id="0063cff3-e24e-4604-9ae5-43711902422c" class="bulleted-list"><li>Class MainWindow</li></ul><ul id="b847d596-df6b-423b-a7ac-bf8de5e70ecd" class="bulleted-list"><li>Class TransactionWindow</li></ul><ul id="99383e80-5898-41ff-9416-e674997d2f56" class="bulleted-list"><li>Class DetailWindow</li></ul><ul id="4ac4e0db-6daf-4edf-ad72-598c333e3cc1" class="bulleted-list"><li>dll.</li></ul><p id="393f544b-d797-4b8f-b5ce-f17c6bd881b7" class="">Mari kita coba.</p><p id="9eb302fd-75f0-414c-a628-75aeaa8947ea" class="">Buatlah sebuah file class java baru bernama <code>MainWindow.java</code>, kemudian isi dengan kode berikut:</p><pre id="1a9b3d4b-88f9-44f1-b346-785dc1855072" class="code"><code>import javax.swing.JFrame;
+
+<em>public</em> <em>class</em> MainWindow <em>extends</em> JFrame { <em>public</em> MainWindow(){ this.setTitle(&quot;Jendela Utama&quot;); this.setSize(600,320); } <em>public</em> <em>static</em> void main(String[] args) { MainWindow mWindow = new MainWindow(); mWindow.setVisible(true); }
+}</code></pre><p id="e2baed11-a961-4da0-bf68-539a5162c26d" class="">Karena kita membuat class <code>MainWindow</code> sebagai class turunan dari <code>JFrame</code>, maka kita bisa mengakses langsung properti JFrame dengan kata kunci <code>this</code> dari method <em>constructor</em>.</p><p id="512f57bf-c55d-4b4e-ae6e-2618d2e18851" class="">Selanjutnya untuk membuat objek dari class <code>MainWindow</code> pada method <code>main()</code>.</p><p id="583e770b-ef24-47c0-b441-6aa51a3dccae" class="">Hasilnya:</p><figure id="e83742db-4dda-4b06-9921-f83d05769b3f" class="image"><a href="https://www.petanikode.com/img/swing/jendela/jendela-turunan.png"><img src="https://www.petanikode.com/img/swing/jendela/jendela-turunan.png"/></a></figure><h2 id="db371b6f-29a9-42bd-b13d-2ba17a6abe38" class=""><strong>Membuat Jendela dengan Drag and Drop</strong></h2><p id="bf934502-54a3-4596-8960-b3363e068196" class="">Teknik ini lebih mudah dari <em>hard coding</em>, karena kita hanya perlu melakukan <em>drag and drop</em> saja.</p><p id="b54f3db9-4bf2-4737-ad63-8171a249dbcb" class="">Silahkan buat JFrame form baru di dalam package <code>jendela</code>.</p><figure id="54ba3141-287b-4c71-a379-7a6c63cc4e24" class="image"><a href="https://www.petanikode.com/img/swing/jendela/membuat-jframe-form.png"><img src="https://www.petanikode.com/img/swing/jendela/membuat-jframe-form.png"/></a></figure><p id="dfa95e2d-2f6d-4dab-83a1-e6c5b9ca90bf" class="">Isi namanya dengan <code>AboutWindow</code>.</p><figure id="84ae2950-5e1c-4d4c-9f83-476dbfeb2746" class="image"><a href="https://www.petanikode.com/img/swing/jendela/nama-jframe-form.png"><img src="https://www.petanikode.com/img/swing/jendela/nama-jframe-form.png"/></a></figure><p id="c44089bd-5569-4232-907a-d00911df9e62" class="">Sekarang tambahkan sebuah <strong>label</strong> dengan menarik dari <em>Palette</em> ke dalam jendela.</p><figure id="1eeb97b9-a948-4da4-af8c-26d8cd346980" class="image"><a href="https://www.petanikode.com/img/swing/jendela/menambahkan-label.png"><img src="https://www.petanikode.com/img/swing/jendela/menambahkan-label.png"/></a></figure><p id="72b4006f-937f-449a-b593-bd9e85efb6aa" class="">Karena <em>drag &amp; drop</em>, kita bisa mengatur properti jendelanya dengan mudah.</p><p id="3d135867-da3b-4c84-b0da-79b7cbcc0e01" class="">Silahkan atur sesuai selera dan tambahkan beberapa komponen, sehingga menjadi seperti ini.</p><figure id="3c078f3d-8df5-4d40-8e25-f2d8c0f0c127" class="image"><a href="https://www.petanikode.com/img/swing/jendela/desain-jframe.png"><img src="https://www.petanikode.com/img/swing/jendela/desain-jframe.png"/></a></figure><p id="ce5a8ca0-b3a9-4db0-ad92-48db384b4414" class="">Komponen yang ditambahkan:</p><ul id="a326211b-4a57-4e0e-b4b2-4e7f76b4c99e" class="bulleted-list"><li>Label</li></ul><ul id="9cb8ec23-972c-4a4e-b19a-70f447657125" class="bulleted-list"><li>TextArea</li></ul><p id="3d534a13-d822-4f1d-9c87-b30d966c46ee" class="">Sekarang coba <em>run</em> dan perhatikan hasilnya:</p><figure id="3b180e90-45cb-4d17-939e-ae04111cca2c" class="image"><a href="https://www.petanikode.com/img/swing/jendela/aplikasi-jframe.png"><img src="https://www.petanikode.com/img/swing/jendela/aplikasi-jframe.png"/></a></figure><p id="3b344214-6583-4910-8a33-bcf0baff74e8" class="">Itu saja?</p><p id="97697c49-2f59-40c1-8e82-6ccc55b07c63" class="">Ya itu saja, jendela bisa jadi dalam sekejab dengan <em>drag &amp; drop</em>.</p><p id="9689c0b7-ab27-4769-95f2-cad4a4d91fde" class="">Coba kita bongkar source code-nya:</p><pre id="c2c5719b-e77c-46cd-ba6b-b6805ee031ba" class="code"><code>package jendela;
+
+<em>public</em> <em>class</em> AboutWindow <em>extends</em> javax.swing.JFrame { 
+	/** * Creates new form AboutWindow */ 
+	<em>public</em> AboutWindow() { 
+		initComponents(); 
+	} 
+	/*
+	* This method is called from within the constructor to initialize the form. 
+	* WARNING: Do NOT modify this code. The content of this method is always 		
+	* regenerated by the Form Editor. 
+	*/ 
+	@SuppressWarnings(&quot;unchecked&quot;) 
+	// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt; 
+	<em>private</em> void initComponents() { 
+		jLabel1 = new javax.swing.JLabel(); 
+		jScrollPane1 = new javax.swing.JScrollPane(); 
+		jTextArea1 = new javax.swing.JTextArea(); 
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); 
+		setTitle(&quot;Aplikasi 1.0.0 - Petani Kode&quot;); 
+		jLabel1.setFont(new java.awt.Font(&quot;Noto Sans UI&quot;, 1, 18)); 
+		// NOI18N 
+		jLabel1.setText(&quot;Aplikasi 1.0.0&quot;); 
+		jTextArea1.setColumns(20); 
+		jTextArea1.setRows(5); 
+		jTextArea1.setText(&quot;Aplikasi 1.0.0 adalah aplikasi untuk belajar pemrograman.\nAplikasi ini dibuat oleh Petani Kode untuk Demo.\nTerima kasih sudah menggunakan Aplikasi ini.\nUntuk saran dan kritik, silahkan kirim email ke info@petanikode.com.&quot;); 
+		jScrollPane1.setViewportView(jTextArea1); 
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane()); 
+		getContentPane().setLayout(layout); 
+		layout.setHorizontalGroup( 
+			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+			.addGroup(layout.createSequentialGroup() 
+			.addContainerGap() 
+			.addComponent(jScrollPane1) 
+			.addContainerGap()) 
+			.addGroup(layout.createSequentialGroup() 
+			.addGap(175, 175, 175) 
+			.addComponent(jLabel1) 
+			.addContainerGap(174, Short.MAX_VALUE)) 
+		); 
+		layout.setVerticalGroup( 
+			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+			.addGroup(layout.createSequentialGroup() 
+			.addGap(29, 29, 29) 
+			.addComponent(jLabel1) 
+			.addGap(18, 18, 18) 
+			.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE) 
+			.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)) 
+		); 
+		pack(); 
+	}
+	// &lt;/editor-fold&gt; /** * @param args the command line arguments */ 
+	<em>public</em> <em>static</em> void main(String args[]) { 
+		/* Set the Nimbus look and feel */ 
+		//&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot; Look and feel setting code (optional) &quot;&gt; 
+		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel. 
+		* For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html */ 
+		try { 
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { 
+				if (&quot;Nimbus&quot;.equals(info.getName())) { 
+					javax.swing.UIManager.setLookAndFeel(info.getClassName()); 
+					break; 
+				} 
+			} 
+		} catch (ClassNotFoundException ex) { 
+			java.util.logging.Logger.getLogger(AboutWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} catch (InstantiationException ex) { 
+			java.util.logging.Logger.getLogger(AboutWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} catch (IllegalAccessException ex) { 
+			java.util.logging.Logger.getLogger(AboutWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) { 
+			java.util.logging.Logger.getLogger(AboutWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} 
+		//&lt;/editor-fold&gt; 
+		/* Create and display the form */ 
+		java.awt.EventQueue.invokeLater(new Runnable() { 
+			<em>public</em> void run() { 
+				new AboutWindow().setVisible(true); 
+			} 
+		}); 
+	} 
+	// Variables declaration - do not modify 
+	<em>private</em> javax.swing.JLabel jLabel1; 
+	<em>private</em> javax.swing.JScrollPane jScrollPane1; 
+	<em>private</em> javax.swing.JTextArea jTextArea1; 
+	// End of variables declaration
+}</code></pre><p id="4a830d69-9fd4-47fe-adbe-81d0d432f611" class="">Kodenya hampir sama seperti kode yang kita buat pada teknik <em>hard coding</em>, namun lebih lengkap.</p><h2 id="663bb518-7de9-427d-ab2e-475990abf03b" class=""><strong>Akhir Kata…</strong></h2><p id="9896a53a-f372-4a5a-a002-48e7c18336e4" class="">Kita sudah belajar dua cara dalam membuat jendela pada program GUI Java.</p><p id="dbc07199-bbdb-4f4f-8ec6-3bf2784a4af6" class="">Pertama dengan cara <em>hard coding</em> dan yang kedua dengan <em>drag &amp; drop</em>.</p><p id="2a73556a-dd3e-414e-84e1-50fdcbddc8a2" class="">Cara yang manakah yang kamu suka?</p><p id="a830336a-340e-4a22-9ee1-ab90581c4a00" class="">Saya yakin pasti yang <em>drag &amp; drop</em>, karena lebih mudah, praktis, dan cepat.</p><p id="9f67b16c-1ac4-4bfa-8e07-b7d092a14628" class="">Lalu <em>hard coding</em> bagaimana?</p><p id="b53ca490-07f9-4e87-99ad-94f6c70596bf" class=""><em>Hard coding</em> lebih susah, karena harus mengetik kode sendiri.</p><p id="83b422c7-0144-408c-a7d5-b2f8ce60f282" class="">Namun bukan berarti tidak ada manfaatnya.</p><p id="074e3708-b01a-4211-8347-b112441e2ab7" class=""><em>Hard Coding</em> perlu kita coba untuk menambah pemahaman kita lebih dalam tentang pemrograman GUI di Java.</p><p id="93c765b0-c571-4ba3-8d22-f92637163ea1" class="">Jadi kedua cara tersebut ‘wajib’ dicoba untuk pemula yang ingin mendalami pemrograman Java Swing.</p></div></article></body></html>

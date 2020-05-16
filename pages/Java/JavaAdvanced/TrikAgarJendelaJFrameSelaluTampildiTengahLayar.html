@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Java Advance</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Trik Agar Jendela JFrame Selalu Tampil di Tengah Layar</title><style>
 /* webkit printing magic: print all background colors */
 html {
 	-webkit-print-color-adjust: exact;
@@ -618,5 +618,80 @@ blockquote {
 .checkbox-off {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
-
-</style></head><body><article id="fa0081c6-8e73-451f-8409-e65cd14d6a83" class="page sans"><header><h1 class="page-title">Java Advance</h1></header><div class="page-body"><blockquote id="cc272d33-35bb-4ff0-97bb-5d0ae0ef3efb" class="">Materi Belajar Tentang Dasar Bahasa Pemrograman Java Advanced</blockquote><figure class="link-to-page"><a href="JavaAdvanced/CaraMembacadanMenulisFilediJava.html">Cara Membaca dan Menulis File di Java</a></figure><figure class="link-to-page"><a href="JavaAdvanced/MembuatAplikasiTodoListdenganJavadanFile.html">Membuat Aplikasi Todo List dengan Java dan File</a></figure><figure class="link-to-page"><a href="JavaAdvanced/BelajarMenggunakanJavadanDatabaseMySQL.html">Belajar Menggunakan Java dan Database MySQL</a></figure><figure class="link-to-page"><a href="JavaAdvanced/MembuatJendeladenganJFrame.html">Membuat Jendela dengan JFrame</a></figure><figure class="link-to-page"><a href="JavaAdvanced/CaraMenggunakanJOptionPaneuntukMembuatDialog.html">Cara Menggunakan JOptionPane untuk Membuat Dialog</a></figure><figure class="link-to-page"><a href="JavaAdvanced/TrikAgarJendelaJFrameSelaluTampildiTengahLayar.html">Trik Agar Jendela JFrame Selalu Tampil di Tengah Layar</a></figure><figure class="link-to-page"><a href="JavaAdvanced/BagaimanaCaraMenanganiEventKlik.html">Bagaimana Cara Menangani Event Klik</a></figure><figure class="link-to-page"><a href="JavaAdvanced/CaraMenggunakanMavenpadaProyekAplikasiJava.html">Cara Menggunakan Maven pada Proyek Aplikasi Java</a></figure><figure class="link-to-page"><a href="JavaAdvanced/ApaituXMLdanKenapaPentingdalamPemrograman.html">Apa itu XML dan Kenapa Penting dalam Pemrograman</a></figure><figure class="link-to-page"><a href="JavaAdvanced/MenggunakanGSONuntukSerialisasidanDeserialisa.html">Menggunakan GSON untuk Serialisasi dan Deserialisa</a></figure><figure class="link-to-page"><a href="JavaAdvanced/ApaituGradledanBagaimanaCaraMenggunakannyadiJava.html">Apa itu Gradle dan Bagaimana Cara Menggunakannya di Java</a></figure><figure class="link-to-page"><a href="JavaAdvanced/PersiapanPemrogramanAndroiddiLinuxMenggunakanAndroidStudio.html">Persiapan Pemrograman Android di Linux Menggunakan Android Studio</a></figure><figure class="link-to-page"><a href="JavaAdvanced/EmulatorAlternatifuntukAndroidStudio.html">Emulator Alternatif untuk Android Studio</a></figure><figure class="link-to-page"><a href="JavaAdvanced/PemrogramanAndroidMengenalActivitydanSiklusHidup.html">Pemrograman Android Mengenal Activity dan Siklus Hidup</a></figure><figure class="link-to-page"><a href="JavaAdvanced/PemrogramanAndroidCaraPeriksaKonektivitas.html">Pemrograman Android Cara Periksa Konektivitas</a></figure><figure class="link-to-page"><a href="JavaAdvanced/EbookdanVideoPemrogramanAndroidGratisdariGoogle.html">Ebook dan Video Pemrograman Android Gratis dari Google</a></figure></div></article></body></html>
+	
+</style></head><body><article id="fe7ed738-655f-4a4f-a9a0-826c6718bcba" class="page sans"><header><h1 class="page-title"><strong>Trik Agar Jendela JFrame Selalu Tampil di Tengah Layar</strong></h1></header><div class="page-body"><p id="049cbc91-ccfb-4645-8e86-49e0c469afeb" class="">Saat kita membuat program GUI dengan Swing, jendelanya sering tampil pada pojok kiri atas atau pada titik (<code>0</code>,<code>0</code>).</p><p id="23935888-4475-4351-a05a-5aadc0cc62cd" class="">Bagaimana caranya agar jendela selalu tampil di tengah-tengah layar?</p><p id="fb774ca9-ab5c-4313-97b5-84d1f94d5ca6" class="">Apakah kita harus mengatur manual posisi titiknya?</p><p id="2aa7cf15-89dc-4580-9fe9-d76b61e44699" class="">Ya perlu, untuk lebih jelasnya mari kita bahas…</p><h2 id="a12b093b-ba21-49f6-9da9-10440dc2e59e" class=""><strong>Class-class yang dibutuhkan</strong></h2><p id="e57d15c9-0c4a-4748-8c23-d0be2f7f5e85" class="">Ada dua class yang kita butuhkan untuk membuat jendela JFrame tampil di tengah-tengah.</p><ol id="ef5a7562-ad2e-4888-87f2-3da1b1603058" class="numbered-list" start="1"><li><code>Dimension</code> untuk membuat objek dimensi</li></ol><ol id="ed86c335-12e7-49b6-aea1-f349a57b49b0" class="numbered-list" start="2"><li><code>Toolkit</code> untuk mengambil ukuran layar</li></ol><p id="c5ea89c8-7647-41f9-898e-822e5362e084" class="">Kedua class tersebut berada dalam package <code>java.awt</code>.</p><h2 id="b73ec3bd-6d79-49da-9b82-20adf66ec493" class=""><strong>Method untuk Mengatur Posisi Jendela</strong></h2><p id="f768352a-646c-4dc1-bd0b-f8eba6ceafb9" class="">Method untuk mengatur posisi jendela adalah <code>setLocation()</code> dengan argumen lokasi koordinat titik <code>x</code> dan <code>y</code>.</p><ol id="52974ab7-0e2b-4270-ae85-9f9fdc5a753a" class="numbered-list" start="1"><li><code>x</code> titik horizontal;</li></ol><ol id="333e94c5-8c59-41c5-aebf-1c99afb4443a" class="numbered-list" start="2"><li><code>y</code> titik vertikal.</li></ol><figure id="75326f6a-03fa-4601-a2ca-f68e64de705e" class="image"><a href="https://www.petanikode.com/img/swing/tengah/koordinat-layar.svg"><img src="https://www.petanikode.com/img/swing/tengah/koordinat-layar.svg"/></a></figure><p id="9d8b5b30-7fa2-4ece-aa5b-f4d87ecd7265" class="">Maka untuk membuat jendela tampil di tengah-tengah layar, kita harus menyesuaikan koordinat <code>x</code> dan <code>y</code> berdasarkan tinggi dan lebar layar.</p><pre id="b966b904-1848-41a8-b340-79af869793bc" class="code"><code>// mengambil ukuran layar
+Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
+// membuat titik x dan y
+int x = layar.width / 2 - jendela.getSize().width / 2;
+int y = layar.height / 2 - jendela.getSize().height / 2;
+jendela.setLocation(x, y);</code></pre><p id="34a45443-f291-4651-8b6a-75049372e3c8" class="">Pertama kita membagi tinggi dan lebar jendela dengan <code>2</code>. Sehingga titik yang akan kita dapatkan tepat berada di tengah-tengah layar.</p><p id="c32f2a6e-5200-45ff-b2e8-735046fecd54" class="">Misalkan ukuran layarnya adalah <code>800x600</code>, maka titik yang akan didapatkan adalah <code>x=400</code> dan <code>y=300</code>.</p><p id="bfd8818d-a139-422c-92a1-5a156e5be273" class="">Akan tetapi jendelanya tidak tampil di tengah layar dengan sempurnya, karena jendela juga memiliki tinggi dan lebar.</p><figure id="ea1739d9-3600-4fb5-9607-9aa794b661c5" class="image"><a href="https://www.petanikode.com/img/swing/tengah/posisi-tengah-layar.svg"><img src="https://www.petanikode.com/img/swing/tengah/posisi-tengah-layar.svg"/></a></figure><p id="5863957b-7d82-43ac-8a18-4a7b07fb2839" class="">Untuk mengatasi ini, hasil bagi dua dari tinggi dan lebar layar kita kurangi dengan tinggi dan lebar jendela yang dibagi dua juga.</p><pre id="7ba58eea-f0a4-42b7-bdba-2bd6909b3509" class="code"><code>int x = layar.width / 2 - jendela.getSize().width / 2;
+int y = layar.height / 2 - jendela.getSize().height / 2;</code></pre><p id="7edf3687-1dbc-49e1-865c-3618595a3fab" class="">Sekarang jendelanya sudah ditampilkan di tengah-tengah layar.</p><figure id="98fcef7a-e0a1-411c-9b1a-6ac88e4666ef" class="image"><a href="https://www.petanikode.com/img/swing/tengah/posisi-tengah-jendela.svg"><img src="https://www.petanikode.com/img/swing/tengah/posisi-tengah-jendela.svg"/></a></figure><h2 id="9fa33beb-768a-42b5-82a6-e09a07ef119c" class=""><strong>Kode Lengkap</strong></h2><p id="e4f01c72-7fd4-4711-a6cd-1307ca5d4a84" class="">Sudah paham kan dengan teorinya?</p><p id="affa8092-8e65-4ba6-861b-42421e6d5140" class="">Sekarang mari kita coba terapkan dalam kode.</p><p id="1079c9f0-295e-4c4a-8375-5e8f4185e737" class="">Silahkan buat JFrame baru, lalu impor class yang dibutuhkan.</p><pre id="71bca5b4-7fa1-4f93-bfb3-8803e500c6cf" class="code"><code>import java.awt.Dimension;
+import java.awt.Toolkit;</code></pre><p id="2a16971e-a069-409b-987f-8978975cea5e" class="">Setelah itu, tambahkan kode berikut pada <em>contstuctor</em> atau di bawah <code>initComponent()</code>.</p><pre id="95495a60-0d50-434c-b2f4-959df1557a85" class="code"><code>// mengambil ukuran layar
+Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
+// membuat titik x dan y
+int x = layar.width / 2 - this.getSize().width / 2;
+int y = layar.height / 2 - this.getSize().height / 2;
+this.setLocation(x, y);</code></pre><p id="63db51ee-f4fb-49ae-b7f4-bb98448e7770" class="">kita menggunakan <code>this</code> untuk menggantikan jendela, karena jendela yang kita buat adalah class turunan dari <code>JFrame</code>.</p><p id="9d5de987-b630-43f0-9a14-b8602d9659df" class="">Sehingga kode lengkapnya akan seperti ini:</p><pre id="e1638110-b8ee-459d-aee4-1db2b01453d0" class="code"><code>import java.awt.Dimension;
+import java.awt.Toolkit;
+<em>public</em> <em>class</em> JendelaPercobaan <em>extends</em> javax.swing.JFrame { 
+	// konstruktor 
+	<em>public</em> JendelaPercobaan() { 
+		initComponents(); 
+		// mengambil ukuran layar 
+		Dimension layar = Toolkit.getDefaultToolkit().getScreenSize(); 
+		// membuat titik x dan y 
+		int x = layar.width / 2 - this.getSize().width / 2; 
+		int y = layar.height / 2 - this.getSize().height / 2;
+		this.setLocation(x, y); 
+	} 
+	<em>private</em> void initComponents() { 
+		jLabel1 = new javax.swing.JLabel(); 
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); 
+		jLabel1.setText(&quot;www.petanikode.com&quot;); 
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane()); 
+		getContentPane().setLayout(layout); 
+		layout.setHorizontalGroup( 
+			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+			.addGroup(layout.createSequentialGroup() 
+			.addGap(138, 138, 138) 
+			.addComponent(jLabel1) 
+			.addContainerGap(143, Short.MAX_VALUE)) 
+		); 
+		layout.setVerticalGroup( 
+			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+				.addGroup(layout.createSequentialGroup() 
+				.addGap(134, 134, 134) 
+				.addComponent(jLabel1) 
+				.addContainerGap(149, Short.MAX_VALUE)) 
+			); 
+		pack(); 
+	}
+	// &lt;/editor-fold&gt; 
+	<em>public</em> <em>static</em> void main(String args[]) { 
+		try { 
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { 
+				if (“Nimbus”.equals(info.getName())) { 
+					javax.swing.UIManager.setLookAndFeel(info.getClassName()); 
+					break; 
+				} 
+			} 
+		} catch (ClassNotFoundException ex) { 
+			java.util.logging.Logger.getLogger(JendelaPercobaan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} catch (InstantiationException ex) { 
+			java.util.logging.Logger.getLogger(JendelaPercobaan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} catch (IllegalAccessException ex) { 
+			java.util.logging.Logger.getLogger(JendelaPercobaan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) { 
+			java.util.logging.Logger.getLogger(JendelaPercobaan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
+		} 
+		//&lt;/editor-fold&gt; / Create and display the form */ 
+		java.awt.EventQueue.invokeLater(new Runnable() { 
+			<em>public</em> void run() { 
+				new JendelaPercobaan().setVisible(true); 
+			} 
+		}); 
+	} 
+	// Variables declaration - do not modify 
+	<em>private</em> javax.swing.JLabel jLabel1; 
+	// End of variables declaration
+}</code></pre><p id="0b151a45-bbbd-495d-838e-5812431de57a" class="">Silahkan di-run dan lihatlah hasilnya:</p><figure id="93c14fe3-f9fe-45da-8c36-a2996fc527ca" class="image"><a href="https://4.bp.blogspot.com/-oK3kCCbzHY0/V5tur3iPgKI/AAAAAAAAAAQ/R3HSbAw1p5Uvj8AMnm9A02kUKzjnFpoMgCK4B/s1600/Jendela%2BJFrame%2Btampil%2Bdi%2Btengah%2Blayar%2B-%2Bpetanikode.png"><img src="https://4.bp.blogspot.com/-oK3kCCbzHY0/V5tur3iPgKI/AAAAAAAAAAQ/R3HSbAw1p5Uvj8AMnm9A02kUKzjnFpoMgCK4B/s1600/Jendela%2BJFrame%2Btampil%2Bdi%2Btengah%2Blayar%2B-%2Bpetanikode.png"/></a></figure><p id="632deefa-f1b6-47d4-a347-ba43402c52fb" class="">Referensi: <a href="https://stackoverflow.com/a/2442610">Stack Overflow</a></p></div></article></body></html>

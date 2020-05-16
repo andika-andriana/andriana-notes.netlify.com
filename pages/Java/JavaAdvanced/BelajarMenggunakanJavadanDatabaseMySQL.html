@@ -1,0 +1,933 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Membuat Program CRUD Berbasis Teks</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0d19a912-165a-4c20-96f2-0ac1bbf0edc6" class="page sans"><header><h1 class="page-title"><strong>Membuat Program CRUD Berbasis Teks</strong></h1></header><div class="page-body"><p id="699986cf-bddf-4876-b90e-5341dde63739" class="">Program Java yang sering kita buat, biasanya akan menyimpan data dalam memori (RAM).</p><p id="4fdf219b-aba5-4667-b6aa-0d7e1a2aba96" class="">Setelah program ditutup, semuanya akan hilang. Karena sifatnya temporer.</p><p id="27bdeb76-b11f-4f85-ac30-923c8c723ccc" class="">Agar data yang diinputkan dapat disimpan secara <em>‘permanen’</em>, kita membutuhkan database.</p><p id="9c9a8538-938d-4c92-99c0-4950328fb64f" class="">Ada banyak sekali pilihan database yang bisa digunakan, diantaranya: <a href="https://www.petanikode.com/topik/mysql/">MySQL</a>, <a href="https://www.petanikode.com/topik/sqlite/">SQLite</a>, PostgreSQL, Ms. SQL Server, Oracle, <a href="https://www.petanikode.com/topik/mongodb">MongoDB</a>, dan sebagainya.</p><p id="a879bbc6-acf9-447b-a3a6-ac736424d905" class="">Pada kesempatan ini, kita akan belajar cara menghubungkan Java dengan MySQL dan membuat sebuah program CRUD sederhana berbasis teks.</p><h2 id="ecc639be-e9fb-405c-8fc0-8e66b0c776ed" class=""><strong>Bagaimana Cara Menghubungkan Java dengan MySQL?</strong></h2><p id="8be76538-626d-4b15-8d55-1753cdfdfc26" class="">Kita membutuhkan JDBC <em>(Java Data Base Connectivity)</em> untuk menghubungkan Java dan MySQL.</p><p id="6b4a6761-22b7-4fb1-bdca-761d164c6b2d" class="">JDBC bertugas menyediakan koneksi ke database, sehingga kita bisa mengakses dan mengelola datanya dari program Java.</p><p id="ea764fcb-015e-4b6b-82ff-414fcfa67bf0" class="">Ada beberapa istilah yang harus dipahami dalam JDBC:</p><ul id="0f5e8c5d-8ac0-443e-b05a-8bae5d301843" class="bulleted-list"><li><strong>DriverManager</strong>: adalah sebuah <em>class</em> yang mengelola dirver;</li></ul><ul id="a2241123-7593-4771-930f-9fa858ce2567" class="bulleted-list"><li><strong>Driver</strong>: adalah <em>interface</em> yang menangani komunikasi dengan database.</li></ul><ul id="f842b435-364a-43ab-b914-f923299d4768" class="bulleted-list"><li><strong>Connection</strong>: adalah <em>interface</em> yang menyediakan method untuk menghubungi database;</li></ul><ul id="7fdd1183-e34c-4088-9453-f9593aecdaa1" class="bulleted-list"><li><strong>Statement</strong>: adalah <em>inteface</em> untuk mengeksekusi <em>query</em>;</li></ul><ul id="f6ca351f-2e39-4ff7-b48a-7b1e5643513b" class="bulleted-list"><li><strong>ResultSet</strong>: adalah <em>interface</em> untuk menampung data hasil <em>query</em>.</li></ul><p id="b9b490ff-1613-449d-924d-278b5a57b1b1" class=""><strong>Langkah-langkah menghubungkan Java dengan MySQL</strong>:</p><ol id="ba0faf80-b7bb-4efa-831c-e4e0c9f97b43" class="numbered-list" start="1"><li>Import package <code>java.sql.*</code>;</li></ol><ol id="0b7885e0-a8cc-4746-8347-e05efa57860d" class="numbered-list" start="2"><li>Daftarkan driver atau pilih driver yang akan digunakan;</li></ol><ol id="57f7f0bc-8562-4112-85eb-7d88e7da2565" class="numbered-list" start="3"><li>Buat Sebuah Koneksi;</li></ol><ol id="db519b4b-2a03-486c-aab0-417e223adc78" class="numbered-list" start="4"><li>Exsekusi sebuah Query;</li></ol><ol id="76a5d202-cfb7-4526-b951-0811cbbd8bf9" class="numbered-list" start="5"><li>Tutup koneksi dan selesai.</li></ol><p id="12a0ee35-cd47-406c-9399-d0e783e69662" class="">Untuk lebih jelasnya, mari kita coba saja dalam program.</p><h2 id="a9606208-9adf-4a01-b7d8-e6c5ae7e0d0a" class=""><strong>Program Java dan MySQL</strong></h2><p id="c89aace1-2e36-4b00-a440-413403f4bbed" class="">Silahkan buat proyek <em><strong>Java Application</strong></em> di Netbeans.</p><figure id="fe149f9d-75c7-4cd0-b142-79a0a341e2fc" class="image"><a href="https://www.petanikode.com/img/java/mysql/membuat-proyek.png"><img src="https://www.petanikode.com/img/java/mysql/membuat-proyek.png"/></a></figure><p id="725d2c11-f70e-4456-bce0-0e583496f181" class="">Berikan nama: <code>belajar-java-mysql</code>.</p><figure id="ec90b3e9-292b-4caa-9ae2-b212702ffd55" class="image"><a href="https://www.petanikode.com/img/java/mysql/nama-proyek-java.png"><img src="https://www.petanikode.com/img/java/mysql/nama-proyek-java.png"/></a></figure><p id="8a017f40-cf26-4e92-9062-fbb259a3382b" class="">Sebelum mulai <em>coding</em>, siapkan dulu databasenya.</p><p id="d6b18a95-1e4a-41c4-aeff-d22a35a43387" class="">Silahkan buat database baru bernama <code>perpustakaan</code>.</p><figure id="f3f89b51-b54a-4e7f-bda7-ba0eb87c60b9" class="image"><a href="https://www.petanikode.com/img/java/mysql/membuat-database.png"><img src="https://www.petanikode.com/img/java/mysql/membuat-database.png"/></a></figure><p id="c2398788-ec70-404f-a957-fb1957ad73e1" class="">Setelah itu buat tabel bernama <code>buku</code>.</p><figure id="4bcbb575-02d8-4fcb-af2b-f6938978d6b7" class="image"><a href="https://www.petanikode.com/img/java/mysql/membuat-tabel-buku.png"><img src="https://www.petanikode.com/img/java/mysql/membuat-tabel-buku.png"/></a></figure><p id="2b06a1a6-2c0f-4132-96ef-f234c61f5589" class="">Kode SQL-nya:</p><pre id="d84e3006-f05a-4aa3-9bc8-f282201b5dd4" class="code"><code>CREATE TABLE buku ( 
+id_buku <em>INT</em> NOT NULL AUTO_INCREMENT , 
+judul <em>VARCHAR</em>(45) NOT NULL , 
+pengarang <em>VARCHAR</em>(45) NOT NULL , 
+PRIMARY KEY (id_buku)
+);</code></pre><p id="cb08e046-ba5c-49f7-9ef5-999782937999" class="">Setelah itu coba isi dengan beberapa data.</p><pre id="d72a795c-3a5a-4a36-aa5f-7627b2d1d69d" class="code"><code>INSERT INTO buku (judul, pengarang)
+VALUES 
+(&#x27;Belajar Pemrograman Java dari Nol&#x27;, &#x27;Petani Kode&#x27;), 
+(&#x27;Pemrograman Java Menggunakan Linux&#x27;, &#x27;Petani Kode&#x27;)</code></pre><p id="7c3c5743-df2d-4d97-82e6-13703d266f15" class="">Selanjutnya kita akan mencoba menghubugkan program yang sudah kita buat dengan database ini. Silahkan ikuti kode berikut:</p><pre id="d7c6bc85-3f90-4aca-95b5-d753d2bb2934" class="code"><code>package belajar.java.mysql;
+// import bumbu-bumbu yang diperlukan
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+// bisa juga diimpor sekaligus seperti ini:
+// import java.sql.*
+<em>public</em> <em>class</em> BelajarJavaMysql { 
+	// Menyiapkan paramter JDBC untuk koneksi ke database 
+	<em>static</em> <em>final</em> String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;; 
+	<em>static</em> <em>final</em> String DB_URL = &quot;jdbc:mysql://localhost/perpustakaan&quot;; 
+	<em>static</em> <em>final</em> String USER = &quot;root&quot;; <em>static</em> <em>final</em> String PASS = &quot;kopi&quot;; 
+	// Menyiapkan objek yang diperlukan untuk mengelola database 
+	<em>static</em> Connection conn; 
+	<em>static</em> Statement stmt; 
+	<em>static</em> ResultSet rs; 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		// Melakukan koneksi ke database 
+		// harus dibungkus dalam blok try/catch 
+		try { 
+			// register driver yang akan dipakai 
+			Class.forName(JDBC_DRIVER); 
+			// buat koneksi ke database 
+			conn = DriverManager.getConnection(DB_URL, USER, PASS); 
+			// buat objek 
+			statement stmt = conn.createStatement(); 
+			// buat query ke database 
+			String sql = &quot;SELECT * FROM buku&quot;; 
+			// eksekusi query dan simpan hasilnya di 
+			obj ResultSet rs = stmt.executeQuery(sql); 
+			// tampilkan hasil query 
+			while(rs.next()){ 
+				System.out.println(&quot;ID Buku: &quot; + rs.getInt(&quot;id_buku&quot;)); 
+				System.out.println(&quot;Judul: &quot; + rs.getString(&quot;judul&quot;)); 
+				System.out.println(&quot;Pengarang: &quot; + rs.getString(&quot;pengarang&quot;)); 
+			} 
+			stmt.close(); 
+			conn.close(); 
+		} catch (Exception e) { 
+				e.printStackTrace(); 
+		} 
+	}
+}</code></pre><p id="6326911d-1f3a-4cc7-8983-fa8cb251d300" class="">Programnya belum dapat dieksekusi, karena <em>library</em> <strong>MySQL JDBC Driver</strong> belum kita tambahkan ke dalam proyek.</p><p id="0043e798-8901-4d3e-bfa6-3e7b40eeb8d3" class="">Kalau kamu nekat mengeksekusi, maka akan mendapatkan error <code>ClassNotFoundException: com.mysql.jdbc.Driver</code>.</p><figure id="1741f92a-3175-4216-b0ad-f82729607b2d" class="image"><a href="https://www.petanikode.com/img/java/mysql/class-not-found.png"><img src="https://www.petanikode.com/img/java/mysql/class-not-found.png"/></a></figure><p id="c76a28a6-e19c-4769-b36a-aafe7e58d60a" class="">Bagaimana cara menambahkannya?</p><p id="dfed73e2-3338-4cd7-b771-d3e376a98961" class="">Klik kanan pada <em><strong>Libraries</strong></em>, lalu pilih <em><strong>Add Library</strong></em> dan <strong>MySQL JDBC Driver</strong>:</p><figure id="593b7939-cb37-4114-bffb-381aef88d837" class="image"><a href="https://www.petanikode.com/img/java/mysql/menambahkan-library-mysql-jdbc.png"><img src="https://www.petanikode.com/img/java/mysql/menambahkan-library-mysql-jdbc.png"/></a></figure><p id="4a734142-7ce5-4a7d-9c53-1db7d5a67753" class="">Setelah itu, baru bisa di-run atau dieksekusi.</p><p id="75988da5-38e4-498b-8cf9-3223c8f726b8" class="">Tekan Shift+F6 atau klik kanan–&gt;Run File.</p><figure id="873a2381-0fd4-4a9c-94df-e1fcf21b8cdb" class="image"><a href="https://www.petanikode.com/img/java/mysql/menjalankan-program-java-mysql.png"><img src="https://www.petanikode.com/img/java/mysql/menjalankan-program-java-mysql.png"/></a></figure><p id="eb19f461-24e8-4050-b210-446f53fbd50b" class="">Kita telah berhasil menghubungkan program Java dengan database MySQL dan menampilkan datanya.</p><p id="ce57c406-7a0e-40af-acc6-6a6925ca4de3" class="">Baik, saya akan jelaskan.</p><p id="42f4cedc-e311-4141-a2a4-e6ea1e951cf8" class="">Pertam dimulai dari mengimpor:</p><pre id="20bef4d1-ce7e-431d-8051-ec048d68c829" class="code"><code>// import bumbu-bumbu yang diperlukan
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;</code></pre><p id="b871ed6c-0b1d-4e64-a1d9-ddcf13dd8433" class="">Kode di atas maksudnya adalah mengimpor class dan interface yang kita butuhkan.</p><p id="193390a4-c521-4bce-b8e5-8d67f1ab4e05" class="">Bisa juga disingkat seperti ini:</p><pre id="87d2a190-f00f-464e-a86c-3ba56fa8f718" class="code"><code>import java.sql.*;</code></pre><p id="016e577e-da5e-4864-b173-693a97fcd0a0" class="">Setelah kita mengimpor, selanjutnya kita siapkan dulu sebuah konstanta untuk parameter yang akan digunakan saat membuat koneksi ke database.</p><pre id="c080d2e0-9068-46bd-8d15-8e0f58ea249c" class="code"><code>// Menyiapkan paramter JDBC untuk koneksi ke datbase
+<em>static</em> <em>final</em> String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;;
+<em>static</em> <em>final</em> String DB_URL = &quot;jdbc:mysql://localhost/perpustakaan&quot;;
+<em>static</em> <em>final</em> String USER = &quot;root&quot;;
+<em>static</em> <em>final</em> String PASS = &quot;kopi&quot;;</code></pre><p id="94561c58-f798-42a3-b8c9-a3a5ad4015bb" class=""><code>DB_URL</code> menyatakan URL server database dan database yang akan digunakan. Lalu <code>USER</code> untuk username databasenya dan <code>PASS</code> untuk password.</p><p id="ce385629-de7f-4736-a1fe-3e53dee8314e" class="">Di komputer saya, password MySQL-nya adalah</p><pre id="6e0589f1-5b57-4310-8eb3-e000ebdb6578" class="code"><code>kopi</code></pre><p id="d1e81b3d-0c21-4794-a4a1-b998a95321ca" class="">Jika tidak pakai password, kosongkan saja nilai <code>PASS</code>.</p><pre id="10a345c6-93f1-4f85-a482-b7c20e180ed8" class="code"><code><em>static</em> <em>final</em> String PASS = &quot;&quot;;</code></pre><p id="8d77a1e0-028c-455f-b8ea-d63156ecae82" class="">Sebelum mulai membuat koneksi ke server, kita harus tentukan dulu driver yang akan digunakan.</p><pre id="38efff7f-0b90-44b8-bf31-b878f1d37706" class="code"><code>// register driver yang akan digunakan
+Class.forName(JDBC_DRIVER);</code></pre><p id="002d461f-3179-457e-a34f-d1eba51c7b4c" class="">Dalam contoh tersebut, kita menggunakan driver <code>&quot;com.mysql.jdbc.Driver&quot;</code> untuk database MySQL.</p><p id="d9715280-030a-4b58-81e0-377fcb563890" class="">Sedangkan untuk database yang lain, beda lagi drivernya.</p><ul id="b9a35c04-dcc3-47c3-9205-346cea256f1f" class="bulleted-list"><li><strong>MySQL</strong><p id="e7733d26-b16c-4e24-b36f-491d2aa14e06" class="">Driver: <code>com.mysql.jdbc.Driver</code>,</p><p id="f3d999ef-c656-4278-bbc9-916eaf1c3744" class="">URL: <code>jdbc:mysql://hostname/databaseName</code>;</p></li></ul><ul id="df98d431-c94f-4eb6-8062-95833e6be44b" class="bulleted-list"><li><strong>ORACLE</strong><p id="829fb725-4c0c-4c2e-9217-c44d0f5e06c3" class="">Driver: <code>oracle.jdbc.driver.OracleDriver</code>,</p><p id="c5abc8fe-d8fb-42f5-8491-6fdfd887ff25" class="">URL <code>jdbc:oracle:thin:@hostname:portNumber:databaseName</code>;</p></li></ul><ul id="07caf173-bac9-475c-a5f6-4e10663e30c6" class="bulleted-list"><li><strong>DB2</strong><p id="a723d11f-f80d-4ec9-bf3e-200fa6745b28" class="">Driver: <code>COM.ibm.db2.jdbc.net.DB2Driver</code>,</p><p id="f55b9f6b-4104-4470-9d00-8811fd313715" class="">URL: <code>jdbc:db2:hostname:portNumber/databaseName</code></p></li></ul><ul id="7cd1f6ab-a20b-4960-9724-2c76e3b64f0f" class="bulleted-list"><li><strong>Sybase</strong><p id="0e368720-2def-4484-b54b-9236d658fe44" class="">Driver: <code>com.sybase.jdbc.SybDriver</code>,</p><p id="3d3c59f4-0bbb-411f-a742-7b7b99e6bdcc" class="">URL: <code>jdbc:sybase:Tds:hostname:portNumber/databaseName</code></p></li></ul><p id="45071141-ffe7-4912-92c4-a8a40e643562" class="">Setelah memilih driver, selanjutnya kita lakukan koneksi ke database dengan parameter yang sudah dibuat.</p><pre id="25a9f472-9ae0-46ad-98ed-90b858ec01ed" class="code"><code>// buat koneksi ke database
+conn = DriverManager.getConnection(DB_URL, USER, PASS);</code></pre><p id="ea7b9f93-46f1-4abb-80f8-5a2a13bfa80f" class="">Kalau koneksinya gagal, biasanya akan terjadi <code>SQLException</code>.</p><p id="09019653-cfcd-484f-b270-ee99b3ca85f5" class="">Selanjutnya kita membutuhkan objek <code>Statement</code> untuk mengeksekusi Query MySQL.</p><pre id="4831922d-8c0a-492c-8e13-48bfffbd92a8" class="code"><code>// buat objek 
+statement stmt = conn.createStatement();</code></pre><p id="4c9d0b80-2208-4e92-90cd-9da7c5b4d597" class="">Setelah itu, buat sebuah Query, eksekusi, dan hasilnya akan disimpan ke dalam objek <code>rs</code> (ResultSet).</p><pre id="33944d7a-6689-4e7f-b20c-befc065cc98b" class="code"><code>// buat query ke database
+String sql = &quot;SELECT * FROM buku&quot;;
+// eksekusi query dan simpan hasilnya di obj ResultSet
+rs = stmt.executeQuery(sql);</code></pre><p id="9a71dc17-beab-420b-aa30-781f5f57966f" class="">Method <code>executeQuery()</code> akan menghasilkan nilai kembalian berupa objek <code>ResultSet</code>. Method ini biasanya digunakan untuk mengambil data dari database.</p><p id="2c67773e-92e4-46ad-8b21-2dd3135b6a6a" class="">Selain itu ada juga method untuk eksekusi query simpan, update, batch, dsb.</p><p id="bcf4e864-b0c4-46de-9e10-22a71c23ab89" class=""><strong>Tips</strong>: Tekan tobol Ctrl+Spasi saat menulis kode untuk melihatnya.</p><figure id="6bf1c452-44d0-4b0f-a3d1-29878f253d0a" class="image"><a href="https://www.petanikode.com/img/java/mysql/method-eksekusi-query.png"><img src="https://www.petanikode.com/img/java/mysql/method-eksekusi-query.png"/></a></figure><p id="c9dd1815-b928-46c4-b071-7c573382f30f" class="">Setelah mendapatkan data dari database MySQL, selanjutnya kita bisa tampilkan dengan perulangan.</p><pre id="78e5476f-9160-4521-a891-ebaa1be44013" class="code"><code>// tampilkan hasil query
+while(rs.next()){ 
+	System.out.println(&quot;ID Buku: &quot; + rs.getInt(&quot;id_buku&quot;));
+	System.out.println(&quot;Judul: &quot; + rs.getString(&quot;judul&quot;)); 
+	System.out.println(&quot;Pengarang: &quot; + rs.getString(&quot;pengarang&quot;));
+}</code></pre><p id="5c654504-e540-4268-ae67-ee3f5f731859" class="">Perulangan tersebut akan mengulang sebanyak isi tabelnya, atau dengan kata lain “Ulangi selama <code>rs</code> masih punya isi”.</p><p id="75fa9418-54db-4248-8274-6aa276db55eb" class="">Cara mengambil nilai dari objek <code>rs</code> menggunakan method <code>get*</code> dengan parameter nama kolom di tabel database.</p><p id="875fa316-76da-411b-adff-74570d3b79ba" class="">Contoh mau ambil id buku yang bertipe Integer:</p><pre id="3b350322-54b0-4ad9-b50d-dac54b70aad9" class="code"><code>int idBuku = rs.getInt(&quot;id_buku&quot;);</code></pre><p id="1c42313a-272a-47cc-8a02-1ea0f10f0102" class="">Kalau mau ambil dengan tipe String bagaimana?</p><p id="de1c3069-d5f4-4c76-bee9-0cbb82f3a8b8" class="">Ya tinggal diganti method-nya:</p><pre id="ffd04e41-6a72-488d-a80c-5c9d85fcfa0c" class="code"><code>String idBuku = rs.getString(&quot;id_buku&quot;);</code></pre><p id="e39e8acb-b78d-4ebf-b967-da870401e28f" class="">Pastikan paramternya sama persis dengan nama kolom di database. Jika di database pakai huruf kapital, ya ikuti pakai huruf kapital.</p><figure id="0e0ff19b-aac5-4e29-97a0-e275e8a12817" class="image"><a href="https://www.petanikode.com/img/java/mysql/getkolom.png"><img src="https://www.petanikode.com/img/java/mysql/getkolom.png"/></a></figure><p id="55eb3c99-4cba-49b4-b0d9-7193c86ee42b" class="">Terakhir menutup Statement dan koneksi, biar aman</p><pre id="13dede29-3d33-4ba9-bcc3-6fb862871452" class="code"><code>stmt.close();
+conn.close();</code></pre><p id="e1d3f5de-6e87-476a-a1c0-1e46eb63e7ca" class="">Gampang kan?</p><p id="e48787f3-7f71-4d8b-ae66-3a7842e53438" class="">Selanjutnya kita akan membuat program yang lebih lengkap.</p><h2 id="877a00f4-e522-4026-8e39-6b05bf3bfd9f" class=""><strong>Membuat Program CRUD Java dan MySQL</strong></h2><p id="ef4748d5-f5a0-4dd3-abcb-a4556d028543" class="">Program CRUD adalah program yang mampu melakukan operasi <em>Create</em>, <em>Read</em>, <em>Update</em>, dan <em>Delete</em>.</p><p id="aa0fa200-6b31-4ac8-a318-a250aaed449a" class="">Program dasar untuk memahami pemrograman database.</p><p id="7a18b210-d0ec-492b-879c-aadaff93cb74" class="">Silahkan buat Class baru di dalam proyek yang tadi dengan nama <code>JavaCRUD</code>.</p><p id="1f5ad6ad-fd81-4561-87a6-941c36cbb9dc" class="">Kita akan isi Class tersebut dengan fungsi-fungsi atau method untuk melakukan CRUD.</p><p id="5b4dd704-e01e-4217-99f7-51b5c51b9476" class="">Mari kita mulai dari mengimpor bumbu-bumbu yang dibutuhkan:</p><pre id="772400ea-889a-462b-9119-73afd66455a2" class="code"><code>import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;</code></pre><p id="51283f69-3dfc-4bec-a548-595767369740" class="">Class <code>BuffereReader</code> dan <code>InputStreamReader</code> kita butuhkan untuk <a href="https://www.petanikode.com/java-input-output/">mengambil input dari keyboard</a>.</p><p id="228b100c-bdd8-4364-80ae-1c62072ba64c" class="">Seteleh itu, kita siapkan parameter, variabel, dan objek yang dibutuhkan.</p><pre id="9bcab7bf-4950-4469-9d03-5dff02d83060" class="code"><code><em>static</em> <em>final</em> String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;;
+<em>static</em> <em>final</em> String DB_URL = &quot;jdbc:mysql://localhost/perpustakaan&quot;;
+<em>static</em> <em>final</em> String USER = &quot;root&quot;;
+<em>static</em> <em>final</em> String PASS = &quot;kopi&quot;;
+<em>static</em> Connection conn;
+<em>static</em> Statement stmt;
+<em>static</em> ResultSet rs;
+<em>static</em> InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+<em>static</em> BufferedReader input = new BufferedReader(inputStreamReader);</code></pre><p id="e33a62aa-8bf5-49b0-adcb-d760db479033" class="">Selanjutnya membuat method <code>main()</code> yang merupakan entri point dari sebuah program.</p><p id="fb31cb2b-7582-446f-99cf-867d09c6eadc" class="">Di dalam method ini kita akan melakukan perulangan selama terkoneksi dengan database dan perulangannya akan berhenti setelah user memilih menu <em>keluar</em>.</p><pre id="0b3005cf-c3bc-44d5-a2f0-de7a8841fe32" class="code"><code><em>public</em> <em>static</em> void main(String[] args) { 
+	try { 
+		// register driver 
+		Class.forName(JDBC_DRIVER); 
+		conn = DriverManager.getConnection(DB_URL, USER, PASS); 
+		stmt = conn.createStatement(); 
+		while (!conn.isClosed()) { 
+			showMenu(); 
+		} 
+		stmt.close(); 
+		conn.close(); 
+	} catch (Exception e) { 
+		e.printStackTrace(); 
+	}
+}</code></pre><p id="43a1bf9c-e6dc-4b02-8e31-ace462cbde81" class="">Perhatikan, di sana ada pemanggilan fungsi atau method <code>showMenu()</code>.</p><p id="bf8f4c37-2ea4-43ea-90e9-81072426a042" class="">Berarti kita harus membuatnya:</p><pre id="dde1684d-c181-44df-ac8b-bc3ea15c478e" class="code"><code><em>static</em> void showMenu() { 
+	System.out.println(&quot;\n========= MENU UTAMA =========&quot;); 
+	System.out.println(&quot;1. Insert Data&quot;); 
+	System.out.println(&quot;2. Show Data&quot;); 
+	System.out.println(&quot;3. Edit Data&quot;);
+	System.out.println(&quot;4. Delete Data&quot;); 
+	System.out.println(&quot;0. Keluar&quot;); 
+	System.out.println(&quot;&quot;); 
+	System.out.print(&quot;PILIHAN&gt; &quot;); 
+	try { 
+		int pilihan = Integer.parseInt(input.readLine());
+		switch (pilihan) { 
+			case 0: System.exit(0); 
+			break; 
+			case 1: insertBuku(); 
+			break; 
+			case 2: showData(); 
+			break; 
+			case 3: updateBuku(); 
+			break; 
+			case 4: deleteBuku(); 
+			break; 
+			default: System.out.println(&quot;Pilihan salah!&quot;); 
+		} 
+	} catch (Exception e) { 
+			e.printStackTrace(); 
+	}
+}</code></pre><p id="ac6ab042-6013-4334-ac49-57ccf2de6223" class="">Di dalam method tersebut, kita menggunakan <a href="https://www.petanikode.com/java-percabangan/">logika percabangan switch/case</a> untuk pemilihan menu.</p><p id="1e573da6-2501-4bef-b6b5-37f3de32d1bb" class="">Perhatikan lagi, di sana ada pemanggilan method <code>insertBuku()</code>, <code>showData()</code>, <code>updateBuku()</code>, dan <code>deleteBuku()</code> di masing-masing pilihan menu.</p><p id="f196419d-72a0-4d50-9730-1201096e17b9" class="">Tugas kita selanjutnya adalah membuat keempat method tersebut.</p><p id="d8d65e6e-9cc5-4db1-9f80-5ee720ed24de" class="">Mari kita mulai dari method <code>showData()</code>:</p><pre id="25d0cfff-77fe-48da-8cff-38379a1eb1bd" class="code"><code><em>static</em> void showData() { 
+	String sql = &quot;SELECT * FROM buku&quot;; 
+	try { 
+		rs = stmt.executeQuery(sql); 
+		System.out.println(&quot;+--------------------------------+&quot;); 
+		System.out.println(&quot;| DATA BUKU DI PERPUSTAKAAN |&quot;); 
+		System.out.println(&quot;+--------------------------------+&quot;); 
+		while (rs.next()) { 
+			int idBuku = rs.getInt(&quot;id_buku&quot;); 
+			String judul = rs.getString(&quot;judul&quot;); 
+			String pengarang = rs.getString(&quot;pengarang&quot;); 
+			System.out.println(String.format(&quot;%d. %s -- (%s)&quot;, idBuku, judul, pengarang)); 
+		} 
+	} catch (Exception e) { e.printStackTrace(); }
+}</code></pre><p id="de0450e7-fa1a-4583-a2dc-5ca99f29b994" class="">Method show data hanya berfungsi untuk menampilkan data hasil dari database.</p><p id="ebd66519-3183-424f-acc1-186dcaa3ab0f" class="">Kita menggunakan fungsi <code>String.format()</code> untuk memudahkan penggabungan string. Kalau belum paham, silahkan baca meteri tentang <a href="https://www.petanikode.com/java-input-output/#format-string">mengambil input dan menampilkan output di Java</a>.</p><p id="fa32bc44-b8d1-4d28-b8ee-6696671b3001" class="">Setelah itu, kita buat method <code>insertBuku()</code>:</p><pre id="febde378-f85a-4400-8340-fc9f78291d94" class="code"><code><em>static</em> void insertBuku() { 
+	try { 
+		// ambil input dari user 
+		System.out.print(&quot;Judul: &quot;); 
+		String judul = input.readLine().trim(); 
+		System.out.print(&quot;Pengarang: &quot;); 
+		String pengarang = input.readLine().trim(); 
+		// query simpan 
+		String sql = &quot;INSERT INTO buku (judul, pengarang) VALUE(&#x27;%s&#x27;, &#x27;%s&#x27;)&quot;; 
+		sql = String.format(sql, judul, pengarang); 
+		// simpan buku 
+		stmt.execute(sql); 
+	} catch (Exception e) { 
+		e.printStackTrace(); 
+	}
+}</code></pre><p id="cd81a94b-d691-4f3a-9ef5-0f83801b48e9" class="">Untuk melakukan query simpan, kita menggunakan method <code>execute()</code>.</p><p id="d41fb997-fea4-4c2b-af34-f247f3bacd12" class="">Method ini akan mengembalikan nilai <em>boolean</em>: <code>true</code> bila query berhasil dan <code>false</code> bila gagal.</p><p id="86edcacf-2aa5-41a7-a8ae-c31cf249d032" class="">Selanjutnya membuat method <code>updateBuku()</code>:</p><pre id="c8d0f68a-e36b-4baa-8f24-07255cbb342c" class="code"><code><em>static</em> void updateBuku() { 
+	try { 
+		// ambil input dari user 
+		System.out.print(&quot;ID yang mau diedit: &quot;); 
+		int idBuku = Integer.parseInt(input.readLine()); 
+		System.out.print(&quot;Judul: &quot;); 
+		String judul = input.readLine().trim(); 
+		System.out.print(&quot;Pengarang: &quot;); 
+		String pengarang = input.readLine().trim(); 
+		// query update 
+		String sql = &quot;UPDATE buku SET judul=&#x27;%s&#x27;, pengarang=&#x27;%s&#x27; WHERE id_buku=%d&quot;; 
+		sql = String.format(sql, judul, pengarang, idBuku); 
+		// update data buku 
+		stmt.execute(sql); 
+	} catch (Exception e) { 
+		e.printStackTrace(); 
+	}
+}</code></pre><p id="8fa16f50-722c-478c-9fe5-b0d69152ad18" class="">Terakhir membuat method <code>deleteBuku()</code>:</p><pre id="f7663165-67e2-41b8-84a4-9700011fe016" class="code"><code><em>static</em> void deleteBuku() { 
+	try { 
+		// ambil input dari user 
+		System.out.print(&quot;ID yang mau dihapus: &quot;); 
+		int idBuku = Integer.parseInt(input.readLine()); 
+		// buat query hapus 
+		String sql = String.format(&quot;DELETE FROM buku WHERE id_buku=%d&quot;, idBuku); 
+		// hapus data 
+		stmt.execute(sql); 
+		System.out.println(&quot;Data telah terhapus...&quot;); 
+	} catch (Exception e) { 
+		e.printStackTrace(); 
+	}
+}</code></pre><p id="5f3b4d51-1eaa-4747-9643-70eac46055ad" class="">Kode lengkapnya akan menjadi seperti ini:</p><pre id="796184f1-c08b-4535-b077-bb35a7bd3986" class="code"><code>package belajar.java.mysql;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
+<em>public</em> <em>class</em> JavaCRUD { 
+	<em>static</em> <em>final</em> String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;; 
+	<em>static</em> <em>final</em> String DB_URL = &quot;jdbc:mysql://localhost/perpustakaan&quot;; 
+	<em>static</em> <em>final</em> String USER = &quot;root&quot;;
+	<em>static</em> <em>final</em> String PASS = &quot;kopi&quot;; 
+	<em>static</em> Connection conn; 
+	<em>static</em> Statement stmt; 
+	<em>static</em> ResultSet rs; 
+	<em>static</em> InputStreamReader inputStreamReader = new InputStreamReader(System.in); 
+	<em>static</em> BufferedReader input = new BufferedReader(inputStreamReader); 
+	/** * @param args the command line arguments */ 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		try { 
+			// register driver 
+			Class.forName(JDBC_DRIVER); 
+			conn = DriverManager.getConnection(DB_URL, USER, PASS); 
+			stmt = conn.createStatement(); 
+			while (!conn.isClosed()) { 
+				showMenu(); 
+			} 
+			stmt.close(); 
+			conn.close(); 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+	} 
+	<em>static</em> void showMenu() { 
+		System.out.println(&quot;\n========= MENU UTAMA =========&quot;); 
+		System.out.println(&quot;1. Insert Data&quot;); 
+		System.out.println(&quot;2. Show Data&quot;); 
+		System.out.println(&quot;3. Edit Data&quot;); 
+		System.out.println(&quot;4. Delete Data&quot;); 
+		System.out.println(&quot;0. Keluar&quot;); 
+		System.out.println(&quot;&quot;); 
+		System.out.print(&quot;PILIHAN&gt; &quot;); 
+		try { 
+			int pilihan = Integer.parseInt(input.readLine()); 
+			switch (pilihan) { 
+				case 0: System.exit(0); 
+				break; 
+				case 1: insertBuku(); 
+				break; 
+				case 2: showData(); 
+				break; 
+				case 3: updateBuku(); 
+				break; 
+				case 4: deleteBuku(); 
+				break; 
+				default: System.out.println(&quot;Pilihan salah!&quot;); 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+	} 
+	<em>static</em> void showData() { 
+		String sql = &quot;SELECT * FROM buku&quot;; 
+		try { 
+			rs = stmt.executeQuery(sql); 
+			System.out.println(&quot;+--------------------------------+&quot;); 
+			System.out.println(&quot;| DATA BUKU DI PERPUSTAKAAN |&quot;); 
+			System.out.println(&quot;+--------------------------------+&quot;); 
+			while (rs.next()) { 
+				int idBuku = rs.getInt(&quot;id_buku&quot;); 
+				String judul = rs.getString(&quot;judul&quot;); 
+				String pengarang = rs.getString(&quot;pengarang&quot;); 
+				System.out.println(String.format(&quot;%d. %s -- (%s)&quot;, idBuku, judul, pengarang)); 
+			} 
+		} catch (Exception e) { 
+				e.printStackTrace(); 
+		} 
+	} 
+	<em>static</em> void insertBuku() { 
+		try { 
+			// ambil input dari user 
+			System.out.print(&quot;Judul: &quot;); 
+			String judul = input.readLine().trim(); 
+			System.out.print(&quot;Pengarang: &quot;); 
+			String pengarang = input.readLine().trim(); 
+			// query simpan 
+			String sql = &quot;INSERT INTO buku (judul, pengarang) VALUE(&#x27;%s&#x27;, &#x27;%s&#x27;)&quot;; 
+			sql = String.format(sql, judul, pengarang); 
+			// simpan buku 
+			stmt.execute(sql); 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+	} 
+	<em>static</em> void updateBuku() { 
+		try { 
+			// ambil input dari user 
+			System.out.print(&quot;ID yang mau diedit: &quot;); 
+			int idBuku = Integer.parseInt(input.readLine()); 
+			System.out.print(&quot;Judul: &quot;);
+			String judul = input.readLine().trim(); 
+			System.out.print(&quot;Pengarang: &quot;);
+			String pengarang = input.readLine().trim(); 
+			// query update 
+			String sql = &quot;UPDATE buku SET judul=&#x27;%s&#x27;, pengarang=&#x27;%s&#x27; WHERE id_buku=%d&quot;;
+			sql = String.format(sql, judul, pengarang, idBuku); 
+			// update data buku 
+			stmt.execute(sql); 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+	} 
+	<em>static</em> void deleteBuku() { 
+		try { 
+			// ambil input dari user
+			System.out.print(&quot;ID yang mau dihapus: &quot;); 
+			int idBuku = Integer.parseInt(input.readLine()); 
+			// buat query hapus 
+			String sql = String.format(&quot;DELETE FROM buku WHERE id_buku=%d&quot;, idBuku); 
+			// hapus data 
+			stmt.execute(sql); 
+			System.out.println(&quot;Data telah terhapus...&quot;); 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+	}
+}</code></pre><p id="77f2b1ab-dbc6-4552-b0ac-3d66ef361756" class="">Cobalah untuk mengeksekusi dan analisis sendiri hasilnya</p><p id="1a09baee-efb8-4b52-91d3-699e6593afa6" class="">…</p><figure id="a00fd35e-747f-445b-aae0-206636cf9a6f" class="image"><a href="https://www.petanikode.com/img/java/mysql/program-crud-java-mysql.png"><img src="https://www.petanikode.com/img/java/mysql/program-crud-java-mysql.png"/></a></figure></div></article></body></html>

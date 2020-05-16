@@ -1,0 +1,624 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Emulator Alternatif untuk Android Studio</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="87d2c39f-5efc-4269-bd6a-14d121a43f63" class="page sans"><header><h1 class="page-title"><strong>Emulator Alternatif untuk Android Studio</strong></h1></header><div class="page-body"><p id="b4f4290d-d5b0-4d1b-9814-7239fe633ea0" class="">Emulator Android terasa berat?</p><p id="141a7940-ee78-4006-a488-5a0d8598f7cc" class="">Mungkin kamu harus upgrade RAM atau gunakan emulator alternatif.</p><p id="ffa1e01e-5c4b-411c-8843-8d540949ee72" class="">Emulator bawaan Android memang terasa berat bagi yang menggunakan komputer dengan spesifikasi rendah.</p><p id="a1aff2d6-ba3c-4aa0-9e7a-07c6170ac873" class="">Android manyarankan spesifikasi minimal RAM 8GB, tapi kita tidak punya RAM sebanyak itu.</p><p id="bf00567c-465f-45d0-83b8-6f1acf4c2ac4" class="">Bagaimana cara mengatasinya?</p><p id="d2e771ae-1462-4140-b3e4-d0bd88f002b6" class="">Gunakan emulator alternatif.</p><p id="4efa79b9-6f84-4e84-af49-4388a2656351" class="">Ada dua emulator alternatif yang bisa kita gunakan untuk debug dan deploy aplikasi android:</p><ol id="ce8dfa3d-d41a-4b00-b73c-60bda7212161" class="numbered-list" start="1"><li>Menggunakan Genymotion</li></ol><ol id="25de8baf-c2ef-483d-bee8-2683640118bc" class="numbered-list" start="2"><li>Menggunakan Hp sendiri</li></ol><p id="b95a6b5d-48bf-44fb-89dd-aec98f57ef5f" class="">Pada tulisan ini kita akan belajar cara menggunakan emulator alternatif untuk mengembangkan aplikasi android.</p><h2 id="8aac4628-38b8-4a1a-9d22-a4d660b07495" class=""><strong>Menggunakan Genymotion</strong></h2><p id="c7854d23-0c03-466d-bcdc-5912691a85b8" class="">Genymotion adalah emulator android yang berbasis virtualbox. Ada yang mengklaim emulator ini lebih cepat dibandingkan emulator bawaan android studio.</p><h3 id="e6fe6868-c381-4943-af90-d3a00ee61246" class=""><strong>Cara Install Genymotion di Linux</strong></h3><p id="337691cb-b32a-4fd7-b33b-24df43a88db7" class="">Untuk dapat menggunakan Genymotion, kita harus menginstalnya terlebih dahulu.</p><p id="73cd699c-4bce-4a60-9e59-b1312228f7ea" class="">Berikut ini langkah-langkah menginstal Genymotion di Linux.</p><h3 id="b6e60bcf-5853-4572-aa4a-29eb552ce3d3" class=""><strong>1. Pastikan virtualbox Sudah Terinstal</strong></h3><p id="097504db-f2ea-475f-9c05-bf69229b97c8" class="">Genymotion memanfaatkan virtualbox untuk melakuan virtualisasi. Jadi pastikan virtualbox sudah terpasang di komputermu.</p><pre id="ddd7b495-1be9-4e4d-9be9-a88ab82394c3" class="code"><code>sudo apt install virtualbox</code></pre><h3 id="3e87dd17-a497-4509-840e-5417603e807f" class=""><strong>2. Download dan Install Genymotion</strong></h3><p id="11c3ae82-44ab-4c69-9eb7-c6da9f6502f9" class="">Download Genymotion di website resminya (<a href="https://www.genymotion.com/#!/download">genymotion.com</a>). Silahkan buat akun dan download.</p><figure id="ac8efb84-8395-4322-a233-3695ea76ed10" class="image"><a href="https://www.petanikode.com/img/android/emulator/download-genymotion.png"><img src="https://www.petanikode.com/img/android/emulator/download-genymotion.png"/></a></figure><p id="8d64cf99-a95f-4cd6-ac86-e317e96c2608" class="">Nanti kita akan mendapatkan file <em>binary</em>, seperti ini.</p><figure id="0cb376db-2601-41bd-8d3a-f5b8eb596031" class="image"><a href="https://3.bp.blogspot.com/-9aMDhjKhdGc/VkXGKfp2ipI/AAAAAAAACMU/IKY6Xw98LdQ/s1600/Genymotion%2Buntuk%2Blinux%2Bsudah%2Bdidownload.png"><img src="https://3.bp.blogspot.com/-9aMDhjKhdGc/VkXGKfp2ipI/AAAAAAAACMU/IKY6Xw98LdQ/s1600/Genymotion%2Buntuk%2Blinux%2Bsudah%2Bdidownload.png"/></a></figure><p id="5ef9eb84-cd7a-4c38-a49d-c3c5a15af614" class="">Setelah mendapatkan genymotion, selanjutnya kita akan menginstalnya ke direktori <code>/opt</code>.</p><p id="ae05c2f7-b857-449c-8814-4e497836efe2" class="">Saya pilih direktori ini, karena banyak aplikasi lain juga terinstal di sana. Sebenarnya bisa diinstal di mana saja.</p><p id="7da37548-d086-4dee-9905-546c53541ea7" class="">Silahkan copy atau pindahkan file binary yang didapatkan tadi ke direktori <code>/opt</code>.</p><pre id="aa944976-7189-4f05-8664-a10b18e040b3" class="code"><code>sudo cp ~/Downloads/genymotion-2.5.2_x86.bin /opt/</code></pre><p id="deeef373-30e8-411e-9af9-2aa5e3eaf337" class="">Setelah itu eksekusi filenya:</p><pre id="262e2c6e-c917-4b85-a747-cf8842af7275" class="code"><code><em>cd</em> /opt
+sudo chmod +x genymotion-2.5.2_x86.bin
+sudo ./genymotion-2.5.2_x86.bin</code></pre><p id="d366e63f-50e3-4d12-99f3-565ea4df612a" class="">Jika instalasi berhasil, akan muncul pesan seperti berikut ini.</p><figure id="520407f0-c5e6-4e2a-8ac5-10e7bef90102" class="image"><a href="https://www.petanikode.com/img/android/emulator/instalasi-genymotion.png"><img src="https://www.petanikode.com/img/android/emulator/instalasi-genymotion.png"/></a></figure><p id="ccc15a60-1764-4b8a-838c-903e6d1b9c79" class="">Setelah itu kita akan memiliki direktory baru bernama <code>genymobile</code> di dalam <code>/opt</code> dan item baru di Menu.</p><figure id="e0446fc5-3e0b-4d07-b361-fa76bfab1029" class="image"><a href="https://www.petanikode.com/img/android/emulator/menu-genymotion.png"><img src="https://www.petanikode.com/img/android/emulator/menu-genymotion.png"/></a></figure><h3 id="606df162-1c3d-46ee-b157-abb080b178f8" class=""><strong>Membuat Emulator Genymotion</strong></h3><p id="27b7943f-4ca4-4b82-987a-bb2a6358bec9" class="">Silahkan buka Genymotion, kemudian pada jendela <strong>Welcome</strong>, pilih <strong>Personal Use</strong>.</p><figure id="d9dfb57b-d07b-4160-856a-a8e6b9dc3c69" class="image"><a href="https://www.petanikode.com/img/android/emulator/jenis-lisensi-genymotion.png"><img src="https://www.petanikode.com/img/android/emulator/jenis-lisensi-genymotion.png"/></a></figure><p id="5d582e7b-d530-490e-ac86-f68743fa2684" class="">Kemudian silahkan setujui EULA, atau baca-baca bila sempat.</p><figure id="f05b1fe7-958c-4485-ab1e-a74564bfb919" class="image"><a href="https://www.petanikode.com/img/android/emulator/eula.png"><img src="https://www.petanikode.com/img/android/emulator/eula.png"/></a></figure><p id="d2c49039-6631-44ed-be95-48c9c22cb8c2" class="">Setelah itu akan muncul sebuah dialog, <em>“Apakah anda ingin membuat perangkat virtual?&quot;</em> jawab saja <strong>Yes</strong>.</p><figure id="d9cfa823-fc37-4fe7-9197-89277461acae" class="image"><a href="https://www.petanikode.com/img/android/emulator/dialog.png"><img src="https://www.petanikode.com/img/android/emulator/dialog.png"/></a></figure><p id="36d9e688-8d1f-4999-b46e-640df884661a" class="">Kemudian, kita akan diminta untuk login dengan akun yang sudah dibuat.</p><figure id="b31adf3c-56b0-4cd8-bbf4-e919d6dfb561" class="image"><a href="https://www.petanikode.com/img/android/emulator/signin.png"><img src="https://www.petanikode.com/img/android/emulator/signin.png"/></a></figure><p id="e6377112-ac63-4e73-bd0d-08c7514656a9" class="">Setelah berhasil login, selanjutnya silahkan pilih perangkat virutal yang akan diinstal.</p><p id="c61c205e-d016-46f8-8845-4ebc957d4f53" class="">Sebagai contoh saya memilih Google Nexus 5 dengan OS Android 6.0.0 (API 23).</p><figure id="e3cc4519-654d-46bf-bf5a-3472e425f16c" class="image"><a href="https://www.petanikode.com/img/android/emulator/pemilihan-device.png"><img src="https://www.petanikode.com/img/android/emulator/pemilihan-device.png"/></a></figure><p id="b6ab3738-0a14-4bc4-9027-280ee2fae655" class="">Selanjutnya klik <strong>Next</strong>, berikan nama dan klik <strong>Next</strong> lagi.</p><p id="e1cc67aa-b102-495f-ba34-62adaa285778" class="">Tunggulah beberapa menit, perangkat virtualnya sedang di-download.</p><figure id="8fcc5689-370b-40cc-9efa-35c897028e0a" class="image"><a href="https://www.petanikode.com/img/android/emulator/download-virtual-device.png"><img src="https://www.petanikode.com/img/android/emulator/download-virtual-device.png"/></a></figure><p id="58b52629-fbdd-4435-a73e-bcc469ef1c45" class="">Setelah login dengan ke akun Genymotion, kita bisa menambahkan dan men-download emulator dengan mengklik tombol <strong>Add</strong>.</p><p id="ee980733-83ee-4e38-a80e-2bec57f72ed7" class="">Setelah selesai, klik <strong>Finish</strong> dan selanjutnya kita bisa menjalankan emulator dengan mengelik tombol <strong>Start</strong>.</p><figure id="816cb389-7cdb-4b3d-a053-fec70f7fd854" class="image"><a href="https://1.bp.blogspot.com/-cfL4afw7Yh0/VkXO0ZEV0QI/AAAAAAAACM8/vWGD1yIcBUk/s1600/Genymotion%2Bsedang%2Bberaksi.png"><img src="https://1.bp.blogspot.com/-cfL4afw7Yh0/VkXO0ZEV0QI/AAAAAAAACM8/vWGD1yIcBUk/s1600/Genymotion%2Bsedang%2Bberaksi.png"/></a></figure><p id="f29def65-b59c-4bd5-95ce-73b0954fab72" class="">Bagus, sekarang kita sudah punya emulator android.</p><p id="5cfc920d-2b96-45ae-b67e-eb4baa9f88cc" class="">Lalu bagaimana caranya mengintegrasikannya dengan Android Studio?</p><h3 id="6423848a-3645-410e-a73f-a8092da201b1" class=""><strong>Menambahkan Plug-in Genymotion di Android Studio</strong></h3><p id="c5aed455-5454-4399-bc3f-45227ae17f1c" class="">Klik menu <em><strong>file</strong></em> kemudian pilih <em><strong>Settings</strong></em>. Pada jendela yang terbuka, di bagian sebelah kiri, pilih <em><strong>plugins</strong></em>.</p><p id="4b3f138d-094f-484c-a0a1-851d56f5dbfc" class="">Cari plugin <code>genymotion</code>, bila tidak ditemukan klik <em><strong>browse</strong></em>. Kemudian, cari lagi plugin <code>genymotion</code>.</p><p id="08a0c5a2-e6a1-4869-af97-cacfe69fa076" class="">Setelah ketemu, klik <em><strong>Install Plugin</strong></em> dan jawab <em><strong>Yes</strong></em>.</p><figure id="d93e6e1d-3d31-439a-b617-0de18bf02160" class="image"><a href="https://3.bp.blogspot.com/-tAem4UlNjF4/VkXWB0DBRRI/AAAAAAAACNM/DoetsxT-mzo/s1600/Instalasi%2Bplugin%2Bgenymotion%2Bdi%2Bandroid%2Bstudio.png"><img src="https://3.bp.blogspot.com/-tAem4UlNjF4/VkXWB0DBRRI/AAAAAAAACNM/DoetsxT-mzo/s1600/Instalasi%2Bplugin%2Bgenymotion%2Bdi%2Bandroid%2Bstudio.png"/></a></figure><p id="0ed70fba-df6f-45e8-9bad-95ce10588d05" class="">Setelah instalasi selesai, silahkan <em>restart</em> atau buka ulang Android Studio-nya.</p><h3 id="b1a16057-9589-47ae-967e-0545a7d4b2b3" class=""><strong>3. Uji Coba Genymotion</strong></h3><p id="27dcc169-5021-4c52-b193-dea74f1fdc2d" class="">Setelah plugin genymotion berhasil terinstal, maka akan ada tambahan ikon Genymotion di toolbar Android Studio.</p><figure id="b3bee318-329a-450c-bfc8-43c6739bdf15" class="image"><a href="https://www.petanikode.com/img/android/emulator/ikon-genymotion.png"><img src="https://www.petanikode.com/img/android/emulator/ikon-genymotion.png"/></a></figure><p id="7d2fb660-5d53-47b6-9c7c-f05592e3c41f" class="">Silahkan klik ikon tersebut.</p><p id="8c3cfda4-0b2c-4d13-8415-aa07a631af7a" class="">Jika baru pertama kali diinstal, Android Studio akan meminta kita untuk menentukan direktori tempat Genymotion terinstal.</p><figure id="13b9fd6e-d8b6-441f-9b0b-2630327b63e0" class="image"><a href="https://www.petanikode.com/img/android/emulator/menentukan-lokasi-genymotion.png"><img src="https://www.petanikode.com/img/android/emulator/menentukan-lokasi-genymotion.png"/></a></figure><p id="c5a87dcf-2ac2-4cee-a178-5baeafc94d4b" class="">Setelah itu akan muncul <strong>Genymotion Device Manager</strong>.</p><figure id="da96312c-c862-468e-a5c5-083255bbfb70" class="image"><a href="https://1.bp.blogspot.com/-4-XsdNfS_SU/VkXX3U1-Y0I/AAAAAAAACNY/j5PqsSprhZs/s1600/Tombol%2Bgenymotion%2Bdi%2Bandroid%2Bstudio.png"><img src="https://1.bp.blogspot.com/-4-XsdNfS_SU/VkXX3U1-Y0I/AAAAAAAACNY/j5PqsSprhZs/s1600/Tombol%2Bgenymotion%2Bdi%2Bandroid%2Bstudio.png"/></a></figure><p id="b6248e91-ccbc-4886-b76d-1f5e45c26127" class="">Silahkan nyalakan salah satu mesin virtual Genymotion. Kemudian <em>run</em> salah satu proyek app di android studio, maka kita akan keluar jendela pemilihan mesin virtual atau emulator.</p><figure id="9fc9e012-fd48-467a-91fb-7eb22614c87d" class="image"><a href="https://4.bp.blogspot.com/-CITW2sYWH5U/VkXb1F5ZSGI/AAAAAAAACNk/ucTfzjf5csQ/s1600/Memilih%2Bmesin%2Bvirtual%2Bsaat%2Bmenjalankan%2Bproyek%2Bandroid%2Bstudio.png"><img src="https://4.bp.blogspot.com/-CITW2sYWH5U/VkXb1F5ZSGI/AAAAAAAACNk/ucTfzjf5csQ/s1600/Memilih%2Bmesin%2Bvirtual%2Bsaat%2Bmenjalankan%2Bproyek%2Bandroid%2Bstudio.png"/></a></figure><p id="1d31253e-105d-4ed2-82dd-3630c2ebecfd" class="">Karena salah satu mesin genymotion sedang dinyalakan, makan akan tampil pilihannya di sana.</p><p id="cb5731ea-68b4-4150-86fa-ceb08a5d0d56" class="">Setelah itu, aplikasi akan dikirim ke mesin virtual genymotion untuk dijalankan.</p><figure id="f9fac0ea-27d8-4c05-9cc0-4a27777c715f" class="image"><a href="https://2.bp.blogspot.com/-dAjdV4lnZkk/VkXdVuHOAxI/AAAAAAAACNs/qwJHxIZebzo/s1600/Aplikasi%2Bproyek%2Bberhasil%2Bdi-run.png"><img src="https://2.bp.blogspot.com/-dAjdV4lnZkk/VkXdVuHOAxI/AAAAAAAACNs/qwJHxIZebzo/s1600/Aplikasi%2Bproyek%2Bberhasil%2Bdi-run.png"/></a></figure><p id="3ca3509e-eacb-404f-b59d-f8aeed190ce0" class="">Selamat</p><p id="fe79278a-2343-463b-ac70-9afe7f25a09d" class="">…</p><p id="95f0eba3-6712-4707-8eb4-089808df57ba" class="">Android Studio sudah bisa bekerja dengan Genymotion.</p><h2 id="b489402a-23bb-4607-8841-a4f02e374b67" class=""><strong>Menggunakan HP Sendiri Sebagai Emulator</strong></h2><p id="361ddfa5-6ee9-4ae0-82af-a4f7b15e85ce" class="">Jika kamu memiliki HP dengan sistem operasi Android, kamu bisa menggunakannya sebagai emulator.</p><p id="d1a28e78-b9f4-4ba3-b139-cef0815d4f98" class="">Cara ini lebih cepat, karena komputer hanya akan fokus untuk menjalankan Android Studio Saja.</p><p id="6112dcec-1af6-4541-b619-7560cd205329" class="">Di samping itu, kita bisa melihat kinerja aplikasi kita secara nyata di perangkat Android yang sebenarnya.</p><p id="dc5fe9a0-d313-4662-bda5-a41b77c1581e" class="">Untuk menggunakan HP sebagai emulator, Kita membutuhkan kabel data untuk menghubunkan HP dengan komputer.</p><p id="534b8deb-1a17-48df-abe8-52ba13913adf" class="">Namun sebelumnya, pastikan HP-nya sudah diubah menjadi mode developer.</p><h3 id="d049278a-b191-4c33-87a3-5a3d87ef230f" class=""><strong>Cara Mengaktifkan Developer Options Pada HP</strong></h3><p id="f3722405-d0c3-4da4-a48c-5542f2e31acf" class="">Buka <em><strong>Settings</strong></em>, kemudian masuk ke menu <em><strong>About Phone</strong></em>.</p><p id="9dda36c5-59f6-4fa3-94d9-25632c1d0edf" class="">Pada bagian versi, ketuk tujuh kali (7x).</p><figure id="a9d4c91a-3e60-40d0-bdd8-70ad99a9e41c" class="image"><a href="https://2.bp.blogspot.com/-9GMxh6g-cSI/Vvjc__ZC8rI/AAAAAAAACko/lgxvUx2vKGwW3TY2Mfdd9oeeYMbRDIHsA/s1600/Enable%2BDeveloper%2BOptions%2BPonsel%2BAndroid%2B-%2BPetani%2BKode.jpg"><img src="https://2.bp.blogspot.com/-9GMxh6g-cSI/Vvjc__ZC8rI/AAAAAAAACko/lgxvUx2vKGwW3TY2Mfdd9oeeYMbRDIHsA/s1600/Enable%2BDeveloper%2BOptions%2BPonsel%2BAndroid%2B-%2BPetani%2BKode.jpg"/></a></figure><p id="4a13744f-c7a4-43cf-ba68-945ee7324bf8" class="">Hingga keluar pesan:</p><figure id="7b5d5980-e655-48f1-99d7-c76e6ad5a8f5" class="image"><a href="https://2.bp.blogspot.com/-o6fQ3SvXPtM/VvjdrYi-QLI/AAAAAAAACk0/rddBvBBOEK0OMQpVkUwSbUQ4C3jfss6IQ/s1600/nowdeveloper-100361671-large.idge.png"><img src="https://2.bp.blogspot.com/-o6fQ3SvXPtM/VvjdrYi-QLI/AAAAAAAACk0/rddBvBBOEK0OMQpVkUwSbUQ4C3jfss6IQ/s1600/nowdeveloper-100361671-large.idge.png"/></a></figure><p id="7a52f6d1-b4b9-43eb-aa68-18fc2dc6db6f" class="">Sekarang fitur <strong>Developer Options</strong> sudah aktif, silahkan lihat di <em><strong>Settings</strong></em>.</p><figure id="01855894-0990-46e3-9bd0-360e0bdf5292" class="image"><a href="https://3.bp.blogspot.com/-HtMZ1_fL54c/VvjfDhQqoWI/AAAAAAAAClE/lyPuz2CFwa4VVJ5ZJ6GphG-DPtTGBmEVw/s1600/Pengaturan%2BDeveloper%2BOptions.jpg"><img src="https://3.bp.blogspot.com/-HtMZ1_fL54c/VvjfDhQqoWI/AAAAAAAAClE/lyPuz2CFwa4VVJ5ZJ6GphG-DPtTGBmEVw/s1600/Pengaturan%2BDeveloper%2BOptions.jpg"/></a></figure><p id="951704b1-7f56-4bef-9234-f417311e8938" class="">Silahkan centang pilihan “<strong>USB Debugging</strong>” (Mendebug USB), lalu hubungkan ke komputer dengan kabel data dan cobalah jalankan sebuah aplikasi dari Android Studio.</p><figure id="2cad41b1-d2d7-4819-868d-d9df99c80c78" class="image"><a href="https://www.petanikode.com/img/android/deployment-target.png"><img src="https://www.petanikode.com/img/android/deployment-target.png"/></a></figure><h2 id="6df7cacb-dea1-4a62-bc54-f2705a3e1563" class=""><strong>Akhir Kata…</strong></h2><p id="84d3eaa9-9a51-4871-8f31-d5f2d2c0a7b7" class="">Itulah dua pilihan alternatif emulator yang dapat digunakan untuk pengembangan aplikasi Android.</p></div></article></body></html>

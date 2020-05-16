@@ -1,0 +1,1099 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Membuat Aplikasi TodoList (CRUD) dengan Java dan File</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="02df4bf7-fb5c-49a8-a94d-d997d939b275" class="page sans"><header><h1 class="page-title"><strong>Membuat Aplikasi TodoList (CRUD) dengan Java dan File</strong></h1></header><div class="page-body"><p id="234944d6-058c-4650-a169-dcfd55c9495c" class="">Ini adalah lanjutan dari tutorial sebelumnya:</p><p id="faae9c94-d027-40fa-b597-ec02543149f7" class="">Pada tutorial ini, kita akan belajar membuat alikasi TodoList berbasis teks dengan memanfaatkan file sebagai media penyimpanan.</p><p id="ad6460d3-892b-453c-88f6-116cba5891a4" class="">Langsung saja.</p><p id="4ff62399-2096-47f4-a4a7-8df898212f17" class="">Mari kita mulai…</p><h2 id="a80ae76f-e428-450a-bc35-bdd429085d0b" class=""><strong>Membuat Class Baru</strong></h2><p id="ed7d9ce3-8ab3-4012-a970-2567951cbeb5" class="">Buatlah class baru di dalam project <code>AplikasiFile</code> dengan nama <code>TodoListApp</code>.</p><figure id="8abe89f0-6305-45f6-81cc-05fa448e4a68" class="image"><a href="https://www.petanikode.com/img/java/file/crud/class-todoapp.png"><img src="https://www.petanikode.com/img/java/file/crud/class-todoapp.png"/></a></figure><p id="306e0110-f7ae-4e75-be28-8db29410b268" class="">Kemudian isi dengan kode berikut:</p><pre id="1b804bfb-4b8a-4ffd-bef6-fa1b8811ddf9" class="code"><code>import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class TodoListApp {
+
+    // deklarasi variabel global
+    static String fileName;
+    static ArrayList&lt;String&gt; todoLists;
+    static boolean isEditing = false;
+    static Scanner input;
+
+    public static void main(String[] args) {
+        
+    }
+    
+    static void clearScreen(){
+    }
+
+    static void showMenu() {
+    }
+
+    static void backToMenu() {
+    }
+
+    static void readTodoList() {
+    }
+
+    static void showTodoList() {
+    }
+
+    static void addTodoList() {
+    }
+
+    static void editTodoList() {
+    }
+
+    static void deleteTodoList() {
+    }
+
+}</code></pre><h2 id="87527419-92e0-4ad0-895f-b291c6c0dedd" class=""><strong>Membuat Fungsi Clear Screen di Java</strong></h2><p id="90c2d10c-c283-46c6-910a-7766fe772e61" class="">Fungsi ini kita butuhkan untuk membersihkan layar. Silahkan isi kode untuk fungsi <code>clearScreen()</code> seperti berikut ini:</p><pre id="85624f04-a3c4-419e-9975-1bd3259e6f3a" class="code"><code>static void clearScreen() {
+    try {
+        final String os = System.getProperty(&quot;os.name&quot;);
+        if (os.contains(&quot;Windows&quot;)) {
+            // clear screen untuk windows
+            new ProcessBuilder(&quot;cmd&quot;, &quot;/c&quot;, &quot;cls&quot;)
+                    .inheritIO()
+                    .start()
+                    .waitFor();
+        } else {
+            // clear screen untuk Linux, Unix, Mac
+            Runtime.getRuntime().exec(&quot;clear&quot;);
+            System.out.print(&quot;\033[H\033[2J&quot;);
+            System.out.flush();
+        }
+    } catch (final Exception e) {
+        System.out.println(&quot;Error karena: &quot; + e.getMessage());
+    }
+}</code></pre><p id="16dad0b8-ae81-4b43-923b-a14aa63891fe" class="">Kalau kita perhatikan, fungsi ini akan menjalankan perintah <code>cls</code> dan <code>celar</code>.</p><p id="d7de4e7c-35db-4e5a-bcea-8dc57876195b" class="">Jika kamu membuka program ini dari Windows, maka perintah <code>cls</code> yang akan digunakan. Dan <code>clear</code> untuk Linux, Unix, dan Mac.</p><p id="8227d8ca-d3a6-4bfe-9b6f-b564fc14a926" class="">Tapi fungsi ini tidak bisa bekerja pada jendela output di Netbeans.</p><h2 id="ff9b96f2-bf7c-4119-8654-1aa1eaf01ebe" class=""><strong>Membuat Fungsi </strong><strong>showMenu()</strong></h2><p id="87dbdd75-c0ea-499d-8ee8-6d2849666bec" class="">Berikutnya kita membutuhkan fungsi <code>showMenu()</code> untuk menampilkan menu apa saja yang ada di aplikasi.</p><p id="d5d607f3-66d3-4661-b2cc-8f9b7da594d1" class="">Silahkan isi kode untuk fungsi <code>showMenu()</code> seperti berikut ini:</p><pre id="569d14c5-de85-4b0f-967d-d44fbb6d554a" class="code"><code>static void showMenu() {
+    System.out.println(&quot;=== TODO LIST APP ===&quot;);
+    System.out.println(&quot;[1] Lihat Todo List&quot;);
+    System.out.println(&quot;[2] Tambah Todo List&quot;);
+    System.out.println(&quot;[3] Edit Todo List&quot;);
+    System.out.println(&quot;[4] Hapus Todo List&quot;);
+    System.out.println(&quot;[0] Keluar&quot;);
+    System.out.println(&quot;---------------------&quot;);
+    System.out.print(&quot;Pilih menu&gt; &quot;);
+
+    String selectedMenu = input.nextLine();
+
+    if (selectedMenu.equals(&quot;1&quot;)) {
+        showTodoList();
+    } else if (selectedMenu.equals(&quot;2&quot;)) {
+        addTodoList();
+    } else if (selectedMenu.equals(&quot;3&quot;)) {
+        editTodoList();
+    } else if (selectedMenu.equals(&quot;4&quot;)) {
+        deleteTodoList();
+    } else if (selectedMenu.equals(&quot;0&quot;)) {
+        System.exit(0);
+    } else {
+        System.out.println(&quot;Kamu salah pilih menu!&quot;);
+        backToMenu();
+    }
+}</code></pre><p id="f4e3155b-e277-4dab-9587-a877693b9391" class="">Selain menampilkan menu, fungsi ini juga akan menentukan fungsi mana yang akan dieksekusi saat menu dipilih.</p><p id="11d1c1fb-42e1-4704-88ac-71c383889e1e" class="">Misal, user memilih menu <code>1</code>, maka fungsi <code>showTodoList()</code> yang akan dieksekusi.</p><h2 id="cdae576d-ca4b-47d3-bdeb-e528c396a18a" class=""><strong>Membuat Fungsi </strong><strong>backToMenu()</strong></h2><p id="250d0b35-acae-40a9-b811-52db1bc862ce" class="">Fungsi ini kita butuhkan untuk kembali ke Menu Utama. Silahkan isi kode di dalam fungsi <code>backToMenu()</code> seperti ini:</p><pre id="7c16b935-ac5b-41e2-a617-7aba0a971b52" class="code"><code>static void backToMenu() {
+    System.out.println(&quot;&quot;);
+    System.out.print(&quot;Tekan [Enter] untuk kembali..&quot;);
+    input.nextLine();
+    clearScreen();
+}</code></pre><p id="9c0b52f7-ed32-475f-9bac-0ad0b75e0ae6" class="">Fungsi ini akan meminta user untuk menekan Enter. Setelah itu akan membersihkan layar dan membuka menu Utama.</p><p id="9de92e4c-ac3c-4140-839a-90431d4987c6" class="">Walaupun kita tidak memanggil fungsi <code>showMenu()</code> di sana, tapi tetap akan kembali ke menu.</p><p id="58e47321-5ba4-43a4-9eac-e3de43b588e0" class="">Ini karena kita akan kembali ke <em>main loop</em>.</p><p id="98a0695e-8ced-4398-84c0-90a3df7c7d9e" class="">Apa itu <em>main loop</em>?</p><p id="1ee7db0b-5c0e-4b0a-8c13-58f6044a427a" class="">Nanti kita akan buat dan bahas..</p><h2 id="acf84981-95f3-4d36-be28-fea173445283" class=""><strong>Membuat Fungsi </strong><strong>readTodoList()</strong></h2><p id="581015dc-cbdb-4d73-85e2-bd4bdb3e5b6e" class="">Fungsi ini kita butuhkan untuk membaca isi File. Silahkan isi kode untuk fungsi <code>readTodoList()</code> seperti berikut ini:</p><pre id="e7e4c800-5f1c-4c79-966f-c292ad6bb26d" class="code"><code>static void readTodoList() {
+    try {
+        File file = new File(fileName);
+        Scanner fileReader = new Scanner(file);
+
+        // load isi file ke dalam array todoLists
+        todoLists.clear();
+        while (fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            todoLists.add(data);
+        }
+
+    } catch (FileNotFoundException e) {
+        System.out.println(&quot;Error karena: &quot; + e.getMessage());
+    }
+}</code></pre><p id="a4f37d3b-d640-4501-810b-c34375741962" class="">Fungsi ini akan membaca file, lalu isinya akan disimpan dalam variabel array <code>todoLists</code>.</p><p id="948cc924-8d84-481b-9270-f664cef44a35" class="">Fungsi ini akan kita panggil saat kita ingin membaca ulang isi file.</p><h2 id="d3757e21-91b4-4ca8-b0b7-7b64c4e246cc" class=""><strong>Membuat Fungsi </strong><strong>showTodoList()</strong></h2><p id="4ec9f304-b046-4157-8084-91088249c1aa" class="">Fungsi ini kita butuhkan untuk menampilkan isi dari file <code>todolist.txt</code>.</p><p id="048e15fd-ead9-40fc-b082-1bc0bda8423c" class="">Silahkan isi kode fungsi <code>showTodoList()</code> seperti berikut ini:</p><pre id="b0f8d328-f9f4-42d8-affd-b51221b23bc5" class="code"><code>static void showTodoList() {
+    clearScreen();
+    readTodoList();
+    if (todoLists.size() &gt; 0) {
+        System.out.println(&quot;TODO LIST:&quot;);
+        int index = 0;
+        for (String data : todoLists) {
+            System.out.println(String.format(&quot;[%d] %s&quot;, index, data));
+            index++;
+        }
+    } else {
+        System.out.println(&quot;Tidak ada data!&quot;);
+    }
+
+    if (!isEditing) {
+        backToMenu();
+    }
+}</code></pre><p id="da93410c-9a16-45da-8ec9-679f1c5a5b42" class="">Fungsi ini hanya melakukan print atau cetak isi file. Kita memanggil fungsi <code>readTodoList()</code> di sini, untuk membaca isi file.</p><h2 id="e643457e-b614-4da2-a452-2a784b49e96a" class=""><strong>Membuat Fungsi </strong><strong>addTodoList()</strong></h2><p id="62784d29-e35e-4b25-9c9b-3b2310efbba8" class="">Berikutnya, silahakan isi kode untuk fungsi <code>addTodoList()</code> seperti ini:</p><pre id="3d0d9e38-6d88-4c2c-b361-94cbb9cf32ee" class="code"><code>static void addTodoList() {
+    clearScreen();
+
+    System.out.println(&quot;Apa yang ingin kamu kerjakan?&quot;);
+    System.out.print(&quot;Jawab: &quot;);
+    String newTodoList = input.nextLine();
+
+    try {
+        // tulis file
+        FileWriter fileWriter = new FileWriter(fileName, true);
+        fileWriter.append(String.format(&quot;%s%n&quot;, newTodoList));
+        fileWriter.close();
+        System.out.println(&quot;Berhasil ditambahkan!&quot;);
+    } catch (IOException e) {
+        System.out.println(&quot;Terjadi kesalahan karena: &quot; + e.getMessage());
+    }
+
+    backToMenu();
+}</code></pre><p id="e953a867-ac80-44c5-96a4-27c339169cfb" class="">Fungsi ini akan meminta user untuk menginputkan data todo list, kemudian menuliskannya ke dalam file.</p><h2 id="4607dd79-c331-499b-ba75-5834a4862b3f" class=""><strong>Membuat Fungsi </strong><strong>editTodoList()</strong></h2><p id="6acb5563-6325-4c7e-b426-e19ddf5df2f5" class="">Fungsi ini kita butuhkan untuk mengubah isi data. Silahkan isi kode untuk fungsi <code>editTodoList()</code> seperti berikut ini:</p><pre id="542f2ab5-e841-4ecb-b558-564fdb4f95fc" class="code"><code>static void editTodoList() {
+    isEditing = true;
+    showTodoList();
+
+    try {
+        System.out.println(&quot;-----------------&quot;);
+        System.out.print(&quot;Pilih Indeks&gt; &quot;);
+        int index = Integer.parseInt(input.nextLine());
+
+        if (index &gt; todoLists.size()) {
+            throw new IndexOutOfBoundsException(&quot;Kamu memasukan data yang salah!&quot;);
+        } else {
+
+            System.out.print(&quot;Data baru: &quot;);
+            String newData = input.nextLine();
+
+            // update data
+            todoLists.set(index, newData);
+
+            System.out.println(todoLists.toString());
+
+            try {
+                FileWriter fileWriter = new FileWriter(fileName, false);
+
+                // write new data
+                for (String data : todoLists) {
+                    fileWriter.append(String.format(&quot;%s%n&quot;, data));
+                }
+                fileWriter.close();
+
+                System.out.println(&quot;Berhasil diubah!&quot;);
+            } catch (IOException e) {
+                System.out.println(&quot;Terjadi kesalahan karena: &quot; + e.getMessage());
+            }
+        }
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    isEditing = false;
+    backToMenu();
+}</code></pre><p id="17ff4841-4530-48e7-b2c6-c6b6fbe74259" class="">Cara kerja fungsi ini ada beberapa langkah:</p><ol id="84bbd3ca-9a83-4e82-af02-678c2f483dc1" class="numbered-list" start="1"><li>Meminta user untuk memilih nomer indeks dari data (indeks dalam array <code>todolist</code>)</li></ol><ol id="fd0cad75-9e4a-40ce-b8d0-4b871c935b07" class="numbered-list" start="2"><li>Memeriksa indeks</li></ol><ol id="a0e5401e-3fd1-4e0d-8bb1-095b070b46bc" class="numbered-list" start="3"><li>Meminta user untuk menginputkan data baru</li></ol><ol id="908a28d8-03fa-4d33-b3e3-f4d845fdf8d6" class="numbered-list" start="4"><li>Menyimpan data baru ke dalam array <code>todolist</code></li></ol><ol id="31d4553d-4d35-469b-8e20-07ebe6c5e4c1" class="numbered-list" start="5"><li>Menulis ulang semua isi array <code>todolist</code> ke dalam file</li></ol><h2 id="2e27c080-7965-447d-bd07-ad60c12e625f" class=""><strong>Membuat Fungsi </strong><strong>deleteTodoList()</strong></h2><p id="5fc526b5-aa5a-411c-8c38-9be0517aeabd" class="">Fungsi ini kita butuhkan untuk menghapus data todolist. Silahkan tulis kode untuk fungsi <code>deleteTodoList()</code> seperti berikut ini.</p><pre id="1a01ffb0-3e94-4a60-aed0-3d392bea395b" class="code"><code>static void deleteTodoList() {
+    isEditing = true;
+    showTodoList();
+
+    System.out.println(&quot;-----------------&quot;);
+    System.out.print(&quot;Pilih Indeks&gt; &quot;);
+    int index = Integer.parseInt(input.nextLine());
+
+    try {
+        if (index &gt; todoLists.size()) {
+            throw new IndexOutOfBoundsException(&quot;Kamu memasukan data yang salah!&quot;);
+        } else {
+
+            System.out.println(&quot;Kamu akan menghapus:&quot;);
+            System.out.println(String.format(&quot;[%d] %s&quot;, index, todoLists.get(index)));
+            System.out.println(&quot;Apa kamu yakin?&quot;);
+            System.out.print(&quot;Jawab (y/t): &quot;);
+            String jawab = input.nextLine();
+
+            if (jawab.equalsIgnoreCase(&quot;y&quot;)) {
+                // hapus data
+                todoLists.remove(index);
+
+                // tulis ulang file
+                try {
+                    FileWriter fileWriter = new FileWriter(fileName, false);
+
+                    // write new data
+                    for (String data : todoLists) {
+                        fileWriter.append(String.format(&quot;%s%n&quot;, data));
+                    }
+                    fileWriter.close();
+
+                    System.out.println(&quot;Berhasil dihapus!&quot;);
+                } catch (IOException e) {
+                    System.out.println(&quot;Terjadi kesalahan karena: &quot; + e.getMessage());
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    isEditing = false;
+    backToMenu();
+}</code></pre><p id="ed5e48bb-c100-4330-9a86-b048d5eea75d" class="">Cara kerja fungsi <code>deleteTodoList()</code> juga hampir sama dengan <code>editTodoList()</code>.</p><h2 id="b1c88c6c-6358-4a5e-b0e8-18ef55df917d" class=""><strong>Membuat Inisialisasi dan Main Loop</strong></h2><p id="ad412854-11fc-4fb4-816e-41e8f325a5e2" class="">Terakhir, kita harus membuat inisialisasi dan <em>main loop</em> pada fungsi <code>main()</code>.</p><p id="85362b48-2f10-4aaf-9a50-b19f0f87fac1" class="">Silahkan tulis kode untuk fungsi <code>main()</code> seperti berikut ini.</p><pre id="eaec11c5-8af7-41b3-befc-019b82a14899" class="code"><code>public static void main(String[] args) {
+    // initialize
+    todoLists = new ArrayList&lt;&gt;();
+    input = new Scanner(System.in);
+
+    String filePath = System.console() == null ? &quot;/src/todolist.txt&quot; : &quot;/todolist.txt&quot;;
+    fileName = System.getProperty(&quot;user.dir&quot;) + filePath;
+
+    System.out.println(&quot;FILE: &quot; + fileName);
+
+    // run the program (main loop)
+    while (true) {
+        showMenu();
+    }
+}</code></pre><p id="61e2bd4e-42ce-40d6-b079-1c1ca199afe1" class="">Pertama kita harus melakukan inisalisasi atau mengisi nilai pertama untuk tiap variabel global yang belum memiliki isi agar tidak terjadi <code>NullPointerException</code>.</p><p id="21fbc688-b0ea-41ac-9e17-65417ff10265" class="">Untuk menentukan lokasi file yang akan dibaca, kita menulisnya seperti ini:</p><pre id="89dd2de0-a628-4a02-8bf1-c26b46869f1c" class="code"><code>String filePath = System.console() == null ? &quot;/src/todolist.txt&quot; : &quot;/todolist.txt&quot;;
+fileName = System.getProperty(&quot;user.dir&quot;) + filePath;</code></pre><p id="10f6e7cd-bf2d-4b7e-854b-4440670ebbf9" class="">Kaerna nanti kita akan coba membuka palikasi dari luar dan di dalam Netbeans.</p><p id="b71f98fd-4ff5-4bbd-b7e1-3b761e51d926" class="">Soalnya, alamat file (path) yang dibaca di Netbeans berbeda dengan yang di lauar.</p><p id="446af14e-5462-4bcd-8f22-13774fa33a7f" class="">Terakhir, kita membuat <em>main loop</em> menjaga agar program tidak berhenti selama kita tidak menutupnya.</p><pre id="589118ea-e252-46e2-9383-52a22a97ce7c" class="code"><code>while (true) {
+    showMenu();
+}</code></pre><p id="fa6a394a-30f4-4742-bb76-38adac67e296" class="">Fungsi <code>showMenu()</code> akan dipanggil berulang-ulang di dalam <em>main loop</em>.</p><p id="a8687758-7567-4edd-ba6d-b48d2152b86e" class="">Sekarang kode programnya sudah lengkap..</p><pre id="56838ae0-23c8-4684-b154-28f917074405" class="code"><code>import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class TodoListApp {
+
+    static String fileName;
+    static ArrayList&lt;String&gt; todoLists;
+    static boolean isEditing = false;
+    static Scanner input;
+
+    public static void main(String[] args) {
+        // initialize
+        todoLists = new ArrayList&lt;&gt;();
+        input = new Scanner(System.in);
+
+        String filePath = System.console() == null ? &quot;/src/todolist.txt&quot; : &quot;/todolist.txt&quot;;
+        fileName = System.getProperty(&quot;user.dir&quot;) + filePath;
+
+        System.out.println(&quot;FILE: &quot; + fileName);
+
+        // run the program
+        while (true) {
+            showMenu();
+        }
+    }
+
+    static void clearScreen() {
+        try {
+            final String os = System.getProperty(&quot;os.name&quot;);
+            if (os.contains(&quot;Windows&quot;)) {
+                // clear screen untuk windows
+                new ProcessBuilder(&quot;cmd&quot;, &quot;/c&quot;, &quot;cls&quot;)
+                        .inheritIO()
+                        .start()
+                        .waitFor();
+            } else {
+                // clear screen untuk Linux, Unix, Mac
+                Runtime.getRuntime().exec(&quot;clear&quot;);
+                System.out.print(&quot;\033[H\033[2J&quot;);
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            System.out.println(&quot;Error karena: &quot; + e.getMessage());
+        }
+
+    }
+
+    static void showMenu() {
+        System.out.println(&quot;=== TODO LIST APP ===&quot;);
+        System.out.println(&quot;[1] Lihat Todo List&quot;);
+        System.out.println(&quot;[2] Tambah Todo List&quot;);
+        System.out.println(&quot;[3] Edit Todo List&quot;);
+        System.out.println(&quot;[4] Hapus Todo List&quot;);
+        System.out.println(&quot;[0] Keluar&quot;);
+        System.out.println(&quot;---------------------&quot;);
+        System.out.print(&quot;Pilih menu&gt; &quot;);
+
+        String selectedMenu = input.nextLine();
+
+        if (selectedMenu.equals(&quot;1&quot;)) {
+            showTodoList();
+        } else if (selectedMenu.equals(&quot;2&quot;)) {
+            addTodoList();
+
+        } else if (selectedMenu.equals(&quot;3&quot;)) {
+            editTodoList();
+
+        } else if (selectedMenu.equals(&quot;4&quot;)) {
+            deleteTodoList();
+        } else if (selectedMenu.equals(&quot;0&quot;)) {
+            System.exit(0);
+        } else {
+            System.out.println(&quot;Kamu salah pilih menu!&quot;);
+            backToMenu();
+        }
+    }
+
+    static void backToMenu() {
+        System.out.println(&quot;&quot;);
+        System.out.print(&quot;Tekan [Enter] untuk kembali..&quot;);
+        input.nextLine();
+        clearScreen();
+    }
+
+    static void readTodoList() {
+        try {
+            File file = new File(fileName);
+            Scanner fileReader = new Scanner(file);
+
+            // load isi file ke dalam array todoLists
+            todoLists.clear();
+            while (fileReader.hasNextLine()) {
+                String data = fileReader.nextLine();
+                todoLists.add(data);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(&quot;Error karena: &quot; + e.getMessage());
+        }
+    }
+
+    static void showTodoList() {
+        clearScreen();
+        readTodoList();
+        if (todoLists.size() &gt; 0) {
+            System.out.println(&quot;TODO LIST:&quot;);
+            int index = 0;
+            for (String data : todoLists) {
+                System.out.println(String.format(&quot;[%d] %s&quot;, index, data));
+                index++;
+            }
+        } else {
+            System.out.println(&quot;Tidak ada data!&quot;);
+        }
+
+        if (!isEditing) {
+            backToMenu();
+        }
+    }
+
+    static void addTodoList() {
+        clearScreen();
+
+        System.out.println(&quot;Apa yang ingin kamu kerjakan?&quot;);
+        System.out.print(&quot;Jawab: &quot;);
+        String newTodoList = input.nextLine();
+
+        try {
+            // tulis file
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.append(String.format(&quot;%s%n&quot;, newTodoList));
+            fileWriter.close();
+
+            System.out.println(&quot;Berhasil ditambahkan!&quot;);
+        } catch (IOException e) {
+            System.out.println(&quot;Terjadi kesalahan karena: &quot; + e.getMessage());
+        }
+        backToMenu();
+    }
+
+    static void editTodoList() {
+        isEditing = true;
+        showTodoList();
+
+        try {
+            System.out.println(&quot;-----------------&quot;);
+            System.out.print(&quot;Pilih Indeks&gt; &quot;);
+            int index = Integer.parseInt(input.nextLine());
+
+            if (index &gt; todoLists.size()) {
+                throw new IndexOutOfBoundsException(&quot;Kamu memasukan data yang salah!&quot;);
+            } else {
+
+                System.out.print(&quot;Data baru: &quot;);
+                String newData = input.nextLine();
+
+                // update data
+                todoLists.set(index, newData);
+
+                System.out.println(todoLists.toString());
+
+                try {
+                    FileWriter fileWriter = new FileWriter(fileName, false);
+
+                    // write new data
+                    for (String data : todoLists) {
+                        fileWriter.append(String.format(&quot;%s%n&quot;, data));
+                    }
+                    fileWriter.close();
+
+                    System.out.println(&quot;Berhasil diubah!&quot;);
+                } catch (IOException e) {
+                    System.out.println(&quot;Terjadi kesalahan karena: &quot; + e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        isEditing = false;
+        backToMenu();
+    }
+
+    static void deleteTodoList() {
+        isEditing = true;
+        showTodoList();
+
+        System.out.println(&quot;-----------------&quot;);
+        System.out.print(&quot;Pilih Indeks&gt; &quot;);
+        int index = Integer.parseInt(input.nextLine());
+
+        try {
+            if (index &gt; todoLists.size()) {
+                throw new IndexOutOfBoundsException(&quot;Kamu memasukan data yang salah!&quot;);
+            } else {
+
+                System.out.println(&quot;Kamu akan menghapus:&quot;);
+                System.out.println(String.format(&quot;[%d] %s&quot;, index, todoLists.get(index)));
+                System.out.println(&quot;Apa kamu yakin?&quot;);
+                System.out.print(&quot;Jawab (y/t): &quot;);
+                String jawab = input.nextLine();
+
+                if (jawab.equalsIgnoreCase(&quot;y&quot;)) {
+                    todoLists.remove(index);
+
+                    // tulis ulang file
+                    try {
+                        FileWriter fileWriter = new FileWriter(fileName, false);
+
+                        // write new data
+                        for (String data : todoLists) {
+                            fileWriter.append(String.format(&quot;%s%n&quot;, data));
+                        }
+                        fileWriter.close();
+
+                        System.out.println(&quot;Berhasil dihapus!&quot;);
+                    } catch (IOException e) {
+                        System.out.println(&quot;Terjadi kesalahan karena: &quot; + e.getMessage());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        isEditing = false;
+        backToMenu();
+    }
+
+}</code></pre><p id="3c1d1813-01d9-48ea-9253-176c27781e15" class="">..dan kita tinggal uji coba saja.</p><h2 id="55fd9089-06e7-4348-a53f-cd40ec60f516" class=""><strong>Uji Coba Program</strong></h2><p id="59aebc2f-647e-4496-9465-d5ae926f21ff" class="">Percobaan ini akan dilakukan di dua tempat, yakni Netbeans dan Terminal.</p><h3 id="0eb40b42-0c8a-458e-8676-25fab79ee1d7" class=""><strong>Percobaan dari Netbeans</strong></h3><ol id="4a9156d5-8e77-4438-b46f-c2722bb8371f" class="numbered-list" start="1"><li>Melihat isi Todo List</li></ol><figure id="4b6cbaac-209e-43c2-b8b7-585dcafa4ecd" class="image"><a href="https://www.petanikode.com/img/java/file/crud/netbeans-lihat-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/netbeans-lihat-todolist.gif"/></a></figure><ol id="47b3ab8b-66bd-46ff-8019-0190a31eda8c" class="numbered-list" start="1"><li>Tambah Todo List</li></ol><figure id="819781d8-00d1-43b2-8256-b26d4d462f2a" class="image"><a href="https://www.petanikode.com/img/java/file/crud/netbeans-add-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/netbeans-add-todolist.gif"/></a></figure><ol id="2536ef1f-20d5-4304-a1b9-d33ec7f50caa" class="numbered-list" start="1"><li>Edit Todo List</li></ol><figure id="908ec33f-f662-4820-a791-32abc6367688" class="image"><a href="https://www.petanikode.com/img/java/file/crud/netbeans-edit-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/netbeans-edit-todolist.gif"/></a></figure><ol id="5cab007f-e30d-4d2d-88c1-f39b19f0b166" class="numbered-list" start="1"><li>Hapus Todo List</li></ol><figure id="789f01c8-098b-45ff-bab9-0108fdad4714" class="image"><a href="https://www.petanikode.com/img/java/file/crud/netbeans-delete-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/netbeans-delete-todolist.gif"/></a></figure><ol id="413fd7b6-fc90-40c0-829b-ebc5492a4287" class="numbered-list" start="1"><li>Salah Pilih Menu dan Keluar</li></ol><figure id="235c42d6-6773-46ef-9397-a15d3d03991f" class="image"><a href="https://www.petanikode.com/img/java/file/crud/netbeans-keluar.gif"><img src="https://www.petanikode.com/img/java/file/crud/netbeans-keluar.gif"/></a></figure><p id="8ecaf70b-f7e8-413a-9ee4-5ff611e66bc2" class="">Seperti yang kita lihat, fungsi Clear Screen tidak akan bisa bekerja di Netbeans.</p><p id="6075f6a8-aafe-4bed-97b9-af53d5c18a47" class="">Sekarang mari kita coba jalankan melalui Terminal.</p><h3 id="1eb2fabf-00c4-4bd6-ad41-79b33e9bc69b" class=""><strong>Percobaan dari Terminal</strong></h3><p id="623d3dc1-5590-411d-81ab-14cf11ffc87e" class="">Klik kanan pada <code>&lt;default package&gt;</code> kemudian, pilih <strong>Tools-&gt;Open in Terminal</strong>.</p><figure id="f4eb91b7-e9b1-4b83-ade5-a46abc5853c0" class="image"><a href="https://www.petanikode.com/img/java/file/crud/open-terminal.gif"><img src="https://www.petanikode.com/img/java/file/crud/open-terminal.gif"/></a></figure><p id="abcebe0b-6554-480b-932b-64bffd99965a" class="">Setelah itu, compile programnya dengan perintah:</p><p id="a9c24f1c-f89b-4069-a258-21b19fed3395" class=""><code>javac TodoListApp.java</code></p><figure id="515a1a8e-6f41-463d-bdc2-005ec2d4296e" class="image"><a href="https://www.petanikode.com/img/java/file/crud/javac.gif"><img src="https://www.petanikode.com/img/java/file/crud/javac.gif"/></a></figure><p id="2fea57a8-5a5e-492a-9631-0d9d09f387f2" class="">Setelah itu, kita bisa buka programnya dengan perintah:</p><p id="05cb7360-c22d-419e-aec6-cd3ecd77ab9b" class=""><code>java TodoListApp</code></p><p id="3d92f4c6-c5c2-4e63-8c6d-39481e08fb3b" class="">Mari kita coba semua fitur yang ada:</p><ol id="f1ce8e06-64b8-43d2-9240-8b9916fcf22d" class="numbered-list" start="1"><li>Melihat isi Todo List</li></ol><figure id="51a2ba88-ff3f-47f8-af90-387361231db3" class="image"><a href="https://www.petanikode.com/img/java/file/crud/terminal-lihat-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/terminal-lihat-todolist.gif"/></a></figure><ol id="30d9768b-b323-40a2-835f-b25c44fe5532" class="numbered-list" start="1"><li>Tambah Todo List</li></ol><figure id="4d41e830-3fd3-4cfb-bebc-c5307a1d1597" class="image"><a href="https://www.petanikode.com/img/java/file/crud/terminal-add-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/terminal-add-todolist.gif"/></a></figure><ol id="fbe33f1a-4073-4a5e-8fa7-a5728c173c75" class="numbered-list" start="1"><li>Edit Todo List</li></ol><figure id="f5d40caf-4b15-4199-bd9c-b1f3387e3157" class="image"><a href="https://www.petanikode.com/img/java/file/crud/terminal-edit-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/terminal-edit-todolist.gif"/></a></figure><ol id="06ebdf23-16a8-4fa4-84b9-246d138e6fbe" class="numbered-list" start="1"><li>Hapus Todo List</li></ol><figure id="71939b7b-8137-4235-8bc7-46727722c8e4" class="image"><a href="https://www.petanikode.com/img/java/file/crud/terminal-delete-todolist.gif"><img src="https://www.petanikode.com/img/java/file/crud/terminal-delete-todolist.gif"/></a></figure><ol id="59917a12-9b71-4f3e-bbf9-5b5a96954b1e" class="numbered-list" start="1"><li>Salah Pilih Menu dan Keluar</li></ol><figure id="66da0772-093c-4b02-be3b-4b7600f66da5" class="image"><a href="https://www.petanikode.com/img/java/file/crud/terminal-keluar.gif"><img src="https://www.petanikode.com/img/java/file/crud/terminal-keluar.gif"/></a></figure><p id="2bf8a969-08b9-4ac7-8f3e-13a671f3766d" class="">Percobaan pada Terminal, berhasil!</p><p id="be9fe5e6-beb1-4c06-ade9-b6ee3349d368" class="">Fungsi Clear Screen bisa bekerja di sini.</p><h2 id="48d90492-0439-452f-b532-b9fdadce43a3" class=""><strong>Akhir Kata..</strong></h2><p id="16acfa62-5380-4bc8-a121-a952dc32ec8f" class="">Gimana?</p><p id="16e522ac-419a-4dd8-b2d5-51d3afb351d0" class="">Ada yang error?</p><p id="ab4b0ae2-4c1b-41c8-863a-e5d26ff205df" class="">Kalau tidak ada, syukurlah..</p><p id="a8d583b6-789e-461a-9ab9-257b477e9006" class="">Tapi kalau ada error, kamu bisa tanyakan melalui kolom komentar.</p><p id="bba86a58-6055-4e28-b3a8-23a3001d856e" class="">Sekian tutorial ini. Semoga bermanfaat.</p></div></article></body></html>

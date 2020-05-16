@@ -1,0 +1,662 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cara Menggunakan Maven pada Proyek Aplikasi Java</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="77c7a46b-4f58-4ea3-86cc-d74abf6b8763" class="page sans"><header><h1 class="page-title"><strong>Cara Menggunakan Maven pada Proyek Aplikasi Java</strong></h1></header><div class="page-body"><p id="4ef9c15d-9db3-4294-b416-b65d5c16e629" class="">Maven adalah salah satu <em>build tool</em> yang sering digunakan dalam proyek aplikasi Java.</p><p id="cbb45e33-8d86-4fe3-bd68-4fda7d9fea76" class="">Dengan Maven kita bisa:</p><ol id="e7f33ad1-3102-4bf4-af68-d668b7e344fb" class="numbered-list" start="1"><li>Kompilasi <em>source code</em> dengan mudah;</li></ol><ol id="5e24242b-8556-42b0-a4ff-440cb0b01f6c" class="numbered-list" start="2"><li>Melakukan <em>Testing</em>;</li></ol><ol id="2e6846c1-1d5c-4b69-b1d6-889f2ef4a6f9" class="numbered-list" start="3"><li>Menginstal <em>library</em> yang dibutuhkan;</li></ol><p id="72c0fbb9-07e6-4610-b8a7-00eadeb1c11a" class="">Selain digunakan untuk Java, Maven juga dapat digunakan untuk mengelola project dengan bahasa Kotlin, C#, Ruby, Scala, dan sebagainya.</p><p id="24266364-33d2-41e8-bd91-356217155528" class="">Maven adalah program berbasis teks yang digunakan pada <em>command line</em>. Namun, bisa juga digunakan dalam IDE.</p><p id="849c2055-d79f-4e71-b110-4f40e62c67ec" class="">Karena sebagian besar IDE Java seperti Intellij, Eclipse, dan Netbeans sudah mendukungnya.</p><p id="95da4c78-b6e3-4d1c-94fb-c051b29cd646" class="">Pada kesempatan ini, kita akan belajar cara menggunakan Maven pada proyek Java sampai bisa:</p><ol id="85f8f150-a9ab-4bc0-901f-95967c7484d8" class="numbered-list" start="1"><li>Mengelola proyek dengan Maven;</li></ol><ol id="81d2b0d7-7c7b-4730-b3c8-7e17c7ae2cec" class="numbered-list" start="2"><li>Melakukan build atau kompilasi;</li></ol><ol id="efd6a14d-50cc-419b-bff2-9363b08a68db" class="numbered-list" start="3"><li>Menginstal Library yang dibutuhkan;</li></ol><ol id="3c5e8b66-8620-429c-ad30-98aff533a561" class="numbered-list" start="4"><li>Melakukan Testing.</li></ol><p id="2b0f16f4-c1ec-462f-9fb7-7fa1d5a38e5f" class="">Mari kita mulai…</p><h2 id="846aae22-3989-41e0-8efc-6c8b2245cee6" class=""><strong>Instalasi Maven di Linux</strong></h2><p id="896f1497-c92b-4f0b-a415-2100e00294f7" class="">Untuk dapat menggunakan Maven, kita harus menginstalnya terlebih dahulu.</p><p id="e2463558-367f-4ca5-9f3a-b359694a6f7a" class="">Ketik perintah berikut untuk menginstal Maven di Linux:</p><p id="77c28e6b-c8a8-4c44-9e09-e9938bacb834" class=""><code>sudo apt install maven</code></p><p id="401071de-e6dd-4889-8c19-84d1525fb4f5" class="">Setelah itu, coba periksa versi Maven yang terinstal dengan perintah <code>mvn -version</code>.</p><figure id="53755c03-0dfa-4e0e-ab3a-8520ab0c37b4" class="image"><a href="https://www.petanikode.com/img/kotlin-netbeans/versi-maven.png"><img src="https://www.petanikode.com/img/kotlin-netbeans/versi-maven.png"/></a></figure><p id="cbd01981-10fe-4309-b71a-4c1d60d1ccd6" class="">Instalasi Maven pada sistem operasi yang lain, silahkan cek di sini: <a href="https://maven.apache.org/install.html">https://maven.apache.org/install.html</a></p><h2 id="81e44621-3b9c-4574-a56b-7a4757420a02" class=""><strong>Membuat Project Java dengan Maven</strong></h2><p id="c5f65562-0abc-455f-863c-90496939ef08" class="">Ada dua cara yang bisa kita lakukan untuk membuat proyek Java dengan Maven:</p><ol id="041627df-de3e-4697-bb07-5ea108b3421f" class="numbered-list" start="1"><li>Menggunakan <em>Command Line</em> atau Terminal;</li></ol><ol id="22348782-a8ef-4b1d-a18e-f5c5eeedb8e6" class="numbered-list" start="2"><li>Menggunakan IDE seperti Netbeans, Eclipse, dan Intellij.</li></ol><p id="b51ef776-d2f5-4c6c-aa6f-15a566e72aec" class="">Mari kita coba menggunakan Terminal.</p><p id="b77f7955-a530-4658-8cfe-beabaafdf263" class="">Perintahnya seperti ini:</p><pre id="8f31e3e9-45ea-4fe8-b27d-02568fa7dc3a" class="code"><code>mvn archetype:generate \
+-DgroupId=com.petanikode.app \
+-DartifactId=petanikode-app \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DinteractiveMode=<em>false</em></code></pre><p id="7fb14bb0-b566-431e-b14b-286a31b68126" class="">Keterangan:</p><ul id="6de0ccd0-a7d5-47af-81f7-73e86ab2e7af" class="bulleted-list"><li>Argumen <code>archetype:generate</code> artinya kita akan membuat sebuah archetype;</li></ul><ul id="6bc22363-5946-4494-89c0-709410df6852" class="bulleted-list"><li>Argumen <code>-DgroupId=com.petanikode.app</code> adalah namespace atau nama package dari aplikasi;</li></ul><ul id="293576b4-7cb2-4c45-9c92-762b83a9a177" class="bulleted-list"><li>Argumen <code>-DartifactId=petanikode-app</code> adalah nama direktori dari aplikasi;</li></ul><ul id="1828e000-34e0-44c1-a116-6215de13a613" class="bulleted-list"><li>Argumen <code>-DarchetypeArtifactId=maven-archetype-quickstart</code> artifact atau template yang akan digunakan;</li></ul><ul id="b023f687-faf6-4608-8387-06093f1c1ce3" class="bulleted-list"><li>Arugmen <code>-DinteractiveMode=false</code> untuk mematikan mode iteraktif.</li></ul><p id="0123afd4-483d-456c-8543-cf95e76a2641" class="">Tekan Enter, maka project akan segera dibuat.</p><figure id="5d2e57b6-76e9-41f9-ac7c-a0fdff860762" class="image"><a href="https://www.petanikode.com/img/java/maven/membuat-project-terminal.png"><img src="https://www.petanikode.com/img/java/maven/membuat-project-terminal.png"/></a></figure><p id="e4d88710-7e2c-4db0-bcce-34d5c7449e4c" class="">Setelah itu, coba masuk ke direktori <code>petanikode-app</code> kemudian lihat struktur direktorinya.</p><figure id="b489511b-721e-470f-b357-33f933ccb03f" class="image"><a href="https://www.petanikode.com/img/java/maven/struktur-direktori-maven.png"><img src="https://www.petanikode.com/img/java/maven/struktur-direktori-maven.png"/></a></figure><p id="58aba9b1-7d32-44ed-85ef-88f479eef3c2" class="">Ini adalah struktur standar direktori project Maven, nanti kita akan bahas lebih dalam.</p><p id="c4c7848b-6fbd-461b-b6ed-6a38bfd3552f" class="">Berikutnya, kita coba membuat project Maven dengan IDE.</p><p id="a1ed06c4-0182-41be-8550-8c2a97308c2c" class="">IDE yang akan digunakan adalah Netbeans. Untuk IDE yang lain, silahkan disesuaikan saja. Karena caranya hampir sama.</p><p id="8c9da8fc-ec56-48c0-a316-3cbf6df6dd45" class="">Silahkan buka Netbeans, lalu klik New Project.</p><figure id="ba3f36de-1372-4360-8494-dd1bac55631e" class="image"><a href="https://www.petanikode.com/img/java/maven/netbeans-new.png"><img src="https://www.petanikode.com/img/java/maven/netbeans-new.png"/></a></figure><p id="caa2b8c8-0b28-4ce4-a606-a0aa8d5f0305" class="">Pada jendela yang muncul, pilih: <strong>Maven-&gt;Java Application</strong>.</p><figure id="22c8ae7e-7c75-47ba-bb70-9ef5c0c4722b" class="image"><a href="https://www.petanikode.com/img/java/maven/new-project-netbeans.png"><img src="https://www.petanikode.com/img/java/maven/new-project-netbeans.png"/></a></figure><p id="914ef09a-8713-462d-ba66-95894e1e0088" class="">Berikutnya, isi nama project-nya dengan <strong>BelajarMaven</strong>.</p><figure id="13a5b13e-c666-4397-b5b0-f13f40522796" class="image"><a href="https://www.petanikode.com/img/java/maven/nama-project-netbeans.png"><img src="https://www.petanikode.com/img/java/maven/nama-project-netbeans.png"/></a></figure><p id="8f379965-01de-430d-ac75-0a559cc8af67" class="">Maka hasilnya:</p><figure id="d4fb46e9-3226-44ae-b33d-a261f5bd7a1d" class="image"><a href="https://www.petanikode.com/img/java/maven/project-maven-di-netbeans.png"><img src="https://www.petanikode.com/img/java/maven/project-maven-di-netbeans.png"/></a></figure><p id="ea073e5a-1c11-4d62-8b9e-bbcd2f25c297" class="">Tidak ada file Java, karena kita tidak menggunakan <code>DarchetypeArtifactId</code> seperti pada <em>command line</em>.</p><p id="b4468f17-ea18-4792-b49c-215f2a50bdf8" class="">Apa bedanya yang menggunakan <code>DarchetypeArtifactId</code> dengan yang tidak?</p><p id="30b4196e-c316-4647-be0f-ac062facc80b" class="">Menggunakan <code>DarchetypeArtifactId</code> artinya, kita akan menggunakan template yang sudah ada. Sedangkan yang tidak, berarti kita akan membuat project kosong.</p><p id="79f29deb-47f0-41bc-becb-8c880cae4c43" class="">Pada Netbeans, jika ingin menggunakan <code>DarchetypeArtifactId</code>, kita bisa memilih <strong>Project From Archetype</strong>.</p><figure id="cbe2df53-68b2-46c7-8436-29a20aa2b392" class="image"><a href="https://www.petanikode.com/img/java/maven/project-baru-archetype.png"><img src="https://www.petanikode.com/img/java/maven/project-baru-archetype.png"/></a></figure><p id="24851854-c258-4740-b5dd-cde14973477f" class="">Lalu memilih archetype atau template yang ingin digunakan.</p><figure id="f38249c5-48b7-4d28-b378-2160fb25bbf6" class="image"><a href="https://www.petanikode.com/img/java/maven/memilih-archetype.png"><img src="https://www.petanikode.com/img/java/maven/memilih-archetype.png"/></a></figure><p id="ae2dcb2b-76c9-4c60-ac58-c216fd1b67a0" class="">Ada banyak archetype yang bisa dipilih. Silahkan pilih sesuai kebutuhan.</p><h2 id="3ba0ba85-17c2-4158-a030-5892fe8a2138" class=""><strong>Struktur Direktori Project Maven</strong></h2><p id="58612fcf-f2b2-4558-8bd4-539ca0a17617" class="">Berikut ini struktur direktori standar yang akan dibuatkan oleh Maven:</p><figure id="e58035e8-f704-40dc-afe6-65a01b5fc84a" class="image"><a href="https://www.petanikode.com/img/java/maven/struktur-direktori-maven.svg"><img src="https://www.petanikode.com/img/java/maven/struktur-direktori-maven.svg"/></a></figure><p id="c3caf013-e064-41ef-b438-282bfb30aef1" class="">Terdapat beberapa file dan direktori yang harus dipahami. </p><p id="cf3b984f-b42b-4c4e-bb22-a3eea5465eb8" class="">Berikut ini penjelasannya:</p><div id="27698456-7cb2-42c5-9d35-bf744f7ec6a8" class="collection-content"><h4 class="collection-title">Struktur Direktori Project Maven</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Nama File atau Direktori</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Keterangan</th></tr></thead><tbody><tr id="183172d2-311c-4400-a8cd-548cac88c25b"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/project%20home%20183172d2311c4400a8cd548cac88c25b.html">project home</a></td><td class="cell-?^M_">berisi file pom.xml dan semua direktori</td></tr><tr id="3bbea09c-e736-4af2-acf3-444ec2805e2d"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/src%20main%20java%203bbea09ce7364af2acf3444ec2805e2d.html">src/main/java</a></td><td class="cell-?^M_">berisi kode program</td></tr><tr id="ec8761bf-5b2a-4539-8a54-3f26d94dcd59"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/src%20main%20resources%20ec8761bf5b2a45398a543f26d94dcd59.html">src/main/resources</a></td><td class="cell-?^M_">berisi file pendukung untuk project seperti gambar, dokumen, dll.</td></tr><tr id="857a6879-a764-4648-a5b2-570c28987327"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/src%20test%20java%20857a6879a7644648a5b2570c28987327.html">src/test/java</a></td><td class="cell-?^M_">berisi kode program untuk melakukan testing</td></tr><tr id="6b39d218-1f5d-4cfd-9b0a-a4e57ec1ed23"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/src%20test%20resources%206b39d2181f5d4cfd9b0aa4e57ec1ed23.html">src/test/resources</a></td><td class="cell-?^M_">berisi file pendukung untuk melakukan testing</td></tr><tr id="25ef3161-10cb-42a9-a628-c66efa0b68b2"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/target%2025ef316110cb42a9a628c66efa0b68b2.html">target</a></td><td class="cell-?^M_">berisi file hasil kompilasi seperti .jar dan .class</td></tr><tr id="029b6072-efaf-460e-9eaa-01f631d0cfc6"><td class="cell-title"><a href="Cara%20Menggunakan%20Maven%20pada%20Proyek%20Aplikasi%20Java%2077c7a46b4f584ea386ccd74abf6b8763/Struktur%20Direktori%20Project%20Maven%20276984567cb242c59d35bf744f7ec6a8/pom%20xml%20029b6072efaf460e9eaa01f631d0cfc6.html">pom.xml</a></td><td class="cell-?^M_">berisi konfigurasi project</td></tr></tbody></table></div><h3 id="e09adad3-d413-462d-8371-126ba01f1984" class=""><strong>Mengenal file pom.xml</strong></h3><p id="9afd39a7-cea0-422a-8b15-dbbd25ef9136" class="">POM adalah singkatan dari <em>Project Object Model</em>.</p><p id="a11e1cd8-d87c-4db6-9e55-ab8597b57770" class="">File <code>pom.xml</code> merupakan file XML yang berisi konfigurasi dari project.</p><p id="e086befc-3e27-4f23-92d7-fa9a901b6802" class="">Contoh:</p><pre id="179532d8-61da-41cf-a4b1-58ab3db20bc8" class="code"><code>&lt;project 
+	xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; 
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;
+&gt; 
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; 
+	&lt;groupId&gt;com.petanikode.app&lt;/groupId&gt; 
+	&lt;artifactId&gt;petanikode-app&lt;/artifactId&gt; 
+	&lt;packaging&gt;jar&lt;/packaging&gt; 
+	&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt; 
+	&lt;name&gt;petanikode-app&lt;/name&gt; 
+	&lt;url&gt;http://maven.apache.org&lt;/url&gt; 
+	&lt;dependencies&gt; 
+		&lt;dependency&gt; 
+			&lt;groupId&gt;junit&lt;/groupId&gt; 
+			&lt;artifactId&gt;junit&lt;/artifactId&gt; 
+			&lt;version&gt;3.8.1&lt;/version&gt; 
+			&lt;scope&gt;test&lt;/scope&gt; 
+		&lt;/dependency&gt; 
+&lt;/dependencies&gt;
+&lt;/project&gt;</code></pre><p id="b8729885-0dd2-4df8-8ae2-1f79e522a16a" class="">Bagian penting yang harus kita pahami adalah di bagian <code>&lt;depedencies&gt;</code>.</p><p id="d3f23733-b3b8-451f-8dc5-bcc479ab24fb" class="">Bagian ini tempat kita menentukan library apa yang akan kita gunakan dalam project.</p><p id="93b33955-8676-44e9-ae61-889e905ff91b" class="">Contohnya: di sini sudah ada library <code>junit</code> untuk melakukan <em>unit testing</em>.</p><pre id="0260ac0a-2732-4d3f-adb5-731ee7200583" class="code"><code>&lt;dependencies&gt; 
+	&lt;dependency&gt; 
+		&lt;groupId&gt;junit&lt;/groupId&gt;
+		&lt;artifactId&gt;junit&lt;/artifactId&gt; 
+		&lt;version&gt;3.8.1&lt;/version&gt; 
+		&lt;scope&gt;test&lt;/scope&gt; 
+	&lt;/dependency&gt; 
+&lt;/dependencies&gt;</code></pre><p id="3009ec1d-6a6e-4954-90e0-f6212775dbd4" class="">Nanti kita akan coba menambahkan library lain.</p><h2 id="69b287df-5c39-44c0-b914-ff6a30d51e45" class=""><strong>Kompilasi Program dengan Maven</strong></h2><p id="9bf5bd3e-d5d4-4e31-b313-40c33a71ecbb" class="">Kita dapat melakukan kompilasi aplikasi dengan perintah:</p><pre id="1099ccb6-280f-44a5-b932-e63fbee35b4b" class="code"><code>mvn package</code></pre><p id="38d48b92-d9fe-452e-a2b1-dd5b15dafb18" class="">Perintah ini akan membuat direktori baru beranama <code>target</code> yang berisi file hasil kompilasi berupa <code>.jar</code> dan <code>.class</code>.</p><figure id="46dc4670-7abd-4971-bef9-38368ffd6e71" class="image"><a href="https://www.petanikode.com/img/java/maven/mvn-package.gif"><img src="https://www.petanikode.com/img/java/maven/mvn-package.gif"/></a></figure><p id="59146040-f2c3-47b0-ad23-d99e9823e905" class="">Selanjutnya kita bisa ekesekusi programnya dengan perintah berikut:</p><pre id="88b95649-9234-422c-991d-3a60dde93499" class="code"><code>mvn exec:java -Dexec.mainClass=com.petanikode.app.App</code></pre><p id="42221042-0003-4f40-a253-e891975fa228" class="">atau</p><pre id="7436812d-ad56-4526-9312-692264614afb" class="code"><code>java -cp target/petanikode-app-1.0-SNAPSHOT.jar com.petanikode.app.App</code></pre><p id="31daa6bc-04f4-4338-8818-89f31021f6b0" class="">Parameter <code>-cp</code> <em>(class path)</em> untuk menentukan lokasi class program yang akan dieksekusi.</p><figure id="5aabd5e9-15bd-4f52-813c-667da03fa0a6" class="image"><a href="https://www.petanikode.com/img/java/maven/eksekusi-program.gif"><img src="https://www.petanikode.com/img/java/maven/eksekusi-program.gif"/></a></figure><p id="f8e864f0-264a-4e20-bd68-66e3eda5a8fa" class="">Cukup mudah bukan…?</p><p id="bc6958ad-c817-4568-a693-1497dc92aa91" class="">Berikutnya kita coba menghapus hasil kompilasi dengan perintah:</p><pre id="0d264cf2-580a-4e67-8a35-9f24b3dbf321" class="code"><code>mvn clean</code></pre><p id="8f00a6b2-6925-4fa6-9c82-4b089e983099" class="">Selain perintah ini, ada beberapa peritnah dasar yang perlu diingat:</p><ul id="5319bee4-f1e0-4f85-97e3-7154a4e7c17b" class="bulleted-list"><li><code>mvn package</code> untuk kompilasi aplikasi;</li></ul><ul id="25bf73de-cd39-420b-a053-167ba8040ac0" class="bulleted-list"><li><code>mvn clean</code> untuk menghapus hasil kompilasi;</li></ul><ul id="0b33eac9-02c3-4e66-97c8-76dbbd55b1d2" class="bulleted-list"><li><code>mvn install</code> untuk menginstall library yang dibutuhkan;</li></ul><ul id="4ef54568-749a-4ec9-8a6b-75bed413d879" class="bulleted-list"><li><code>mvn test</code> utnuk menjalankan testing;</li></ul><p id="80c8971f-b1da-46ec-a45b-a8069783375c" class="">Bila kita menggunakan Netbeans, perintah tersebut bisa diakses dengan klik kanan pada project lalu tinggal pilih.</p><figure id="1980920b-d608-4326-bffc-41392f29fce8" class="image"><a href="https://www.petanikode.com/img/java/maven/perintah-maven-netbeans.png"><img src="https://www.petanikode.com/img/java/maven/perintah-maven-netbeans.png"/></a></figure><h2 id="729231f7-29ec-41b8-8daa-1c14a1af8c00" class=""><strong>Menginstall Library dengan Maven</strong></h2><p id="d6c07f61-d696-4f0f-b680-3c075d70b79e" class="">Ada banyak library di luar sana yang bisa kita gunakan untuk membuat aplikasi.</p><p id="3ed3edb5-8ea0-462a-afe9-0b6e384df991" class="">Biasanya kita download file <code>.jar</code>, lalu diimpor ke dalam Project.</p><p id="efcf094a-a6cb-4420-b798-2e483bf9861d" class="">Tapi, bila menggunakan Maven, kita tidak perlu melakukan itu. Karena kita akan menyuruh Maven untuk mendownload dan mengimpor langsung ke Project.</p><p id="0eba8ae4-35c7-48de-90bd-6f34f1de792f" class="">Caranya bagaimana?</p><p id="b4b21b60-4c7c-4f22-8afd-d7cdc0f0ee46" class="">Caranya: kita tinggal tambahkan saja deklarasi <em>depedency library</em> yang dibutuhkan.</p><p id="c7cc01ab-f673-4e7d-b49a-5863155ffa38" class="">Silahkan buka <a href="https://mvnrepository.com/">https://mvnrepository.com/</a> untuk mencari library yang ingin diinstal.</p><p id="a5db9ad0-77d5-40bb-822f-72eca864a6ee" class="">Misalkan kita membutuhkan library untuk JSON.</p><figure id="3e43212f-68ad-46e3-b75d-27f24a0b9ef3" class="image"><a href="https://www.petanikode.com/img/java/maven/repo-maven.png"><img src="https://www.petanikode.com/img/java/maven/repo-maven.png"/></a></figure><p id="ebc56f3b-7b40-40c0-b5f6-3105deffb328" class="">Mari kita coba install GSON, silahkan buka: <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.2">https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.2</a></p><p id="68dfa2b3-9cb2-4e1d-a57b-5775f443ecb9" class="">Kemudian <em>copy</em> kode <em>depedency</em> untuk Maven.</p><figure id="0a5106c2-30cc-47b0-b3a3-5fd5633b69c6" class="image"><a href="https://www.petanikode.com/img/java/maven/library-gson.png"><img src="https://www.petanikode.com/img/java/maven/library-gson.png"/></a></figure><p id="61e7f883-2064-465a-aaf2-602bf1cd6102" class="">Paste di file <code>pom.xml</code> seperti ini:</p><figure id="830fe8a7-ca42-40d5-982a-f0d3565c65cc" class="image"><a href="https://www.petanikode.com/img/java/maven/pom-gson.png"><img src="https://www.petanikode.com/img/java/maven/pom-gson.png"/></a></figure><p id="1445690d-9a49-45bd-bba5-600892d3ecb2" class="">Jangan lupa disimpan.</p><p id="0e13cb57-db12-4d1d-96c6-fe645080ece6" class="">Selanjutnya kita akan buka terminal dari Netbeans untuk menjalankan perintah <code>mvn install</code>.</p><p id="918efe24-6ba0-449f-bb06-44413a6847f2" class="">Klik <strong>Tools-&gt;Open in Terminal</strong>.</p><figure id="eb3b3c3d-66be-46a3-b7a3-2fb3b4e7606d" class="image"><a href="https://www.petanikode.com/img/java/maven/open-in-terminal.png"><img src="https://www.petanikode.com/img/java/maven/open-in-terminal.png"/></a></figure><p id="38f49adb-16dc-4799-896f-0745aca02040" class="">Ketik perintah <code>mvn install</code> untuk menginstall library GSON.</p><figure id="48dc61dc-bcb2-4c3a-99d8-32fecedb4b70" class="image"><a href="https://www.petanikode.com/img/java/maven/mvn-install.gif"><img src="https://www.petanikode.com/img/java/maven/mvn-install.gif"/></a></figure><p id="2e6a3959-1e74-45f1-ab85-aecd6bef5c77" class="">Hasilnya, file <code>.jar</code> dari GSON akan ter-download dan kita bisa impor class GSON dari kode project. Karena sudah langsung terintegrasi.</p><figure id="5c527c4f-6203-41a6-ade6-0f8474956c35" class="image"><a href="https://www.petanikode.com/img/java/maven/impor-gson.png"><img src="https://www.petanikode.com/img/java/maven/impor-gson.png"/></a></figure><p id="0e7c1c17-15f0-49d9-a959-68d0fe8817e4" class="">Semua library (<code>.jar</code>) yang diinstal dengan Maven, akan tersimpan dalam direktori <code>/home/username/.m2</code>. Bukan di dalam project.</p><p id="fa458efe-f2f1-4647-8f05-d5b33faf1bca" class="">Jika ada project lain yang membutuhkan, maka tinggal mengambil saja dari sana tanpa harus men-download.</p><p id="41ee2787-4014-4686-99be-27d42e65b268" class="">Oya, kamu bisa baca cara menggunakan library GSON di: <a href="https://www.petanikode.com/java-gson/">Cara Menggunakan GSON untuk Serialisasi dan Deserialisasi data JSON di Java</a></p><h2 id="6875c38f-34f9-41d7-b0b4-0793397c2372" class=""><strong>Melakukan Testing</strong></h2><p id="871c34e3-1a6a-45bc-ab6f-fa67f986b00f" class="">Tes akan kita lakukan dengan <code>junit</code>, karena sudah terinstal di sana.</p><p id="da855eac-2170-4845-91b0-4fb8cf1ed09c" class="">Pertam-tama, kita ubah dulu kode dari <code>App.java</code> menjadi seperti ini:</p><pre id="40b66f2a-70e4-4644-90e8-dbe7231bb706" class="code"><code>package com.petanikode.app;
+/** * Hello world! * */
+<em>public</em> <em>class</em> App { 
+	<em>public</em> <em>static</em> void main(String[] args) { 
+		System.out.println(getHelloWorld()); 
+	} 
+	<em>public</em> <em>static</em> String getHelloWorld() { 
+		return &quot;Hello World&quot;; 
+	}
+}</code></pre><p id="e976fa08-7268-4614-a096-631c4838ecef" class="">Di sana terdapat method <code>getHelloWorld()</code> yang akan kita tes.</p><p id="399d69be-c28b-4583-8c68-f74fbae9830a" class="">Berikutnya kita akan menulis kode test-nya. Silahkan buka file <code>AppTest.java</code>.</p><p id="9218702b-1fb0-4248-948f-8dc3f0359259" class="">Lalu tambahkan kode:</p><pre id="797c0cf3-2215-4185-9a5d-7a7d8979541d" class="code"><code>assertEquals(App.getHelloWorld(), &quot;Hello World&quot;);</code></pre><p id="b7120527-36a0-495a-a522-a674cd091f8f" class="">di dalam method <code>testApp()</code>.</p><figure id="cdabf7f3-4883-4d4a-87a9-0232d1fa23a0" class="image"><a href="https://www.petanikode.com/img/java/maven/assert.png"><img src="https://www.petanikode.com/img/java/maven/assert.png"/></a></figure><p id="131452ec-5741-4aea-ad54-128a8d7c8329" class=""><code>assertEquals()</code> adalah method untuk melakukan testing yang membandingkan persamaan.</p><p id="639db47a-8013-4fdc-8091-de468ca6d303" class="">Kita akan tes: apakah fungsi <code>getHelloWorld()</code> benar menghasilkan String <code>&quot;Hello World&quot;</code> atau tidak?</p><p id="91021c66-7d7f-4739-9680-bba7955742a6" class="">Silahkan ketik perintah:</p><p id="1b920679-47fc-4aef-a8b9-75e37dee08f6" class=""><code>mvn </code><code><em>test</em></code></p><p id="2e614792-73a3-4a95-a888-e47d74da6fc4" class="">untuk melakukan testing.</p><p id="cb085414-6d76-425c-9e34-14e339d00091" class="">Ini hasilnya jika testing berhasil:</p><figure id="da255d2f-2f36-46de-a2c2-26afed76a946" class="image"><a href="https://www.petanikode.com/img/java/maven/testing-berhasil.png"><img src="https://www.petanikode.com/img/java/maven/testing-berhasil.png"/></a></figure><p id="4e4f5271-4e70-40cc-b782-09e895c1190a" class="">Sedangkan kalau gagal:</p><figure id="6194ad3f-20a5-41ba-b6e9-20584ae1a0b4" class="image"><a href="https://www.petanikode.com/img/java/maven/testing-gagal.png"><img src="https://www.petanikode.com/img/java/maven/testing-gagal.png"/></a></figure><p id="5c9ac1b7-5de4-4b70-bc1a-87300b8abd10" class="">Kenapa bisa gagal?</p><p id="47a13466-ff1a-4698-a1cf-21ca487835c0" class="">Karena saya mengubah <code>&quot;Hello World&quot;</code> menjadi <code>&quot;Hello Petani&quot;</code> di method <code>getHelloWorld()</code>.</p><h2 id="d6618456-6bb1-490a-b884-d309bae3f1a7" class=""><strong>Akhir Kata…</strong></h2><p id="237c7d4c-b75d-49d9-8fcd-42356cbda53c" class="">Maven dapat digunakan dengan <em>command line</em> dan IDE.</p><p id="bff19c78-2813-4091-b704-89cbfa0e019c" class="">Kamu lebih suka pakai yang mana?</p><p id="cb82953f-acb7-44a3-9ecc-3c92b2b08b9b" class="">Saya yakin banyak yang akan menjawab IDE, karena lebih mudah. Namun, kita juga perlu tahu cara menggunakannya di <em>command line</em> untuk melakukan tugas yang tidak bisa dilakukan di IDE.</p><p id="c75201f7-192f-47fb-809e-d6e98718e801" class="">Selamat belajar Maven.</p></div></article></body></html>

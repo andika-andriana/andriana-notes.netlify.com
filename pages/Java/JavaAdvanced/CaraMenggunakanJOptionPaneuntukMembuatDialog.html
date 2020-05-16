@@ -1,0 +1,757 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cara Menggunakan JOptionPane untuk Membuat Dialog</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f9060e4d-ca28-473a-86d8-d4de0398a3e1" class="page sans"><header><h1 class="page-title">Cara Menggunakan JOptionPane untuk Membuat Dialog</h1></header><div class="page-body"><p id="0b2f7dfc-b211-4a22-a98c-bef8c0e76db1" class="">Agar program yang kita mempu berinteraksi dengan pengguna, kita harus membuat sebuah dialog dengannya.</p><p id="2d7ad731-f6b4-4165-b706-62b43fdb3926" class="">Pada Java Swing, terdapat sebuah komponen bernama <code>JOptionPane</code> untuk membuat dialog yang interakif.</p><p id="095ca142-9bd7-47e4-89d5-521f5c2aca2a" class="">Bagaimana cara menggunakan <code>JOptionPane</code>?</p><p id="48b46bf9-0584-4a5a-a423-983a2016a268" class="">Mari kita simak pembahsannya…</p><h2 id="297b1759-7328-4bd7-b104-388908345ce1" class=""><strong>Mengenal JOptionPane</strong></h2><p id="f6ab788e-e7a0-4510-8328-203c483101d2" class="">JOptionPane merupakan sebuah kelas yang menyediakan jendela dialog.</p><p id="4e5d52ed-7f76-4dd0-a1de-ce154eb7249f" class="">JOptionPane bisa kita gunakan untuk mengambil input, menampilkan informasi, menampilkan pesan error, menampilkan dialog konfirmasi, dan lain-lain.</p><p id="3e3a8472-b0e6-493f-87f9-6ecf2c4aff85" class="">Sebelum menggunakan <code>JOptionPane</code>, kita harus mengimpornya terlebih dahulu ke dalam program:</p><pre id="2fbcdf91-ae85-49ee-b4eb-df9663e016c8" class="code"><code>import javax.swing.JOptionPane;</code></pre><p id="0f4786ad-29ec-45d1-a2e2-bcd72a448942" class="">Terdapat empat fungsi atau metode yang sering digunakan pada <code>JOptionPane</code>:</p><ol id="9ca2263f-e681-4d13-bae3-52df2a98fa04" class="numbered-list" start="1"><li><code>showConfirmDialog()</code> : untuk menampilkan dialog konfirmasi;</li></ol><ol id="6ebd7873-a008-4947-bb40-c9922b693728" class="numbered-list" start="2"><li><code>showInputDialog()</code> : untuk menampilkan dialog input;</li></ol><ol id="acbd9f86-46e4-44eb-85e7-22de867d4653" class="numbered-list" start="3"><li><code>showMessageDialog()</code> : untuk menampilkan pesan/informasi;</li></ol><ol id="39223a99-a217-42d2-9dd9-528af09dfc43" class="numbered-list" start="4"><li><code>showOptionDialog()</code> : untuk menampilkan dialog pilihan.</li></ol><p id="aa37aa53-1f50-4603-a281-5186dc9909d1" class="">Class <code>JOptionPane</code> dapat digunakan langsung tanpa harus membuat objek seperti ini:</p><pre id="5c2b6fa8-7162-4e7b-aead-d1ee12c827c8" class="code"><code>JOptionPane.showMessageDialog(null, &quot;Hello!&quot;);</code></pre><p id="f2fe174b-b98e-43f4-9aba-3d07a6e3f1ad" class="">Keterangan:</p><ul id="cdd64dd5-8d6c-4a6f-a34b-e4275777e9a7" class="bulleted-list"><li><code>null</code> adalah parameter untuk komponen induknya, bisa diberikan <code>null</code> atau <code>this</code>.</li></ul><ul id="ef7a0b62-0e3d-498d-b83c-39e8d1829ef6" class="bulleted-list"><li><code>&quot;Hello!&quot;</code> adalah teks yang ingin kita tampilkan di dalam dialog.</li></ul><p id="cfd6e8d9-1dee-49ef-b767-8b96fc06fe27" class="">Untuk lebih jelasnya, mari kita coba dalam program.</p><h2 id="5647e562-7896-4082-b2c7-f5870d345881" class=""><strong>Contoh Program dengan JOptionPane</strong></h2><p id="28699527-02f8-4e61-aabe-8b7d1196b4b2" class="">Silahkan buat sebuah jendela <code>JFrame</code> baru, kemudian buatlah desainnya seperti ini:</p><figure id="9ed74bc3-446d-4027-8688-bbccc2e3256d" class="image"><a href="https://www.petanikode.com/img/swing/dialog/desain-form.png"><img src="https://www.petanikode.com/img/swing/dialog/desain-form.png"/></a></figure><p id="e422297d-5bbf-4e8b-a3fd-d2f3f9e01740" class="">Berikan <em>variabel name</em> untuk setiap tombolnya sebagai berikut:</p><ul id="ae4867a1-5fe7-4bdc-8cec-86bb9705f6a6" class="bulleted-list"><li><strong>Message Dialog</strong>: <code>btnMsgDialog</code></li></ul><ul id="791c6c0a-2cac-4b65-8459-4ab5e614160b" class="bulleted-list"><li><strong>Input Dialog</strong>: <code>btnInputDialog</code></li></ul><ul id="49f6cca6-aa7b-481a-b530-160ebc6ac2bd" class="bulleted-list"><li><strong>Dialog Konfirmasi</strong>: <code>btnConfirmDialog</code></li></ul><ul id="b29f6fa1-7150-468a-88de-6d82d1f3e218" class="bulleted-list"><li><strong>Dialog Pilihan</strong>: <code>btnOptionDialog</code></li></ul><p id="2afe23e3-9102-43cf-b39b-b1cf214c915e" class="">Setelah itu isi kode untuk masing-masing tombol sebagai berikut.</p><p id="07290827-0bc7-4ed6-9d6e-6e625fab40cb" class=""><strong>Message Dialog</strong>: <code>btnMsgDialog</code></p><pre id="0649e3a6-5218-4af7-9b83-3bf1715b366b" class="code"><code><em>private</em> void btnMsgDialogActionPerformed(java.awt.event.ActionEvent evt) { 
+	JOptionPane.showMessageDialog(this, &quot;Ini Adalah Dialog Informasi&quot;);
+}</code></pre><p id="f7c487b3-54dd-4476-ba14-7fd9e91e5c09" class=""><strong>Input Dialog</strong>: <code>btnInputDialog</code></p><pre id="e6a5f0e7-a916-4308-ac6e-6c7bb83b8913" class="code"><code><em>private</em> void btnInputDialogActionPerformed(java.awt.event.ActionEvent evt) { 
+	String inputan = JOptionPane.showInputDialog(&quot;Inputkan Sesuatu&quot;); 
+	JOptionPane.showMessageDialog(this, &quot;Kamu meng-inputkan: &quot; + inputan);
+}</code></pre><p id="3c93421b-f5dc-4d70-b1b0-434491a559a9" class=""><strong>Dialog Konfirmasi</strong>: <code>btnConfirmDialog</code></p><pre id="adc58142-2336-411c-98e4-66df010d31d0" class="code"><code><em>private</em> void btnConfirmDialogActionPerformed(java.awt.event.ActionEvent evt) { 
+	int jawab = JOptionPane.showConfirmDialog(this, &quot;Silahkan Konfirmasi?&quot;); 
+	// 0 : yes 
+	// 1 : no 
+	// 2 : cancel 
+	switch(jawab){ 
+	case JOptionPane.YES_OPTION: 
+	JOptionPane.showMessageDialog(this, &quot;Kamu menjawab ya&quot;); 
+	break; 
+	case JOptionPane.NO_OPTION: 
+	JOptionPane.showMessageDialog(this, &quot;Kamu menjawab tidak&quot;); 
+	break; 
+	case JOptionPane.CANCEL_OPTION: 
+	JOptionPane.showMessageDialog(this, &quot;Kamu mejawab batal&quot;); 
+	}
+}</code></pre><p id="ec58145a-8d16-440d-9fc2-1f389b76a055" class=""><strong>Dialog Pilihan</strong>: <code>btnOptionDialog</code></p><pre id="7b05c9d1-eb63-4eb2-87ea-41702f803a70" class="code"><code><em>private</em> void btnOptionDialogActionPerformed(java.awt.event.ActionEvent evt) { 
+	int jawab = JOptionPane.showOptionDialog(this, &quot;Ingin Keluar?&quot;, &quot;Keluar&quot;, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null); 
+	if(jawab == JOptionPane.YES_OPTION){ 
+		JOptionPane.showMessageDialog(this, &quot;Program Akan Keluar&quot;); 
+		System.exit(0); 
+	}
+}</code></pre><p id="798cc491-f4f9-4ebc-ab5a-ef5d049218bf" class="">Sehingga kode lengkapnya akan seperti ini:</p><pre id="2e3ffd01-9f8e-4b08-aec6-756a901c1e4d" class="code"><code>package dialog;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+
+<em>public</em> <em>class</em> Berdialog <em>extends</em> javax.swing.JFrame { 
+	/** * Creates new form Berdialog */ 
+	<em>public</em> Berdialog() { 
+		initComponents(); 
+	}
+	@SuppressWarnings(&quot;unchecked&quot;) 
+	// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt; 
+	<em>private</em> void initComponents() { 
+		btnMsgDialog = new javax.swing.JButton(); 
+		btnInputDialog = new javax.swing.JButton(); 
+		btnConfirmDialog = new javax.swing.JButton(); 
+		btnOptionDialog = new javax.swing.JButton(); 
+		jLabel1 = new javax.swing.JLabel(); 
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); 
+		btnMsgDialog.setText(&quot;Message Dialog&quot;); 
+		btnMsgDialog.setName(&quot;btnMsgDialog&quot;); 
+		// NOI18N 
+		btnMsgDialog.addActionListener(new java.awt.event.ActionListener() { 
+			<em>public</em> void actionPerformed(java.awt.event.ActionEvent evt) { 
+				btnMsgDialogActionPerformed(evt); 
+			} 
+		}); 
+		btnInputDialog.setText(&quot;Input Dialog&quot;); 
+		btnInputDialog.setName(&quot;btnInputDialog&quot;); 
+		// NOI18N 
+		btnInputDialog.addActionListener(new java.awt.event.ActionListener() { 
+			<em>public</em> void actionPerformed(java.awt.event.ActionEvent evt) { 
+				btnInputDialogActionPerformed(evt); 
+			} 
+			}); 
+			btnConfirmDialog.setText(&quot;Dialog Konfirmasi&quot;); 
+			btnConfirmDialog.setName(&quot;btnConfirmDialog&quot;); 
+		// NOI18N 
+		btnConfirmDialog.addActionListener(new java.awt.event.ActionListener() { 
+			<em>public</em> void actionPerformed(java.awt.event.ActionEvent evt) { 
+				btnConfirmDialogActionPerformed(evt); 
+			} 
+		}); 
+		btnOptionDialog.setText(&quot;Dialog Pilihan&quot;); 
+		btnOptionDialog.setName(&quot;btnOptionsDialog&quot;); 
+		// NOI18N 
+		btnOptionDialog.addActionListener(new java.awt.event.ActionListener() { 
+			<em>public</em> void actionPerformed(java.awt.event.ActionEvent evt) { 
+				btnOptionDialogActionPerformed(evt); 
+			} 
+		}); 
+		jLabel1.setText(&quot;Belajar JOptionPane&quot;); 
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane()); 
+		getContentPane().setLayout(layout); 
+		layout.setHorizontalGroup( layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+			.addGroup(layout.createSequentialGroup() 
+				.addGap(60, 60, 60) 
+				.addGroup(
+					layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+					.addComponent(btnConfirmDialog) 
+					.addComponent(btnMsgDialog)
+				) 
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE) 
+				.addGroup(
+					layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+					.addComponent(btnInputDialog) 
+					.addComponent(btnOptionDialog)
+				) 
+				.addGap(62, 62, 62)
+			) 
+			.addGroup(
+				layout.createSequentialGroup() 
+				.addGap(129, 129, 129) 
+				.addComponent(jLabel1) 
+				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+			) 
+		); 
+		layout.setVerticalGroup( 
+			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) 
+				.addGroup(
+						javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup() 
+						.addGap(31, 31, 31) 
+						.addComponent(jLabel1) 
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE) 
+						.addGroup(
+							layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE) 
+							.addComponent(btnMsgDialog) 
+							.addComponent(btnInputDialog)
+						) 
+						.addGap(74, 74, 74) 
+						.addGroup(
+							layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE) 
+							.addComponent(btnConfirmDialog) 
+							.addComponent(btnOptionDialog)
+						) 
+						.addGap(63, 63, 63)
+				) 
+			); 
+		pack(); 
+	}// &lt;/editor-fold&gt; <em>private</em> void btnMsgDialogActionPerformed(java.awt.event.ActionEvent evt) { JOptionPane.showMessageDialog(this, &quot;Ini Adalah Dialog Informasi&quot;); } <em>private</em> void btnInputDialogActionPerformed(java.awt.event.ActionEvent evt) { String inputan = JOptionPane.showInputDialog(&quot;Inputkan Sesuatu&quot;); JOptionPane.showMessageDialog(this, &quot;Kamu meng-inputkan: &quot; + inputan); } <em>private</em> void btnConfirmDialogActionPerformed(java.awt.event.ActionEvent evt) { int jawab = JOptionPane.showConfirmDialog(this, &quot;Silahkan Konfirmasi?&quot;); // 0 : yes // 1 : no // 2 : cancel switch(jawab){ case JOptionPane.YES_OPTION: JOptionPane.showMessageDialog(this, &quot;Kamu menjawab ya&quot;); break; case JOptionPane.NO_OPTION: JOptionPane.showMessageDialog(this, &quot;Kamu menjawab tidak&quot;); break; case JOptionPane.CANCEL_OPTION: JOptionPane.showMessageDialog(this, &quot;Kamu mejawab batal&quot;); } } <em>private</em> void btnOptionDialogActionPerformed(java.awt.event.ActionEvent evt) { int jawab = JOptionPane.showOptionDialog(this, &quot;Ingin Keluar?&quot;, &quot;Keluar&quot;, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null); if(jawab == JOptionPane.YES_OPTION){ JOptionPane.showMessageDialog(this, &quot;Program Akan Keluar&quot;); System.exit(0); } } /** * @param args the command line arguments */ <em>public</em> <em>static</em> void main(String args[]) { /* Set the Nimbus look and feel */ //&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot; Look and feel setting code (optional) &quot;&gt; /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel. * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html */ try { for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { if (&quot;Nimbus&quot;.equals(info.getName())) { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch (ClassNotFoundException ex) { java.util.logging.Logger.getLogger(Berdialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); } catch (InstantiationException ex) { java.util.logging.Logger.getLogger(Berdialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); } catch (IllegalAccessException ex) { java.util.logging.Logger.getLogger(Berdialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); } catch (javax.swing.UnsupportedLookAndFeelException ex) { java.util.logging.Logger.getLogger(Berdialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); } //&lt;/editor-fold&gt; /* Create and display the form */ java.awt.EventQueue.invokeLater(new Runnable() { <em>public</em> void run() { new Berdialog().setVisible(true); } }); } // Variables declaration - do not modify <em>private</em> javax.swing.JButton btnConfirmDialog; <em>private</em> javax.swing.JButton btnInputDialog; <em>private</em> javax.swing.JButton btnMsgDialog; <em>private</em> javax.swing.JButton btnOptionDialog; <em>private</em> javax.swing.JLabel jLabel1; // End of variables declaration
+}</code></pre><p id="58461a0e-f306-4003-a557-d5a9b0a93c99" class="">Setelah itu, silahkan jalankan programnya dan perhatikanlah hasilnya.</p><figure id="c0660bde-fcb5-4772-be6f-92593efaaa4f" class="image"><a href="https://www.petanikode.com/img/swing/dialog/program-joptionpane.png"><img src="https://www.petanikode.com/img/swing/dialog/program-joptionpane.png"/></a></figure><p id="060095e5-1943-4b16-9f92-5aecc3865918" class="">Untuk <code>showConfirmDialog()</code> dan <code>showOptionDialgo()</code> hasilnya sama-sama dalam bentuk dialgo konfirmasi yang berisi tombol “Yes”, “No”, dan “Cancel”.</p><p id="d5c403c3-5ee8-47aa-8834-50baf61d4a8f" class="">Masing-masing tombol, apabila ditekan akan menghasilkan nilai berupa integer.</p><ul id="684bb098-b5b1-4c1f-9172-18bef5aa150a" class="bulleted-list"><li>“Yes” akan menghasilkan <code>0</code>;</li></ul><ul id="25a73efb-0b76-4ee8-a841-98f5a0b2fb5c" class="bulleted-list"><li>“No” akan menghasilkan <code>1</code>;</li></ul><ul id="c2f8315e-11fb-4cfb-b6ec-a61313428c05" class="bulleted-list"><li>“Cancel” akan menghasilkan <code>2</code>.</li></ul><p id="a3513c21-f608-4879-83f4-96080070fcb9" class="">Untuk mempermudah pemrosesan, <code>JOptionPane</code> sudah menyediakan konstanta:</p><ul id="605ba133-f0a1-46bb-883c-c3ed4210ccc3" class="bulleted-list"><li><code>JOptionPane.YES_OPTION</code> yang bernilai <code>0</code>;</li></ul><ul id="b648bf4e-475a-43d9-98ae-5cec21ca6fce" class="bulleted-list"><li><code>JOptionPane.NO_OPTION</code> yang bernilai <code>1</code>;</li></ul><ul id="5632341c-3aaa-483a-917e-f2bac40bd6ae" class="bulleted-list"><li><code>JOptionPane.CANCEL_OPTION</code> yang bernilai <code>2</code>.</li></ul><p id="47929004-b93a-4fc7-be8a-6e00528b042c" class="">Sehingga kita dapat menggunakannya dalam <a href="https://www.petanikode.com/java-percabangan/">blok Switch/Case</a> seperti ini:</p><pre id="01205cc2-cbaf-4f34-9f61-7b4ab1abfaea" class="code"><code>switch(jawab){ 
+		case JOptionPane.YES_OPTION: 
+		JOptionPane.showMessageDialog(this, &quot;Kamu menjawab ya&quot;); 
+		break; 
+		case JOptionPane.NO_OPTION: 
+		JOptionPane.showMessageDialog(this, &quot;Kamu menjawab tidak&quot;); 
+		break; 
+		case JOptionPane.CANCEL_OPTION: 
+		JOptionPane.showMessageDialog(this, &quot;Kamu mejawab batal&quot;);
+}</code></pre><h2 id="eeff8f15-83e2-4809-a337-22ecf989cd25" class=""><strong>Akhir Kata…</strong></h2><p id="485a3748-0b74-4630-b209-ecdd2b885451" class="">Itulah contoh penggunaan <code>JOptionPane</code> dalam program Java.</p><p id="efb77933-bae7-48c2-88af-3834aa00fdf2" class="">Sebenarnya masih banyak yang belum kita coba, seperti mengganti ikon, mengubah teks di tombol, mengganti judul, dll.</p><p id="52500c03-d496-489e-b65c-dcfff5baf9ac" class="">Silahkan eksperimen sendiri.</p></div></article></body></html>
