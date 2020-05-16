@@ -1,135 +1,189 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-  <!-- Standart META -->
-  <meta charset="utp-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Title & Logo -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Study Notes">
+  <meta name="author" content="Andika Andriana">
+
   <title>Andriana Notes</title>
   <link rel="icon" href="public/images/favicon.ico" type="image/x-icon" />
 
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Bootstrap core CSS -->
+  <link href="src/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="src/css/simple-sidebar.css" rel="stylesheet">
+
+  <!-- Icon css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-  <style>
-    .sidenav {
-      height: 100%;
-      width: 160px;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      padding-top: 70px;
+  <style media="screen">
+    @media (min-width: 900px) {
+      .Button1 {
+        display: none;
+      }
     }
 
-    .sidenav a {
-      text-decoration: none;
-      color: #818181;
+    @media (max-width: 900px) {
+      .textTitle {
+        display: none;
+      }
+    }
+
+    .embed-responsive {
+      position: relative;
       display: block;
+      height: 0;
+      padding: 0;
+      overflow: hidden;
     }
 
-    .sidenav a:hover {
-      color: #f1f1f1;
+    .embed-responsive-9by16 {
+      padding-bottom: 177.78%;
+    }
+
+    .embed-responsive .embed-responsive-item,
+    .embed-responsive embed,
+    .embed-responsive iframe,
+    .embed-responsive object,
+    .embed-responsive video {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   </style>
+
 </head>
 
 <body>
-  <!-- Navbar / Header -->
-  <header class="fixed-top">
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="btn btn-success" href="/"><i class="fas fa-home"></i></a>
-      <h3 class="text-light">Catatan Belajarku</h3>
-      <span class="navbar-text">
-        <a class="btn btn-primary" href="javascript:self.history.back()"><i class="fas fa-angle-left"></i></a>
-        <a class="btn btn-danger" href="javascript:self.history.forward()"><i class="fas fa-angle-right"></i></a>
-      </span>
-      </div>
-    </nav>
-  </header>
 
-  <!-- Sidebar -->
-  <div class="row">
-    <div class="col-2 bg-dark sidenav" style="font-size:12px">
-      <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-item nav-link text-light active" id="nav-javascript-tab" data-toggle="tab" href="#nav-javascript" role="tab" aria-controls="javascript"><i class="fab fa-js-square"></i> Javascript</a>
-        <a class="nav-item nav-link text-light" id="nav-reactJs-tab" data-toggle="tab" href="#nav-reactJs" role="tab" aria-controls="reactJs"><i class="fab fa-react"></i> React JS</a>
-        <a class="nav-item nav-link text-light" id="nav-database-tab" data-toggle="tab" href="#nav-database" role="tab" aria-controls="database"><i class="fas fa-database"></i> Database</a>
-        <a class="nav-item nav-link text-light" id="nav-nodeJs-tab" data-toggle="tab" href="#nav-nodeJs" role="tab" aria-controls="nodeJs"><i class="fab fa-node-js"></i> Node JS</a>
-        <a class="nav-item nav-link text-light" id="nav-deployment-tab" data-toggle="tab" href="#nav-deployment" role="tab" aria-controls="deployment"><i class="fas fa-cloud-upload-alt"></i> Deployment</a>
-        <a class="nav-item nav-link text-light" id="nav-php-tab" data-toggle="tab" href="#nav-php" role="tab" aria-controls="php"><i class="fab fa-php"></i> PHP</a>
-        <a class="nav-item nav-link text-light" id="nav-reactNative-tab" data-toggle="tab" href="#nav-reactNative" role="tab" aria-controls="reactNative"><i class="fab fa-reacteurope"></i> React Native</a>
-        <a class="nav-item nav-link text-light" id="nav-golang-tab" data-toggle="tab" href="#nav-golang" role="tab" aria-controls="golang"><i class="fab fa-google"></i> Golang</a>
-        <a class="nav-item nav-link text-light" id="nav-java-tab" data-toggle="tab" href="#nav-java" role="tab" aria-controls="java"><i class="fab fa-java"></i> Java</a>
-      </div>
-    </div>
+  <div class="d-flex" id="wrapper">
 
-    <!-- Content -->
-    <div class="col-10" style="margin-left:160px;margin-top:50px">
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-javascript" role="tabpanel" aria-labelledby="nav-javascript-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/Javascript.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-reactJs" role="tabpanel" aria-labelledby="nav-reactJs-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/ReactJS.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-database" role="tabpanel" aria-labelledby="nav-database-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/Database.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-nodeJs" role="tabpanel" aria-labelledby="nav-nodeJs-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/NodeJS.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-deployment" role="tabpanel" aria-labelledby="nav-deployment-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/Deployment.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-php" role="tabpanel" aria-labelledby="nav-php-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/PHP.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-reactNative" role="tabpanel" aria-labelledby="nav-reactNative-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/ReactNative.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-golang" role="tabpanel" aria-labelledby="nav-golang-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/Golang.html"></iframe>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="nav-java" role="tabpanel" aria-labelledby="nav-java-tab">
-          <div class="embed-responsive embed-responsive-1by1">
-            <iframe class="embed-responsive-item" src="/pages/Java.html"></iframe>
-          </div>
+    <!-- Sidebar -->
+    <div class="bg-dark" id="sidebar-wrapper">
+      <div class="sidebar-heading text-light">Catatan Belajarku</div>
+      <div class="list-group list-group-flush">
+        <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-item nav-link text-light active" id="nav-javascript-tab" data-toggle="tab" href="#nav-javascript" role="tab" aria-controls="javascript"><i class="fab fa-js-square"></i> Javascript</a>
+          <a class="nav-item nav-link text-light" id="nav-reactJs-tab" data-toggle="tab" href="#nav-reactJs" role="tab" aria-controls="reactJs"><i class="fab fa-react"></i> React JS</a>
+          <a class="nav-item nav-link text-light" id="nav-database-tab" data-toggle="tab" href="#nav-database" role="tab" aria-controls="database"><i class="fas fa-database"></i> Database</a>
+          <a class="nav-item nav-link text-light" id="nav-nodeJs-tab" data-toggle="tab" href="#nav-nodeJs" role="tab" aria-controls="nodeJs"><i class="fab fa-node-js"></i> Node JS</a>
+          <a class="nav-item nav-link text-light" id="nav-deployment-tab" data-toggle="tab" href="#nav-deployment" role="tab" aria-controls="deployment"><i class="fas fa-cloud-upload-alt"></i> Deployment</a>
+          <a class="nav-item nav-link text-light" id="nav-php-tab" data-toggle="tab" href="#nav-php" role="tab" aria-controls="php"><i class="fab fa-php"></i> PHP</a>
+          <a class="nav-item nav-link text-light" id="nav-reactNative-tab" data-toggle="tab" href="#nav-reactNative" role="tab" aria-controls="reactNative"><i class="fab fa-reacteurope"></i> React Native</a>
+          <a class="nav-item nav-link text-light" id="nav-golang-tab" data-toggle="tab" href="#nav-golang" role="tab" aria-controls="golang"><i class="fab fa-google"></i> Golang</a>
+          <a class="nav-item nav-link text-light" id="nav-java-tab" data-toggle="tab" href="#nav-java" role="tab" aria-controls="java"><i class="fab fa-java"></i> Java</a>
         </div>
       </div>
     </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-light bg-dark">
+        <a class="btn btn-success Button1" href="/" id="menu-toggle"><i class="fas fa-bars"></i></a>
+        <p class="h5 text-light textTitle"></p>
+        <div>
+          <a class="btn btn-primary" href="javascript:self.history.back()"><i class="fas fa-angle-left"></i></a>
+          <a class="btn btn-success" href="/"><i class="fas fa-home"></i></a>
+          <a class="btn btn-danger" href="javascript:self.history.forward()"><i class="fas fa-angle-right"></i></a>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-javascript" role="tabpanel" aria-labelledby="nav-javascript-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/Javascript.html" style="width: 100%;height: 100%;"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-reactJs" role="tabpanel" aria-labelledby="nav-reactJs-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/ReactJS.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-database" role="tabpanel" aria-labelledby="nav-database-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/Database.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-nodeJs" role="tabpanel" aria-labelledby="nav-nodeJs-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/NodeJS.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-deployment" role="tabpanel" aria-labelledby="nav-deployment-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/Deployment.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-php" role="tabpanel" aria-labelledby="nav-php-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/PHP.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-reactNative" role="tabpanel" aria-labelledby="nav-reactNative-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/ReactNative.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-golang" role="tabpanel" aria-labelledby="nav-golang-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/Golang.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-java" role="tabpanel" aria-labelledby="nav-java-tab">
+            <div class="container-fluid">
+              <div class="embed-responsive embed-responsive-9by16">
+                <iframe class="embed-responsive-item" src="/pages/Java.html"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    <Footer class="fixed-bottom">
+      <p class="text-light text-monospace text-right"><small class="bg-dark">&copy; 2020, Andika Andriana.</small></p>
+    </footer>
   </div>
+  <!-- /#wrapper -->
 
-  <!-- Footer -->
-  <Footer class="fixed-bottom">
-    <p class="text-light text-monospace text-right"><small class="bg-dark">&copy; 2020, Andika Andriana.</small></p>
-  </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="src/vendor/jquery/jquery.min.js"></script>
+  <script src="src/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
 </body>
 
 </html>
