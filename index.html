@@ -1,233 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Andriana Notes</title>
+    <link rel="icon" href="public/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="google-site-verification"
+      content="gOhAjiw_jRqTO11EFiZ1Rqa6YfK_9sBFHEM_kuPn3Zg"
+    />
+    <meta
+      name="description"
+      content="This is the portfolio of a Andika Andriana as Mobile Developer specialising in frameworks such as React Native and Flutter."
+    />
+    <meta
+      name="keywords"
+      content="andika andriana, codefivex, mobile, developer, react, react native, flutter, software engineering, design"
+    />
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Study Notes">
-  <meta name="author" content="Andika Andriana">
-
-  <title>Andriana Notes</title>
-  <link rel="icon" href="public/images/favicon.ico" type="image/x-icon" />
-
-  <!-- Bootstrap core CSS -->
-  <link href="src/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="src/css/simple-sidebar.css" rel="stylesheet">
-
-  <!-- Icon css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-  <style media="screen">
-    @media (min-width: 900px) {
-      .Button1 {
-        display: none;
+    <script type="application/ld+json">
+      {
+        "@context": "http://github.com",
+        "@type": "Website",
+        "name": "Andika Andriana - Mobile Developer - Portfolio",
+        "url": "http://andika-andriana.github.io",
+        "sameAs": [
+          "http://www.linkedin.com/in/andika-andriana",
+          "http://github.com/andika-andriana"
+        ]
       }
-    }
+    </script>
 
-    @media (max-width: 900px) {
-      .textTitle {
-        display: none;
+    <!-- Bootstrap core CSS -->
+    <link href="src/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="src/css/simple-sidebar.css" rel="stylesheet" />
+
+    <!-- Icon css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    />
+    <style media="screen">
+      @media (min-width: 900px) {
+        .Button1 {
+          display: none;
+        }
       }
-    }
 
-    .embed-responsive {
-      position: relative;
-      display: block;
-      height: 0;
-      padding: 0;
-      overflow: hidden;
-    }
+      @media (max-width: 900px) {
+        .textTitle {
+          display: none;
+        }
+      }
 
-    .embed-responsive-9by16 {
-      padding-bottom: 177.78%;
-    }
+      .embed-responsive {
+        position: relative;
+        display: block;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-    .embed-responsive .embed-responsive-item,
-    .embed-responsive embed,
-    .embed-responsive iframe,
-    .embed-responsive object,
-    .embed-responsive video {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+      .embed-responsive-9by16 {
+        padding-bottom: 177.78%;
+      }
 
-    #loader { 
-      border: 12px solid #f3f3f3; 
-      border-radius: 50%; 
-      border-top: 12px solid #444444; 
-      width: 70px; 
-      height: 70px; 
-      animation: spin 1s linear infinite; 
-    } 
-          
-    @keyframes spin { 
-      100% { 
-        transform: rotate(360deg); 
-      } 
-    } 
-          
-    .center { 
-      position: absolute; 
-      top: 0; 
-      bottom: 0; 
-      left: 0; 
-      right: 0; 
-      margin: auto; 
-    }
+      .embed-responsive .embed-responsive-item,
+      .embed-responsive embed,
+      .embed-responsive iframe,
+      .embed-responsive object,
+      .embed-responsive video {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
 
-  </style>
+      #loader {
+        border: 12px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 12px solid #444444;
+        width: 70px;
+        height: 70px;
+        animation: spin 1s linear infinite;
+      }
 
-</head>
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-<body>
-  <div id="loader" class="center"></div> 
-  <div class="d-flex" id="wrapper">
+      .center {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    </style>
+  </head>
 
-    <!-- Sidebar -->
-    <div class="bg-dark" id="sidebar-wrapper">
-      <div class="sticky-top">
-        <div class="sidebar-heading text-light">Catatan Belajarku</div>
-        <div class="list-group list-group-flush">
-          <div class="nav flex-column nav-pills" id="nav-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-item nav-link text-light active" id="nav-javascript-tab" data-toggle="tab" href="#nav-javascript" role="tab" aria-controls="javascript"><i class="fab fa-js-square"></i> Javascript</a>
-            <a class="nav-item nav-link text-light" id="nav-reactJs-tab" data-toggle="tab" href="#nav-reactJs" role="tab" aria-controls="reactJs"><i class="fab fa-react"></i> React JS</a>
-            <a class="nav-item nav-link text-light" id="nav-database-tab" data-toggle="tab" href="#nav-database" role="tab" aria-controls="database"><i class="fas fa-database"></i> Database</a>
-            <a class="nav-item nav-link text-light" id="nav-nodeJs-tab" data-toggle="tab" href="#nav-nodeJs" role="tab" aria-controls="nodeJs"><i class="fab fa-node-js"></i> Node JS</a>
-            <a class="nav-item nav-link text-light" id="nav-deployment-tab" data-toggle="tab" href="#nav-deployment" role="tab" aria-controls="deployment"><i class="fas fa-cloud-upload-alt"></i> Deployment</a>
-            <a class="nav-item nav-link text-light" id="nav-php-tab" data-toggle="tab" href="#nav-php" role="tab" aria-controls="php"><i class="fab fa-php"></i> PHP</a>
-            <a class="nav-item nav-link text-light" id="nav-reactNative-tab" data-toggle="tab" href="#nav-reactNative" role="tab" aria-controls="reactNative"><i class="fab fa-reacteurope"></i> React Native</a>
-            <a class="nav-item nav-link text-light" id="nav-golang-tab" data-toggle="tab" href="#nav-golang" role="tab" aria-controls="golang"><i class="fab fa-google"></i> Golang</a>
-            <a class="nav-item nav-link text-light" id="nav-java-tab" data-toggle="tab" href="#nav-java" role="tab" aria-controls="java"><i class="fab fa-java"></i> Java</a>
-            <a class="nav-item nav-link text-light" id="nav-firebase-tab" data-toggle="tab" href="#nav-firebase" role="tab" aria-controls="firebase"><i class="fas fa-fire-alt"></i> Firebase</a>
+  <body>
+    <div id="loader" class="center"></div>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="bg-dark" id="sidebar-wrapper">
+        <div class="sticky-top">
+          <div class="sidebar-heading text-light">Andriana notes</div>
+          <div class="list-group list-group-flush">
+            <div
+              class="nav flex-column nav-pills"
+              id="nav-tab"
+              role="tablist"
+              aria-orientation="vertical"
+            >
+              <a
+                class="nav-item nav-link text-light active"
+                id="nav-javascript-tab"
+                data-toggle="tab"
+                href="#nav-javascript"
+                role="tab"
+                aria-controls="javascript"
+                ><i class="fab fa-js-square"></i> Javascript</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-reactJs-tab"
+                data-toggle="tab"
+                href="#nav-reactJs"
+                role="tab"
+                aria-controls="reactJs"
+                ><i class="fab fa-react"></i> React JS</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-database-tab"
+                data-toggle="tab"
+                href="#nav-database"
+                role="tab"
+                aria-controls="database"
+                ><i class="fas fa-database"></i> Database</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-nodeJs-tab"
+                data-toggle="tab"
+                href="#nav-nodeJs"
+                role="tab"
+                aria-controls="nodeJs"
+                ><i class="fab fa-node-js"></i> Node JS</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-deployment-tab"
+                data-toggle="tab"
+                href="#nav-deployment"
+                role="tab"
+                aria-controls="deployment"
+                ><i class="fas fa-cloud-upload-alt"></i> Deployment</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-php-tab"
+                data-toggle="tab"
+                href="#nav-php"
+                role="tab"
+                aria-controls="php"
+                ><i class="fab fa-php"></i> PHP</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-reactNative-tab"
+                data-toggle="tab"
+                href="#nav-reactNative"
+                role="tab"
+                aria-controls="reactNative"
+                ><i class="fab fa-reacteurope"></i> React Native</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-golang-tab"
+                data-toggle="tab"
+                href="#nav-golang"
+                role="tab"
+                aria-controls="golang"
+                ><i class="fab fa-google"></i> Golang</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-java-tab"
+                data-toggle="tab"
+                href="#nav-java"
+                role="tab"
+                aria-controls="java"
+                ><i class="fab fa-java"></i> Java</a
+              >
+              <a
+                class="nav-item nav-link text-light"
+                id="nav-firebase-tab"
+                data-toggle="tab"
+                href="#nav-firebase"
+                role="tab"
+                aria-controls="firebase"
+                ><i class="fas fa-fire-alt"></i> Firebase</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <nav class="navbar navbar-light bg-secondary sticky-top">
+          <a class="btn btn-dark Button1" href="/" id="menu-toggle"
+            ><i class="fas fa-bars"></i
+          ></a>
+          <p class="h5 text-light textTitle"></p>
+          <div>
+            <a class="btn btn-dark" href="javascript:self.history.back()"
+              ><i class="fas fa-angle-left"></i
+            ></a>
+            <a class="btn btn-dark" href="/"><i class="fas fa-home"></i></a>
+            <a class="btn btn-dark" href="javascript:self.history.forward()"
+              ><i class="fas fa-angle-right"></i
+            ></a>
+          </div>
+        </nav>
+
+        <div class="container-fluid bg-transparent">
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="nav-javascript"
+              role="tabpanel"
+              aria-labelledby="nav-javascript-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="javascript"
+                    class="embed-responsive-item"
+                    src="/src/pages/Javascript.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-reactJs"
+              role="tabpanel"
+              aria-labelledby="nav-reactJs-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="reactJs"
+                    class="embed-responsive-item"
+                    src="/src/pages/ReactJS.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-database"
+              role="tabpanel"
+              aria-labelledby="nav-database-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="database"
+                    class="embed-responsive-item"
+                    src="/src/pages/Database.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-nodeJs"
+              role="tabpanel"
+              aria-labelledby="nav-nodeJs-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="nodeJs"
+                    class="embed-responsive-item"
+                    src="/src/pages/NodeJS.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-deployment"
+              role="tabpanel"
+              aria-labelledby="nav-deployment-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="deployment"
+                    class="embed-responsive-item"
+                    src="/src/pages/Deployment.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-php"
+              role="tabpanel"
+              aria-labelledby="nav-php-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="php"
+                    class="embed-responsive-item"
+                    src="/src/pages/PHP.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-reactNative"
+              role="tabpanel"
+              aria-labelledby="nav-reactNative-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="reactNative"
+                    class="embed-responsive-item"
+                    src="/src/pages/ReactNative.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-golang"
+              role="tabpanel"
+              aria-labelledby="nav-golang-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="golang"
+                    class="embed-responsive-item"
+                    src="/src/pages/Golang.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-java"
+              role="tabpanel"
+              aria-labelledby="nav-java-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="java"
+                    class="embed-responsive-item"
+                    src="/src/pages/Java.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-firebase"
+              role="tabpanel"
+              aria-labelledby="nav-firebase-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="firebase"
+                    class="embed-responsive-item"
+                    src="/src/pages/Firebase.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- /#sidebar-wrapper -->
+    <!-- /#wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <!-- Bootstrap core JavaScript -->
+    <script src="src/vendor/jquery/jquery.min.js"></script>
+    <script src="src/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-      <nav class="navbar navbar-light bg-dark sticky-top">
-        <a class="btn btn-success Button1" href="/" id="menu-toggle"><i class="fas fa-bars"></i></a>
-        <p class="h5 text-light textTitle"></p>
-        <div>
-          <a class="btn btn-primary" href="javascript:self.history.back()"><i class="fas fa-angle-left"></i></a>
-          <a class="btn btn-success" href="/"><i class="fas fa-home"></i></a>
-          <a class="btn btn-danger" href="javascript:self.history.forward()"><i class="fas fa-angle-right"></i></a>
-        </div>
-      </nav>
-
-      <div class="container-fluid">
-        <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-javascript" role="tabpanel" aria-labelledby="nav-javascript-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/Javascript.html" style="width: 100%;height: 100%;"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-reactJs" role="tabpanel" aria-labelledby="nav-reactJs-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/ReactJS.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-database" role="tabpanel" aria-labelledby="nav-database-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/Database.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-nodeJs" role="tabpanel" aria-labelledby="nav-nodeJs-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/NodeJS.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-deployment" role="tabpanel" aria-labelledby="nav-deployment-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/Deployment.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-php" role="tabpanel" aria-labelledby="nav-php-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/PHP.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-reactNative" role="tabpanel" aria-labelledby="nav-reactNative-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/ReactNative.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-golang" role="tabpanel" aria-labelledby="nav-golang-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/Golang.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-java" role="tabpanel" aria-labelledby="nav-java-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/Java.html"></iframe>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-firebase" role="tabpanel" aria-labelledby="nav-firebase-tab">
-            <div class="container-fluid">
-              <div class="embed-responsive embed-responsive-9by16">
-                <iframe class="embed-responsive-item" src="/pages/Firebase.html"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /#page-content-wrapper -->
-    <Footer class="fixed-bottom">
-      <p class="text-dark text-monospace text-right"><small class="bg-light" style="text-shadow: 0 0 3px #ffffff, 0 0 5px #000000;">&copy; 2020, Andika Andriana.</small></p>
-    </footer>
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="src/vendor/jquery/jquery.min.js"></script>
-  <script src="src/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-    document.onreadystatechange = function() { 
-      if (document.readyState !== "complete") { 
-          document.querySelector("body").style.visibility = "hidden"; 
-          document.querySelector("#loader").style.visibility = "visible"; 
-      } else { 
-          document.querySelector("#loader").style.display = "none"; 
-          document.querySelector("body").style.visibility = "visible"; 
-      } 
-    };
-  </script>
-
-</body>
-
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+      document.onreadystatechange = function () {
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.querySelector("#loader").style.visibility = "visible";
+        } else {
+          document.querySelector("#loader").style.display = "none";
+          document.querySelector("body").style.visibility = "visible";
+        }
+      };
+    </script>
+  </body>
 </html>
