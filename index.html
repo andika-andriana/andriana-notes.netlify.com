@@ -115,6 +115,18 @@
         background-color: #6c757d !important;
         color: black !important;
       }
+      #scrollToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+
+        font-size: 20px;
+        cursor: pointer;
+      }
     </style>
   </head>
 
@@ -132,6 +144,7 @@
               role="tablist"
               aria-orientation="vertical"
             >
+              <!-- javascript -->
               <a
                 class="nav-item nav-link active"
                 id="nav-javascript-tab"
@@ -139,8 +152,19 @@
                 href="#nav-javascript"
                 role="tab"
                 aria-controls="javascript"
-                ><i class="fab fa-js-square"></i> Javascript</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-js-square col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Javascript</p>
+                  </div>
+                </div>
+              </a>
+              <!-- reactJs -->
               <a
                 class="nav-item nav-link"
                 id="nav-reactJs-tab"
@@ -148,8 +172,19 @@
                 href="#nav-reactJs"
                 role="tab"
                 aria-controls="reactJs"
-                ><i class="fab fa-react"></i> React JS</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-react col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">React JS</p>
+                  </div>
+                </div>
+              </a>
+              <!-- database -->
               <a
                 class="nav-item nav-link"
                 id="nav-database-tab"
@@ -157,8 +192,19 @@
                 href="#nav-database"
                 role="tab"
                 aria-controls="database"
-                ><i class="fas fa-database"></i> Database</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fas fa-database col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Database</p>
+                  </div>
+                </div>
+              </a>
+              <!-- nodeJs -->
               <a
                 class="nav-item nav-link"
                 id="nav-nodeJs-tab"
@@ -166,8 +212,19 @@
                 href="#nav-nodeJs"
                 role="tab"
                 aria-controls="nodeJs"
-                ><i class="fab fa-node-js"></i> Node JS</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-node-js col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Node JS</p>
+                  </div>
+                </div>
+              </a>
+              <!-- deployment -->
               <a
                 class="nav-item nav-link"
                 id="nav-deployment-tab"
@@ -175,8 +232,19 @@
                 href="#nav-deployment"
                 role="tab"
                 aria-controls="deployment"
-                ><i class="fas fa-cloud-upload-alt"></i> Deployment</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fas fa-cloud-upload-alt col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Deployment</p>
+                  </div>
+                </div>
+              </a>
+              <!-- php -->
               <a
                 class="nav-item nav-link"
                 id="nav-php-tab"
@@ -184,8 +252,19 @@
                 href="#nav-php"
                 role="tab"
                 aria-controls="php"
-                ><i class="fab fa-php"></i> PHP</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-php col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">PHP</p>
+                  </div>
+                </div>
+              </a>
+              <!-- reactNative -->
               <a
                 class="nav-item nav-link"
                 id="nav-reactNative-tab"
@@ -193,8 +272,19 @@
                 href="#nav-reactNative"
                 role="tab"
                 aria-controls="reactNative"
-                ><i class="fab fa-reacteurope"></i> React Native</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-reacteurope col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">React Native</p>
+                  </div>
+                </div>
+              </a>
+              <!-- golang -->
               <a
                 class="nav-item nav-link"
                 id="nav-golang-tab"
@@ -202,8 +292,19 @@
                 href="#nav-golang"
                 role="tab"
                 aria-controls="golang"
-                ><i class="fab fa-google"></i> Golang</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-google col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Golang</p>
+                  </div>
+                </div>
+              </a>
+              <!-- java -->
               <a
                 class="nav-item nav-link"
                 id="nav-java-tab"
@@ -211,8 +312,19 @@
                 href="#nav-java"
                 role="tab"
                 aria-controls="java"
-                ><i class="fab fa-java"></i> Java</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fab fa-java col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Java</p>
+                  </div>
+                </div>
+              </a>
+              <!-- firebase -->
               <a
                 class="nav-item nav-link"
                 id="nav-firebase-tab"
@@ -220,8 +332,58 @@
                 href="#nav-firebase"
                 role="tab"
                 aria-controls="firebase"
-                ><i class="fas fa-fire-alt"></i> Firebase</a
               >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fas fa-fire-alt col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">Firebase</p>
+                  </div>
+                </div>
+              </a>
+              <!-- http -->
+              <a
+                class="nav-item nav-link"
+                id="nav-http-tab"
+                data-toggle="tab"
+                href="#nav-http"
+                role="tab"
+                aria-controls="http"
+              >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fas fa-network-wired col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">HTTP</p>
+                  </div>
+                </div>
+              </a>
+              <!-- http_tunnel_ngrok -->
+              <a
+                class="nav-item nav-link"
+                id="nav-http_tunnel_ngrok-tab"
+                data-toggle="tab"
+                href="#nav-http_tunnel_ngrok"
+                role="tab"
+                aria-controls="http_tunnel_ngrok"
+              >
+                <div
+                  class="d-flex row justify-content-between align-items-center"
+                >
+                  <div class="col-1">
+                    <i class="fas fa-ethernet col"></i>
+                  </div>
+                  <div class="col-9">
+                    <p class="mb-0">HTTP tunnel Ngrok</p>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -248,6 +410,7 @@
 
         <div class="container-fluid bg-transparent">
           <div class="tab-content" id="nav-tabContent">
+            <!-- javascript -->
             <div
               class="tab-pane fade show active"
               id="nav-javascript"
@@ -259,11 +422,12 @@
                   <iframe
                     title="javascript"
                     class="embed-responsive-item"
-                    src="/src/pages/Javascript.html"
+                    src="/src/pages/javascript.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- reactJs -->
             <div
               class="tab-pane fade"
               id="nav-reactJs"
@@ -275,11 +439,12 @@
                   <iframe
                     title="reactJs"
                     class="embed-responsive-item"
-                    src="/src/pages/ReactJS.html"
+                    src="/src/pages/reactjs.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- database -->
             <div
               class="tab-pane fade"
               id="nav-database"
@@ -291,11 +456,12 @@
                   <iframe
                     title="database"
                     class="embed-responsive-item"
-                    src="/src/pages/Database.html"
+                    src="/src/pages/database.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- nodeJs -->
             <div
               class="tab-pane fade"
               id="nav-nodeJs"
@@ -307,11 +473,12 @@
                   <iframe
                     title="nodeJs"
                     class="embed-responsive-item"
-                    src="/src/pages/NodeJS.html"
+                    src="/src/pages/nodejs.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- deployment -->
             <div
               class="tab-pane fade"
               id="nav-deployment"
@@ -323,11 +490,12 @@
                   <iframe
                     title="deployment"
                     class="embed-responsive-item"
-                    src="/src/pages/Deployment.html"
+                    src="/src/pages/deployment.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- php -->
             <div
               class="tab-pane fade"
               id="nav-php"
@@ -339,11 +507,12 @@
                   <iframe
                     title="php"
                     class="embed-responsive-item"
-                    src="/src/pages/PHP.html"
+                    src="/src/pages/php.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- reactNative -->
             <div
               class="tab-pane fade"
               id="nav-reactNative"
@@ -355,11 +524,12 @@
                   <iframe
                     title="reactNative"
                     class="embed-responsive-item"
-                    src="/src/pages/ReactNative.html"
+                    src="/src/pages/reactnative.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- golang -->
             <div
               class="tab-pane fade"
               id="nav-golang"
@@ -371,11 +541,12 @@
                   <iframe
                     title="golang"
                     class="embed-responsive-item"
-                    src="/src/pages/Golang.html"
+                    src="/src/pages/golang.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- java -->
             <div
               class="tab-pane fade"
               id="nav-java"
@@ -387,11 +558,12 @@
                   <iframe
                     title="java"
                     class="embed-responsive-item"
-                    src="/src/pages/Java.html"
+                    src="/src/pages/java.html"
                   ></iframe>
                 </div>
               </div>
             </div>
+            <!-- firebase -->
             <div
               class="tab-pane fade"
               id="nav-firebase"
@@ -403,7 +575,41 @@
                   <iframe
                     title="firebase"
                     class="embed-responsive-item"
-                    src="/src/pages/Firebase.html"
+                    src="/src/pages/firebase.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <!-- http -->
+            <div
+              class="tab-pane fade"
+              id="nav-http"
+              role="tabpanel"
+              aria-labelledby="nav-http-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="http"
+                    class="embed-responsive-item"
+                    src="/src/pages/http.html"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <!-- http_tunnel_ngrok -->
+            <div
+              class="tab-pane fade"
+              id="nav-http_tunnel_ngrok"
+              role="tabpanel"
+              aria-labelledby="nav-http_tunnel_ngrok-tab"
+            >
+              <div class="container-fluid">
+                <div class="embed-responsive embed-responsive-9by16">
+                  <iframe
+                    title="http_tunnel_ngrok"
+                    class="embed-responsive-item"
+                    src="/src/pages/http_tunnel_ngrok.html"
                   ></iframe>
                 </div>
               </div>
@@ -411,6 +617,9 @@
           </div>
         </div>
       </div>
+      <button id="scrollToTopBtn" class="btn btn-dark" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+      </button>
     </div>
     <!-- /#wrapper -->
 
@@ -433,6 +642,26 @@
           document.querySelector("body").style.visibility = "visible";
         }
       };
+
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          document.getElementById("scrollToTopBtn").style.display = "block";
+        } else {
+          document.getElementById("scrollToTopBtn").style.display = "none";
+        }
+      }
+
+      function scrollToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
     </script>
   </body>
 </html>
